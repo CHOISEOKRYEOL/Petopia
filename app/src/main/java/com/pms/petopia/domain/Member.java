@@ -10,14 +10,14 @@ public class Member {
   private String id;
   private String password;
   private String email;
-  private String phone;
+  private String tel;
   private int role;
   private Date registeredDate;
 
   @Override
   public String toString() {
     return "Member [no=" + no + ", name=" + name + ", nick=" + nick + ", id=" + id + ", password="
-        + password + ", email=" + email + ", phone=" + phone + ", role=" + role
+        + password + ", email=" + email + ", phone=" + tel + ", role=" + role
         + ", registeredDate=" + registeredDate + "]";
   }
 
@@ -57,11 +57,11 @@ public class Member {
   public void setEmail(String email) {
     this.email = email;
   }
-  public String getPhone() {
-    return phone;
+  public String getTel() {
+    return tel;
   }
-  public void setPhone(String phone) {
-    this.phone = phone;
+  public void setTel(String tel) {
+    this.tel = tel;
   }
   public int getRole() {
     return role;

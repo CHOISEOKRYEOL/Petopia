@@ -12,21 +12,12 @@ import javax.servlet.annotation.WebServlet;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import com.eomcs.pms.dao.BoardDao;
-import com.eomcs.pms.dao.MemberDao;
-import com.eomcs.pms.dao.ProjectDao;
-import com.eomcs.pms.dao.TaskDao;
-import com.eomcs.pms.service.BoardService;
-import com.eomcs.pms.service.MemberService;
-import com.eomcs.pms.service.ProjectService;
-import com.eomcs.pms.service.TaskService;
-import com.eomcs.pms.service.impl.DefaultBoardService;
-import com.eomcs.pms.service.impl.DefaultMemberService;
-import com.eomcs.pms.service.impl.DefaultProjectService;
-import com.eomcs.pms.service.impl.DefaultTaskService;
 import com.pms.mybatis.MybatisDaoFactory;
 import com.pms.mybatis.SqlSessionFactoryProxy;
 import com.pms.mybatis.TransactionManager;
+import com.pms.petopia.dao.MemberDao;
+import com.pms.petopia.service.MemberService;
+import com.pms.petopia.service.impl.DefaultMemberService;
 
 @WebServlet(
     value="/init",   // 클라인언트에서 요청할 때 사용할 명령이다.
@@ -54,29 +45,19 @@ public class AppInitHandler implements Servlet {
       MybatisDaoFactory daoFactory = new MybatisDaoFactory(sqlSessionFactoryProxy);
 
 
-
-      BoardDao boardDao = daoFactory.createDao(BoardDao.class);
       MemberDao memberDao = daoFactory.createDao(MemberDao.class);
-      ProjectDao projectDao = daoFactory.createDao(ProjectDao.class);
-      TaskDao taskDao = daoFactory.createDao(TaskDao.class);
+
 
       // 3) 서비스 관련 객체 준비
       TransactionManager txManager = new TransactionManager(sqlSessionFactoryProxy);
 
-      BoardService boardService = new DefaultBoardService(boardDao);
       MemberService memberService = new DefaultMemberService(memberDao);
-      ProjectService projectService = new DefaultProjectService(txManager, projectDao, taskDao);
-      TaskService taskService = new DefaultTaskService(taskDao);
 
       // 4) 서비스 객체를 ServletContext 보관소에 저장한다.
       ServletContext servletContext = config.getServletContext();
 
-      servletContext.setAttribute("boardService", boardService);
       servletContext.setAttribute("memberService", memberService);
-      servletContext.setAttribute("projectService", projectService);
-      servletContext.setAttribute("taskService", taskService);
 
-      System.out.println("의존 객체를 모두 준비하였습니다.");
 
     } catch (Exception e) {
       e.printStackTrace();
