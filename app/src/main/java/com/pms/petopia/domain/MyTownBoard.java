@@ -17,7 +17,7 @@ public class MyTownBoard {
         + CreatedDate + ", vw_count=" + vw_count + ", writer=" + writer + "]";
   }
 
-  public int getNo() {
+  public int getNo() {      
     return no;
   }
   public void setNo(int no) {
