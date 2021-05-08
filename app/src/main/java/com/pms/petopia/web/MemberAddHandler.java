@@ -45,6 +45,7 @@ public class MemberAddHandler extends HttpServlet {
     try {
       memberService.add(m);
 
+      out.println("<meta http-equiv='Refresh' content='1;url=main'>");
       out.println("</head>");
       out.println("<body>");
       out.println("<h1>회원 가입 완료</h1>");

@@ -40,10 +40,8 @@ public class AppInitHandler implements Servlet {
       SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(mybatisConfigStream);
       SqlSessionFactoryProxy sqlSessionFactoryProxy = new SqlSessionFactoryProxy(sqlSessionFactory);
 
-
       // 2) DAO 관련 객체 준비
       MybatisDaoFactory daoFactory = new MybatisDaoFactory(sqlSessionFactoryProxy);
-
 
       MemberDao memberDao = daoFactory.createDao(MemberDao.class);
 

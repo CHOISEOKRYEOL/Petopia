@@ -36,12 +36,11 @@
   <update id="update" parameterType="member">
     update pet_user 
     <set> 
-      <if test="name != ''">name=#{name},</if>
-      <if test="email != ''">email=#{email},</if>
-      <if test="password != ''">password=password(#{password}),</if>
-      <if test="tel != ''">tel=#{tel}</if> 
+      <if test="nick != ''">nick=#{nick},</if>
+      <if test="password != ''">pwd=password(#{password}),</if>
+      <if test="tel != ''">phone=#{tel}</if> 
     </set>
-    where no=#{no}
+    where mno=#{no}
   </update>
   
   <delete id="delete" parameterType="int">

@@ -10,25 +10,37 @@ import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.Member;
 
 @SuppressWarnings("serial")
-@WebServlet("/logout")
+@WebServlet("/member/logout")
 public class LogoutHandler extends HttpServlet {
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    response.setContentType("text/plain;charset=UTF-8");
+    request.setCharacterEncoding("UTF-8");
+
+    response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
+    out.println("<!DOCTYPE html>");
+    out.println("<html>");
+    out.println("<head>");
+    out.println("<title>로그아웃</title>");
+    out.println("</head>");
+    out.println("<body>");
     Member member = (Member) request.getSession().getAttribute("loginUser");
     if (member == null) {
-      out.println("로그인 하지 않았습니다!");
-      return;
+      throw new ServletException("알 수 없는 오류가 발생하였습니다.");
     }
 
     request.getSession().invalidate();
 
-    out.printf("%s 님 안녕히 가세요!\n", member.getName());
+    out.printf("%s 님 로그아웃 하였습니다.\n", member.getName());
+    out.println("<meta http-equiv='Refresh' content='1;url=main'>");
+
+    out.println("</body>");
+    out.println("</html>");
+
   }
 }
 

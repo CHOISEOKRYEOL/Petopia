@@ -16,16 +16,23 @@ import com.pms.petopia.service.MemberService;
 public class MemberUpdateHandler extends HttpServlet {
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     MemberService memberService = (MemberService) request.getServletContext().getAttribute("memberService");
 
-    response.setContentType("text/plain;charset=UTF-8");
+    response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
+    out.println("<!DOCTYPE html>");
+    out.println("<html>");
+    out.println("<head>");
+    out.println("<title>게시글 변경</title>");
+
     try {
-      out.println("[회원 변경]");
+      request.setCharacterEncoding("UTF-8");
+
+      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
       int no = Integer.parseInt(request.getParameter("no"));
 
