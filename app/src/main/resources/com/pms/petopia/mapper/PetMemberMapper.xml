@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eomcs.pms.dao.PetMember">
+  
+  <resultMap id="petmemberMap" type="petmember">
+    <id column="no" property="no"/>
+    <result column="pname" property="name"/>
+    <result column="age" property="age"/>
+    <result column="birth" property="birth"/>
+    <result column="gender" property="gender"/>
+    <result column="photo" property="photo"/>
+    
+    <association property="owner" javaType="member">
+	    <id column="owner_no" property="no"/>
+	    <result column="owner_name" property="name"/>
+    </association>
+    
+  </resultMap>
+  
+  <insert id="insert" parameterType="petmember">
+    insert into pet_member(pname, age, birth, gender, photo, owner) 
+    values(#{pname}, #{age}, #{birth}, #{gender}, #{photo} ,#{owner})
+  </insert>
+  
+  <select id="findByNo" resultMap="petmemberMap" parameterType="int">
+    select
+      p.pname, 
+      p.age,
+      p.birth,
+      p.gender, 
+      p.photo, 
+      m.nowner from pet_mypet p join pet_user m on m.mno = p.pno
+      where p.pno = #{value}
+  </select>
+  
+  <update id="update" parameterType="petmember">
+    update pet_mypet set
+        pname = #{pname}
+    where no = #{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from pet_mypet 
+    where no = #{value}
+  </delete>
+
+</mapper>
+
+
+
+
+
+
+
