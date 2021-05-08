@@ -12,41 +12,51 @@ import com.pms.petopia.domain.Member;
 import com.pms.petopia.service.MemberService;
 
 @SuppressWarnings("serial")
-@WebServlet("/login")
+@WebServlet("/member/login")
 public class LoginHandler extends HttpServlet {
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     MemberService memberService = (MemberService) request.getServletContext().getAttribute("memberService");
 
-    response.setContentType("text/plain;charset=UTF-8");
-    PrintWriter out = response.getWriter();
+    request.setCharacterEncoding("UTF-8");
 
-    out.println("[로그인]");
-
-    // 아이디 or 이메일
-    String email = request.getParameter("email");
+    String id = request.getParameter("id");
     String password = request.getParameter("password");
 
+    response.setContentType("text/html;charset=UTF-8");
+    PrintWriter out = response.getWriter();
+
+    out.println("<!DOCTYPE html>");
+    out.println("<html>");
+    out.println("<head>");
+
     try {
-      Member member = memberService.get(email, password);
+      Member member = memberService.get(id, password);
+      out.println("</head>");
+      out.println("<body>");
       if (member == null) {
-        out.println("사용자 정보가 맞지 않습니다.");
         request.getSession().invalidate();
-        return;
+        throw new ServletException("사용자 정보가 맞지 않습니다.");
       }
 
       request.getSession().setAttribute("loginUser", member);
 
-      out.printf("%s 님 로그인하였습니다.\n", member.getName());
+      out.printf("<p>%s 님 로그인하였습니다.</p>\n", member.getId());
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();
       PrintWriter printWriter = new PrintWriter(strWriter);
       e.printStackTrace(printWriter);
-      out.println(strWriter.toString());
+      out.println("</head>");
+      out.println("<body>");
+      out.println("<h1>로그인 실패</h1>");
+      out.printf("<pre>%s</pre>\n", strWriter.toString());
     } 
+
+    out.println("</body>");
+    out.println("</html>");
   }
 }

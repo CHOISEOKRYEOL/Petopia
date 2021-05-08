@@ -29,6 +29,10 @@ public class MemberAddHandler extends HttpServlet {
     m.setNick(request.getParameter("nick"));
     m.setEmail(request.getParameter("email"));
     m.setPassword(request.getParameter("password"));
+    String checkPassword = request.getParameter("checkPassword");
+    if(!m.getPassword().equals(checkPassword)) {
+      throw new ServletException("비밀번호가 일치하지 않습니다.");
+    }
     m.setEmail(request.getParameter("email"));
     m.setTel(request.getParameter("tel"));
 
@@ -38,14 +42,12 @@ public class MemberAddHandler extends HttpServlet {
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
-    out.println("<title>회원 가입</title>");
-    out.println("<p><a href='memberForm.html'>가입</a></p>");
     try {
       memberService.add(m);
 
       out.println("</head>");
       out.println("<body>");
-      out.println("<h1>회원 가입</h1>");
+      out.println("<h1>회원 가입 완료</h1>");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();

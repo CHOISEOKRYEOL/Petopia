@@ -27,9 +27,9 @@ public class DefaultMemberService implements MemberService {
 
   // 사용자 조회 업무
   @Override
-  public Member get(String email, String password) throws Exception {
+  public Member get(String id, String password) throws Exception {
     Map<String,Object> params = new HashMap<>();
-    params.put("email", email);
+    params.put("id", id);
     params.put("password", password);
 
     return memberDao.findByEmailPassword(params);

@@ -28,8 +28,9 @@ public class MainDisplay extends HttpServlet {
     out.println("<title>회원 가입</title>");
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>회원 가입</h1>");
-    out.println("<p><a href='memberForm.html'>가입</a></p>");
+    out.println("<h1>회원 가입 및 로그인</h1>");
+    out.println("<p><a href='form.html'>가입</a></p>");
+    out.println("<p><a href='login.html'>로그인</a></p>");
 
     out.println("</body>");
     out.println("</html>");
