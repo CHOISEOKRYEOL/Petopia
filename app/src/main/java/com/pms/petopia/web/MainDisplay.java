@@ -40,7 +40,7 @@ public class MainDisplay extends HttpServlet {
     else {
       out.println("<h1>메인 화면</h1>");
       out.println("<p><form action='detail' method='get'></p>");
-      out.println("<input name='update' type='submit' value='내 정보 변경'></form>");
+      out.println("<input name='update' type='submit' value='내 계정 관리'></form>");
       out.println("<p><form action='logout' method='post'></p>");
       out.println("<input name='logout' type='submit' value='로그아웃'></form>");
     }

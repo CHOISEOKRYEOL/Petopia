@@ -27,40 +27,40 @@ public class MemberUpdateHandler extends HttpServlet {
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
-    out.println("<title>게시글 변경</title>");
+    out.println("<title>내 정보 수정</title>");
 
     try {
       request.setCharacterEncoding("UTF-8");
 
       Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
-      int no = Integer.parseInt(request.getParameter("no"));
-
-      Member oldMember = memberService.get(no);
-      if (oldMember == null) {
-        out.println("해당 번호의 회원이 없습니다.");
-        return;
-      }
+      Member oldMember = loginUser;
 
       Member m = new Member();
       m.setNo(oldMember.getNo());
 
-      m.setName(request.getParameter("name"));
       m.setNick(request.getParameter("nick"));
-      m.setEmail(request.getParameter("email"));
       m.setPassword(request.getParameter("password"));
-      m.setEmail(request.getParameter("email"));
       m.setTel(request.getParameter("tel"));
       memberService.update(m);
 
-      out.println("회원을 변경하였습니다.");
+      out.println("<meta http-equiv='Refresh' content='1;url=main'>");
+      out.println("</head>");
+      out.println("<body>");
+      out.println("<h1>내 정보 수정 완료</h1>");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();
       PrintWriter printWriter = new PrintWriter(strWriter);
       e.printStackTrace(printWriter);
-      out.println(strWriter.toString());
+      out.println("</head>");
+      out.println("<body>");
+      out.println("<h1>내 정보 수정 실패</h1>");
+      out.printf("<pre>%s</pre>\n", strWriter.toString());
     }
+
+    out.println("</body>");
+    out.println("</html>");
   }
 }
 

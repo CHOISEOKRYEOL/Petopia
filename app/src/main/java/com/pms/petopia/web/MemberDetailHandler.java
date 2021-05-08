@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.Member;
-import com.pms.petopia.service.MemberService;
 
 @SuppressWarnings("serial")
 @WebServlet("/member/detail")
@@ -18,8 +17,6 @@ public class MemberDetailHandler extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
-    MemberService memberService = (MemberService) request.getServletContext().getAttribute("memberService");
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -55,9 +52,12 @@ public class MemberDetailHandler extends HttpServlet {
       out.printf("<tr><th>휴대전화</th>"
           + " <td><input name='tel' type='tel'></td></tr>\n", m.getTel());
       out.println("<input type='submit' value='수정' ");
-      out.println("<button type='button' value='취소' onClick='main'");
+      //      out.println("<button type='button' value='취소' onClick='main'");
       out.println("</tbody>");
       out.println("</table>");
+      out.println("</form>");
+      out.println("<form action='delete' method='post'>");
+      out.println("<input type='submit' name='delete' value='회원탈퇴'>");
       out.println("</form>");
 
       out.println("<p><a href='main'>메인 화면</a></p>");

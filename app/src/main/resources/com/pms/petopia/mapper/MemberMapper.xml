@@ -45,9 +45,8 @@
   
   <delete id="delete" parameterType="int">
     delete from pet_user 
-    where no=#{value}
+    where mno=#{value}
   </delete>
-
 </mapper>
 
 
