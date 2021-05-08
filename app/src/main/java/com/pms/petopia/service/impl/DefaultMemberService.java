@@ -32,7 +32,7 @@ public class DefaultMemberService implements MemberService {
     params.put("id", id);
     params.put("password", password);
 
-    return memberDao.findByEmailPassword(params);
+    return memberDao.findByIdPassword(params);
   }
 
   // 변경 업무

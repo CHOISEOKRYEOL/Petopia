@@ -24,15 +24,13 @@ public class MemberDeleteHandler extends HttpServlet {
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
-    out.println("[회원 삭제]");
-
     try {
       request.setCharacterEncoding("UTF-8");
       Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
       memberService.delete(loginUser.getNo());
-
-      out.println("<meta http-equiv='Refresh' content='1;url=main'>");
+      request.getSession().invalidate();
+      out.println("<meta http-equiv='Refresh' content='1;url=../main'>");
       out.println("</head>");
       out.println("<body>");
       out.println("<h1>그동안 Petopia 를 이용해주셔서 감사합니다.</h1>");

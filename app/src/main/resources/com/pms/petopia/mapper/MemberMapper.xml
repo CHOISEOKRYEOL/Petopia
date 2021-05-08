@@ -21,7 +21,7 @@
     values(#{name}, #{id}, #{email}, #{nick}, password(#{password}), #{tel}, 1)
   </insert>
   
-  <select id="findByEmailPassword" resultMap="memberMap" parameterType="map">
+  <select id="findByIdPassword" resultMap="memberMap" parameterType="map">
     select 
       mno,
       name,
