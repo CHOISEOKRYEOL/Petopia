@@ -14,7 +14,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.pms.mybatis.MybatisDaoFactory;
 import com.pms.mybatis.SqlSessionFactoryProxy;
-import com.pms.mybatis.TransactionManager;
 import com.pms.petopia.dao.MemberDao;
 import com.pms.petopia.service.MemberService;
 import com.pms.petopia.service.impl.DefaultMemberService;
@@ -37,9 +36,10 @@ public class AppInitHandler implements Servlet {
     try {
       // 1) Mybatis 관련 객체 준비
       InputStream mybatisConfigStream = Resources.getResourceAsStream(
-          "com/eomcs/pms/conf/mybatis-config.xml");
+          "com/pms/petopia/conf/mybatis-config.xml");
       SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(mybatisConfigStream);
       SqlSessionFactoryProxy sqlSessionFactoryProxy = new SqlSessionFactoryProxy(sqlSessionFactory);
+
 
       // 2) DAO 관련 객체 준비
       MybatisDaoFactory daoFactory = new MybatisDaoFactory(sqlSessionFactoryProxy);
@@ -49,7 +49,7 @@ public class AppInitHandler implements Servlet {
 
 
       // 3) 서비스 관련 객체 준비
-      TransactionManager txManager = new TransactionManager(sqlSessionFactoryProxy);
+      //      TransactionManager txManager = new TransactionManager(sqlSessionFactoryProxy);
 
       MemberService memberService = new DefaultMemberService(memberDao);
 

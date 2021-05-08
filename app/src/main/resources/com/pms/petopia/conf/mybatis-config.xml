@@ -4,10 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-  <properties resource="com/eomcs/pms/conf/jdbc.properties"></properties>
+  <properties resource="com/pms/petopia/conf/jdbc.properties"></properties>
 
   <typeAliases>
-    <package name="com.eomcs.pms.domain"/>
+    <package name="com.pms.petopia.domain"/>
   </typeAliases>
 
   <environments default="development">
@@ -23,10 +23,7 @@
   </environments>
   
   <mappers>
-    <mapper resource="com/eomcs/pms/mapper/BoardMapper.xml"/>
-    <mapper resource="com/eomcs/pms/mapper/MemberMapper.xml"/>
-    <mapper resource="com/eomcs/pms/mapper/TaskMapper.xml"/>
-    <mapper resource="com/eomcs/pms/mapper/ProjectMapper.xml"/>
+    <mapper resource="com/pms/petopia/mapper/MemberMapper.xml"/>
   </mappers>
 </configuration>
 

@@ -16,34 +16,49 @@ import com.pms.petopia.service.MemberService;
 public class MemberAddHandler extends HttpServlet {
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     MemberService memberService = (MemberService) request.getServletContext().getAttribute("memberService");
 
-    response.setContentType("text/plain;charset=UTF-8");
+    request.setCharacterEncoding("UTF-8");
+
+    Member m = new Member();
+    m.setName(request.getParameter("name"));
+    m.setId(request.getParameter("id"));
+    m.setNick(request.getParameter("nick"));
+    m.setEmail(request.getParameter("email"));
+    m.setPassword(request.getParameter("password"));
+    m.setEmail(request.getParameter("email"));
+    m.setTel(request.getParameter("tel"));
+
+    response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
+    out.println("<!DOCTYPE html>");
+    out.println("<html>");
+    out.println("<head>");
+    out.println("<title>회원 가입</title>");
+    out.println("<p><a href='memberForm.html'>가입</a></p>");
     try {
-      out.println("[회원 가입]");
-
-      Member m = new Member();
-      m.setId(request.getParameter("id"));
-      m.setName(request.getParameter("name"));
-      m.setNick(request.getParameter("nick"));
-      m.setEmail(request.getParameter("email"));
-      m.setPassword(request.getParameter("password"));
-      m.setEmail(request.getParameter("email"));
-      m.setTel(request.getParameter("tel"));
       memberService.add(m);
 
-      out.println("회원 가입 완료");
+      out.println("</head>");
+      out.println("<body>");
+      out.println("<h1>회원 가입</h1>");
+
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();
       PrintWriter printWriter = new PrintWriter(strWriter);
       e.printStackTrace(printWriter);
-      out.println(strWriter.toString());
+      out.println("</head>");
+      out.println("<body>");
+      out.println("<h1>회원 가입 오류</h1>");
+      out.printf("<pre>%s</pre>\n", strWriter.toString());
     }
+
+    out.println("</body>");
+    out.println("</html>");
   }
 }
 

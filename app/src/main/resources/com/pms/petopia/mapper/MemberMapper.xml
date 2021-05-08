@@ -3,20 +3,22 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.eomcs.pms.dao.MemberDao">
+<mapper namespace="com.pms.petopia.dao.MemberDao">
   
   <resultMap id="memberMap" type="member">
-    <id column="no" property="no"/>
+    <id column="mno" property="no"/>
     <result column="name" property="name"/>
+    <result column="nick" property="nick"/>
+    <result column="id" property="id"/>
     <result column="email" property="email"/>
     <result column="photo" property="photo"/>
-    <result column="tel" property="tel"/>
-    <result column="cdt" property="registeredDate"/>
+    <result column="phone" property="tel"/> 
+    <result column="date" property="registeredDate"/>
   </resultMap>
   
   <insert id="insert" parameterType="member">
-    insert into pms_member(name,email,password,photo,tel) 
-    values(#{name}, #{email}, password(#{password}), #{photo}, #{tel})
+    insert into pet_user(name, id, email, nick, pwd, phone, role) 
+    values(#{name}, #{id}, #{email}, #{nick}, password(#{password}), #{tel}, 1)
   </insert>
   
   <select id="findByEmailPassword" resultMap="memberMap" parameterType="map">
