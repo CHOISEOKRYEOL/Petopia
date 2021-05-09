@@ -5,7 +5,8 @@ public class Hospital {
   private int no;
   private String name;
   private String tel;
-  private boolean parking;
+  private String address;
+  private int parking;
   private int veterinarian;
   private String businessHour;
   private int rate;
@@ -14,9 +15,10 @@ public class Hospital {
 
   @Override
   public String toString() {
-    return "Hospital [no=" + no + ", name=" + name + ", tel=" + tel + ", parking=" + parking
-        + ", veterinarian=" + veterinarian + ", businessHour=" + businessHour + ", rate=" + rate
-        + ", longitude=" + longitude + ", latitude=" + latitude + "]";
+    return "Hospital [no=" + no + ", name=" + name + ", tel=" + tel + ", address=" + address
+        + ", parking=" + parking + ", veterinarian=" + veterinarian + ", businessHour="
+        + businessHour + ", rate=" + rate + ", longitude=" + longitude + ", latitude=" + latitude
+        + "]";
   }
 
   public int getNo() {
@@ -37,10 +39,16 @@ public class Hospital {
   public void setTel(String tel) {
     this.tel = tel;
   }
-  public boolean isParking() {
+  public String getAddress() {
+    return address;
+  }
+  public void setAddress(String address) {
+    this.address = address;
+  }
+  public int getParking() {
     return parking;
   }
-  public void setParking(boolean parking) {
+  public void setParking(int parking) {
     this.parking = parking;
   }
   public int getVeterinarian() {
