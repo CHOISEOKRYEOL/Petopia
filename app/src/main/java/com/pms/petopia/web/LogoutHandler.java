@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.Member;
 
 @SuppressWarnings("serial")
-@WebServlet("/member/logout")
+@WebServlet("/logout")
 public class LogoutHandler extends HttpServlet {
 
   @Override

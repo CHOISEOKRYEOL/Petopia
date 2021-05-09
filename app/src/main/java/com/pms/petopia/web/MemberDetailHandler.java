@@ -50,17 +50,16 @@ public class MemberDetailHandler extends HttpServlet {
       out.println("<tr><th>비밀번호 확인</th>"
           + " <td><input name='checkPassword' type='password'></td></tr>\n");
       out.printf("<tr><th>휴대전화</th>"
-          + " <td><input name='tel' type='tel'></td></tr>\n", m.getTel());
-      out.println("<input type='submit' value='수정' ");
-      //      out.println("<button type='button' value='취소' onClick='main'");
+          + " <td><input name='tel' type='tel'></td></tr><br>\n", m.getTel());
       out.println("</tbody>");
       out.println("</table>");
+      out.println("<input type='submit' value='수정' >");
       out.println("</form>");
       out.println("<form action='delete' method='post'>");
       out.println("<input type='submit' name='delete' value='회원탈퇴'>");
       out.println("</form>");
 
-      out.println("<p><a href='main'>메인 화면</a></p>");
+      out.println("<p><a href='../main'>메인 화면</a></p>");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();

@@ -12,7 +12,7 @@ import com.pms.petopia.domain.Member;
 import com.pms.petopia.service.MemberService;
 
 @SuppressWarnings("serial")
-@WebServlet("/member/login")
+@WebServlet("/login")
 public class LoginHandler extends HttpServlet {
 
   @Override

@@ -44,7 +44,7 @@ public class MemberUpdateHandler extends HttpServlet {
       m.setTel(request.getParameter("tel"));
       memberService.update(m);
 
-      out.println("<meta http-equiv='Refresh' content='1;url=main'>");
+      out.println("<meta http-equiv='Refresh' content='1;url=../main'>");
       out.println("</head>");
       out.println("<body>");
       out.println("<h1>내 정보 수정 완료</h1>");

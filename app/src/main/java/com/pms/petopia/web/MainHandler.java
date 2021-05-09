@@ -8,24 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.Member;
-import com.pms.petopia.service.MemberService;
 
 @SuppressWarnings("serial")
-@WebServlet("/member/main")
-public class MainDisplay extends HttpServlet {
+@WebServlet("/main")
+public class MainHandler extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    MemberService memberService = (MemberService) request.getServletContext().getAttribute("memberService");
-
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
-    HttpServletRequest httpRequest = request;
-    Member loginUser = (Member) httpRequest.getSession().getAttribute("loginUser");
-
+    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
@@ -34,13 +29,13 @@ public class MainDisplay extends HttpServlet {
     out.println("<body>");
     if(loginUser == null) {
       out.println("<h1>회원 가입 및 로그인</h1>");
-      out.println("<p><a href='form.html'>가입</a></p>");
+      out.println("<p><a href='member/form.html'>가입</a></p>");
       out.println("<p><a href='login.html'>로그인</a></p>");
     }
     else {
       out.println("<h1>메인 화면</h1>");
-      out.println("<p><form action='detail' method='get'></p>");
-      out.println("<input name='update' type='submit' value='내 계정 관리'></form>");
+      out.println("<p><form action='member/detail' method='get'></p>");
+      out.println("<input name='detail' type='submit' value='내 계정 관리'></form>");
       out.println("<p><form action='logout' method='post'></p>");
       out.println("<input name='logout' type='submit' value='로그아웃'></form>");
     }
