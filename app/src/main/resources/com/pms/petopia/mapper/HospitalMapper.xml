@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pms.petopia.dao.HospitalDao">
+  
+  <resultMap id="hospitalMap" type="hospital">
+    <id column="hno" property="no"/>
+    <result column="name" property="name"/>
+    <result column="tel" property="tel"/>
+    <result column="address" property="address"/>
+    <result column="parking" property="parking"/>
+    <result column="vet" property="veterinarian"/>
+    <result column="time" property="businessHour"/>
+    <result column="grade" property="rate"/> 
+  </resultMap>
+  
+  <insert id="insert" parameterType="hospital">
+    insert into pet_hp(name, tel, address, parking, vet, time) 
+    values(#{name}, #{tel}, #{address}, #{parking}, #{vet}, #{time})
+  </insert>
+  
+  <select id="findAll" resultMap="hospitalMap">
+    select 
+      hno,
+      name,
+      tel,
+      address
+    from pet_hp 
+    order by hno desc
+  </select>
+  
+  <select id="findByNo" resultMap="hospitalMap" parameterType="int">
+    select
+      hno,
+      name,
+      tel,
+      address,
+      parking,
+      vet,
+      time,
+      grade
+    from pet_hp
+    where hno = #{value}
+  </select>
+  
+  <select id="findByKeyword" resultMap="hospitalMap" parameterType="string">
+    select
+      hno,
+      name,
+      tel,
+      address,
+      parking,
+      vet,
+      time,
+      grade
+    from pet_hp
+    <if test="value != null">
+    where 
+      address like concat('%', #{value},'%')
+    </if>
+    order by hno desc
+  </select>
+  
+  <update id="update" parameterType="hospital">
+    update pet_hp 
+    <set> 
+      <if test="name != ''">name=#{name},</if>
+      <if test="tel != ''">tel=#{tel},</if>
+      <if test="address != ''">address=#{address}</if>
+      <if test="parking != ''">parking=#{parking},</if>
+      <if test="vet != ''">vet=#{vet},</if>
+      <if test="time != ''">time=#{time},</if>
+    </set>
+    where hno=#{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from pet_hp 
+    where hno=#{value}
+  </delete>
+</mapper>
