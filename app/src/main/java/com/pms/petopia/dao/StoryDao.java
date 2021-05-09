@@ -11,6 +11,8 @@ public interface StoryDao {
 
   List<Story> findByKeyword(String keyword) throws Exception;
 
+  Story findByNo(int no) throws Exception;
+
   int update(Story story) throws Exception;
 
   int delete(int no) throws Exception;

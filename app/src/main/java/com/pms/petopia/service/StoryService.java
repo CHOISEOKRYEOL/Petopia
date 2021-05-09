@@ -9,6 +9,8 @@ public interface StoryService {
 
   List<Story> list() throws Exception;
 
+  Story get(int no) throws Exception;
+
   int update(Story story) throws Exception;
 
   int delete(int no) throws Exception;

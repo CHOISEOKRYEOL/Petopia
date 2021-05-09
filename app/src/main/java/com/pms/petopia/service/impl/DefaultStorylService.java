@@ -24,6 +24,11 @@ public class DefaultStorylService implements StoryService {
   }
 
   @Override
+  public Story get(int no) throws Exception {
+    return storyDao.findByNo(no); 
+  }
+
+  @Override
   public int update(Story story) throws Exception {
     return storyDao.update(story);
   }
