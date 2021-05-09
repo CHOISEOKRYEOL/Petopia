@@ -28,16 +28,24 @@ public class MainHandler extends HttpServlet {
     out.println("</head>");
     out.println("<body>");
     if(loginUser == null) {
-      out.println("<h1>회원 가입 및 로그인</h1>");
+      out.println("<h1>비회원 화면</h1>");
       out.println("<p><a href='member/form.html'>가입</a></p>");
       out.println("<p><a href='login.html'>로그인</a></p>");
+      out.println("<p><a href='main'>병원 찾기</a></p>");
+      out.println("<p><a href='main'>스토리</a></p>");
+      out.println("<p><a href='main'>나눔 장터</a></p>");
+      out.println("<p><a href='main'>우리 동네</a></p>");
     }
     else {
-      out.println("<h1>메인 화면</h1>");
+      out.println("<h1>회원 화면</h1>");
       out.println("<p><form action='member/detail' method='get'></p>");
       out.println("<input name='detail' type='submit' value='내 계정 관리'></form>");
       out.println("<p><form action='logout' method='post'></p>");
       out.println("<input name='logout' type='submit' value='로그아웃'></form>");
+      out.println("<p><a href='main'>병원 찾기</a></p>");
+      out.println("<p><a href='main'>스토리</a></p>");
+      out.println("<p><a href='main'>나눔 장터</a></p>");
+      out.println("<p><a href='main'>우리 동네</a></p>");
     }
     out.println("</body>");
     out.println("</html>");

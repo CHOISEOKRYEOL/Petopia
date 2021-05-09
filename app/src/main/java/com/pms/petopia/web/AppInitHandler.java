@@ -14,9 +14,21 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.pms.mybatis.MybatisDaoFactory;
 import com.pms.mybatis.SqlSessionFactoryProxy;
+import com.pms.petopia.dao.HospitalDao;
 import com.pms.petopia.dao.MemberDao;
+import com.pms.petopia.dao.PetDao;
+import com.pms.petopia.dao.RecordDao;
+import com.pms.petopia.dao.StoryDao;
+import com.pms.petopia.service.HospitalService;
 import com.pms.petopia.service.MemberService;
+import com.pms.petopia.service.PetService;
+import com.pms.petopia.service.RecordService;
+import com.pms.petopia.service.StoryService;
+import com.pms.petopia.service.impl.DefaultHospitalService;
 import com.pms.petopia.service.impl.DefaultMemberService;
+import com.pms.petopia.service.impl.DefaultPetService;
+import com.pms.petopia.service.impl.DefaultRecordService;
+import com.pms.petopia.service.impl.DefaultStorylService;
 
 @WebServlet(
     value="/init",   // 클라인언트에서 요청할 때 사용할 명령이다.
@@ -44,18 +56,28 @@ public class AppInitHandler implements Servlet {
       MybatisDaoFactory daoFactory = new MybatisDaoFactory(sqlSessionFactoryProxy);
 
       MemberDao memberDao = daoFactory.createDao(MemberDao.class);
-
+      PetDao petDao = daoFactory.createDao(PetDao.class);
+      RecordDao recordDao = daoFactory.createDao(RecordDao.class);
+      HospitalDao hospitalDao = daoFactory.createDao(HospitalDao.class);
+      StoryDao storyDao = daoFactory.createDao(StoryDao.class);
 
       // 3) 서비스 관련 객체 준비
       //      TransactionManager txManager = new TransactionManager(sqlSessionFactoryProxy);
 
       MemberService memberService = new DefaultMemberService(memberDao);
+      PetService petService = new DefaultPetService(petDao);
+      RecordService recordService = new DefaultRecordService(recordDao);
+      HospitalService hospitalService = new DefaultHospitalService(hospitalDao);
+      StoryService storyService = new DefaultStorylService(storyDao);
 
       // 4) 서비스 객체를 ServletContext 보관소에 저장한다.
       ServletContext servletContext = config.getServletContext();
 
       servletContext.setAttribute("memberService", memberService);
-
+      servletContext.setAttribute("petService", petService);
+      servletContext.setAttribute("recordService", recordService);
+      servletContext.setAttribute("hospitalService", hospitalService);
+      servletContext.setAttribute("storyService", storyService);
 
     } catch (Exception e) {
       e.printStackTrace();

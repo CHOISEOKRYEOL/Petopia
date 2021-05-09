@@ -5,11 +5,11 @@ import com.pms.petopia.dao.StoryDao;
 import com.pms.petopia.domain.Story;
 import com.pms.petopia.service.StoryService;
 
-public class DefaultStorylSearvice implements StoryService {
+public class DefaultStorylService implements StoryService {
 
   StoryDao storyDao;
 
-  public DefaultStorylSearvice(StoryDao storyDao) {
+  public DefaultStorylService(StoryDao storyDao) {
     this.storyDao = storyDao;
   }
 

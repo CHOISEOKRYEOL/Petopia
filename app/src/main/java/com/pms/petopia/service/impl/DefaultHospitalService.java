@@ -5,11 +5,11 @@ import com.pms.petopia.dao.HospitalDao;
 import com.pms.petopia.domain.Hospital;
 import com.pms.petopia.service.HospitalService;
 
-public class DefaultHospitalSearvice implements HospitalService {
+public class DefaultHospitalService implements HospitalService {
 
   HospitalDao hospitalDao;
 
-  public DefaultHospitalSearvice(HospitalDao hospitalDao) {
+  public DefaultHospitalService(HospitalDao hospitalDao) {
     this.hospitalDao = hospitalDao;
   }
 

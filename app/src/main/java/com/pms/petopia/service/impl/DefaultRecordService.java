@@ -5,7 +5,7 @@ import com.pms.petopia.dao.RecordDao;
 import com.pms.petopia.domain.Record;
 import com.pms.petopia.service.RecordService;
 
-public abstract class DefaultRecordService implements RecordService {
+public class DefaultRecordService implements RecordService {
 
   RecordDao recordDao;
 
