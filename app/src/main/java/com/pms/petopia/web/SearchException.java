@@ -1,9 +1,7 @@
 package com.pms.petopia.web;
 
-// 이 예외 클래스는 검색 결과의 예외 상태를 구분할 목적으로 정의하였다.
-// 
 @SuppressWarnings("serial")
-public class SearchException extends RuntimeException {
+public class SearchException extends Exception {
 
   public SearchException() {
     super();
@@ -13,3 +11,4 @@ public class SearchException extends RuntimeException {
     super(message);
   }
 }
+

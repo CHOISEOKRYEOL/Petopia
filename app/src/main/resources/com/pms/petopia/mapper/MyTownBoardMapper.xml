@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eomcs.pms.dao.MyTownBoardDao">
+  
+  <resultMap id="myTownBoardMap" type="board">
+    <id column="tno" property="tno"/>
+    <result column="title" property="title"/>
+    <result column="cont" property="cont"/>
+    <result column="date" property="date"/>
+    <result column="cmtcnt" property="cmtcnt"/>
+    <result column="view" property="view"/>
+    
+    <association property="writer" javaType="member">
+	    <id column="writer_no" property="no"/>
+	    <result column="writer_name" property="name"/>
+    </association>
+    
+    <association property="area" javaType="area">
+      <id column="area_no" property="no"/>
+      <result column="area_name" property="name"/>
+    </association>
+    
+  </resultMap>
+  
+  <insert id="insert" parameterType="board">
+    insert into pet_mytown(mno, gno, title, cont, cmtcnt, view) 
+    values(#{writer.no}, #{area.no}, #{title}, #{cont}, #{cmtcnt}, #{view})
+  </insert>
+  
+  <select id="findByArea" resultMap="boardMap" parameterType="int">
+    select
+      t.tno, t.title, t.date, t.view,
+      m.mno, m.nick,
+      c.cno, c.cname, s.gno, s.gname
+    from pet_city c
+      inner join pet_state s on c.cno=s.cno
+      inner join pet_mytown t on s.gno=t.gno
+      inner join pet_user m on t.mno=m.mno  
+    where c.cno=#{cno} and s.gno=#{gno}
+    order by t.tno desc
+  </select>
+
+  <select id="findByKeyword" resultMap="boardMap" parameterType="string">
+    select
+      t.tno, t.title, t.date, t.view,
+      m.mno, m.nick,
+      c.cno, c.cname, s.gno, s.gname
+    from pet_city c
+      inner join pet_state s on c.cno=s.cno
+      inner join pet_mytown t on s.gno=t.gno
+      inner join pet_user m on t.mno=m.mno
+    
+    <if test="value != null">
+    where 
+      t.title like concat('%', #{value},'%')
+      or m.nick like concat('%', #{value},'%')
+      or t.cont like concat('%', #{value},'%')
+    </if>
+    
+    order by b.no desc
+  </select>
+  
+  <select id="findByNo" resultMap="boardMap" parameterType="int">
+    select
+      t.tno, t.title, t.date, t.view,
+      m.mno, m.nick,
+      c.cno, c.cname, s.gno, s.gname, o.cont
+    from pet_city c
+      inner join pet_state s on c.cno=s.cno
+      inner join pet_mytown t on s.gno=t.gno
+      inner join pet_user m on t.mno=m.mno
+      inner join pet_mytown_comt o on t.tno=o.tno
+    where t.tno=#{value}
+  </select>
+  
+  <update id="update" parameterType="board">
+    update pet_mytown set
+      title = #{title},
+      cont = #{cont},
+    date = now()
+    where tno=#{tno}
+  </update>
+  
+  <update id="updateViewCount" parameterType="int">
+    update pet_mytown set 
+      view = view + 1 
+    where no = #{value}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from pet_mytown
+    where tno=#{value}
+  </delete>
+
+</mapper>
+
+
+
+
+
+
+
