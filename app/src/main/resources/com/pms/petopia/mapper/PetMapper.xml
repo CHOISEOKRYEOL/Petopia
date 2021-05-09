@@ -3,9 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.eomcs.pms.dao.PetMember">
+<mapper namespace="com.pms.petopia.dao.PetDao">
   
-  <resultMap id="petmemberMap" type="petmember">
+  <resultMap id="petMap" type="pet">
     <id column="no" property="no"/>
     <result column="pname" property="name"/>
     <result column="age" property="age"/>
@@ -20,23 +20,25 @@
     
   </resultMap>
   
-  <insert id="insert" parameterType="petmember">
+  <insert id="insert" parameterType="pet">
     insert into pet_member(pname, age, birth, gender, photo, owner) 
     values(#{pname}, #{age}, #{birth}, #{gender}, #{photo} ,#{owner})
   </insert>
   
-  <select id="findByNo" resultMap="petmemberMap" parameterType="int">
+  <select id="findByNo" resultMap="pet" parameterType="int">
     select
       p.pname, 
       p.age,
       p.birth,
       p.gender, 
       p.photo, 
-      m.nowner from pet_mypet p join pet_user m on m.mno = p.pno
-      where p.pno = #{value}
+      m.nowner 
+    from pet_mypet p 
+    join pet_user m on m.mno = p.pno
+    where p.pno = #{value}
   </select>
   
-  <update id="update" parameterType="petmember">
+  <update id="update" parameterType="pet">
     update pet_mypet set
         pname = #{pname}
     where no = #{no}

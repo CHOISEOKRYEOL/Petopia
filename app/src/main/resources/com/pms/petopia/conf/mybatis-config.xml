@@ -24,6 +24,7 @@
   
   <mappers>
     <mapper resource="com/pms/petopia/mapper/MemberMapper.xml"/>
+    <mapper resource="com/pms/petopia/mapper/PetMapper.xml"/>
   </mappers>
 </configuration>
 

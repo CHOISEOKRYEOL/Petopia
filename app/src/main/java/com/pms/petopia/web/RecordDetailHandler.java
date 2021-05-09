@@ -9,15 +9,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.pms.petopia.domain.PetMember;
+import com.pms.petopia.domain.Pet;
 import com.pms.petopia.domain.Record;
 import com.pms.petopia.service.RecordService;
 
 @SuppressWarnings("serial")
-@WebServlet("/board/detail")
+@WebServlet("/record/detail")
 public class RecordDetailHandler extends HttpServlet {
 
-  PetMember petmember;
+  Pet pet;
 
   SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -51,13 +51,13 @@ public class RecordDetailHandler extends HttpServlet {
       out.println("<table border='1'>");
       out.println("<tbody>");
       out.printf("<tr><th>이름</th>"
-          + " <td><input type='text' name='no' value='%d' readonly></td></tr>\n", petmember.getName());
+          + " <td><input type='text' name='no' value='%d' readonly></td></tr>\n", pet.getName());
       out.printf("<tr><th>나이</th>"
-          + " <td><input name='title' type='text' value='%s'></td></tr>\n", petmember.getAge());
+          + " <td><input name='title' type='text' value='%s'></td></tr>\n", pet.getAge());
       out.printf("<tr><th>생년월일</th>"
-          + " <td><textarea name='content' rows='10' cols='60'>%s</textarea></td></tr>\n", petmember.getBirth());
-      out.printf("<tr><th>성별</th> <td>%s</td></tr>\n", petmember.getGender());
-      out.printf("<tr><th>사진</th> <td>%s</td></tr>\n", petmember.getPhoto());
+          + " <td><textarea name='content' rows='10' cols='60'>%s</textarea></td></tr>\n", pet.getBirthDay());
+      out.printf("<tr><th>성별</th> <td>%s</td></tr>\n", pet.isGender());
+      out.printf("<tr><th>사진</th> <td>%s</td></tr>\n", pet.getPhoto());
       out.println("</tbody>");
 
       //      Member loginUser = (Member) request.getSession().getAttribute("loginUser");

@@ -12,7 +12,7 @@ import com.pms.petopia.domain.Record;
 import com.pms.petopia.service.RecordService;
 
 @SuppressWarnings("serial")
-@WebServlet("/board/update")
+@WebServlet("/record/update")
 public class RecordUpdateHandler extends HttpServlet {
 
   @Override

@@ -14,7 +14,7 @@ import com.pms.petopia.service.RecordService;
 
 
 @SuppressWarnings("serial")
-@WebServlet("/board/list")
+@WebServlet("/record/list")
 public class RecordListHandler extends HttpServlet {
 
   @Override

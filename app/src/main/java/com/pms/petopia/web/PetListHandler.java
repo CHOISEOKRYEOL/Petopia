@@ -9,12 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.pms.petopia.domain.PetMember;
-import com.pms.petopia.service.PetMemberService;
-
+import com.pms.petopia.domain.Pet;
+import com.pms.petopia.service.PetService;
 
 @SuppressWarnings("serial")
-@WebServlet("/board/list")
+@WebServlet("/pet/list")
 public class PetListHandler extends HttpServlet {
 
   @Override
@@ -22,7 +21,7 @@ public class PetListHandler extends HttpServlet {
       throws ServletException, IOException {
     // 클라이언트가 /board/list 를 요청하면 톰캣 서버가 이 메서드를 호출한다. 
 
-    PetMemberService petMemberService = (PetMemberService) request.getServletContext().getAttribute("PetMemberService");
+    PetService petMemberService = (PetService) request.getServletContext().getAttribute("PetMemberService");
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -38,7 +37,7 @@ public class PetListHandler extends HttpServlet {
     out.println("<p><a href='form.html'>새 글</a></p>");
 
     try {
-      List<PetMember> pets = petMemberService.list();
+      List<Pet> pets = petMemberService.list();
 
       out.println("<table border='1'>");
       out.println("<thead>");
@@ -48,18 +47,18 @@ public class PetListHandler extends HttpServlet {
       out.println("</thead>");
       out.println("<tbody>");
 
-      for (PetMember p : pets) {
+      for (Pet p : pets) {
         out.printf("<tr>"
             + " <td>%d</td>"
             + " <td><a href='detail?no=%1$d'>%s</a></td>"
             + " <td>%s</td>"
-            + " <td>%s</td>"
+            + " <td>%b</td>"
             + " <td>%d</td> </tr>\n", 
             p.getNo(), 
             p.getName(), 
             p.getAge(),
-            p.getBirth(),
-            p.getGender(), 
+            p.getBirthDay(),
+            p.isGender(), 
             p.getPhoto());
       }
       out.println("</tbody>");

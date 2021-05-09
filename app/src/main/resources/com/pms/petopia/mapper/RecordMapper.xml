@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.eomcs.pms.dao.Record">
+<mapper namespace="com.pms.petopia.dao.RecordDao">
   
   <resultMap id="recordMap" type="record">
     <id column="no" property="no"/>
@@ -16,30 +16,30 @@
     values(#{state}, #{history})
   </insert>
   
-  <select id="findAll" resultMap="memberMap">
+  <select id="findAll" resultMap="recordMap">
     select 
       no,
       name,
       email,
       photo,
       tel 
-    from pms_member 
+    from pet_hprecord 
     order by name asc
   </select>
   
-  <select id="findByName" resultMap="memberMap" parameterType="string">
+  <select id="findByName" resultMap="recordMap" parameterType="string">
     select 
       no,
       name,
       email,
       photo,
       tel 
-    from pms_member
+    from pet_hprecord
     where name = #{value}
     order by name asc
   </select>
   
-  <select id="findByNo" resultMap="memberMap" parameterType="int">
+  <select id="findByNo" resultMap="recordMap" parameterType="int">
     select 
       no,
       name,
@@ -47,22 +47,12 @@
       photo,
       tel,
       cdt 
-    from pms_member 
+    from pet_hprecord 
     where no = #{value}
   </select>
   
-  <select id="findByEmailPassword" resultMap="memberMap" parameterType="map">
-    select 
-      no,
-      name,
-      email,
-      photo
-    from pms_member 
-    where email = #{email} and password = password(#{password})
-  </select>
-  
-  <update id="update" parameterType="member">
-    update pms_member 
+  <update id="update" parameterType="record">
+    update pet_hprecord 
     <set> 
       <if test="name != ''">name=#{name},</if>
       <if test="email != ''">email=#{email},</if>
@@ -74,7 +64,7 @@
   </update>
   
   <delete id="delete" parameterType="int">
-    delete from pms_member 
+    delete from pet_hprecord 
     where no=#{value}
   </delete>
 

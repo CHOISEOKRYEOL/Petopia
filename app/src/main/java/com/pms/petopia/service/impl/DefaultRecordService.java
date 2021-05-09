@@ -19,6 +19,11 @@ public abstract class DefaultRecordService implements RecordService {
     return recordDao.insert(record);
   }
 
+  @Override
+  public Record get(int no) throws Exception {
+    return recordDao.findByNo(no);
+  }
+
   // 조회 업무
   @Override
   public List<Record> list() throws Exception {

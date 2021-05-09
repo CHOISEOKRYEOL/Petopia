@@ -9,11 +9,11 @@ public interface RecordService {
 
   List<Record> list() throws Exception;
 
+  Record get(int no) throws Exception;
+
   int update(Record record) throws Exception;
 
   int delete(int no) throws Exception;
-
-  Record get(int no) throws Exception;
 
 }
 

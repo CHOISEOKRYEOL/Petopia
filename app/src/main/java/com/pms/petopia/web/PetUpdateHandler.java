@@ -8,17 +8,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.pms.petopia.domain.PetMember;
-import com.pms.petopia.service.PetMemberService;
+import com.pms.petopia.domain.Pet;
+import com.pms.petopia.service.PetService;
 
 @SuppressWarnings("serial")
-@WebServlet("/board/update")
+@WebServlet("/pet/update")
 public class PetUpdateHandler extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    PetMemberService petMemberService = (PetMemberService) request.getServletContext().getAttribute("PetMemberService");
+    PetService petMemberService = (PetService) request.getServletContext().getAttribute("PetMemberService");
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -30,13 +30,13 @@ public class PetUpdateHandler extends HttpServlet {
 
     try {
       request.setCharacterEncoding("UTF-8");
-      int no = Integer.parseInt(request.getParameter("no"));
+      //      int no = Integer.parseInt(request.getParameter("no"));
 
-      PetMember petmember = new PetMember();
-      petmember.setNo(petmember.getNo());
-      petmember.setName(request.getParameter("name"));
+      Pet pet = new Pet();
+      pet.setNo(pet.getNo());
+      pet.setName(request.getParameter("name"));
 
-      petMemberService.update(petmember);
+      petMemberService.update(pet);
 
       out.println("<meta http-equiv='Refresh' content='1;url=list'>");
       out.println("</head>");

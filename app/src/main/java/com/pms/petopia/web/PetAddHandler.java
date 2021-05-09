@@ -9,8 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.pms.petopia.domain.PetMember;
-import com.pms.petopia.service.PetMemberService;
+import com.pms.petopia.domain.Pet;
+import com.pms.petopia.service.PetService;
 
 @SuppressWarnings("serial")
 @WebServlet("/pet/add")
@@ -20,17 +20,19 @@ public class PetAddHandler extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    PetMemberService petMemberService = (PetMemberService) request.getServletContext().getAttribute("PetMemberService");
+    PetService petMemberService = (PetService) request.getServletContext().getAttribute("PetMemberService");
 
-    PetMember p = new PetMember();
+    Pet p = new Pet();
 
     // 클라이언트가 POST 요청으로 보낸 데이터가 UTF-8임을 알려준다.
     request.setCharacterEncoding("UTF-8");
 
+
     p.setName(request.getParameter("name"));
     p.setAge(Integer.parseInt(request.getParameter("age")));
-    p.setBirth(Date.valueOf(request.getParameter(("birth"))));
-    p.setGender(Integer.parseInt(request.getParameter("gender")));
+    p.setBirthDay(Date.valueOf(request.getParameter(("birth"))));
+    //    p.setGender(request.getParameter("gender"));
+    //    p.setGender(Integer.parseInt(request.getParameter("gender")));
     p.setPhoto(request.getParameter("photo"));
 
 

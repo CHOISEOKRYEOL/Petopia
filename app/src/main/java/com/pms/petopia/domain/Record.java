@@ -3,7 +3,7 @@ package com.pms.petopia.domain;
 public class Record {
   private int state;
   private String record;
-  private PetMember petmember;
+  private Pet pet;
 
   public Record() {}
 
@@ -23,19 +23,19 @@ public class Record {
     this.record = record;
   }
 
-  public PetMember getPetmember() {
-    return petmember;
+  public Pet getPet() {
+    return pet;
   }
 
-  public void setPetmember(PetMember petmember) {
-    this.petmember = petmember;
+  public void setPetMember(Pet pet) {
+    this.pet = pet;
   }
 
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((petmember == null) ? 0 : petmember.hashCode());
+    result = prime * result + ((pet == null) ? 0 : pet.hashCode());
     result = prime * result + ((record == null) ? 0 : record.hashCode());
     result = prime * result + state;
     return result;
@@ -50,10 +50,10 @@ public class Record {
     if (getClass() != obj.getClass())
       return false;
     Record other = (Record) obj;
-    if (petmember == null) {
-      if (other.petmember != null)
+    if (pet == null) {
+      if (other.pet != null)
         return false;
-    } else if (!petmember.equals(other.petmember))
+    } else if (!pet.equals(other.pet))
       return false;
     if (record == null) {
       if (other.record != null)
@@ -67,7 +67,7 @@ public class Record {
 
   @Override
   public String toString() {
-    return "Record [state=" + state + ", record=" + record + ", petmember=" + petmember + "]";
+    return "Record [state=" + state + ", record=" + record + ", pet=" + pet + "]";
   }
 
 
