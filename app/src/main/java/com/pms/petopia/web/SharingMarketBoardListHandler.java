@@ -18,7 +18,7 @@ import com.pms.petopia.service.SharingMarketBoardService;
 @WebServlet("/sharingmarketboard/list")
 public class SharingMarketBoardListHandler extends HttpServlet{
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		SharingMarketBoardService shareMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("shareMarketBoardService");
 		
@@ -33,7 +33,7 @@ public class SharingMarketBoardListHandler extends HttpServlet{
 	    out.println("<body>");
 	    out.println("<h1>나눔 장터 게시글 목록</h1>");
 
-	    out.println("<p><a href='form.html'>새 글</a></p>");
+	    out.println("<p><a href='shareform.html'>새 글</a></p>");
 	    
         out.println("<form action='search' method='get'>");
         out.println("<input type='text' name='keyword'> ");
@@ -80,7 +80,6 @@ public class SharingMarketBoardListHandler extends HttpServlet{
 	        StringWriter strWriter = new StringWriter();
 	        PrintWriter printWriter = new PrintWriter(strWriter);
 	        e.printStackTrace(printWriter);
-
 	        // StringWriter 에 들어 있는 출력 내용을 꺼내 클라이언트로 보낸다.
 	        out.printf("<pre>%s</pre>\n", strWriter.toString());
 	      }

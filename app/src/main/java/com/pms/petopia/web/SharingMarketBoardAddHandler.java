@@ -17,22 +17,24 @@ import com.pms.petopia.service.SharingMarketBoardService;
 @SuppressWarnings("serial")
 @WebServlet("/sharingmarketboard/add")
 public class SharingMarketBoardAddHandler extends HttpServlet {
+	
 @Override
 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	SharingMarketBoardService shareMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("shareMarketBoardService");
 	SharingMarketBoard smb = new SharingMarketBoard();
 	
 	request.setCharacterEncoding("UTF-8");
+	
 	smb.setCategory(request.getParameter("category"));
 	smb.setTitle(request.getParameter("title"));
-	smb.setContent(request.getParameter("cont"));
+	smb.setContent(request.getParameter("content"));
     
 	
 	  HttpServletRequest httpRequest = request;
-	    Member loginUser = (Member) httpRequest.getSession().getAttribute("loginUser");
-	    smb.setWriter(loginUser);
-	  response.setContentType("text/html;charset=UTF-8");
+	  Member loginUser = (Member) httpRequest.getSession().getAttribute("loginUser");
+	  smb.setWriter(loginUser);
 	  
+	  response.setContentType("text/html;charset=UTF-8");
 	  PrintWriter out = response.getWriter();
 
 	    out.println("<!DOCTYPE html>");
@@ -41,9 +43,10 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	    out.println("<title>나눔장터 게시 등록</title>");
 
 	    try {
+	    	
 	    	shareMarketBoardService.add(smb);
 
-	      out.println("<meta http-equiv='Refresh' content='1; url=list'>");
+	      out.println("<meta http-equiv='Refresh' content='1;url=list'>");
 	      out.println("</head>");
 	      out.println("<body>");
 	      out.println("<h1>나눔장터 게시글 등록</h1>");
