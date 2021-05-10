@@ -10,14 +10,14 @@ public class SharingMarketBoard {
   private String content;
   private Date createdDate;
   private Member writer;
+  private int veiwCount;
 
   @Override
-  public String toString() {
-    return "SharingMarketBoard [no=" + no + ", category=" + category + ", title=" + title
-        + ", content=" + content + ", createdDate=" + createdDate + ", writer=" + writer + "]";
-  }
-
-  public int getNo() {
+public String toString() {
+	return "SharingMarketBoard [no=" + no + ", category=" + category + ", title=" + title + ", content=" + content
+			+ ", createdDate=" + createdDate + ", writer=" + writer + ", veiwCount=" + veiwCount + "]";
+}
+public int getNo() {
     return no;
   }
   public void setNo(int no) {
@@ -53,5 +53,13 @@ public class SharingMarketBoard {
   public void setWriter(Member writer) {
     this.writer = writer;
   }
+public int getVeiwCount() {
+	return veiwCount;
+}
+public void setVeiwCount(int veiwCount) {
+	this.veiwCount = veiwCount;
+}
+  
+  
 
 }

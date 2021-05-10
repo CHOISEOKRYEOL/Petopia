@@ -55,7 +55,7 @@ public class MyTownBoardDetailHandler extends HttpServlet {
       out.printf("<tr><th>작성자</th> <td>%s</td></tr>\n", b.getWriter().getName());
       out.printf("<tr><th>등록일</th> <td>%s</td></tr>\n", formatter.format(b.getCreatedDate()));
       out.printf("<tr><th>조회수</th> <td>%s</td></tr>\n", b.getViewCount());
-      out.printf("<tr><th>댓글</th> <td>%s</td></tr>\n",b.getComment());
+      //out.printf("<tr><th>댓글</th> <td>%s</td></tr>\n",b.getComment());
       out.println("</tbody>");
 
       Member loginUser = (Member) request.getSession().getAttribute("loginUser");

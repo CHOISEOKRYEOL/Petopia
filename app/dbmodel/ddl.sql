@@ -170,7 +170,8 @@ CREATE TABLE pet_mark (
   category INTEGER     NOT NULL COMMENT '분류', -- 분류
   title    VARCHAR(50) NOT NULL COMMENT '제목', -- 제목
   cont     LONGTEXT    NOT NULL COMMENT '내용', -- 내용
-  date     DATETIME    NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
+  date     DATETIME    NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
+  vw_cnt   INTEGER     NOT NULL DEFAULT 0 COMMENT '조회수' -- 조회수
 )
 COMMENT '나눔장터';
 
@@ -186,13 +187,14 @@ ALTER TABLE pet_mark
 
 -- 우리동네
 CREATE TABLE pet_mytown (
-  tno   INTEGER     NOT NULL COMMENT '우리동네번호', -- 우리동네번호
-  mno   INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
-  gno   INTEGER     NOT NULL COMMENT '시군구번호', -- 시군구번호
-  title VARCHAR(50) NOT NULL COMMENT '제목', -- 제목
-  cont  LONGTEXT    NOT NULL COMMENT '내용(사진)', -- 내용(사진)
-  date  DATETIME    NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
-  view  INTEGER     NULL     DEFAULT 0 COMMENT '조회수' -- 조회수
+  tno     INTEGER     NOT NULL COMMENT '우리동네번호', -- 우리동네번호
+  mno     INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
+  gno     INTEGER     NOT NULL COMMENT '시군구번호', -- 시군구번호
+  title   VARCHAR(50) NOT NULL COMMENT '제목', -- 제목
+  cont    LONGTEXT    NOT NULL COMMENT '내용(사진)', -- 내용(사진)
+  date    DATETIME    NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
+  vw_cnt  INTEGER     NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
+  cmt_cnt INTEGER     NOT NULL DEFAULT 0 COMMENT '댓글수' -- 댓글수
 )
 COMMENT '우리동네';
 
