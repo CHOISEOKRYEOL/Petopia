@@ -22,7 +22,7 @@
   
   <insert id="insert" parameterType="pet">
     insert into pet_member(mno, pname, age, birth, gender, photo, owner) 
-    values(#{mno), #{pname}, #{age}, #{birth}, #{gender}, #{photo} ,#{owner})
+    values(#{mno}, #{pname}, #{age}, #{birth}, #{gender}, #{photo} ,#{owner})
   </insert>
   
   <select id="findByNo" resultMap="pet" parameterType="int">
