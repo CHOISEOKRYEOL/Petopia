@@ -35,7 +35,7 @@ public class SharingMarketBoardListHandler extends HttpServlet{
 
 	    out.println("<p><a href='form.html'>새 글</a></p>");
 	    
-        out.println("<form action=`search` method='get'>");
+        out.println("<form action='search' method='get'>");
         out.println("<input type='text' name='keyword'> ");
         out.println("<button>검색</button>");
         out.println("</form>");

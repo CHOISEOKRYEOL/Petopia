@@ -5,7 +5,7 @@
 
 <mapper namespace="com.eomcs.pms.dao.SharingMarketBoardDao">
   
-  <resultMap id="boardMap" type="board">
+  <resultMap id="boardMap" type="smBoard">
     <id column="sno" property="no"/>
     <result column="category" property="category"/>
     <result column="title" property="title"/>
@@ -20,7 +20,7 @@
     
   </resultMap>
   
-  <insert id="insert" parameterType="board">
+  <insert id="insert" parameterType="smBoard">
     insert into pet_mark(title, content, writer) 
     values(#{title}, #{content}, #{writer.no})
   </insert>
@@ -59,7 +59,7 @@
     where b.no = #{value}
   </select>
   
-  <update id="update" parameterType="board">
+  <update id="update" parameterType="smBoard">
     update pms_board set
         title = #{title}, 
         cont = #{content}
