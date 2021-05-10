@@ -19,7 +19,7 @@ repositories {
 }
 
 war {
-    archiveBaseName = 'web'
+    archiveBaseName = 'pet'
 }
 
 dependencies {

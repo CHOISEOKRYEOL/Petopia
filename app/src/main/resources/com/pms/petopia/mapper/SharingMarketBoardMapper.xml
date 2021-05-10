@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eomcs.pms.dao.SharingMarketBoardDao">
+  
+  <resultMap id="boardMap" type="board">
+    <id column="sno" property="no"/>
+    <result column="category" property="category"/>
+    <result column="title" property="title"/>
+    <result column="cont" property="content"/>
+    <result column="date" property="createdDate"/>
+    <result column="vw_cnt" property="viewCount"/>
+    
+    <association property="writer" javaType="member">
+	    <id column="mno" property="no"/>
+	    <result column="writer_name" property="name"/>
+    </association>
+    
+  </resultMap>
+  
+  <insert id="insert" parameterType="board">
+    insert into pet_mark(title, content, writer) 
+    values(#{title}, #{content}, #{writer.no})
+  </insert>
+
+  <select id="findByKeyword" resultMap="boardMap" parameterType="string">
+    select
+      mark.no,
+      mark.title,
+      mark.date,
+      mark.vw_cnt,
+      mem.no as writer_no,
+      mem.name as writer_name
+    from pet_mark mark
+      inner join pet_member mem on mem.no=mark.writer
+    
+    <if test="value != null">
+    where 
+      mark.title like concat('%', #{value},'%')
+      or mark.content like concat('%', #{value},'%')
+      or mem.name like concat('%', #{value},'%')
+    </if>
+    order by mark.no desc
+  </select>
+  
+  <select id="findByNo" resultMap="boardMap" parameterType="int">
+    select
+      mark.no,
+      mark.title,
+      mark.content,
+      mark.date,
+      mark.vw_cnt,
+      mem.no as writer_no,
+      mem.name as writer_name
+    from pet_mark mark
+      inner join pet_member mem on mem.no=mark.writer
+    where b.no = #{value}
+  </select>
+  
+  <update id="update" parameterType="board">
+    update pms_board set
+        title = #{title}, 
+        cont = #{content}
+    where no = #{no}
+  </update>
+  
+  <update id="updateViewCount" parameterType="int">
+    update pet_mark set 
+      vw_cnt = vw_cnt + 1 
+    where no = #{value}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from pms_mark 
+    where no = #{value}
+  </delete>
+
+</mapper>
+
+
+
+
+
+
+
