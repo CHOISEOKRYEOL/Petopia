@@ -38,8 +38,8 @@ public class MyTownBoardSearchHandler extends HttpServlet {
         throw new SearchException("검색어를 입력하세요.");
       }
 
-      MyTownBoardService boardService = (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
-      List<MyTownBoard> list = boardService.search(keyword);
+      MyTownBoardService myTownBoardService = (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
+      List<MyTownBoard> list = myTownBoardService.search(keyword);
       if (list.size() == 0) {
         throw new SearchException("검색어에 해당하는 게시글이 없습니다.");
       }

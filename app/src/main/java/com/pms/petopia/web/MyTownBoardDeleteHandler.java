@@ -21,7 +21,7 @@ public class MyTownBoardDeleteHandler extends HttpServlet {
       throws ServletException, IOException {
 
     response.setContentType("text/html;charset=UTF-8");
-    MyTownBoardService boardService = (MyTownBoardService) request.getServletContext().getAttribute("boardService");
+    MyTownBoardService myTownBoardService = (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
     PrintWriter out = response.getWriter();
 
     out.println("<!DOCTYPE html>");
@@ -32,7 +32,7 @@ public class MyTownBoardDeleteHandler extends HttpServlet {
     int no = Integer.parseInt(request.getParameter("no"));
 
     try {
-      MyTownBoard oldBoard = boardService.get(no);
+      MyTownBoard oldBoard = myTownBoardService.get(no);
       if (oldBoard == null) {
         throw new Exception("해당 번호의 게시글이 없습니다.");
       }
@@ -42,7 +42,7 @@ public class MyTownBoardDeleteHandler extends HttpServlet {
         throw new Exception("삭제 권한이 없습니다!");
       }
 
-      boardService.delete(no);
+      myTownBoardService.delete(no);
 
       out.println("<meta http-equiv='Refresh' content='1;url=list'>");
       out.println("</head>");

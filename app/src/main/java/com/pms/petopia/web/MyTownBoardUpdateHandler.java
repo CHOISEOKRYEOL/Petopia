@@ -20,7 +20,7 @@ public class MyTownBoardUpdateHandler extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    MyTownBoardService boardService = (MyTownBoardService) request.getServletContext().getAttribute("boardService");
+    MyTownBoardService myTownBoardService = (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
     response.setContentType("text/html;charset=UTF-8");
 
     PrintWriter out = response.getWriter();
@@ -34,7 +34,7 @@ public class MyTownBoardUpdateHandler extends HttpServlet {
       request.setCharacterEncoding("UTF-8");
       int no = Integer.parseInt(request.getParameter("no"));
 
-      MyTownBoard oldBoard = boardService.get(no);
+      MyTownBoard oldBoard = myTownBoardService.get(no);
       if (oldBoard == null) {
         throw new Exception ("해당 번호의 게시글이 없습니다.");
       }
@@ -47,7 +47,7 @@ public class MyTownBoardUpdateHandler extends HttpServlet {
       board.setNo(oldBoard.getNo());
       board.setTitle(request.getParameter("title"));
       board.setContent(request.getParameter("content"));
-      boardService.update(board);
+      myTownBoardService.update(board);
 
       out.println("<meta http-equiv='Refresh' content='1;url=list'>");
       out.println("</head>");

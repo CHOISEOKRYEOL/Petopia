@@ -23,7 +23,7 @@ public class MytownBoardListHandler extends HttpServlet {
 
     // 클라이언트가 /board/list를 요청하면 톰캣 서버가 이 메서드를 호출한다.
 
-    MyTownBoardService boardService = (MyTownBoardService) request.getServletContext().getAttribute("boardService");
+    MyTownBoardService myTownBoardService = (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
     int cityNo = Integer.parseInt(request.getParameter("cityNo"));
@@ -40,7 +40,7 @@ public class MytownBoardListHandler extends HttpServlet {
     out.println("<p><a href='form.html'>새 글</a></p>");
 
     try {
-      List<MyTownBoard> boards = boardService.list(cityNo,stateNo);
+      List<MyTownBoard> boards = myTownBoardService.list(cityNo,stateNo);
       out.println("<table border='1'>");
       out.println("<thead>");
       out.println("<tr>");

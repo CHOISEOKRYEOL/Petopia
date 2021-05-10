@@ -20,7 +20,7 @@ public class MyTownBoardAddHandler extends HttpServlet{
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    MyTownBoardService boardService = (MyTownBoardService)request.getServletContext().getAttribute("boardService");
+    MyTownBoardService myTownBoardService = (MyTownBoardService)request.getServletContext().getAttribute("myTownBoardService");
 
     MyTownBoard b = new MyTownBoard();
 
@@ -43,7 +43,7 @@ public class MyTownBoardAddHandler extends HttpServlet{
     out.println("[게시글 등록]");
 
     try {
-      boardService.add(b);
+      myTownBoardService.add(b);
 
       out.println("<meta http-equiv='Refresh' content='1;url=list>");
       out.println("</head>");

@@ -22,7 +22,7 @@ public class MyTownBoardDetailHandler extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    MyTownBoardService boardService = (MyTownBoardService) request.getServletContext().getAttribute("boardService");
+    MyTownBoardService myTownBoardService = (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
     response.setContentType("text/html;charset=UTF-8");
 
     PrintWriter out = response.getWriter();
@@ -37,7 +37,7 @@ public class MyTownBoardDetailHandler extends HttpServlet {
     out.println("<h1>게시글 상세보기</h1>");
 
     try {
-      MyTownBoard b = boardService.get(no);
+      MyTownBoard b = myTownBoardService.get(no);
       if (b == null) {
         out.println("<p>해당 번호의 게시글이 없습니다.</p>");
         return;
