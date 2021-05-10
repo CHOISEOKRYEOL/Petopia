@@ -16,21 +16,46 @@ import com.pms.petopia.service.StoryService;
 public class StoryAddHandler extends HttpServlet {
 
   @Override
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+
+    StoryService storyService = (StoryService) request.getServletContext().getAttribute("storyService");
+
+    response.setContentType("text/html;charset=UTF-8");
+    PrintWriter out = response.getWriter();
+
+    out.println("<!DOCTYPE html>");
+    out.println("<html>");
+    out.println("<head>");
+    out.println("<meta charset='UTF-8'>");
+    out.println("<title>새 스토리</title>");
+    out.println("</head>");
+    out.println("<body>");
+    out.println("<h1>새 스토리</h1>");
+    out.println("<form action='add' method='post'>");
+    out.println("제목: <input type='text' name='title'><br>");
+    out.println("URL: <input type='url' name='url'><br>");
+    out.println("사이트: <input type='text' name='site'><br>");
+
+    out.println("<input type='submit' value='등록'>");
+    out.println("</form>");
+    out.println("</body>");
+    out.println("</html>");
+  }
+
+  @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     StoryService storyService = (StoryService) request.getServletContext().getAttribute("storyService");
 
-    Story story = new Story();
+    Story s = new Story();
 
     request.setCharacterEncoding("UTF-8");
 
-    story.setTitle(request.getParameter("title"));
-    story.setUrl(request.getParameter("url"));
-    story.setSite(request.getParameter("site"));
-
-    //    HttpServletRequest httpRequest = request;
-    //    Member loginUser = (Member) httpRequest.getSession().getAttribute("loginUser");
+    s.setTitle(request.getParameter("title"));
+    s.setUrl(request.getParameter("url"));
+    s.setSite(request.getParameter("site"));
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -41,7 +66,7 @@ public class StoryAddHandler extends HttpServlet {
     out.println("<title>스토리 등록</title>");
 
     try {
-      storyService.add(story);
+      storyService.add(s);
 
       out.println("<meta http-equiv='Refresh' content='1;url=list'>");
       out.println("</head>");

@@ -28,10 +28,12 @@ public class StoryListHandler extends HttpServlet {
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
-    out.println("<title>스토리 목록</title>");
+    out.println("<title>스토리</title>");
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>게시글 목록</h1>");
+    out.println("<h1>스토리</h1>");
+
+    out.println("<p><a href='add'>새 스토리</a></p>");
 
     try {
       List<Story> storys = storyService.list(); 
@@ -44,16 +46,16 @@ public class StoryListHandler extends HttpServlet {
       out.println("</thead>");
       out.println("<tbody>");
 
-      for (Story story: storys) {
+      for (Story s : storys) {
         out.printf("<tr>"
             + " <td>%d</td>"
-            + " <td><a href=>%s</a></td>" //url
             + " <td>%s</td>"
-            + " <td>%s</td></tr>\n",
-            story.getNo(),
-            story.getTitle(),
-            story.getSite(),
-            story.getRegisteredDate());
+            + " <td>%s</td>"
+            + " <td>%s</td> </tr>\n",
+            s.getNo(),
+            s.getTitle(),
+            s.getSite(),
+            s.getRegisteredDate());
       }
       out.println("</tbody");
       out.println("</table>");

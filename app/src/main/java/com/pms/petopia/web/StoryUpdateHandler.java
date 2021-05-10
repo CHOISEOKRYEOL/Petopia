@@ -21,6 +21,8 @@ public class StoryUpdateHandler extends HttpServlet {
 
     StoryService storyService = (StoryService) request.getServletContext().getAttribute("storyService");
 
+    request.setCharacterEncoding("UTF-8");
+
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
@@ -30,24 +32,20 @@ public class StoryUpdateHandler extends HttpServlet {
     out.println("<title>스토리 변경</title>");
 
     try {
-      request.setCharacterEncoding("UTF-8");
       int no = Integer.parseInt(request.getParameter("no"));
 
       Story oldStory = storyService.get(no);
+
       if (oldStory == null) {
-        throw new Exception("해당 번호의 게시글이 없습니다.");
+        throw new Exception("해당 번호의 스토리가 없습니다.");
       }
 
-      //      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-      //      if (oldBoard.getWriter().getNo() != loginUser.getNo()) {
-      //        throw new Exception("변경 권한이 없습니다!");
-      //      }
-
       Story story = new Story();
-      story.setNo(oldStory.getNo());
+      story.setNo(no);
       story.setTitle(request.getParameter("title"));
       story.setUrl(request.getParameter("url"));
       story.setSite(request.getParameter("site"));
+
       storyService.update(story);
 
       out.println("<meta http-equiv='Refresh' content='1;url=list'>");

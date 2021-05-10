@@ -14,6 +14,19 @@
     <result column="vet" property="veterinarian"/>
     <result column="time" property="businessHour"/>
     <result column="grade" property="rate"/> 
+  
+  <!-- 
+    <association property="bigAddress" javaType="bigAddress">
+      <id column="city_no" property="no"/>
+      <result column="city_name" property="name"/>
+    </association>
+
+    <association property="smallAddress" javaType="smallAddress">
+      <id column="state_no" property="no"/>
+      <result column="state_name" property="name"/>
+    </association>
+  -->
+
   </resultMap>
   
   <insert id="insert" parameterType="hospital">
