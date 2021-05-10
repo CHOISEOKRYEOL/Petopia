@@ -30,7 +30,7 @@ public class PetAddHandler extends HttpServlet {
     Pet p = new Pet();
     p.setName(request.getParameter("name"));
     p.setAge(Integer.parseInt(request.getParameter("age")));
-    p.setBirthDay(Date.valueOf(request.getParameter(("birth"))));
+    p.setBirthDay(Date.valueOf(request.getParameter(("birthDay"))));
     p.setGender(Integer.parseInt(request.getParameter("gender")));
     p.setPhoto(request.getParameter("photo"));
 
@@ -38,8 +38,7 @@ public class PetAddHandler extends HttpServlet {
     p.setOwner(loginUser);
 
     Type t = new Type();
-    t.setNo(1);
-    t.setType(1);
+    t.setType(Integer.parseInt(request.getParameter("type")));
     p.setType(t);
 
     response.setContentType("text/html;charset=UTF-8");
@@ -56,7 +55,7 @@ public class PetAddHandler extends HttpServlet {
       out.println("<meta http-equiv='Refresh' content='1;url=../main'>");
       out.println("</head>");
       out.println("<body>");
-      out.println("<h1>마이펫 등록</h1>");
+      out.println("<p>마이펫 등록 성공</p>");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();

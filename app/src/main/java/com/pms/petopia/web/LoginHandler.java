@@ -34,7 +34,6 @@ public class LoginHandler extends HttpServlet {
     out.println("<head>");
 
     try {
-      out.println("진입");
       Member member = memberService.get(id, password);
 
       out.println("</head>");
