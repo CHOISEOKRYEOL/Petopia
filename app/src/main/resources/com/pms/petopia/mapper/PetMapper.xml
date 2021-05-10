@@ -6,7 +6,7 @@
 <mapper namespace="com.pms.petopia.dao.PetDao">
   
   <resultMap id="petMap" type="pet">
-    <id column="no" property="no"/>
+    <id column="pno" property="no"/>
     <result column="pname" property="name"/>
     <result column="age" property="age"/>
     <result column="birth" property="birth"/>
@@ -18,11 +18,17 @@
 	    <result column="owner_name" property="name"/>
     </association>
     
+    <association property="type" javaType="type">
+      <id column="type_no" property="no"/>
+      <result column="type_type" property="type"/>
+    </association>
+    
   </resultMap>
   
-  <insert id="insert" parameterType="pet">
-    insert into pet_member(mno, pname, age, birth, gender, photo, owner) 
-    values(#{mno}, #{pname}, #{age}, #{birth}, #{gender}, #{photo} ,#{owner})
+  <insert id="insert" parameterType="pet"
+    useGeneratedKeys="true" keyColumn="pno" keyProperty="no">
+    insert into pet_mypet(pname, age, birth, gender, owner, type) 
+    values(#{name}, #{age}, #{birth}, #{gender}, #{owner.no}, #{type.no})
   </insert>
   
   <select id="findByNo" resultMap="pet" parameterType="int">

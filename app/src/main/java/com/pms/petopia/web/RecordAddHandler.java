@@ -40,7 +40,7 @@ public class RecordAddHandler extends HttpServlet {
     try {
       recordService.add(r);
 
-      out.println("<meta http-equiv='Refresh' content='1;url=list'>");
+      out.println("<meta http-equiv='Refresh' content='1;url=../main'>");
       out.println("</head>");
       out.println("<body>");
       out.println("<h1>진료기록 등록</h1>");
@@ -55,7 +55,6 @@ public class RecordAddHandler extends HttpServlet {
       out.println("<body>");
       out.println("<h1>진료 기록 등록 오류</h1>");
       out.printf("<pre>%s</pre>\n", strWriter.toString());
-      out.println("<p><a href='list'>목록</a></p>");
     }
 
     out.println("</body>");

@@ -3,11 +3,13 @@ package com.pms.petopia.web;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.Pet;
 import com.pms.petopia.service.PetService;
 
@@ -26,11 +28,14 @@ public class PetAddHandler extends HttpServlet {
 
     Pet p = new Pet();
     p.setName(request.getParameter("name"));
-    //    p.setAge(Integer.parseInt(request.getParameter("age")));
-    //    p.setBirthDay(Date.valueOf(request.getParameter(("birth"))));
-    //    p.setGender(request.getParameter("gender"));
-    //    p.setGender(Integer.parseInt(request.getParameter("gender")));
-    //    p.setPhoto(request.getParameter("photo"));
+    p.setAge(Integer.parseInt(request.getParameter("age")));
+    p.setBirthDay(Date.valueOf(request.getParameter(("birth"))));
+    p.setGender(Integer.parseInt(request.getParameter("gender")));
+    p.setPhoto(request.getParameter("photo"));
+    int temp = Integer.parseInt(request.getParameter("mno"));
+    Member m = new Member();
+    m.setNo(temp);
+    p.setOwner(m);
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();

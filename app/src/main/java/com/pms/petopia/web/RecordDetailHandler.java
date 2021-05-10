@@ -56,7 +56,7 @@ public class RecordDetailHandler extends HttpServlet {
           + " <td><input name='title' type='text' value='%s'></td></tr>\n", pet.getAge());
       out.printf("<tr><th>생년월일</th>"
           + " <td><textarea name='content' rows='10' cols='60'>%s</textarea></td></tr>\n", pet.getBirthDay());
-      out.printf("<tr><th>성별</th> <td>%s</td></tr>\n", pet.isGender());
+      out.printf("<tr><th>성별</th> <td>%s</td></tr>\n", pet.getGender());
       out.printf("<tr><th>사진</th> <td>%s</td></tr>\n", pet.getPhoto());
       out.println("</tbody>");
 

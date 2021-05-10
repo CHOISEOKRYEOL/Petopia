@@ -58,7 +58,7 @@ public class PetListHandler extends HttpServlet {
             p.getName(), 
             p.getAge(),
             p.getBirthDay(),
-            p.isGender(), 
+            p.getGender(), 
             p.getPhoto());
       }
       out.println("</tbody>");

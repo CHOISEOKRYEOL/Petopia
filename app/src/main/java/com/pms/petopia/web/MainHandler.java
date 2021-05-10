@@ -31,8 +31,8 @@ public class MainHandler extends HttpServlet {
       out.println("<h1>비회원 화면</h1>");
       out.println("<p><a href='member/form.html'>가입</a></p>");
       out.println("<p><a href='login.html'>로그인</a></p>");
-      out.println("<p><a href='main'>마이펫 등록</a></p>");
-      out.println("<p><a href='main'>진찰기록</a></p>");
+      out.println("<p><a href='pet/form.html'>마이펫 등록</a></p>");
+      out.println("<p><a href='pet/record.html'>진찰기록</a></p>");
       out.println("<p><a href='main'>병원 찾기</a></p>");
       out.println("<p><a href='main'>스토리</a></p>");
       out.println("<p><a href='main'>나눔 장터</a></p>");
@@ -45,7 +45,7 @@ public class MainHandler extends HttpServlet {
       out.println("<input name='detail' type='submit' value='내 계정 관리'></form>");
       out.println("<p><form action='logout' method='post'></p>");
       out.println("<input name='logout' type='submit' value='로그아웃'></form>");
-      out.println("<p><a href='main'>마이펫 등록</a></p>");
+      out.println("<p><a href='pet/form.html'>마이펫 등록</a></p>");
       out.println("<p><a href='main'>진찰기록</a></p>");
       out.println("<p><a href='main'>병원 찾기</a></p>");
       out.println("<p><a href='main'>스토리</a></p>");
