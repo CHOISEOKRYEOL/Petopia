@@ -8,26 +8,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.pms.petopia.domain.Record;
-import com.pms.petopia.service.RecordService;
+import com.pms.petopia.domain.Hospital;
+import com.pms.petopia.service.HospitalService;
 
 @SuppressWarnings("serial")
-@WebServlet("/record/add")
-public class RecordAddHandler extends HttpServlet {
+@WebServlet("/hospital/delete")
+public class HospitalDeleteHandler extends HttpServlet {
 
   @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    RecordService recordService = (RecordService) request.getServletContext().getAttribute("RecordService");
-
-    Record r = new Record();
-
-    // 클라이언트가 POST 요청으로 보낸 데이터가 UTF-8임을 알려준다.
-    request.setCharacterEncoding("UTF-8");
-
-    r.setState(Integer.parseInt(request.getParameter("state")));
-    r.setRecord(request.getParameter("record"));
+    HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -35,16 +27,23 @@ public class RecordAddHandler extends HttpServlet {
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
-    out.println("<title>진료기록 등록</title>");
+    out.println("<title>병원 삭제</title>");
 
     try {
-      recordService.add(r);
+      int no = Integer.parseInt(request.getParameter("no"));
 
-      out.println("<meta http-equiv='Refresh' content='1;url=../main'>");
+      Hospital oldHospital = hospitalService.get(no);
+      if (oldHospital == null) {
+        throw new Exception("해당 번호의 병원이 없습니다.");
+      }
+
+      hospitalService.delete(no);
+
+      out.println("<meta http-equiv='Refresh' content='1;url=list'>");
       out.println("</head>");
       out.println("<body>");
-      out.println("<h1>진료기록 등록</h1>");
-      out.println("<p>진료기록을 등록했습니다.</p>");
+      out.println("<h1>병원 삭제</h1>");
+      out.println("<p>병원을 삭제했습니다.</p>");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();
@@ -53,12 +52,13 @@ public class RecordAddHandler extends HttpServlet {
 
       out.println("</head>");
       out.println("<body>");
-      out.println("<h1>진료 기록 등록 오류</h1>");
+      out.println("<h1>병원 삭제 오류</h1>");
+      out.printf("<p>%s</p>\n", e.getMessage());
       out.printf("<pre>%s</pre>\n", strWriter.toString());
+      out.println("<p><a href='list'>목록</a></p>");
     }
 
     out.println("</body>");
     out.println("</html>");
   }
-
 }

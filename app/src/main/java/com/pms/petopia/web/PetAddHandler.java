@@ -3,12 +3,15 @@ package com.pms.petopia.web;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.Pet;
+import com.pms.petopia.domain.Type;
 import com.pms.petopia.service.PetService;
 
 @SuppressWarnings("serial")
@@ -26,11 +29,17 @@ public class PetAddHandler extends HttpServlet {
 
     Pet p = new Pet();
     p.setName(request.getParameter("name"));
-    //    p.setAge(Integer.parseInt(request.getParameter("age")));
-    //    p.setBirthDay(Date.valueOf(request.getParameter(("birth"))));
-    //    p.setGender(request.getParameter("gender"));
-    //    p.setGender(Integer.parseInt(request.getParameter("gender")));
-    //    p.setPhoto(request.getParameter("photo"));
+    p.setAge(Integer.parseInt(request.getParameter("age")));
+    p.setBirthDay(Date.valueOf(request.getParameter(("birthDay"))));
+    p.setGender(Integer.parseInt(request.getParameter("gender")));
+    p.setPhoto(request.getParameter("photo"));
+
+    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    p.setOwner(loginUser);
+
+    Type t = new Type();
+    t.setType(Integer.parseInt(request.getParameter("type")));
+    p.setType(t);
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -46,7 +55,7 @@ public class PetAddHandler extends HttpServlet {
       out.println("<meta http-equiv='Refresh' content='1;url=../main'>");
       out.println("</head>");
       out.println("<body>");
-      out.println("<h1>마이펫 등록</h1>");
+      out.println("<p>마이펫 등록 성공</p>");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();

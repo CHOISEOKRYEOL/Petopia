@@ -34,7 +34,7 @@ public class StoryDeleteHandler extends HttpServlet {
 
       Story oldStory = storyService.get(no);
       if (oldStory == null) {
-        throw new Exception("해당 번호의 게시글이 없습니다.");
+        throw new Exception("해당 번호의 스토리가 없습니다.");
       }
 
       storyService.delete(no);

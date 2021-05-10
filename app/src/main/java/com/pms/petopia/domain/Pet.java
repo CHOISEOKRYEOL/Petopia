@@ -8,27 +8,17 @@ public class Pet {
   private String name;
   private int age;
   private Date birthDay;
-  private boolean gender; // true = female | false = male
+  private int gender; // 1 = female / 0 = male
   private String photo;
   private Member owner;
+  private Type type;
 
-  @Override
-  public String toString() {
-    return "Pet [no=" + no + ", owner=" + owner + ", name=" + name + ", age=" + age + ", birthDay="
-        + birthDay + ", gender=" + gender + ", photo=" + photo + "]";
-  }
 
   public int getNo() {
     return no;
   }
   public void setNo(int no) {
     this.no = no;
-  }
-  public Member getOwner() {
-    return owner;
-  }
-  public void setOwner(Member owner) {
-    this.owner = owner;
   }
   public String getName() {
     return name;
@@ -48,10 +38,10 @@ public class Pet {
   public void setBirthDay(Date birthDay) {
     this.birthDay = birthDay;
   }
-  public boolean isGender() {
+  public int getGender() {
     return gender;
   }
-  public void setGender(boolean gender) {
+  public void setGender(int gender) {
     this.gender = gender;
   }
   public String getPhoto() {
@@ -60,5 +50,19 @@ public class Pet {
   public void setPhoto(String photo) {
     this.photo = photo;
   }
+  public Member getOwner() {
+    return owner;
+  }
+  public void setOwner(Member owner) {
+    this.owner = owner;
+  }
+  public Type getType() {
+    return type;
+  }
+  public void setType(Type type) {
+    this.type = type;
+  }
+
+
 
 }

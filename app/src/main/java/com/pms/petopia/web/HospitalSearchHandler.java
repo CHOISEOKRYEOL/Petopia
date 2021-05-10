@@ -9,12 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.pms.petopia.domain.Story;
-import com.pms.petopia.service.StoryService;
+import com.pms.petopia.domain.Hospital;
+import com.pms.petopia.service.HospitalService;
 
 @SuppressWarnings("serial")
-@WebServlet("/story/search")
-public class StorySearchHandler extends HttpServlet {
+@WebServlet("/hospital/search")
+public class HospitalSearchHandler extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -28,41 +28,41 @@ public class StorySearchHandler extends HttpServlet {
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
-    out.println("<title>스토리 검색</title>");
+    out.println("<title>병원 검색</title>");
     out.println("</head>");
     out.println("<body>");
-    out.printf("<h1>스토리 검색 결과 : %s</h1>\n", keyword);
+    out.printf("<h1>병원 검색 결과 : %s</h1>\n", keyword);
 
     try {
       if (keyword == null || keyword.length() == 0) {
         throw new SearchException("검색어를 입력하세요.");
       }
 
-      StoryService storyService = (StoryService) request.getServletContext().getAttribute("storyService");
+      HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
 
-      List<Story> list = storyService.search(keyword);
+      List<Hospital> list = hospitalService.search(keyword);
       if (list.size() == 0) {
-        throw new SearchException("검색어에 해당하는 스토리가 없습니다.");
+        throw new SearchException("검색어에 해당하는 병원이 없습니다.");
       }
 
       out.println("<table border='1'>");
       out.println("<thead>");
       out.println("<tr>");
-      out.println("<th>번호</th> <th>제목</th> <th>사이트</th> <th>등록일</th>");
+      out.println("<th>번호</th> <th>이름</th> <th>전화</th> <th>주소</th>");
       out.println("</tr>");
       out.println("</thead>");
       out.println("<tbody>");
 
-      for (Story story: list) {
+      for (Hospital h : list) {
         out.printf("<tr>"
             + " <td>%d</td>"
-            + " <td><a href=>%s</a></td>" //url
+            + " <td><a href='detail?no=%1$d'>%s</a></td>"
             + " <td>%s</td>"
-            + " <td>%s</td></tr>\n",
-            story.getNo(),
-            story.getTitle(),
-            story.getSite(),
-            story.getRegisteredDate());
+            + " <td>%s</td> </tr>\n",
+            h.getNo(),
+            h.getName(),
+            h.getTel(),
+            h.getAddress());
       }
       out.println("</tbody");
       out.println("</table>");

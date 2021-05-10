@@ -12,8 +12,8 @@
   </resultMap>
   
   <insert id="insert" parameterType="record">
-    insert into pet_hprecord(state,history) 
-    values(#{state}, #{history})
+    insert into pet_hprecord(hno,pno,state,history) 
+    values(#{hno},#{pno},#{state}, #{history})
   </insert>
   
   <select id="findAll" resultMap="recordMap">
