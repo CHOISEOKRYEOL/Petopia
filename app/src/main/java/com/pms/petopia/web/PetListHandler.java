@@ -21,7 +21,7 @@ public class PetListHandler extends HttpServlet {
       throws ServletException, IOException {
     // 클라이언트가 /board/list 를 요청하면 톰캣 서버가 이 메서드를 호출한다. 
 
-    PetService petMemberService = (PetService) request.getServletContext().getAttribute("PetMemberService");
+    PetService petMemberService = (PetService) request.getServletContext().getAttribute("PetService");
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();

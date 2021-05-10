@@ -19,10 +19,8 @@
   <select id="findAll" resultMap="recordMap">
     select 
       no,
-      name,
-      email,
-      photo,
-      tel 
+      state,
+      history
     from pet_hprecord 
     order by name asc
   </select>
@@ -30,10 +28,8 @@
   <select id="findByName" resultMap="recordMap" parameterType="string">
     select 
       no,
-      name,
-      email,
-      photo,
-      tel 
+      state,
+      history
     from pet_hprecord
     where name = #{value}
     order by name asc
@@ -43,10 +39,8 @@
     select 
       no,
       name,
-      email,
-      photo,
-      tel,
-      cdt 
+      state,
+      history
     from pet_hprecord 
     where no = #{value}
   </select>
@@ -54,11 +48,10 @@
   <update id="update" parameterType="record">
     update pet_hprecord 
     <set> 
-      <if test="name != ''">name=#{name},</if>
-      <if test="email != ''">email=#{email},</if>
-      <if test="password != ''">password=password(#{password}),</if>
-      <if test="photo != ''">photo=#{photo},</if>
-      <if test="tel != ''">tel=#{tel}</if> 
+       update pet_hprecord set
+        state = #{state},
+        history = #{history}
+    where no = #{no}
     </set>
     where no=#{no}
   </update>
