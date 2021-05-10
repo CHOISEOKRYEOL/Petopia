@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.Pet;
+import com.pms.petopia.domain.Type;
 import com.pms.petopia.service.PetService;
 
 @SuppressWarnings("serial")
@@ -32,10 +33,14 @@ public class PetAddHandler extends HttpServlet {
     p.setBirthDay(Date.valueOf(request.getParameter(("birth"))));
     p.setGender(Integer.parseInt(request.getParameter("gender")));
     p.setPhoto(request.getParameter("photo"));
-    int temp = Integer.parseInt(request.getParameter("mno"));
-    Member m = new Member();
-    m.setNo(temp);
-    p.setOwner(m);
+
+    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    p.setOwner(loginUser);
+
+    Type t = new Type();
+    t.setNo(1);
+    t.setType(1);
+    p.setType(t);
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();

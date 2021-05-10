@@ -9,7 +9,7 @@
     <id column="pno" property="no"/>
     <result column="pname" property="name"/>
     <result column="age" property="age"/>
-    <result column="birth" property="birth"/>
+    <result column="birth" property="birthDay"/>
     <result column="gender" property="gender"/>
     <result column="photo" property="photo"/>
     
@@ -25,12 +25,12 @@
     
   </resultMap>
   
-  <insert id="insert" parameterType="pet"
-    useGeneratedKeys="true" keyColumn="pno" keyProperty="no">
+  <insert id="insert" parameterType="pet">
     insert into pet_mypet(pname, age, birth, gender, owner, type) 
     values(#{name}, #{age}, #{birth}, #{gender}, #{owner.no}, #{type.no})
   </insert>
-  
+ 
+ <!--  
   <select id="findByNo" resultMap="pet" parameterType="int">
     select
       p.mno,
@@ -44,7 +44,7 @@
     join pet_user m on m.mno = p.pno
     where p.pno = #{value}
   </select>
-  
+   -->
   <update id="update" parameterType="pet">
     update pet_mypet set
         pname = #{pname}
