@@ -1,5 +1,6 @@
 package com.pms.petopia.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import com.pms.petopia.dao.MyTownBoardDao;
 import com.pms.petopia.domain.MyTownBoard;
@@ -22,7 +23,11 @@ public class DefaultMyTownBoardService implements MyTownBoardService {
   // 게시글 목록 조회 업무
   @Override
   public List<MyTownBoard> list(int cityNo, int stateNo) throws Exception {
-    return myTownBoardDao.findByArea(cityNo,stateNo);
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("cname", cityNo);
+    params.put("gname", stateNo);
+
+    return myTownBoardDao.findByArea(params);
   }
 
   // 게시글 상세 조회 업무
