@@ -18,7 +18,7 @@ import com.pms.petopia.service.SharingMarketBoardService;
 @WebServlet("/sharingmarketboard/list")
 public class SharingMarketBoardListHandler extends HttpServlet{
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		SharingMarketBoardService shareMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("shareMarketBoardService");
 		
@@ -67,7 +67,11 @@ public class SharingMarketBoardListHandler extends HttpServlet{
 	        }
 	        out.println("</tbody>");
 	        out.println("</table>");
-
+	        
+	        out.println("<form action='search' method='get'>");
+	        out.println("<input type='text' name='keyword'> ");
+	        out.println("<button>검색</button>");
+	        out.println("</form>");
 
 
 
