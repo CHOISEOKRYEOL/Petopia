@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pms.petopia.dao.BigAddressDao">
+  
+  <resultMap id="bigAddressMap" type="bigAddress">
+    <id column="gno" property="no"/>
+    <result column="gname" property="name"/>
+  </resultMap>
+  
+  <select id="findAll" resultMap="bigAddressMap">
+     select 
+      g.gno as bigAddress_no,
+      g.gname as bigAddress_name
+    from pet_state g
+  </select>
+  
+  <select id="findByNo" resultMap="bigAddressMap" parameterType="int">
+     select 
+      g.gno,
+      g.gname,
+    from pet_state g 
+    where g.no = #{value}
+  </select>
+
+</mapper>
+
+
+
+
+
+
+

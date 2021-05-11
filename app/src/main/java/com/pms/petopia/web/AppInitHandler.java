@@ -14,6 +14,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.pms.mybatis.MybatisDaoFactory;
 import com.pms.mybatis.SqlSessionFactoryProxy;
+import com.pms.petopia.dao.BigAddressDao;
 import com.pms.petopia.dao.HospitalDao;
 import com.pms.petopia.dao.MemberDao;
 import com.pms.petopia.dao.MyTownBoardDao;
@@ -23,6 +24,7 @@ import com.pms.petopia.dao.ReviewDao;
 import com.pms.petopia.dao.SharingMarketBoardDao;
 import com.pms.petopia.dao.SmallAddressDao;
 import com.pms.petopia.dao.StoryDao;
+import com.pms.petopia.service.BigAddressService;
 import com.pms.petopia.service.HospitalService;
 import com.pms.petopia.service.MemberService;
 import com.pms.petopia.service.MyTownBoardService;
@@ -32,6 +34,7 @@ import com.pms.petopia.service.ReviewService;
 import com.pms.petopia.service.SharingMarketBoardService;
 import com.pms.petopia.service.SmallAddressService;
 import com.pms.petopia.service.StoryService;
+import com.pms.petopia.service.impl.DefaultBigAddressService;
 import com.pms.petopia.service.impl.DefaultHospitalService;
 import com.pms.petopia.service.impl.DefaultMemberService;
 import com.pms.petopia.service.impl.DefaultMyTownBoardService;
@@ -74,6 +77,7 @@ public class AppInitHandler implements Servlet {
       StoryDao storyDao = daoFactory.createDao(StoryDao.class);
       MyTownBoardDao myTownBoardDao = daoFactory.createDao(MyTownBoardDao.class);
       SharingMarketBoardDao sharingMarketBoardDao = daoFactory.createDao(SharingMarketBoardDao.class);
+      BigAddressDao bigAddressDao = daoFactory.createDao(BigAddressDao.class);
       SmallAddressDao smallAddressDao = daoFactory.createDao(SmallAddressDao.class);
       ReviewDao reviewDao = daoFactory.createDao(ReviewDao.class);
       // 3) 서비스 관련 객체 준비
@@ -86,6 +90,7 @@ public class AppInitHandler implements Servlet {
       StoryService storyService = new DefaultStorylService(storyDao);
       MyTownBoardService myTownBoardService = new DefaultMyTownBoardService(myTownBoardDao);
       SharingMarketBoardService sharingMarketBoardService = new DefaultSharingMarketBoardService(sharingMarketBoardDao);
+      BigAddressService bigAddressService = new DefaultBigAddressService(bigAddressDao);
       SmallAddressService smallAddressService = new DefaultSmallAddressService(smallAddressDao);
       ReviewService reviewService = new DefaultReviewService(reviewDao);
 

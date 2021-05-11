@@ -8,9 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.pms.petopia.domain.BigAddress;
 import com.pms.petopia.domain.Hospital;
 import com.pms.petopia.domain.Member;
+import com.pms.petopia.domain.SmallAddress;
+import com.pms.petopia.service.BigAddressService;
 import com.pms.petopia.service.HospitalService;
+import com.pms.petopia.service.SmallAddressService;
 
 @SuppressWarnings("serial")
 @WebServlet("/hospital/add")
@@ -21,6 +25,8 @@ public class HospitalAddHandler extends HttpServlet {
       throws ServletException, IOException {
 
     HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
+    BigAddressService bigAddressService = (BigAddressService) request.getServletContext().getAttribute("bigAddressService");
+    SmallAddressService smallAddressService = (SmallAddressService) request.getServletContext().getAttribute("smallAddressService");
 
     Hospital hospital = new Hospital();
 
@@ -32,7 +38,14 @@ public class HospitalAddHandler extends HttpServlet {
     hospital.setBusinessHour(request.getParameter("time"));
     hospital.setParking(Integer.valueOf(request.getParameter("parking")));
     hospital.setVeterinarian(Integer.valueOf(request.getParameter("vet")));
-    hospital.setSmallAddress(Integer.valueOf(request.getParameter("cno")));
+
+    BigAddress bigAddress = new BigAddress();
+    bigAddress.setNo(Integer.parseInt(request.getParameter("gno")));
+    hospital.setBigAddress(bigAddress);
+
+    SmallAddress smallAddress = new SmallAddress();
+    smallAddress.setNo(Integer.parseInt(request.getParameter("cno")));
+    hospital.setSmallAddress(smallAddress);
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
     hospital.setAdmin(loginUser);
