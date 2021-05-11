@@ -35,19 +35,24 @@ public class MyTownBoardMainHandler extends HttpServlet{
     out.println("<h1>우리동네 찾기</h1>");
 
     try {
+      out.println("<form action='list' method='get'>");
       List<SmallAddress> smallAddress = smallAddressService.list();
+      out.println("광역시/도 : ");
+      out.println("<select name ='stateNo'>\n");
       for (SmallAddress s : smallAddress) {
-        out.println("광역시/도 : ");
-        out.println("<select name ='bigAddress'>\n");
         out.printf("<option value='%d'>%s</option>\n", s.getBigAddress().getNo(), s.getBigAddress().getName());
-        out.println("</select>\n");
-
-        out.println("시/군/구 : ");
-        out.println("<select name='smallAddress'>\n");
-        out.printf("<option value='%d'>%s</option>\n", s.getNo(), s.getName());
-        out.println("</select><br>\n");
-        out.println("<input type='submit' value='전송'>");
       }
+      out.println("</select>\n");
+
+      out.println("시/군/구 : ");
+      out.println("<select name='cityNo'>\n");
+      for (SmallAddress s : smallAddress) {
+        out.printf("<option value='%d'>%s</option>\n", s.getNo(), s.getName());
+      }
+      out.println("</select>\n");
+
+      out.println("<input type='submit' value='찾기'>");
+
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();
       PrintWriter printWriter = new PrintWriter(strWriter);
@@ -55,6 +60,7 @@ public class MyTownBoardMainHandler extends HttpServlet{
 
       out.printf("<pre>%s</pre>\n", strWriter.toString());
     }
+    out.println("</form");
     out.println("</body>");
     out.println("</html>");
   }

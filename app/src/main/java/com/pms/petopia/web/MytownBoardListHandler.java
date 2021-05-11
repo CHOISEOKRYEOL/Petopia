@@ -21,13 +21,11 @@ public class MytownBoardListHandler extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    // 클라이언트가 /board/list를 요청하면 톰캣 서버가 이 메서드를 호출한다.
-
     MyTownBoardService myTownBoardService = (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
-    int cityNo = Integer.parseInt(request.getParameter("cityNo"));
     int stateNo = Integer.parseInt(request.getParameter("stateNo"));
+    int cityNo = Integer.parseInt(request.getParameter("cityNo"));
 
     out.println("<!DOCTYPE html>");
     out.println("<html>");
@@ -41,10 +39,11 @@ public class MytownBoardListHandler extends HttpServlet {
 
     try {
       List<MyTownBoard> boards = myTownBoardService.list(cityNo,stateNo);
+      //out.println(boards);
       out.println("<table border='1'>");
       out.println("<thead>");
       out.println("<tr>");
-      out.println("<th>번호</th> <th>제목</th> <th>작성자</th> <th>등록일</th> <th>조회수</th>");
+      out.println("<th>번호</th> <th>제목</th> <th>작성자</th> <th>등록일</th> <th>조회수</th> <th>댓글수</th>");
       out.println("</tr>");
       out.println("</thead>");
       out.println("<tbody>");
@@ -55,12 +54,14 @@ public class MytownBoardListHandler extends HttpServlet {
             + " <td><a href='detail?no=%1$d'>%s</a></td>"
             + " <td>%s</td>"
             + " <td>%s</td>"
-            + " <td>%d<td> </tr>\n", 
+            + " <td>%d</td>"
+            + " <td>%d</td></tr>\n", 
             b.getNo(), 
             b.getTitle(), 
             b.getWriter().getName(),
             b.getCreatedDate(),
-            b.getViewCount());
+            b.getViewCount(),
+            b.getCommentCount());
       }
       out.println("</tbody>");
       out.println("</table>");

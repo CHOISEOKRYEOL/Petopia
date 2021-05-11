@@ -23,18 +23,18 @@
     values(#{title}, #{url}, #{site})
   </insert>
   
-  <!-- 
-  <select id="findAll" resultMap="storyMap">
+  <select id="findAll" resultMap="StoryMap">
     select 
       nno,
       title,
       url,
       site,
       date
-    from pet_st_news 
+    from pet_st_news
     order by nno desc
   </select>
   
+  <!--
   <select id="findByKeyword" resultMap="storyMap" parameterType="string">
     select
       nno,

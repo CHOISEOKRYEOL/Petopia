@@ -39,7 +39,6 @@
     values(#{name}, #{tel}, #{address}, #{businessHour}, #{parking}, #{veterinarian}, #{smallAddress})
   </insert>
   
-   <!-- 
   <select id="findAll" resultMap="hospitalMap">
     select 
       hno,
@@ -50,6 +49,7 @@
     order by hno desc
   </select>
   
+   <!-- 
   <select id="findByNo" resultMap="hospitalMap" parameterType="int">
     select
       hno,
