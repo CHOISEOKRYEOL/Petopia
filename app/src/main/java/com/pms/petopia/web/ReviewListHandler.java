@@ -3,6 +3,7 @@ package com.pms.petopia.web;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,31 +15,20 @@ import com.pms.petopia.domain.Review;
 import com.pms.petopia.service.ReviewService;
 
 @SuppressWarnings("serial")
-@WebServlet("/review/add")
-public class ReviewAddHandler extends HttpServlet {
+@WebServlet("/review/list")
+public class ReviewListHandler extends HttpServlet {
 
   @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     ReviewService reviewService = (ReviewService) request.getServletContext().getAttribute("reviewService");
 
     request.setCharacterEncoding("UTF-8");
 
-    Review r = new Review();
-
-    r.setServiceRating(Integer.parseInt(request.getParameter("serviceRating")));
-    r.setCleanlinessRating(Integer.parseInt(request.getParameter("cleanlinessRating")));
-    r.setCostRating(Integer.parseInt(request.getParameter("costRating")));
-    r.setComment(request.getParameter("comment"));
-    r.setPhoto(request.getParameter("photo"));
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-    r.setWriter(loginUser);
 
-    Hospital h = new Hospital();
-    h.setNo(1);
-    r.setHospital(h);
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -46,19 +36,29 @@ public class ReviewAddHandler extends HttpServlet {
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
-    out.println("<title>리뷰 작성</title>");
+    out.println("<title>리뷰 목록</title>");
 
-    out.println(r.getServiceRating());
-    out.println(r.getCleanlinessRating());
+    Hospital h = new Hospital();
+    h.setNo(1);
 
     try {
-      reviewService.add(r);
+      List<Review> list = reviewService.list(h.getNo());
 
-      out.println("<meta http-equiv='Refresh' content='1;url=../main'>");
       out.println("</head>");
       out.println("<body>");
-      out.println("<h1>리뷰 등록 완료</h1>");
+      out.printf("<h1>%s 리뷰 목록</h1>\n", h.getName());
 
+      for(Review r : list) {
+        if(r.getHospital().getNo() == h.getNo()) {
+          out.printf("<p>리뷰내용 : %s</p>\n", r.getComment());
+          out.printf("<p>작성자 : %s</p>\n", r.getWriter().getName());
+          out.printf("<o>작성일 : %s</p><br>\n", r.getCreatedDate());
+          if(r.getWriter().getNo() == loginUser.getNo()) {
+            out.println("<form action='review/delete' method='post'>");
+            out.println("<input type='submit' value='삭제' name='%d'>" + r.getNo() + "</form>");
+          }
+        }
+      }
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();
       PrintWriter printWriter = new PrintWriter(strWriter);
@@ -69,6 +69,7 @@ public class ReviewAddHandler extends HttpServlet {
       out.printf("<pre>%s</pre>\n", strWriter.toString());
     }
 
+    out.println("<p><a href='../main'>돌아가기</a></p>");
     out.println("</body>");
     out.println("</html>");
   }
