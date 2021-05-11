@@ -23,7 +23,7 @@ public class SharingMarketBoardDetailHandler extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SharingMarketBoardService shareMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("shareMarketBoardService");
+		SharingMarketBoardService sharingMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("sharingMarketBoardService");
 		response.setContentType("text/html;charset=UTF-8");
 	    PrintWriter out = response.getWriter();
 
@@ -38,7 +38,7 @@ public class SharingMarketBoardDetailHandler extends HttpServlet{
 	    out.println("<h1>나눔장터 게시글 상세보기</h1>");
 
 	    try {
-	     SharingMarketBoard smb = shareMarketBoardService.get(no);
+	     SharingMarketBoard smb = sharingMarketBoardService.get(no);
 	     
 	      if (smb == null) {
 	        out.println("<p>해당 번호의 게시글이 없습니다.</p>");

@@ -33,9 +33,10 @@ public class MainHandler extends HttpServlet {
       out.println("<p><a href='login.html'>로그인</a></p>");
       out.println("<p><a href='main'>병원 찾기</a></p>");
       out.println("<p><a href='main'>스토리</a></p>");
-      out.println("<p><a href='main'>나눔 장터</a></p>");
-      out.println("<form action='mytown/list'>");
-      out.println("<input type='submit' name='mytown_list' value='우리 동네'></form>");
+      out.println("<p><a href='sharingmarketboard/list'>나눔 장터</a></p>");
+      out.println("<p><a href='mytown/list'>우리 동네</a></p>");
+      //out.println("<form action='mytown/list'>");
+      //out.println("<input type='submit' name='mytown_list' value='우리 동네'></form>");
     }
     else {
       out.println("<h1>회원 화면</h1>");

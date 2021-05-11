@@ -20,7 +20,7 @@ public class SharingMarketBoardAddHandler extends HttpServlet {
 	
 @Override
 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	SharingMarketBoardService shareMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("shareMarketBoardService");
+	SharingMarketBoardService sharingMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("sharingMarketBoardService");
 	SharingMarketBoard smb = new SharingMarketBoard();
 	
 	request.setCharacterEncoding("UTF-8");
@@ -44,7 +44,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 
 	    try {
 	    	
-	    	shareMarketBoardService.add(smb);
+	    	sharingMarketBoardService.add(smb);
 
 	      out.println("<meta http-equiv='Refresh' content='1;url=list'>");
 	      out.println("</head>");

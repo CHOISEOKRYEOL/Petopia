@@ -20,7 +20,7 @@ public class SharingMarketBoardListHandler extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		SharingMarketBoardService shareMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("shareMarketBoardService");
+		SharingMarketBoardService sharingMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("sharingMarketBoardService");
 		
 		response.setContentType("text/html;charset=UTF-8");
 	    PrintWriter out = response.getWriter();
@@ -42,12 +42,12 @@ public class SharingMarketBoardListHandler extends HttpServlet{
 	    
 	    
 	    try {
-	        List<SharingMarketBoard> smBoards = shareMarketBoardService.list();
+	        List<SharingMarketBoard> smBoards = sharingMarketBoardService.list();
 
 	        out.println("<table border='1'>");
 	        out.println("<thead>");
 	        out.println("<tr>");
-	        out.println("<th>번호</th> <th>분류</th> <th>제목</th> <th>내용</th> <th>작성자</th> <th>작성일</th> <th>조회수</th>");
+	        out.println("<th>번호</th> <th>분류</th> <th>제목</th> <th>작성자</th> <th>작성일</th>");
 	        out.println("</tr>");
 	        out.println("</thead>");
 	        out.println("<tbody>");
@@ -58,15 +58,12 @@ public class SharingMarketBoardListHandler extends HttpServlet{
 	              + " <td>%d</td>"
 	              + " <td><a href='detail?no=%1$d'>%s</a></td>"
 	              + " <td>%s</td>"
-	              + " <td>%s</td>"
 	              + " <td>%d</td> </tr>\n", 
 	              smb.getNo(),
 	              smb.getCategory(),
 	              smb.getTitle(),
-	              smb.getContent(), 
 	              smb.getWriter().getName(),
-	              smb.getCreatedDate(),
-	              smb.getVeiwCount());
+	              smb.getCreatedDate());
 	        }
 	        out.println("</tbody>");
 	        out.println("</table>");

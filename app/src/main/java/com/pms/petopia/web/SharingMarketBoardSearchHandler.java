@@ -23,7 +23,7 @@ public class SharingMarketBoardSearchHandler extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		SharingMarketBoardService shareMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("shareMarketBoardService");
+		SharingMarketBoardService sharingMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("sharingMarketBoardService");
 
 	    response.setContentType("text/plain;charset=UTF-8");
 	    PrintWriter out = response.getWriter();
@@ -36,7 +36,7 @@ public class SharingMarketBoardSearchHandler extends HttpServlet{
 	        return;
 	      }
 
-	      List<SharingMarketBoard> list = shareMarketBoardService.search(keyword);
+	      List<SharingMarketBoard> list = sharingMarketBoardService.search(keyword);
 
 	      if (list.size() == 0) {
 	        out.println("검색어에 해당하는 게시글이 없습니다.");

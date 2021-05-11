@@ -20,7 +20,7 @@ public class SharingMarketBoardUpdateHandler extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		SharingMarketBoardService shareMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("shareMarketBoardService");
+		SharingMarketBoardService sharingMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("sharingMarketBoardService");
 	    response.setContentType("text/html;charset=UTF-8");
 	    PrintWriter out = response.getWriter();
 
@@ -33,7 +33,7 @@ public class SharingMarketBoardUpdateHandler extends HttpServlet{
 	      request.setCharacterEncoding("UTF-8");
 	      int no = Integer.parseInt(request.getParameter("no"));
 
-	      SharingMarketBoard oldBoard = shareMarketBoardService.get(no);
+	      SharingMarketBoard oldBoard = sharingMarketBoardService.get(no);
 	      if (oldBoard == null) {
 	        throw new Exception("해당 번호의 게시글이 없습니다.");
 	      } 
@@ -48,7 +48,7 @@ public class SharingMarketBoardUpdateHandler extends HttpServlet{
 	      smbBoard.setCategory(request.getParameter("category"));
 	      smbBoard.setTitle(request.getParameter("title"));
 	      smbBoard.setContent(request.getParameter("content"));
-	      shareMarketBoardService.update(smbBoard);
+	      sharingMarketBoardService.update(smbBoard);
 
 	      out.println("<meta http-equiv='Refresh' content='1;url=list'>");
 	      out.println("</head>");
