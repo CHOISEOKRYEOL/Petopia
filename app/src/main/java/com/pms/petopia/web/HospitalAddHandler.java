@@ -30,8 +30,8 @@ public class HospitalAddHandler extends HttpServlet {
     hospital.setTel(request.getParameter("tel"));
     hospital.setAddress(request.getParameter("address"));
     hospital.setBusinessHour(request.getParameter("time"));
-    hospital.setParking(Integer.parseInt(request.getParameter("parking")));
-    hospital.setVeterinarian(Integer.parseInt(request.getParameter("vet")));
+    hospital.setParking(Integer.valueOf(request.getParameter("parking")));
+    hospital.setVeterinarian(Integer.valueOf(request.getParameter("vet")));
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
     hospital.setAdmin(loginUser);

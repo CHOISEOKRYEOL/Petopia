@@ -9,16 +9,19 @@ public class Hospital {
   private String businessHour;
   private int parking;
   private int veterinarian;
-  private int rate;
+  // private int rate;
   private Member admin;
+  private BigAddress bigAddress;
+  private SmallAddress smallAddress;
   //  private float longitude;
   //  private float latitude;
 
   @Override
   public String toString() {
     return "Hospital [no=" + no + ", name=" + name + ", tel=" + tel + ", address=" + address
-        + ", parking=" + parking + ", veterinarian=" + veterinarian + ", businessHour="
-        + businessHour + ", rate=" + rate + ", admin=" + admin + "]";
+        + ", businessHour=" + businessHour + ", parking=" + parking + ", veterinarian="
+        + veterinarian + ", admin=" + admin + ", bigAddress=" + bigAddress + ", smallAddress="
+        + smallAddress + "]";
   }
 
   public int getNo() {
@@ -45,6 +48,12 @@ public class Hospital {
   public void setAddress(String address) {
     this.address = address;
   }
+  public String getBusinessHour() {
+    return businessHour;
+  }
+  public void setBusinessHour(String businessHour) {
+    this.businessHour = businessHour;
+  }
   public int getParking() {
     return parking;
   }
@@ -57,23 +66,23 @@ public class Hospital {
   public void setVeterinarian(int veterinarian) {
     this.veterinarian = veterinarian;
   }
-  public String getBusinessHour() {
-    return businessHour;
-  }
-  public void setBusinessHour(String businessHour) {
-    this.businessHour = businessHour;
-  }
-  public int getRate() {
-    return rate;
-  }
-  public void setRate(int rate) {
-    this.rate = rate;
-  }
   public Member getAdmin() {
     return admin;
   }
   public void setAdmin(Member admin) {
     this.admin = admin;
+  }
+  public BigAddress getBigAddress() {
+    return bigAddress;
+  }
+  public void setBigAddress(BigAddress bigAddress) {
+    this.bigAddress = bigAddress;
+  }
+  public SmallAddress getSmallAddress() {
+    return smallAddress;
+  }
+  public void setSmallAddress(SmallAddress smallAddress) {
+    this.smallAddress = smallAddress;
   }
 
 }

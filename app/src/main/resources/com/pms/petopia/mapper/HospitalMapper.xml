@@ -11,16 +11,14 @@
     <result column="tel" property="tel"/>
     <result column="address" property="address"/>
     <result column="parking" property="parking"/>
-    <result column="vet" property="veterinarian"/>
     <result column="time" property="businessHour"/>
-    <result column="grade" property="rate"/> 
-    
+    <result column="vet" property="veterinarian"/>
+
     <association property="admin" javaType="member">
       <id column="admin_no" property="no"/>
       <result column="admin_name" property="name"/>
     </association>
   
-  <!-- 
     <association property="bigAddress" javaType="bigAddress">
       <id column="city_no" property="no"/>
       <result column="city_name" property="name"/>
@@ -30,12 +28,12 @@
       <id column="state_no" property="no"/>
       <result column="state_name" property="name"/>
     </association>
-  -->
+
   </resultMap>
   
   <insert id="insert" parameterType="hospital">
-    insert into pet_hp(name, tel, address, time, parking, vet) 
-    values(#{name}, #{tel}, #{address}, #{time}, #{parking}, #{vet},)
+    insert into pet_hp(name, tel, address, time, parking, vet, smallAddress) 
+    values(#{name}, #{tel}, #{address}, #{businessHour}, #{parking}, #{veterinarian}, #{smallAddress.no})
   </insert>
   
    <!-- 
