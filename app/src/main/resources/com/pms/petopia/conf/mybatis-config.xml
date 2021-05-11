@@ -24,13 +24,14 @@
   
   <mappers>
     <mapper resource="com/pms/petopia/mapper/MemberMapper.xml"/>
-    <mapper resource="com/pms/petopia/mapper/PetMapper.xml"/>
-    <mapper resource="com/pms/petopia/mapper/RecordMapper.xml"/>
     <mapper resource="com/pms/petopia/mapper/HospitalMapper.xml"/>
     <mapper resource="com/pms/petopia/mapper/StoryMapper.xml"/>
+    <!-- 
+    <mapper resource="com/pms/petopia/mapper/PetMapper.xml"/>
+    <mapper resource="com/pms/petopia/mapper/RecordMapper.xml"/>
     <mapper resource="com/pms/petopia/mapper/MyTownBoardMapper.xml"/>
     <mapper resource="com/pms/petopia/mapper/SharingMarketBoardMapper.xml"/>
-     
+      -->
   </mappers>
 </configuration>
 

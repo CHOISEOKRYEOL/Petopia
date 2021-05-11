@@ -6,19 +6,19 @@ public class Hospital {
   private String name;
   private String tel;
   private String address;
+  private String businessHour;
   private int parking;
   private int veterinarian;
-  private String businessHour;
   private int rate;
-  private float longitude;
-  private float latitude;
+  private Member admin;
+  //  private float longitude;
+  //  private float latitude;
 
   @Override
   public String toString() {
     return "Hospital [no=" + no + ", name=" + name + ", tel=" + tel + ", address=" + address
         + ", parking=" + parking + ", veterinarian=" + veterinarian + ", businessHour="
-        + businessHour + ", rate=" + rate + ", longitude=" + longitude + ", latitude=" + latitude
-        + "]";
+        + businessHour + ", rate=" + rate + ", admin=" + admin + "]";
   }
 
   public int getNo() {
@@ -69,17 +69,11 @@ public class Hospital {
   public void setRate(int rate) {
     this.rate = rate;
   }
-  public float getLongitude() {
-    return longitude;
+  public Member getAdmin() {
+    return admin;
   }
-  public void setLongitude(float longitude) {
-    this.longitude = longitude;
-  }
-  public float getLatitude() {
-    return latitude;
-  }
-  public void setLatitude(float latitude) {
-    this.latitude = latitude;
+  public void setAdmin(Member admin) {
+    this.admin = admin;
   }
 
 }

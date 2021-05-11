@@ -9,11 +9,12 @@ public class Story {
   private String url;
   private String site;
   private Date registeredDate;
+  private Member admin;
 
   @Override
   public String toString() {
     return "Story [no=" + no + ", title=" + title + ", url=" + url + ", site=" + site
-        + ", registeredDate=" + registeredDate + "]";
+        + ", registeredDate=" + registeredDate + ", admin=" + admin + "]";
   }
 
   public int getNo() {
@@ -45,6 +46,12 @@ public class Story {
   }
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
+  }
+  public Member getAdmin() {
+    return admin;
+  }
+  public void setAdmin(Member admin) {
+    this.admin = admin;
   }
 
 }

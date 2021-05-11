@@ -14,6 +14,11 @@
     <result column="vet" property="veterinarian"/>
     <result column="time" property="businessHour"/>
     <result column="grade" property="rate"/> 
+    
+    <association property="admin" javaType="member">
+      <id column="admin_no" property="no"/>
+      <result column="admin_name" property="name"/>
+    </association>
   
   <!-- 
     <association property="bigAddress" javaType="bigAddress">
@@ -26,14 +31,14 @@
       <result column="state_name" property="name"/>
     </association>
   -->
-
   </resultMap>
   
   <insert id="insert" parameterType="hospital">
-    insert into pet_hp(name, tel, address, parking, vet, time) 
-    values(#{name}, #{tel}, #{address}, #{parking}, #{vet}, #{time})
+    insert into pet_hp(name, tel, address, time, parking, vet) 
+    values(#{name}, #{tel}, #{address}, #{time}, #{parking}, #{vet},)
   </insert>
   
+   <!-- 
   <select id="findAll" resultMap="hospitalMap">
     select 
       hno,
@@ -93,4 +98,5 @@
     delete from pet_hp 
     where hno=#{value}
   </delete>
+    -->
 </mapper>

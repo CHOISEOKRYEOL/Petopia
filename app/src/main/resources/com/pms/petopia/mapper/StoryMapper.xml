@@ -11,6 +11,11 @@
     <result column="url" property="url"/>
     <result column="site" property="site"/>
     <result column="date" property="registeredDate"/>
+
+    <association property="admin" javaType="member">
+      <id column="admin_no" property="no"/>
+      <result column="admin_name" property="name"/>
+    </association>
   </resultMap>
   
   <insert id="insert" parameterType="story">
@@ -18,6 +23,7 @@
     values(#{title}, #{url}, #{site})
   </insert>
   
+  <!-- 
   <select id="findAll" resultMap="storyMap">
     select 
       nno,
@@ -67,4 +73,6 @@
     delete from pet_st_news
     where nno = #{value}
   </delete>
+ -->
+ 
 </mapper>
