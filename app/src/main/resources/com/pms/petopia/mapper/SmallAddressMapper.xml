@@ -29,13 +29,13 @@
   
   <select id="findByNo" resultMap="smallAddressMap" parameterType="int">
      select 
-      g.cno,
-      g.cname,
-      c.gno,
-      c.gname
-    from pet_state c 
-    inner join pet_city g on c.cno=g.cno
-    where g.cno = #{value}
+      g.gno,
+      g.gname,
+      c.cno,
+      c.cname
+    from pet_state g 
+    inner join pet_city c on g.gno=c.gno
+    where c.gno = #{value}
   </select>
 
 </mapper>

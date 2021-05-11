@@ -22,6 +22,7 @@ public class MytownBoardListHandler extends HttpServlet {
       throws ServletException, IOException {
 
     MyTownBoardService myTownBoardService = (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
+
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
     int stateNo = Integer.parseInt(request.getParameter("stateNo"));
@@ -30,15 +31,16 @@ public class MytownBoardListHandler extends HttpServlet {
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
-    out.println("<title>게시글 목록</title>");
+    out.printf("<title>게시글 목록</title>");
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>게시글 목록</h1>");
 
-    out.println("<p><a href='form.html'>새 글</a></p>");
 
     try {
       List<MyTownBoard> boards = myTownBoardService.list(cityNo,stateNo);
+      MyTownBoard board = boards.get(0);
+      out.printf("<h1>%s %s</h1>", board.getBigAddress().getName(), board.getSmallAddress().getName());
+      out.println("<p><a href='form.html'>새 글</a></p>");
       //out.println(boards);
       out.println("<table border='1'>");
       out.println("<thead>");
@@ -58,7 +60,7 @@ public class MytownBoardListHandler extends HttpServlet {
             + " <td>%d</td></tr>\n", 
             b.getNo(), 
             b.getTitle(), 
-            b.getWriter().getName(),
+            b.getWriter().getNick(),
             b.getCreatedDate(),
             b.getViewCount(),
             b.getCommentCount());

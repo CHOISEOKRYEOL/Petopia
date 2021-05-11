@@ -87,8 +87,7 @@
       or m.nick like concat('%', #{value},'%')
       or t.cont like concat('%', #{value},'%')
     </if>
-    
-    order by b.no desc
+    order by t.tno desc
   </select>
   
   <select id="findByNo" resultMap="myTownBoardMap" parameterType="int">
@@ -122,8 +121,8 @@
   
   <update id="updateViewCount" parameterType="int">
     update pet_mytown set 
-      view = view + 1 
-    where no = #{value}
+      vw_cnt = vw_cnt + 1 
+    where tno = #{value}
   </update>
   
   <delete id="delete" parameterType="int">
