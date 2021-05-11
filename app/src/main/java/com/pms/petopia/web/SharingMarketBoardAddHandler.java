@@ -29,9 +29,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	smb.setTitle(request.getParameter("title"));
 	smb.setContent(request.getParameter("content"));
     
-	
-	  HttpServletRequest httpRequest = request;
-	  Member loginUser = (Member) httpRequest.getSession().getAttribute("loginUser");
+	  Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 	  smb.setWriter(loginUser);
 	  
 	  response.setContentType("text/html;charset=UTF-8");

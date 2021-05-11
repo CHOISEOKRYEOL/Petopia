@@ -48,7 +48,7 @@ public class MainHandler extends HttpServlet {
       out.println("<p><a href='pet/record.html'>진찰기록</a></p>");
       out.println("<p><a href='main'>병원 찾기</a></p>");
       out.println("<p><a href='main'>스토리</a></p>");
-      out.println("<p><a href='main'>나눔 장터</a></p>");
+      out.println("<p><a href='sharingmarketboard/shareform.html'>나눔 장터</a></p>");
       out.println("<p><a href='main'>우리 동네</a></p>");
     }
     out.println("</body>");
