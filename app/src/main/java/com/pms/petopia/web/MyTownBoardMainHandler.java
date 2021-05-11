@@ -16,7 +16,7 @@ import com.pms.petopia.service.SmallAddressService;
 @WebServlet("/mytown/main")
 public class MyTownBoardMainHandler extends HttpServlet{
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
 
