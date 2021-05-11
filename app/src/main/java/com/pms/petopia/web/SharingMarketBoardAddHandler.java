@@ -25,13 +25,13 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	
 	request.setCharacterEncoding("UTF-8");
 	
-	smb.setCategory(request.getParameter("category"));
+	//smb.setCategory(Integer.parseInt(request.getParameter("category")));
+	smb.setCategory(1);
 	smb.setTitle(request.getParameter("title"));
 	smb.setContent(request.getParameter("content"));
     
-	  Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-	  smb.setWriter(loginUser);
-	  
+	Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+	smb.setWriter(loginUser);
 	  response.setContentType("text/html;charset=UTF-8");
 	  PrintWriter out = response.getWriter();
 
@@ -39,11 +39,11 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	    out.println("<html>");
 	    out.println("<head>");
 	    out.println("<title>나눔장터 게시 등록</title>");
-
+	    out.println("진입");
 	    try {
 	    	
-	    	sharingMarketBoardService.add(smb);
-
+	     sharingMarketBoardService.add(smb);
+	     out.println("진입");
 	      out.println("<meta http-equiv='Refresh' content='1;url=list'>");
 	      out.println("</head>");
 	      out.println("<body>");

@@ -15,8 +15,8 @@ public class DefaultSharingMarketBoardService implements SharingMarketBoardServi
 	}
 
 	@Override
-	public int add(SharingMarketBoard smBoard) throws Exception {
-		return sharingMarketBoardDao.insert(smBoard);
+	public int add(SharingMarketBoard sharingMarketBoard) throws Exception {
+		return sharingMarketBoardDao.insert(sharingMarketBoard);
 	}
 
 	@Override
@@ -34,8 +34,8 @@ public class DefaultSharingMarketBoardService implements SharingMarketBoardServi
 	}
 
 	@Override
-	public int update(SharingMarketBoard smBoard) throws Exception {
-		return sharingMarketBoardDao.update(smBoard);
+	public int update(SharingMarketBoard sharingMarketBoard) throws Exception {
+		return sharingMarketBoardDao.update(sharingMarketBoard);
 	}
 
 	@Override
