@@ -5,9 +5,9 @@
 
 <mapper namespace="com.pms.petopia.dao.SmallAddressDao">
   
-  <resultMap id="smallAddress" type="smallAdress">
-    <id column="no" property="no"/>
-    <result column="name" property="name"/>
+  <resultMap id="smallAddressMap" type="smallAddress">
+    <id column="cno" property="no"/>
+    <result column="cname" property="name"/>
   
   
   <association property="bigAddress" javaType="bigAddress">
@@ -17,17 +17,17 @@
   
   </resultMap>
   
-  <select id="findAll" resultMap="smallAddress">
+  <select id="findAll" resultMap="smallAddressMap">
      select 
-      g.cno,
-      g.cname,
-      c.gno,
-      c.gname
-    from pet_state c 
-    inner join pet_city g on c.cno=g.cno
+      g.gno,
+      g.gname,
+      c.cno,
+      c.cname
+    from pet_state g
+    inner join pet_city c on g.gno=c.gno
   </select>
   
-  <select id="findByNo" resultMap="smallAddress" parameterType="int">
+  <select id="findByNo" resultMap="smallAddressMap" parameterType="int">
      select 
       g.cno,
       g.cname,
