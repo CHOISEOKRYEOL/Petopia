@@ -9,7 +9,15 @@
 <form action="add" method="post">
 병원이름 <input type="text" name="name"><br>
 전화번호 <input type="tel" name="tel"><br>
-주소 <input type="text" name="address"><br>
+주소1 <select name='gno'>
+<option value=''>분류</option>
+<option value='1'>서울특별시</option>
+</select>
+<select name='cno'>
+<option value=''>분류</option>
+<option value='1'>강남구</option>
+</select><br>
+주소2 <input type="text" name="address"><br>
 진료시간 <input type="text" name="time"><br>
 주차여부 <input type="radio" name="parking" value="1">Yes
          <input type="radio" name="parking" value="0">No<br>

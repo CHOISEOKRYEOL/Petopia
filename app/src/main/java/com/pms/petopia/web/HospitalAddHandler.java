@@ -32,6 +32,7 @@ public class HospitalAddHandler extends HttpServlet {
     hospital.setBusinessHour(request.getParameter("time"));
     hospital.setParking(Integer.valueOf(request.getParameter("parking")));
     hospital.setVeterinarian(Integer.valueOf(request.getParameter("vet")));
+    hospital.setSmallAddress(Integer.valueOf(request.getParameter("cno")));
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
     hospital.setAdmin(loginUser);
@@ -46,6 +47,19 @@ public class HospitalAddHandler extends HttpServlet {
 
     try {
       hospitalService.add(hospital);
+      //      List<SmallAddress> smallAddressList =smallAddressService.list();
+      //            out.println("<select name='gno'>");
+      //            for(SmallAddress s : smallAddressList) {
+      //              out.printf("<option value='%d'>%s</option>",s.getBigAddress().getNo(),s.getBigAddress().getName());
+      //            }
+      //            out.println("</select>");
+      //      out.println("<select name='cno'>");
+      //      for(SmallAddress s : smallAddressList) {
+      //        out.printf("<option value='%d'>%s</option>",s.getNo(),s.getName());
+      //      }
+      //      out.println("</select>");
+      //      out.println("<br>");
+      //      out.println("<form action='submit' value='등록'>");
 
       out.println("<meta http-equiv='Refresh' content='1;url=list'>");
       out.println("</head>");

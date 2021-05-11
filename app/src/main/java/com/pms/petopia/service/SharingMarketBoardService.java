@@ -6,13 +6,13 @@ import com.pms.petopia.domain.SharingMarketBoard;
 
 public interface SharingMarketBoardService {
 	
-	int add(SharingMarketBoard smBoard) throws Exception;
+	int add(SharingMarketBoard sharingMarketBoard) throws Exception;
 	
 	List<SharingMarketBoard> list() throws Exception;
 	
 	SharingMarketBoard get(int no) throws Exception;
 	
-	int update(SharingMarketBoard smBoard) throws Exception;
+	int update(SharingMarketBoard sharingMarketBoard) throws Exception;
 	
 	int delete(int no) throws Exception;
 	

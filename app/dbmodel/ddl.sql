@@ -142,16 +142,17 @@ ALTER TABLE pet_mypet
 
 -- 병원
 CREATE TABLE pet_hp (
-  hno     INTEGER     NOT NULL COMMENT '병원번호', -- 병원번호
-  cno     INTEGER     NOT NULL COMMENT '시군구번호', -- 시군구번호
-  name    VARCHAR(50) NOT NULL COMMENT '이름', -- 이름
-  tel     VARCHAR(30) NOT NULL COMMENT '전화번호', -- 전화번호
-  parking INTEGER     NOT NULL COMMENT '주차여부', -- 주차여부
-  vet     INTEGER     NOT NULL COMMENT '수의사', -- 수의사
-  time    VARCHAR(15) NULL     COMMENT '진료시간', -- 진료시간
-  grade   INTEGER     NULL     COMMENT '평점', -- 평점
-  lat     FLOAT       NULL     COMMENT '위도', -- 위도
-  lon     FLOAT       NULL     COMMENT '경도' -- 경도
+  hno     INTEGER      NOT NULL COMMENT '병원번호', -- 병원번호
+  cno     INTEGER      NOT NULL COMMENT '시군구번호', -- 시군구번호
+  name    VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
+  tel     VARCHAR(30)  NOT NULL COMMENT '전화번호', -- 전화번호
+  address VARCHAR(255) NOT NULL COMMENT '주소', -- 주소
+  time    VARCHAR(50)  NOT NULL COMMENT '진료시간', -- 진료시간
+  parking INTEGER      NOT NULL COMMENT '주차여부', -- 주차여부
+  vet     INTEGER      NOT NULL COMMENT '수의사', -- 수의사
+  grade   INTEGER      NULL     COMMENT '평점', -- 평점
+  lat     FLOAT        NULL     COMMENT '위도', -- 위도
+  lon     FLOAT        NULL     COMMENT '경도' -- 경도
 )
 COMMENT '병원';
 
