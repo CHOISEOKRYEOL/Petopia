@@ -5,44 +5,52 @@ import java.sql.Date;
 public class Review {
 
   private int no;
-  private int serviceRate;
-  private int cleanlinessRate; 
-  private int costRate;
+  private int serviceRating;
+  private int cleanlinessRating; 
+  private int costRating;
   private String comment;
   private String photo;
   private Date createdDate;
   private Member writer;
+  private Hospital hospitalName;
 
   @Override
   public String toString() {
-    return "Review [no=" + no + ", serviceRate=" + serviceRate + ", cleanlinessRate="
-        + cleanlinessRate + ", costRate=" + costRate + ", comment=" + comment + ", photo=" + photo
-        + ", createdDate=" + createdDate + ", writer=" + writer + "]";
+    return "Review [no=" + no + ", serviceRating=" + serviceRating + ", cleanlinessRating="
+        + cleanlinessRating + ", costRating=" + costRating + ", comment=" + comment + ", photo="
+        + photo + ", createdDate=" + createdDate + ", writer=" + writer + ", hospitalName="
+        + hospitalName + "]";
   }
 
+  public Hospital getHospitalName() {
+    return hospitalName;
+  }
+  public void setHospitalName(Hospital hospitalName) {
+    this.hospitalName = hospitalName;
+  }
   public int getNo() {
     return no;
   }
   public void setNo(int no) {
     this.no = no;
   }
-  public int getServiceRate() {
-    return serviceRate;
+  public int getServiceRating() {
+    return serviceRating;
   }
-  public void setServiceRate(int serviceRate) {
-    this.serviceRate = serviceRate;
+  public void setServiceRating(int serviceRating) {
+    this.serviceRating = serviceRating;
   }
-  public int getCleanlinessRate() {
-    return cleanlinessRate;
+  public int getCleanlinessRating() {
+    return cleanlinessRating;
   }
-  public void setCleanlinessRate(int cleanlinessRate) {
-    this.cleanlinessRate = cleanlinessRate;
+  public void setCleanlinessRating(int cleanlinessRating) {
+    this.cleanlinessRating = cleanlinessRating;
   }
-  public int getCostRate() {
-    return costRate;
+  public int getCostRating() {
+    return costRating;
   }
-  public void setCostRate(int costRate) {
-    this.costRate = costRate;
+  public void setCostRating(int costRating) {
+    this.costRating = costRating;
   }
   public String getComment() {
     return comment;

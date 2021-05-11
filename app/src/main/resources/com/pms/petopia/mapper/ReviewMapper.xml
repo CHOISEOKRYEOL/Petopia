@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pms.petopia.dao.ReviewDao">
+  
+  <resultMap id="reviewMap" type="review">
+    <id column="rno" property="no"/>
+    <result column="service" property="serviceRating"/>
+    <result column="clean" property="cleanlinessRating"/>
+    <result column="cost" property="costRating"/>
+    <result column="cont" property="comment"/>
+    <result column="rphoto" property="photo"/>
+    <result column="date" property="createdDate"/>
+
+  <association property="writer" javaType="Member">
+    <id column="writer_no" property="no"/>
+    <result column="writer_name" property="name"/>
+   </association>
+  
+  <association property="hospital" javaType="Hospital">
+    <id column="hospital_no" property="no"/>
+    <result column="hospital_name" property="name"/>
+  </association>
+    
+  </resultMap>
+
+  <insert id="insert" parameterType="review">
+    insert into pet_hp_review(service, clean, cost, cont, writer, hname, rphoto)
+    values(#{serviceRating}, #{cleanlinessRating}, #{costRating}, #{comment}, #{writer.no}, #{hospital.no}, #{photo});
+  </insert>
+
+</mapper>

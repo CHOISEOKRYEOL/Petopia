@@ -178,7 +178,7 @@ CREATE TABLE pet_mark (
   title    VARCHAR(50) NOT NULL COMMENT '제목', -- 제목
   cont     LONGTEXT    NOT NULL COMMENT '내용', -- 내용
   date     DATETIME    NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
-  vw_cnt   INTEGER     NOT NULL DEFAULT 0
+  vw_cnt   INTEGER     NULL     DEFAULT 0
    COMMENT '조회수' -- 조회수
 )
 COMMENT '나눔장터';
@@ -201,7 +201,7 @@ CREATE TABLE pet_mytown (
   title   VARCHAR(50) NOT NULL COMMENT '제목', -- 제목
   cont    LONGTEXT    NOT NULL COMMENT '내용(사진)', -- 내용(사진)
   date    DATETIME    NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
-  vw_cnt  INTEGER     NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
+  vw_cnt  INTEGER     NULL     DEFAULT 0 COMMENT '조회수', -- 조회수
   cmt_cnt INTEGER     NOT NULL DEFAULT 0 COMMENT '댓글수' -- 댓글수
 )
 COMMENT '우리동네';
@@ -257,7 +257,7 @@ ALTER TABLE pet_mark_phot
 -- 리뷰
 CREATE TABLE pet_hp_review (
   rno     INTEGER      NOT NULL COMMENT '리뷰번호', -- 리뷰번호
-  hno     INTEGER      NOT NULL COMMENT '병원번호', -- 병원번호
+  hname   INTEGER      NOT NULL COMMENT '병원명', -- 병원명
   writer  INTEGER      NOT NULL COMMENT '작성자', -- 작성자
   service INTEGER      NOT NULL COMMENT '서비스', -- 서비스
   clean   INTEGER      NOT NULL COMMENT '청결도', -- 청결도
@@ -590,7 +590,7 @@ ALTER TABLE pet_mark_phot
 ALTER TABLE pet_hp_review
   ADD CONSTRAINT FK_pet_hp_TO_pet_hp_review -- 병원 -> 리뷰
     FOREIGN KEY (
-      hno -- 병원번호
+      hname -- 병원명
     )
     REFERENCES pet_hp ( -- 병원
       hno -- 병원번호
