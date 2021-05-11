@@ -5,7 +5,7 @@
 
 <mapper namespace="com.eomcs.pms.dao.SharingMarketBoardDao">
   
-  <resultMap id="boardMap" type="smBoard">
+  <resultMap id="boardMap" type="sharingmarketboard">
     <id column="sno" property="no"/>
     <result column="category" property="category"/>
     <result column="title" property="title"/>
@@ -14,15 +14,15 @@
     <result column="vw_cnt" property="viewCount"/>
     
     <association property="writer" javaType="member">
-	    <id column="mno" property="no"/>
+	    <id column="writer_no" property="no"/>
 	    <result column="writer_name" property="name"/>
     </association>
     
   </resultMap>
   
-  <insert id="insert" parameterType="smBoard">
-    insert into pet_mark(title, content, writer) 
-    values(#{title}, #{content}, #{writer.no})
+  <insert id="insert" parameterType="sharingmarketboard">
+    insert into pet_mark(category,title, content) 
+    values(#{title},#{category}, #{content})
   </insert>
 
   <select id="findByKeyword" resultMap="boardMap" parameterType="string">
@@ -35,7 +35,6 @@
       mem.name as writer_name
     from pet_mark mark
       inner join pet_member mem on mem.no=mark.writer
-    
     <if test="value != null">
     where 
       mark.title like concat('%', #{value},'%')
@@ -59,7 +58,20 @@
     where b.no = #{value}
   </select>
   
-  <update id="update" parameterType="smBoard">
+    <select id="findAll" resultMap="boardMap" parameterType="sharingmarketboard">
+    select
+      mark.no,
+      mark.title,
+      mark.content,
+      mark.date,
+      mark.vw_cnt,
+      mem.no as writer_no,
+      mem.name as writer_name
+    from pet_mark mark
+      inner join pet_member mem on mem.no=mark.writer
+  </select>
+  
+  <update id="update" parameterType="sharingmarketboard">
     update pms_board set
         title = #{title}, 
         cont = #{content}
