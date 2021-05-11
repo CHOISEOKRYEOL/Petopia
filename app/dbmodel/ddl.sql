@@ -457,9 +457,9 @@ ALTER TABLE `pet_state`
 
 -- 품종
 CREATE TABLE `pet_type` (
-  `rno`  INTEGER NOT NULL, -- 품종번호
-  `sno`  INTEGER NOT NULL, -- 종번호
-  `type` INTEGER NOT NULL  -- 품종
+  `rno`  INTEGER      NOT NULL, -- 품종번호
+  `sno`  INTEGER      NOT NULL, -- 종번호
+  `type` VARCHAR(255) NOT NULL  -- 품종
 );
 
 -- 품종
@@ -474,8 +474,8 @@ ALTER TABLE `pet_type`
 
 -- 종
 CREATE TABLE `pet_species` (
-  `sno`  INTEGER NOT NULL, -- 종번호
-  `type` INTEGER NOT NULL  -- 종
+  `sno`  INTEGER      NOT NULL, -- 종번호
+  `type` VARCHAR(255) NOT NULL  -- 종
 );
 
 -- 종
