@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pms.petopia.dao.SmallAddressDao">
+  
+  <resultMap id="smallAddress" type="smallAdress">
+    <id column="no" property="no"/>
+    <result column="name" property="name"/>
+  
+  
+  <association property="bigAddress" javaType="bigAddress">
+    <id column="bigAddress_no" property="no"/>
+    <result column="bigAddress_name" property="name"/>
+  </association>
+  
+  </resultMap>
+  
+  <select id="findAll" resultMap="smallAddress">
+     select 
+      g.cno,
+      g.cname,
+      c.gno,
+      c.gname
+    from pet_state c 
+    inner join pet_city g on c.cno=g.cno
+  </select>
+  
+  <select id="findByNo" resultMap="smallAddress" parameterType="int">
+     select 
+      g.cno,
+      g.cname,
+      c.gno,
+      c.gname
+    from pet_state c 
+    inner join pet_city g on c.cno=g.cno
+    where g.cno = #{value}
+  </select>
+
+</mapper>
+
+
+
+
+
+
+
