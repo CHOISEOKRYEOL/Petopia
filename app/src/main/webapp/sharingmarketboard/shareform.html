@@ -7,17 +7,19 @@
 <body>
 <h1>게시글 등록</h1>
 <form action="add" method="post">
-번호:<input type='text' name='no' value='%d' readonly><br>
-카테고리:<select name='category'>
-<option value=''>분류</option>
-<option value='강아지용품'>강아지용품</option>
-<option value='고양이용품'>고양이용품</option>
-<option value='기타'>기타</option>
+<!-- 
+<label for="categoty">분류:</label>
+<select id="categoty" name="categoty">
+<option value='0'>강아지용품</option>
+<option value='1'>고양이용품</option>
+<option value='2'>기타</option>
 </select>
+ -->
+
+
+
 제목: <input type='text' name='title' ><br>
 내용: <textarea name='content' rows='10' cols='60'></textarea><br>
-등록일: <input type='date' name='createdDate'  readonly><br>
-조회수:<input type='text' name='vw_cnt' value='%d'  readonly><br>
 <input type='submit' value='등록'>
 </form>
 <form action="../main">

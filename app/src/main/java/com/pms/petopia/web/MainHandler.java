@@ -31,8 +31,8 @@ public class MainHandler extends HttpServlet {
       out.println("<h1>비회원 화면</h1>");
       out.println("<p><a href='member/form.html'>가입</a></p>");
       out.println("<p><a href='login.html'>로그인</a></p>");
-      out.println("<p><a href='main'>병원 찾기</a></p>");
-      out.println("<p><a href='main'>스토리</a></p>");
+      out.println("<p><a href='hospital/list'>병원 찾기</a></p>");
+      out.println("<p><a href='story/list'>스토리</a></p>");
       out.println("<p><a href='sharingmarketboard/list'>나눔 장터</a></p>");
       out.println("<p><a href='mytown/main'>우리 동네</a></p>");
       //out.println("<form action='mytown/list'>");
@@ -46,10 +46,11 @@ public class MainHandler extends HttpServlet {
       out.println("<input name='logout' type='submit' value='로그아웃'></form>");
       out.println("<p><a href='pet/form.html'>마이펫 등록</a></p>");
       out.println("<p><a href='pet/record.html'>진찰기록</a></p>");
-      out.println("<p><a href='main'>병원 찾기</a></p>");
-      out.println("<p><a href='main'>스토리</a></p>");
+      out.println("<p><a href='hospital/form.html'>병원 찾기</a></p>");
+      out.println("<p><a href='story/add'>스토리</a></p>");
       out.println("<p><a href='sharingmarketboard/shareform.html'>나눔 장터</a></p>");
       out.println("<p><a href='main'>우리 동네</a></p>");
+      out.println("<p><a href='review/form.html'>리뷰 작성</a></p>");
     }
     out.println("</body>");
     out.println("</html>");

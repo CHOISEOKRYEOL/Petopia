@@ -6,19 +6,22 @@ public class Hospital {
   private String name;
   private String tel;
   private String address;
+  private String businessHour;
   private int parking;
   private int veterinarian;
-  private String businessHour;
-  private int rate;
-  private float longitude;
-  private float latitude;
+  // private int rate;
+  private Member admin;
+  private int bigAddress;
+  private int smallAddress;
+  //  private float longitude;
+  //  private float latitude;
 
   @Override
   public String toString() {
     return "Hospital [no=" + no + ", name=" + name + ", tel=" + tel + ", address=" + address
-        + ", parking=" + parking + ", veterinarian=" + veterinarian + ", businessHour="
-        + businessHour + ", rate=" + rate + ", longitude=" + longitude + ", latitude=" + latitude
-        + "]";
+        + ", businessHour=" + businessHour + ", parking=" + parking + ", veterinarian="
+        + veterinarian + ", admin=" + admin + ", bigAddress=" + bigAddress + ", smallAddress="
+        + smallAddress + "]";
   }
 
   public int getNo() {
@@ -45,6 +48,12 @@ public class Hospital {
   public void setAddress(String address) {
     this.address = address;
   }
+  public String getBusinessHour() {
+    return businessHour;
+  }
+  public void setBusinessHour(String businessHour) {
+    this.businessHour = businessHour;
+  }
   public int getParking() {
     return parking;
   }
@@ -57,29 +66,28 @@ public class Hospital {
   public void setVeterinarian(int veterinarian) {
     this.veterinarian = veterinarian;
   }
-  public String getBusinessHour() {
-    return businessHour;
+  public Member getAdmin() {
+    return admin;
   }
-  public void setBusinessHour(String businessHour) {
-    this.businessHour = businessHour;
+  public void setAdmin(Member admin) {
+    this.admin = admin;
   }
-  public int getRate() {
-    return rate;
+
+  public int getBigAddress() {
+    return bigAddress;
   }
-  public void setRate(int rate) {
-    this.rate = rate;
+
+  public void setBigAddress(int bigAddress) {
+    this.bigAddress = bigAddress;
   }
-  public float getLongitude() {
-    return longitude;
+
+  public int getSmallAddress() {
+    return smallAddress;
   }
-  public void setLongitude(float longitude) {
-    this.longitude = longitude;
+
+  public void setSmallAddress(int smallAddress) {
+    this.smallAddress = smallAddress;
   }
-  public float getLatitude() {
-    return latitude;
-  }
-  public void setLatitude(float latitude) {
-    this.latitude = latitude;
-  }
+
 
 }

@@ -19,6 +19,7 @@
     </association>
     
     <association property="type" javaType="type">
+      <id column="type_no" property="no"/>
       <result column="type_type" property="type"/>
     </association>
     
@@ -26,7 +27,7 @@
   
   <insert id="insert" parameterType="pet">
     insert into pet_mypet(pname, age, birth, gender, owner, type) 
-    values(#{name}, #{age}, #{birthDay}, #{gender}, #{owner.no}, #{type.type})
+    values(#{name}, #{age}, #{birthDay}, #{gender}, #{owner.no}, #{type.no})
   </insert>
  
  <!--  

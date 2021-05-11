@@ -3,9 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.eomcs.pms.dao.SharingMarketBoardDao">
+<mapper namespace="com.pms.petopia.dao.SharingMarketBoardDao">
   
-  <resultMap id="boardMap" type="sharingmarketboard">
+  <resultMap id="sharingmarketboardMap" type="sharingmarketboard">
     <id column="sno" property="no"/>
     <result column="category" property="category"/>
     <result column="title" property="title"/>
@@ -21,14 +21,17 @@
   </resultMap>
   
   <insert id="insert" parameterType="sharingmarketboard">
-    insert into pet_mark(category,title, content) 
-    values(#{title},#{category}, #{content})
+    insert into pet_mark(category, title, cont, writer) 
+    values( #{category}, #{title}, #{content}, #{writer.no})
   </insert>
-
+  
+<!--  
   <select id="findByKeyword" resultMap="boardMap" parameterType="string">
     select
       mark.no,
+      mark.category,
       mark.title,
+      mark.content,
       mark.date,
       mark.vw_cnt,
       mem.no as writer_no,
@@ -88,7 +91,7 @@
     delete from pms_mark 
     where no = #{value}
   </delete>
-
+-->
 </mapper>
 
 
