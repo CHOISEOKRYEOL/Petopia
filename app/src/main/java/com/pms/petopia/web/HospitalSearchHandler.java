@@ -9,18 +9,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.pms.petopia.domain.Story;
-import com.pms.petopia.service.StoryService;
+import com.pms.petopia.domain.Hospital;
+import com.pms.petopia.service.HospitalService;
 
 @SuppressWarnings("serial")
-@WebServlet("/story/list")
-public class StoryListHandler extends HttpServlet {
+@WebServlet("/hospital/search")
+public class HospitalSearchHandler extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    StoryService storyService = (StoryService) request.getServletContext().getAttribute("storyService");
+    String keyword = request.getParameter("keyword");
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -28,42 +28,47 @@ public class StoryListHandler extends HttpServlet {
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
-    out.println("<title>스토리</title>");
+    out.println("<title>병원 검색</title>");
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>스토리</h1>");
-
-    out.println("<p><a href='add'>새 스토리</a></p>");
+    out.printf("<h1>병원 검색 결과 : %s</h1>\n", keyword);
 
     try {
-      List<Story> storys = storyService.list(); 
+      if (keyword == null || keyword.length() == 0) {
+        throw new SearchException("검색어를 입력하세요.");
+      }
+
+      HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
+
+      List<Hospital> list = hospitalService.search(keyword);
+      if (list.size() == 0) {
+        throw new SearchException("검색어에 해당하는 병원이 없습니다.");
+      }
 
       out.println("<table border='1'>");
       out.println("<thead>");
       out.println("<tr>");
-      out.println("<th>번호</th> <th>제목</th> <th>사이트</th> <th>등록일</th>");
+      out.println("<th>번호</th> <th>이름</th> <th>전화</th> <th>주소</th>");
       out.println("</tr>");
       out.println("</thead>");
       out.println("<tbody>");
 
-      for (Story s : storys) {
+      for (Hospital h : list) {
         out.printf("<tr>"
             + " <td>%d</td>"
-            + " <td>%s</td>"
+            + " <td><a href='detail?no=%1$d'>%s</a></td>"
             + " <td>%s</td>"
             + " <td>%s</td> </tr>\n",
-            s.getNo(),
-            s.getTitle(),
-            s.getSite(),
-            s.getRegisteredDate());
+            h.getNo(),
+            h.getName(),
+            h.getTel(),
+            h.getAddress());
       }
       out.println("</tbody");
       out.println("</table>");
 
-      out.println("<form action='search' method='get'>");
-      out.println("<input type='text' name='keyword'> ");
-      out.println("<button>검색</button>");
-      out.println("</form>");
+    } catch (SearchException e) {
+      out.printf("<p>%s</p>\n", e.getMessage());
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();

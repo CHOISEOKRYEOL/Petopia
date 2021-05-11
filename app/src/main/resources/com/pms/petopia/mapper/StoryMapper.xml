@@ -7,7 +7,7 @@
   
   <resultMap id="StoryMap" type="story">
     <id column="nno" property="no"/>
-    <result column="title" property="name"/>
+    <result column="title" property="title"/>
     <result column="url" property="url"/>
     <result column="site" property="site"/>
     <result column="date" property="registeredDate"/>
@@ -44,7 +44,7 @@
     order by nno desc
   </select>
   
-  <select id="findByKeyword" resultMap="storyMap" parameterType="int">
+  <select id="findByNo" resultMap="storyMap" parameterType="int">
     select
       nno,
       title,
@@ -56,17 +56,15 @@
   </select>
   
   <update id="update" parameterType="story">
-    update pet_st_news 
-    <set> 
-      <if test="title != ''">title=#{title},</if>
-      <if test="url != ''">url=#{url},</if>
-      <if test="site != ''">site=#{site}</if> 
-    </set>
-    where nno=#{no}
+    update pet_st_news set
+        title=#{title},
+        url=#{url},
+        site=#{site} 
+    where nno = #{no}
   </update>
   
   <delete id="delete" parameterType="int">
     delete from pet_st_news
-    where nno=#{value}
+    where nno = #{value}
   </delete>
 </mapper>

@@ -21,7 +21,7 @@ public class DefaultSharingMarketBoardService implements SharingMarketBoardServi
 
 	@Override
 	public List<SharingMarketBoard> list() throws Exception {
-		return sharingMarketBoardDao.findByKeyword(null);
+		return sharingMarketBoardDao.findAll();
 	}
 
 	@Override

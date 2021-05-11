@@ -8,18 +8,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.pms.petopia.domain.Story;
-import com.pms.petopia.service.StoryService;
+import com.pms.petopia.domain.Hospital;
+import com.pms.petopia.service.HospitalService;
 
 @SuppressWarnings("serial")
-@WebServlet("/story/update")
-public class StoryUpdateHandler extends HttpServlet {
+@WebServlet("/hospital/update")
+public class HospitalUpdateHandler extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    StoryService storyService = (StoryService) request.getServletContext().getAttribute("storyService");
+    HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
 
     request.setCharacterEncoding("UTF-8");
 
@@ -29,30 +29,38 @@ public class StoryUpdateHandler extends HttpServlet {
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
-    out.println("<title>스토리 변경</title>");
+    out.println("<title>병원 변경</title>");
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
 
-      Story oldStory = storyService.get(no);
+      Hospital oldHospital = hospitalService.get(no);
 
-      if (oldStory == null) {
-        throw new Exception("해당 번호의 스토리가 없습니다.");
+      if (oldHospital == null) {
+        throw new Exception("해당 번호의 병원이 없습니다.");
       }
 
-      Story story = new Story();
-      story.setNo(no);
-      story.setTitle(request.getParameter("title"));
-      story.setUrl(request.getParameter("url"));
-      story.setSite(request.getParameter("site"));
+      //      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+      //      if (oldHospital.getWriter().getNo() != loginUser.getNo()) {
+      //        throw new Exception("변경 권한이 없습니다!");
+      //      }
 
-      storyService.update(story);
+      Hospital hospital = new Hospital();
+      hospital.setNo(oldHospital.getNo());
+      hospital.setName(request.getParameter("name"));
+      hospital.setTel(request.getParameter("tel"));
+      hospital.setAddress(request.getParameter("address"));
+      hospital.setBusinessHour(request.getParameter("time"));
+      hospital.setParking(Integer.valueOf(request.getParameter("parking")));
+      hospital.setVeterinarian(Integer.valueOf(request.getParameter("vet")));
+
+      hospitalService.update(hospital);
 
       out.println("<meta http-equiv='Refresh' content='1;url=list'>");
       out.println("</head>");
       out.println("<body>");
-      out.println("<h1>스토리 변경</h1>");
-      out.println("<p>스토리를 변경했습니다.</p>");
+      out.println("<h1>병원 변경</h1>");
+      out.println("<p>병원을 변경했습니다.</p>");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();
@@ -61,7 +69,7 @@ public class StoryUpdateHandler extends HttpServlet {
 
       out.println("</head>");
       out.println("<body>");
-      out.println("<h1>스토리 변경 오류</h1>");
+      out.println("<h1>병원 변경 오류</h1>");
       out.printf("<p>%s</p>\n", e.getMessage());
       out.printf("<pre>%s</pre>\n", strWriter.toString());
       out.println("<p><a href='list'>목록</a></p>");

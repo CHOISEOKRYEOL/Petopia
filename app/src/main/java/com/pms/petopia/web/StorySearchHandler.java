@@ -42,7 +42,7 @@ public class StorySearchHandler extends HttpServlet {
 
       List<Story> list = storyService.search(keyword);
       if (list.size() == 0) {
-        throw new SearchException("검색어에 해당하는 게시글이 없습니다.");
+        throw new SearchException("검색어에 해당하는 스토리가 없습니다.");
       }
 
       out.println("<table border='1'>");
