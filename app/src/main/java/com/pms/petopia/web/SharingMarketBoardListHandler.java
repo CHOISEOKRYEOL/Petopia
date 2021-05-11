@@ -47,7 +47,7 @@ public class SharingMarketBoardListHandler extends HttpServlet{
 	        out.println("<table border='1'>");
 	        out.println("<thead>");
 	        out.println("<tr>");
-	        out.println("<th>번호</th> <th>분류</th> <th>제목</th> <th>작성자</th> <th>작석일</th>");
+	        out.println("<th>번호</th> <th>분류</th> <th>제목</th> <th>내용</th> <th>작성자</th> <th>작성일</th> <th>조회수</th>");
 	        out.println("</tr>");
 	        out.println("</thead>");
 	        out.println("<tbody>");
@@ -55,15 +55,18 @@ public class SharingMarketBoardListHandler extends HttpServlet{
 	        for (SharingMarketBoard smb : smBoards) {
 	          out.printf("<tr>"
 	              + " <td>%d</td>"
+	              + " <td>%d</td>"
 	              + " <td><a href='detail?no=%1$d'>%s</a></td>"
 	              + " <td>%s</td>"
 	              + " <td>%s</td>"
 	              + " <td>%d</td> </tr>\n", 
 	              smb.getNo(),
 	              smb.getCategory(),
-	              smb.getTitle(), 
+	              smb.getTitle(),
+	              smb.getContent(), 
 	              smb.getWriter().getName(),
-	              smb.getCreatedDate());
+	              smb.getCreatedDate(),
+	              smb.getVeiwCount());
 	        }
 	        out.println("</tbody>");
 	        out.println("</table>");

@@ -17,5 +17,7 @@ public interface SharingMarketBoardDao {
 	  int updateViewCount(int no) throws Exception;
 
 	  int delete(int no) throws Exception;
+	  
+	  List<SharingMarketBoard> findAll() throws Exception;
   
 }

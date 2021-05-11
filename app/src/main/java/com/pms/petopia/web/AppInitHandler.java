@@ -16,18 +16,24 @@ import com.pms.mybatis.MybatisDaoFactory;
 import com.pms.mybatis.SqlSessionFactoryProxy;
 import com.pms.petopia.dao.HospitalDao;
 import com.pms.petopia.dao.MemberDao;
+import com.pms.petopia.dao.MyTownBoardDao;
 import com.pms.petopia.dao.PetDao;
 import com.pms.petopia.dao.RecordDao;
+import com.pms.petopia.dao.SharingMarketBoardDao;
 import com.pms.petopia.dao.StoryDao;
 import com.pms.petopia.service.HospitalService;
 import com.pms.petopia.service.MemberService;
+import com.pms.petopia.service.MyTownBoardService;
 import com.pms.petopia.service.PetService;
 import com.pms.petopia.service.RecordService;
+import com.pms.petopia.service.SharingMarketBoardService;
 import com.pms.petopia.service.StoryService;
 import com.pms.petopia.service.impl.DefaultHospitalService;
 import com.pms.petopia.service.impl.DefaultMemberService;
+import com.pms.petopia.service.impl.DefaultMyTownBoardService;
 import com.pms.petopia.service.impl.DefaultPetService;
 import com.pms.petopia.service.impl.DefaultRecordService;
+import com.pms.petopia.service.impl.DefaultSharingMarketBoardService;
 import com.pms.petopia.service.impl.DefaultStorylService;
 
 @WebServlet(
@@ -60,7 +66,8 @@ public class AppInitHandler implements Servlet {
       RecordDao recordDao = daoFactory.createDao(RecordDao.class);
       HospitalDao hospitalDao = daoFactory.createDao(HospitalDao.class);
       StoryDao storyDao = daoFactory.createDao(StoryDao.class);
-
+      MyTownBoardDao myTownBoardDao = daoFactory.createDao(MyTownBoardDao.class);
+      SharingMarketBoardDao sharingMarketBoardDao = daoFactory.createDao(SharingMarketBoardDao.class);
       // 3) 서비스 관련 객체 준비
       //      TransactionManager txManager = new TransactionManager(sqlSessionFactoryProxy);
 
@@ -69,7 +76,9 @@ public class AppInitHandler implements Servlet {
       RecordService recordService = new DefaultRecordService(recordDao);
       HospitalService hospitalService = new DefaultHospitalService(hospitalDao);
       StoryService storyService = new DefaultStorylService(storyDao);
-
+      MyTownBoardService myTownBoardService = new DefaultMyTownBoardService(myTownBoardDao);
+      SharingMarketBoardService sharingMarketBoardService = new DefaultSharingMarketBoardService(sharingMarketBoardDao);
+      
       // 4) 서비스 객체를 ServletContext 보관소에 저장한다.
       ServletContext servletContext = config.getServletContext();
 
@@ -78,7 +87,10 @@ public class AppInitHandler implements Servlet {
       servletContext.setAttribute("recordService", recordService);
       servletContext.setAttribute("hospitalService", hospitalService);
       servletContext.setAttribute("storyService", storyService);
-
+      servletContext.setAttribute("myTownBoardService", myTownBoardService);
+      servletContext.setAttribute("sharingMarketBoardService", sharingMarketBoardService);
+      
+      
     } catch (Exception e) {
       e.printStackTrace();
     }
