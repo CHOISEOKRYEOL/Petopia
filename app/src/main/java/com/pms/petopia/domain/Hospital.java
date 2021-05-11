@@ -11,8 +11,8 @@ public class Hospital {
   private int veterinarian;
   // private int rate;
   private Member admin;
-  private BigAddress bigAddress;
-  private SmallAddress smallAddress;
+  private int bigAddress;
+  private int smallAddress;
   //  private float longitude;
   //  private float latitude;
 
@@ -72,17 +72,22 @@ public class Hospital {
   public void setAdmin(Member admin) {
     this.admin = admin;
   }
-  public BigAddress getBigAddress() {
+
+  public int getBigAddress() {
     return bigAddress;
   }
-  public void setBigAddress(BigAddress bigAddress) {
+
+  public void setBigAddress(int bigAddress) {
     this.bigAddress = bigAddress;
   }
-  public SmallAddress getSmallAddress() {
+
+  public int getSmallAddress() {
     return smallAddress;
   }
-  public void setSmallAddress(SmallAddress smallAddress) {
+
+  public void setSmallAddress(int smallAddress) {
     this.smallAddress = smallAddress;
   }
+
 
 }
