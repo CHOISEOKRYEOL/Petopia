@@ -1,7 +1,7 @@
 package com.pms.petopia.service.impl;
 
+import java.util.List;
 import com.pms.petopia.dao.ReviewDao;
-import com.pms.petopia.domain.Hospital;
 import com.pms.petopia.domain.Review;
 import com.pms.petopia.service.ReviewService;
 
@@ -25,9 +25,9 @@ public class DefaultReviewService implements ReviewService {
 
   // 사용자 조회 업무
   @Override
-  public Review get(Hospital hospital) throws Exception {
+  public List<Review> list(int no) throws Exception {
 
-    return reviewDao.findAll(hospital);
+    return reviewDao.findAll(no);
   }
 
   // 변경 업무

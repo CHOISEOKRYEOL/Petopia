@@ -54,11 +54,11 @@ public class PetListHandler extends HttpServlet {
             + " <td>%s</td>"
             + " <td>%b</td>"
             + " <td>%d</td> </tr>\n", 
-            p.getNo(), 
-            p.getName(), 
+            p.getNo(),
+            p.getName(),
             p.getAge(),
             p.getBirthDay(),
-            p.getType(), 
+            p.getType(),
             p.getPhoto());
       }
       out.println("</tbody>");

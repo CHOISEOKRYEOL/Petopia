@@ -6,27 +6,27 @@ public class Review {
 
   private int no;
   private int serviceRating;
-  private int cleanlinessRating; 
+  private int cleanlinessRating;
   private int costRating;
   private String comment;
   private String photo;
   private Date createdDate;
   private Member writer;
-  private Hospital hospitalName;
+  private Hospital hospital;
 
   @Override
   public String toString() {
     return "Review [no=" + no + ", serviceRating=" + serviceRating + ", cleanlinessRating="
         + cleanlinessRating + ", costRating=" + costRating + ", comment=" + comment + ", photo="
-        + photo + ", createdDate=" + createdDate + ", writer=" + writer + ", hospitalName="
-        + hospitalName + "]";
+        + photo + ", createdDate=" + createdDate + ", writer=" + writer + ", hospital=" + hospital
+        + "]";
   }
 
-  public Hospital getHospitalName() {
-    return hospitalName;
+  public Hospital getHospital() {
+    return hospital;
   }
-  public void setHospitalName(Hospital hospitalName) {
-    this.hospitalName = hospitalName;
+  public void setHospital(Hospital hospital) {
+    this.hospital = hospital;
   }
   public int getNo() {
     return no;
