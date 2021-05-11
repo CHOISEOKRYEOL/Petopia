@@ -19,8 +19,8 @@
   
   <select id="findAll" resultMap="smallAddressMap">
      select 
-      g.gno,
-      g.gname,
+      g.gno as bigAddress_no,
+      g.gname as bigAddress_name,
       c.cno,
       c.cname
     from pet_state g
