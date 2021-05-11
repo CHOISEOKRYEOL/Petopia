@@ -5,7 +5,7 @@
 
 <mapper namespace="com.pms.petopia.dao.SmallAddressDao">
   
-  <resultMap id="smallAddress" type="smallAdress">
+  <resultMap id="smallAddress" type="smallAddress">
     <id column="no" property="no"/>
     <result column="name" property="name"/>
   
