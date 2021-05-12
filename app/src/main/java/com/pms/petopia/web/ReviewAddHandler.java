@@ -48,9 +48,6 @@ public class ReviewAddHandler extends HttpServlet {
     out.println("<head>");
     out.println("<title>리뷰 작성</title>");
 
-    out.println(r.getServiceRating());
-    out.println(r.getCleanlinessRating());
-
     try {
       reviewService.add(r);
 
