@@ -53,16 +53,17 @@ public class StorySearchHandler extends HttpServlet {
       out.println("</thead>");
       out.println("<tbody>");
 
-      for (Story story: list) {
+      for (Story s : list) {
         out.printf("<tr>"
-            + " <td>%d</td>"
-            + " <td><a href=>%s</a></td>" //url
+            + " <td><a href='detail?no=%1$d'>%d</a></td>"
+            + " <td><a href='%s'>%s</a></td>"
             + " <td>%s</td>"
-            + " <td>%s</td></tr>\n",
-            story.getNo(),
-            story.getTitle(),
-            story.getSite(),
-            story.getRegisteredDate());
+            + " <td>%s</td> </tr>\n",
+            s.getNo(),
+            s.getUrl(),
+            s.getTitle(),
+            s.getSite(),
+            s.getRegisteredDate());
       }
       out.println("</tbody");
       out.println("</table>");

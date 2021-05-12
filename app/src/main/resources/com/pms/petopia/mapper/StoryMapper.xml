@@ -57,8 +57,7 @@
     delete from pet_st_news
     where nno = #{value}
   </delete>
-  
-  <!--
+
   <select id="findByKeyword" resultMap="StoryMap" parameterType="string">
     select
       nno,
@@ -70,8 +69,8 @@
     <if test="value != null">
     where 
       title like concat('%', #{value},'%')
+      or site like concat('%', #{value},'%')
     </if>
     order by nno desc
   </select>
- -->
 </mapper>
