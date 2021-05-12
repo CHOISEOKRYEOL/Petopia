@@ -1,9 +1,9 @@
-package com.pms.petopia.web;
+package com.pms.petopia.web.listener;
 
 import java.io.InputStream;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -40,26 +40,19 @@ import com.pms.petopia.service.impl.DefaultSharingMarketBoardService;
 import com.pms.petopia.service.impl.DefaultSmallAddressService;
 import com.pms.petopia.service.impl.DefaultStorylService;
 
-//@WebServlet(
-//    value="/init",   // 클라인언트에서 요청할 때 사용할 명령이다.
-//    loadOnStartup = 1 // 톰캣 서버를 실행할 때 이 객체를 생성하라고 지정한다.
-//    )
-// loadOnStartup 이 지정되지 않은 경우, 
-// 클라이언트가 실행을 요청할 때 서블릿 객체를 생성한다.
-// 물론 한 번 객체를 생성하면 그 생성된 객체를 계속 사용한다.
-// 즉 두 개의 객체를 생성하진 않는다.
-@SuppressWarnings("serial")
-public class AppInitHandler extends HttpServlet {
-
+// 웹 애플리케이션을 시작하거나 종료할 때 서버로부터 보고를 받는다.
+// 즉, 톰캣 서버가 웹 애플리케이션을 시작하면, Listener 규칙에 따라 메소드를 호출한다는 뜻이다.
+// 
+public class ContextLoaderListener implements ServletContextListener {
   @Override
-  public void init() throws ServletException {
-    // 서블릿 객체를 생성할 때 톰캣 서버가 호출하는 메서드
-    // => 보통 서블릿들이 사용할 의존 객체를 준비하는 등의 일을 한다.
-
+  public void contextInitialized(ServletContextEvent sce) {
     try {
+
+      ServletContext servletContext = sce.getServletContext();
+
       // 1) Mybatis 관련 객체 준비
       InputStream mybatisConfigStream = Resources.getResourceAsStream(
-          this.getInitParameter("mybatis-config"));
+          servletContext.getInitParameter("mybatis-config"));
       SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(mybatisConfigStream);
       SqlSessionFactoryProxy sqlSessionFactoryProxy = new SqlSessionFactoryProxy(sqlSessionFactory);
 
@@ -76,9 +69,8 @@ public class AppInitHandler extends HttpServlet {
       BigAddressDao bigAddressDao = daoFactory.createDao(BigAddressDao.class);
       SmallAddressDao smallAddressDao = daoFactory.createDao(SmallAddressDao.class);
       ReviewDao reviewDao = daoFactory.createDao(ReviewDao.class);
-      // 3) 서비스 관련 객체 준비
-      //      TransactionManager txManager = new TransactionManager(sqlSessionFactoryProxy);
 
+      // 3) 서비스 관련 객체 준비
       MemberService memberService = new DefaultMemberService(memberDao);
       PetService petService = new DefaultPetService(petDao);
       RecordService recordService = new DefaultRecordService(recordDao);
@@ -91,8 +83,6 @@ public class AppInitHandler extends HttpServlet {
       ReviewService reviewService = new DefaultReviewService(reviewDao);
 
       // 4) 서비스 객체를 ServletContext 보관소에 저장한다.
-      ServletContext servletContext = this.getServletContext();
-
       servletContext.setAttribute("memberService", memberService);
       servletContext.setAttribute("petService", petService);
       servletContext.setAttribute("recordService", recordService);
@@ -108,5 +98,4 @@ public class AppInitHandler extends HttpServlet {
       e.printStackTrace();
     }
   }
-
 }
