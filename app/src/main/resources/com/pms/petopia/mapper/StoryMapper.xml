@@ -34,8 +34,32 @@
     order by nno desc
   </select>
   
+  <select id="findByNo" resultMap="StoryMap" parameterType="int">
+    select
+      nno,
+      title,
+      url,
+      site,
+      date
+    from pet_st_news
+    where nno = #{value}
+  </select>
+  
+  <update id="update" parameterType="story">
+    update pet_st_news set
+        title = #{title},
+        url = #{url},
+        site = #{site} 
+    where nno = #{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from pet_st_news
+    where nno = #{value}
+  </delete>
+  
   <!--
-  <select id="findByKeyword" resultMap="storyMap" parameterType="string">
+  <select id="findByKeyword" resultMap="StoryMap" parameterType="string">
     select
       nno,
       title,
@@ -49,30 +73,5 @@
     </if>
     order by nno desc
   </select>
-  
-  <select id="findByNo" resultMap="storyMap" parameterType="int">
-    select
-      nno,
-      title,
-      url,
-      site,
-      date
-    from pet_st_news
-    where nno = #{value}
-  </select>
-  
-  <update id="update" parameterType="story">
-    update pet_st_news set
-        title=#{title},
-        url=#{url},
-        site=#{site} 
-    where nno = #{no}
-  </update>
-  
-  <delete id="delete" parameterType="int">
-    delete from pet_st_news
-    where nno = #{value}
-  </delete>
  -->
- 
 </mapper>

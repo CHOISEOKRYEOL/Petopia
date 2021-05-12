@@ -40,8 +40,13 @@ public class StoryUpdateHandler extends HttpServlet {
         throw new Exception("해당 번호의 스토리가 없습니다.");
       }
 
+      //      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+      //      if (oldStory.getAdmin().getNo() != loginUser.getNo()) {
+      //        throw new Exception("변경 권한이 없습니다!");
+      //      }
+
       Story story = new Story();
-      story.setNo(no);
+      story.setNo(oldStory.getNo());
       story.setTitle(request.getParameter("title"));
       story.setUrl(request.getParameter("url"));
       story.setSite(request.getParameter("site"));
