@@ -30,29 +30,29 @@ public class LoginHandler extends HttpServlet {
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
+    out.println("<body>");
 
     try {
       Member member = memberService.get(id, password);
 
-      out.println("</head>");
-      out.println("<body>");
       if (member == null) {
         request.getSession().invalidate();
-        throw new ServletException("사용자 정보가 맞지 않습니다.");
+        out.println("</head>");
+        response.sendRedirect("login");
+        out.println("<h1>로그인 결과</h1>");
+        out.println("<p>사용자 정보가 맞지 않습니다.</p>");
+        response.setHeader("Refresh", "1;url=login");
       }
 
       request.getSession().setAttribute("loginUser", member);
-
-      out.printf("<p>%s 님 로그인 하였습니다.</p>\n", member.getId());
-      response.setHeader("Refresh", "1;url=../main");
+      response.sendRedirect("main");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();
       PrintWriter printWriter = new PrintWriter(strWriter);
       e.printStackTrace(printWriter);
       out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>로그인 실패</h1>");
+      out.println("<h1>로그인 오류</h1>");
       out.printf("<pre>%s</pre>\n", strWriter.toString());
     } 
 
