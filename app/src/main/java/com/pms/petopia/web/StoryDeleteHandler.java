@@ -37,6 +37,11 @@ public class StoryDeleteHandler extends HttpServlet {
         throw new Exception("해당 번호의 스토리가 없습니다.");
       }
 
+      //      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+      //      if (oldStory.getAdmin().getNo() != loginUser.getNo()) {
+      //        throw new Exception("삭제 권한이 없습니다!");
+      //      }
+
       storyService.delete(no);
 
       out.println("<meta http-equiv='Refresh' content='1;url=list'>");
