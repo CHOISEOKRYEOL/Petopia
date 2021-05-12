@@ -16,7 +16,7 @@ import com.pms.petopia.service.ReviewService;
 public class ReviewDeleteHandler extends HttpServlet {
 
   @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     ReviewService reviewService = (ReviewService) request.getServletContext().getAttribute("reviewService");
@@ -38,8 +38,8 @@ public class ReviewDeleteHandler extends HttpServlet {
     out.println("<title>리뷰 삭제</title>");
 
     try {
-      //      int no = Integer.parseInt(request.getParameter(1));
-      reviewService.delete(1);
+      int no = Integer.parseInt(request.getParameter("no"));
+      reviewService.delete(no);
 
       out.println("<meta http-equiv='Refresh' content='1;url=../main'>");
       out.println("</head>");

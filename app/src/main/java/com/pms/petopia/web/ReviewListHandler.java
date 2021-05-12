@@ -54,8 +54,7 @@ public class ReviewListHandler extends HttpServlet {
           out.printf("<p>작성자 : %s</p>\n", r.getWriter().getName());
           out.printf("<o>작성일 : %s</p><br>\n", r.getCreatedDate());
           if(r.getWriter().getNo() == loginUser.getNo()) {
-            out.println("<form action='review/delete' method='post'>");
-            out.println("<input type='submit' value='삭제' name='%d'>" + r.getNo() + "</form>");
+            out.println("<a href='delete?no=" + r.getNo() + "'>삭제</a>");
           }
         }
       }
