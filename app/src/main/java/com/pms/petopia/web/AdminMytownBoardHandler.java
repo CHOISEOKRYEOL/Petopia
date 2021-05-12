@@ -16,7 +16,7 @@ import com.pms.petopia.service.MyTownBoardService;
 @SuppressWarnings("serial")
 @WebServlet("/mytown/list")
 
-public class MytownBoardListHandler extends HttpServlet {
+public class AdminMytownBoardHandler extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
