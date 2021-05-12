@@ -58,7 +58,7 @@ public class SharingMarketBoardListHandler extends HttpServlet{
 	              + " <td>%d</td>"
 	              + " <td><a href='detail?no=%1$d'>%s</a></td>"
 	              + " <td>%s</td>"
-	              + " <td>%d</td> </tr>\n", 
+	              + " <td>%s</td> </tr>\n", 
 	              smb.getNo(),
 	              smb.getCategory(),
 	              smb.getTitle(),

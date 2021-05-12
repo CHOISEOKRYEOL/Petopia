@@ -47,5 +47,7 @@ public class DefaultSharingMarketBoardService implements SharingMarketBoardServi
 	public List<SharingMarketBoard> search(String keyword) throws Exception {
 		return sharingMarketBoardDao.findByKeyword(keyword);
 	}
+	
+
 
 }

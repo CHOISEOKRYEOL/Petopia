@@ -3,6 +3,7 @@ package com.pms.petopia.web;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,29 +16,29 @@ import com.pms.petopia.service.SharingMarketBoardService;
 @SuppressWarnings("serial")
 @WebServlet("/sharingmarketboard/add")
 public class SharingMarketBoardAddHandler extends HttpServlet {
+	
+	@Override
+		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    SharingMarketBoardService sharingMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("sharingMarketBoardService");
-    SharingMarketBoard smb = new SharingMarketBoard();
-
-    //smb.setCategory(Integer.parseInt(request.getParameter("category")));
-    smb.setCategory(1);
-    smb.setTitle(request.getParameter("title"));
-    smb.setContent(request.getParameter("content"));
-
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-    smb.setWriter(loginUser);
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<title>나눔장터 게시 등록</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>나눔장터 게시글 등록</h1>");
+	SharingMarketBoardService sharingMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("sharingMarketBoardService");
+	SharingMarketBoard smb = new SharingMarketBoard();
+	
+	request.setCharacterEncoding("UTF-8");
+	smb.setCategory(Integer.parseInt(request.getParameter("category")));
+	smb.setTitle(request.getParameter("title"));
+	smb.setContent(request.getParameter("content"));
+	
+	Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+	smb.setWriter(loginUser);
+	
+	response.setContentType("text/html;charset=UTF-8");
+	PrintWriter out = response.getWriter();
+	  
+	
+	    out.println("<!DOCTYPE html>");
+	    out.println("<html>");
+	    out.println("<head>");
+	    out.println("<title>나눔장터 게시 등록</title>");
 
     try {
       sharingMarketBoardService.add(smb);
