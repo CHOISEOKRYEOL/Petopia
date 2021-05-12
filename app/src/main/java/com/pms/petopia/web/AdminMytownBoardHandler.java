@@ -44,12 +44,10 @@ public class AdminMytownBoardHandler extends HttpServlet {
       MyTownBoard board = boards.get(0);
       out.printf("<h1>%s %s</h1>", board.getBigAddress().getName(), board.getSmallAddress().getName());
       out.println("<p><a href='form.html'>새 글</a></p>");
-      //out.println(boards);
       out.println("<table border='1'>");
       out.println("<thead>");
       out.println("<tr>");
       out.println("<th>번호</th> <th>제목</th> <th>작성자</th> <th>등록일</th> <th>조회수</th> <th>댓글수</th>");
-      out.println("<form action='mytown/delete' method='post'>");
       out.println("</tr>");
       out.println("</thead>");
       out.println("<tbody>");
@@ -68,6 +66,7 @@ public class AdminMytownBoardHandler extends HttpServlet {
             b.getCreatedDate(),
             b.getViewCount(),
             b.getCommentCount());
+        out.printf("<a href='mytown/delete=no?" + b.getNo() + "'> 삭제</a> ");
       }
       out.println("</tbody>");
       out.println("</table>");

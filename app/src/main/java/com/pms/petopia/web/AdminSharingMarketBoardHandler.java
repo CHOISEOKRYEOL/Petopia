@@ -65,6 +65,7 @@ public class AdminSharingMarketBoardHandler extends HttpServlet{
             smb.getTitle(),
             smb.getWriter().getName(),
             smb.getCreatedDate());
+        out.printf("<a href='sharingmarketsmboard/delete=no?" + smb.getNo() + "'> 삭제</a> ");
       }
       out.println("</tbody>");
       out.println("</table>");
