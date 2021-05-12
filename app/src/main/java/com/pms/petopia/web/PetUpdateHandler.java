@@ -27,10 +27,11 @@ public class PetUpdateHandler extends HttpServlet {
     out.println("<html>");
     out.println("<head>");
     out.println("<title>마이펫 변경</title>");
+    out.println("</head>");
+    out.println("<body>");
+    out.println("<h1>마이펫 변경</h1>");
 
     try {
-      request.setCharacterEncoding("UTF-8");
-      //      int no = Integer.parseInt(request.getParameter("no"));
 
       Pet pet = new Pet();
       pet.setNo(pet.getNo());
@@ -38,11 +39,9 @@ public class PetUpdateHandler extends HttpServlet {
 
       petMemberService.update(pet);
 
-      out.println("<meta http-equiv='Refresh' content='1;url=list'>");
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>마이펫 변경</h1>");
+
       out.println("<p>마이펫을 변경하였습니다.</p>");
+      response.setHeader("Refresh", "1;url=../main");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();

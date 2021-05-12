@@ -23,8 +23,6 @@ public class RecordAddHandler extends HttpServlet {
 
     Record r = new Record();
 
-    // 클라이언트가 POST 요청으로 보낸 데이터가 UTF-8임을 알려준다.
-    request.setCharacterEncoding("UTF-8");
 
     r.setState(Integer.parseInt(request.getParameter("state")));
     r.setRecord(request.getParameter("record"));
@@ -36,15 +34,15 @@ public class RecordAddHandler extends HttpServlet {
     out.println("<html>");
     out.println("<head>");
     out.println("<title>진료기록 등록</title>");
+    out.println("</head>");
+    out.println("<body>");
+    out.println("<h1>진료기록 등록</h1>");
 
     try {
       recordService.add(r);
 
-      out.println("<meta http-equiv='Refresh' content='1;url=../main'>");
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>진료기록 등록</h1>");
       out.println("<p>진료기록을 등록했습니다.</p>");
+      response.setHeader("Refresh", "1;url=../main");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();

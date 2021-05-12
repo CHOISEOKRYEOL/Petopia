@@ -23,8 +23,6 @@ public class ReviewAddHandler extends HttpServlet {
 
     ReviewService reviewService = (ReviewService) request.getServletContext().getAttribute("reviewService");
 
-    request.setCharacterEncoding("UTF-8");
-
     Review r = new Review();
 
     r.setServiceRating(Integer.parseInt(request.getParameter("serviceRating")));
@@ -47,14 +45,14 @@ public class ReviewAddHandler extends HttpServlet {
     out.println("<html>");
     out.println("<head>");
     out.println("<title>리뷰 작성</title>");
+    out.println("</head>");
+    out.println("<body>");
 
     try {
       reviewService.add(r);
 
-      out.println("<meta http-equiv='Refresh' content='1;url=../main'>");
-      out.println("</head>");
-      out.println("<body>");
       out.println("<h1>리뷰 등록 완료</h1>");
+      response.setHeader("Refresh", "1;url=../main");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();

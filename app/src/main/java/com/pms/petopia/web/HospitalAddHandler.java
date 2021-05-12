@@ -30,8 +30,6 @@ public class HospitalAddHandler extends HttpServlet {
 
     Hospital hospital = new Hospital();
 
-    request.setCharacterEncoding("UTF-8");
-
     hospital.setName(request.getParameter("name"));
     hospital.setTel(request.getParameter("tel"));
     hospital.setAddress(request.getParameter("address"));
@@ -57,6 +55,9 @@ public class HospitalAddHandler extends HttpServlet {
     out.println("<html>");
     out.println("<head>");
     out.println("<title>병원 등록</title>");
+    out.println("</head>");
+    out.println("<body>");
+    out.println("<h1>병원 등록</h1>");
 
     try {
       hospitalService.add(hospital);
@@ -74,11 +75,10 @@ public class HospitalAddHandler extends HttpServlet {
       //      out.println("<br>");
       //      out.println("<form action='submit' value='등록'>");
 
-      out.println("<meta http-equiv='Refresh' content='1;url=list'>");
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>병원 등록</h1>");
+
       out.println("<p>병원을 등록했습니다.</p>");
+
+      response.setHeader("Refresh", "1;url=../main");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();

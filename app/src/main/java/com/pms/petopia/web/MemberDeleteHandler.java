@@ -24,23 +24,27 @@ public class MemberDeleteHandler extends HttpServlet {
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
+    out.println("<!DOCTYPE html>");
+    out.println("<html>");
+    out.println("<head>");
+    out.println("<title>회원 탈퇴</title>");
+    out.println("</head>");
+    out.println("<body>");
+
     try {
-      request.setCharacterEncoding("UTF-8");
       Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
       memberService.delete(loginUser.getNo());
       request.getSession().invalidate();
-      out.println("<meta http-equiv='Refresh' content='1;url=../main'>");
-      out.println("</head>");
-      out.println("<body>");
+
       out.println("<h1>그동안 Petopia 를 이용해주셔서 감사합니다.</h1>");
+
+      response.setHeader("Refresh", "content=1;url='../main'");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();
       PrintWriter printWriter = new PrintWriter(strWriter);
       e.printStackTrace(printWriter);
-      out.println("</head>");
-      out.println("<body>");
       out.println("<h1>회원 탈퇴 오류 발생</h1>");
       out.printf("<pre>%s</pre>\n", strWriter.toString());
     }

@@ -21,8 +21,6 @@ public class LoginHandler extends HttpServlet {
 
     MemberService memberService = (MemberService) request.getServletContext().getAttribute("memberService");
 
-    request.setCharacterEncoding("UTF-8");
-
     String id = request.getParameter("id");
     String password = request.getParameter("password");
 
@@ -46,7 +44,7 @@ public class LoginHandler extends HttpServlet {
       request.getSession().setAttribute("loginUser", member);
 
       out.printf("<p>%s 님 로그인 하였습니다.</p>\n", member.getId());
-      out.println("<meta http-equiv='Refresh' content='1;url=main'>");
+      response.setHeader("Refresh", "1;url=../main");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();

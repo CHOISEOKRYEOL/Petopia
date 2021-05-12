@@ -17,8 +17,6 @@ public class LogoutHandler extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    request.setCharacterEncoding("UTF-8");
-
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
@@ -36,7 +34,7 @@ public class LogoutHandler extends HttpServlet {
     request.getSession().invalidate();
 
     out.printf("%s 님 로그아웃 하였습니다.\n", member.getName());
-    out.println("<meta http-equiv='Refresh' content='1;url=main'>");
+    response.setHeader("Refresh", "1;url=../main");
 
     out.println("</body>");
     out.println("</html>");

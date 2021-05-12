@@ -21,8 +21,6 @@ public class StoryUpdateHandler extends HttpServlet {
 
     StoryService storyService = (StoryService) request.getServletContext().getAttribute("storyService");
 
-    request.setCharacterEncoding("UTF-8");
-
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
@@ -30,6 +28,9 @@ public class StoryUpdateHandler extends HttpServlet {
     out.println("<html>");
     out.println("<head>");
     out.println("<title>스토리 변경</title>");
+    out.println("</head>");
+    out.println("<body>");
+    out.println("<h1>스토리 변경</h1>");
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
@@ -53,11 +54,8 @@ public class StoryUpdateHandler extends HttpServlet {
 
       storyService.update(story);
 
-      out.println("<meta http-equiv='Refresh' content='1;url=list'>");
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>스토리 변경</h1>");
       out.println("<p>스토리를 변경했습니다.</p>");
+      response.setHeader("Refresh", "1;url=../main");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();
