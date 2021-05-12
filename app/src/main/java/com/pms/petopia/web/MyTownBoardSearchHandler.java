@@ -47,7 +47,7 @@ public class MyTownBoardSearchHandler extends HttpServlet {
       out.println("<table border='1'>");
       out.println("<thead>");
       out.println("<tr>");
-      out.println("<th>번호</th> <th>제목</th> <th>작성자</th> <th>등록일</th> <th>조회수</th>");
+      out.println("<th>번호</th> <th>제목</th> <th>작성자</th> <th>등록일</th> <th>조회수</th> <th>댓글수</th>");
       out.println("</tr>");
       out.println("</thead>");
       out.println("<tbody>");
@@ -58,11 +58,13 @@ public class MyTownBoardSearchHandler extends HttpServlet {
             + " <td><a href='detail?no=%1$d'>%s</a></td>"
             + " <td>%s</td>"
             + " <td>%s</td>"
-            + " <td>%d<td> </tr>\n", 
+            + " <td>%d</td>"
+            + " <td>%d</td></tr>\n", 
             b.getNo(), 
             b.getTitle(), 
-            b.getWriter().getName(),
+            b.getWriter().getNick(),
             b.getCreatedDate(),
+            b.getCommentCount(),
             b.getViewCount());
       }
       out.println("</tbody>");

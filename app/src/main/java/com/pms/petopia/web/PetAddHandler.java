@@ -24,8 +24,6 @@ public class PetAddHandler extends HttpServlet {
 
     PetService petService = (PetService) request.getServletContext().getAttribute("petService");
 
-    // 클라이언트가 POST 요청으로 보낸 데이터가 UTF-8임을 알려준다.
-    request.setCharacterEncoding("UTF-8");
 
     Pet p = new Pet();
     p.setName(request.getParameter("name"));
@@ -47,15 +45,16 @@ public class PetAddHandler extends HttpServlet {
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
+    out.println("</head>");
+    out.println("<body>");
     out.println("<h1>마이펫 등록</h1>");
+
 
     try {
       petService.add(p);
 
-      out.println("<meta http-equiv='Refresh' content='1;url=../main'>");
-      out.println("</head>");
-      out.println("<body>");
       out.println("<p>마이펫 등록 성공</p>");
+      response.setHeader("Refresh", "1;url=../main");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();

@@ -9,7 +9,7 @@ public class Hospital {
   private String businessHour;
   private int parking;
   private int veterinarian;
-  // private int rate;
+  private int rate;
   private Member admin;
   private BigAddress bigAddress;
   private SmallAddress smallAddress;
@@ -71,6 +71,12 @@ public class Hospital {
   }
   public void setAdmin(Member admin) {
     this.admin = admin;
+  }
+  public int getRate() {
+    return rate;
+  }
+  public void setRate(int rate) {
+    this.rate = rate;
   }
   public BigAddress getBigAddress() {
     return bigAddress;

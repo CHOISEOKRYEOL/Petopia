@@ -52,7 +52,7 @@ public class MyTownBoardDetailHandler extends HttpServlet {
           + "<td><input name='title' type='text' value='%s'></td></tr>\n", b.getTitle());
       out.printf("<tr><th>내용</th> "
           + "<td><textarea name='content' rows='10'>%s</textarea></td></tr>\n", b.getContent());
-      out.printf("<tr><th>작성자</th> <td>%s</td></tr>\n", b.getWriter().getName());
+      out.printf("<tr><th>작성자</th> <td>%s</td></tr>\n", b.getWriter().getNick());
       out.printf("<tr><th>등록일</th> <td>%s</td></tr>\n", formatter.format(b.getCreatedDate()));
       out.printf("<tr><th>조회수</th> <td>%s</td></tr>\n", b.getViewCount());
       //out.printf("<tr><th>댓글</th> <td>%s</td></tr>\n",b.getComment());
@@ -71,6 +71,7 @@ public class MyTownBoardDetailHandler extends HttpServlet {
 
       out.println("<table>");
       out.printf("</form>");
+      out.printf("<a href='list?stateNo=%d&cityNo=%d'>목록</a></p>\n", b.getBigAddress().getNo(), b.getSmallAddress().getNo());
 
     } catch (Exception e) {
       // 상세 오류 내용을 StringWriter로 출력한다.
@@ -81,7 +82,6 @@ public class MyTownBoardDetailHandler extends HttpServlet {
       // StringWriter에 들어있는 출력 내용을 꺼내 클라이언트로 보낸다.
       out.printf("<pre>%s</pre>\n", strWriter.toString());
     }
-    out.println("<a href='list'>목록</a></p>\n");
 
     out.println("</body>");
     out.println("</html>");

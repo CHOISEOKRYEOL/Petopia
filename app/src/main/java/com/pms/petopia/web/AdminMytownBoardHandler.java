@@ -14,9 +14,9 @@ import com.pms.petopia.domain.MyTownBoard;
 import com.pms.petopia.service.MyTownBoardService;
 
 @SuppressWarnings("serial")
-@WebServlet("/mytown/list")
+@WebServlet("/admin/list1")
 
-public class MytownBoardListHandler extends HttpServlet {
+public class AdminMytownBoardHandler extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -44,7 +44,6 @@ public class MytownBoardListHandler extends HttpServlet {
       MyTownBoard board = boards.get(0);
       out.printf("<h1>%s %s</h1>", board.getBigAddress().getName(), board.getSmallAddress().getName());
       out.println("<p><a href='form.html'>새 글</a></p>");
-      //out.println(boards);
       out.println("<table border='1'>");
       out.println("<thead>");
       out.println("<tr>");
@@ -67,6 +66,7 @@ public class MytownBoardListHandler extends HttpServlet {
             b.getCreatedDate(),
             b.getViewCount(),
             b.getCommentCount());
+        out.printf("<a href='mytown/delete=no?" + b.getNo() + "'> 삭제</a> ");
       }
       out.println("</tbody>");
       out.println("</table>");

@@ -24,8 +24,6 @@ public class MyTownBoardAddHandler extends HttpServlet{
 
     MyTownBoard b = new MyTownBoard();
 
-    request.setCharacterEncoding("UTF-8");
-
     b.setTitle(request.getParameter("title"));
     b.setContent(request.getParameter("content"));
     HttpServletRequest httpRequest= request;
@@ -39,17 +37,16 @@ public class MyTownBoardAddHandler extends HttpServlet{
     out.println("<html>");
     out.println("<head>");
     out.println("<title>게시글 등록</title>");
-
-    out.println("[게시글 등록]");
+    out.println("</head>");
+    out.println("<body>");
+    out.println("<h1>게시글 등록</h1>");
 
     try {
       myTownBoardService.add(b);
 
-      out.println("<meta http-equiv='Refresh' content='1;url=list>");
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>게시글 등록</h1>");
       out.println("<p>게시글을 등록했습니다.<p>");
+
+      response.setHeader("Refresh", "1;url=../main");
     } catch (Exception e) {
       // 상세 오류 내용을 StringWriter로 출력한다.
       StringWriter strWriter = new StringWriter();

@@ -21,8 +21,6 @@ public class HospitalUpdateHandler extends HttpServlet {
 
     HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
 
-    request.setCharacterEncoding("UTF-8");
-
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
@@ -30,6 +28,9 @@ public class HospitalUpdateHandler extends HttpServlet {
     out.println("<html>");
     out.println("<head>");
     out.println("<title>병원 변경</title>");
+    out.println("</head>");
+    out.println("<body>");
+    out.println("<h1>병원 변경</h1>");
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
@@ -56,11 +57,9 @@ public class HospitalUpdateHandler extends HttpServlet {
 
       hospitalService.update(hospital);
 
-      out.println("<meta http-equiv='Refresh' content='1;url=list'>");
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>병원 변경</h1>");
       out.println("<p>병원을 변경했습니다.</p>");
+
+      response.setHeader("Refresh", "1;url=../main");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();

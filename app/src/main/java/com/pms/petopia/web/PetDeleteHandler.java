@@ -20,7 +20,7 @@ public class PetDeleteHandler extends HttpServlet {
 
     PetService petMemberService = (PetService) request.getServletContext().getAttribute("PetMemberService");
 
-    response.setContentType("text/plain;charset=UTF-8");
+    response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
     out.println("[나의 펫 삭제]");

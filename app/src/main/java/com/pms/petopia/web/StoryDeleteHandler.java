@@ -28,6 +28,9 @@ public class StoryDeleteHandler extends HttpServlet {
     out.println("<html>");
     out.println("<head>");
     out.println("<title>스토리 삭제</title>");
+    out.println("</head>");
+    out.println("<body>");
+    out.println("<h1>스토리 삭제</h1>");
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
@@ -37,13 +40,14 @@ public class StoryDeleteHandler extends HttpServlet {
         throw new Exception("해당 번호의 스토리가 없습니다.");
       }
 
-      storyService.delete(no);
+      //      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+      //      if (oldStory.getAdmin().getNo() != loginUser.getNo()) {
+      //        throw new Exception("삭제 권한이 없습니다!");
+      //      }
 
-      out.println("<meta http-equiv='Refresh' content='1;url=list'>");
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>스토리 삭제</h1>");
+      storyService.delete(no);
       out.println("<p>스토리를 삭제했습니다.</p>");
+      response.setHeader("Refresh", "1;url=../main");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();

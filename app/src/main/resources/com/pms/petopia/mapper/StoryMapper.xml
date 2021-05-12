@@ -23,34 +23,18 @@
     values(#{title}, #{url}, #{site})
   </insert>
   
-  <!-- 
-  <select id="findAll" resultMap="storyMap">
+  <select id="findAll" resultMap="StoryMap">
     select 
       nno,
       title,
       url,
       site,
       date
-    from pet_st_news 
-    order by nno desc
-  </select>
-  
-  <select id="findByKeyword" resultMap="storyMap" parameterType="string">
-    select
-      nno,
-      title,
-      url,
-      site,
-      date
     from pet_st_news
-    <if test="value != null">
-    where 
-      title like concat('%', #{value},'%')
-    </if>
     order by nno desc
   </select>
   
-  <select id="findByNo" resultMap="storyMap" parameterType="int">
+  <select id="findByNo" resultMap="StoryMap" parameterType="int">
     select
       nno,
       title,
@@ -63,9 +47,9 @@
   
   <update id="update" parameterType="story">
     update pet_st_news set
-        title=#{title},
-        url=#{url},
-        site=#{site} 
+        title = #{title},
+        url = #{url},
+        site = #{site} 
     where nno = #{no}
   </update>
   
@@ -73,6 +57,20 @@
     delete from pet_st_news
     where nno = #{value}
   </delete>
- -->
- 
+
+  <select id="findByKeyword" resultMap="StoryMap" parameterType="string">
+    select
+      nno,
+      title,
+      url,
+      site,
+      date
+    from pet_st_news
+    <if test="value != null">
+    where 
+      title like concat('%', #{value},'%')
+      or site like concat('%', #{value},'%')
+    </if>
+    order by nno desc
+  </select>
 </mapper>

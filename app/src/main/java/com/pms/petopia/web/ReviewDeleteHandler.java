@@ -8,24 +8,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.pms.petopia.domain.Record;
-import com.pms.petopia.service.RecordService;
+import com.pms.petopia.domain.Member;
+import com.pms.petopia.service.ReviewService;
 
 @SuppressWarnings("serial")
-@WebServlet("/record/add")
-public class RecordAddHandler extends HttpServlet {
+@WebServlet("/review/delete")
+public class ReviewDeleteHandler extends HttpServlet {
 
   @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    RecordService recordService = (RecordService) request.getServletContext().getAttribute("RecordService");
+    ReviewService reviewService = (ReviewService) request.getServletContext().getAttribute("reviewService");
 
-    Record r = new Record();
+    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
-
-    r.setState(Integer.parseInt(request.getParameter("state")));
-    r.setRecord(request.getParameter("record"));
+    if(loginUser == null) {
+      throw new ServletException("접근 권한이 없습니다.");
+    }
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -33,30 +33,34 @@ public class RecordAddHandler extends HttpServlet {
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
-    out.println("<title>진료기록 등록</title>");
+    out.println("<title>리뷰 삭제</title>");
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>진료기록 등록</h1>");
 
     try {
-      recordService.add(r);
+      int no = Integer.parseInt(request.getParameter("no"));
+      reviewService.delete(no);
 
-      out.println("<p>진료기록을 등록했습니다.</p>");
+      out.println("<h1>리뷰 삭제 완료</h1>");
       response.setHeader("Refresh", "1;url=../main");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();
       PrintWriter printWriter = new PrintWriter(strWriter);
       e.printStackTrace(printWriter);
-
       out.println("</head>");
       out.println("<body>");
-      out.println("<h1>진료 기록 등록 오류</h1>");
+      out.println("<h1>리뷰 삭제 실패</h1>");
       out.printf("<pre>%s</pre>\n", strWriter.toString());
     }
 
     out.println("</body>");
     out.println("</html>");
   }
-
 }
+
+
+
+
+
+

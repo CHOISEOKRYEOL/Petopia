@@ -22,10 +22,10 @@ public class DefaultMyTownBoardService implements MyTownBoardService {
 
   // 게시글 목록 조회 업무
   @Override
-  public List<MyTownBoard> list(int cityNo, int stateNo) throws Exception {
+  public List<MyTownBoard> list(int stateNo, int cityNo) throws Exception {
     HashMap<String,Object> params = new HashMap<>();
-    params.put("cname", cityNo);
-    params.put("gname", stateNo);
+    params.put("gno", stateNo);
+    params.put("cno", cityNo);
 
     return myTownBoardDao.findByArea(params);
   }
