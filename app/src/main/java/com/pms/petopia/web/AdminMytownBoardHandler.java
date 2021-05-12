@@ -14,7 +14,7 @@ import com.pms.petopia.domain.MyTownBoard;
 import com.pms.petopia.service.MyTownBoardService;
 
 @SuppressWarnings("serial")
-@WebServlet("/mytown/list")
+@WebServlet("/admin/list1")
 
 public class AdminMytownBoardHandler extends HttpServlet {
 
@@ -49,6 +49,7 @@ public class AdminMytownBoardHandler extends HttpServlet {
       out.println("<thead>");
       out.println("<tr>");
       out.println("<th>번호</th> <th>제목</th> <th>작성자</th> <th>등록일</th> <th>조회수</th> <th>댓글수</th>");
+      out.println("<form action='mytown/delete' method='post'>");
       out.println("</tr>");
       out.println("</thead>");
       out.println("<tbody>");
