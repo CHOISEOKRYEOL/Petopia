@@ -25,6 +25,20 @@
     values( #{category}, #{title}, #{content}, #{writer.no})
   </insert>
   
+  
+      <select id="findAll" resultMap="sharingmarketboardMap" parameterType="sharingmarketboard">
+    select
+      mark.sno,
+      mark.title,
+      mark.cont,
+      mark.date,
+      mark.vw_cnt,
+      mem.mno as writer_no,
+      mem.name as writer_name
+    from pet_mark mark
+      inner join pet_user mem on mem.mno = mark.writer
+  </select>
+  
 <!--  
   <select id="findByKeyword" resultMap="boardMap" parameterType="string">
     select
@@ -61,18 +75,7 @@
     where b.no = #{value}
   </select>
   
-    <select id="findAll" resultMap="boardMap" parameterType="sharingmarketboard">
-    select
-      mark.no,
-      mark.title,
-      mark.content,
-      mark.date,
-      mark.vw_cnt,
-      mem.no as writer_no,
-      mem.name as writer_name
-    from pet_mark mark
-      inner join pet_member mem on mem.no=mark.writer
-  </select>
+
   
   <update id="update" parameterType="sharingmarketboard">
     update pms_board set

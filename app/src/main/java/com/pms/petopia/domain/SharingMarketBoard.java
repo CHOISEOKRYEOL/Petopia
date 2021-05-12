@@ -10,12 +10,12 @@ public class SharingMarketBoard {
   private String content;
   private Date createdDate;
   private Member writer;
-  private int veiwCount;
+  private int viewCount;
 
   @Override
 public String toString() {
 	return "SharingMarketBoard [no=" + no + ", category=" + category + ", title=" + title + ", content=" + content
-			+ ", createdDate=" + createdDate + ", writer=" + writer + ", veiwCount=" + veiwCount + "]";
+			+ ", createdDate=" + createdDate + ", writer=" + writer + ", veiwCount=" + viewCount + "]";
 }
 public int getNo() {
     return no;
@@ -55,10 +55,10 @@ public String getTitle() {
     this.writer = writer;
   }
 public int getVeiwCount() {
-	return veiwCount;
+	return viewCount;
 }
 public void setVeiwCount(int veiwCount) {
-	this.veiwCount = veiwCount;
+	this.viewCount = veiwCount;
 }
   
   
