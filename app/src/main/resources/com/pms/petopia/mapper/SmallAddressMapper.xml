@@ -9,13 +9,17 @@
     <id column="cno" property="no"/>
     <result column="cname" property="name"/>
   
-  
   <association property="bigAddress" javaType="bigAddress">
     <id column="bigAddress_no" property="no"/>
     <result column="bigAddress_name" property="name"/>
   </association>
   
   </resultMap>
+  
+  <insert id="insert" parameterType="smallAddress">
+    insert into pet_city(gno, cname)
+    values(#{bigAddress.no}, #{name})
+  </insert>
   
   <select id="findAll" resultMap="smallAddressMap">
      select 

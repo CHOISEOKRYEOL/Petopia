@@ -45,11 +45,13 @@ public class MyTownBoardMainHandler extends HttpServlet{
       out.println("<option value='3'>종로구</option>");
       out.println("<option value='4'>중구</option>");
       out.println("<option value='5'>성북구</option>");
+
       out.println("<option value='5'>성남시</option>");
       out.println("<option value='6'>안양시</option>");
       out.println("<option value='7'>광명시</option>");
       out.println("<option value='8'>안산시</option>");
       out.println("<option value='9'>시흥시</option>");
+
       out.println("<option value='10'>서구</option>");
       out.println("<option value='11'>동구</option>");
       out.println("<option value='12'>중구</option>");
