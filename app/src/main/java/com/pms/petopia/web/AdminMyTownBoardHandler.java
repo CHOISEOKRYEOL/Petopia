@@ -14,17 +14,15 @@ import com.pms.petopia.domain.MyTownBoard;
 import com.pms.petopia.service.MyTownBoardService;
 
 @SuppressWarnings("serial")
-@WebServlet("/admin/list1")
+@WebServlet("/admin/mytownlist")
 
-public class AdminMytownBoardHandler extends HttpServlet {
+public class AdminMyTownBoardHandler extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     MyTownBoardService myTownBoardService = (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
-
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -37,6 +35,12 @@ public class AdminMytownBoardHandler extends HttpServlet {
     out.printf("<title>게시글 목록</title>");
     out.println("</head>");
     out.println("<body>");
+
+    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    if(loginUser.getRole() != 0) {
+      out.println("<h1>접근 권한이 없습니다.</h1>");
+      return;
+    }
 
 
     try {

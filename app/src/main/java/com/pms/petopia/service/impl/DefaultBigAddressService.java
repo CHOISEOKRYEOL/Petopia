@@ -13,6 +13,10 @@ public class DefaultBigAddressService implements BigAddressService {
     this.bigAddressDao = bigAddressDao;
   }
 
+  public int add(BigAddress b) throws Exception {
+    return bigAddressDao.insert(b);
+  }
+
   @Override
   public BigAddress get(int no) throws Exception {
     return bigAddressDao.findByNo(no);

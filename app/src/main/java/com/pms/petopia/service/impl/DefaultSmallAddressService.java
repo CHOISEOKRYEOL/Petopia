@@ -14,6 +14,10 @@ public class DefaultSmallAddressService implements SmallAddressService {
     this.smallAddressDao = smallAddressDao;
   }
 
+  public int add(SmallAddress s) throws Exception {
+    return smallAddressDao.insert(s);
+  }
+
   @Override
   public SmallAddress get(int no) throws Exception {
     return smallAddressDao.findByNo(no);

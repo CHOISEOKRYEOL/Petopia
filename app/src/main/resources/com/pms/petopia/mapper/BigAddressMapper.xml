@@ -10,6 +10,10 @@
     <result column="gname" property="name"/>
   </resultMap>
   
+  <insert id="insert" parameterType="bigAddress">
+    insert into pet_state(gname) values(#{name})
+  </insert>
+  
   <select id="findAll" resultMap="bigAddressMap">
      select 
       g.gno as bigAddress_no,

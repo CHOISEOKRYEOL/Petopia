@@ -19,13 +19,13 @@
     </association>
     
     <association property="bigAddress" javaType="bigAddress">
-      <id column="state_no" property="no"/>
-      <result column="state_name" property="name"/>
+      <id column="bigAddress_no" property="no"/>
+      <result column="bigAddress_name" property="name"/>
     </association>
 
     <association property="smallAddress" javaType="smallAddress">
-      <id column="city_no" property="no"/>
-      <result column="city_name" property="name"/>
+      <id column="smallAddress_no" property="no"/>
+      <result column="smallAddress_name" property="name"/>
     </association>
     
     <!-- 
@@ -40,7 +40,7 @@
   
   <insert id="insert" parameterType="mytownboard">
     insert into pet_mytown(cno, title, cont, writer) 
-    values(#{cno}, #{title}, #{content}, #{writer.no})
+    values(#{smallAddress.no}, #{title}, #{content}, #{writer.no})
   </insert>
   
   <select id="findByArea" resultMap="myTownBoardMap" parameterType="map">
@@ -52,10 +52,10 @@
       t.cmt_cnt,
       m.mno as writer_no, 
       m.nick as writer_nick,
-      s.gno as state_no, 
-      s.gname as state_name,
-      c.cno as city_no, 
-      c.cname as city_name
+      s.gno as bigAddress_no, 
+      s.gname as bigAddress_name,
+      c.cno as smallAddress_no, 
+      c.cname as smallAddress_name
     from pet_state s
       inner join pet_city c on s.gno=c.gno
       inner join pet_mytown t on c.cno=t.cno
@@ -73,10 +73,10 @@
       t.cmt_cnt,
       m.mno as writer_no, 
       m.nick as writer_nick,
-      s.gno as state_no, 
-      s.gname as state_name,
-      c.cno as city_no, 
-      c.cname as city_name
+      s.gno as bigAddress_no, 
+      s.gname as bigAddress_name,
+      c.cno as smallAddress_no, 
+      c.cname as smallAddress_name
     from pet_state s
       inner join pet_city c on s.gno=c.gno
       inner join pet_mytown t on c.cno=t.cno
@@ -100,10 +100,10 @@
       t.cmt_cnt,
       m.mno as writer_no,
       m.nick as writer_nick,
-      s.gno as state_no,
-      s.gname as state_name,
-      c.cno as city_no,
-      c.cname as city_name
+      s.gno as bigAddress_no,
+      s.gname as bigAddress_name,
+      c.cno as smallAddress_no,
+      c.cname as smallAddress_name
     from pet_city c
       inner join pet_state s on s.gno=c.gno
       inner join pet_mytown t on c.cno=t.cno

@@ -14,14 +14,12 @@ import com.pms.petopia.domain.SharingMarketBoard;
 import com.pms.petopia.service.SharingMarketBoardService;
 
 @SuppressWarnings("serial")
-@WebServlet("/admin/list2")
+@WebServlet("/admin/sharingmarketlist")
 public class AdminSharingMarketBoardHandler extends HttpServlet{
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     SharingMarketBoardService sharingMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("sharingMarketBoardService");
-
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -32,6 +30,13 @@ public class AdminSharingMarketBoardHandler extends HttpServlet{
     out.println("<title>나눔장터 게시글 목록</title>");
     out.println("</head>");
     out.println("<body>");
+
+    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    if(loginUser.getRole() != 0) {
+      out.println("<h1>접근 권한이 없습니다.</h1>");
+      return;
+    }
+
     out.println("<h1>나눔 장터 게시글 목록</h1>");
 
     out.println("<p><a href='shareform.html'>새 글</a></p>");
