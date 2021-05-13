@@ -10,8 +10,9 @@
     <result column="name" property="name"/>
     <result column="tel" property="tel"/>
     <result column="address" property="address"/>
+    <result column="startTime" property="startTime"/>
+    <result column="endTime" property="endTime"/>
     <result column="parking" property="parking"/>
-    <result column="time" property="businessHour"/>
     <result column="vet" property="veterinarian"/>
     <result column="grade" property="rate"/>
 
@@ -40,8 +41,8 @@
   </resultMap>
   
   <insert id="insert" parameterType="hospital">
-    insert into pet_hp(name, tel, address, time, parking, vet, cno) 
-    values(#{name}, #{tel}, #{address}, #{businessHour}, #{parking}, #{veterinarian}, #{smallAddress.no})
+    insert into pet_hp(name, tel, address, startTime, endTime, parking, vet, cno) 
+    values(#{name}, #{tel}, #{address}, #{startTime}, #{endTime}, #{parking}, #{veterinarian}, #{smallAddress.no})
   </insert>
 
   <select id="findAll" resultMap="hospitalMap">
@@ -61,9 +62,10 @@
       h.name,
       h.tel,
       h.address,
+      h.startTime,
+      h.endTime,
       h.parking,
       h.vet,
-      h.time,
       h.grade,
       c.cno as city_no,
       c.cname as city_name
@@ -79,7 +81,8 @@
       tel=#{tel},
       cno=#{smallAddress.no},
       address=#{address},
-      time=#{businessHour},
+      startTime=#{startTime},
+      endTime=#{endTime},
       parking=#{parking},
       vet=#{veterinarian}
     </set>

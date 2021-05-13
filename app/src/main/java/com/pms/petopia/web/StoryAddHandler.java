@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.Story;
 import com.pms.petopia.service.StoryService;
 
@@ -19,8 +18,6 @@ public class StoryAddHandler extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
-    StoryService storyService = (StoryService) request.getServletContext().getAttribute("storyService");
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -58,8 +55,8 @@ public class StoryAddHandler extends HttpServlet {
     s.setUrl(request.getParameter("url"));
     s.setSite(request.getParameter("site"));
 
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-    s.setAdmin(loginUser);
+    //Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    //s.setAdmin(loginUser);
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();

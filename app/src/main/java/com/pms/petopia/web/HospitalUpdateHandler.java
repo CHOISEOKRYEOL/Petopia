@@ -52,7 +52,8 @@ public class HospitalUpdateHandler extends HttpServlet {
       hospital.setName(request.getParameter("name"));
       hospital.setTel(request.getParameter("tel"));
       hospital.setAddress(request.getParameter("address"));
-      hospital.setBusinessHour(request.getParameter("time"));
+      hospital.setStartTime(Integer.valueOf(request.getParameter("startTime")));
+      hospital.setEndTime(Integer.valueOf(request.getParameter("endTime")));
       hospital.setParking(Integer.valueOf(request.getParameter("parking")));
       hospital.setVeterinarian(Integer.valueOf(request.getParameter("vet")));
 

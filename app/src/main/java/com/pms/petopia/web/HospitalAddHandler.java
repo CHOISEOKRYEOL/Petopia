@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.Hospital;
-import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.SmallAddress;
 import com.pms.petopia.service.HospitalService;
 
@@ -28,7 +27,8 @@ public class HospitalAddHandler extends HttpServlet {
     hospital.setName(request.getParameter("name"));
     hospital.setTel(request.getParameter("tel"));
     hospital.setAddress(request.getParameter("address"));
-    hospital.setBusinessHour(request.getParameter("time"));
+    hospital.setStartTime(Integer.valueOf(request.getParameter("startTime")));
+    hospital.setEndTime(Integer.valueOf(request.getParameter("endTime")));
     hospital.setParking(Integer.valueOf(request.getParameter("parking")));
     hospital.setVeterinarian(Integer.valueOf(request.getParameter("vet")));
 
@@ -36,8 +36,8 @@ public class HospitalAddHandler extends HttpServlet {
     smallAddress.setNo(Integer.parseInt(request.getParameter("cno")));
     hospital.setSmallAddress(smallAddress);
 
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-    hospital.setAdmin(loginUser);
+    //    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    //    hospital.setAdmin(loginUser);
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();

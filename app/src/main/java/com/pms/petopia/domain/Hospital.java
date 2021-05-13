@@ -6,7 +6,8 @@ public class Hospital {
   private String name;
   private String tel;
   private String address;
-  private String businessHour;
+  private int startTime;
+  private int endTime;
   private int parking;
   private int veterinarian;
   private int rate;
@@ -19,9 +20,9 @@ public class Hospital {
   @Override
   public String toString() {
     return "Hospital [no=" + no + ", name=" + name + ", tel=" + tel + ", address=" + address
-        + ", businessHour=" + businessHour + ", parking=" + parking + ", veterinarian="
-        + veterinarian + ", admin=" + admin + ", bigAddress=" + bigAddress + ", smallAddress="
-        + smallAddress + "]";
+        + ", startTime=" + startTime + ", endTime=" + endTime + ", parking=" + parking
+        + ", veterinarian=" + veterinarian + ", rate=" + rate + ", admin=" + admin + ", bigAddress="
+        + bigAddress + ", smallAddress=" + smallAddress + "]";
   }
 
   public int getNo() {
@@ -48,11 +49,17 @@ public class Hospital {
   public void setAddress(String address) {
     this.address = address;
   }
-  public String getBusinessHour() {
-    return businessHour;
+  public int getStartTime() {
+    return startTime;
   }
-  public void setBusinessHour(String businessHour) {
-    this.businessHour = businessHour;
+  public void setStartTime(int startTime) {
+    this.startTime = startTime;
+  }
+  public int getEndTime() {
+    return endTime;
+  }
+  public void setEndTime(int endTime) {
+    this.endTime = endTime;
   }
   public int getParking() {
     return parking;
@@ -66,17 +73,17 @@ public class Hospital {
   public void setVeterinarian(int veterinarian) {
     this.veterinarian = veterinarian;
   }
-  public Member getAdmin() {
-    return admin;
-  }
-  public void setAdmin(Member admin) {
-    this.admin = admin;
-  }
   public int getRate() {
     return rate;
   }
   public void setRate(int rate) {
     this.rate = rate;
+  }
+  public Member getAdmin() {
+    return admin;
+  }
+  public void setAdmin(Member admin) {
+    this.admin = admin;
   }
   public BigAddress getBigAddress() {
     return bigAddress;

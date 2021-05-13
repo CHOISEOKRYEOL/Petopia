@@ -20,8 +20,6 @@ public class HospitalDetailHandler extends HttpServlet {
       throws ServletException, IOException {
 
     HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
-    //    BigAddressService bigAddressService = (BigAddressService) request.getServletContext().getAttribute("bigAddressService");
-    //    SmallAddressService smallAddressService = (SmallAddressService) request.getServletContext().getAttribute("smallAddressService");
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -49,22 +47,7 @@ public class HospitalDetailHandler extends HttpServlet {
       out.printf("번호 <input type='text' name='no' value='%d' readonly><br>\n", hospital.getNo());
       out.printf("병원이름 <input type='text' name='name' value='%s'><br>\n", hospital.getName());
       out.printf("전화번호 <input type='tel' name='tel' value='%s'><br>\n", hospital.getTel());
-      //      try {
-      //        BigAddress bigAddress = bigAddressService.get(no);
-      //        if (bigAddress.getNo() == 1) {
-      //          out.println("기본주소 <select name='gno'><option value=''>분류</option><option value='1' selected>서울특별시</option></select>\n");
-      //        } else {
-      //          out.println("기본주소 <select name='gno'><option value=''>분류</option><option value='1'>서울특별시</option></select>\n");
-      //        }
-      //        SmallAddress smallAddress = smallAddressService.get(no);
-      //        if (smallAddress.getNo() == 1) {
-      //          out.println("<select name='cno'><option value=''>분류</option><option value='1' selected>강남구</option></select><br>\n");
-      //        } else {
-      //          out.println("<select name='cno'><option value=''>분류</option><option value='1'>강남구</option></select><br>\n");
-      //        }
-      //      } catch (Exception e) {
-      //        throw new ServletException(e);
-      //      }
+
       out.println("기본주소 <select name='gno'><option value=''>분류</option>"
           + "<option value='1'>서울특별시</option>\n"
           + "<option value='2'>경기도</option>\n"
@@ -78,7 +61,8 @@ public class HospitalDetailHandler extends HttpServlet {
           + "<option value='3'>중구</option></optgroup></select><br>");
 
       out.printf("상세주소 <input type='text' name='address' value='%s'><br>\n", hospital.getAddress());
-      out.printf("진료시간 <input type='text' name='time' value='%s'><br>\n", hospital.getBusinessHour());
+      out.printf("진료시간 <input type='text' name='startTime' value='%s'><input type='text' name='endTime' value='%s'><br>\n", 
+          hospital.getStartTime(), hospital.getEndTime());
 
       if (hospital.getParking() == 1) {
         out.println("주차여부 <input type='radio' name='parking' value='1' checked>Yes"
@@ -87,6 +71,7 @@ public class HospitalDetailHandler extends HttpServlet {
         out.println("주차여부 <input type='radio' name='parking' value='1'>Yes"
             + "<input type='radio' name='parking' value='0' checked>No<br>\n");
       }
+
       out.printf("수의사 <input type='number' name='vet' value='%d'><br>\n", hospital.getVeterinarian());
 
       out.println("<input type='submit' value='변경'> ");
