@@ -3,7 +3,7 @@ package com.pms.petopia.dao;
 import java.util.List;
 import com.pms.petopia.domain.Comment;
 
-public interface CommentDao {
+public interface MyTownBoardCommentDao {
 
   int insert(Comment comt) throws Exception;
 

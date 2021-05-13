@@ -46,7 +46,7 @@ public class MyTownBoardAddHandler extends HttpServlet{
       out.println("제목: <input type='text' name='title'><br>");
       out.println("내용: <textarea name='content' rows='10' cols='60'></textarea><br>");
 
-      out.printf("<a href='list?stateNo=%d&cityNo=%d'>목록</a>",small.getBigAddress().getNo(), small.getNo());
+      //out.printf("<a href='list?stateNo=%d&cityNo=%d'>목록</a>",small.getBigAddress().getNo(), small.getNo());
 
     } catch (Exception e) {
       throw new ServletException(e);
@@ -90,14 +90,6 @@ public class MyTownBoardAddHandler extends HttpServlet{
       String webAdress= String.format("list?stateNo=%s&cityNo=%s", s.getBigAddress().getNo(), s.getNo());
       response.sendRedirect(webAdress);
 
-      //      out.printf("<meta http-equiv='Refresh' content='1;url=list?stateNo=%d&cityNo=%d>",
-      //          s.getBigAddress().getNo(), s.getNo());
-      //      out.println("</head>");
-      //      out.println("<body>");
-      //      out.println("<h1>게시글 등록</h1>");
-      //      out.println("<p>게시글을 등록했습니다.<p>");
-
-      response.setHeader("Refresh", "1;url=../main");
     } catch (Exception e) {
       // 상세 오류 내용을 StringWriter로 출력한다.
       StringWriter strWriter = new StringWriter();

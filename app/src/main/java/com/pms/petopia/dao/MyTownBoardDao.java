@@ -11,7 +11,7 @@ public interface MyTownBoardDao {
 
   List<MyTownBoard> findByArea(Map<String,Object> params) throws Exception;
 
-  List<MyTownBoard> findByKeyword(String keyword) throws Exception;
+  List<MyTownBoard> findByKeyword(Map<String,Object> params) throws Exception;
 
   MyTownBoard findByNo(int no) throws Exception;
 
