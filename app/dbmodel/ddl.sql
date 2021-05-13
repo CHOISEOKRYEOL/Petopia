@@ -47,12 +47,18 @@ DROP TABLE IF EXISTS pet_like RESTRICT;
 DROP TABLE IF EXISTS pet_hprecord RESTRICT;
 
 -- 시군구
-DROP TABLE IF EXISTS pet_state RESTRICT;
-
--- 광역시도
 DROP TABLE IF EXISTS pet_city RESTRICT;
 
--- 나눔장터_카테고리
+-- 광역시도
+DROP TABLE IF EXISTS pet_state RESTRICT;
+
+-- 품종
+DROP TABLE IF EXISTS pet_type RESTRICT;
+
+-- 종
+DROP TABLE IF EXISTS pet_species RESTRICT;
+
+-- 새 테이블
 DROP TABLE IF EXISTS pet_mark_cat RESTRICT;
 
 -- 회원
@@ -65,7 +71,7 @@ CREATE TABLE pet_user (
 	email VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
 	phone VARCHAR(30)  NOT NULL COMMENT '휴대전화', -- 휴대전화
 	role  INTEGER      NOT NULL COMMENT '역할', -- 역할
-	date  DATE         NULL     DEFAULT now() COMMENT '가입일' -- 가입일
+	date  DATE         NOT NULL DEFAULT now() COMMENT '가입일' -- 가입일
 )
 COMMENT '회원';
 
@@ -112,12 +118,13 @@ ALTER TABLE pet_user
 -- 펫
 CREATE TABLE pet_mypet (
 	pno    INTEGER      NOT NULL COMMENT '마이펫번호', -- 마이펫번호
-	mno    INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
 	pname  VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
 	age    INTEGER      NOT NULL COMMENT '나이', -- 나이
 	birth  DATE         NOT NULL COMMENT '생년월일', -- 생년월일
+	owner  INTEGER      NOT NULL COMMENT '소유자', -- 소유자
 	gender INTEGER      NOT NULL COMMENT '성별', -- 성별
-	photo  VARCHAR(255) NULL     COMMENT '사진' -- 사진
+	photo  VARCHAR(255) NULL     COMMENT '사진', -- 사진
+	type   INTEGER      NOT NULL COMMENT '품종' -- 품종
 )
 COMMENT '펫';
 
@@ -139,7 +146,7 @@ ALTER TABLE pet_mypet
 -- 병원
 CREATE TABLE pet_hp (
 	hno     INTEGER     NOT NULL COMMENT '병원번호', -- 병원번호
-	gno     INTEGER     NOT NULL COMMENT '시군구번호', -- 시군구번호
+	cno     INTEGER     NOT NULL COMMENT '시군구번호', -- 시군구번호
 	name    VARCHAR(50) NOT NULL COMMENT '이름', -- 이름
 	tel     VARCHAR(30) NOT NULL COMMENT '전화번호', -- 전화번호
 	parking INTEGER     NOT NULL COMMENT '주차여부', -- 주차여부
@@ -168,12 +175,14 @@ ALTER TABLE pet_hp
 
 -- 나눔장터
 CREATE TABLE pet_mark (
-	sno   INTEGER     NOT NULL COMMENT '나눔장터번호', -- 나눔장터번호
-	mno   INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
-	ono   INTEGER     NOT NULL COMMENT '분류번호', -- 분류번호
-	title VARCHAR(50) NOT NULL COMMENT '제목', -- 제목
-	cont  LONGTEXT    NOT NULL COMMENT '내용', -- 내용
-	date  DATETIME    NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
+	sno    INTEGER     NOT NULL COMMENT '나눔장터번호', -- 나눔장터번호
+	writer INTEGER     NOT NULL COMMENT '작성자', -- 작성자
+	title  VARCHAR(50) NOT NULL COMMENT '제목', -- 제목
+	cont   LONGTEXT    NOT NULL COMMENT '내용', -- 내용
+	date   DATETIME    NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
+	vw_cnt INTEGER     NULL     DEFAULT 0
+	 COMMENT '조회수', -- 조회수
+	ono    INTEGER     NULL     COMMENT '카테고리' -- 카테고리
 )
 COMMENT '나눔장터';
 
@@ -189,13 +198,14 @@ ALTER TABLE pet_mark
 
 -- 우리동네
 CREATE TABLE pet_mytown (
-	tno   INTEGER     NOT NULL COMMENT '우리동네번호', -- 우리동네번호
-	mno   INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
-	gno   INTEGER     NOT NULL COMMENT '시군구번호', -- 시군구번호
-	title VARCHAR(50) NOT NULL COMMENT '제목', -- 제목
-	cont  LONGTEXT    NOT NULL COMMENT '내용(사진)', -- 내용(사진)
-	date  DATETIME    NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
-	view  INTEGER     NULL     DEFAULT 0 COMMENT '조회수' -- 조회수
+	tno     INTEGER     NOT NULL COMMENT '우리동네번호', -- 우리동네번호
+	writer  INTEGER     NOT NULL COMMENT '작성자', -- 작성자
+	cno     INTEGER     NOT NULL COMMENT '시군구번호', -- 시군구번호
+	title   VARCHAR(50) NOT NULL COMMENT '제목', -- 제목
+	cont    LONGTEXT    NOT NULL COMMENT '내용(사진)', -- 내용(사진)
+	date    DATETIME    NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
+	vw_cnt  INTEGER     NULL     DEFAULT 0 COMMENT '조회수', -- 조회수
+	cmt_cnt INTEGER     NOT NULL DEFAULT 0 COMMENT '댓글수' -- 댓글수
 )
 COMMENT '우리동네';
 
@@ -250,12 +260,12 @@ ALTER TABLE pet_mark_phot
 -- 리뷰
 CREATE TABLE pet_hp_review (
 	rno     INTEGER      NOT NULL COMMENT '리뷰번호', -- 리뷰번호
-	hno     INTEGER      NOT NULL COMMENT '병원번호', -- 병원번호
-	mno     INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+	hname   INTEGER      NOT NULL COMMENT '병원명', -- 병원명
+	writer  INTEGER      NOT NULL COMMENT '작성자', -- 작성자
 	service INTEGER      NOT NULL COMMENT '서비스', -- 서비스
 	clean   INTEGER      NOT NULL COMMENT '청결도', -- 청결도
 	cost    INTEGER      NOT NULL COMMENT '비용', -- 비용
-	cont    LONGTEXT     NOT NULL COMMENT '한줄평가', -- 한줄평가
+	cont    VARCHAR(255) NOT NULL COMMENT '한줄평가', -- 한줄평가
 	date    DATETIME     NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
 	rphoto  VARCHAR(255) NOT NULL COMMENT '영수증사진' -- 영수증사진
 )
@@ -307,13 +317,13 @@ ALTER TABLE pet_st_scrap
 
 -- Q&A
 CREATE TABLE pet_qna (
-	qno   INTEGER     NOT NULL COMMENT 'Q&A번호', -- Q&A번호
-	mno   INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
-	title VARCHAR(50) NOT NULL COMMENT '제목', -- 제목
-	cont  LONGTEXT    NOT NULL COMMENT '내용', -- 내용
-	date  DATETIME    NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
-	ans   LONGTEXT    NULL     COMMENT '답변', -- 답변
-	date2 DATETIME    NULL     DEFAULT now() COMMENT '답변일' -- 답변일
+	qno    INTEGER     NOT NULL COMMENT 'Q&A번호', -- Q&A번호
+	writer INTEGER     NOT NULL COMMENT '작성자', -- 작성자
+	title  VARCHAR(50) NOT NULL COMMENT '제목', -- 제목
+	cont   LONGTEXT    NOT NULL COMMENT '내용', -- 내용
+	date   DATETIME    NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
+	ans    LONGTEXT    NULL     COMMENT '답변', -- 답변
+	date2  DATETIME    NULL     DEFAULT now() COMMENT '답변일' -- 답변일
 )
 COMMENT 'Q&A';
 
@@ -329,11 +339,11 @@ ALTER TABLE pet_qna
 
 -- 나눔장터 댓글
 CREATE TABLE pet_mark_comt (
-	srno INTEGER  NOT NULL COMMENT '번호', -- 번호
-	sno  INTEGER  NOT NULL COMMENT '나눔장터번호', -- 나눔장터번호
-	mno  INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
-	cont LONGTEXT NOT NULL COMMENT '내용', -- 내용
-	date DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
+	srno   INTEGER  NOT NULL COMMENT '번호', -- 번호
+	sno    INTEGER  NOT NULL COMMENT '나눔장터번호', -- 나눔장터번호
+	writer INTEGER  NOT NULL COMMENT '작성자', -- 작성자
+	cont   LONGTEXT NOT NULL COMMENT '내용', -- 내용
+	date   DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '나눔장터 댓글';
 
@@ -349,11 +359,11 @@ ALTER TABLE pet_mark_comt
 
 -- 우리동네 댓글
 CREATE TABLE pet_mytown_comt (
-	trno INTEGER  NOT NULL COMMENT '번호', -- 번호
-	tno  INTEGER  NULL     COMMENT '우리동네번호', -- 우리동네번호
-	mno  INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
-	cont LONGTEXT NOT NULL COMMENT '내용', -- 내용
-	date DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
+	trno   INTEGER  NOT NULL COMMENT '번호', -- 번호
+	tno    INTEGER  NOT NULL COMMENT '우리동네번호', -- 우리동네번호
+	writer INTEGER  NOT NULL COMMENT '작성자', -- 작성자
+	cont   LONGTEXT NOT NULL COMMENT '내용', -- 내용
+	date   DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '우리동네 댓글';
 
@@ -423,93 +433,141 @@ ALTER TABLE pet_hprecord
 	MODIFY COLUMN exno INTEGER NOT NULL AUTO_INCREMENT COMMENT '진찰기록번호';
 
 -- 시군구
-CREATE TABLE pet_state (
-	gno   INTEGER     NOT NULL COMMENT '시군구번호', -- 시군구번호
-	cno   INTEGER     NOT NULL COMMENT '광역시도번호', -- 광역시도번호
-	gname VARCHAR(50) NULL     COMMENT '시군구명' -- 시군구명
+CREATE TABLE pet_city (
+	cno   INTEGER     NOT NULL COMMENT '시군구번호', -- 시군구번호
+	gno   INTEGER     NOT NULL COMMENT '광역시도번호', -- 광역시도번호
+	cname VARCHAR(50) NOT NULL COMMENT '시군구명' -- 시군구명
 )
 COMMENT '시군구';
 
 -- 시군구
-ALTER TABLE pet_state
-	ADD CONSTRAINT PK_pet_state -- 시군구 기본키
+ALTER TABLE pet_city
+	ADD CONSTRAINT PK_pet_city -- 시군구 기본키
 		PRIMARY KEY (
-			gno -- 시군구번호
+			cno -- 시군구번호
 		);
 
 -- 시군구 인덱스
-CREATE INDEX IX_pet_state
-	ON pet_state( -- 시군구
-		gname ASC -- 시군구명
+CREATE INDEX IX_pet_city
+	ON pet_city( -- 시군구
+		cname ASC -- 시군구명
 	);
 
-ALTER TABLE pet_state
-	MODIFY COLUMN gno INTEGER NOT NULL AUTO_INCREMENT COMMENT '시군구번호';
+ALTER TABLE pet_city
+	MODIFY COLUMN cno INTEGER NOT NULL AUTO_INCREMENT COMMENT '시군구번호';
 
 -- 광역시도
-CREATE TABLE pet_city (
-	cno   INTEGER     NOT NULL COMMENT '광역시도번호', -- 광역시도번호
-	cname VARCHAR(50) NOT NULL COMMENT '시도명' -- 시도명
+CREATE TABLE pet_state (
+	gno   INTEGER     NOT NULL COMMENT '광역시도번호', -- 광역시도번호
+	gname VARCHAR(50) NOT NULL COMMENT '시도명' -- 시도명
 )
 COMMENT '광역시도';
 
 -- 광역시도
-ALTER TABLE pet_city
-	ADD CONSTRAINT PK_pet_city -- 광역시도 기본키
+ALTER TABLE pet_state
+	ADD CONSTRAINT PK_pet_state -- 광역시도 기본키
 		PRIMARY KEY (
-			cno -- 광역시도번호
+			gno -- 광역시도번호
 		);
 
 -- 광역시도 인덱스
-CREATE INDEX IX_pet_city
-	ON pet_city( -- 광역시도
-		cname ASC -- 시도명
+CREATE INDEX IX_pet_state
+	ON pet_state( -- 광역시도
+		gname ASC -- 시도명
 	);
 
-ALTER TABLE pet_city
-	MODIFY COLUMN cno INTEGER NOT NULL AUTO_INCREMENT COMMENT '광역시도번호';
+ALTER TABLE pet_state
+	MODIFY COLUMN gno INTEGER NOT NULL AUTO_INCREMENT COMMENT '광역시도번호';
 
--- 나눔장터_카테고리
-CREATE TABLE pet_mark_cat (
-	ono    INTEGER     NOT NULL COMMENT '분류', -- 분류
-	dg_cat VARCHAR(15) NULL     COMMENT '강아지용품', -- 강아지용품
-	ct_cat VARCHAR(15) NULL     COMMENT '고양이용품', -- 고양이용품
-	et_cat VARCHAR(15) NULL     COMMENT '기타용품' -- 기타용품
+-- 품종
+CREATE TABLE pet_type (
+	rno  INTEGER      NOT NULL COMMENT '품종번호', -- 품종번호
+	sno  INTEGER      NOT NULL COMMENT '종번호', -- 종번호
+	type VARCHAR(255) NOT NULL COMMENT '품종' -- 품종
 )
-COMMENT '나눔장터_카테고리';
+COMMENT '품종';
 
--- 나눔장터_카테고리
-ALTER TABLE pet_mark_cat
-	ADD CONSTRAINT PK_pet_mark_cat -- 나눔장터_카테고리 기본키
+-- 품종
+ALTER TABLE pet_type
+	ADD CONSTRAINT PK_pet_type -- 품종 기본키
 		PRIMARY KEY (
-			ono -- 분류
+			rno -- 품종번호
+		);
+
+ALTER TABLE pet_type
+	MODIFY COLUMN rno INTEGER NOT NULL AUTO_INCREMENT COMMENT '품종번호';
+
+-- 종
+CREATE TABLE pet_species (
+	sno  INTEGER      NOT NULL COMMENT '종번호', -- 종번호
+	type VARCHAR(255) NOT NULL COMMENT '종' -- 종
+)
+COMMENT '종';
+
+-- 종
+ALTER TABLE pet_species
+	ADD CONSTRAINT PK_pet_species -- 종 기본키
+		PRIMARY KEY (
+			sno -- 종번호
+		);
+
+-- 종
+ALTER TABLE pet_species
+	ADD CONSTRAINT CK_pet_species -- 종 체크 제약
+		CHECK (type = 0 or type = 1 or type = 2);
+
+ALTER TABLE pet_species
+	MODIFY COLUMN sno INTEGER NOT NULL AUTO_INCREMENT COMMENT '종번호';
+
+-- 새 테이블
+CREATE TABLE pet_mark_cat (
+	ono      INTEGER     NOT NULL COMMENT '카테고리', -- 카테고리
+	cat_name VARCHAR(15) NOT NULL COMMENT '카데고리_이름' -- 카데고리_이름
+)
+COMMENT '새 테이블';
+
+-- 새 테이블
+ALTER TABLE pet_mark_cat
+	ADD CONSTRAINT PK_pet_mark_cat -- 새 테이블 기본키
+		PRIMARY KEY (
+			ono -- 카테고리
 		);
 
 -- 펫
 ALTER TABLE pet_mypet
 	ADD CONSTRAINT FK_pet_user_TO_pet_mypet -- 회원 -> 펫
 		FOREIGN KEY (
-			mno -- 회원번호
+			owner -- 소유자
 		)
 		REFERENCES pet_user ( -- 회원
 			mno -- 회원번호
 		);
 
+-- 펫
+ALTER TABLE pet_mypet
+	ADD CONSTRAINT FK_pet_type_TO_pet_mypet -- 품종 -> 펫
+		FOREIGN KEY (
+			type -- 품종
+		)
+		REFERENCES pet_type ( -- 품종
+			rno -- 품종번호
+		);
+
 -- 병원
 ALTER TABLE pet_hp
-	ADD CONSTRAINT FK_pet_state_TO_pet_hp -- 시군구 -> 병원
+	ADD CONSTRAINT FK_pet_city_TO_pet_hp -- 시군구 -> 병원
 		FOREIGN KEY (
-			gno -- 시군구번호
+			cno -- 시군구번호
 		)
-		REFERENCES pet_state ( -- 시군구
-			gno -- 시군구번호
+		REFERENCES pet_city ( -- 시군구
+			cno -- 시군구번호
 		);
 
 -- 나눔장터
 ALTER TABLE pet_mark
 	ADD CONSTRAINT FK_pet_user_TO_pet_mark -- 회원 -> 나눔장터
 		FOREIGN KEY (
-			mno -- 회원번호
+			writer -- 작성자
 		)
 		REFERENCES pet_user ( -- 회원
 			mno -- 회원번호
@@ -517,19 +575,19 @@ ALTER TABLE pet_mark
 
 -- 나눔장터
 ALTER TABLE pet_mark
-	ADD CONSTRAINT FK_pet_mark_cat_TO_pet_mark -- 나눔장터_카테고리 -> 나눔장터
+	ADD CONSTRAINT FK_pet_mark_cat_TO_pet_mark -- 새 테이블 -> 나눔장터
 		FOREIGN KEY (
-			ono -- 분류번호
+			ono -- 카테고리
 		)
-		REFERENCES pet_mark_cat ( -- 나눔장터_카테고리
-			ono -- 분류
+		REFERENCES pet_mark_cat ( -- 새 테이블
+			ono -- 카테고리
 		);
 
 -- 우리동네
 ALTER TABLE pet_mytown
 	ADD CONSTRAINT FK_pet_user_TO_pet_mytown -- 회원 -> 우리동네
 		FOREIGN KEY (
-			mno -- 회원번호
+			writer -- 작성자
 		)
 		REFERENCES pet_user ( -- 회원
 			mno -- 회원번호
@@ -537,12 +595,12 @@ ALTER TABLE pet_mytown
 
 -- 우리동네
 ALTER TABLE pet_mytown
-	ADD CONSTRAINT FK_pet_state_TO_pet_mytown -- 시군구 -> 우리동네
+	ADD CONSTRAINT FK_pet_city_TO_pet_mytown -- 시군구 -> 우리동네
 		FOREIGN KEY (
-			gno -- 시군구번호
+			cno -- 시군구번호
 		)
-		REFERENCES pet_state ( -- 시군구
-			gno -- 시군구번호
+		REFERENCES pet_city ( -- 시군구
+			cno -- 시군구번호
 		);
 
 -- 나눔장터사진
@@ -559,7 +617,7 @@ ALTER TABLE pet_mark_phot
 ALTER TABLE pet_hp_review
 	ADD CONSTRAINT FK_pet_hp_TO_pet_hp_review -- 병원 -> 리뷰
 		FOREIGN KEY (
-			hno -- 병원번호
+			hname -- 병원명
 		)
 		REFERENCES pet_hp ( -- 병원
 			hno -- 병원번호
@@ -569,7 +627,7 @@ ALTER TABLE pet_hp_review
 ALTER TABLE pet_hp_review
 	ADD CONSTRAINT FK_pet_user_TO_pet_hp_review -- 회원 -> 리뷰
 		FOREIGN KEY (
-			mno -- 회원번호
+			writer -- 작성자
 		)
 		REFERENCES pet_user ( -- 회원
 			mno -- 회원번호
@@ -609,7 +667,7 @@ ALTER TABLE pet_st_scrap
 ALTER TABLE pet_qna
 	ADD CONSTRAINT FK_pet_user_TO_pet_qna -- 회원 -> Q&A
 		FOREIGN KEY (
-			mno -- 회원번호
+			writer -- 작성자
 		)
 		REFERENCES pet_user ( -- 회원
 			mno -- 회원번호
@@ -629,7 +687,7 @@ ALTER TABLE pet_mark_comt
 ALTER TABLE pet_mark_comt
 	ADD CONSTRAINT FK_pet_user_TO_pet_mark_comt -- 회원 -> 나눔장터 댓글
 		FOREIGN KEY (
-			mno -- 회원번호
+			writer -- 작성자
 		)
 		REFERENCES pet_user ( -- 회원
 			mno -- 회원번호
@@ -639,7 +697,7 @@ ALTER TABLE pet_mark_comt
 ALTER TABLE pet_mytown_comt
 	ADD CONSTRAINT FK_pet_user_TO_pet_mytown_comt -- 회원 -> 우리동네 댓글
 		FOREIGN KEY (
-			mno -- 회원번호
+			writer -- 작성자
 		)
 		REFERENCES pet_user ( -- 회원
 			mno -- 회원번호
@@ -716,11 +774,21 @@ ALTER TABLE pet_hprecord
 		);
 
 -- 시군구
-ALTER TABLE pet_state
-	ADD CONSTRAINT FK_pet_city_TO_pet_state -- 광역시도 -> 시군구
+ALTER TABLE pet_city
+	ADD CONSTRAINT FK_pet_state_TO_pet_city -- 광역시도 -> 시군구
 		FOREIGN KEY (
-			cno -- 광역시도번호
+			gno -- 광역시도번호
 		)
-		REFERENCES pet_city ( -- 광역시도
-			cno -- 광역시도번호
+		REFERENCES pet_state ( -- 광역시도
+			gno -- 광역시도번호
+		);
+
+-- 품종
+ALTER TABLE pet_type
+	ADD CONSTRAINT FK_pet_species_TO_pet_type -- 종 -> 품종
+		FOREIGN KEY (
+			sno -- 종번호
+		)
+		REFERENCES pet_species ( -- 종
+			sno -- 종번호
 		);

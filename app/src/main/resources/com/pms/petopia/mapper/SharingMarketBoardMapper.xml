@@ -17,18 +17,16 @@
 	    <result column="writer_name" property="name"/>
     </association>
     
-        <association property="category_title" javaType="sharingmarketboardcategory">
+        <association property="category" javaType="sharingmarketboardcategory">
 	    <id column="category_no" property="no"/>
-	    <result column="dog_category" property="dog"/>
-	    <result column="cat_category" property="cat"/>
-	    <result column="ect_category" property="ect"/>
+	    <result column="category_name" property="name"/>
     </association>
     
   </resultMap>
   
   <insert id="insert" parameterType="sharingmarketboard">
-    insert into pet_mark(category, title, cont, writer) 
-    values( #{category}, #{title}, #{content}, #{writer.no})
+    insert into pet_mark(ono, title, cont, writer) 
+    values( #{category.no}, #{title}, #{content}, #{writer.no})
   </insert>
   
   
@@ -40,10 +38,12 @@
       mark.date,
       mark.vw_cnt,
       mem.mno as writer_no,
-      mem.name as writer_name
+      mem.name as writer_name,
+      cat.ono as category_no,
+      cat.name as category_name
     from pet_mark mark
       inner join pet_user mem on mem.mno = mark.writer
-      inner join pet_
+      inner join pet_mark_cat cat on cat.ono = mark.category
   </select>
   
 <!--  
