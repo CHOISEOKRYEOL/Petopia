@@ -20,6 +20,8 @@ public class HospitalDetailHandler extends HttpServlet {
       throws ServletException, IOException {
 
     HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
+    //    BigAddressService bigAddressService = (BigAddressService) request.getServletContext().getAttribute("bigAddressService");
+    //    SmallAddressService smallAddressService = (SmallAddressService) request.getServletContext().getAttribute("smallAddressService");
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -44,13 +46,48 @@ public class HospitalDetailHandler extends HttpServlet {
       }
 
       out.println("<form action='update' method='post'>");
-      out.printf("번호: <input type='text' name='no' value='%d' readonly><br>\n", hospital.getNo());
-      out.printf("병원이름: <input type='text' name='name' value='%s'><br>\n", hospital.getName());
-      out.printf("전화번호: <input type='tel' name='tel' value='%s'><br>\n", hospital.getTel());
-      out.printf("주소: <input type='text' name='address' value='%s'><br>\n", hospital.getAddress());
-      out.printf("진료시간: <input type='text' name='time' value='%s'><br>\n", hospital.getBusinessHour());
-      out.printf("주차여부: <input type='checkbox' name='parking' value='%d'><br>\n", hospital.getParking());
-      out.printf("수의사: <input type='number' name='vet' value='%d'><br>\n", hospital.getVeterinarian());
+      out.printf("번호 <input type='text' name='no' value='%d' readonly><br>\n", hospital.getNo());
+      out.printf("병원이름 <input type='text' name='name' value='%s'><br>\n", hospital.getName());
+      out.printf("전화번호 <input type='tel' name='tel' value='%s'><br>\n", hospital.getTel());
+      //      try {
+      //        BigAddress bigAddress = bigAddressService.get(no);
+      //        if (bigAddress.getNo() == 1) {
+      //          out.println("기본주소 <select name='gno'><option value=''>분류</option><option value='1' selected>서울특별시</option></select>\n");
+      //        } else {
+      //          out.println("기본주소 <select name='gno'><option value=''>분류</option><option value='1'>서울특별시</option></select>\n");
+      //        }
+      //        SmallAddress smallAddress = smallAddressService.get(no);
+      //        if (smallAddress.getNo() == 1) {
+      //          out.println("<select name='cno'><option value=''>분류</option><option value='1' selected>강남구</option></select><br>\n");
+      //        } else {
+      //          out.println("<select name='cno'><option value=''>분류</option><option value='1'>강남구</option></select><br>\n");
+      //        }
+      //      } catch (Exception e) {
+      //        throw new ServletException(e);
+      //      }
+      out.println("기본주소 <select name='gno'><option value=''>분류</option>"
+          + "<option value='1'>서울특별시</option>\n"
+          + "<option value='2'>경기도</option>\n"
+          + "<option value='3'>인천광역시</option></select>");
+      out.println("<select name='cno'><option value=''>분류</option>"
+          + "<optgroup label='서울특별시'>"
+          + "<option value='1'>강남구</option></optgroup>\n"
+          + "<optgroup label='경기도'>"
+          + "<option value='2'>김포시</option></optgroup>\n"
+          + "<optgroup label='인천광역시'>"
+          + "<option value='3'>중구</option></optgroup></select><br>");
+
+      out.printf("상세주소 <input type='text' name='address' value='%s'><br>\n", hospital.getAddress());
+      out.printf("진료시간 <input type='text' name='time' value='%s'><br>\n", hospital.getBusinessHour());
+
+      if (hospital.getParking() == 1) {
+        out.println("주차여부 <input type='radio' name='parking' value='1' checked>Yes"
+            + "<input type='radio' name='parking' value='0'>No<br>\n");
+      } else if (hospital.getParking() == 0) {
+        out.println("주차여부 <input type='radio' name='parking' value='1'>Yes"
+            + "<input type='radio' name='parking' value='0' checked>No<br>\n");
+      }
+      out.printf("수의사 <input type='number' name='vet' value='%d'><br>\n", hospital.getVeterinarian());
 
       out.println("<input type='submit' value='변경'> ");
       out.printf("<a href='delete?no=%d'>삭제</a>\n", hospital.getNo());

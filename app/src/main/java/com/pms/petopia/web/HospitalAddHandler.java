@@ -8,13 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.pms.petopia.domain.BigAddress;
 import com.pms.petopia.domain.Hospital;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.SmallAddress;
-import com.pms.petopia.service.BigAddressService;
 import com.pms.petopia.service.HospitalService;
-import com.pms.petopia.service.SmallAddressService;
 
 @SuppressWarnings("serial")
 @WebServlet("/hospital/add")
@@ -25,8 +22,6 @@ public class HospitalAddHandler extends HttpServlet {
       throws ServletException, IOException {
 
     HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
-    BigAddressService bigAddressService = (BigAddressService) request.getServletContext().getAttribute("bigAddressService");
-    SmallAddressService smallAddressService = (SmallAddressService) request.getServletContext().getAttribute("smallAddressService");
 
     Hospital hospital = new Hospital();
 
@@ -36,10 +31,6 @@ public class HospitalAddHandler extends HttpServlet {
     hospital.setBusinessHour(request.getParameter("time"));
     hospital.setParking(Integer.valueOf(request.getParameter("parking")));
     hospital.setVeterinarian(Integer.valueOf(request.getParameter("vet")));
-
-    BigAddress bigAddress = new BigAddress();
-    bigAddress.setNo(Integer.parseInt(request.getParameter("gno")));
-    hospital.setBigAddress(bigAddress);
 
     SmallAddress smallAddress = new SmallAddress();
     smallAddress.setNo(Integer.parseInt(request.getParameter("cno")));
@@ -61,20 +52,6 @@ public class HospitalAddHandler extends HttpServlet {
 
     try {
       hospitalService.add(hospital);
-      //      List<SmallAddress> smallAddressList =smallAddressService.list();
-      //            out.println("<select name='gno'>");
-      //            for(SmallAddress s : smallAddressList) {
-      //              out.printf("<option value='%d'>%s</option>",s.getBigAddress().getNo(),s.getBigAddress().getName());
-      //            }
-      //            out.println("</select>");
-      //      out.println("<select name='cno'>");
-      //      for(SmallAddress s : smallAddressList) {
-      //        out.printf("<option value='%d'>%s</option>",s.getNo(),s.getName());
-      //      }
-      //      out.println("</select>");
-      //      out.println("<br>");
-      //      out.println("<form action='submit' value='등록'>");
-
 
       out.println("<p>병원을 등록했습니다.</p>");
 

@@ -8,11 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.pms.petopia.domain.BigAddress;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.MyTownBoard;
 import com.pms.petopia.domain.SmallAddress;
-import com.pms.petopia.service.BigAddressService;
 import com.pms.petopia.service.MyTownBoardService;
 import com.pms.petopia.service.SmallAddressService;
 
@@ -21,52 +19,84 @@ import com.pms.petopia.service.SmallAddressService;
 public class MyTownBoardAddHandler extends HttpServlet{
 
   @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    SmallAddressService smallAddressService = (SmallAddressService)request.getServletContext().getAttribute("smallAddressService");
-    BigAddressService bigAddressService = (BigAddressService)request.getServletContext().getAttribute("bigAddressService");
-    MyTownBoardService myTownBoardService = (MyTownBoardService)request.getServletContext().getAttribute("myTownBoardService");
-
-    MyTownBoard b = new MyTownBoard();
-
-    b.setTitle(request.getParameter("title"));
-    b.setContent(request.getParameter("content"));
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-    b.setWriter(loginUser);
-
-    BigAddress ba = new BigAddress();
-    //    ba.setNo(Integer.parseInt(request.getParameter("stateNo")));
-    int num = Integer.parseInt(request.getParameter("stateNo"));
-    ba.setNo(3);
-    ba.setName(setBigAddress(num));
-
-    SmallAddress sa = new SmallAddress();
-    //    sa.setNo(Integer.parseInt(request.getParameter("cityNo")));
-    int num2 = Integer.parseInt(request.getParameter("cityNo"));
-    sa.setNo(5);
-    sa.setName(setSmallAddress(num2));
-    sa.setBigAddress(ba);
-
-    b.setSmallAddress(sa);
-    //    b.setBigAddress(ba);
-
+    SmallAddressService smallAddressService = (SmallAddressService) request.getServletContext().getAttribute("smallAddressService");
+    //SmallAddress s = new SmallAddress();
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
-    out.println("<title>게시글 등록</title>");
+    out.println("<meta charset='UTF-8'>");
+    out.println("<title>우리동네 새 게시글</title>");
     out.println("</head>");
     out.println("<body>");
 
+    Integer.parseInt(request.getParameter("stateNo")); //일단 가져왔음
+    int no = Integer.parseInt(request.getParameter("cityNo"));
     try {
-      bigAddressService.add(ba);
-      smallAddressService.add(sa);
-      myTownBoardService.add(b);
+      SmallAddress small = smallAddressService.get(no);
+      out.printf("<h1>%s %s</h1>", small.getBigAddress().getName(), small.getName());
 
-      out.println("<p>게시글을 등록했습니다.<p>");
+      out.println("<h2>우리동네 새 게시글</h2>");
+      out.println("<form action='add' method='post'>");
+      out.printf("지역: <input type='text' name='cityNo' value ='%d' readonly> <br>\n", small.getNo());
+      out.println("제목: <input type='text' name='title'><br>");
+      out.println("내용: <textarea name='content' rows='10' cols='60'></textarea><br>");
+
+      out.printf("<a href='list?stateNo=%d&cityNo=%d'>목록</a>",small.getBigAddress().getNo(), small.getNo());
+
+    } catch (Exception e) {
+      throw new ServletException(e);
+    }
+    out.println("<input type='submit' value='등록'>");
+
+    out.println("</form>");
+    out.println("</body>");
+    out.println("</html>");
+  }
+
+  @Override
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+
+    MyTownBoardService myTownBoardService = (MyTownBoardService)request.getServletContext().getAttribute("myTownBoardService");
+    SmallAddressService smallAddressService = (SmallAddressService) request.getServletContext().getAttribute("smallAddressService");
+
+    response.setContentType("text/html;charset=UTF-8");
+    request.setCharacterEncoding("UTF-8");
+    PrintWriter out = response.getWriter();
+
+    MyTownBoard b = new MyTownBoard();
+
+    try {
+      int no = Integer.parseInt(request.getParameter("cityNo"));
+      SmallAddress s = smallAddressService.get(no);
+      b.setSmallAddress(s);
+      b.setTitle(request.getParameter("title"));
+      b.setContent(request.getParameter("content"));
+      Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+      b.setWriter(loginUser);
+
+
+      out.println("<!DOCTYPE html>");
+      out.println("<html>");
+      out.println("<head>");
+      out.println("<title>게시글 등록</title>");
+
+      myTownBoardService.add(b);
+      String webAdress= String.format("list?stateNo=%s&cityNo=%s", s.getBigAddress().getNo(), s.getNo());
+      response.sendRedirect(webAdress);
+
+      //      out.printf("<meta http-equiv='Refresh' content='1;url=list?stateNo=%d&cityNo=%d>",
+      //          s.getBigAddress().getNo(), s.getNo());
+      //      out.println("</head>");
+      //      out.println("<body>");
+      //      out.println("<h1>게시글 등록</h1>");
+      //      out.println("<p>게시글을 등록했습니다.<p>");
 
       response.setHeader("Refresh", "1;url=../main");
     } catch (Exception e) {
@@ -84,39 +114,8 @@ public class MyTownBoardAddHandler extends HttpServlet{
     out.println("</body>");
     out.println("</html>");
   }
-
-  private String setBigAddress(int no) {
-    switch(no) {
-      case 1: return "서울특별시";
-      case 2: return "경기도";
-      case 3: return "인천광역시";
-      default: return null;
-    }
-  }
-
-  private String setSmallAddress(int no) {
-    switch(no) {
-      case 1: return "강남구";
-      case 2: return "서초구";
-      case 3: return "종로구";
-      case 4: return "중구";
-      case 5: return "성북구";
-      case 6: return "성남시";
-      case 7: return "안양시";
-      case 8: return "광명시";
-      case 9: return "안산시";
-      case 10: return "시흥시";
-      case 11: return "서구";
-      case 12: return "동구";
-      case 13: return "중구";
-      case 14: return "남구";
-      case 15: return "부평구";
-      case 16: return "계양구";
-      case 17: return "연수구";
-      default: return null;
-    }
-  }
-
 }
+
+
 
 

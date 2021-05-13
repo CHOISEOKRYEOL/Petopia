@@ -34,7 +34,6 @@ public class MyTownBoardDetailHandler extends HttpServlet {
     out.println("<title>게시글 상세</title>");
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>게시글 상세보기</h1>");
 
     try {
       MyTownBoard b = myTownBoardService.get(no);
@@ -42,7 +41,10 @@ public class MyTownBoardDetailHandler extends HttpServlet {
         out.println("<p>해당 번호의 게시글이 없습니다.</p>");
         return;
       }
-      out.printf("<form action='update' method='post'>");
+      out.printf("<h1>%s %s</h1>", b.getBigAddress().getName(), b.getSmallAddress().getName());
+      out.println("<h2>게시글 상세보기</h2>");
+      out.printf("<form action='list?stateNo=%d&cityNo=%d' method='post'>",
+          b.getBigAddress().getNo(), b.getSmallAddress().getNo());
       out.println("<table border='1'>");
       out.println("<tbody>");
 
