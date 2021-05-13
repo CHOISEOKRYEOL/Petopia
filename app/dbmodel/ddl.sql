@@ -68,7 +68,7 @@ CREATE TABLE pet_user (
   email VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
   phone VARCHAR(30)  NOT NULL COMMENT '휴대전화', -- 휴대전화
   role  INTEGER      NOT NULL COMMENT '역할', -- 역할
-  date  DATE         NOT NULL DEFAULT now() COMMENT '가입일' -- 가입일
+  rdt   DATE         NOT NULL DEFAULT now() COMMENT '가입일' -- 가입일
 )
 COMMENT '회원';
 
@@ -179,7 +179,7 @@ CREATE TABLE pet_mark (
   writer INTEGER     NOT NULL COMMENT '작성자', -- 작성자
   title  VARCHAR(50) NOT NULL COMMENT '제목', -- 제목
   cont   LONGTEXT    NOT NULL COMMENT '내용', -- 내용
-  date   DATETIME    NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
+  cdt    DATETIME    NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
   vw_cnt INTEGER     NULL     DEFAULT 0
    COMMENT '조회수' -- 조회수
 )
@@ -202,7 +202,7 @@ CREATE TABLE pet_mytown (
   cno     INTEGER     NOT NULL COMMENT '시군구번호', -- 시군구번호
   title   VARCHAR(50) NOT NULL COMMENT '제목', -- 제목
   cont    LONGTEXT    NOT NULL COMMENT '내용(사진)', -- 내용(사진)
-  date    DATETIME    NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
+  cdt     DATETIME    NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
   vw_cnt  INTEGER     NULL     DEFAULT 0 COMMENT '조회수', -- 조회수
   cmt_cnt INTEGER     NOT NULL DEFAULT 0 COMMENT '댓글수' -- 댓글수
 )
@@ -224,7 +224,7 @@ CREATE TABLE pet_st_news (
   title VARCHAR(50)  NOT NULL COMMENT '제목', -- 제목
   url   VARCHAR(255) NOT NULL COMMENT 'URL', -- URL
   site  VARCHAR(50)  NOT NULL COMMENT '제공사이트', -- 제공사이트
-  date  DATETIME     NOT NULL DEFAULT now() COMMENT '등록일' -- 등록일
+  rdt   DATETIME     NOT NULL DEFAULT now() COMMENT '등록일' -- 등록일
 )
 COMMENT '뉴스';
 
@@ -265,7 +265,7 @@ CREATE TABLE pet_hp_review (
   clean   INTEGER      NOT NULL COMMENT '청결도', -- 청결도
   cost    INTEGER      NOT NULL COMMENT '비용', -- 비용
   cont    VARCHAR(255) NOT NULL COMMENT '한줄평가', -- 한줄평가
-  date    DATETIME     NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
+  cdt     DATETIME     NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
   rphoto  VARCHAR(255) NOT NULL COMMENT '영수증사진' -- 영수증사진
 )
 COMMENT '리뷰';
@@ -282,9 +282,9 @@ ALTER TABLE pet_hp_review
 
 -- 스크랩
 CREATE TABLE pet_st_scrap (
-  nno  INTEGER NOT NULL COMMENT '뉴스번호', -- 뉴스번호
-  mno  INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-  date DATE    NOT NULL DEFAULT now() COMMENT '등록일' -- 등록일
+  nno INTEGER NOT NULL COMMENT '뉴스번호', -- 뉴스번호
+  mno INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
+  rdt DATE    NOT NULL DEFAULT now() COMMENT '등록일' -- 등록일
 )
 COMMENT '스크랩';
 
@@ -302,9 +302,9 @@ CREATE TABLE pet_qna (
   writer INTEGER     NOT NULL COMMENT '작성자', -- 작성자
   title  VARCHAR(50) NOT NULL COMMENT '제목', -- 제목
   cont   LONGTEXT    NOT NULL COMMENT '내용', -- 내용
-  date   DATETIME    NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
+  cdt    DATETIME    NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
   ans    LONGTEXT    NULL     COMMENT '답변', -- 답변
-  date2  DATETIME    NULL     DEFAULT now() COMMENT '답변일' -- 답변일
+  adt    DATETIME    NULL     DEFAULT now() COMMENT '답변일' -- 답변일
 )
 COMMENT 'Q&A';
 
@@ -324,7 +324,7 @@ CREATE TABLE pet_mark_comt (
   sno    INTEGER  NOT NULL COMMENT '나눔장터번호', -- 나눔장터번호
   writer INTEGER  NOT NULL COMMENT '작성자', -- 작성자
   cont   LONGTEXT NOT NULL COMMENT '내용', -- 내용
-  date   DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
+  cdt    DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '나눔장터 댓글';
 
@@ -344,7 +344,7 @@ CREATE TABLE pet_mytown_comt (
   tno    INTEGER  NOT NULL COMMENT '우리동네번호', -- 우리동네번호
   writer INTEGER  NOT NULL COMMENT '작성자', -- 작성자
   cont   LONGTEXT NOT NULL COMMENT '내용', -- 내용
-  date   DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
+  cdt    DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '우리동네 댓글';
 

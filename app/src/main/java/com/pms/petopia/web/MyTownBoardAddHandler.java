@@ -10,11 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.MyTownBoard;
-<<<<<<< HEAD
-=======
 import com.pms.petopia.domain.SmallAddress;
->>>>>>> 720e9634b3d5bc0083fe71413cb10bfb05c74237
 import com.pms.petopia.service.MyTownBoardService;
+import com.pms.petopia.service.SmallAddressService;
 
 @SuppressWarnings("serial")
 @WebServlet("/mytown/add")
@@ -24,14 +22,9 @@ public class MyTownBoardAddHandler extends HttpServlet{
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-<<<<<<< HEAD
-    MyTownBoardService myTownBoardService = (MyTownBoardService)request.getServletContext().getAttribute("myTownBoardService");
-=======
     SmallAddressService smallAddressService = (SmallAddressService) request.getServletContext().getAttribute("smallAddressService");
-    //SmallAddress s = new SmallAddress();
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
->>>>>>> 720e9634b3d5bc0083fe71413cb10bfb05c74237
 
     out.println("<!DOCTYPE html>");
     out.println("<html>");
@@ -47,8 +40,6 @@ public class MyTownBoardAddHandler extends HttpServlet{
       SmallAddress small = smallAddressService.get(no);
       out.printf("<h1>%s %s</h1>", small.getBigAddress().getName(), small.getName());
 
-<<<<<<< HEAD
-=======
       out.println("<h2>우리동네 새 게시글</h2>");
       out.println("<form action='add' method='post'>");
       out.printf("지역: <input type='text' name='cityNo' value ='%d' readonly> <br>\n", small.getNo());
@@ -73,7 +64,6 @@ public class MyTownBoardAddHandler extends HttpServlet{
 
     MyTownBoardService myTownBoardService = (MyTownBoardService)request.getServletContext().getAttribute("myTownBoardService");
     SmallAddressService smallAddressService = (SmallAddressService) request.getServletContext().getAttribute("smallAddressService");
->>>>>>> 720e9634b3d5bc0083fe71413cb10bfb05c74237
 
     response.setContentType("text/html;charset=UTF-8");
     request.setCharacterEncoding("UTF-8");
@@ -82,8 +72,6 @@ public class MyTownBoardAddHandler extends HttpServlet{
     MyTownBoard b = new MyTownBoard();
 
     try {
-<<<<<<< HEAD
-=======
       int no = Integer.parseInt(request.getParameter("cityNo"));
       SmallAddress s = smallAddressService.get(no);
       b.setSmallAddress(s);
@@ -98,7 +86,6 @@ public class MyTownBoardAddHandler extends HttpServlet{
       out.println("<head>");
       out.println("<title>게시글 등록</title>");
 
->>>>>>> 720e9634b3d5bc0083fe71413cb10bfb05c74237
       myTownBoardService.add(b);
       String webAdress= String.format("list?stateNo=%s&cityNo=%s", s.getBigAddress().getNo(), s.getNo());
       response.sendRedirect(webAdress);
