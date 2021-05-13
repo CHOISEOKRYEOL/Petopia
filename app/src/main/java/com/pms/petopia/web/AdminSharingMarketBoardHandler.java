@@ -61,12 +61,12 @@ public class AdminSharingMarketBoardHandler extends HttpServlet{
       for (SharingMarketBoard smb : smBoards) {
         out.printf("<tr>"
             + " <td>%d</td>"
-            + " <td>%d</td>"
+            + " <td>%s</td>"
             + " <td><a href='detail?no=%1$d'>%s</a></td>"
             + " <td>%s</td>"
             + " <td>%d</td> </tr>\n", 
             smb.getNo(),
-            smb.getCategory(),
+            smb.getCategory().getName(),
             smb.getTitle(),
             smb.getWriter().getName(),
             smb.getCreatedDate());
