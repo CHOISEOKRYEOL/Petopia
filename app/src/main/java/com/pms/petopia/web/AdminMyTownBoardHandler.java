@@ -42,7 +42,6 @@ public class AdminMyTownBoardHandler extends HttpServlet {
       return;
     }
 
-
     try {
       List<MyTownBoard> boards = myTownBoardService.list(cityNo,stateNo);
       MyTownBoard board = boards.get(0);
