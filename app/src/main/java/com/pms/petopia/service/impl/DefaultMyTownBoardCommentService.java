@@ -5,11 +5,11 @@ import com.pms.petopia.dao.CommentDao;
 import com.pms.petopia.domain.Comment;
 import com.pms.petopia.service.CommentService;
 
-public class DefaultCommentService implements CommentService{
+public class DefaultMyTownBoardCommentService implements CommentService{
 
   CommentDao commentDao;
 
-  public DefaultCommentService (CommentDao commentDao) {
+  public DefaultMyTownBoardCommentService (CommentDao commentDao) {
     this.commentDao = commentDao;
   }
 
