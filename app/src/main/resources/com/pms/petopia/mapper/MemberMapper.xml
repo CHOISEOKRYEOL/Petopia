@@ -29,16 +29,18 @@
       id,
       email,
       phone
-    from pet_user 
-    where id = #{id} and pwd = password(#{password})
+    from pet_user
+      where
+      id = #{id} or email = #{id}
+      and pwd = password(#{password})
   </select>
   
   <update id="update" parameterType="member">
     update pet_user 
-    <set> 
+    <set>
       <if test="nick != ''">nick=#{nick},</if>
       <if test="password != ''">pwd=password(#{password}),</if>
-      <if test="tel != ''">phone=#{tel}</if> 
+      <if test="tel != ''">phone=#{tel}</if>
     </set>
     where mno=#{no}
   </update>
