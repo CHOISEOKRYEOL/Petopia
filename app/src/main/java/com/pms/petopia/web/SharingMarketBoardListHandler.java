@@ -35,11 +35,6 @@ public class SharingMarketBoardListHandler extends HttpServlet{
 
 	    out.println("<p><a href='shareform.html'>새 글</a></p>");
 	    
-        out.println("<form action='search' method='get'>");
-        out.println("<input type='text' name='keyword'> ");
-        out.println("<button>검색</button>");
-        out.println("</form>");
-	    
 	    
 	    try {
 	        List<SharingMarketBoard> smBoards = sharingMarketBoardService.list();
@@ -58,7 +53,7 @@ public class SharingMarketBoardListHandler extends HttpServlet{
 	              + " <td>%d</td>"
 	              + " <td><a href='detail?no=%1$d'>%s</a></td>"
 	              + " <td>%s</td>"
-	              + " <td>%d</td> </tr>\n", 
+	              + " <td>%s</td> </tr>\n", 
 	              smb.getNo(),
 	              smb.getCategory(),
 	              smb.getTitle(),

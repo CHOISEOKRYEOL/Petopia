@@ -1,5 +1,6 @@
 package com.pms.petopia.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.pms.petopia.dao.SharingMarketBoardDao;
@@ -47,5 +48,14 @@ public class DefaultSharingMarketBoardService implements SharingMarketBoardServi
 	public List<SharingMarketBoard> search(String keyword) throws Exception {
 		return sharingMarketBoardDao.findByKeyword(keyword);
 	}
+	
+	@Override
+	public List<SharingMarketBoard> list(int no, String category) throws Exception {
+	    HashMap<String,Object> params = new HashMap<>();
+	    //params.put("gno", stateNo);
+	    //params.put("cno", cityNo);
+		return sharingMarketBoardDao.findbyCategory(params);
+	}
+
 
 }

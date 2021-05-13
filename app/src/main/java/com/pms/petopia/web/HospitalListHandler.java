@@ -41,7 +41,7 @@ public class HospitalListHandler extends HttpServlet {
       out.println("<table border='1'>");
       out.println("<thead>");
       out.println("<tr>");
-      out.println("<th>번호</th> <th>이름</th> <th>전화</th> <th>주소</th>");
+      out.println("<th>번호</th> <th>이름</th> <th>전화</th> <th>상세주소</th> <th>평점</th>");
       out.println("</tr>");
       out.println("</thead>");
       out.println("<tbody>");
@@ -51,14 +51,22 @@ public class HospitalListHandler extends HttpServlet {
             + " <td>%d</td>"
             + " <td><a href='detail?no=%1$d'>%s</a></td>"
             + " <td>%s</td>"
-            + " <td>%s</td> </tr>\n",
+            + " <td>%s</td>"
+            + " <td>%d</td> </tr>\n",
             h.getNo(),
             h.getName(),
             h.getTel(),
-            h.getAddress());
+            h.getAddress(),
+            h.getRate());
       }
       out.println("</tbody");
       out.println("</table>");
+
+      out.println("<form action='search' method='get'>");
+      out.println("<select name='gno'><option value=''>분류</option><option value='1'>서울특별시</option></select>");
+      out.println("<select name='cno'><option value=''>분류</option><option value='1'>강남구</option></select>");
+      out.println("<button>검색</button>");
+      out.println("</form>");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();

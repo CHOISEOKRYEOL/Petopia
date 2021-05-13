@@ -7,9 +7,41 @@
 <body>
 <h1>게시글 등록</h1>
 <form action="add" method="POST">
+광역시/도 : <select name="stateNo" id="selectBox">
+<option value="1" selected>서울특별시</option>
+<option value="2">경기도</option>
+<option value="3">인천광역시</option>
+</select>
+
+
+시/군/구 : <select name="cityNo" id="selectBox">
+<option value="1" selected>강남구</option>
+<option value="2">서초구</option>
+<option value="3">종로구</option>
+<option value="4">중구</option>
+<option value="5">성북구</option>
+
+<option value="5">성남시</option>
+<option value="6">안양시</option>
+<option value="7">광명시</option>
+<option value="8">안산시</option>
+<option value="9">시흥시</option>
+
+<option value="10">서구</option>
+<option value="11">동구</option>
+<option value="12">중구</option>
+<option value="13">남구</option>
+<option value="15">부평구</option>
+<option value="16">계양구</option>
+<option value="17">연수구</option>
+</select>
+<br>
 제목: <input type="text" name="title"><br>
 내용: <textarea name="content" rows="10" cols="60"></textarea>
 <input type="submit" value="등록">
+</form>
+<form action="../main">
+<input type="submit" value="뒤로가기">
 </form>
 </body>
 </html>

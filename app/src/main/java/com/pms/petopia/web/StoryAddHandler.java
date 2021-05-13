@@ -68,15 +68,15 @@ public class StoryAddHandler extends HttpServlet {
     out.println("<html>");
     out.println("<head>");
     out.println("<title>스토리 등록</title>");
+    out.println("</head>");
+    out.println("<body>");
+    out.println("<h1>스토리 등록</h1>");
 
     try {
       storyService.add(s);
 
-      out.println("<meta http-equiv='Refresh' content='1;url=list'>");
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>스토리 등록</h1>");
       out.println("<p>스토리를 등록했습니다.</p>");
+      response.setHeader("Refresh", "1;url=../main");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();

@@ -29,9 +29,11 @@ public class MyTownBoardUpdateHandler extends HttpServlet {
     out.println("<html>");
     out.println("<head>");
     out.println("<title>게시글 변경</title>");
+    out.println("</head>");
+    out.println("<body>");
+    out.println("<h1>게시글 변경</h1>");
 
     try {
-      request.setCharacterEncoding("UTF-8");
       int no = Integer.parseInt(request.getParameter("no"));
 
       MyTownBoard oldBoard = myTownBoardService.get(no);
@@ -55,6 +57,7 @@ public class MyTownBoardUpdateHandler extends HttpServlet {
       out.println("<body>");
       out.println("<h1>게시글 변경</h1>");
       out.println("<p>게시글을 변경하였습니다.</p>");
+      response.setHeader("Refresh", "1;url=../main");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();

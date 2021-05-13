@@ -47,6 +47,19 @@
     delete from pet_user 
     where mno=#{value}
   </delete>
+  
+  <delete id="sharingMarketDelete" parameterType="int">
+    delete from pet_mytown
+    where tno=#{value}
+  </delete>
+  
+  <delete id="myTownDelete" parameterType="int">
+    delete from pet_mark
+    where sno=#{value}
+  </delete>
+  
+  
+  
 </mapper>
 
 

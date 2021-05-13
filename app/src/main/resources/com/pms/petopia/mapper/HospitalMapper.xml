@@ -13,8 +13,7 @@
     <result column="parking" property="parking"/>
     <result column="time" property="businessHour"/>
     <result column="vet" property="veterinarian"/>
-    <result column="gno" property="bigAddress"/>
-    <result column="cno" property="smallAddress"/>
+    <result column="grade" property="rate"/>
 
     <association property="admin" javaType="member">
       <id column="admin_no" property="no"/>
@@ -22,6 +21,12 @@
     </association>
     
    <!-- 
+    <association property="review" javaType="review">
+      <id column="review_no" property="no"/>
+      <result column="review_name" property="name"/>
+    </association>
+     -->
+     
     <association property="bigAddress" javaType="bigAddress">
       <id column="state_no" property="no"/>
       <result column="state_name" property="name"/>
@@ -30,15 +35,15 @@
     <association property="smallAddress" javaType="smallAddress">
       <id column="city_no" property="no"/>
       <result column="city_name" property="name"/>
-    </association> -->
+    </association>
 
   </resultMap>
   
   <insert id="insert" parameterType="hospital">
     insert into pet_hp(name, tel, address, time, parking, vet, cno) 
-    values(#{name}, #{tel}, #{address}, #{businessHour}, #{parking}, #{veterinarian}, #{smallAddress})
+    values(#{name}, #{tel}, #{address}, #{businessHour}, #{parking}, #{veterinarian}, #{smallAddress.no})
   </insert>
-  
+
   <select id="findAll" resultMap="hospitalMap">
     select 
       hno,

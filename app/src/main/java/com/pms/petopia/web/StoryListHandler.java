@@ -41,21 +41,20 @@ public class StoryListHandler extends HttpServlet {
       out.println("<table border='1'>");
       out.println("<thead>");
       out.println("<tr>");
-      out.println("<th>번호</th> <th>제목</th> <th>URL</th> <th>사이트</th> <th>등록일</th>");
+      out.println("<th>번호</th> <th>제목</th> <th>사이트</th> <th>등록일</th>");
       out.println("</tr>");
       out.println("</thead>");
       out.println("<tbody>");
 
       for (Story s : storys) {
         out.printf("<tr>"
-            + " <td>%d</td>"
-            + " <td>%s</td>"
-            + " <td>%s</td>"
+            + " <td><a href='detail?no=%1$d'>%d</a></td>"
+            + " <td><a href='%s'>%s</a></td>"
             + " <td>%s</td>"
             + " <td>%s</td> </tr>\n",
             s.getNo(),
-            s.getTitle(),
             s.getUrl(),
+            s.getTitle(),
             s.getSite(),
             s.getRegisteredDate());
       }

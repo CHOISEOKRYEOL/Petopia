@@ -28,6 +28,9 @@ public class MyTownBoardDeleteHandler extends HttpServlet {
     out.println("<html>");
     out.println("<head>");
     out.println("<title>게시글 삭제</title>");
+    out.println("</head>");
+    out.println("<body>");
+    out.println("<h1>게시글 삭제</h1>");
 
     int no = Integer.parseInt(request.getParameter("no"));
 
@@ -50,6 +53,8 @@ public class MyTownBoardDeleteHandler extends HttpServlet {
       out.println("<body>");
       out.println("<h1>게시글 삭제</h1>");
       out.println("<p>게시글을 삭제하였습니다.</p>");
+
+      response.setHeader("Refresh", "1;url=../main");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();

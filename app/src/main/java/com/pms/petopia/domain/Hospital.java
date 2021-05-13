@@ -9,10 +9,10 @@ public class Hospital {
   private String businessHour;
   private int parking;
   private int veterinarian;
-  // private int rate;
+  private int rate;
   private Member admin;
-  private int bigAddress;
-  private int smallAddress;
+  private BigAddress bigAddress;
+  private SmallAddress smallAddress;
   //  private float longitude;
   //  private float latitude;
 
@@ -72,22 +72,23 @@ public class Hospital {
   public void setAdmin(Member admin) {
     this.admin = admin;
   }
-
-  public int getBigAddress() {
+  public int getRate() {
+    return rate;
+  }
+  public void setRate(int rate) {
+    this.rate = rate;
+  }
+  public BigAddress getBigAddress() {
     return bigAddress;
   }
-
-  public void setBigAddress(int bigAddress) {
+  public void setBigAddress(BigAddress bigAddress) {
     this.bigAddress = bigAddress;
   }
-
-  public int getSmallAddress() {
+  public SmallAddress getSmallAddress() {
     return smallAddress;
   }
-
-  public void setSmallAddress(int smallAddress) {
+  public void setSmallAddress(SmallAddress smallAddress) {
     this.smallAddress = smallAddress;
   }
-
 
 }

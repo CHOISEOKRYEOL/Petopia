@@ -8,10 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.pms.petopia.domain.BigAddress;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.MyTownBoard;
 import com.pms.petopia.domain.SmallAddress;
-import com.pms.petopia.service.MyTownBoardService;
+  import com.pms.petopia.service.MyTownBoardService;
 import com.pms.petopia.service.SmallAddressService;
 
 @SuppressWarnings("serial")
@@ -21,6 +22,7 @@ public class MyTownBoardAddHandler extends HttpServlet{
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+
     SmallAddressService smallAddressService = (SmallAddressService) request.getServletContext().getAttribute("smallAddressService");
     //SmallAddress s = new SmallAddress();
     response.setContentType("text/html;charset=UTF-8");
@@ -94,6 +96,8 @@ public class MyTownBoardAddHandler extends HttpServlet{
       out.println("<body>");
       out.println("<h1>게시글 등록</h1>");
       out.println("<p>게시글을 등록했습니다.<p>");
+
+      response.setHeader("Refresh", "1;url=../main");
     } catch (Exception e) {
       // 상세 오류 내용을 StringWriter로 출력한다.
       StringWriter strWriter = new StringWriter();
@@ -109,7 +113,8 @@ public class MyTownBoardAddHandler extends HttpServlet{
     out.println("</body>");
     out.println("</html>");
   }
-
 }
+
+
 
 

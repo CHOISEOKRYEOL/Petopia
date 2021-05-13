@@ -28,6 +28,8 @@ public class MemberUpdateHandler extends HttpServlet {
     out.println("<html>");
     out.println("<head>");
     out.println("<title>내 정보 수정</title>");
+    out.println("</head>");
+    out.println("<body>");
 
     try {
       request.setCharacterEncoding("UTF-8");
@@ -44,10 +46,9 @@ public class MemberUpdateHandler extends HttpServlet {
       m.setTel(request.getParameter("tel"));
       memberService.update(m);
 
-      out.println("<meta http-equiv='Refresh' content='1;url=../main'>");
-      out.println("</head>");
-      out.println("<body>");
+
       out.println("<h1>내 정보 수정 완료</h1>");
+      response.setHeader("Refresh", "1;url=../main");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();

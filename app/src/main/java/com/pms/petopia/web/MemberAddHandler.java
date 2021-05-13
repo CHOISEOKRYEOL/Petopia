@@ -48,14 +48,13 @@ public class MemberAddHandler extends HttpServlet {
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
+    out.println("</head>");
+    out.println("<body>");
 
     try {
       memberService.add(m);
-
-      out.println("<meta http-equiv='Refresh' content='1;url=../main'>");
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>회원 가입 완료</h1>");
+      out.printf("<h1>%s 님 Petopia에 오신 걸 환영합니다.</h1>\n", m.getName());
+      response.setHeader("Refresh", "1;url=../main");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();
