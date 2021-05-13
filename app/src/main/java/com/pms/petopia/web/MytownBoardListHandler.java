@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.MyTownBoard;
 import com.pms.petopia.service.MyTownBoardService;
 
@@ -24,12 +23,11 @@ public class MytownBoardListHandler extends HttpServlet {
 
     MyTownBoardService myTownBoardService = (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
 
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
     int stateNo = Integer.parseInt(request.getParameter("stateNo"));
     int cityNo = Integer.parseInt(request.getParameter("cityNo"));
+    String keyword = request.getParameter("keyword");
 
     out.println("<!DOCTYPE html>");
     out.println("<html>");
@@ -43,8 +41,14 @@ public class MytownBoardListHandler extends HttpServlet {
       List<MyTownBoard> boards = myTownBoardService.list(cityNo,stateNo);
       MyTownBoard board = boards.get(0);
       out.printf("<h1>%s %s</h1>", board.getBigAddress().getName(), board.getSmallAddress().getName());
-      out.println("<p><a href='form.html'>새 글</a></p>");
-      //out.println(boards);
+      out.printf("<p><a href='add?stateNo=%d&cityNo=%d'>새 글</a><p>", board.getBigAddress().getNo(), board.getSmallAddress().getNo());
+
+      if (keyword != null && keyword.length() > 0) {
+        boards = myTownBoardService.search(keyword);
+      } else {
+        boards = myTownBoardService.list(stateNo, cityNo);
+      }
+
       out.println("<table border='1'>");
       out.println("<thead>");
       out.println("<tr>");
@@ -52,6 +56,10 @@ public class MytownBoardListHandler extends HttpServlet {
       out.println("</tr>");
       out.println("</thead>");
       out.println("<tbody>");
+
+      if(boards.size() == 0) {
+        out.println("게시글이 없습니다.");
+      }
 
       for (MyTownBoard b : boards) {
         out.printf("<tr>"
@@ -68,11 +76,12 @@ public class MytownBoardListHandler extends HttpServlet {
             b.getViewCount(),
             b.getCommentCount());
       }
+
       out.println("</tbody>");
       out.println("</table>");
 
-      out.println("<form action='search' method='get'>");
-      out.println("<input type='text' name ='keyword'>");
+      out.println("<form action='list' method='get'>");
+      out.println("<input type='search' name ='keyword'>");
       out.println("<button> 검색 </button>");
       out.println("</form>");
     } catch (Exception e) {

@@ -47,6 +47,11 @@ public class MyTownBoardDeleteHandler extends HttpServlet {
 
       myTownBoardService.delete(no);
 
+      out.printf("<meta http-equiv='Refresh' content='1;url=list?stateNo=%d&cityNo=%d>",
+          oldBoard.getBigAddress().getNo(), oldBoard.getNo());
+      out.println("</head>");
+      out.println("<body>");
+      out.println("<h1>게시글 삭제</h1>");
       out.println("<p>게시글을 삭제하였습니다.</p>");
 
       response.setHeader("Refresh", "1;url=../main");

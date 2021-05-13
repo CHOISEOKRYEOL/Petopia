@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.MyTownBoard;
+<<<<<<< HEAD
+=======
+import com.pms.petopia.domain.SmallAddress;
+>>>>>>> 720e9634b3d5bc0083fe71413cb10bfb05c74237
 import com.pms.petopia.service.MyTownBoardService;
 
 @SuppressWarnings("serial")
@@ -17,33 +21,94 @@ import com.pms.petopia.service.MyTownBoardService;
 public class MyTownBoardAddHandler extends HttpServlet{
 
   @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
+<<<<<<< HEAD
     MyTownBoardService myTownBoardService = (MyTownBoardService)request.getServletContext().getAttribute("myTownBoardService");
-
-    MyTownBoard b = new MyTownBoard();
-
-    b.setTitle(request.getParameter("title"));
-    b.setContent(request.getParameter("content"));
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-    b.setWriter(loginUser);
-
-
+=======
+    SmallAddressService smallAddressService = (SmallAddressService) request.getServletContext().getAttribute("smallAddressService");
+    //SmallAddress s = new SmallAddress();
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
+>>>>>>> 720e9634b3d5bc0083fe71413cb10bfb05c74237
 
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
-    out.println("<title>게시글 등록</title>");
+    out.println("<meta charset='UTF-8'>");
+    out.println("<title>우리동네 새 게시글</title>");
     out.println("</head>");
     out.println("<body>");
 
+    Integer.parseInt(request.getParameter("stateNo")); //일단 가져왔음
+    int no = Integer.parseInt(request.getParameter("cityNo"));
     try {
-      myTownBoardService.add(b);
+      SmallAddress small = smallAddressService.get(no);
+      out.printf("<h1>%s %s</h1>", small.getBigAddress().getName(), small.getName());
 
-      out.println("<p>게시글을 등록했습니다.<p>");
+<<<<<<< HEAD
+=======
+      out.println("<h2>우리동네 새 게시글</h2>");
+      out.println("<form action='add' method='post'>");
+      out.printf("지역: <input type='text' name='cityNo' value ='%d' readonly> <br>\n", small.getNo());
+      out.println("제목: <input type='text' name='title'><br>");
+      out.println("내용: <textarea name='content' rows='10' cols='60'></textarea><br>");
+
+      out.printf("<a href='list?stateNo=%d&cityNo=%d'>목록</a>",small.getBigAddress().getNo(), small.getNo());
+
+    } catch (Exception e) {
+      throw new ServletException(e);
+    }
+    out.println("<input type='submit' value='등록'>");
+
+    out.println("</form>");
+    out.println("</body>");
+    out.println("</html>");
+  }
+
+  @Override
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+
+    MyTownBoardService myTownBoardService = (MyTownBoardService)request.getServletContext().getAttribute("myTownBoardService");
+    SmallAddressService smallAddressService = (SmallAddressService) request.getServletContext().getAttribute("smallAddressService");
+>>>>>>> 720e9634b3d5bc0083fe71413cb10bfb05c74237
+
+    response.setContentType("text/html;charset=UTF-8");
+    request.setCharacterEncoding("UTF-8");
+    PrintWriter out = response.getWriter();
+
+    MyTownBoard b = new MyTownBoard();
+
+    try {
+<<<<<<< HEAD
+=======
+      int no = Integer.parseInt(request.getParameter("cityNo"));
+      SmallAddress s = smallAddressService.get(no);
+      b.setSmallAddress(s);
+      b.setTitle(request.getParameter("title"));
+      b.setContent(request.getParameter("content"));
+      Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+      b.setWriter(loginUser);
+
+
+      out.println("<!DOCTYPE html>");
+      out.println("<html>");
+      out.println("<head>");
+      out.println("<title>게시글 등록</title>");
+
+>>>>>>> 720e9634b3d5bc0083fe71413cb10bfb05c74237
+      myTownBoardService.add(b);
+      String webAdress= String.format("list?stateNo=%s&cityNo=%s", s.getBigAddress().getNo(), s.getNo());
+      response.sendRedirect(webAdress);
+
+      //      out.printf("<meta http-equiv='Refresh' content='1;url=list?stateNo=%d&cityNo=%d>",
+      //          s.getBigAddress().getNo(), s.getNo());
+      //      out.println("</head>");
+      //      out.println("<body>");
+      //      out.println("<h1>게시글 등록</h1>");
+      //      out.println("<p>게시글을 등록했습니다.<p>");
 
       response.setHeader("Refresh", "1;url=../main");
     } catch (Exception e) {
@@ -61,8 +126,8 @@ public class MyTownBoardAddHandler extends HttpServlet{
     out.println("</body>");
     out.println("</html>");
   }
-
-
 }
+
+
 
 

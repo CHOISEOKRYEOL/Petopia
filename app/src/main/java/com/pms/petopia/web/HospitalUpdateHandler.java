@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.Hospital;
+import com.pms.petopia.domain.SmallAddress;
 import com.pms.petopia.service.HospitalService;
 
 @SuppressWarnings("serial")
@@ -54,6 +55,10 @@ public class HospitalUpdateHandler extends HttpServlet {
       hospital.setBusinessHour(request.getParameter("time"));
       hospital.setParking(Integer.valueOf(request.getParameter("parking")));
       hospital.setVeterinarian(Integer.valueOf(request.getParameter("vet")));
+
+      SmallAddress smallAddress = new SmallAddress();
+      smallAddress.setNo(Integer.parseInt(request.getParameter("cno")));
+      hospital.setSmallAddress(smallAddress);
 
       hospitalService.update(hospital);
 

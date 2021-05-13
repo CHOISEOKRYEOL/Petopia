@@ -114,9 +114,9 @@
   <update id="update" parameterType="mytownboard">
     update pet_mytown set
       title = #{title},
-      cont = #{cont},
-    date = now()
-    where tno=#{tno}
+      cont = #{content},
+      date = now()
+    where tno=#{no}
   </update>
   
   <update id="updateViewCount" parameterType="int">
