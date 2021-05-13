@@ -4,11 +4,11 @@ package com.pms.petopia.domain;
 public class SharingMarketBoardCategory {
 
   private int no;
-  private String category;
+  private String name;
   
 @Override
 public String toString() {
-	return "SharingMarketBoardCategory [no=" + no + ", category=" + category + "]";
+	return "SharingMarketBoardCategory [no=" + no + ", category=" + name + "]";
 }
 
 public int getNo() {
@@ -17,11 +17,11 @@ public int getNo() {
 public void setNo(int no) {
 	this.no = no;
 }
-public String getCategory() {
-	return category;
+public String getName() {
+	return name;
 }
-public void setCategory(String category) {
-	this.category = category;
+public void serName(String category) {
+	this.name = category;
 }
  
   

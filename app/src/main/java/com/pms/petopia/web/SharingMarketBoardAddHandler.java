@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.SharingMarketBoard;
+import com.pms.petopia.domain.SharingMarketBoardCategory;
 import com.pms.petopia.service.SharingMarketBoardService;
 
 @SuppressWarnings("serial")
@@ -22,9 +23,12 @@ public class SharingMarketBoardAddHandler extends HttpServlet {
 
 	SharingMarketBoardService sharingMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("sharingMarketBoardService");
 	SharingMarketBoard smb = new SharingMarketBoard();
+	SharingMarketBoardCategory c = new SharingMarketBoardCategory();
 	
 	request.setCharacterEncoding("UTF-8");
-	//smb.setCategory(Integer.parseInt(request.getParameter("category")));
+	
+	c.setNo(Integer.parseInt(request.getParameter("category")));
+	smb.setCategory(c);
 	smb.setTitle(request.getParameter("title"));
 	smb.setContent(request.getParameter("content"));
 	

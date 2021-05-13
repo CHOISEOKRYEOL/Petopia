@@ -24,6 +24,7 @@
     
   </resultMap>
   
+  
   <insert id="insert" parameterType="sharingmarketboard">
     insert into pet_mark(ono, title, cont, writer) 
     values( #{category.no}, #{title}, #{content}, #{writer.no})
@@ -40,11 +41,41 @@
       mem.mno as writer_no,
       mem.name as writer_name,
       cat.ono as category_no,
-      cat.name as category_name
+      cat.cat_name as category_name
     from pet_mark mark
       inner join pet_user mem on mem.mno = mark.writer
-      inner join pet_mark_cat cat on cat.ono = mark.category
+      inner join pet_mark_cat cat on cat.ono = mark.ono
   </select>
+  
+    <select id="findByNo" resultMap="sharingmarketboardMap" parameterType="int">
+    select
+      mark.sno,
+      mark.title,
+      mark.cont,
+      mark.date,
+      mark.vw_cnt,
+      mem.mno as writer_no,
+      mem.name as writer_name,
+      cat.ono as category_no,
+      cat.cat_name as category_name
+    from pet_mark mark
+      inner join pet_user mem on mem.mno = mark.writer
+      inner join pet_mark_cat cat on cat.ono = mark.ono
+    where mark.sno = #{value}
+  </select>
+  
+    <update id="updateViewCount" parameterType="int">
+    update pet_mark set 
+      vw_cnt = vw_cnt + 1 
+    where sno = #{value}
+  </update>
+  
+    <update id="update" parameterType="sharingmarketboard">
+    update pet_mark set
+        title = #{title}, 
+        cont = #{content}
+    where sno = #{no}
+  </update>
   
 <!--  
   <select id="findByKeyword" resultMap="boardMap" parameterType="string">
@@ -68,34 +99,9 @@
     order by mark.no desc
   </select>
   
-  <select id="findByNo" resultMap="boardMap" parameterType="int">
-    select
-      mark.no,
-      mark.title,
-      mark.content,
-      mark.date,
-      mark.vw_cnt,
-      mem.no as writer_no,
-      mem.name as writer_name
-    from pet_mark mark
-      inner join pet_member mem on mem.no=mark.writer
-    where b.no = #{value}
-  </select>
-  
 
   
-  <update id="update" parameterType="sharingmarketboard">
-    update pms_board set
-        title = #{title}, 
-        cont = #{content}
-    where no = #{no}
-  </update>
-  
-  <update id="updateViewCount" parameterType="int">
-    update pet_mark set 
-      vw_cnt = vw_cnt + 1 
-    where no = #{value}
-  </update>
+
   
   <delete id="delete" parameterType="int">
     delete from pms_mark 

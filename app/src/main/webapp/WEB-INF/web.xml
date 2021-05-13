@@ -22,17 +22,17 @@
 
 <!--  필터 등록 및 필터를 적용할 URL 설정 -->
 
-	<filter>
-	  <filter-name>CharacterEncodingFilter</filter-name>
-	  <filter-class>com.pms.petopia.web.filter.CharacterEncodingFilter</filter-class>
-	  <init-param>
-	 <param-name>encoding</param-name>
-	 <param-value>UTF-8</param-value>
-	  </init-param>
-	</filter>
-	<filter-mapping>
-	  <filter-name>CharacterEncodingFilter</filter-name>
-	  <url-pattern>/*</url-pattern>
-	</filter-mapping>
+  <filter>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <filter-class>com.pms.petopia.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+   <param-name>encoding</param-name>
+   <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 
 </web-app>

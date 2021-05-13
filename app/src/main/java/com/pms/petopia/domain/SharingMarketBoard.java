@@ -11,6 +11,7 @@ public class SharingMarketBoard {
   private Member writer;
   private int viewCount;
   private SharingMarketBoardCategory category;
+  
 public int getNo() {
 	return no;
 }

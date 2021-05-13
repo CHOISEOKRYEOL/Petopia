@@ -41,7 +41,7 @@ public class HospitalListHandler extends HttpServlet {
       out.println("<table border='1'>");
       out.println("<thead>");
       out.println("<tr>");
-      out.println("<th>번호</th> <th>이름</th> <th>전화</th> <th>상세주소</th> <th>평점</th>");
+      out.println("<th>번호</th> <th>이름</th> <th>전화</th> <th>기본주소</th> <th>상세주소</th> <th>평점</th>");
       out.println("</tr>");
       out.println("</thead>");
       out.println("<tbody>");
@@ -52,10 +52,12 @@ public class HospitalListHandler extends HttpServlet {
             + " <td><a href='detail?no=%1$d'>%s</a></td>"
             + " <td>%s</td>"
             + " <td>%s</td>"
+            + " <td>%s</td>"
             + " <td>%d</td> </tr>\n",
             h.getNo(),
             h.getName(),
             h.getTel(),
+            h.getSmallAddress(),
             h.getAddress(),
             h.getRate());
       }
@@ -63,8 +65,18 @@ public class HospitalListHandler extends HttpServlet {
       out.println("</table>");
 
       out.println("<form action='search' method='get'>");
-      out.println("<select name='gno'><option value=''>분류</option><option value='1'>서울특별시</option></select>");
-      out.println("<select name='cno'><option value=''>분류</option><option value='1'>강남구</option></select>");
+      out.println("<select name='gno'><option value=''>분류</option>"
+          + "<option value='1'>서울특별시</option>\\n"
+          + "<option value='2'>경기도</option>\n"
+          + "<option value='3'>인천광역시</option></select>");
+      out.println("<select name='cno'><option value=''>분류</option>"
+          + "<optgroup label='서울특별시'>"
+          + "<option value='1'>강남구</option></optgroup>\n"
+          + "<optgroup label='경기도'>"
+          + "<option value='2'>김포시</option></optgroup>\n"
+          + "<optgroup label='인천광역시'>"
+          + "<option value='3'>중구</option></optgroup>\n"
+          + "</select>");
       out.println("<button>검색</button>");
       out.println("</form>");
 
