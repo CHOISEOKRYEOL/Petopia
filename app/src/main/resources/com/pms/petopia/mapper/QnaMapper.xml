@@ -25,6 +25,24 @@
   <insert id="answer" parameterType="qna">
   </insert>
   
+  <select id="findByNo" resultMap="qnaMap" parameterType="int">
+    select
+      q.qno, q.title, q.cont, q.cdt,
+      m.mno as writer_no, m.name as writer_name
+    from pet_qna q
+      inner join pet_user m on m.mno=q.writer
+      where qno=#{no}
+  </select>
+  
+  <select id="findAll" resultMap="qnaMap">
+    select
+      q.qno, q.title, q.cdt,
+      m.mno as writer_no, m.name as writer_name
+    from pet_qna q
+      inner join pet_user m on m.mno=q.writer
+    order by q.cdt desc
+  </select>
+  
   <update id="update" parameterType="qna">
     update pet_qna
     <set>
@@ -42,7 +60,6 @@
     delete from pet_qna
     where pno = #{value}
   </delete>
--->
 </mapper>
 
 
