@@ -1,6 +1,7 @@
 package com.pms.petopia.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.pms.petopia.domain.SharingMarketBoard;
 
@@ -19,5 +20,7 @@ public interface SharingMarketBoardDao {
 	  int delete(int no) throws Exception;
 	  
 	  List<SharingMarketBoard> findAll() throws Exception;
+	  
+	  List<SharingMarketBoard> findbyCategory(Map<String,Object> params) throws Exception;
   
 }

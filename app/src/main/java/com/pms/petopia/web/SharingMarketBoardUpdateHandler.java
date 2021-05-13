@@ -45,7 +45,7 @@ public class SharingMarketBoardUpdateHandler extends HttpServlet{
 
       SharingMarketBoard smbBoard = new SharingMarketBoard();
       smbBoard.setNo(oldBoard.getNo());
-      smbBoard.setCategory(Integer.parseInt(request.getParameter("category")));
+      //smbBoard.setCategory(Integer.parseInt(request.getParameter("category")));
       smbBoard.setTitle(request.getParameter("title"));
       smbBoard.setContent(request.getParameter("content"));
       sharingMarketBoardService.update(smbBoard);

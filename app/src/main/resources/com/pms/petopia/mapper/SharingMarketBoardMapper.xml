@@ -7,7 +7,6 @@
   
   <resultMap id="sharingmarketboardMap" type="sharingmarketboard">
     <id column="sno" property="no"/>
-    <result column="category" property="category"/>
     <result column="title" property="title"/>
     <result column="cont" property="content"/>
     <result column="date" property="createdDate"/>
@@ -16,6 +15,13 @@
     <association property="writer" javaType="member">
 	    <id column="writer_no" property="no"/>
 	    <result column="writer_name" property="name"/>
+    </association>
+    
+        <association property="category_title" javaType="sharingmarketboardcategory">
+	    <id column="category_no" property="no"/>
+	    <result column="dog_category" property="dog"/>
+	    <result column="cat_category" property="cat"/>
+	    <result column="ect_category" property="ect"/>
     </association>
     
   </resultMap>
@@ -37,6 +43,7 @@
       mem.name as writer_name
     from pet_mark mark
       inner join pet_user mem on mem.mno = mark.writer
+      inner join pet_
   </select>
   
 <!--  

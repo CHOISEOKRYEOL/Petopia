@@ -24,7 +24,7 @@ public class SharingMarketBoardAddHandler extends HttpServlet {
 	SharingMarketBoard smb = new SharingMarketBoard();
 	
 	request.setCharacterEncoding("UTF-8");
-	smb.setCategory(Integer.parseInt(request.getParameter("category")));
+	//smb.setCategory(Integer.parseInt(request.getParameter("category")));
 	smb.setTitle(request.getParameter("title"));
 	smb.setContent(request.getParameter("content"));
 	

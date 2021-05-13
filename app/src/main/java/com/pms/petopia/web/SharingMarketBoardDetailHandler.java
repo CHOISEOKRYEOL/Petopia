@@ -57,7 +57,7 @@ public class SharingMarketBoardDetailHandler extends HttpServlet{
 	          + " <td><textarea name='content' rows='10' cols='60'>%s</textarea></td></tr>\n", smb.getContent());
 	      out.printf("<tr><th>작성자</th> <td>%s</td></tr>\n", smb.getWriter().getName());
 	      out.printf("<tr><th>작성일</th> <td>%s</td></tr>\n", formatter.format(smb.getCreatedDate()));
-	      out.printf("<tr><th>조회수</th> <td>%s</td></tr>\n", smb.getVeiwCount());
+	      out.printf("<tr><th>조회수</th> <td>%s</td></tr>\n", smb.getViewCount());
 	   
 	      out.println("</tsmbody>");
 
