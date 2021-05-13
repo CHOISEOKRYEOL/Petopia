@@ -50,7 +50,7 @@ public class MainHandler extends HttpServlet {
       out.println("<p><a href='hospital/form.html'>병원 찾기</a></p>");
       out.println("<p><a href='story/add'>스토리</a></p>");
       out.println("<p><a href='sharingmarketboard/shareform.html'>나눔 장터</a></p>");
-      out.println("<p><a href='main'>우리 동네</a></p>");
+      out.println("<p><a href='mytown/main'>우리 동네</a></p>");
       out.println("<p><a href='review/form.html'>리뷰 작성</a></p>");
     }
     out.println("</body>");
