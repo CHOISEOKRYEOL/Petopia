@@ -40,7 +40,7 @@
   
   <insert id="insert" parameterType="mytownboard">
     insert into pet_mytown(cno, title, cont, writer) 
-    values(#{cno}, #{title}, #{content}, #{writer.no})
+    values(#{smallAddress.no}, #{title}, #{content}, #{writer.no})
   </insert>
   
   <select id="findByArea" resultMap="myTownBoardMap" parameterType="map">
@@ -114,9 +114,9 @@
   <update id="update" parameterType="mytownboard">
     update pet_mytown set
       title = #{title},
-      cont = #{cont},
-    date = now()
-    where tno=#{tno}
+      cont = #{content},
+      date = now()
+    where tno=#{no}
   </update>
   
   <update id="updateViewCount" parameterType="int">

@@ -49,7 +49,8 @@ public class MyTownBoardUpdateHandler extends HttpServlet {
       board.setContent(request.getParameter("content"));
       myTownBoardService.update(board);
 
-      out.println("<meta http-equiv='Refresh' content='1;url=list'>");
+      out.printf("<meta http-equiv='Refresh' content='1;url=list?stateNo=%d&cityNo=%d>",
+          oldBoard.getBigAddress().getNo(), oldBoard.getNo());
       out.println("</head>");
       out.println("<body>");
       out.println("<h1>게시글 변경</h1>");
