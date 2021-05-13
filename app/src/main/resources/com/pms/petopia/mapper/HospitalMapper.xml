@@ -49,26 +49,49 @@
       hno,
       name,
       tel,
-      address
+      address,
+      cno 
     from pet_hp 
     order by hno desc
   </select>
   
-   <!-- 
   <select id="findByNo" resultMap="hospitalMap" parameterType="int">
     select
-      hno,
-      name,
-      tel,
-      address,
-      parking,
-      vet,
-      time,
-      grade
-    from pet_hp
-    where hno = #{value}
+      h.hno,
+      h.name,
+      h.tel,
+      h.address,
+      h.parking,
+      h.vet,
+      h.time,
+      h.grade,
+      c.cno as city_no,
+      c.cname as city_name
+    from pet_hp h
+      inner join pet_city c on c.cno=h.cno
+    where h.hno=#{value}
   </select>
   
+  <update id="update" parameterType="hospital">
+    update pet_hp 
+    <set> 
+      name=#{name},
+      tel=#{tel},
+      cno=#{smallAddress.no},
+      address=#{address},
+      time=#{businessHour},
+      parking=#{parking},
+      vet=#{veterinarian}
+    </set>
+    where hno=#{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from pet_hp 
+    where hno=#{value}
+  </delete>
+  
+     <!-- 
   <select id="findByKeyword" resultMap="hospitalMap" parameterType="string">
     select
       hno,
@@ -86,23 +109,5 @@
     </if>
     order by hno desc
   </select>
-  
-  <update id="update" parameterType="hospital">
-    update pet_hp 
-    <set> 
-      <if test="name != ''">name=#{name},</if>
-      <if test="tel != ''">tel=#{tel},</if>
-      <if test="address != ''">address=#{address}</if>
-      <if test="parking != ''">parking=#{parking},</if>
-      <if test="vet != ''">vet=#{vet},</if>
-      <if test="time != ''">time=#{time},</if>
-    </set>
-    where hno=#{no}
-  </update>
-  
-  <delete id="delete" parameterType="int">
-    delete from pet_hp 
-    where hno=#{value}
-  </delete>
     -->
 </mapper>
