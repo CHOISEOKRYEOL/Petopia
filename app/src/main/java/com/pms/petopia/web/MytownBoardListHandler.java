@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.MyTownBoard;
 import com.pms.petopia.service.MyTownBoardService;
 
@@ -23,8 +22,6 @@ public class MytownBoardListHandler extends HttpServlet {
       throws ServletException, IOException {
 
     MyTownBoardService myTownBoardService = (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
-
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();

@@ -8,11 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.pms.petopia.domain.BigAddress;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.MyTownBoard;
 import com.pms.petopia.domain.SmallAddress;
-  import com.pms.petopia.service.MyTownBoardService;
+import com.pms.petopia.service.MyTownBoardService;
 import com.pms.petopia.service.SmallAddressService;
 
 @SuppressWarnings("serial")
@@ -89,13 +88,15 @@ public class MyTownBoardAddHandler extends HttpServlet{
       out.println("<title>게시글 등록</title>");
 
       myTownBoardService.add(b);
+      String webAdress= String.format("list?stateNo=%s&cityNo=%s", s.getBigAddress().getNo(), s.getNo());
+      response.sendRedirect(webAdress);
 
-      out.printf("<meta http-equiv='Refresh' content='1;url=list?stateNo=%d&cityNo=%d>",
-          s.getBigAddress().getNo(), s.getNo());
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>게시글 등록</h1>");
-      out.println("<p>게시글을 등록했습니다.<p>");
+      //      out.printf("<meta http-equiv='Refresh' content='1;url=list?stateNo=%d&cityNo=%d>",
+      //          s.getBigAddress().getNo(), s.getNo());
+      //      out.println("</head>");
+      //      out.println("<body>");
+      //      out.println("<h1>게시글 등록</h1>");
+      //      out.println("<p>게시글을 등록했습니다.<p>");
 
       response.setHeader("Refresh", "1;url=../main");
     } catch (Exception e) {
