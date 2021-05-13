@@ -14,6 +14,7 @@ import com.pms.petopia.dao.HospitalDao;
 import com.pms.petopia.dao.MemberDao;
 import com.pms.petopia.dao.MyTownBoardDao;
 import com.pms.petopia.dao.PetDao;
+import com.pms.petopia.dao.QnaDao;
 import com.pms.petopia.dao.RecordDao;
 import com.pms.petopia.dao.ReviewDao;
 import com.pms.petopia.dao.SharingMarketBoardDao;
@@ -24,6 +25,7 @@ import com.pms.petopia.service.HospitalService;
 import com.pms.petopia.service.MemberService;
 import com.pms.petopia.service.MyTownBoardService;
 import com.pms.petopia.service.PetService;
+import com.pms.petopia.service.QnaService;
 import com.pms.petopia.service.RecordService;
 import com.pms.petopia.service.ReviewService;
 import com.pms.petopia.service.SharingMarketBoardService;
@@ -34,6 +36,7 @@ import com.pms.petopia.service.impl.DefaultHospitalService;
 import com.pms.petopia.service.impl.DefaultMemberService;
 import com.pms.petopia.service.impl.DefaultMyTownBoardService;
 import com.pms.petopia.service.impl.DefaultPetService;
+import com.pms.petopia.service.impl.DefaultQnaService;
 import com.pms.petopia.service.impl.DefaultRecordService;
 import com.pms.petopia.service.impl.DefaultReviewService;
 import com.pms.petopia.service.impl.DefaultSharingMarketBoardService;
@@ -69,6 +72,7 @@ public class ContextLoaderListener implements ServletContextListener {
       BigAddressDao bigAddressDao = daoFactory.createDao(BigAddressDao.class);
       SmallAddressDao smallAddressDao = daoFactory.createDao(SmallAddressDao.class);
       ReviewDao reviewDao = daoFactory.createDao(ReviewDao.class);
+      QnaDao qnaDao = daoFactory.createDao(QnaDao.class);
 
       // 3) 서비스 관련 객체 준비
       MemberService memberService = new DefaultMemberService(memberDao);
@@ -81,6 +85,7 @@ public class ContextLoaderListener implements ServletContextListener {
       BigAddressService bigAddressService = new DefaultBigAddressService(bigAddressDao);
       SmallAddressService smallAddressService = new DefaultSmallAddressService(smallAddressDao);
       ReviewService reviewService = new DefaultReviewService(reviewDao);
+      QnaService qnaService = new DefaultQnaService(qnaDao);
 
       // 4) 서비스 객체를 ServletContext 보관소에 저장한다.
       servletContext.setAttribute("memberService", memberService);
@@ -93,6 +98,7 @@ public class ContextLoaderListener implements ServletContextListener {
       servletContext.setAttribute("bigAddressService", bigAddressService);
       servletContext.setAttribute("smallAddressService", smallAddressService);
       servletContext.setAttribute("reviewService", reviewService);
+      servletContext.setAttribute("qnaService", qnaService);
 
     } catch (Exception e) {
       e.printStackTrace();
