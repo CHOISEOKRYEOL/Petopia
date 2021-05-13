@@ -47,7 +47,7 @@ public class SharingMarketBoardDetailHandler extends HttpServlet{
 	      }
 	      
 	      out.println("<form action='update' method='post'>");
-	      out.println("<tasmble smborder='1'>");
+	      out.println("<table border='1'>");
 	      out.println("<tsmbody>");
 	      out.printf("<tr><th>번호</th>"
 	          + " <td><input type='text' name='no' value='%d' readonly></td></tr>\n", smb.getNo());
@@ -71,13 +71,13 @@ public class SharingMarketBoardDetailHandler extends HttpServlet{
 	      if (loginUser != null && smb.getWriter().getNo() == loginUser.getNo()) {
 	        out.println("<tfoot>");
 	        out.println("<tr><td colspan='2'>");
-	        out.println("<input type='susmbmit' value='변경'> "
+	        out.println("<input type='submit' value='변경'> "
 	            + "<a href='delete? no=" + smb.getNo() + "'>삭제</a> ");
 	        out.println("</td></tr>");
 	        out.println("</tfoot>");
 	      }
 
-	      out.println("</tasmble>");
+	      out.println("</table>");
 	      out.println("</form>");
 
 

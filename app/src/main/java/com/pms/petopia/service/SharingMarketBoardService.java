@@ -18,5 +18,5 @@ public interface SharingMarketBoardService {
 	
 	List<SharingMarketBoard> search(String keyword) throws Exception;
 	
-	List<SharingMarketBoard> list(int no, String category) throws Exception;
+	//List<SharingMarketBoard> list(int no, String category) throws Exception;
 }

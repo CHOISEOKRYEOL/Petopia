@@ -49,13 +49,13 @@ public class DefaultSharingMarketBoardService implements SharingMarketBoardServi
 		return sharingMarketBoardDao.findByKeyword(keyword);
 	}
 	
-	@Override
-	public List<SharingMarketBoard> list(int no, String category) throws Exception {
-	    HashMap<String,Object> params = new HashMap<>();
-	    params.put("ono", no);
-	    params.put("cat_name", category);
-		return sharingMarketBoardDao.findbyCategory(params);
-	}
+//	@Override
+//	public List<SharingMarketBoard> list(int no, String category) throws Exception {
+//	    HashMap<String,Object> params = new HashMap<>();
+//	    params.put("ono", no);
+//	    params.put("cat_name", category);
+//		return sharingMarketBoardDao.findbyCategory(params);
+//	}
 
 
 }
