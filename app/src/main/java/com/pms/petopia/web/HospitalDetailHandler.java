@@ -100,11 +100,28 @@ public class HospitalDetailHandler extends HttpServlet {
 
       List<Review> reviews = reviewService.list2();
 
-      out.printf("리뷰 개수 : %d\n", reviews.size());
-
       for(Review r : reviews) {
         if(hospital.getNo() == r.getHospital().getNo()) {
           out.println(r.getComment());
+          out.printf("<tr>"
+              + " <td>%d</td>"
+              + " <td>%d</td>"
+              + " <td>%d</td>"
+              + " <td>%d</td>"
+              + " <td>%s</td>"
+              + " <td>%s</td>"
+              + " <td>%s</td>"
+              + " <td>%s</td>"
+              + " <td>%s</td> </tr>\n",
+              r.getNo(),
+              r.getServiceRating(),
+              r.getCleanlinessRating(),
+              r.getCostRating(),
+              r.getComment(),
+              r.getPhoto(),
+              r.getCreatedDate(),
+              r.getWriter().getName(),
+              r.getHospital().getName());
         }
       }
 
