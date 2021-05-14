@@ -14,6 +14,7 @@
     <result column="endTime" property="endTime"/>
     <result column="parking" property="parking"/>
     <result column="vet" property="veterinarian"/>
+    <result column="photo" property="photo"/>
     <result column="grade" property="rate"/>
 
     <association property="admin" javaType="member">
@@ -41,18 +42,22 @@
   </resultMap>
   
   <insert id="insert" parameterType="hospital">
-    insert into pet_hp(name, tel, address, startTime, endTime, parking, vet, cno) 
-    values(#{name}, #{tel}, #{address}, #{startTime}, #{endTime}, #{parking}, #{veterinarian}, #{smallAddress.no})
+    insert into pet_hp(name, tel, address, startTime, endTime, parking, vet, photo, cno) 
+    values(#{name}, #{tel}, #{address}, #{startTime}, #{endTime}, #{parking}, #{veterinarian}, #{photo}, #{smallAddress.no})
   </insert>
 
   <select id="findAll" resultMap="hospitalMap">
     select 
-      hno,
-      name,
-      tel,
-      address,
-      cno 
-    from pet_hp 
+      h.hno,
+      h.name,
+      h.tel,
+      h.address,
+      h.startTime,
+      h.endTime,
+      c.cno as city_no,
+      c.cname as city_name
+    from pet_hp h
+      inner join pet_city c on c.cno=h.cno
     order by hno desc
   </select>
   
@@ -66,6 +71,7 @@
       h.endTime,
       h.parking,
       h.vet,
+      h.photo,
       h.grade,
       c.cno as city_no,
       c.cname as city_name
@@ -84,6 +90,7 @@
       startTime=#{startTime},
       endTime=#{endTime},
       parking=#{parking},
+      photo=#{photo},
       vet=#{veterinarian}
     </set>
     where hno=#{no}

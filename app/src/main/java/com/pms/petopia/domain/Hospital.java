@@ -10,6 +10,7 @@ public class Hospital {
   private int endTime;
   private int parking;
   private int veterinarian;
+  private String photo;
   private int rate;
   private Member admin;
   private BigAddress bigAddress;
@@ -21,10 +22,9 @@ public class Hospital {
   public String toString() {
     return "Hospital [no=" + no + ", name=" + name + ", tel=" + tel + ", address=" + address
         + ", startTime=" + startTime + ", endTime=" + endTime + ", parking=" + parking
-        + ", veterinarian=" + veterinarian + ", rate=" + rate + ", admin=" + admin + ", bigAddress="
-        + bigAddress + ", smallAddress=" + smallAddress + "]";
+        + ", veterinarian=" + veterinarian + ", photo=" + photo + ", rate=" + rate + ", admin="
+        + admin + ", bigAddress=" + bigAddress + ", smallAddress=" + smallAddress + "]";
   }
-
   public int getNo() {
     return no;
   }
@@ -72,6 +72,12 @@ public class Hospital {
   }
   public void setVeterinarian(int veterinarian) {
     this.veterinarian = veterinarian;
+  }
+  public String getPhoto() {
+    return photo;
+  }
+  public void setPhoto(String photo) {
+    this.photo = photo;
   }
   public int getRate() {
     return rate;

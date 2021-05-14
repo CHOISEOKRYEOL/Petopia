@@ -37,6 +37,9 @@ public class StoryAddHandler extends HttpServlet {
 
     out.println("<input type='submit' value='등록'>");
     out.println("</form>");
+    out.println("<form action='../main'>");
+    out.println("<input type='submit' value='취소'>");
+    out.println("</form>");
     out.println("</body>");
     out.println("</html>");
   }

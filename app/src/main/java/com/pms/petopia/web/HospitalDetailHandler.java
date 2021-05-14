@@ -44,11 +44,13 @@ public class HospitalDetailHandler extends HttpServlet {
       }
 
       out.println("<form action='update' method='post'>");
-      out.printf("번호 <input type='text' name='no' value='%d' readonly><br>\n", hospital.getNo());
-      out.printf("병원이름 <input type='text' name='name' value='%s'><br>\n", hospital.getName());
-      out.printf("전화번호 <input type='tel' name='tel' value='%s'><br>\n", hospital.getTel());
+      out.println("<table border='1'>");
+      out.println("<tbody>");
+      out.printf("<tr><th>번호</th> <td><input type='text' name='no' value='%d' readonly></td></tr>\n", hospital.getNo());
+      out.printf("<tr><th>병원이름</th> <td><input type='text' name='name' value='%s'></td></tr>\n", hospital.getName());
+      out.printf("<tr><th>전화번호</th> <td><input type='tel' name='tel' value='%s'></td></tr>\n", hospital.getTel());
 
-      out.println("기본주소 <select name='gno'><option value=''>분류</option>"
+      out.println("<tr><th>기본주소</th> <td><select name='gno'><option value=''>분류</option>"
           + "<option value='1'>서울특별시</option>\n"
           + "<option value='2'>경기도</option>\n"
           + "<option value='3'>인천광역시</option></select>");
@@ -58,24 +60,37 @@ public class HospitalDetailHandler extends HttpServlet {
           + "<optgroup label='경기도'>"
           + "<option value='2'>김포시</option></optgroup>\n"
           + "<optgroup label='인천광역시'>"
-          + "<option value='3'>중구</option></optgroup></select><br>");
+          + "<option value='3'>중구</option></optgroup></select></td></tr>");
 
-      out.printf("상세주소 <input type='text' name='address' value='%s'><br>\n", hospital.getAddress());
-      out.printf("진료시간 <input type='text' name='startTime' value='%s'><input type='text' name='endTime' value='%s'><br>\n", 
+      out.printf("<tr><th>상세주소</th> <td><input type='text' name='address' value='%s'></td></tr>\n", hospital.getAddress());
+      out.printf("<tr><th>진료시간</th> <td><input type='number' name='startTime' value='%d'>"
+          + "<input type='number' name='endTime' value='%d'></td></tr>\n", 
           hospital.getStartTime(), hospital.getEndTime());
 
       if (hospital.getParking() == 1) {
-        out.println("주차여부 <input type='radio' name='parking' value='1' checked>Yes"
-            + "<input type='radio' name='parking' value='0'>No<br>\n");
+        out.println("<tr><th>주차여부</th> <td><input type='radio' name='parking' value='1' checked>Yes"
+            + "<input type='radio' name='parking' value='0'>No</td></tr>\n");
       } else if (hospital.getParking() == 0) {
-        out.println("주차여부 <input type='radio' name='parking' value='1'>Yes"
-            + "<input type='radio' name='parking' value='0' checked>No<br>\n");
+        out.println("<tr><th>주차여부</th> <td><input type='radio' name='parking' value='1'>Yes"
+            + "<input type='radio' name='parking' value='0' checked>No</td></tr>\n");
       }
 
-      out.printf("수의사 <input type='number' name='vet' value='%d'><br>\n", hospital.getVeterinarian());
+      out.printf("<tr><th>수의사</th> <td><input type='number' name='vet' value='%d'></td></tr>\n", hospital.getVeterinarian());
+      //      out.printf("<tr><th>병원사진</th> <td><a href='%s'><img src='%s'></a><br>"
+      //          + "<input name='photo' type='file'></td></tr>\n", hospital.getPhoto());
+      out.println("</tbody>");
 
-      out.println("<input type='submit' value='변경'> ");
+      //Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+      //if (loginUser != null && hospital.getNo() == loginUser.getNo()) {
+      out.println("<tfoot>");
+      out.println("<tr><td colspan='2'>");
+      out.println("<input type='submit' value='변경'>");
       out.printf("<a href='delete?no=%d'>삭제</a>\n", hospital.getNo());
+      out.println("</td></tr>");
+      out.println("</tfoot>");
+      //}
+
+      out.println("</table>");
       out.println("</form>");
 
     } catch (Exception e) {
