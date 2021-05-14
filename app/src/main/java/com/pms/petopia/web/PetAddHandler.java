@@ -32,11 +32,12 @@ public class PetAddHandler extends HttpServlet {
     p.setGender(Integer.parseInt(request.getParameter("gender")));
     p.setPhoto(request.getParameter("photo"));
 
+
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
     p.setOwner(loginUser);
 
     Type t = new Type();
-    t.setType(Integer.parseInt(request.getParameter("type")));
+    t.setNo(Integer.parseInt(request.getParameter("type")));
     p.setType(t);
 
     response.setContentType("text/html;charset=UTF-8");

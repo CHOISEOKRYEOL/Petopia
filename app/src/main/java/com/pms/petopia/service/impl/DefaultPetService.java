@@ -19,15 +19,22 @@ public class DefaultPetService implements PetService {
     return petDao.insert(pet);
   }
 
-  // 조회 업무
+  // 상세 조회 업무
+  @Override
+  public Pet get(int no) throws Exception {
+    return petDao.findByNo(no);
+  }
+
+  //사용자 조회 업무
   @Override
   public List<Pet> list() throws Exception {
     return petDao.findAll();
   }
 
+  // 변경 업무
   @Override
-  public Pet findByNo(int no) throws Exception {
-    return petDao.findByNo(no);
+  public int update(Pet pet) throws Exception {
+    return petDao.update(pet);
   }
 
   // 삭제 업무
@@ -36,16 +43,5 @@ public class DefaultPetService implements PetService {
     return petDao.delete(no);
   }
 
-  @Override
-  public int update(Pet pet) throws Exception {
-    return petDao.update(pet);
-  }
 
 }
-
-
-
-
-
-
-

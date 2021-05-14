@@ -18,6 +18,13 @@
 	    <result column="owner_name" property="name"/>
     </association>
     
+    <!-- 
+    <association property="species" javaType="species">
+      <id column="species_no" property="no"/>
+      <result column="species_name" property="type"/>
+    </association>
+     -->
+     
     <association property="type" javaType="type">
       <id column="type_no" property="no"/>
       <result column="type_type" property="type"/>
@@ -30,32 +37,59 @@
     values(#{name}, #{age}, #{birthDay}, #{gender}, #{owner.no}, #{type.no})
   </insert>
  
- <!--  
-  <select id="findByNo" resultMap="pet" parameterType="int">
+  <select id="findAll"  resultMap="petMap">
     select
-      p.mno,
-      p.pname, 
+      p.pno,
+      p.pname,
       p.age,
       p.birth,
-      p.gender, 
-      p.photo, 
-      m.nowner 
-    from pet_mypet p 
-    join pet_user m on m.mno = p.pno
-    where p.pno = #{value}
+      p.gender,
+      p.photo,
+      m.mno as owner_no,
+      m.name as owner_name,
+      t.rno as type_no, t.type as type_type
+    from pet_mypet p
+    inner join pet_type t on p.type = t.rno
+    inner join pet_species s on s.sno = t.sno
+    inner join pet_user m on m.mno=p.owner
+  </select>
+<!-- 
+    inner join pet_species s on s.sno=t.sno
+ -->
+  <select id="findByNo" resultMap="petMap" parameterType="int">
+    select
+      p.pno,
+      p.pname,
+      p.age,
+      p.birth,
+      p.gender,
+      p.photo,
+      t.type as type_type,
+      m.name as owner_name
+    from pet_species s
+   inner join pet_type t on s.sno = t.sno
+   inner join pet_mypet p on s.type = p.type
+   inner join pet_user m on m.mno=p.owner
+    where p.pno = #{no}
   </select>
    
   <update id="update" parameterType="pet">
-    update pet_mypet set
-        pname = #{pname}
-    where no = #{no}
+    update pet_mypet
+    <set>
+      <if test="name != null or name != ''">
+        pname = #{name},
+      </if>
+      <if test="photo != null or photo != ''">
+        photo = #{photo}
+      </if>
+    </set>
+    where pno = #{no}
   </update>
   
   <delete id="delete" parameterType="int">
     delete from pet_mypet 
-    where no = #{value}
+    where pno = #{value}
   </delete>
--->
 </mapper>
 
 

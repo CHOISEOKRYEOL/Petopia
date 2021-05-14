@@ -15,6 +15,8 @@ public interface PetDao {
 
   int delete(int no) throws Exception;
 
+  Pet findByName(String name) throws Exception;
+
 }
 
 

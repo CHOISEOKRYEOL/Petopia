@@ -9,7 +9,7 @@ public interface PetService {
 
   List<Pet> list() throws Exception;
 
-  Pet findByNo(int no) throws Exception;
+  Pet get(int no) throws Exception;
 
   int update(Pet pet) throws Exception;
 

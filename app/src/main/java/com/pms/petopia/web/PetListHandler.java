@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.Pet;
 import com.pms.petopia.service.PetService;
 
@@ -21,8 +22,9 @@ public class PetListHandler extends HttpServlet {
       throws ServletException, IOException {
     // 클라이언트가 /board/list 를 요청하면 톰캣 서버가 이 메서드를 호출한다. 
 
-    PetService petMemberService = (PetService) request.getServletContext().getAttribute("PetService");
+    PetService petService = (PetService) request.getServletContext().getAttribute("petService");
 
+    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
@@ -37,29 +39,32 @@ public class PetListHandler extends HttpServlet {
     out.println("<p><a href='form.html'>새 글</a></p>");
 
     try {
-      List<Pet> pets = petMemberService.list();
+      List<Pet> list = petService.list();
 
       out.println("<table border='1'>");
       out.println("<thead>");
       out.println("<tr>");
-      out.println("<th>번호</th> <th>이름</th> <th>나이</th> <th>생일</th> <th>품종</th> <th>사진</th>");
+      out.println("<th>번호</th>  <th>이름</th> <th>나이</th> <th>생일</th> <th>품종</th> <th>사진</th>");
       out.println("</tr>");
       out.println("</thead>");
       out.println("<tbody>");
 
-      for (Pet p : pets) {
-        out.printf("<tr>"
-            + " <td>%d</td>"
-            + " <td><a href='detail?no=%1$d'>%s</a></td>"
-            + " <td>%s</td>"
-            + " <td>%b</td>"
-            + " <td>%d</td> </tr>\n", 
-            p.getNo(),
-            p.getName(),
-            p.getAge(),
-            p.getBirthDay(),
-            p.getType(),
-            p.getPhoto());
+      for(Pet p : list) {
+        if(loginUser.getNo() == p.getOwner().getNo()) {
+          out.printf("<tr>"
+              + " <td>%d</td>"
+              + " <td><a href='detail?no=%1$d'>%s</a></td>"
+              + " <td>%d</td>"
+              + " <td>%s</td>"
+              + " <td>%s</td>"
+              + " <td>%s</td> </tr>\n", 
+              p.getNo(),
+              p.getName(),
+              p.getAge(),
+              p.getBirthDay(),
+              p.getType().getType(),
+              p.getPhoto());
+        }
       }
       out.println("</tbody>");
       out.println("</table>");
