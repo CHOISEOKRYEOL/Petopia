@@ -3,13 +3,16 @@ package com.pms.petopia.web;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.Hospital;
+import com.pms.petopia.domain.Review;
 import com.pms.petopia.service.HospitalService;
+import com.pms.petopia.service.ReviewService;
 
 @SuppressWarnings("serial")
 @WebServlet("/hospital/detail")
@@ -20,8 +23,7 @@ public class HospitalDetailHandler extends HttpServlet {
       throws ServletException, IOException {
 
     HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
-    //    BigAddressService bigAddressService = (BigAddressService) request.getServletContext().getAttribute("bigAddressService");
-    //    SmallAddressService smallAddressService = (SmallAddressService) request.getServletContext().getAttribute("smallAddressService");
+    ReviewService reviewService = (ReviewService) request.getServletContext().getAttribute("reviewService");
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -45,27 +47,14 @@ public class HospitalDetailHandler extends HttpServlet {
         return;
       }
 
-      out.println("<form action='update' method='post'>");
-      out.printf("번호 <input type='text' name='no' value='%d' readonly><br>\n", hospital.getNo());
-      out.printf("병원이름 <input type='text' name='name' value='%s'><br>\n", hospital.getName());
-      out.printf("전화번호 <input type='tel' name='tel' value='%s'><br>\n", hospital.getTel());
-      //      try {
-      //        BigAddress bigAddress = bigAddressService.get(no);
-      //        if (bigAddress.getNo() == 1) {
-      //          out.println("기본주소 <select name='gno'><option value=''>분류</option><option value='1' selected>서울특별시</option></select>\n");
-      //        } else {
-      //          out.println("기본주소 <select name='gno'><option value=''>분류</option><option value='1'>서울특별시</option></select>\n");
-      //        }
-      //        SmallAddress smallAddress = smallAddressService.get(no);
-      //        if (smallAddress.getNo() == 1) {
-      //          out.println("<select name='cno'><option value=''>분류</option><option value='1' selected>강남구</option></select><br>\n");
-      //        } else {
-      //          out.println("<select name='cno'><option value=''>분류</option><option value='1'>강남구</option></select><br>\n");
-      //        }
-      //      } catch (Exception e) {
-      //        throw new ServletException(e);
-      //      }
-      out.println("기본주소 <select name='gno'><option value=''>분류</option>"
+      out.println("<form action='update' method='post' enctype='multipart/form-data'>");
+      out.println("<table border='1'>");
+      out.println("<tbody>");
+      out.printf("<tr><th>번호</th> <td><input type='text' name='no' value='%d' readonly></td></tr>\n", hospital.getNo());
+      out.printf("<tr><th>병원이름</th> <td><input type='text' name='name' value='%s'></td></tr>\n", hospital.getName());
+      out.printf("<tr><th>전화번호</th> <td><input type='tel' name='tel' value='%s'></td></tr>\n", hospital.getTel());
+
+      out.println("<tr><th>기본주소</th> <td><select name='gno'><option value=''>분류</option>"
           + "<option value='1'>서울특별시</option>\n"
           + "<option value='2'>경기도</option>\n"
           + "<option value='3'>인천광역시</option></select>");
@@ -75,23 +64,66 @@ public class HospitalDetailHandler extends HttpServlet {
           + "<optgroup label='경기도'>"
           + "<option value='2'>김포시</option></optgroup>\n"
           + "<optgroup label='인천광역시'>"
-          + "<option value='3'>중구</option></optgroup></select><br>");
+          + "<option value='3'>중구</option></optgroup></select></td></tr>");
 
-      out.printf("상세주소 <input type='text' name='address' value='%s'><br>\n", hospital.getAddress());
-      out.printf("진료시간 <input type='text' name='time' value='%s'><br>\n", hospital.getBusinessHour());
+      out.printf("<tr><th>상세주소</th> <td><input type='text' name='address' value='%s'></td></tr>\n", hospital.getAddress());
+      out.printf("<tr><th>진료시간</th> <td><input type='number' name='startTime' value='%d'>"
+          + "<input type='number' name='endTime' value='%d'></td></tr>\n", 
+          hospital.getStartTime(), hospital.getEndTime());
 
       if (hospital.getParking() == 1) {
-        out.println("주차여부 <input type='radio' name='parking' value='1' checked>Yes"
-            + "<input type='radio' name='parking' value='0'>No<br>\n");
+        out.println("<tr><th>주차여부</th> <td><input type='radio' name='parking' value='1' checked>Yes"
+            + "<input type='radio' name='parking' value='0'>No</td></tr>\n");
       } else if (hospital.getParking() == 0) {
-        out.println("주차여부 <input type='radio' name='parking' value='1'>Yes"
-            + "<input type='radio' name='parking' value='0' checked>No<br>\n");
+        out.println("<tr><th>주차여부</th> <td><input type='radio' name='parking' value='1'>Yes"
+            + "<input type='radio' name='parking' value='0' checked>No</td></tr>\n");
       }
-      out.printf("수의사 <input type='number' name='vet' value='%d'><br>\n", hospital.getVeterinarian());
 
-      out.println("<input type='submit' value='변경'> ");
+      out.printf("<tr><th>수의사</th> <td><input type='number' name='vet' value='%d'></td></tr>\n", hospital.getVeterinarian());
+
+      out.printf("<tr><th>사진</th> <td><a href='%s'><img src='%s'></a><br>"
+          + "<input name='photo' type='file'></td></tr>\n",
+          hospital.getPhoto() != null ? "../upload/" + hospital.getPhoto() : "",
+              hospital.getPhoto() != null ? "../upload/" + hospital.getPhoto() + "_300x300.jpg" : "../images/person_300x300.jpg");
+
+      out.println("</tbody>");
+
+      out.println("<tfoot>");
+      out.println("<tr><td colspan='2'>");
+      out.println("<input type='submit' value='변경'>");
       out.printf("<a href='delete?no=%d'>삭제</a>\n", hospital.getNo());
+      out.println("</td></tr>");
+      out.println("</tfoot>");
+
+      out.println("</table>");
       out.println("</form>");
+
+      List<Review> reviews = reviewService.list2();
+
+      for(Review r : reviews) {
+        if(hospital.getNo() == r.getHospital().getNo()) {
+          out.println(r.getComment());
+          out.printf("<tr>"
+              + " <td>%d</td>"
+              + " <td>%d</td>"
+              + " <td>%d</td>"
+              + " <td>%d</td>"
+              + " <td>%s</td>"
+              + " <td>%s</td>"
+              + " <td>%s</td>"
+              + " <td>%s</td>"
+              + " <td>%s</td> </tr>\n",
+              r.getNo(),
+              r.getServiceRating(),
+              r.getCleanlinessRating(),
+              r.getCostRating(),
+              r.getComment(),
+              r.getPhoto(),
+              r.getCreatedDate(),
+              r.getWriter().getName(),
+              r.getHospital().getName());
+        }
+      }
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();

@@ -41,4 +41,8 @@ public class DefaultReviewService implements ReviewService {
   public int delete(int no) throws Exception {
     return reviewDao.delete(no);
   }
+
+  public List<Review> list2() throws Exception {
+    return reviewDao.findAll2();
+  }
 }
