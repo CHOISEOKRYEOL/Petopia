@@ -12,19 +12,19 @@ public class Hospital {
   private int veterinarian;
   private String photo;
   private int rate;
-  private Member admin;
   private BigAddress bigAddress;
   private SmallAddress smallAddress;
+  private Review review;
   //  private float longitude;
   //  private float latitude;
-
   @Override
   public String toString() {
     return "Hospital [no=" + no + ", name=" + name + ", tel=" + tel + ", address=" + address
         + ", startTime=" + startTime + ", endTime=" + endTime + ", parking=" + parking
-        + ", veterinarian=" + veterinarian + ", photo=" + photo + ", rate=" + rate + ", admin="
-        + admin + ", bigAddress=" + bigAddress + ", smallAddress=" + smallAddress + "]";
+        + ", veterinarian=" + veterinarian + ", photo=" + photo + ", rate=" + rate + ", bigAddress="
+        + bigAddress + ", smallAddress=" + smallAddress + ", review=" + review + "]";
   }
+
   public int getNo() {
     return no;
   }
@@ -85,12 +85,6 @@ public class Hospital {
   public void setRate(int rate) {
     this.rate = rate;
   }
-  public Member getAdmin() {
-    return admin;
-  }
-  public void setAdmin(Member admin) {
-    this.admin = admin;
-  }
   public BigAddress getBigAddress() {
     return bigAddress;
   }
@@ -102,6 +96,12 @@ public class Hospital {
   }
   public void setSmallAddress(SmallAddress smallAddress) {
     this.smallAddress = smallAddress;
+  }
+  public Review getReview() {
+    return review;
+  }
+  public void setReview(Review review) {
+    this.review = review;
   }
 
 }

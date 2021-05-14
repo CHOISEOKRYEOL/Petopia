@@ -1,7 +1,6 @@
 package com.pms.petopia.dao;
 
 import java.util.List;
-import com.pms.petopia.domain.Hospital;
 import com.pms.petopia.domain.Review;
 
 public interface ReviewDao {
@@ -15,5 +14,7 @@ public interface ReviewDao {
   int update(Review review) throws Exception;
 
   int delete(int no) throws Exception;
+
+  List<Review> findAll2() throws Exception;
 
 }

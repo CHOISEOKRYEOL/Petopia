@@ -17,18 +17,6 @@
     <result column="photo" property="photo"/>
     <result column="grade" property="rate"/>
 
-    <association property="admin" javaType="member">
-      <id column="admin_no" property="no"/>
-      <result column="admin_name" property="name"/>
-    </association>
-    
-   <!-- 
-    <association property="review" javaType="review">
-      <id column="review_no" property="no"/>
-      <result column="review_name" property="name"/>
-    </association>
-     -->
-     
     <association property="bigAddress" javaType="bigAddress">
       <id column="state_no" property="no"/>
       <result column="state_name" property="name"/>

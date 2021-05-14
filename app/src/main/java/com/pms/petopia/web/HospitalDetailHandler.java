@@ -3,13 +3,16 @@ package com.pms.petopia.web;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.Hospital;
+import com.pms.petopia.domain.Review;
 import com.pms.petopia.service.HospitalService;
+import com.pms.petopia.service.ReviewService;
 
 @SuppressWarnings("serial")
 @WebServlet("/hospital/detail")
@@ -20,6 +23,7 @@ public class HospitalDetailHandler extends HttpServlet {
       throws ServletException, IOException {
 
     HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
+    ReviewService reviewService = (ReviewService) request.getServletContext().getAttribute("reviewService");
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -84,8 +88,6 @@ public class HospitalDetailHandler extends HttpServlet {
 
       out.println("</tbody>");
 
-      //Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-      //if (loginUser != null && hospital.getNo() == loginUser.getNo()) {
       out.println("<tfoot>");
       out.println("<tr><td colspan='2'>");
       out.println("<input type='submit' value='변경'>");
@@ -96,6 +98,16 @@ public class HospitalDetailHandler extends HttpServlet {
 
       out.println("</table>");
       out.println("</form>");
+
+      List<Review> reviews = reviewService.list2();
+
+      out.printf("리뷰 개수 : %d\n", reviews.size());
+
+      for(Review r : reviews) {
+        if(hospital.getNo() == r.getHospital().getNo()) {
+          out.println(r.getComment());
+        }
+      }
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();
