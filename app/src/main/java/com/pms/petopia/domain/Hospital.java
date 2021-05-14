@@ -17,6 +17,7 @@ public class Hospital {
   private Review review;
   //  private float longitude;
   //  private float latitude;
+
   @Override
   public String toString() {
     return "Hospital [no=" + no + ", name=" + name + ", tel=" + tel + ", address=" + address

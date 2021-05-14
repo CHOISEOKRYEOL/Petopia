@@ -40,11 +40,6 @@ public class HospitalDeleteHandler extends HttpServlet {
         throw new Exception("해당 번호의 병원이 없습니다.");
       }
 
-      //      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-      //      if (oldHospital.getWriter().getNo() != loginUser.getNo()) {
-      //        throw new Exception("변경 권한이 없습니다!");
-      //      }
-
       hospitalService.delete(no);
 
       out.println("<p>병원을 삭제했습니다.</p>");

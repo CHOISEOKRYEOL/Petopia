@@ -94,7 +94,6 @@ public class HospitalDetailHandler extends HttpServlet {
       out.printf("<a href='delete?no=%d'>삭제</a>\n", hospital.getNo());
       out.println("</td></tr>");
       out.println("</tfoot>");
-      //}
 
       out.println("</table>");
       out.println("</form>");

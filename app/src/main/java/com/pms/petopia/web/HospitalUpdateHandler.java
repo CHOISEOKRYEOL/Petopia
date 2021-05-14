@@ -57,11 +57,6 @@ public class HospitalUpdateHandler extends HttpServlet {
         throw new Exception("해당 번호의 병원이 없습니다.");
       }
 
-      //      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-      //      if (oldHospital.getWriter().getNo() != loginUser.getNo()) {
-      //        throw new Exception("변경 권한이 없습니다!");
-      //      }
-
       Hospital hospital = new Hospital();
       hospital.setNo(oldHospital.getNo());
       hospital.setName(request.getParameter("name"));

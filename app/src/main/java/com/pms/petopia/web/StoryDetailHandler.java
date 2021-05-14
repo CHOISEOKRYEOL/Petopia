@@ -65,14 +65,12 @@ public class StoryDetailHandler extends HttpServlet {
       out.printf("<tr><th>등록일</th> <td>%s</td></tr>\n", formatter.format(s.getRegisteredDate()));
       out.println("</tbody>");
 
-      //Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-      //if (loginUser != null && s.getAdmin().getNo() == loginUser.getNo()) {
       out.println("<tfoot>");
       out.println("<tr><td colspan='2'>");
       out.printf("<input type='submit' value='변경'> <a href='delete?no=%d'>삭제</a>", s.getNo());
       out.println("</td></tr>");
       out.println("</tfoot>");
-      // }
+
       out.println("</table>");
       out.println("</form>");
 

@@ -11,11 +11,6 @@
     <result column="url" property="url"/>
     <result column="site" property="site"/>
     <result column="rdt" property="registeredDate"/>
-
-    <association property="admin" javaType="member">
-      <id column="admin_no" property="no"/>
-      <result column="admin_name" property="name"/>
-    </association>
   </resultMap>
   
   <insert id="insert" parameterType="story">
