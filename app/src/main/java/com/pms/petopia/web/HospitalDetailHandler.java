@@ -43,7 +43,7 @@ public class HospitalDetailHandler extends HttpServlet {
         return;
       }
 
-      out.println("<form action='update' method='post'>");
+      out.println("<form action='update' method='post' enctype='multipart/form-data'>");
       out.println("<table border='1'>");
       out.println("<tbody>");
       out.printf("<tr><th>번호</th> <td><input type='text' name='no' value='%d' readonly></td></tr>\n", hospital.getNo());
@@ -76,8 +76,12 @@ public class HospitalDetailHandler extends HttpServlet {
       }
 
       out.printf("<tr><th>수의사</th> <td><input type='number' name='vet' value='%d'></td></tr>\n", hospital.getVeterinarian());
-      //      out.printf("<tr><th>병원사진</th> <td><a href='%s'><img src='%s'></a><br>"
-      //          + "<input name='photo' type='file'></td></tr>\n", hospital.getPhoto());
+
+      out.printf("<tr><th>사진</th> <td><a href='%s'><img src='%s'></a><br>"
+          + "<input name='photo' type='file'></td></tr>\n",
+          hospital.getPhoto() != null ? "../upload/" + hospital.getPhoto() : "",
+              hospital.getPhoto() != null ? "../upload/" + hospital.getPhoto() + "_300x300.jpg" : "../images/person_300x300.jpg");
+
       out.println("</tbody>");
 
       //Member loginUser = (Member) request.getSession().getAttribute("loginUser");
