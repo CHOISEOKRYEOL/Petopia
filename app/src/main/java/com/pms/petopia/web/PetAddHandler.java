@@ -2,7 +2,6 @@ package com.pms.petopia.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.sql.Date;
 import java.util.UUID;
 import javax.servlet.ServletException;
@@ -102,14 +101,7 @@ public class PetAddHandler extends HttpServlet {
       response.setHeader("Refresh", "1;url=list");
 
     } catch (Exception e) {
-      StringWriter strWriter = new StringWriter();
-      PrintWriter printWriter = new PrintWriter(strWriter);
-      e.printStackTrace(printWriter);
-
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>마이펫 등록 오류</h1>");
-      out.printf("<pre>%s</pre>\n", strWriter.toString());
+      throw new ServletException(e);
     }
 
     out.println("</body>");

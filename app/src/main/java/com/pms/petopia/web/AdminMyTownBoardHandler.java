@@ -2,7 +2,6 @@ package com.pms.petopia.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -79,13 +78,7 @@ public class AdminMyTownBoardHandler extends HttpServlet {
       out.println("<button> 검색 </button>");
       out.println("</form>");
     } catch (Exception e) {
-      // 상세 오류 내용을 StringWriter로 출력한다.
-      StringWriter strWriter = new StringWriter();
-      PrintWriter printWriter = new PrintWriter(strWriter);
-      e.printStackTrace(printWriter);
-
-      // StringWriter에 들어있는 출력 내용을 꺼내 클라이언트로 보낸다.
-      out.printf("<pre>%s</pre>\n", strWriter.toString());
+      throw new ServletException(e);
     }
     out.println("</body>");
     out.println("</html>");
