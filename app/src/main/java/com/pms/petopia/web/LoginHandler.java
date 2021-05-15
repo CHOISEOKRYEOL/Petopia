@@ -3,6 +3,8 @@ package com.pms.petopia.web;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +24,10 @@ public class LoginHandler extends HttpServlet {
     MemberService memberService = (MemberService) request.getServletContext().getAttribute("memberService");
 
     String id = request.getParameter("id");
+    boolean check = isEmail(id);
     String password = request.getParameter("password");
+    Member member = null;
+
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -33,7 +38,13 @@ public class LoginHandler extends HttpServlet {
     out.println("<body>");
 
     try {
-      Member member = memberService.get(id, password);
+      if(check) {
+        member = memberService.getEmail(id, password);
+      }
+      else {
+        member = memberService.getId(id, password);
+      }
+
 
       if (member == null) {
         request.getSession().invalidate();
@@ -59,4 +70,16 @@ public class LoginHandler extends HttpServlet {
     out.println("</body>");
     out.println("</html>");
   }
+
+  private boolean isEmail(String id) { 
+    boolean check = false; 
+    String regex = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$"; 
+    Pattern p = Pattern.compile(regex); 
+    Matcher email = p.matcher(id);
+    if(email.matches()) { 
+      check = true; 
+    } 
+    return check; 
+  }
+
 }

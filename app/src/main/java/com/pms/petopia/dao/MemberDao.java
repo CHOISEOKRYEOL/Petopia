@@ -11,6 +11,8 @@ public interface MemberDao {
 
   Member findByIdPassword(Map<String,Object> params) throws Exception;
 
+  Member findByEmailPassword(Map<String,Object> params) throws Exception;
+
   int update(Member member) throws Exception;
 
   int delete(int no) throws Exception;

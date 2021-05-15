@@ -8,7 +8,9 @@ public interface MemberService {
 
   Member get(int no) throws Exception;
 
-  Member get(String id, String password) throws Exception;
+  Member getId(String id, String password) throws Exception;
+
+  Member getEmail(String email, String password) throws Exception;
 
   int update(Member member) throws Exception;
 
