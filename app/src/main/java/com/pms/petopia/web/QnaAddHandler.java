@@ -2,7 +2,6 @@ package com.pms.petopia.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -73,9 +72,7 @@ public class QnaAddHandler extends HttpServlet {
       response.setHeader("Refresh", "1;url=../main");
     }
     catch (Exception e) {
-      StringWriter strWriter = new StringWriter();
-      PrintWriter printWriter = new PrintWriter(strWriter);
-      e.printStackTrace(printWriter);
+      throw new ServletException(e);
 
     }
     out.println("</body>");

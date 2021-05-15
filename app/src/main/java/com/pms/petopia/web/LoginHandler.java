@@ -2,7 +2,6 @@ package com.pms.petopia.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.ServletException;
@@ -59,12 +58,7 @@ public class LoginHandler extends HttpServlet {
       response.sendRedirect("main");
 
     } catch (Exception e) {
-      StringWriter strWriter = new StringWriter();
-      PrintWriter printWriter = new PrintWriter(strWriter);
-      e.printStackTrace(printWriter);
-      out.println("</head>");
-      out.println("<h1>로그인 오류</h1>");
-      out.printf("<pre>%s</pre>\n", strWriter.toString());
+      throw new ServletException(e);
     } 
 
     out.println("</body>");
