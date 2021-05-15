@@ -9,7 +9,7 @@ public interface QnaService {
 
   List<Qna> list() throws Exception;
 
-  Qna findByNo(int no) throws Exception;
+  Qna get(int no) throws Exception;
 
   int update(Qna qna) throws Exception;
 
