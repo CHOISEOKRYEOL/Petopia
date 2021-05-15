@@ -16,13 +16,8 @@
     <result column="date" property="registeredDate"/>
   </resultMap>
   
-  <insert id="insert" parameterType="member">
-    insert into pet_user(name, id, email, nick, pwd, phone, role) 
-    values(#{name}, #{id}, #{email}, #{nick}, password(#{password}), #{tel}, 1)
-  </insert>
-  
-  <select id="findByIdPassword" resultMap="memberMap" parameterType="map">
-    select 
+  <sql id="login">
+     select 
       mno,
       name,
       nick,
@@ -30,9 +25,21 @@
       email,
       phone
     from pet_user
-      where
-      id = #{id} or email = #{id}
-      and pwd = password(#{password})
+  </sql>
+  
+  <insert id="insert" parameterType="member">
+    insert into pet_user(name, id, email, nick, pwd, phone, role) 
+    values(#{name}, #{id}, #{email}, #{nick}, password(#{password}), #{tel}, 1)
+  </insert>
+  
+  <select id="findByIdPassword" resultMap="memberMap" parameterType="map">
+    <include refid="login"/>
+      where id = #{id} and pwd = password(#{password})
+  </select>
+  
+  <select id="findByEmailPassword" resultMap="memberMap" parameterType="map">
+    <include refid="login"/>
+      where email = #{id} and pwd = password(#{password})
   </select>
   
   <update id="update" parameterType="member">
