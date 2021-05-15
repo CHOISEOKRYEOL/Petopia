@@ -50,21 +50,19 @@ public class PetListHandler extends HttpServlet {
       out.println("<tbody>");
 
       for(Pet p : list) {
-        if(loginUser.getNo() == p.getOwner().getNo()) {
-          out.printf("<tr>"
-              + " <td>%d</td>"
-              + " <td><a href='detail?no=%1$d'>%s</a></td>"
-              + " <td>%d</td>"
-              + " <td>%s</td>"
-              + " <td>%s</td>"
-              + " <td>%s</td> </tr>\n", 
-              p.getNo(),
-              p.getName(),
-              p.getAge(),
-              p.getBirthDay(),
-              p.getType().getType(),
-              p.getPhoto());
-        }
+        out.printf("<tr>"
+            + " <td>%d</td>"
+            + " <td><a href='detail?no=%1$d'>%s</a></td>"
+            + " <td>%d</td>"
+            + " <td>%s</td>"
+            + " <td>%s</td>"
+            + " <td><img src='%s'></td> </tr>\n", 
+            p.getNo(),
+            p.getName(),
+            p.getAge(),
+            p.getBirthDay(),
+            p.getType().getType(),
+            p.getPhoto() != null ? "../upload/" + p.getPhoto() + "_30x30.jpg" : "../images/person_30x30.jpg");
       }
       out.println("</tbody>");
       out.println("</table>");

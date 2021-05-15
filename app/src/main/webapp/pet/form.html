@@ -6,13 +6,13 @@
 </head>
 <body>
 <h1>마이펫 등록</h1>
-<form action="add" method="post">
+<form action="add" method="post" enctype="multipart/form-data">
 이름 : <input type="text" name="name"><br>
 나이 : <input type="text" name="age"><br>
 생일 : <input type="date" name="birthDay"><br>
 성별 : <input type="number" name="gender"><br>
 품종 : <input type="number" name="type"><br>
-사진 : <input type="file" name="file" id="imageFileOpenInput" accept="image/*"><br>
+사진 : <input type="file" name="photo"><br>
 <input type="submit" value="등록하기">
 </form>
 <form action="../main">
