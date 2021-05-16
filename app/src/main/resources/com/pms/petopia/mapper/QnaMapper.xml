@@ -43,15 +43,9 @@
   </select>
   
   <update id="update" parameterType="qna">
-    update pet_qna
-    <set>
-      <if test="title != '' and title != null">
+    update pet_qna set
         title = #{title},
-      </if>
-      <if test="cont != '' and cont != null">
         cont = #{content}
-      </if>
-    </set>
     where qno = #{no}
   </update>
   

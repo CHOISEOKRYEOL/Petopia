@@ -117,7 +117,7 @@ public class HospitalDetailHandler extends HttpServlet {
               r.getCostRating(),
               r.getComment(),
               r.getCreatedDate(),
-              r.getWriter().getName(),
+              r.getWriter().getNick(),
               r.getPhoto());
           out.println("</tbody>");
           out.println("</table>");

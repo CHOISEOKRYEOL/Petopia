@@ -6,7 +6,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.Qna;
 import com.pms.petopia.service.QnaService;
 
@@ -17,20 +16,16 @@ public class QnaUpdateHandler extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     QnaService qnaService = (QnaService) request.getServletContext().getAttribute("qnaService");
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-
-    if(loginUser == null) {
-      throw new ServletException("로그인 후 이용하세요.");
-    }
 
     Qna qna = new Qna();
+    qna.setNo(Integer.parseInt(request.getParameter("no")));
     qna.setTitle(request.getParameter("title"));
     qna.setContent(request.getParameter("content"));
-    qna.setWriter(loginUser);
 
     try {
       qnaService.update(qna);
-
+      response.setContentType("text/html;charset=UTF-8");
+      request.getRequestDispatcher("/jsp/qna/update.jsp").include(request, response);
       response.setHeader("Refresh", "1;url=list");
     }
     catch (Exception e) {
