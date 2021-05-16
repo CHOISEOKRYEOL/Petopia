@@ -1,8 +1,6 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,37 +18,21 @@ public class MemberDeleteHandler extends HttpServlet {
       throws ServletException, IOException {
 
     MemberService memberService = (MemberService) request.getServletContext().getAttribute("memberService");
-
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<title>회원 탈퇴</title>");
-    out.println("</head>");
-    out.println("<body>");
+    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
     try {
-      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
       memberService.delete(loginUser.getNo());
       request.getSession().invalidate();
-
-      out.println("<h1>그동안 Petopia 를 이용해주셔서 감사합니다.</h1>");
-
+      request.setAttribute("member", loginUser);
+      response.setContentType("text/html;charset=UTF-8");
+      request.getRequestDispatcher("/jsp/member/delete.jsp");
       response.setHeader("Refresh", "content=1;url='../main'");
 
     } catch (Exception e) {
-      StringWriter strWriter = new StringWriter();
-      PrintWriter printWriter = new PrintWriter(strWriter);
-      e.printStackTrace(printWriter);
-      out.println("<h1>회원 탈퇴 오류 발생</h1>");
-      out.printf("<pre>%s</pre>\n", strWriter.toString());
+      throw new ServletException(e);
     }
 
-    out.println("</body>");
-    out.println("</html>");
   }
 }
 

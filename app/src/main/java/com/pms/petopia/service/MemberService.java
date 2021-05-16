@@ -8,11 +8,21 @@ public interface MemberService {
 
   Member get(int no) throws Exception;
 
-  Member get(String id, String password) throws Exception;
+  Member getId(String id, String password) throws Exception;
+
+  Member getEmail(String email, String password) throws Exception;
 
   int update(Member member) throws Exception;
 
   int delete(int no) throws Exception;
+
+  int deleteMember(int no) throws Exception;
+
+  int deleteSharingMarketPost(int no) throws Exception;
+
+  int deleteMyTownPost(int no) throws Exception;
+
+  int deleteHospital(int no) throws Exception;
 
 }
 

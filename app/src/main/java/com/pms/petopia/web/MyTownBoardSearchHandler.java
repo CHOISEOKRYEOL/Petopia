@@ -74,11 +74,7 @@
 //      out.printf("<p>%s</p>\n", e.getMessage());
 //
 //    } catch (Exception e) {
-//      StringWriter strWriter = new StringWriter();
-//      PrintWriter printWriter = new PrintWriter(strWriter);
-//      e.printStackTrace(printWriter);
-//
-//      out.printf("<pre>%s</pre>\n", strWriter.toString());
+//     throw new ServletException(e);
 //    }
 //    out.println("</body>");
 //    out.println("</html>");

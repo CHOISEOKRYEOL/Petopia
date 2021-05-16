@@ -2,7 +2,6 @@ package com.pms.petopia.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +17,7 @@ public class PetUpdateHandler extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    PetService petMemberService = (PetService) request.getServletContext().getAttribute("PetMemberService");
+    PetService petService = (PetService) request.getServletContext().getAttribute("petService");
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -31,29 +30,19 @@ public class PetUpdateHandler extends HttpServlet {
     out.println("<body>");
     out.println("<h1>마이펫 변경</h1>");
 
+    Pet p = new Pet();
+    p.setNo(Integer.parseInt(request.getParameter("no")));
+    p.setName(request.getParameter("name"));
+    p.setPhoto(request.getParameter("photo"));
     try {
 
-      Pet pet = new Pet();
-      pet.setNo(pet.getNo());
-      pet.setName(request.getParameter("name"));
-
-      petMemberService.update(pet);
-
+      petService.update(p);
 
       out.println("<p>마이펫을 변경하였습니다.</p>");
-      response.setHeader("Refresh", "1;url=../main");
+      response.setHeader("Refresh", "1;url=list");
 
     } catch (Exception e) {
-      StringWriter strWriter = new StringWriter();
-      PrintWriter printWriter = new PrintWriter(strWriter);
-      e.printStackTrace(printWriter);
-
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>마이펫 변경 오류</h1>");
-      out.printf("<p>%s</p>\n", e.getMessage());
-      out.printf("<pre>%s</pre>\n", strWriter.toString());
-      out.println("<p><a href='list'>목록</a></p>");
+      throw new ServletException(e);
     }
 
     out.println("</body>");

@@ -14,7 +14,6 @@ public class MyTownBoard {
   private BigAddress bigAddress;
   private SmallAddress smallAddress;
 
-
   @Override
   public String toString() {
     return "MyTownBoard [no=" + no + ", title=" + title + ", content=" + content + ", createdDate="

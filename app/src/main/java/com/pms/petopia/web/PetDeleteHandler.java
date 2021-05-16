@@ -2,7 +2,6 @@ package com.pms.petopia.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,26 +17,27 @@ public class PetDeleteHandler extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    PetService petMemberService = (PetService) request.getServletContext().getAttribute("PetMemberService");
+    PetService petService = (PetService) request.getServletContext().getAttribute("petService");
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
-    out.println("[나의 펫 삭제]");
+    out.println("<!DOCTYPE html>");
+    out.println("<html>");
+    out.println("<head>");
+    out.println("<title>마이펫 삭제</title>");
+    out.println("</head>");
+    out.println("<body>");
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
+      petService.delete(no);
+      out.println("<h1>마이펫 삭제 완료</h1>");
 
-      if (petMemberService.delete(no) == 0) {
-        out.println("해당 번호의 펫이 없습니다.");
-      } else {
-        out.println("펫을 삭제하였습니다.");
-      }
+      response.setHeader("Refresh", "1;url=../main");
+
     } catch (Exception e) {
-      StringWriter strWriter = new StringWriter();
-      PrintWriter printWriter = new PrintWriter(strWriter);
-      e.printStackTrace(printWriter);
-      out.println(strWriter.toString());
+      throw new ServletException(e);
     }
   }
 

@@ -2,7 +2,6 @@ package com.pms.petopia.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,11 +39,6 @@ public class HospitalDeleteHandler extends HttpServlet {
         throw new Exception("해당 번호의 병원이 없습니다.");
       }
 
-      //      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-      //      if (oldHospital.getWriter().getNo() != loginUser.getNo()) {
-      //        throw new Exception("변경 권한이 없습니다!");
-      //      }
-
       hospitalService.delete(no);
 
       out.println("<p>병원을 삭제했습니다.</p>");
@@ -52,16 +46,7 @@ public class HospitalDeleteHandler extends HttpServlet {
       response.setHeader("Refresh", "1;url=../main");
 
     } catch (Exception e) {
-      StringWriter strWriter = new StringWriter();
-      PrintWriter printWriter = new PrintWriter(strWriter);
-      e.printStackTrace(printWriter);
-
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>병원 삭제 오류</h1>");
-      out.printf("<p>%s</p>\n", e.getMessage());
-      out.printf("<pre>%s</pre>\n", strWriter.toString());
-      out.println("<p><a href='list'>목록</a></p>");
+      throw new ServletException(e);
     }
 
     out.println("</body>");

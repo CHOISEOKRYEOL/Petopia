@@ -153,14 +153,8 @@ public class MyTownBoardDetailHandler extends HttpServlet {
       out.println("</body>");
       out.println("</html>");
 
-    }catch (Exception e) {
-      // 상세 오류 내용을 StringWriter로 출력한다.
-      StringWriter strWriter = new StringWriter();
-      PrintWriter printWriter = new PrintWriter(strWriter);
-      e.printStackTrace(printWriter);
-
-      // StringWriter에 들어있는 출력 내용을 꺼내 클라이언트로 보낸다.
-      out.printf("<pre>%s</pre>\n", strWriter.toString());
+    } catch (Exception e) {
+      throw new ServletException(e);
     }
 
     out.println("</body>");

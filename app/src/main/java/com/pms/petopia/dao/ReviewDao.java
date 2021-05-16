@@ -1,7 +1,6 @@
 package com.pms.petopia.dao;
 
 import java.util.List;
-import com.pms.petopia.domain.Hospital;
 import com.pms.petopia.domain.Review;
 
 public interface ReviewDao {

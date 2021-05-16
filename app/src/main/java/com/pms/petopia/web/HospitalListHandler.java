@@ -2,7 +2,6 @@ package com.pms.petopia.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,7 +40,7 @@ public class HospitalListHandler extends HttpServlet {
       out.println("<table border='1'>");
       out.println("<thead>");
       out.println("<tr>");
-      out.println("<th>번호</th> <th>이름</th> <th>전화</th> <th>기본주소</th> <th>상세주소</th> <th>평점</th>");
+      out.println("<th>번호</th> <th>이름</th> <th>전화</th> <th>기본주소</th> <th>상세주소</th> <th>진료시간</th> <th>평점</th>");
       out.println("</tr>");
       out.println("</thead>");
       out.println("<tbody>");
@@ -53,12 +52,15 @@ public class HospitalListHandler extends HttpServlet {
             + " <td>%s</td>"
             + " <td>%s</td>"
             + " <td>%s</td>"
+            + " <td>%02d시 ~ %02d시</td>"
             + " <td>%d</td> </tr>\n",
             h.getNo(),
             h.getName(),
             h.getTel(),
-            h.getSmallAddress(),
+            h.getSmallAddress().getName(),
             h.getAddress(),
+            h.getStartTime(),
+            h.getEndTime(),
             h.getRate());
       }
       out.println("</tbody");
@@ -81,11 +83,7 @@ public class HospitalListHandler extends HttpServlet {
       out.println("</form>");
 
     } catch (Exception e) {
-      StringWriter strWriter = new StringWriter();
-      PrintWriter printWriter = new PrintWriter(strWriter);
-      e.printStackTrace(printWriter);
-
-      out.printf("<pre>%s</pre>\n", strWriter.toString());
+      throw new ServletException(e);
     }
 
     out.println("</body>");

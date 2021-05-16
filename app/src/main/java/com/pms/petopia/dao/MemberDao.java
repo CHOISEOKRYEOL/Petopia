@@ -1,5 +1,6 @@
 package com.pms.petopia.dao;
 
+import java.util.List;
 import java.util.Map;
 import com.pms.petopia.domain.Member;
 
@@ -11,9 +12,21 @@ public interface MemberDao {
 
   Member findByIdPassword(Map<String,Object> params) throws Exception;
 
+  Member findByEmailPassword(Map<String,Object> params) throws Exception;
+
+  List<Member> findAll() throws Exception;
+
   int update(Member member) throws Exception;
 
   int delete(int no) throws Exception;
+
+  int deleteMember(int no) throws Exception;
+
+  int deleteSharingMarketBoardPost(int no) throws Exception;
+
+  int deleteMyTownBoardPost(int no) throws Exception;
+
+  int deleteHospitalInfo(int no) throws Exception;
 
 }
 
