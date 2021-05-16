@@ -70,6 +70,7 @@ public class HospitalAddHandler extends HttpServlet {
     smallAddress.setNo(Integer.parseInt(request.getParameter("cno")));
     hospital.setSmallAddress(smallAddress);
 
+
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 

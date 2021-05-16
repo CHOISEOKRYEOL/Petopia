@@ -76,13 +76,13 @@ public class LoginHandler extends HttpServlet {
         request.getRequestDispatcher("/jsp/login_fail.jsp").include(request, response);
         response.setHeader("Refresh", "1;url=login");
       }
-
-      request.getSession().setAttribute("loginUser", member);
-      response.sendRedirect("main");
-
+      else {
+        request.getSession().setAttribute("loginUser", member);
+        response.sendRedirect("main");
+      }
     } catch (Exception e) {
       throw new ServletException(e);
-    } 
+    }
   }
 
   private boolean isEmail(String id) { 

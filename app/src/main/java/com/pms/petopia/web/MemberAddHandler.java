@@ -1,7 +1,6 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,12 +14,19 @@ import com.pms.petopia.service.MemberService;
 public class MemberAddHandler extends HttpServlet {
 
   @Override
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+
+    response.setContentType("text/html;charset=UTF-8");
+    request.getRequestDispatcher("/jsp/member/member_form.jsp").include(request, response);
+
+  }
+
+  @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     MemberService memberService = (MemberService) request.getServletContext().getAttribute("memberService");
-
-    request.setCharacterEncoding("UTF-8");
 
     Member m = new Member();
     m.setName(request.getParameter("name"));
@@ -42,25 +48,16 @@ public class MemberAddHandler extends HttpServlet {
     }
 
     response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
 
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("</head>");
-    out.println("<body>");
 
     try {
       memberService.add(m);
-      out.printf("<h1>%s 님 Petopia에 오신 걸 환영합니다.</h1>\n", m.getName());
       response.setHeader("Refresh", "1;url=../main");
 
     } catch (Exception e) {
       throw new ServletException(e);
     }
 
-    out.println("</body>");
-    out.println("</html>");
   }
 }
 

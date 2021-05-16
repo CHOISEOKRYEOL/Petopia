@@ -42,6 +42,13 @@
       where email = #{id} and pwd = password(#{password})
   </select>
   
+  <select id="findAll" resultMap="memberMap">
+    select
+      mno, name, nick, id, email, phone, rdt
+    from pet_user
+      order by rdt desc
+  </select>
+  
   <update id="update" parameterType="member">
     update pet_user 
     <set>
@@ -52,22 +59,38 @@
     where mno=#{no}
   </update>
   
-  <delete id="delete" parameterType="int">
+  <update id="delete" parameterType="int">
+    update pet_user set
+      name = 'null',
+      nick = 'null',
+      pwd = password('$#@#$@FDAWEAFfkaoodfko$@#NDOSAojefo!#!'),
+      phone = 'null'
+    where mno=#{value}
+  </update>
+  
+  <delete id="deleteMember" parameterType="int">
+  <!-- 일괄 삭제 기능 준비 -->
     delete from pet_user 
     where mno=#{value}
   </delete>
   
-  <delete id="sharingMarketDelete" parameterType="int">
+  <delete id="deleteSharingMarketBoardPost" parameterType="int">
+    <!-- 일괄 삭제 기능 준비 -->
     delete from pet_mytown
     where tno=#{value}
   </delete>
   
-  <delete id="myTownDelete" parameterType="int">
+  <delete id="deleteMyTownBoardPost" parameterType="int">
+    <!-- 일괄 삭제 기능 준비 -->
     delete from pet_mark
     where sno=#{value}
   </delete>
   
-  
+  <delete id="deleteHospitalInfo" parameterType="int">
+    <!-- 일괄 삭제 기능 준비 -->
+    delete from pet_hp;
+    where hno=#{value}
+  </delete>
   
 </mapper>
 

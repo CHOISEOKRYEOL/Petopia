@@ -16,6 +16,14 @@ public interface MemberService {
 
   int delete(int no) throws Exception;
 
+  int deleteMember(int no) throws Exception;
+
+  int deleteSharingMarketPost(int no) throws Exception;
+
+  int deleteMyTownPost(int no) throws Exception;
+
+  int deleteHospital(int no) throws Exception;
+
 }
 
 

@@ -1,7 +1,6 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,42 +18,25 @@ public class MemberUpdateHandler extends HttpServlet {
       throws ServletException, IOException {
 
     MemberService memberService = (MemberService) request.getServletContext().getAttribute("memberService");
+    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<title>내 정보 수정</title>");
-    out.println("</head>");
-    out.println("<body>");
+    Member m = new Member();
+    m.setNo(loginUser.getNo());
+    m.setNick(request.getParameter("nick"));
+    m.setPassword(request.getParameter("password"));
+    m.setTel(request.getParameter("tel"));
 
     try {
-      request.setCharacterEncoding("UTF-8");
 
-      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-
-      Member oldMember = loginUser;
-
-      Member m = new Member();
-      m.setNo(oldMember.getNo());
-
-      m.setNick(request.getParameter("nick"));
-      m.setPassword(request.getParameter("password"));
-      m.setTel(request.getParameter("tel"));
       memberService.update(m);
-
-
-      out.println("<h1>내 정보 수정 완료</h1>");
+      request.setAttribute("member", loginUser);
+      response.setContentType("text/html;charset=UTF-8");
+      request.getRequestDispatcher("/jsp/member/update.jsp").include(request, response);
       response.setHeader("Refresh", "1;url=../main");
 
     } catch (Exception e) {
       throw new ServletException(e);
     }
-
-    out.println("</body>");
-    out.println("</html>");
   }
 }
 

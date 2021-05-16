@@ -34,6 +34,8 @@ public class ReviewListHandler extends HttpServlet {
       List<Review> list = reviewService.list(h.getNo());
 
       request.setAttribute("list", list);
+      response.setContentType("text/html;charset=UTF-8");
+      request.getRequestDispatcher("/jsp/review/list.jsp").include(request, response);
 
     } catch (Exception e) {
       throw new ServletException(e);

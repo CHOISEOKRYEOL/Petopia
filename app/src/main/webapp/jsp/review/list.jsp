@@ -27,9 +27,9 @@ for(Review r : list) {
   </thead>
 <tbody>
 <tr>
-<td><%=r.getServiceRating() %></td>
-<td><%=r.getCleanlinessRating() %></td>
-<td><%=r.getCostRating() %></td>
+<td><%=r.getServiceRating() %>점</td>
+<td><%=r.getCleanlinessRating() %>점</td>
+<td><%=r.getCostRating() %>점</td>
 </tr>
 </tbody>  
   <thead> 

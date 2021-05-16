@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
+    trimDirectiveWhitespaces="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,7 +8,7 @@
 <title>회원 가입</title>
 </head>
 <body>
-<h1>회원 가입</h1>
+<h1>Petopia 회원 가입</h1>
 <form action="add" method="post">
 이름 : <input type="text" name="name"><br>
 아이디 : <input type="text" name="id"> <input type="button" name="checkId" value="중복 확인"><br>

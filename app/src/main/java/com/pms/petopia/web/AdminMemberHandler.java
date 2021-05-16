@@ -37,6 +37,7 @@ public class AdminMemberHandler extends HttpServlet {
 
       Member m = loginUser;
 
+
       out.println("<form action='update' method='post'>");
       out.println("<table border='1'>");
       out.println("<tbody>");
