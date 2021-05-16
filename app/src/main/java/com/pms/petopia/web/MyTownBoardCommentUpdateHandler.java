@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.MyTownBoard;
-import com.pms.petopia.domain.SmallAddress;
+import com.pms.petopia.domain.MyTownBoardComment;
+import com.pms.petopia.service.MyTownBoardCommentService;
 import com.pms.petopia.service.MyTownBoardService;
-import com.pms.petopia.service.SmallAddressService;
 
 @SuppressWarnings("serial")
-@WebServlet("/mytown/update")
-public class MyTownBoardUpdateHandler extends HttpServlet {
+@WebServlet("/mytowncomment/update")
+public class MyTownBoardCommentUpdateHandler extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
+    MyTownBoardCommentService myTownBoardCommentService = (MyTownBoardCommentService) request.getServletContext().getAttribute("myTownBoardCommentService");
     MyTownBoardService myTownBoardService = (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
-    SmallAddressService smallAddressService = (SmallAddressService) request.getServletContext().getAttribute("smallAddressService");
     response.setContentType("text/html;charset=UTF-8");
 
     PrintWriter out = response.getWriter();
@@ -31,42 +31,37 @@ public class MyTownBoardUpdateHandler extends HttpServlet {
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
-    out.println("<title>게시글 변경</title>");
+    out.println("<title>댓글 변경</title>");
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>게시글 변경</h1>");
+    out.println("<h1>댓글 변경</h1>");
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
 
 
-      MyTownBoard oldBoard = myTownBoardService.get(no);
-      if (oldBoard == null) {
-        throw new Exception ("해당 번호의 게시글이 없습니다.");
+      MyTownBoardComment oldBoardComment = myTownBoardCommentService.get(no);
+      if (oldBoardComment == null) {
+        throw new Exception ("해당 번호의 댓글이 없습니다.");
       }
       Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-      if (oldBoard.getWriter().getNo() != loginUser.getNo()) {
+      if (oldBoardComment.getWriter().getNo() != loginUser.getNo()) {
         throw new Exception("변경 권한이 없습니다!");
       }
 
-      MyTownBoard board = new MyTownBoard();
-      board.setNo(oldBoard.getNo());
-      board.setTitle(request.getParameter("title"));
-      board.setContent(request.getParameter("content"));
-      Integer.parseInt(request.getParameter("stateNo")); // 일단 받아와
-      int cityNo = Integer.parseInt(request.getParameter("cityNo"));
-      out.println(cityNo);
-      SmallAddress smallAddress = smallAddressService.get(cityNo);
-      board.setSmallAddress(smallAddress);
-      myTownBoardService.update(board);
+      MyTownBoardComment comment = new MyTownBoardComment();
+      comment.setNo(oldBoardComment.getNo());
+      comment.setContent(request.getParameter("content"));
 
+      MyTownBoard board = myTownBoardService.get(comment.getMyTownBoard().getNo());
+
+      out.printf("<meta http-equiv='Refresh' content='1;url=list?stateNo=%d&cityNo=%d>",
+          board.getBigAddress().getNo(), board.getSmallAddress().getNo());
       out.println("</head>");
       out.println("<body>");
-      out.println("<h1>게시글 변경</h1>");
-      out.println("<p>게시글을 변경하였습니다.</p>");
-      String webAddress = String.format("1;url=../mytown/detail?stateNo=%d&cityNo=%d&no=%d\n", 
-          board.getBigAddress().getNo(), board.getSmallAddress().getNo(), board.getNo());
-      response.sendRedirect(webAddress);
+      out.println("<h1>댓글 변경</h1>");
+      out.println("<p>댓글을 변경하였습니다.</p>");
+      //response.setHeader("Refresh", "1;url=../main");
 
     } catch (Exception e) {
       StringWriter strWriter = new StringWriter();
@@ -75,7 +70,7 @@ public class MyTownBoardUpdateHandler extends HttpServlet {
 
       out.println("</head>");
       out.println("<body>");
-      out.println("<h1>게시글 변경 오류</h1>");
+      out.println("<h1>댓글 변경 오류</h1>");
       out.printf("<p>%s</p>\n",e.getMessage());
       out.printf("<pre>%s</pre>\n", strWriter.toString());
       out.println("<a href='list'>목록</a></p>\n");
@@ -85,9 +80,3 @@ public class MyTownBoardUpdateHandler extends HttpServlet {
     out.println("</html>");
   }
 }
-
-
-
-
-
-

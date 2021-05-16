@@ -112,6 +112,7 @@
   
   <update id="update" parameterType="mytownboard">
     update pet_mytown set
+      cno = #{smallAddress.no},
       title = #{title},
       cont = #{content},
       date = now()

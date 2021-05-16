@@ -3,6 +3,7 @@ package com.pms.petopia.web;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,19 +35,43 @@ public class MyTownBoardAddHandler extends HttpServlet{
     out.println("</head>");
     out.println("<body>");
 
-    Integer.parseInt(request.getParameter("stateNo")); //일단 가져왔음
-    int no = Integer.parseInt(request.getParameter("cityNo"));
+    int stateNo= Integer.parseInt(request.getParameter("stateNo")); //일단 가져왔음
+    int cityNo = Integer.parseInt(request.getParameter("cityNo"));
     try {
-      SmallAddress small = smallAddressService.get(no);
+      SmallAddress small = smallAddressService.get(cityNo);
       out.printf("<h1>%s %s</h1>", small.getBigAddress().getName(), small.getName());
 
       out.println("<h2>우리동네 새 게시글</h2>");
       out.println("<form action='add' method='post'>");
-      out.printf("지역: <input type='text' name='cityNo' value ='%d' readonly> <br>\n", small.getNo());
+      //
+      List<SmallAddress> smallAddress = smallAddressService.list();
+      out.println("광역시/도 : ");
+      out.println("<select name ='stateNo'>\n");
+      for (SmallAddress s : smallAddress) {
+        if (s.getBigAddress().getNo() == stateNo) {
+          out.printf("<option value='%d' selected>%s</option>\n", s.getBigAddress().getNo(), s.getBigAddress().getName());
+        } else {
+          out.printf("<option value='%d'>%s</option>\n", s.getBigAddress().getNo(), s.getBigAddress().getName());
+        }
+      }
+      out.println("</select>\n");
+
+      out.println("시/군/구 : ");
+      out.println("<select name='cityNo'>\n");
+      for (SmallAddress s : smallAddress) {
+        if (s.getNo() == cityNo) {
+          out.printf("<option value='%d' selected>%s</option>\n", s.getNo(), s.getName());
+        } else {
+          out.printf("<option value='%d'>%s</option>\n", s.getNo(), s.getName());
+        }
+      }
+      out.println("</select><br>\n");
+      //
+      //out.printf("지역: <input type='hidden' name='cityNo' value ='%d' readonly> <br>\n", small.getNo());
       out.println("제목: <input type='text' name='title'><br>");
       out.println("내용: <textarea name='content' rows='10' cols='60'></textarea><br>");
 
-      //out.printf("<a href='list?stateNo=%d&cityNo=%d'>목록</a>",small.getBigAddress().getNo(), small.getNo());
+      out.printf("<a href='list?stateNo=%d&cityNo=%d'>목록</a>",small.getBigAddress().getNo(), small.getNo());
 
     } catch (Exception e) {
       throw new ServletException(e);

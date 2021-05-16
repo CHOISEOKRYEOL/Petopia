@@ -60,7 +60,7 @@ public class MyTownBoardMainHandler extends HttpServlet{
 
       out.printf("<pre>%s</pre>\n", strWriter.toString());
     }
-    out.println("</form");
+    out.println("</form>");
     out.println("</body>");
     out.println("</html>");
   }

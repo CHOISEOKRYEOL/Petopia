@@ -39,16 +39,52 @@ public class MytownBoardListHandler extends HttpServlet {
     out.println("</head>");
     out.println("<body>");
 
+
+
     try {
       List<MyTownBoard> boards = myTownBoardService.list(cityNo,stateNo);
       SmallAddress s = smallAddressService.get(cityNo);
       out.printf("<h1>%s %s</h1>", s.getBigAddress().getName(), s.getName());
 
+      try {
+        out.println("<form action='list' method='get'>");
+        List<SmallAddress> smallAddress = smallAddressService.list();
+        out.println("광역시/도 : ");
+        out.println("<select name ='stateNo'>\n");
+        for (SmallAddress sa : smallAddress) {
+          if (sa.getBigAddress().getNo() == stateNo) {
+            out.printf("<option value='%d' selected>%s</option>\n", sa.getBigAddress().getNo(), sa.getBigAddress().getName());
+          } else {
+            out.printf("<option value='%d'>%s</option>\n", sa.getBigAddress().getNo(), sa.getBigAddress().getName());
+          }
+        }
+        out.println("</select>\n");
+
+        out.println("시/군/구 : ");
+        out.println("<select name='cityNo'>\n");
+        for (SmallAddress sa : smallAddress) {
+          if (sa.getNo() == cityNo) {
+            out.printf("<option value='%d' selected>%s</option>\n", sa.getNo(), sa.getName());
+          } else {
+            out.printf("<option value='%d'>%s</option>\n", sa.getNo(), sa.getName());
+          }
+        }
+        out.println("</select>\n");
+
+        out.println("<input type='submit' value='찾기'>");
+
+      } catch (Exception e) {
+        StringWriter strWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(strWriter);
+        e.printStackTrace(printWriter);
+
+        out.printf("<pre>%s</pre>\n", strWriter.toString());
+      }
+      out.println("</form>");
+
+      out.printf("<p><a href='add?stateNo=%d&cityNo=%d'>새 글</a><p>", s.getBigAddress().getNo(), s.getNo());
       if(boards.size() > 0) {
 
-        MyTownBoard board = boards.get(0);
-
-        out.printf("<p><a href='add?stateNo=%d&cityNo=%d'>새 글</a><p>", board.getBigAddress().getNo(), board.getSmallAddress().getNo());
 
         if (keyword != null && keyword.length() > 0) {
           boards = myTownBoardService.search(stateNo, cityNo, keyword);
@@ -68,12 +104,14 @@ public class MytownBoardListHandler extends HttpServlet {
         for (MyTownBoard b : boards) {
           out.printf("<tr>"
               + " <td>%d</td>"
-              + " <td><a href='detail?no=%1$d'>%s</a></td>"
+              + " <td><a href='detail?stateNo=%d&cityNo=%d&no=%1$d'>%s</a></td>"
               + " <td>%s</td>"
               + " <td>%s</td>"
               + " <td>%d</td>"
-              + " <td>%d</td></tr>\n", 
-              b.getNo(), 
+              + " <td>%d</td></tr>\n",
+              b.getNo(),
+              s.getBigAddress().getNo(),
+              s.getNo(),
               b.getTitle(), 
               b.getWriter().getNick(),
               b.getCreatedDate(),
@@ -85,12 +123,12 @@ public class MytownBoardListHandler extends HttpServlet {
         out.println("</table>");
 
         out.println("<form action='list' method='get'>");
-        out.printf("<input type='text' name='stateNo' value='%d' readonly><br>\n",
-            s.getBigAddress().getNo());
-        out.printf("<input type='text' name='cityNo' value='%d' readonly><br>\n",
-            s.getNo());
         out.printf("<input type='search' name='keyword' value='%s'>\n",
             keyword != null ? keyword : "");
+        out.printf("<input type='hidden' name='stateNo' value='%d'><br>\n",
+            s.getBigAddress().getNo());
+        out.printf("<input type='hidden' name='cityNo' value='%d'><br>\n",
+            s.getNo());
         out.println("<button> 검색 </button>");
         out.println("</form>");
       } else {
