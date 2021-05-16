@@ -11,9 +11,11 @@
 <title>내 Q&A 목록</title>
 </head>
 <body>
-<% Member loginUser = (Member) request.getSession().getAttribute("loginUser"); %>
+<% 
+Member loginUser = (Member) request.getSession().getAttribute("loginUser"); 
+%>
 <h1><%=loginUser.getNick() %>님의 Q&A 목록</h1>
-<p><a href='add'>새 Q&A 작성</a>
+<p><a href='add'>새 Q&A 작성</a></p>
      <table border='1'>
   <thead> 
   <tr>
@@ -30,7 +32,7 @@
 <tr>
 <td><%=q.getNo()%></td>
 <td><a href='detail?no=<%=q.getNo()%>'><%=q.getTitle()%></a></td>
-<td><%=q.getWriter().getName()%></td>
+<td><%=q.getWriter().getNick()%></td>
 <td><%=q.getCreatedDate()%></td>
 </tr>
 <%

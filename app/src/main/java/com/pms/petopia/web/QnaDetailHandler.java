@@ -22,8 +22,8 @@ public class QnaDetailHandler extends HttpServlet {
     int no = Integer.parseInt(request.getParameter("no"));
 
     try {
-
       Qna q = qnaService.get(no);
+
       request.setAttribute("qna", q);
       response.setContentType("text/html;charset=UTF-8");
       request.getRequestDispatcher("/jsp/qna/detail.jsp").include(request, response);

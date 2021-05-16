@@ -15,9 +15,17 @@
     
     <association property="writer" javaType="member">
 	    <id column="writer_no" property="no"/>
-	    <result column="writer_name" property="name"/>
+	    <result column="writer_nick" property="nick"/>
     </association>
   </resultMap>
+  
+  <sql id="select">
+    select
+      q.qno, q.title, q.cont, q.cdt,
+      m.mno as writer_no, m.nick as writer_nick
+    from pet_qna q
+      inner join pet_user m on m.mno = q.writer
+  </sql>
   
   <insert id="insert" parameterType="qna">
     insert into pet_qna(title, cont, writer)
@@ -25,18 +33,12 @@
   </insert>
 
   <select id="findByNo" resultMap="qnaMap" parameterType="int">
-    select
-      qno, title, cont, cdt
-    from pet_qna
-      where qno=#{value}
+    <include refid="select"/>
+    where q.qno = #{value}
   </select>
   
   <select id="findAll" resultMap="qnaMap">
-    select
-      q.qno, q.title, q.cdt,
-      m.mno as writer_no, m.name as writer_name
-    from pet_qna q
-      inner join pet_user m on m.mno=q.writer
+    <include refid="select"/>
     order by q.cdt desc
   </select>
   
@@ -50,12 +52,12 @@
         cont = #{content}
       </if>
     </set>
-    where pno = #{no}
+    where qno = #{no}
   </update>
   
   <delete id="delete" parameterType="int">
     delete from pet_qna
-    where pno = #{value}
+    where qno = #{value}
   </delete>
 </mapper>
 

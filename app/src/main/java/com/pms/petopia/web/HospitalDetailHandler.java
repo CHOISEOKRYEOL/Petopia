@@ -105,13 +105,13 @@ public class HospitalDetailHandler extends HttpServlet {
           out.println("<table border='1'>");
           out.println("<tbody>");
           out.printf("<tr>"
-              + " <td>%d점</td>"
-              + " <td>%d점</td>"
-              + " <td>%d점</td>"
-              + " <td>%s</td>"
-              + " <td>%s</td>"
-              + " <td>%s</td>"
-              + " <td>%s</td> </tr>\n",
+              + " <td>서비스 : %d점</td>"
+              + " <td>청결도 : %d점</td>"
+              + " <td>비용 : %d점</td>"
+              + " <td>내용 : %s</td>"
+              + " <td>작성일 : %s</td>"
+              + " <td>작성자 : %s</td>"
+              + " <td>영수증 : <img src='%s'></td> </tr>\n",
               r.getServiceRating(),
               r.getCleanlinessRating(),
               r.getCostRating(),

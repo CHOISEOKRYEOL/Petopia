@@ -40,8 +40,8 @@ public class QnaAddHandler extends HttpServlet {
 
     try {
       qnaService.add(qna);
-
       response.setContentType("text/html;charset=UTF-8");
+      request.getRequestDispatcher("/jsp/qna/qna_add_success.jsp").include(request, response);
       response.setHeader("Refresh", "1;url=list");
     }
     catch (Exception e) {
