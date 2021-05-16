@@ -24,7 +24,7 @@ public class DefaultQnaService implements QnaService {
   }
 
   @Override
-  public Qna findByNo(int no) throws Exception {
+  public Qna get(int no) throws Exception {
     return qnaDao.findByNo(no);
   }
 

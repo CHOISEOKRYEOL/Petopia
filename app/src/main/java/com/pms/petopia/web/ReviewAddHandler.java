@@ -34,7 +34,7 @@ public class ReviewAddHandler extends HttpServlet {
     r.setWriter(loginUser);
 
     Hospital h = new Hospital();
-    h.setNo(1);
+    h.setNo(6);
     r.setHospital(h);
 
     response.setContentType("text/html;charset=UTF-8");

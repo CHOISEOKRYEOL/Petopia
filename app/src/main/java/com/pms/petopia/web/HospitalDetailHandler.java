@@ -96,32 +96,33 @@ public class HospitalDetailHandler extends HttpServlet {
 
       out.println("</table>");
       out.println("</form>");
-
-      List<Review> reviews = reviewService.list2();
+      out.println("<br>");
+      out.printf("<h1> %s 의 리뷰 </h1>\n", hospital.getName());
+      List<Review> reviews = reviewService.list(no);
 
       for(Review r : reviews) {
         if(hospital.getNo() == r.getHospital().getNo()) {
-          out.println(r.getComment());
+          out.println("<table border='1'>");
+          out.println("<tbody>");
           out.printf("<tr>"
-              + " <td>%d</td>"
-              + " <td>%d</td>"
-              + " <td>%d</td>"
-              + " <td>%d</td>"
-              + " <td>%s</td>"
+              + " <td>%d점</td>"
+              + " <td>%d점</td>"
+              + " <td>%d점</td>"
               + " <td>%s</td>"
               + " <td>%s</td>"
               + " <td>%s</td>"
               + " <td>%s</td> </tr>\n",
-              r.getNo(),
               r.getServiceRating(),
               r.getCleanlinessRating(),
               r.getCostRating(),
               r.getComment(),
-              r.getPhoto(),
               r.getCreatedDate(),
               r.getWriter().getName(),
-              r.getHospital().getName());
+              r.getPhoto());
+          out.println("</tbody>");
+          out.println("</table>");
         }
+        out.println("<br>");
       }
 
     } catch (Exception e) {

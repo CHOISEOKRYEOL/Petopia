@@ -29,8 +29,8 @@ public class MainHandler extends HttpServlet {
     out.println("<body>");
     if(loginUser == null) {
       out.println("<h1>비회원 화면</h1>");
-      out.println("<p><a href='member/form.html'>가입</a></p>");
-      out.println("<p><a href='login.html'>로그인</a></p>");
+      out.println("<p><a href='member/add'>가입</a></p>");
+      out.println("<p><a href='login'>로그인</a></p>");
       out.println("<p><a href='hospital/list'>병원 찾기</a></p>");
       out.println("<p><a href='story/list'>스토리</a></p>");
       out.println("<p><a href='sharingmarketboard/list'>나눔 장터</a></p>");

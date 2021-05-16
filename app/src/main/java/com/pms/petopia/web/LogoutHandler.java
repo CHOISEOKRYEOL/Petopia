@@ -17,7 +17,7 @@ public class LogoutHandler extends HttpServlet {
 
     request.getSession().invalidate();
 
-    response.sendRedirect("login.html");
+    response.sendRedirect("main");
 
   }
 }
