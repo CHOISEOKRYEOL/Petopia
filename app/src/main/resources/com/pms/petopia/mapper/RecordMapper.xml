@@ -12,48 +12,42 @@
   </resultMap>
   
   <insert id="insert" parameterType="record">
-    insert into pet_hprecord(hno,pno,state,history) 
-    values(#{hno},#{pno},#{state}, #{history})
+    insert into pet_hprecord(hno,pno,owner,state,history) 
+    values(#{hno},#{pno},#{owner},#{state}, #{history})
   </insert>
   
   <select id="findAll" resultMap="recordMap">
     select 
-      no,
+      pno,
+      hno,
       state,
       history
     from pet_hprecord 
-    order by name asc
-  </select>
-  
-  <select id="findByName" resultMap="recordMap" parameterType="string">
-    select 
-      no,
-      state,
-      history
-    from pet_hprecord
-    where name = #{value}
-    order by name asc
+    order by exno asc
   </select>
   
   <select id="findByNo" resultMap="recordMap" parameterType="int">
     select 
-      no,
-      name,
+      pno,
+      hno,
       state,
       history
-    from pet_hprecord 
-    where no = #{value}
+    from pet_hprecord
+    where exno = #{value}
+    order by exno asc
   </select>
   
   <update id="update" parameterType="record">
-    update pet_hprecord 
-    <set> 
-       update pet_hprecord set
+     update pet_hprecord
+    <set>
+      <if test="state != null or state != ''">
         state = #{state},
-        history = #{history}
-    where no = #{no}
+      </if>
+      <if test="record != null or record != ''">
+        record = #{record}
+      </if>
     </set>
-    where no=#{no}
+    where exno = #{no}
   </update>
   
   <delete id="delete" parameterType="int">

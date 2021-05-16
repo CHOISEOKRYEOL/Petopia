@@ -7,6 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.pms.petopia.domain.Hospital;
+import com.pms.petopia.domain.Pet;
 import com.pms.petopia.domain.Record;
 import com.pms.petopia.service.RecordService;
 
@@ -18,13 +20,7 @@ public class RecordAddHandler extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    RecordService recordService = (RecordService) request.getServletContext().getAttribute("RecordService");
-
-    Record r = new Record();
-
-
-    r.setState(Integer.parseInt(request.getParameter("state")));
-    r.setRecord(request.getParameter("record"));
+    RecordService recordService = (RecordService) request.getServletContext().getAttribute("recordService");
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -38,6 +34,20 @@ public class RecordAddHandler extends HttpServlet {
     out.println("<h1>진료기록 등록</h1>");
 
     try {
+
+      Record r = new Record();
+      r.setState(Integer.parseInt(request.getParameter("state")));
+      r.setRecord(request.getParameter("record"));
+
+      Hospital h = new Hospital();
+      h.setNo(Integer.parseInt(request.getParameter("no")));
+      r.setHospital(h);
+
+
+      Pet p = new Pet();
+      p.setNo(Integer.parseInt(request.getParameter("no")));
+      r.setPet(p);
+
       recordService.add(r);
 
       out.println("<p>진료기록을 등록했습니다.</p>");

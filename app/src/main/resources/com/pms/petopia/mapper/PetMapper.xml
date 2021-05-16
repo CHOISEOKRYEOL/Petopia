@@ -87,8 +87,8 @@
   </update>
   
   <delete id="delete" parameterType="int">
-    delete from pet_mypet 
-    where pno = #{value}
+    delete from pet_hprecord 
+    where exno = #{value}
   </delete>
 </mapper>
 

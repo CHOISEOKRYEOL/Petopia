@@ -1,9 +1,11 @@
 package com.pms.petopia.domain;
 
 public class Record {
+  private int no;
   private int state;
   private String record;
   private Pet pet;
+  private Hospital hospital;
 
   public Record() {}
 
@@ -27,14 +29,23 @@ public class Record {
     return pet;
   }
 
-  public void setPetMember(Pet pet) {
+  public void setPet(Pet pet) {
     this.pet = pet;
+  }
+
+  public Hospital getHospital() {
+    return hospital;
+  }
+
+  public void setHospital(Hospital hospital) {
+    this.hospital = hospital;
   }
 
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
+    result = prime * result + ((hospital == null) ? 0 : hospital.hashCode());
     result = prime * result + ((pet == null) ? 0 : pet.hashCode());
     result = prime * result + ((record == null) ? 0 : record.hashCode());
     result = prime * result + state;
@@ -50,6 +61,11 @@ public class Record {
     if (getClass() != obj.getClass())
       return false;
     Record other = (Record) obj;
+    if (hospital == null) {
+      if (other.hospital != null)
+        return false;
+    } else if (!hospital.equals(other.hospital))
+      return false;
     if (pet == null) {
       if (other.pet != null)
         return false;
@@ -67,8 +83,10 @@ public class Record {
 
   @Override
   public String toString() {
-    return "Record [state=" + state + ", record=" + record + ", pet=" + pet + "]";
+    return "Record [state=" + state + ", record=" + record + ", pet=" + pet + ", hospital="
+        + hospital + "]";
   }
+
 
 
 
