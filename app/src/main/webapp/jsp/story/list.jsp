@@ -20,15 +20,16 @@
 </tr>
 </thead>
 <tbody>
+<jsp:useBean id="list" type="List<Story>" scope="request"/>
 <%
-List<Story> list = (List<Story>) request.getAttribute("list");
 for (Story s : list) {
 %>
 <tr> 
   <td><a href='detail?no=<%=s.getNo()%>'><%=s.getNo()%></a></td> 
   <td><a href='<%=s.getUrl()%>'><%=s.getTitle()%></a></td> 
   <td><%=s.getSite()%></td> 
-  <td><%=s.getRegisteredDate()%></td> </tr>
+  <td><%=s.getRegisteredDate()%></td> 
+</tr>
 <%}%>
 </tbody>
 </table>
