@@ -61,7 +61,6 @@
   <update id="update" parameterType="myTownBoardComment">
     update pet_mytown_comt set
       cont = #{content}
-      date = now()
     where trno=#{no}
   </update>
   
