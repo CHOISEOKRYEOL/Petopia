@@ -13,7 +13,7 @@
 </head>
 <body>
 <h1>병원 찾기</h1>
-<p><a href='form.html'>새 병원</a></p>
+<p><a href='add'>새 병원</a></p>
 
 <form action='search' method='get'>
 <select name='gno'><option value=''>분류</option>
