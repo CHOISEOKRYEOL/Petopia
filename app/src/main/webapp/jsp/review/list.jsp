@@ -42,7 +42,6 @@ for(Review r : list) {
 {
 %>
       <a href='delete?no=<%=r.getNo()%>'>삭제</a>
-
 <%
       }
     }
