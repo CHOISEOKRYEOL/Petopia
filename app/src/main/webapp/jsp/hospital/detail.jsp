@@ -79,45 +79,11 @@ if (h != null) {
 <title>병원 리뷰 목록</title>
 </head>
 <body>
-<h1>병원 리뷰</h1>
-<%-- 
-<%
-Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-%>
-<%
-List<Review> list = (List<Review>) request.getAttribute("list");
-Hospital h = (Hospital) request.getAttribute("hospital");
-for(Review r : list) {
-  if(r.getHospital().getNo() == h.getNo()) {
-%>
+<h2>병원 리뷰</h2>
 
-<table border='1'>
-  <thead>
-  <tr>
-  <th>서비스</th> <th>청결도</th> <th>비용</th> <th>작성자</th> <th>내용</th> <th>등록일</th> 
-  </tr>
-  </thead>
-<tbody>
-<tr>
-<td><%=r.getServiceRating() %>점</td>
-<td><%=r.getCleanlinessRating() %>점</td>
-<td><%=r.getCostRating() %>점</td>
-<td><%=r.getWriter().getNick()%></td>
-<td><%=r.getComment()%></td>
-<td><%=r.getCreatedDate()%></td>
-</tr>
-</tbody>  
-</table>
-<% if(r.getWriter().getNo() == loginUser.getNo()) 
-{
-%>
-      <a href='delete?no=<%=r.getNo()%>'>삭제</a>
-<%
-      }
-    }
-  }
-%>
---%>
+
+
+
 <p><a href='../review/add'>새 리뷰 작성</a></p>
 <p><a href='list'>목록</a></p>
 <p><a href='../main'>메인</a></p>
