@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>리뷰 등록</h1>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
 서비스 : <select name="serviceRating" id="selectBox">
 <option value="1" selected>1점</option>
 <option value="2">2점</option>

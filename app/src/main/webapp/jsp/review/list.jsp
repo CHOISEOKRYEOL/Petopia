@@ -18,6 +18,9 @@
 
 <%
 for(Review r : list) {
+  pageContext.setAttribute("r", r);
+  pageContext.setAttribute("photoUrl",
+      r.getPhoto() != null ? "../upload/" + r.getPhoto() + "_100x100.jpg" : "");
   if(r.getHospital().getNo() == hospital.getNo()) {
 %>
 <table border='1'>
@@ -28,20 +31,20 @@ for(Review r : list) {
   </thead>
 <tbody>
 <tr>
-<td><%=r.getServiceRating() %>점</td>
-<td><%=r.getCleanlinessRating() %>점</td>
-<td><%=r.getCostRating() %>점</td>
-<td><%=r.getWriter().getNick()%></td>
-<td><%=r.getComment()%></td>
-<td><%=r.getCreatedDate()%></td>
-<td><img src='<%=r.getPhoto() != null ? "../upload/" + r.getPhoto() + "_100x100.jpg" : "영수증 없음" %>'>
+<td>${r.serviceRating}점</td>
+<td>${r.cleanlinessRating}점</td>
+<td>${r.costRating}점</td>
+<td>${r.writer.nick}</td>
+<td>${r.comment}</td>
+<td>${r.createdDate}</td>
+<td><img src='${photoUrl}'>
 </tr>
 </tbody>  
 </table>
 <% if(r.getWriter().getNo() == loginUser.getNo()) 
 {
 %>
-      <a href='delete?no=<%=r.getNo()%>'>삭제</a>
+      <a href='delete?no=${r.no}'>삭제</a>
 
 <%
       }

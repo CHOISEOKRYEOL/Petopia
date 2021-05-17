@@ -24,14 +24,15 @@
   <jsp:useBean id="list" type="List<Qna>" scope="request"/>
 <% 
   for(Qna q : list) {
+    pageContext.setAttribute("q", q);
     if(q.getWriter().getNo() == loginUser.getNo()) 
     {
 %>
 <tr>
-<td><%=q.getNo()%></td>
-<td><a href='detail?no=<%=q.getNo()%>'><%=q.getTitle()%></a></td>
-<td><%=q.getWriter().getNick()%></td>
-<td><%=q.getCreatedDate()%></td>
+<td>${q.no}</td>
+<td><a href='detail?no=${q.no}'>${q.title}</a></td>
+<td>${q.writer.nick}</td>
+<td>${q.createdDate}</td>
 </tr>
 <%
     }
