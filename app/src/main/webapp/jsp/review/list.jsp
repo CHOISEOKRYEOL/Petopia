@@ -12,19 +12,18 @@
 </head>
 <body>
 <h1>병원 리뷰</h1>
+<jsp:useBean id="loginUser" type="com.pms.petopia.domain.Member" scope="session"/>
+<jsp:useBean id="list" type="List<Review>" scope="request"/>
+<jsp:useBean id="hospital" type="com.pms.petopia.domain.Hospital" scope="request"/>
+
 <%
-Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-%>
-<%
-List<Review> list = (List<Review>) request.getAttribute("list");
-Hospital h = (Hospital) request.getAttribute("hospital");
 for(Review r : list) {
-  if(r.getHospital().getNo() == h.getNo()) {
+  if(r.getHospital().getNo() == hospital.getNo()) {
 %>
 <table border='1'>
   <thead>
   <tr>
-  <th>서비스</th> <th>청결도</th> <th>비용</th> <th>작성자</th> <th>내용</th> <th>등록일</th> 
+  <th>서비스</th> <th>청결도</th> <th>비용</th> <th>작성자</th> <th>내용</th> <th>등록일</th> <th> 사진</th>
   </tr>
   </thead>
 <tbody>
@@ -35,6 +34,7 @@ for(Review r : list) {
 <td><%=r.getWriter().getNick()%></td>
 <td><%=r.getComment()%></td>
 <td><%=r.getCreatedDate()%></td>
+<td><img src='<%=r.getPhoto() != null ? "../upload/" + r.getPhoto() + "_100x100.jpg" : "영수증 없음" %>'>
 </tr>
 </tbody>  
 </table>

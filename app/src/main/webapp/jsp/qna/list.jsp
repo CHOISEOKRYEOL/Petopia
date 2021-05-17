@@ -11,9 +11,7 @@
 <title>내 Q&A 목록</title>
 </head>
 <body>
-<% 
-Member loginUser = (Member) request.getSession().getAttribute("loginUser"); 
-%>
+<jsp:useBean id="loginUser" type="com.pms.petopia.domain.Member" scope="session"/>
 <h1><%=loginUser.getNick() %>님의 Q&A 목록</h1>
 <p><a href='add'>새 Q&A 작성</a></p>
      <table border='1'>
@@ -23,8 +21,8 @@ Member loginUser = (Member) request.getSession().getAttribute("loginUser");
   </tr>
   </thead>
   <tbody>
+  <jsp:useBean id="list" type="List<Qna>" scope="request"/>
 <% 
-  List<Qna> list = (List<Qna>) request.getAttribute("list");
   for(Qna q : list) {
     if(q.getWriter().getNo() == loginUser.getNo()) 
     {
