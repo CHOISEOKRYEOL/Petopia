@@ -25,6 +25,7 @@ int no = Integer.parseInt(request.getParameter("no"));
 <tbody>
 <tr><th>광역시/도</th> 
 <td><select name ='stateNo'>
+
 <%
 for(SmallAddress s : smallAddresses) {
 %>
@@ -42,45 +43,19 @@ for(SmallAddress s : smallAddresses) {
 <%
 }
 %>
-</select></td></tr>
+</select></td></tr><br>
 
-<tr><th>번호</th> <td><input type='text' name='no' value='<%=%>'readonly></td></tr>
-<tr><th>제목</th> <td><input name='title' type='text' value='안녕'></td></tr>
-<tr><th>내용</th> <td><textarea name='content' rows='10'>하세요</textarea></td></tr>
-<tr><th>작성자</th> <td>abc</td></tr>
-<tr><th>등록일</th> <td>2021-05-12 00:00:00</td></tr>
-<tr><th>조회수</th> <td>77</td></tr>
+<tr><th>번호</th> <td><input type='text' name='no' value='<%=myTownBoard.getNo()%>'readonly></td></tr>
+<tr><th>제목</th> <td><input name='title' type='text' value='<%=myTownBoard.getTitle()%>'></td></tr>
+<tr><th>내용</th> <td><textarea name='content' rows='10'><%=myTownBoard.getContent()%></textarea></td></tr>
+<tr><th>작성자</th> <td><%=myTownBoard.getWriter().getNick()%></td></tr>
+<tr><th>등록일</th> <td><%=myTownBoard.getCreatedDate()%></td></tr>
+<tr><th>조회수</th> <td><%=myTownBoard.getViewCount()%></td></tr>
 </tbody>
 </table>
 </form><a href='list?stateNo=1&cityNo=1'>목록</a></p>
 <br>
-<table border='1'>
-<tbody>
-<tr><th>작성자</th><td>aaa</td>
-<th>작성일</th><td>2021-05-17</td></tr>
-<tr><th>내용</th><td>오호라</td></tr><a href='../mytowncomment/delete?no=6'> 삭제</a>  <br>
-</tbody>
-</table>
-<br>
-
-
-
-<table border='1'>
-<tbody>
-<tr><th>작성자</th><td>abc</td>
-<th>작성일</th><td>2021-05-17</td></tr>
-<tr><th>내용</th><td>히히</td></tr><a href='../mytowncomment/delete?no=7'> 삭제</a>  <br>
-</tbody>
-</table>
-<br>
-<table border='1'>
-<tbody>
-<tr><th>작성자</th><td>abc</td>
-<th>작성일</th><td>2021-05-17</td></tr>
-<tr><th>내용</th><td>zzz</td></tr><a href='../mytowncomment/delete?no=8'> 삭제</a>  <br>
-</tbody>
-</table>
-<br>
+<jsp:include page="/jsp/mytownboardcomment/list.jsp"/>
 댓글 수 :3
 <form action='http://localhost:8080/web/mytowncomment/add' method='post'>
 <input type='hidden' name='boardNo' value='3'> <br>
@@ -88,6 +63,4 @@ for(SmallAddress s : smallAddresses) {
 <input type='submit' value='등록'>
 </form>
 </body>
-</html>
-</body>
-</html>
+</html> 
