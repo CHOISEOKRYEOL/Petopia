@@ -10,9 +10,6 @@
 </head>
 <body>
 <h1>로그인 결과</h1>
-<%
-Member member = (Member) session.getAttribute("loginUser");
-%>
-<p><%=member.getNick()%> 님 Petopia에 오신 걸 환영합니다.</p>
+<p>${member.nick} 님 Petopia에 오신 걸 환영합니다.</p>
 </body>
 </html>

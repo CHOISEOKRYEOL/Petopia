@@ -5,9 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원 목록</title>
 </head>
 <body>
+<jsp:useBean id="list" type="List<Member>" scope="request"/>
 
 </body>
 </html>

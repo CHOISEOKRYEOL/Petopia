@@ -1,7 +1,6 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,55 +20,22 @@ public class StoryListHandler extends HttpServlet {
 
     StoryService storyService = (StoryService) request.getServletContext().getAttribute("storyService");
 
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<title>스토리</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>스토리</h1>");
-
-    out.println("<p><a href='add'>새 스토리</a></p>");
-
     try {
-      List<Story> storys = storyService.list(); 
-
-      out.println("<table border='1'>");
-      out.println("<thead>");
-      out.println("<tr>");
-      out.println("<th>번호</th> <th>제목</th> <th>사이트</th> <th>등록일</th>");
-      out.println("</tr>");
-      out.println("</thead>");
-      out.println("<tbody>");
-
-      for (Story s : storys) {
-        out.printf("<tr>"
-            + " <td><a href='detail?no=%1$d'>%d</a></td>"
-            + " <td><a href='%s'>%s</a></td>"
-            + " <td>%s</td>"
-            + " <td>%s</td> </tr>\n",
-            s.getNo(),
-            s.getUrl(),
-            s.getTitle(),
-            s.getSite(),
-            s.getRegisteredDate());
+      String keyword = request.getParameter("keyword");
+      List<Story> storys = null;
+      if (keyword != null && keyword.length() > 0) {
+        storys = storyService.search(keyword);
+      } else {
+        storys = storyService.list();
       }
-      out.println("</tbody");
-      out.println("</table>");
 
-      out.println("<form action='search' method='get'>");
-      out.println("<input type='text' name='keyword'> ");
-      out.println("<button>검색</button>");
-      out.println("</form>");
+      request.setAttribute("list", storys);
+
+      response.setContentType("text/html;charset=UTF-8");
+      request.getRequestDispatcher("/jsp/story/list.jsp").include(request, response);
 
     } catch (Exception e) {
       throw new ServletException(e);
     }
-
-    out.println("</body>");
-    out.println("</html>");
   }
 }

@@ -12,10 +12,7 @@
 <form method='post'>
 <table border='1'>
 <tbody>
-<%
-String id = (String) request.getAttribute("id");
-%>
-<tr><th>아이디</th><td><input name='id' type='id' value='<%=id%>'></td></tr>
+<tr><th>아이디</th><td><input name='id' type='id' value='${cookie.id.value}'></td></tr>
 <tr><th>암호</th><td><input name='password' type='password'></td></tr>
 </tbody>
 <tfoot>
