@@ -1,5 +1,6 @@
 package com.pms.petopia.service;
 
+import java.util.List;
 import com.pms.petopia.domain.Member;
 
 public interface MemberService {
@@ -14,7 +15,9 @@ public interface MemberService {
 
   int update(Member member) throws Exception;
 
-  int delete(int no) throws Exception;
+  int delete(Member member) throws Exception;
+
+  List<Member> list() throws Exception;
 
   int deleteMember(int no) throws Exception;
 

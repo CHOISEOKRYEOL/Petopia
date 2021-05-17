@@ -44,9 +44,10 @@
   
   <select id="findAll" resultMap="memberMap">
     select
-      mno, name, nick, id, email, phone, rdt
+      mno, name, nick, id, email, phone, rdt, status
     from pet_user
-      order by rdt desc
+      where status = 1;
+    order by rdt desc
   </select>
   
   <update id="update" parameterType="member">
@@ -59,13 +60,14 @@
     where mno=#{no}
   </update>
   
-  <update id="delete" parameterType="int">
+  <update id="delete" parameterType="member">
     update pet_user set
-      name = 'null',
-      nick = 'null',
-      pwd = password('$#@#$@FDAWEAFfkaoodfko$@#NDOSAojefo!#!'),
-      phone = 'null'
-    where mno=#{value}
+      name = #{name},
+      nick = #{nick},
+      pwd = #{password},
+      phone = #{tel},
+      email = #{email}
+    where mno=#{no}
   </update>
   
   <delete id="deleteMember" parameterType="int">

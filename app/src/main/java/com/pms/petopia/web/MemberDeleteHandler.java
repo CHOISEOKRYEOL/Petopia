@@ -1,6 +1,7 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
+import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,14 +21,22 @@ public class MemberDeleteHandler extends HttpServlet {
     MemberService memberService = (MemberService) request.getServletContext().getAttribute("memberService");
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
+    Member m = new Member();
+    m.setNo(loginUser.getNo());
+    m.setEmail(UUID.randomUUID().toString());
+    m.setName(UUID.randomUUID().toString());
+    m.setPassword(UUID.randomUUID().toString());
+    m.setTel(UUID.randomUUID().toString());
+    m.setNick(UUID.randomUUID().toString());
+    m.setStatus(0);
+
     try {
 
-      memberService.delete(loginUser.getNo());
+      memberService.delete(m);
       request.getSession().invalidate();
-      request.setAttribute("member", loginUser);
       response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/member/delete.jsp");
-      response.setHeader("Refresh", "content=1;url='../main'");
+      request.getRequestDispatcher("/jsp/member/delete.jsp").include(request, response);
+      response.setHeader("Refresh", "1;url='../main'");
 
     } catch (Exception e) {
       throw new ServletException(e);

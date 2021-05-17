@@ -1,6 +1,7 @@
 package com.pms.petopia.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import com.pms.petopia.dao.MemberDao;
 import com.pms.petopia.domain.Member;
@@ -48,8 +49,13 @@ public class DefaultMemberService implements MemberService {
   }
 
   @Override
-  public int delete(int no) throws Exception {
-    return memberDao.delete(no);
+  public int delete(Member member) throws Exception {
+    return memberDao.delete(member);
+  }
+
+  @Override
+  public List<Member> list() throws Exception {
+    return memberDao.findAll();
   }
 
   @Override
