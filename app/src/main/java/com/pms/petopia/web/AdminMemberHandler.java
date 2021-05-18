@@ -21,20 +21,24 @@ public class AdminMemberHandler extends HttpServlet {
     MemberService memberService = (MemberService) request.getServletContext().getAttribute("memberService");
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-    if(loginUser.getRole() != 0) {
-      return;
-    }
+    System.out.println(loginUser);
 
-    try {
-
-      List<Member> list = memberService.list();
-
-      request.setAttribute("list", list);
+    if(loginUser.getRole() == 1) {
       response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/member/list.jsp").include(request, response);
+      request.getRequestDispatcher("/jsp/admin/list_fail.jsp").include(request, response);
+      response.setHeader("Refresh", "1;url=../main");
+    }
+    else {
+      try {
+        List<Member> list = memberService.list();
 
-    } catch (Exception e) {
-      throw new ServletException(e);
+        request.setAttribute("list", list);
+        response.setContentType("text/html;charset=UTF-8");
+        request.getRequestDispatcher("/jsp/admin/list.jsp").include(request, response);
+
+      } catch (Exception e) {
+        throw new ServletException(e);
+      }
     }
   }
 }

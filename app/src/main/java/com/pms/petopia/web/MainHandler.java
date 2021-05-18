@@ -55,6 +55,7 @@ public class MainHandler extends HttpServlet {
       out.println("<p><a href='review/list'>리뷰 목록</a></p>");
       out.println("<p><a href='qna/add'>Q&A 작성</a></p>");
       out.println("<p><a href='qna/list'>Q&A 목록</a></p>");
+      out.println("<p><a href='admin/memberlist'>ADMIN 회원 리스트</a></p>");
     }
     out.println("</body>");
     out.println("</html>");

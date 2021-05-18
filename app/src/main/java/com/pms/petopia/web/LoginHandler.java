@@ -77,6 +77,7 @@ public class LoginHandler extends HttpServlet {
         response.setHeader("Refresh", "1;url=login");
       }
       else {
+        System.out.println(member);
         request.getSession().setAttribute("loginUser", member);
         response.sendRedirect("main");
       }

@@ -49,9 +49,10 @@ public class MemberAddHandler extends HttpServlet {
 
     response.setContentType("text/html;charset=UTF-8");
 
-
     try {
       memberService.add(m);
+      request.setAttribute("member", m);
+      request.getRequestDispatcher("/jsp/member/add_success.jsp").include(request, response);
       response.setHeader("Refresh", "1;url=../main");
 
     } catch (Exception e) {
