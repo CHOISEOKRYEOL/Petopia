@@ -46,7 +46,7 @@ for(SmallAddress s : smallAddresses) {
 
 <input type='submit' value='찾기'>
 </form>
-<p><a href='add?stateNo=1&cityNo=1'>새 글</a><p><table border='1'>
+<p><a href='add?stateNo=${smallAddress.bigAddress.no}&cityNo=${smallAddress.no}'>새 글</a><p><table border='1'>
 <thead>
 <tr>
 <th>번호</th> <th>제목</th> <th>작성자</th> <th>등록일</th> <th>조회수</th> <th>댓글수</th>
@@ -55,8 +55,11 @@ for(SmallAddress s : smallAddresses) {
 <tbody>
 <% 
 for (MyTownBoard t : boards){
+  pageContext.setAttribute("t", t);
 %>
-<tr> <td><%=t.getNo()%></td> <td><a href='detail?stateNo=<%=smallAddress.getBigAddress().getNo()%>&cityNo=<%=smallAddress.getNo()%>&no=<%=t.getNo()%>'><%=t.getTitle()%></a></td> <td><%=t.getWriter().getNick()%></td> <td><%=t.getCreatedDate()%></td> <td><%=t.getViewCount()%></td> <td><%=t.getCommentCount()%></td></tr>
+<tr> <td>${t.no}</td> <td><a href='detail?stateNo=${smallAddress.bigAddress.no}&cityNo=${smallAddress.no}&no=${t.no}'>${t.title}</a></td> 
+
+<td>${t.writer.nick}</td> <td>${t.createdDate}</td> <td>${t.viewCount}</td> <td>${t.commentCount}</td></tr>
 <%
 }
 %>
@@ -64,8 +67,8 @@ for (MyTownBoard t : boards){
 </table>
 <form action='list' method='get'>
 <input type='search' name='keyword' value=''>
-<input type='hidden' name='stateNo' value='<%=smallAddress.getBigAddress().getNo()%>'><br>
-<input type='hidden' name='cityNo' value='<%=smallAddress.getNo()%>'><br>
+<input type='hidden' name='stateNo' value='${smallAddress.bigAddress.no}'><br>
+<input type='hidden' name='cityNo' value='${smallAddress.no}'><br>
 <button> 검색 </button>
 </form>
 </body>

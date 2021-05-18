@@ -1,3 +1,4 @@
+<%@page import="com.pms.petopia.domain.Member"%>
 <%@page import="com.pms.petopia.domain.MyTownBoard"%>
 <%@page import="com.pms.petopia.domain.SmallAddress"%>
 <%@page import="java.util.List"%>
@@ -39,11 +40,11 @@ for(SmallAddress s : smallAddresses) {
 <%
 for(SmallAddress s : smallAddresses) {
 %>
-<option value='<%=s.getNo()%>' <%=s.getNo() == myTownBoard.getNo() ? "selected" : "" %>><%=s.getName()%></option>
+<option value='<%=s.getNo()%>' <%=s.getNo() == myTownBoard.getSmallAddress().getNo() ? "selected" : "" %>><%=s.getName()%></option>
 <%
 }
 %>
-</select></td></tr><br>
+</select></td></tr>
 
 <tr><th>번호</th> <td><input type='text' name='no' value='<%=myTownBoard.getNo()%>'readonly></td></tr>
 <tr><th>제목</th> <td><input name='title' type='text' value='<%=myTownBoard.getTitle()%>'></td></tr>
@@ -51,14 +52,23 @@ for(SmallAddress s : smallAddresses) {
 <tr><th>작성자</th> <td><%=myTownBoard.getWriter().getNick()%></td></tr>
 <tr><th>등록일</th> <td><%=myTownBoard.getCreatedDate()%></td></tr>
 <tr><th>조회수</th> <td><%=myTownBoard.getViewCount()%></td></tr>
+<% 
+Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+if (loginUser != null && myTownBoard.getWriter().getNo() == loginUser.getNo()) {
+%>
+<tr>
+  <td colspan='2'>
+    <input type='submit' value='변경'><a href='delete?no=${myTownBoard.no}'>삭제</a>
+  </td>
+</tr>
+<%}%>
 </tbody>
 </table>
-</form><a href='list?stateNo=1&cityNo=1'>목록</a></p>
+</form><a href='list?stateNo=1&cityNo=1'>목록</a>
 <br>
 <jsp:include page="/jsp/mytownboardcomment/list.jsp"/>
-댓글 수 :3
-<form action='http://localhost:8080/web/mytowncomment/add' method='post'>
-<input type='hidden' name='boardNo' value='3'> <br>
+<form action='../mytowncomment/add' method='post'>
+<input type='hidden' name='boardNo' value='${myTownBoard.getNo()}'> <br>
 댓글: <textarea name='content' rows='1' cols='30'></textarea><br>
 <input type='submit' value='등록'>
 </form>

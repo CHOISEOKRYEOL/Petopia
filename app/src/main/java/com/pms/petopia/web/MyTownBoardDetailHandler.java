@@ -43,6 +43,9 @@ public class MyTownBoardDetailHandler extends HttpServlet {
       //      if (loginUser != null && myTownBoard.getWriter().getNo() == loginUser.getNo()) {
 
       List<MyTownBoardComment> comments = myTownBoardCommentService.list(no);
+      int commentCount = myTownBoardCommentService.count(no);
+      System.out.println(no);
+      System.out.println(commentCount);
       //      int count = 0;
       //      for(MyTownBoardComment c : comments) {
       //        if(myTownBoard.getNo() == c.getMyTownBoard().getNo()) {
@@ -89,10 +92,10 @@ public class MyTownBoardDetailHandler extends HttpServlet {
       //
       request.setAttribute("myTownBoard", myTownBoard);
       request.setAttribute("smallAddresses", smallAddresses);
-      request.setAttribute("loginUser", loginUser);
       request.setAttribute("comments", comments);
+      request.setAttribute("commentCount", commentCount);
       request.getRequestDispatcher("/jsp/mytownboard/detail.jsp").include(request, response);
-      request.getRequestDispatcher("/jsp/mytownboardcomment/list.jsp").include(request, response);
+      //request.getRequestDispatcher("/jsp/mytownboardcomment/list.jsp").include(request, response);
     } catch (Exception e) {
       throw new ServletException(e);
     }

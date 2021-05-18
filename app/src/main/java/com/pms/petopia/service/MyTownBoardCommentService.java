@@ -15,4 +15,6 @@ public interface MyTownBoardCommentService {
 
   int delete(int no) throws Exception;
 
+  int count(int myTownBoardNo) throws Exception;
+
 }
