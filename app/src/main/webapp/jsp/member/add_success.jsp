@@ -6,10 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>로그인</title>
+<title>회원가입 성공</title>
 </head>
 <body>
-<h1>로그인 결과</h1>
-<p>${member.nick} 님 Petopia에 오신 걸 환영합니다.</p>
+<h1>${member.nick} 님 Petopia에 오신 걸 환영합니다.</h1>
 </body>
 </html>

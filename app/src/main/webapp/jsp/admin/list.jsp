@@ -13,30 +13,32 @@
 <table border='1'>
 <thead>
 <tr>
-<th>아이디</th> <th>닉네임</th> <th>이름</th> <th>이메일</th> <th>전화번호</th> <th>가입일</th>
+<th>아이디</th> <th>닉네임</th> <th>이름</th> <th>이메일</th> <th>전화번호</th> <th>가입일</th> <th>처리</th>
 </tr>
 </thead>
 <tbody>
 <jsp:useBean id="list" type="List<Member>" scope="request"/>
+<form method="post">
 <%
 for(Member m : list) {
   pageContext.setAttribute("m", m);
-  if(m.getStatus() == 1) {
+  if(m.getRole() == 1) {
 
 %>
 <tr>
   <td>${m.id}</td>
   <td>${m.nick}</td>
   <td>${m.name}</td>
-  <td>${m.email}</td> 
-  <td>${m.tel}</td> 
+  <td>${m.email}</td>
+  <td>${m.tel}</td>
   <td>${m.registeredDate}</td>
-  <td><a href='delete?no=${m.no}'>강제탈퇴</a></td>
+  <td><a href='memberdelete?no=${m.no}'>강제 탈퇴</a></td>
 </tr>
 <%
   }
 }
 %>
+</form>
 </tbody>
 </table>
 </body>

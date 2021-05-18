@@ -13,7 +13,8 @@
     <result column="email" property="email"/>
     <result column="photo" property="photo"/>
     <result column="phone" property="tel"/> 
-    <result column="date" property="registeredDate"/>
+    <result column="status" property="status"/>
+    <result column="rdt" property="registeredDate"/>
   </resultMap>
   
   <sql id="login">
@@ -23,7 +24,10 @@
       nick,
       id,
       email,
-      phone
+      phone,
+      status,
+      rdt,
+      role
     from pet_user
   </sql>
   
@@ -44,10 +48,9 @@
   
   <select id="findAll" resultMap="memberMap">
     select
-      mno, name, nick, id, email, phone, rdt, status
+      mno, name, nick, id, email, phone, rdt, status, role
     from pet_user
-      where status = 1;
-    order by rdt desc
+      where status = 1
   </select>
   
   <update id="update" parameterType="member">
@@ -66,7 +69,8 @@
       nick = #{nick},
       pwd = #{password},
       phone = #{tel},
-      email = #{email}
+      email = #{email},
+      status = #{status}
     where mno=#{no}
   </update>
   
