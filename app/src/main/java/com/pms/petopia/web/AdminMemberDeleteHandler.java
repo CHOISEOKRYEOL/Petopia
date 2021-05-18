@@ -28,11 +28,10 @@ public class AdminMemberDeleteHandler extends HttpServlet {
     m.setTel(UUID.randomUUID().toString());
     m.setNick(UUID.randomUUID().toString());
     m.setStatus(0);
-    System.out.println(m);
+
     try {
 
       memberService.delete(m);
-      request.setAttribute("member", m);
       response.setContentType("text/html;charset=UTF-8");
       request.getRequestDispatcher("/jsp/admin/member_delete.jsp").include(request, response);
       response.setHeader("Refresh", "1;url='../main'");

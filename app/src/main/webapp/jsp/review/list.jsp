@@ -5,6 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,13 +17,10 @@
 <jsp:useBean id="list" type="List<Review>" scope="request"/>
 <jsp:useBean id="hospital" type="com.pms.petopia.domain.Hospital" scope="request"/>
 
-<%
-for(Review r : list) {
-  pageContext.setAttribute("r", r);
-  pageContext.setAttribute("photoUrl",
-      r.getPhoto() != null ? "../upload/" + r.getPhoto() + "_100x100.jpg" : "");
-  if(r.getHospital().getNo() == hospital.getNo()) {
-%>
+<c:forEach items="${list}" var="r">
+<c:set var="photoUrl">../upload/${r.photo}</c:set>
+<c:set var="thumbnail">../upload/${r.photo}_100x100.jpg</c:set>
+<c:if test="${r.hospital.no == hospital.no}">
 <table border='1'>
   <thead>
   <tr>
@@ -37,19 +35,15 @@ for(Review r : list) {
 <td>${r.writer.nick}</td>
 <td>${r.comment}</td>
 <td>${r.createdDate}</td>
-<td><img src='${photoUrl}'>
+<td><a href='${photoUrl}'><img src='${thumbnail}'></a>
 </tr>
 </tbody>  
 </table>
-<% if(r.getWriter().getNo() == loginUser.getNo()) 
-{
-%>
+<c:if test="${r.writer.no == loginUser.no}">
       <a href='delete?no=${r.no}'>삭제</a>
-<%
-      }
-    }
-  }
-%>
+</c:if>
+</c:if>
+</c:forEach>
 <p><a href='add'>새 리뷰 작성</a></p>
 <p><a href='../main'>돌아가기</a></p>
 </body>

@@ -1,8 +1,7 @@
-<%@page import="com.pms.petopia.domain.Member"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,14 +16,9 @@
 </tr>
 </thead>
 <tbody>
-<jsp:useBean id="list" type="List<Member>" scope="request"/>
+<c:forEach items="${list}" var="m">
 <form method="post">
-<%
-for(Member m : list) {
-  pageContext.setAttribute("m", m);
-  if(m.getRole() == 1) {
-
-%>
+<c:if test="${m.role == 1}">
 <tr>
   <td>${m.id}</td>
   <td>${m.nick}</td>
@@ -34,10 +28,8 @@ for(Member m : list) {
   <td>${m.registeredDate}</td>
   <td><a href='memberdelete?no=${m.no}'>강제 탈퇴</a></td>
 </tr>
-<%
-  }
-}
-%>
+</c:if>
+</c:forEach>
 </form>
 </tbody>
 </table>
