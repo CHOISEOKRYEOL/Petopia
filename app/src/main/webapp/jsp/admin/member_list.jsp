@@ -33,5 +33,18 @@
 </form>
 </tbody>
 </table>
+<form method='get'>
+<select name='item'>
+  <option value='0' ${param.item == "0" ? "selected" : ""}>전체</option>
+  <option value='1' ${param.item == "1" ? "selected" : ""}>아이디</option>
+  <option value='2' ${param.item == "2" ? "selected" : ""}>닉네임</option>
+  <option value='3' ${param.item == "3" ? "selected" : ""}>이메일</option>
+  <option value='4' ${param.item == "4" ? "selected" : ""}>전화번호</option>
+</select>
+<input type='search' name='keyword' value='${param.keyword}'> 
+<button>검색</button>
+<a href="../main">뒤로가기</a>
+</form>
+
 </body>
 </html>

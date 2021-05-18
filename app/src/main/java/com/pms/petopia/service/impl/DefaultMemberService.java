@@ -44,6 +44,15 @@ public class DefaultMemberService implements MemberService {
   }
 
   @Override
+  public List<Member> search(String item, String keyword) throws Exception {
+    Map<String,Object> params = new HashMap<>();
+    params.put("item", item);
+    params.put("keyword", keyword);
+    return memberDao.findByKeyword(params);
+  }
+
+
+  @Override
   public int update(Member member) throws Exception {
     return memberDao.update(member);
   }

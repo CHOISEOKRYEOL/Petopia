@@ -1,7 +1,3 @@
-<%@page import="com.pms.petopia.domain.Hospital"%>
-<%@page import="java.util.List"%>
-<%@page import="com.pms.petopia.domain.Review"%>
-<%@page import="com.pms.petopia.domain.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
@@ -13,10 +9,6 @@
 </head>
 <body>
 <h1>병원 리뷰</h1>
-<jsp:useBean id="loginUser" type="com.pms.petopia.domain.Member" scope="session"/>
-<jsp:useBean id="list" type="List<Review>" scope="request"/>
-<jsp:useBean id="hospital" type="com.pms.petopia.domain.Hospital" scope="request"/>
-
 <c:forEach items="${list}" var="r">
 <c:set var="photoUrl">../upload/${r.photo}</c:set>
 <c:set var="thumbnail">../upload/${r.photo}_100x100.jpg</c:set>
@@ -36,12 +28,12 @@
 <td>${r.comment}</td>
 <td>${r.createdDate}</td>
 <td><a href='${photoUrl}'><img src='${thumbnail}'></a>
+<c:if test="${r.writer.no == loginUser.no}">
+      <td><a href='delete?no=${r.no}'>삭제</a></td>
+</c:if>
 </tr>
 </tbody>  
 </table>
-<c:if test="${r.writer.no == loginUser.no}">
-      <a href='delete?no=${r.no}'>삭제</a>
-</c:if>
 </c:if>
 </c:forEach>
 <p><a href='add'>새 리뷰 작성</a></p>

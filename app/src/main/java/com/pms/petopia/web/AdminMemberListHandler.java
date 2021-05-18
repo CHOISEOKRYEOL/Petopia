@@ -12,7 +12,7 @@ import com.pms.petopia.service.MemberService;
 
 @SuppressWarnings("serial")
 @WebServlet("/admin/memberlist")
-public class AdminMemberHandler extends HttpServlet {
+public class AdminMemberListHandler extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -25,16 +25,27 @@ public class AdminMemberHandler extends HttpServlet {
 
     if(loginUser.getRole() == 1) {
       response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/admin/list_fail.jsp").include(request, response);
+      request.getRequestDispatcher("/jsp/admin/memberlist_fail.jsp").include(request, response);
       response.setHeader("Refresh", "1;url=../main");
     }
     else {
       try {
-        List<Member> list = memberService.list();
+        //        List<Member> list = memberService.list();
+        List<Member> list = null;
+
+        String item = request.getParameter("item");
+        String keyword = request.getParameter("keyword");
+
+        if (item != null && keyword != null && keyword.length() > 0) {
+          list = memberService.search(item, keyword);
+        }
+        else {
+          list = memberService.list();
+        }
 
         request.setAttribute("list", list);
         response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher("/jsp/admin/list.jsp").include(request, response);
+        request.getRequestDispatcher("/jsp/admin/member_list.jsp").include(request, response);
 
       } catch (Exception e) {
         throw new ServletException(e);
@@ -42,9 +53,4 @@ public class AdminMemberHandler extends HttpServlet {
     }
   }
 }
-
-
-
-
-
 

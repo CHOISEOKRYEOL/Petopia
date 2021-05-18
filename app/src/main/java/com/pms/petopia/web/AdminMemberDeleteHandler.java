@@ -34,7 +34,7 @@ public class AdminMemberDeleteHandler extends HttpServlet {
       memberService.delete(m);
       response.setContentType("text/html;charset=UTF-8");
       request.getRequestDispatcher("/jsp/admin/member_delete.jsp").include(request, response);
-      response.setHeader("Refresh", "1;url='../main'");
+      response.setHeader("Refresh", "1;url='memberlist'");
 
     } catch (Exception e) {
       throw new ServletException(e);
