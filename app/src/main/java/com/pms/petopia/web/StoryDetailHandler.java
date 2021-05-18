@@ -25,8 +25,8 @@ public class StoryDetailHandler extends HttpServlet {
     try {
       int no = Integer.parseInt(request.getParameter("no"));
 
-      Story s = storyService.get(no);
-      request.setAttribute("story", s);
+      Story story = storyService.get(no);
+      request.setAttribute("story", story);
       response.setContentType("text/html;charset=UTF-8");
       request.getRequestDispatcher("/jsp/story/detail.jsp").include(request, response);
 

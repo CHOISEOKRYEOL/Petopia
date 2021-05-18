@@ -12,12 +12,20 @@
 <body>
 <h1>새 스토리</h1>
 <form action='add' method='post'>
-제목: <input type='text' name='title'><br>
-URL: <input type='url' name='url'><br>
-사이트: <input type='text' name='site'><br>
-<input type='submit' value='등록'>
+<table border='1'>
+  <tbody>
+		<tr><th>제목</th> <td><input type='text' name='title'></td></tr>
+		<tr><th>URL</th> <td><input type='url' name='url'></td></tr>
+		<tr><th>사이트</th> <td><input type='text' name='site'></td></tr>
+  </tbody>
+  <tfoot>
+    <tr><td colspan='2'>
+      <input type='submit' value='등록'></td>
+    </tr>
+  </tfoot>
+</table>
 </form>
-<form action='../main'>
+<form action='list'>
 <input type='submit' value='취소'>
 </form>
 </body>

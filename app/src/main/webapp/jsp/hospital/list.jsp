@@ -1,11 +1,9 @@
-<%@page import="com.pms.petopia.domain.Hospital"%>
-<%@page import="java.util.List"%>
 <%@ page 
     language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,22 +35,19 @@
 </tr>
 </thead>
 <tbody>
-<% 
-List<Hospital> list = (List<Hospital>) request.getAttribute("list");
-for (Hospital h : list) {
-%>
+
+<c:forEach items="${list}" var="h">
 <tr>
-  <td><%=h.getNo()%></td>
-  <td><a href='detail?no=<%=h.getNo()%>'><%=h.getName()%></a></td>
-  <td><%=h.getTel()%></td>
-  <td><%=h.getSmallAddress().getName()%></td>
-  <td><%=h.getAddress()%></td>
-  <td><%=h.getStartTime()%>시 ~ <%=h.getEndTime()%>시</td>
-  <td><%=h.getRate()%></td>
+  <td>${h.no}</td>
+  <td><a href='detail?no=${h.no}'>${h.name}</a></td>
+  <td>${h.tel}</td>
+  <td>${h.smallAddress.name}</td>
+  <td>${h.address}</td>
+  <td>${h.startTime}시 ~ ${h.endTime}시</td>
+  <td>${h.rate}</td>
 </tr>
-<%
-}
-%>
+</c:forEach>
+
 </tbody>
 </table>
 </body>

@@ -1,7 +1,6 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -36,22 +35,10 @@ public class HospitalUpdateHandler extends HttpServlet {
 
     HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
 
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<title>병원 변경</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>병원 변경</h1>");
-
     try {
       int no = Integer.parseInt(request.getParameter("no"));
 
       Hospital oldHospital = hospitalService.get(no);
-
       if (oldHospital == null) {
         throw new Exception("해당 번호의 병원이 없습니다.");
       }
@@ -90,16 +77,10 @@ public class HospitalUpdateHandler extends HttpServlet {
       hospital.setSmallAddress(smallAddress);
 
       hospitalService.update(hospital);
-
-      out.println("<p>병원을 변경했습니다.</p>");
-
-      response.setHeader("Refresh", "1;url=list");
+      response.sendRedirect("list");
 
     } catch (Exception e) {
       throw new ServletException(e);
     }
-
-    out.println("</body>");
-    out.println("</html>");
   }
 }

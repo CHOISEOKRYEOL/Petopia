@@ -1,10 +1,8 @@
-<%@page import="com.pms.petopia.domain.Story"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,24 +18,24 @@
 </tr>
 </thead>
 <tbody>
-<jsp:useBean id="list" type="List<Story>" scope="request"/>
-<%
-for (Story s : list) {
-%>
+<c:forEach items="${list}" var="s">
 <tr> 
-  <td><a href='detail?no=<%=s.getNo()%>'><%=s.getNo()%></a></td> 
-  <td><a href='<%=s.getUrl()%>'><%=s.getTitle()%></a></td> 
-  <td><%=s.getSite()%></td> 
-  <td><%=s.getRegisteredDate()%></td> 
+  <td><a href='detail?no=${s.no}'>${s.no}</a></td> 
+  <td><a href='${s.url}'>${s.title}</a></td> 
+  <td>${s.site}</td> 
+  <td>${s.registeredDate}</td> 
 </tr>
-<%}%>
+</c:forEach>
 </tbody>
 </table>
 
-<% String keyword = request.getParameter("keyword");%>
 <form action='list' method='get'>
-<input type='search' name='keyword' value='<%=keyword != null ? keyword : ""%>'> 
+<input type='search' name='keyword' value='${param.keyword}'> 
 <button>검색</button>
+</form>
+
+<form action='../main'>
+<input type='submit' value='메인'>
 </form>
 </body>
 </html>

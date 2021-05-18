@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.Hospital;
 import com.pms.petopia.service.HospitalService;
+import com.pms.petopia.service.ReviewService;
 
 @SuppressWarnings("serial")
 @WebServlet("/hospital/detail")
@@ -18,17 +19,21 @@ public class HospitalDetailHandler extends HttpServlet {
       throws ServletException, IOException {
 
     HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
-    //ReviewService reviewService = (ReviewService) request.getServletContext().getAttribute("reviewService");
+    ReviewService reviewService = (ReviewService) request.getServletContext().getAttribute("reviewService");
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
 
-      Hospital h = hospitalService.get(no);
-      request.setAttribute("hospital", h);
+      Hospital hospital = hospitalService.get(no);
+      if (hospital == null) {
+        throw new Exception("해당 번호의 병원이 없습니다.");
+      }
+
+      request.setAttribute("hospital", hospital);
+      request.setAttribute("reviews", reviewService.list(no));
+
       response.setContentType("text/html;charset=UTF-8");
       request.getRequestDispatcher("/jsp/hospital/detail.jsp").include(request, response);
-
-      //List<Review> reviews = reviewService.list(h.getNo());
 
     } catch (Exception e) {
       throw new ServletException(e);

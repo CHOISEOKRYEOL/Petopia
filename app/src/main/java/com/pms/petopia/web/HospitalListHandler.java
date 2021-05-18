@@ -20,7 +20,6 @@ public class HospitalListHandler extends HttpServlet {
 
     HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
 
-
     try {
       List<Hospital> hospitals = hospitalService.list();
 
