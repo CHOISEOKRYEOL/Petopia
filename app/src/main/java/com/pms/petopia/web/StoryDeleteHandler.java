@@ -1,7 +1,6 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,17 +19,6 @@ public class StoryDeleteHandler extends HttpServlet {
 
     StoryService storyService = (StoryService) request.getServletContext().getAttribute("storyService");
 
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<title>스토리 삭제</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>스토리 삭제</h1>");
-
     try {
       int no = Integer.parseInt(request.getParameter("no"));
 
@@ -40,14 +28,10 @@ public class StoryDeleteHandler extends HttpServlet {
       }
 
       storyService.delete(no);
-      out.println("<p>스토리를 삭제했습니다.</p>");
-      response.setHeader("Refresh", "1;url=../main");
+      response.sendRedirect("list");
 
     } catch (Exception e) {
       throw new ServletException(e);
     }
-
-    out.println("</body>");
-    out.println("</html>");
   }
 }
