@@ -11,18 +11,17 @@ import com.pms.petopia.domain.Member;
 import com.pms.petopia.service.MemberService;
 
 @SuppressWarnings("serial")
-@WebServlet("/member/delete")
-public class MemberDeleteHandler extends HttpServlet {
+@WebServlet("/admin/memberdelete")
+public class AdminMemberDeleteHandler extends HttpServlet {
 
   @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     MemberService memberService = (MemberService) request.getServletContext().getAttribute("memberService");
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
     Member m = new Member();
-    m.setNo(loginUser.getNo());
+    m.setNo(Integer.parseInt(request.getParameter("no")));
     m.setEmail(UUID.randomUUID().toString());
     m.setName(UUID.randomUUID().toString());
     m.setPassword(UUID.randomUUID().toString());
@@ -33,10 +32,9 @@ public class MemberDeleteHandler extends HttpServlet {
     try {
 
       memberService.delete(m);
-      request.getSession().invalidate();
       response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/member/delete.jsp").include(request, response);
-      response.setHeader("Refresh", "1;url='../main'");
+      request.getRequestDispatcher("/jsp/admin/member_delete.jsp").include(request, response);
+      response.setHeader("Refresh", "1;url='memberlist'");
 
     } catch (Exception e) {
       throw new ServletException(e);
