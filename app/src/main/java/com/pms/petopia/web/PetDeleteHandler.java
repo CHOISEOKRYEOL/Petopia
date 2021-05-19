@@ -1,7 +1,6 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,27 +13,20 @@ import com.pms.petopia.service.PetService;
 public class PetDeleteHandler extends HttpServlet {
 
   @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     PetService petService = (PetService) request.getServletContext().getAttribute("petService");
 
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<title>마이펫 삭제</title>");
-    out.println("</head>");
-    out.println("<body>");
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
       petService.delete(no);
-      out.println("<h1>마이펫 삭제 완료</h1>");
 
-      response.setHeader("Refresh", "1;url=../main");
+      response.setContentType("text/html;charset=UTF-8");
+      request.getRequestDispatcher("/jsp/pet/delete.jsp").include(request, response);
+      response.setHeader("Refresh", "1;url=list");
+
 
     } catch (Exception e) {
       throw new ServletException(e);

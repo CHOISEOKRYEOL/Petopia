@@ -1,5 +1,6 @@
 package com.pms.petopia.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import com.pms.petopia.dao.RecordDao;
 import com.pms.petopia.domain.Record;
@@ -40,6 +41,17 @@ public class DefaultRecordService implements RecordService {
   public int update(Record record) throws Exception {
     return recordDao.update(record);
   }
+
+  @Override
+  public HashMap<String, Object> add() throws Exception {
+    return recordDao.add();
+  }
+
+
+  //  @Override
+  //  public List<Member> getMembers(int projectNo) throws Exception {
+  //    return recordDao.findMembers(projectNo);
+  //  }
 
 }
 

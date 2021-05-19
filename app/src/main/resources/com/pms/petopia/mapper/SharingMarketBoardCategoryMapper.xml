@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pms.petopia.dao.SharingMarketBoardCategoryDao">
+  
+  <resultMap id="sharingmarketboardCategoryMap" type="sharingmarketboardcategory">
+    <id column="cno" property="no"/>
+    <result column="cat_name" property="name"/>
+    
+  </resultMap>
+  
+  
+      <select id="findAll" resultMap="sharingmarketboardCategoryMap" parameterType="sharingmarketboard">
+    select
+      cno,
+      cat_name
+    from pet_mark_cat
+  </select>
+  
+    <select id="findByNo" resultMap="sharingmarketboardCategoryMap" parameterType="int">
+      select
+      cno,
+      cat_name
+    from pet_mark_cat
+    where cno = #{value}
+  </select>
+  
+ <!-- 
+  <select id="findByKeyword" resultMap="sharingmarketboardCategoryMap" parameterType="string">
+      select
+      mark.sno,
+      mark.title,
+      mark.cont,
+      mark.date,
+      mark.vw_cnt,
+      mem.mno as writer_no,
+      mem.name as writer_name,
+      cat.cno as category_no,
+      cat.cat_name as category_name
+    from pet_mark mark
+      inner join pet_user mem on mem.mno = mark.writer
+      inner join pet_mark_cat cat on cat.cno = mark.cno
+    <if test="value != null">
+    where 
+      mark.title like concat('%', #{value},'%')
+      or mark.cont like concat('%', #{value},'%')
+      or mem.name like concat('%', #{value},'%')
+      or cat.cat_name like concat('%', #{value},'%')
+    </if>
+    order by mark.sno desc
+  </select> -->
+  
+
+
+</mapper>
+
+
+
+
+
+
+

@@ -15,6 +15,8 @@ public interface PetService {
 
   int delete(int no) throws Exception;
 
+  List<Pet> search(String keyword) throws Exception;
+
 }
 
 

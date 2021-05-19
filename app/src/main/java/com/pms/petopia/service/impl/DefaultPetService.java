@@ -43,5 +43,10 @@ public class DefaultPetService implements PetService {
     return petDao.delete(no);
   }
 
+  @Override
+  public List<Pet> search(String keyword) throws Exception {
+    return petDao.findByKeyword(keyword);
+  }
+
 
 }

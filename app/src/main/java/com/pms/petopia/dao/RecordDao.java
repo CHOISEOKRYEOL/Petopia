@@ -1,5 +1,6 @@
 package com.pms.petopia.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import com.pms.petopia.domain.Record;
 
@@ -19,6 +20,8 @@ public interface RecordDao {
   int delete(int no) throws Exception;
 
   List<Record> findAll() throws Exception;
+
+  HashMap<String,Object> add() throws Exception;
 }
 
 

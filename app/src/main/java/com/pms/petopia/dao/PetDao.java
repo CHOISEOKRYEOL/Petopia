@@ -17,6 +17,9 @@ public interface PetDao {
 
   Pet findByName(String name) throws Exception;
 
+  List<Pet> findByKeyword(String keyword) throws Exception;
+
+
 }
 
 

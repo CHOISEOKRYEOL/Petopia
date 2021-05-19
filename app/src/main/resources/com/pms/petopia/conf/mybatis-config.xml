@@ -24,6 +24,8 @@
   
   <mappers>
     <mapper resource="com/pms/petopia/mapper/MemberMapper.xml"/>
+   <mapper resource="com/pms/petopia/mapper/BigAddressMapper.xml"/>
+=======
     <mapper resource="com/pms/petopia/mapper/BigAddressMapper.xml"/>
     <mapper resource="com/pms/petopia/mapper/BigAddressMapper.xml"/>
     <mapper resource="com/pms/petopia/mapper/HospitalMapper.xml"/>
@@ -35,6 +37,7 @@
     <mapper resource="com/pms/petopia/mapper/MyTownBoardCommentMapper.xml"/>
     <mapper resource="com/pms/petopia/mapper/SmallAddressMapper.xml"/>
     <mapper resource="com/pms/petopia/mapper/SharingMarketBoardMapper.xml"/>
+    <mapper resource="com/pms/petopia/mapper/SharingMarketBoardCategoryMapper.xml"/>
     <mapper resource="com/pms/petopia/mapper/QnaMapper.xml"/>
   </mappers>
 </configuration>

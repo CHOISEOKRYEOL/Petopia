@@ -87,7 +87,7 @@
   </update>
   
   <delete id="delete" parameterType="int">
-    delete from pet_mypet 
+    delete from pet_mypet
     where pno = #{value}
   </delete>
 </mapper>

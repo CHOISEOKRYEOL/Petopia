@@ -46,10 +46,12 @@ public class MainHandler extends HttpServlet {
       out.println("<input name='logout' type='submit' value='로그아웃'></form>");
       out.println("<p><a href='pet/form.html'>마이펫 등록</a></p>");
       out.println("<p><a href='pet/list'>마이펫 리스트</a></p>");
+      out.println("<p><a href='record/record.html'>진찰기록</a></p>");
+      out.println("<p><a href='hospital/form.html'>병원 찾기</a></p>");
       out.println("<p><a href='pet/record.html'>진찰기록</a></p>");
       out.println("<p><a href='hospital/add'>병원 찾기</a></p>");
       out.println("<p><a href='story/add'>스토리</a></p>");
-      out.println("<p><a href='sharingmarketboard/shareform.html'>나눔 장터</a></p>");
+      out.println("<p><a href='sharingmarketboard/add'>나눔 장터</a></p>");
       out.println("<p><a href='mytown/main'>우리 동네</a></p>");
       out.println("<p><a href='review/add'>리뷰 작성</a></p>");
       out.println("<p><a href='review/list'>리뷰 목록</a></p>");
