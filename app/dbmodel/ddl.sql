@@ -59,7 +59,6 @@ DROP TABLE IF EXISTS `pet_species` RESTRICT;
 DROP TABLE IF EXISTS `pet_mark_cat` RESTRICT;
 
 -- 회원
-<<<<<<< HEAD
 CREATE TABLE `pet_user` (
   `mno`   INTEGER      NOT NULL, -- 회원번호
   `name`  VARCHAR(50)  NOT NULL, -- 이름
@@ -68,10 +67,11 @@ CREATE TABLE `pet_user` (
   `pwd`   VARCHAR(100) NOT NULL, -- 암호
   `email` VARCHAR(40)  NOT NULL, -- 이메일
   `phone` VARCHAR(30)  NOT NULL, -- 휴대전화
-  `role`  INTEGER      NOT NULL, -- 역할
+  `role`  INTEGER      NOT NULL DEFAULT 1, -- 역할
   `rdt`   DATE         NOT NULL DEFAULT now(), -- 가입일
-  `state` INTEGER      NOT NULL  -- 탈퇴여부
+  `state` INTEGER      NOT NULL DEFAULT 0 -- 탈퇴여부
 );
+<<<<<<< HEAD
 =======
 CREATE TABLE pet_user (
 <<<<<<< HEAD
@@ -99,6 +99,8 @@ CREATE TABLE pet_user (
 )
 COMMENT '회원';
 >>>>>>> c0a5d0866b751dd681307a61f723ffb7ea73dc75
+=======
+>>>>>>> branch 'main' of https://github.com/yoontaehoonDev/Petopia.git
 
 -- 회원
 <<<<<<< HEAD
@@ -129,13 +131,8 @@ ALTER TABLE `pet_user`
 >>>>>>> branch 'main' of https://github.com/yoontaehoonDev/Petopia.git
 
 -- 회원
-<<<<<<< HEAD
 ALTER TABLE `pet_user`
   ADD CONSTRAINT `CK_pet_user2` -- 회원 체크 제약2
-=======
-ALTER TABLE pet_user
-  ADD CONSTRAINT CK_pet_user2 -- 회원 체크 제약2
->>>>>>> c0a5d0866b751dd681307a61f723ffb7ea73dc75
     CHECK (status = 1 or status = 0);
 
 -- 회원 유니크 인덱스
@@ -151,6 +148,7 @@ CREATE UNIQUE INDEX `UIX_pet_user`
   );
 >>>>>>> branch 'main' of https://github.com/yoontaehoonDev/Petopia.git
 
+<<<<<<< HEAD
 -- 회원 유니크 인덱스2
 <<<<<<< HEAD
 CREATE UNIQUE INDEX UIX_pet_user2
@@ -164,6 +162,8 @@ CREATE UNIQUE INDEX `UIX_pet_user2`
   );
 >>>>>>> branch 'main' of https://github.com/yoontaehoonDev/Petopia.git
 
+=======
+>>>>>>> branch 'main' of https://github.com/yoontaehoonDev/Petopia.git
 -- 회원 유니크 인덱스3
 <<<<<<< HEAD
 CREATE UNIQUE INDEX UIX_pet_user3
@@ -378,7 +378,6 @@ ALTER TABLE `pet_mark`
 >>>>>>> branch 'main' of https://github.com/yoontaehoonDev/Petopia.git
 
 -- 우리동네
-<<<<<<< HEAD
 CREATE TABLE `pet_mytown` (
   `tno`      INTEGER     NOT NULL, -- 우리동네번호
   `writer`   INTEGER     NOT NULL, -- 작성자
@@ -389,6 +388,7 @@ CREATE TABLE `pet_mytown` (
   `vw_cnt`   INTEGER     NULL     DEFAULT 0, -- 조회수
   `like_cnt` INTEGER     NULL     DEFAULT 0 -- 추천수
 );
+<<<<<<< HEAD
 =======
 CREATE TABLE pet_mytown (
 <<<<<<< HEAD
@@ -413,6 +413,8 @@ CREATE TABLE pet_mytown (
 )
 COMMENT '우리동네';
 >>>>>>> c0a5d0866b751dd681307a61f723ffb7ea73dc75
+=======
+>>>>>>> branch 'main' of https://github.com/yoontaehoonDev/Petopia.git
 
 -- 우리동네
 <<<<<<< HEAD
@@ -604,7 +606,6 @@ ALTER TABLE `pet_st_scrap`
 >>>>>>> branch 'main' of https://github.com/yoontaehoonDev/Petopia.git
 
 -- Q&A
-<<<<<<< HEAD
 CREATE TABLE `pet_qna` (
   `qno`    INTEGER     NOT NULL, -- Q&A번호
   `writer` INTEGER     NOT NULL, -- 작성자
@@ -614,6 +615,7 @@ CREATE TABLE `pet_qna` (
   `ans`    LONGTEXT    NULL,     -- 답변
   `adt`    DATETIME    NULL      -- 답변일
 );
+<<<<<<< HEAD
 =======
 CREATE TABLE pet_qna (
 <<<<<<< HEAD
@@ -636,6 +638,8 @@ CREATE TABLE pet_qna (
 )
 COMMENT 'Q&A';
 >>>>>>> c0a5d0866b751dd681307a61f723ffb7ea73dc75
+=======
+>>>>>>> branch 'main' of https://github.com/yoontaehoonDev/Petopia.git
 
 -- Q&A
 <<<<<<< HEAD

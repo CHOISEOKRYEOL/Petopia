@@ -119,7 +119,7 @@ for(SmallAddress s : smallAddresses) {
 <p><a href='add?stateNo=${smallAddress.bigAddress.no}&cityNo=${smallAddress.no}'>새 글</a><p><table border='1'>
 <thead>
 <tr>
-<th>번호</th> <th>제목</th> <th>작성자</th> <th>등록일</th> <th>조회수</th> <th>댓글수</th>
+<th>번호</th> <th>제목</th> <th>작성자</th> <th>등록일</th> <th>조회수</th> <th>추천수</th>
 </tr>
 </thead>
 <tbody>
@@ -129,7 +129,7 @@ for (MyTownBoard t : boards){
 %>
 <tr> <td>${t.no}</td> <td><a href='detail?stateNo=${smallAddress.bigAddress.no}&cityNo=${smallAddress.no}&no=${t.no}'>${t.title}</a></td> 
 
-<td>${t.writer.nick}</td> <td>${t.createdDate}</td> <td>${t.viewCount}</td> <td>${t.commentCount}</td></tr>
+<td>${t.writer.nick}</td> <td>${t.createdDate}</td> <td>${t.viewCount}</td> <td>${t.recommendCount}</td></tr>
 <%
 }
 %>
