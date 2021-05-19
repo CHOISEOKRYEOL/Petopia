@@ -21,26 +21,27 @@ public class MytownBoardListHandler extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    MyTownBoardService myTownBoardService = (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
-    SmallAddressService smallAddressService = (SmallAddressService) request.getServletContext().getAttribute("smallAddressService");
+    MyTownBoardService myTownBoardService =
+        (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
+    SmallAddressService smallAddressService =
+        (SmallAddressService) request.getServletContext().getAttribute("smallAddressService");
 
     int stateNo = Integer.parseInt(request.getParameter("stateNo"));
     int cityNo = Integer.parseInt(request.getParameter("cityNo"));
     String keyword = request.getParameter("keyword");
 
     try {
-      List<MyTownBoard> boards = myTownBoardService.list(cityNo,stateNo);
+      List<MyTownBoard> boards = myTownBoardService.list(cityNo, stateNo);
       SmallAddress smallAddress = smallAddressService.get(cityNo);
       List<SmallAddress> smallAddresses = smallAddressService.list();
 
-      if(boards.size() > 0) {
+      if (boards.size() > 0) {
 
         if (keyword != null && keyword.length() > 0) {
           boards = myTownBoardService.search(stateNo, cityNo, keyword);
         } else {
           boards = myTownBoardService.list(stateNo, cityNo);
         }
-
       }
 
       response.setContentType("text/html;charset=UTF-8");
@@ -53,9 +54,5 @@ public class MytownBoardListHandler extends HttpServlet {
     }
   }
 }
-
-
-
-
 
 
