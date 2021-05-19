@@ -59,7 +59,6 @@ DROP TABLE IF EXISTS `pet_species` RESTRICT;
 DROP TABLE IF EXISTS `pet_mark_cat` RESTRICT;
 
 -- 회원
-<<<<<<< HEAD
 CREATE TABLE `pet_user` (
   `mno`   INTEGER      NOT NULL, -- 회원번호
   `name`  VARCHAR(50)  NOT NULL, -- 이름
@@ -68,25 +67,10 @@ CREATE TABLE `pet_user` (
   `pwd`   VARCHAR(100) NOT NULL, -- 암호
   `email` VARCHAR(40)  NOT NULL, -- 이메일
   `phone` VARCHAR(30)  NOT NULL, -- 휴대전화
-  `role`  INTEGER      NOT NULL, -- 역할
+  `role`  INTEGER      NOT NULL DEFAULT 1, -- 역할
   `rdt`   DATE         NOT NULL DEFAULT now(), -- 가입일
-  `state` INTEGER      NOT NULL  -- 탈퇴여부
+  `state` INTEGER      NOT NULL DEFAULT 0 -- 탈퇴여부
 );
-=======
-CREATE TABLE pet_user (
-  mno    INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
-  name   VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
-  nick   VARCHAR(50)  NOT NULL COMMENT '닉네임', -- 닉네임
-  id     VARCHAR(50)  NOT NULL COMMENT '아이디', -- 아이디
-  pwd    VARCHAR(100) NOT NULL COMMENT '암호', -- 암호
-  email  VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
-  phone  VARCHAR(30)  NOT NULL COMMENT '휴대전화', -- 휴대전화
-  role   INTEGER      NOT NULL COMMENT '역할', -- 역할
-  rdt    DATE         NOT NULL DEFAULT now() COMMENT '가입일', -- 가입일
-  status INTEGER      NOT NULL COMMENT '탈퇴여부' -- 탈퇴여부
-)
-COMMENT '회원';
->>>>>>> c0a5d0866b751dd681307a61f723ffb7ea73dc75
 
 -- 회원
 ALTER TABLE `pet_user`
@@ -102,25 +86,14 @@ ALTER TABLE `pet_user`
         );
 
 -- 회원
-<<<<<<< HEAD
 ALTER TABLE `pet_user`
   ADD CONSTRAINT `CK_pet_user2` -- 회원 체크 제약2
-=======
-ALTER TABLE pet_user
-  ADD CONSTRAINT CK_pet_user2 -- 회원 체크 제약2
->>>>>>> c0a5d0866b751dd681307a61f723ffb7ea73dc75
     CHECK (status = 1 or status = 0);
 
 -- 회원 유니크 인덱스
 CREATE UNIQUE INDEX `UIX_pet_user`
   ON `pet_user` ( -- 회원
     `nick` ASC -- 닉네임
-  );
-
--- 회원 유니크 인덱스2
-CREATE UNIQUE INDEX `UIX_pet_user2`
-  ON `pet_user` ( -- 회원
-    `phone` ASC -- 휴대전화
   );
 
 -- 회원 유니크 인덱스3
@@ -220,7 +193,6 @@ ALTER TABLE `pet_mark`
   MODIFY COLUMN `sno` INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 우리동네
-<<<<<<< HEAD
 CREATE TABLE `pet_mytown` (
   `tno`      INTEGER     NOT NULL, -- 우리동네번호
   `writer`   INTEGER     NOT NULL, -- 작성자
@@ -231,19 +203,6 @@ CREATE TABLE `pet_mytown` (
   `vw_cnt`   INTEGER     NULL     DEFAULT 0, -- 조회수
   `like_cnt` INTEGER     NULL     DEFAULT 0 -- 추천수
 );
-=======
-CREATE TABLE pet_mytown (
-  tno    INTEGER     NOT NULL COMMENT '우리동네번호', -- 우리동네번호
-  writer INTEGER     NOT NULL COMMENT '작성자', -- 작성자
-  cno    INTEGER     NOT NULL COMMENT '시군구번호', -- 시군구번호
-  title  VARCHAR(50) NOT NULL COMMENT '제목', -- 제목
-  cont   LONGTEXT    NOT NULL COMMENT '내용(사진)', -- 내용(사진)
-  cdt    DATETIME    NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
-  vw_cnt INTEGER     NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
-  rc_cnt INTEGER     NOT NULL DEFAULT 0 COMMENT '추천수' -- 추천수
-)
-COMMENT '우리동네';
->>>>>>> c0a5d0866b751dd681307a61f723ffb7ea73dc75
 
 -- 우리동네
 ALTER TABLE `pet_mytown`
@@ -330,7 +289,6 @@ ALTER TABLE `pet_st_scrap`
     );
 
 -- Q&A
-<<<<<<< HEAD
 CREATE TABLE `pet_qna` (
   `qno`    INTEGER     NOT NULL, -- Q&A번호
   `writer` INTEGER     NOT NULL, -- 작성자
@@ -340,18 +298,6 @@ CREATE TABLE `pet_qna` (
   `ans`    LONGTEXT    NULL,     -- 답변
   `adt`    DATETIME    NULL      -- 답변일
 );
-=======
-CREATE TABLE pet_qna (
-  qno    INTEGER     NOT NULL COMMENT 'Q&A번호', -- Q&A번호
-  writer INTEGER     NOT NULL COMMENT '작성자', -- 작성자
-  title  VARCHAR(50) NOT NULL COMMENT '제목', -- 제목
-  cont   LONGTEXT    NOT NULL COMMENT '내용', -- 내용
-  cdt    DATETIME    NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
-  ans    LONGTEXT    NULL     COMMENT '답변', -- 답변
-  adt    DATETIME    NULL     COMMENT '답변일' -- 답변일
-)
-COMMENT 'Q&A';
->>>>>>> c0a5d0866b751dd681307a61f723ffb7ea73dc75
 
 -- Q&A
 ALTER TABLE `pet_qna`

@@ -24,7 +24,7 @@ public class ReviewListHandler extends HttpServlet {
     Member loginUser = (Member) request.getServletContext().getAttribute("loginUser");
 
     Hospital h = new Hospital();
-    h.setNo(6);
+    h.setNo(1);
 
     try {
       List<Review> list = reviewService.list(h.getNo());

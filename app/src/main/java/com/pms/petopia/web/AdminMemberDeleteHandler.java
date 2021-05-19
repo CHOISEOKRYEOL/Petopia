@@ -27,7 +27,7 @@ public class AdminMemberDeleteHandler extends HttpServlet {
     m.setPassword(UUID.randomUUID().toString());
     m.setTel(UUID.randomUUID().toString());
     m.setNick(UUID.randomUUID().toString());
-    m.setStatus(0);
+    m.setState(0);
 
     try {
 

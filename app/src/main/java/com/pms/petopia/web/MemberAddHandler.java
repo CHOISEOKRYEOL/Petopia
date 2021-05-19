@@ -47,11 +47,11 @@ public class MemberAddHandler extends HttpServlet {
       throw new ServletException("빈 칸 없이 입력하세요.");
     }
 
-    response.setContentType("text/html;charset=UTF-8");
 
     try {
       memberService.add(m);
       request.setAttribute("member", m);
+      response.setContentType("text/html;charset=UTF-8");
       request.getRequestDispatcher("/jsp/member/add_success.jsp").include(request, response);
       response.setHeader("Refresh", "1;url=../main");
 
