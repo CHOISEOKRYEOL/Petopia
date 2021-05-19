@@ -39,15 +39,30 @@ public class RecordAddHandler extends HttpServlet {
       r.setState(Integer.parseInt(request.getParameter("state")));
       r.setRecord(request.getParameter("record"));
 
-      Hospital h = new Hospital();
-      h.setNo(Integer.parseInt(request.getParameter("no")));
-      r.setHospital(h);
+      //      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+      //      r.setOwner(loginUser);
+
+      Pet pet = (Pet) request.getSession().getAttribute("pet");
+      r.setPetNo(pet);
+
+      Hospital hospital = (Hospital) request.getSession().getAttribute("hospital");
+      r.setHospitalNo(hospital);
 
 
-      Pet p = new Pet();
-      p.setNo(Integer.parseInt(request.getParameter("no")));
-      r.setPet(p);
 
+      //      Hospital hospital = new Hospital();
+      //      int hospitalNo = hospital.getNo();  
+      //
+      //      Pet pet = new Pet();
+      //      int petNo = pet.getNo();
+
+      //      request.getSession().setAttribute("hospital", hospitalNo);
+      //      request.getSession().setAttribute("pet" ,petNo);
+      //
+      //      System.out.println(hospitalNo);
+      //      System.out.println(petNo);
+
+      System.out.println(r);
       recordService.add(r);
 
       out.println("<p>진료기록을 등록했습니다.</p>");

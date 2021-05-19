@@ -4,54 +4,50 @@ public class Record {
   private int no;
   private int state;
   private String record;
-  private Pet pet;
-  private Hospital hospital;
+  private Pet petNo;
+  private Hospital hospitalNo;
 
-  public Record() {}
-
+  public int getNo() {
+    return no;
+  }
+  public void setNo(int no) {
+    this.no = no;
+  }
   public int getState() {
     return state;
   }
-
   public void setState(int state) {
     this.state = state;
   }
-
   public String getRecord() {
     return record;
   }
-
   public void setRecord(String record) {
     this.record = record;
   }
-
-  public Pet getPet() {
-    return pet;
+  public Pet getPetNo() {
+    return petNo;
   }
-
-  public void setPet(Pet pet) {
-    this.pet = pet;
+  public void setPetNo(Pet petNo) {
+    this.petNo = petNo;
   }
-
-  public Hospital getHospital() {
-    return hospital;
+  public Hospital getHospitalNo() {
+    return hospitalNo;
   }
-
-  public void setHospital(Hospital hospital) {
-    this.hospital = hospital;
+  public void setHospitalNo(Hospital hospitalNo) {
+    this.hospitalNo = hospitalNo;
   }
-
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((hospital == null) ? 0 : hospital.hashCode());
-    result = prime * result + ((pet == null) ? 0 : pet.hashCode());
+    result = prime * result + ((hospitalNo == null) ? 0 : hospitalNo.hashCode());
+    result = prime * result + no;
+    result = prime * result + ((petNo == null) ? 0 : petNo.hashCode());
     result = prime * result + ((record == null) ? 0 : record.hashCode());
     result = prime * result + state;
     return result;
   }
-
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -61,15 +57,17 @@ public class Record {
     if (getClass() != obj.getClass())
       return false;
     Record other = (Record) obj;
-    if (hospital == null) {
-      if (other.hospital != null)
+    if (hospitalNo == null) {
+      if (other.hospitalNo != null)
         return false;
-    } else if (!hospital.equals(other.hospital))
+    } else if (!hospitalNo.equals(other.hospitalNo))
       return false;
-    if (pet == null) {
-      if (other.pet != null)
+    if (no != other.no)
+      return false;
+    if (petNo == null) {
+      if (other.petNo != null)
         return false;
-    } else if (!pet.equals(other.pet))
+    } else if (!petNo.equals(other.petNo))
       return false;
     if (record == null) {
       if (other.record != null)
@@ -80,14 +78,9 @@ public class Record {
       return false;
     return true;
   }
-
   @Override
   public String toString() {
-    return "Record [state=" + state + ", record=" + record + ", pet=" + pet + ", hospital="
-        + hospital + "]";
+    return "Record [no=" + no + ", state=" + state + ", record=" + record + ", petNo=" + petNo
+        + ", hospitalNo=" + hospitalNo + "]";
   }
-
-
-
-
 }

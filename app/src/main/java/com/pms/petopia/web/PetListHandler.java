@@ -23,6 +23,14 @@ public class PetListHandler extends HttpServlet {
 
     try {
 
+      String keyword = request.getParameter("keyword");
+      List<Pet> boards = null;
+      if (keyword != null && keyword.length() > 0) {
+        boards = petService.search(keyword);
+      } else {
+        boards = petService.list();
+      }
+
       List<Pet> pets = petService.list();
 
       request.setAttribute("list", pets);

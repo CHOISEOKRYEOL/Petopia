@@ -6,14 +6,28 @@
 <mapper namespace="com.pms.petopia.dao.RecordDao">
   
   <resultMap id="recordMap" type="record">
-    <id column="no" property="no"/>
+    <id column="exno" property="no"/>
     <result column="state" property="state"/>
     <result column="history" property="record"/>
+    
+    <association property="owner" javaType="member">
+      <id column="owner_no" property="no"/>
+      <result column="owner_name" property="name"/>
+    </association>
+    
+    <association property="petNo" javaType="pet">
+      <id column="petNo_no" property="no"/>
+    </association>
+    
+     <association property="hospitalNo" javaType="hospital">
+      <id column="hospitalNo_no" property="no"/>
+    </association>
+    
   </resultMap>
-  
+    
   <insert id="insert" parameterType="record">
-    insert into pet_hprecord(hno,pno,owner,state,history) 
-    values(#{hno},#{pno},#{owner},#{state}, #{history})
+    insert into pet_hprecord(pno,hno,state,history) 
+    values(#{petNo.no},#{hospitalNo.no},#{state},#{record})
   </insert>
   
   <select id="findAll" resultMap="recordMap">
@@ -44,7 +58,7 @@
         state = #{state},
       </if>
       <if test="record != null or record != ''">
-        record = #{record}
+        history = #{record}
       </if>
     </set>
     where exno = #{no}
@@ -56,10 +70,3 @@
   </delete>
 
 </mapper>
-
-
-
-
-
-
-

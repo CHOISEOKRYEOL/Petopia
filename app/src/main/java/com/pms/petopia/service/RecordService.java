@@ -1,5 +1,6 @@
 package com.pms.petopia.service;
 
+import java.util.HashMap;
 import java.util.List;
 import com.pms.petopia.domain.Record;
 
@@ -14,6 +15,10 @@ public interface RecordService {
   int update(Record record) throws Exception;
 
   int delete(int no) throws Exception;
+
+  HashMap<String,Object> add() throws Exception;
+
+  //  List<Member> getMembers(int recordNo) throws Exception;
 
 }
 
