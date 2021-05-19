@@ -7,13 +7,13 @@ public class SharingMarketBoardComment {
   private int no;
   private String content;
   private Member writer;
-  private Date createdDAte;
+  private Date createdDate;
   private SharingMarketBoard sharingMarketBoard;
   
   
 @Override
 public String toString() {
-	return "Comment [no=" + no + ", content=" + content + ", writer=" + writer + ", createdDAte=" + createdDAte
+	return "Comment [no=" + no + ", content=" + content + ", writer=" + writer + ", createdDAte=" + createdDate
 			+ ", sharingMarketBoard=" + sharingMarketBoard + "]";
 	
 }
@@ -36,10 +36,10 @@ public void setWriter(Member writer) {
 	this.writer = writer;
 }
 public Date getCreatedDAte() {
-	return createdDAte;
+	return createdDate;
 }
 public void setCreatedDAte(Date createdDAte) {
-	this.createdDAte = createdDAte;
+	this.createdDate = createdDAte;
 }
 public SharingMarketBoard getSharingMarketBoard() {
 	return sharingMarketBoard;

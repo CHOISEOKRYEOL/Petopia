@@ -8,8 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.pms.petopia.domain.Member;
 import com.pms.petopia.service.SharingMarketBoardCategoryService;
 import com.pms.petopia.service.SharingMarketBoardService;
 
@@ -28,8 +26,6 @@ public class SharingMarketBoardDetailHandler extends HttpServlet{
 	    try {
 	     int no = Integer.parseInt(request.getParameter("no"));
 
-	      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-	     
 	      request.setAttribute("smb", sharingMarketBoardService.get(no));
 	      request.setAttribute("catList", sharingMarketBoardCategoryService.list());
 
