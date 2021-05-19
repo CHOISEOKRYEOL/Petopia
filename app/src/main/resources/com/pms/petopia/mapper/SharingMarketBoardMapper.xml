@@ -9,7 +9,7 @@
     <id column="sno" property="no"/>
     <result column="title" property="title"/>
     <result column="cont" property="content"/>
-    <result column="date" property="createdDate"/>
+    <result column="cdt" property="createdDate"/>
     <result column="vw_cnt" property="viewCount"/>
     
     <association property="writer" javaType="member">
@@ -37,7 +37,7 @@
       mark.sno,
       mark.title,
       mark.cont,
-      mark.date,
+      mark.cdt,
       mark.vw_cnt,
       mem.mno as writer_no,
       mem.name as writer_name,
@@ -54,7 +54,7 @@
       mark.sno,
       mark.title,
       mark.cont,
-      mark.date,
+      mark.cdt,
       mark.vw_cnt,
       mem.mno as writer_no,
       mem.name as writer_name,
@@ -71,7 +71,7 @@
       mark.sno,
       mark.title,
       mark.cont,
-      mark.date,
+      mark.cdt,
       mark.vw_cnt,
       mem.mno as writer_no,
       mem.name as writer_name,
@@ -93,7 +93,7 @@
     update pet_mark set
     	cno = #{category.no},
         title = #{title},
-        date = now(), 
+        cdt = now(), 
         cont = #{content}
     where sno = #{no}
   </update>
@@ -104,7 +104,7 @@
       mark.sno,
       mark.title,
       mark.cont,
-      mark.date,
+      mark.cdt,
       mark.vw_cnt,
       mem.mno as writer_no,
       mem.name as writer_name,
