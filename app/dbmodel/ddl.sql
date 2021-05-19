@@ -67,9 +67,9 @@ CREATE TABLE pet_user (
 	pwd   VARCHAR(100) NOT NULL COMMENT '암호', -- 암호
 	email VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
 	phone VARCHAR(30)  NOT NULL COMMENT '휴대전화', -- 휴대전화
-	role  INTEGER      NOT NULL COMMENT '역할', -- 역할
+	role  INTEGER      NOT NULL DEFAULT 1 COMMENT '역할', -- 역할
 	rdt   DATE         NOT NULL DEFAULT now() COMMENT '가입일', -- 가입일
-	state INTEGER      NOT NULL COMMENT '탈퇴여부' -- 탈퇴여부
+	state INTEGER      NOT NULL DEFAULT 0 COMMENT '탈퇴여부' -- 탈퇴여부
 )
 COMMENT '회원';
 
@@ -97,12 +97,6 @@ CREATE UNIQUE INDEX UIX_pet_user
 		nick ASC -- 닉네임
 	);
 
--- 회원 유니크 인덱스2
-CREATE UNIQUE INDEX UIX_pet_user2
-	ON pet_user ( -- 회원
-		phone ASC -- 휴대전화
-	);
-
 -- 회원 유니크 인덱스3
 CREATE UNIQUE INDEX UIX_pet_user3
 	ON pet_user ( -- 회원
@@ -114,9 +108,6 @@ CREATE UNIQUE INDEX UIX_pet_user4
 	ON pet_user ( -- 회원
 		id ASC -- 아이디
 	);
-
-ALTER TABLE pet_user
-	MODIFY COLUMN mno INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원번호';
 
 -- 펫
 CREATE TABLE pet_mypet (
