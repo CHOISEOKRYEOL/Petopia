@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.pms.petopia.dao.SharingMarketBoardDao;
 import com.pms.petopia.domain.SharingMarketBoard;
+import com.pms.petopia.domain.SharingMarketBoardCategory;
 import com.pms.petopia.service.SharingMarketBoardService;
 
 public class DefaultSharingMarketBoardService implements SharingMarketBoardService{
@@ -21,9 +22,9 @@ public class DefaultSharingMarketBoardService implements SharingMarketBoardServi
 	}
 
 	@Override
-	public List<SharingMarketBoard> list() throws Exception {
-		return sharingMarketBoardDao.findAll();
-	}
+	  public List<SharingMarketBoard> list() throws Exception {
+	    return sharingMarketBoardDao.findAll();
+	  }
 
 	@Override
 	public SharingMarketBoard get(int no) throws Exception {
@@ -45,17 +46,15 @@ public class DefaultSharingMarketBoardService implements SharingMarketBoardServi
 	}
 
 	@Override
-	public List<SharingMarketBoard> search(String keyword) throws Exception {
-		return sharingMarketBoardDao.findByKeyword(keyword);
+	public List<SharingMarketBoard> searchByDetail(String item, String keyword) throws Exception {
+	    HashMap<String,Object> params = new HashMap<>();
+	    params.put("item",item );
+	    params.put("keyword", keyword);
+	    return sharingMarketBoardDao.findByKeyword(params);
 	}
 	
-//	@Override
-//	public List<SharingMarketBoard> list(int no, String category) throws Exception {
-//	    HashMap<String,Object> params = new HashMap<>();
-//	    params.put("ono", no);
-//	    params.put("cat_name", category);
-//		return sharingMarketBoardDao.findbyCategory(params);
-//	}
-
-
+	@Override
+	  public List<SharingMarketBoard> getCategory(int catNo) throws Exception {
+		    return sharingMarketBoardDao.findCategory(catNo);
+		  }
 }

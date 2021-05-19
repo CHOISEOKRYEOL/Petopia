@@ -16,6 +16,8 @@ import com.pms.petopia.dao.MyTownBoardDao;
 import com.pms.petopia.dao.PetDao;
 import com.pms.petopia.dao.RecordDao;
 import com.pms.petopia.dao.ReviewDao;
+import com.pms.petopia.dao.SharingMarketBoardCategoryDao;
+import com.pms.petopia.dao.SharingMarketBoardCommentDao;
 import com.pms.petopia.dao.SharingMarketBoardDao;
 import com.pms.petopia.dao.SmallAddressDao;
 import com.pms.petopia.dao.StoryDao;
@@ -26,6 +28,8 @@ import com.pms.petopia.service.MyTownBoardService;
 import com.pms.petopia.service.PetService;
 import com.pms.petopia.service.RecordService;
 import com.pms.petopia.service.ReviewService;
+import com.pms.petopia.service.SharingMarketBoardCategoryService;
+import com.pms.petopia.service.SharingMarketBoardCommentService;
 import com.pms.petopia.service.SharingMarketBoardService;
 import com.pms.petopia.service.SmallAddressService;
 import com.pms.petopia.service.StoryService;
@@ -36,6 +40,8 @@ import com.pms.petopia.service.impl.DefaultMyTownBoardService;
 import com.pms.petopia.service.impl.DefaultPetService;
 import com.pms.petopia.service.impl.DefaultRecordService;
 import com.pms.petopia.service.impl.DefaultReviewService;
+import com.pms.petopia.service.impl.DefaultSharingMarketBoardCategoryService;
+import com.pms.petopia.service.impl.DefaultSharingMarketBoardCommentService;
 import com.pms.petopia.service.impl.DefaultSharingMarketBoardService;
 import com.pms.petopia.service.impl.DefaultSmallAddressService;
 import com.pms.petopia.service.impl.DefaultStorylService;
@@ -69,6 +75,8 @@ public class ContextLoaderListener implements ServletContextListener {
       BigAddressDao bigAddressDao = daoFactory.createDao(BigAddressDao.class);
       SmallAddressDao smallAddressDao = daoFactory.createDao(SmallAddressDao.class);
       ReviewDao reviewDao = daoFactory.createDao(ReviewDao.class);
+      SharingMarketBoardCategoryDao sharingMarketBoardCategoryDao = daoFactory.createDao(SharingMarketBoardCategoryDao.class);
+      SharingMarketBoardCommentDao sharingMarketBoardCommentDao = daoFactory.createDao(SharingMarketBoardCommentDao.class);
 
       // 3) 서비스 관련 객체 준비
       MemberService memberService = new DefaultMemberService(memberDao);
@@ -81,7 +89,9 @@ public class ContextLoaderListener implements ServletContextListener {
       BigAddressService bigAddressService = new DefaultBigAddressService(bigAddressDao);
       SmallAddressService smallAddressService = new DefaultSmallAddressService(smallAddressDao);
       ReviewService reviewService = new DefaultReviewService(reviewDao);
-
+      SharingMarketBoardCategoryService sharingMarketBoardCategoryService = new DefaultSharingMarketBoardCategoryService(sharingMarketBoardCategoryDao);
+      SharingMarketBoardCommentService sharingMarketBoardCommentService = new DefaultSharingMarketBoardCommentService(sharingMarketBoardCommentDao);
+      
       // 4) 서비스 객체를 ServletContext 보관소에 저장한다.
       servletContext.setAttribute("memberService", memberService);
       servletContext.setAttribute("petService", petService);
@@ -93,7 +103,10 @@ public class ContextLoaderListener implements ServletContextListener {
       servletContext.setAttribute("bigAddressService", bigAddressService);
       servletContext.setAttribute("smallAddressService", smallAddressService);
       servletContext.setAttribute("reviewService", reviewService);
-
+      servletContext.setAttribute("sharingMarketBoardCategoryService", sharingMarketBoardCategoryService);
+      servletContext.setAttribute("sharingMarketBoardCommentService", sharingMarketBoardCommentService);
+      
+      
     } catch (Exception e) {
       e.printStackTrace();
     }
