@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.SharingMarketBoard;
+import com.pms.petopia.service.SharingMarketBoardCategoryService;
 import com.pms.petopia.service.SharingMarketBoardService;
 
 @SuppressWarnings("serial")
@@ -18,6 +19,8 @@ public class SharingMarketBoardUpdateHandler extends HttpServlet{
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     SharingMarketBoardService sharingMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("sharingMarketBoardService");
+    SharingMarketBoardCategoryService sharingMarketBoardCategoryService = (SharingMarketBoardCategoryService) request.getServletContext().getAttribute("sharingMarketBoardCategoryService");
+    
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
@@ -44,16 +47,18 @@ public class SharingMarketBoardUpdateHandler extends HttpServlet{
 
       SharingMarketBoard smbBoard = new SharingMarketBoard();
       smbBoard.setNo(oldBoard.getNo());
-      //smbBoard.setCategory(Integer.parseInt(request.getParameter("category")));
+     
+      smbBoard.setCategory(sharingMarketBoardCategoryService.get( oldBoard.getCategory().getNo()));
+      
       smbBoard.setTitle(request.getParameter("title"));
       smbBoard.setContent(request.getParameter("content"));
+      
       sharingMarketBoardService.update(smbBoard);
-
-      out.println("<p>나눔장터 게시글을 변경하였습니다.</p>");
-      response.setHeader("Refresh", "1;url=../main");
+      
+      response.sendRedirect("list");
 
     } catch (Exception e) {
-      throw new ServletException(e);
+    	 throw new ServletException(e);
     }
 
     out.println("</body>");

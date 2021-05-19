@@ -19,9 +19,7 @@ public class MemberDetailHandler extends HttpServlet {
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
     try {
-
-      Member m = loginUser;
-      request.setAttribute("member", m);
+      request.setAttribute("member", loginUser);
       response.setContentType("text/html;charset=UTF-8");
       request.getRequestDispatcher("/jsp/member/detail.jsp").include(request, response);
 

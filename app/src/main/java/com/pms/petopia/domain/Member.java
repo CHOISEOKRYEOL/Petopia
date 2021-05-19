@@ -13,12 +13,13 @@ public class Member {
   private String tel;
   private int role;
   private Date registeredDate;
+  private int state;
 
   @Override
   public String toString() {
     return "Member [no=" + no + ", name=" + name + ", nick=" + nick + ", id=" + id + ", password="
-        + password + ", email=" + email + ", phone=" + tel + ", role=" + role
-        + ", registeredDate=" + registeredDate + "]";
+        + password + ", email=" + email + ", tel=" + tel + ", role=" + role + ", registeredDate="
+        + registeredDate + ", state=" + state + "]";
   }
 
   @Override
@@ -88,6 +89,13 @@ public class Member {
     return true;
   }
 
+
+  public int getState() {
+    return state;
+  }
+  public void setState(int state) {
+    this.state = state;
+  }
   public int getNo() {
     return no;
   }

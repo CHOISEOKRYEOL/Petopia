@@ -3,27 +3,32 @@ package com.pms.petopia.service.impl;
 import java.util.List;
 
 import com.pms.petopia.dao.SharingMarketBoardCategoryDao;
-import com.pms.petopia.domain.SharingMarketBoard;
+import com.pms.petopia.domain.SharingMarketBoardCategory;
 import com.pms.petopia.service.SharingMarketBoardCategoryService;
 
 public class DefaultSharingMarketBoardCategoryService implements SharingMarketBoardCategoryService{
 
 	SharingMarketBoardCategoryDao sharingMarketBoardCategoryDao;
 	
+	public DefaultSharingMarketBoardCategoryService(SharingMarketBoardCategoryDao sharingMarketBoardCategoryDao) {
+		this.sharingMarketBoardCategoryDao = sharingMarketBoardCategoryDao;
+	}
+	
 	@Override
-	public SharingMarketBoard get(int no) throws Exception {
-		SharingMarketBoard smBoard = sharingMarketBoardCategoryDao.findByNo(no);
-	    if (smBoard != null) {
-	    	sharingMarketBoardCategoryDao.findByNo(no);
-	    }
-	    return smBoard; 
+	public SharingMarketBoardCategory get(int no) throws Exception {
+	    return sharingMarketBoardCategoryDao.findByNo(no); 
 	}
 
 	@Override
-	public List<SharingMarketBoard> list() throws Exception {
+	public List<SharingMarketBoardCategory> list() throws Exception {
 		return sharingMarketBoardCategoryDao.findAll();
 	}
 	
+	@Override
+	public int add(SharingMarketBoardCategory c) throws Exception {
+		return sharingMarketBoardCategoryDao.insert(c);
+		
+	}
 
 
 }

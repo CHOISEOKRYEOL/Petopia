@@ -55,7 +55,7 @@ public class MyTownBoardMainHandler extends HttpServlet{
     } catch (Exception e) {
       throw new ServletException(e);
     }
-    out.println("</form");
+    out.println("</form>");
     out.println("</body>");
     out.println("</html>");
   }

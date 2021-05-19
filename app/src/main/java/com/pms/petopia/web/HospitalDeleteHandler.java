@@ -1,7 +1,6 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,17 +19,6 @@ public class HospitalDeleteHandler extends HttpServlet {
 
     HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
 
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<title>병원 삭제</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>병원 삭제</h1>");
-
     try {
       int no = Integer.parseInt(request.getParameter("no"));
 
@@ -40,16 +28,10 @@ public class HospitalDeleteHandler extends HttpServlet {
       }
 
       hospitalService.delete(no);
-
-      out.println("<p>병원을 삭제했습니다.</p>");
-
-      response.setHeader("Refresh", "1;url=../main");
+      response.sendRedirect("list");
 
     } catch (Exception e) {
       throw new ServletException(e);
     }
-
-    out.println("</body>");
-    out.println("</html>");
   }
 }

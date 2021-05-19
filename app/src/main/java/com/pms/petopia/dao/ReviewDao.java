@@ -15,6 +15,4 @@ public interface ReviewDao {
 
   int delete(int no) throws Exception;
 
-  List<Review> findAll2() throws Exception;
-
 }

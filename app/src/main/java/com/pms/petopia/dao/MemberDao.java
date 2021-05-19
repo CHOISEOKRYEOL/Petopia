@@ -14,11 +14,13 @@ public interface MemberDao {
 
   Member findByEmailPassword(Map<String,Object> params) throws Exception;
 
+  List<Member> findByKeyword(Map<String,Object> params) throws Exception;
+
   List<Member> findAll() throws Exception;
 
   int update(Member member) throws Exception;
 
-  int delete(int no) throws Exception;
+  int delete(Member member) throws Exception;
 
   int deleteMember(int no) throws Exception;
 

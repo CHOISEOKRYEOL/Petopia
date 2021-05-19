@@ -11,7 +11,7 @@
     <result column="cont" property="content"/>
     <result column="date" property="createdDate"/>
     <result column="vw_cnt" property="viewCount"/>
-    <result column="cmt_cnt" property="commentCount"/>
+    <result column="rc_cnt" property="recommendCount"/>
     
     <association property="writer" javaType="member">
       <id column="writer_no" property="no"/>
@@ -112,6 +112,7 @@
   
   <update id="update" parameterType="mytownboard">
     update pet_mytown set
+      cno = #{smallAddress.no},
       title = #{title},
       cont = #{content},
       date = now()
@@ -128,6 +129,7 @@
     delete from pet_mytown
     where tno=#{value}
   </delete>
+  
 
 </mapper>
 

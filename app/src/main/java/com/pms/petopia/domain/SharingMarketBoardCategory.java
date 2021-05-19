@@ -20,10 +20,9 @@ public void setNo(int no) {
 public String getName() {
 	return name;
 }
-public void serName(String category) {
-	this.name = category;
+
+public void setName(String name) {
+	this.name = name;
 }
- 
-  
-  
+
 }

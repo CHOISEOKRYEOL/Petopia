@@ -14,5 +14,4 @@ public interface ReviewService {
 
   int delete(int no) throws Exception;
 
-  List<Review> list2() throws Exception;
 }

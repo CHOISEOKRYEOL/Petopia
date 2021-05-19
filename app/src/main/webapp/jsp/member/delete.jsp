@@ -8,9 +8,6 @@
 <title>회원 탈퇴</title>
 </head>
 <body>
-<% 
-Member m = (Member) request.getAttribute("member");
-%>
-<h1><%=m.getId()%> 님 그동안 Petopia를 이용해주셔서 감사합니다.</h1>
+<h1>그동안 Petopia를 이용해주셔서 감사합니다.</h1>
 </body>
 </html>

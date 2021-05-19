@@ -3,131 +3,76 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.pms.petopia.dao.MyTownBoardDao">
+<mapper namespace="com.pms.petopia.dao.MyTownBoardCommentDao">
   
-  <resultMap id="myTownBoardMap" type="myTownBoard">
-    <id column="tno" property="no"/>
-    <result column="title" property="title"/>
+  <resultMap id="myTownBoardCommentMap" type="myTownBoardComment">
+    <id column="trno" property="no"/>
     <result column="cont" property="content"/>
     <result column="date" property="createdDate"/>
-    <result column="vw_cnt" property="viewCount"/>
-    <result column="cmt_cnt" property="commentCount"/>
     
     <association property="writer" javaType="member">
       <id column="writer_no" property="no"/>
       <result column="writer_nick" property="nick"/>
     </association>
     
-    <association property="bigAddress" javaType="bigAddress">
-      <id column="bigAddress_no" property="no"/>
-      <result column="bigAddress_name" property="name"/>
+    <association property="myTownBoard" javaType="myTownBoard">
+      <id column="myTownBoard_no" property="no"/>
+      <result column="myTownBoard_title" property="title"/>
     </association>
 
-    <association property="smallAddress" javaType="smallAddress">
-      <id column="smallAddress_no" property="no"/>
-      <result column="smallAddress_name" property="name"/>
-    </association>
-    
-    <!-- 
-    <association property="comment" javaType="comment">
-      <id column="comment_no" property="no"/>
-      <id column="comment_content" property="content"/>
-      <id column="comment_writer" property="writer"/>      
-    </association>
-     -->
-     
   </resultMap>
   
-  <insert id="insert" parameterType="mytownboard">
-    insert into pet_mytown(cno, title, cont, writer) 
-    values(#{smallAddress.no}, #{title}, #{content}, #{writer.no})
+  <insert id="insert" parameterType="myTownBoardComment">
+    insert into pet_mytown_comt(tno,writer,cont)
+    values(#{myTownBoard.no}, #{writer.no}, #{content})
   </insert>
   
-  <select id="findByArea" resultMap="myTownBoardMap" parameterType="map">
-    select
-      t.tno, 
-      t.title, 
-      t.date, 
-      t.vw_cnt,
-      t.cmt_cnt,
-      m.mno as writer_no, 
+  <select id="findByBoardNo" resultMap="myTownBoardCommentMap" parameterType="int">
+    select 
+      t.tno as myTownBoard_no,
+      c.trno,
+      c.cont,
+      c.writer as writer_no,
       m.nick as writer_nick,
-      s.gno as bigAddress_no, 
-      s.gname as bigAddress_name,
-      c.cno as smallAddress_no, 
-      c.cname as smallAddress_name
-    from pet_state s
-      inner join pet_city c on s.gno=c.gno
-      inner join pet_mytown t on c.cno=t.cno
-      inner join pet_user m on t.writer=m.mno  
-    where c.cno=#{cno} and s.gno=#{gno}
-    order by t.tno desc
-  </select>
-
-  <select id="findByKeyword" resultMap="myTownBoardMap" parameterType="map">
-    select
-      t.tno, 
-      t.title, 
-      t.date, 
-      t.vw_cnt,
-      t.cmt_cnt,
-      m.mno as writer_no, 
-      m.nick as writer_nick,
-		  s.gno as state_no, 
-			s.gname as state_name,
-			c.cno as city_no, 
-			c.cname as city_name
-		from pet_state s
-		  inner join pet_city c on s.gno=c.gno
-		  inner join pet_mytown t on c.cno=t.cno
-		  inner join pet_user m on t.writer=m.mno  
-		where 
-		  c.cno=#{cno} and s.gno=#{gno}
-		  and (t.title like concat('%', #{keyword},'%')
-		  or m.nick like concat('%', #{keyword},'%')
-		  or t.cont like concat('%', #{keyword},'%'))
-    order by t.tno desc
-  </select>
-  
-  <select id="findByNo" resultMap="myTownBoardMap" parameterType="int">
-    select
-      t.tno,
-      t.title,
-      t.cont,
-      t.date,
-      t.vw_cnt,
-      t.cmt_cnt,
-      m.mno as writer_no,
-      m.nick as writer_nick,
-      s.gno as bigAddress_no,
-      s.gname as bigAddress_name,
-      c.cno as smallAddress_no,
-      c.cname as smallAddress_name
-    from pet_city c
-      inner join pet_state s on s.gno=c.gno
-      inner join pet_mytown t on c.cno=t.cno
-      inner join pet_user m on t.writer=m.mno
+      c.date
+    from pet_mytown t
+      inner join pet_mytown_comt c on t.tno=c.tno
+      inner join pet_user m on c.writer=m.mno
     where t.tno=#{value}
+    order by c.trno asc
   </select>
   
-  <update id="update" parameterType="mytownboard">
-    update pet_mytown set
-      title = #{title},
-      cont = #{content},
-      date = now()
-    where tno=#{no}
-  </update>
+  <select id="findByNo" resultMap="myTownBoardCommentMap" parameterType="int">
+    select 
+      t.tno as myTownBoard_no,
+      c.trno,
+      c.cont,
+      c.writer as writer_no,
+      m.nick as writer_nick,
+      c.date
+    from pet_mytown t
+      inner join pet_mytown_comt c on t.tno=c.tno
+      inner join pet_user m on c.writer=m.mno
+    where c.trno=#{value}
+    order by c.trno asc
+  </select>
   
-  <update id="updateViewCount" parameterType="int">
-    update pet_mytown set 
-      vw_cnt = vw_cnt + 1 
-    where tno = #{value}
+  
+  <update id="update" parameterType="myTownBoardComment">
+    update pet_mytown_comt set
+      cont = #{content}
+    where trno=#{no}
   </update>
   
   <delete id="delete" parameterType="int">
-    delete from pet_mytown
-    where tno=#{value}
+    delete from pet_mytown_comt
+    where trno=#{value}
   </delete>
+
+  <select id="countComment" resultType="Integer" parameterType="int">
+    select count(*) from pet_mytown_comt
+    where tno = #{value}
+  </select>
 
 </mapper>
 

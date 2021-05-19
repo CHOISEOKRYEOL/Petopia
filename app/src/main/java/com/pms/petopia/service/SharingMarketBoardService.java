@@ -16,7 +16,8 @@ public interface SharingMarketBoardService {
 	
 	int delete(int no) throws Exception;
 	
-	List<SharingMarketBoard> search(String keyword) throws Exception;
+	List<SharingMarketBoard> searchByDetail(String item, String keyword) throws Exception;
 	
-	//List<SharingMarketBoard> list(int no, String category) throws Exception;
+    List<SharingMarketBoard> getCategory(int catNo) throws Exception;
+	
 }

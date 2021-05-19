@@ -1,43 +1,47 @@
 package com.pms.petopia.service.impl;
 
 import java.util.List;
-import com.pms.petopia.dao.CommentDao;
-import com.pms.petopia.domain.Comment;
-import com.pms.petopia.service.CommentService;
+import com.pms.petopia.dao.MyTownBoardCommentDao;
+import com.pms.petopia.domain.MyTownBoardComment;
+import com.pms.petopia.service.MyTownBoardCommentService;
 
-public class DefaultMyTownBoardCommentService implements CommentService{
+public class DefaultMyTownBoardCommentService implements MyTownBoardCommentService{
 
-  CommentDao commentDao;
+  MyTownBoardCommentDao myTownBoardCommentDao;
 
-  public DefaultMyTownBoardCommentService (CommentDao commentDao) {
-    this.commentDao = commentDao;
+  public DefaultMyTownBoardCommentService (MyTownBoardCommentDao myTownBoardCommentDao) {
+    this.myTownBoardCommentDao = myTownBoardCommentDao;
   }
 
   @Override
-  public int add(Comment comt) throws Exception {
-    return commentDao.insert(comt);
+  public int add(MyTownBoardComment comt) throws Exception {
+    return myTownBoardCommentDao.insert(comt);
   }
 
   @Override
-  public List<Comment> list(int myTownBoardNo) throws Exception {
-    return commentDao.list(myTownBoardNo);
+  public List<MyTownBoardComment> list(int myTownBoardNo) throws Exception {
+    return myTownBoardCommentDao.findByBoardNo(myTownBoardNo);
   }
 
   @Override
-  public Comment get(int no) throws Exception {
-    return commentDao.findByNo(no);
+  public MyTownBoardComment get(int myTownBoardCommentNo) throws Exception {
+    return myTownBoardCommentDao.findByNo(myTownBoardCommentNo);
   }
 
   @Override
-  public int update(Comment comt) throws Exception {
-    return commentDao.update(comt);
+  public int update(MyTownBoardComment comt) throws Exception {
+    return myTownBoardCommentDao.update(comt);
   }
 
   @Override
   public int delete(int no) throws Exception {
-    return commentDao.delete(no);
+    return myTownBoardCommentDao.delete(no);
   }
 
+  @Override
+  public int count(int myTownBoardNo) throws Exception {
+    return myTownBoardCommentDao.countComment(myTownBoardNo);
+  }
 
 
 

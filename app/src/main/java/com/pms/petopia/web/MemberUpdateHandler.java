@@ -22,14 +22,14 @@ public class MemberUpdateHandler extends HttpServlet {
 
     Member m = new Member();
     m.setNo(loginUser.getNo());
+    m.setId(loginUser.getId());
     m.setNick(request.getParameter("nick"));
     m.setPassword(request.getParameter("password"));
     m.setTel(request.getParameter("tel"));
 
     try {
-
       memberService.update(m);
-      request.setAttribute("member", loginUser);
+      request.setAttribute("member", m);
       response.setContentType("text/html;charset=UTF-8");
       request.getRequestDispatcher("/jsp/member/update.jsp").include(request, response);
       response.setHeader("Refresh", "1;url=../main");

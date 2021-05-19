@@ -17,6 +17,7 @@
   <association property="writer" javaType="member">
     <id column="writer_no" property="no"/>
     <result column="writer_name" property="name"/>
+    <result column="writer_nick" property="nick"/>
    </association>
   
   <association property="hospital" javaType="hospital">
@@ -34,26 +35,17 @@
   <select id="findAll" resultMap="reviewMap" parameterType="int">
     select
       r.rno, r.service, r.clean, r.cost, r.cont, r.cdt, r.rphoto,
-      m.mno as writer_no, m.name as writer_name,
+      m.mno as writer_no, m.nick as writer_nick,
       h.hno as hospital_no, h.name as hospital_name
     from pet_hp_review r
       inner join pet_user m on m.mno=r.writer
       inner join pet_hp h on h.hno=r.hname
     where h.hno = #{no}
   </select>
-  
-    <select id="findAll2" resultMap="reviewMap">
-    select
-      r.rno, r.service, r.clean, r.cost, r.cont, r.cdt, r.rphoto,
-      m.mno as writer_no, m.name as writer_name,
-      h.hno as hospital_no, h.name as hospital_name
-    from pet_hp_review r
-      inner join pet_user m on m.mno=r.writer
-      inner join pet_hp h on h.hno=r.hname
-  </select>
 
   <delete id="delete" parameterType="int">
-    delete from pet_hp_review where rno=#{value}
+    delete from pet_hp_review 
+    where rno=#{value}
   </delete>
 
 </mapper>

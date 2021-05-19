@@ -17,12 +17,11 @@ public class QnaDetailHandler extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    QnaService qnaService = (QnaService) request.getServletContext().getAttribute("quaService");
+    QnaService qnaService = (QnaService) request.getServletContext().getAttribute("qnaService");
 
     int no = Integer.parseInt(request.getParameter("no"));
 
     try {
-
       Qna q = qnaService.get(no);
       request.setAttribute("qna", q);
       response.setContentType("text/html;charset=UTF-8");

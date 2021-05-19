@@ -2,10 +2,11 @@ package com.pms.petopia.service;
 
 import java.util.List;
 
-import com.pms.petopia.domain.SharingMarketBoard;
+import com.pms.petopia.domain.SharingMarketBoardCategory;
 
 public interface SharingMarketBoardCategoryService {
 
-	List<SharingMarketBoard> list() throws Exception;
-	SharingMarketBoard get(int no) throws Exception;
+	List<SharingMarketBoardCategory> list() throws Exception;
+	SharingMarketBoardCategory get(int no) throws Exception;
+	int add(SharingMarketBoardCategory c)throws Exception;
 }
