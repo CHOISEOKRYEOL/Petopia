@@ -67,7 +67,7 @@ CREATE TABLE pet_user (
 	pwd   VARCHAR(100) NOT NULL COMMENT '암호', -- 암호
 	email VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
 	phone VARCHAR(30)  NOT NULL COMMENT '휴대전화', -- 휴대전화
-	role  INTEGER      NOT NULL COMMENT '역할', -- 역할
+	role  INTEGER      NOT NULL DEFAULT 1 COMMENT '역할', -- 역할
 	rdt   DATE         NOT NULL DEFAULT now() COMMENT '가입일', -- 가입일
 	state INTEGER      NOT NULL COMMENT '탈퇴여부' -- 탈퇴여부
 )
