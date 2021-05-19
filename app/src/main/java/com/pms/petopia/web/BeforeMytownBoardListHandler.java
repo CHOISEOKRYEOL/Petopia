@@ -115,7 +115,7 @@ public class BeforeMytownBoardListHandler extends HttpServlet {
               b.getWriter().getNick(),
               b.getCreatedDate(),
               b.getViewCount(),
-              b.getCommentCount());
+              b.getRecommendCount());
         }
 
         out.println("</tbody>");

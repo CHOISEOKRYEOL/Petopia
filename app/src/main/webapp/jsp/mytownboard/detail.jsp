@@ -52,6 +52,7 @@ for(SmallAddress s : smallAddresses) {
 <tr><th>작성자</th> <td><%=myTownBoard.getWriter().getNick()%></td></tr>
 <tr><th>등록일</th> <td><%=myTownBoard.getCreatedDate()%></td></tr>
 <tr><th>조회수</th> <td><%=myTownBoard.getViewCount()%></td></tr>
+<tr><th>추천수</th> <td><%=myTownBoard.getViewCount()%></td></tr>
 <% 
 Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 if (loginUser != null && myTownBoard.getWriter().getNo() == loginUser.getNo()) {
