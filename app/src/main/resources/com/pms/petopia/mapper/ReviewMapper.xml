@@ -12,11 +12,12 @@
     <result column="cost" property="costRating"/>
     <result column="cont" property="comment"/>
     <result column="rphoto" property="photo"/>
-    <result column="date" property="createdDate"/>
+    <result column="cdt" property="createdDate"/>
 
   <association property="writer" javaType="member">
     <id column="writer_no" property="no"/>
     <result column="writer_name" property="name"/>
+    <result column="writer_nick" property="nick"/>
    </association>
   
   <association property="hospital" javaType="hospital">
@@ -33,8 +34,8 @@
   
   <select id="findAll" resultMap="reviewMap" parameterType="int">
     select
-      r.rno, r.service, r.clean, r.cost, r.cont, r.rphoto, r.date,
-      m.mno as writer_no, m.name as writer_name,
+      r.rno, r.service, r.clean, r.cost, r.cont, r.cdt, r.rphoto,
+      m.mno as writer_no, m.nick as writer_nick,
       h.hno as hospital_no, h.name as hospital_name
     from pet_hp_review r
       inner join pet_user m on m.mno=r.writer
@@ -43,7 +44,8 @@
   </select>
 
   <delete id="delete" parameterType="int">
-    delete from pet_hp_review where rno=#{value}
+    delete from pet_hp_review 
+    where rno=#{value}
   </delete>
 
 </mapper>

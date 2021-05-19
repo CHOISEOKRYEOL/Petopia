@@ -12,8 +12,10 @@ import com.pms.mybatis.SqlSessionFactoryProxy;
 import com.pms.petopia.dao.BigAddressDao;
 import com.pms.petopia.dao.HospitalDao;
 import com.pms.petopia.dao.MemberDao;
+import com.pms.petopia.dao.MyTownBoardCommentDao;
 import com.pms.petopia.dao.MyTownBoardDao;
 import com.pms.petopia.dao.PetDao;
+import com.pms.petopia.dao.QnaDao;
 import com.pms.petopia.dao.RecordDao;
 import com.pms.petopia.dao.ReviewDao;
 import com.pms.petopia.dao.SharingMarketBoardCategoryDao;
@@ -24,8 +26,10 @@ import com.pms.petopia.dao.StoryDao;
 import com.pms.petopia.service.BigAddressService;
 import com.pms.petopia.service.HospitalService;
 import com.pms.petopia.service.MemberService;
+import com.pms.petopia.service.MyTownBoardCommentService;
 import com.pms.petopia.service.MyTownBoardService;
 import com.pms.petopia.service.PetService;
+import com.pms.petopia.service.QnaService;
 import com.pms.petopia.service.RecordService;
 import com.pms.petopia.service.ReviewService;
 import com.pms.petopia.service.SharingMarketBoardCategoryService;
@@ -36,8 +40,10 @@ import com.pms.petopia.service.StoryService;
 import com.pms.petopia.service.impl.DefaultBigAddressService;
 import com.pms.petopia.service.impl.DefaultHospitalService;
 import com.pms.petopia.service.impl.DefaultMemberService;
+import com.pms.petopia.service.impl.DefaultMyTownBoardCommentService;
 import com.pms.petopia.service.impl.DefaultMyTownBoardService;
 import com.pms.petopia.service.impl.DefaultPetService;
+import com.pms.petopia.service.impl.DefaultQnaService;
 import com.pms.petopia.service.impl.DefaultRecordService;
 import com.pms.petopia.service.impl.DefaultReviewService;
 import com.pms.petopia.service.impl.DefaultSharingMarketBoardCategoryService;
@@ -71,12 +77,14 @@ public class ContextLoaderListener implements ServletContextListener {
       HospitalDao hospitalDao = daoFactory.createDao(HospitalDao.class);
       StoryDao storyDao = daoFactory.createDao(StoryDao.class);
       MyTownBoardDao myTownBoardDao = daoFactory.createDao(MyTownBoardDao.class);
+      MyTownBoardCommentDao myTownBoardCommentDao = daoFactory.createDao(MyTownBoardCommentDao.class);
       SharingMarketBoardDao sharingMarketBoardDao = daoFactory.createDao(SharingMarketBoardDao.class);
       BigAddressDao bigAddressDao = daoFactory.createDao(BigAddressDao.class);
       SmallAddressDao smallAddressDao = daoFactory.createDao(SmallAddressDao.class);
       ReviewDao reviewDao = daoFactory.createDao(ReviewDao.class);
       SharingMarketBoardCategoryDao sharingMarketBoardCategoryDao = daoFactory.createDao(SharingMarketBoardCategoryDao.class);
       SharingMarketBoardCommentDao sharingMarketBoardCommentDao = daoFactory.createDao(SharingMarketBoardCommentDao.class);
+      QnaDao qnaDao = daoFactory.createDao(QnaDao.class);
 
       // 3) 서비스 관련 객체 준비
       MemberService memberService = new DefaultMemberService(memberDao);
@@ -85,13 +93,15 @@ public class ContextLoaderListener implements ServletContextListener {
       HospitalService hospitalService = new DefaultHospitalService(hospitalDao);
       StoryService storyService = new DefaultStorylService(storyDao);
       MyTownBoardService myTownBoardService = new DefaultMyTownBoardService(myTownBoardDao);
+      MyTownBoardCommentService myTownBoardCommentService = new DefaultMyTownBoardCommentService(myTownBoardCommentDao);
       SharingMarketBoardService sharingMarketBoardService = new DefaultSharingMarketBoardService(sharingMarketBoardDao);
       BigAddressService bigAddressService = new DefaultBigAddressService(bigAddressDao);
       SmallAddressService smallAddressService = new DefaultSmallAddressService(smallAddressDao);
       ReviewService reviewService = new DefaultReviewService(reviewDao);
       SharingMarketBoardCategoryService sharingMarketBoardCategoryService = new DefaultSharingMarketBoardCategoryService(sharingMarketBoardCategoryDao);
       SharingMarketBoardCommentService sharingMarketBoardCommentService = new DefaultSharingMarketBoardCommentService(sharingMarketBoardCommentDao);
-      
+      QnaService qnaService = new DefaultQnaService(qnaDao);
+
       // 4) 서비스 객체를 ServletContext 보관소에 저장한다.
       servletContext.setAttribute("memberService", memberService);
       servletContext.setAttribute("petService", petService);
@@ -99,14 +109,15 @@ public class ContextLoaderListener implements ServletContextListener {
       servletContext.setAttribute("hospitalService", hospitalService);
       servletContext.setAttribute("storyService", storyService);
       servletContext.setAttribute("myTownBoardService", myTownBoardService);
+      servletContext.setAttribute("myTownBoardCommentService", myTownBoardCommentService);
       servletContext.setAttribute("sharingMarketBoardService", sharingMarketBoardService);
       servletContext.setAttribute("bigAddressService", bigAddressService);
       servletContext.setAttribute("smallAddressService", smallAddressService);
       servletContext.setAttribute("reviewService", reviewService);
       servletContext.setAttribute("sharingMarketBoardCategoryService", sharingMarketBoardCategoryService);
       servletContext.setAttribute("sharingMarketBoardCommentService", sharingMarketBoardCommentService);
-      
-      
+      servletContext.setAttribute("qnaService", qnaService);
+
     } catch (Exception e) {
       e.printStackTrace();
     }

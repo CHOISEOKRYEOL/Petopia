@@ -2,7 +2,6 @@ package com.pms.petopia.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -57,15 +56,7 @@ public class MyTownBoardDeleteHandler extends HttpServlet {
       response.setHeader("Refresh", "1;url=../main");
 
     } catch (Exception e) {
-      StringWriter strWriter = new StringWriter();
-      PrintWriter printWriter = new PrintWriter(strWriter);
-      e.printStackTrace(printWriter);
-
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>게시글 삭제 오류</h1>");
-      out.printf("<pre>%s</pre>\n", strWriter.toString());
-      out.println("<a href='list'>목록</a></p>\n");
+      throw new ServletException(e);
     }
     out.println("</body>");
     out.println("</html>");

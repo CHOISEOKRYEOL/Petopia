@@ -1,10 +1,7 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,11 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pms.petopia.domain.Member;
-import com.pms.petopia.domain.SharingMarketBoard;
-import com.pms.petopia.domain.SharingMarketBoardCategory;
-import com.pms.petopia.domain.SharingMarketBoardComment;
 import com.pms.petopia.service.SharingMarketBoardCategoryService;
-import com.pms.petopia.service.SharingMarketBoardCommentService;
 import com.pms.petopia.service.SharingMarketBoardService;
 
 @SuppressWarnings("serial")

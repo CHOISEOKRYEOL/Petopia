@@ -54,8 +54,13 @@ public class DefaultMyTownBoardService implements MyTownBoardService {
 
   // 게시글 검색 업무
   @Override
-  public List<MyTownBoard> search(String keyword) throws Exception {
-    return myTownBoardDao.findByKeyword(keyword);
+  public List<MyTownBoard> search(int stateNo, int cityNo, String keyword) throws Exception {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("gno", stateNo);
+    params.put("cno", cityNo);
+    params.put("keyword", keyword);
+
+    return myTownBoardDao.findByKeyword(params);
   }
 }
 

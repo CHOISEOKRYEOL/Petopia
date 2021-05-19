@@ -3,18 +3,19 @@ package com.pms.petopia.domain;
 public class Type {
 
   private int no;
-  private int type;
+  private String type;
   private Species bigType;
+
   public int getNo() {
     return no;
   }
   public void setNo(int no) {
     this.no = no;
   }
-  public int getType() {
+  public String getType() {
     return type;
   }
-  public void setType(int type) {
+  public void setType(String type) {
     this.type = type;
   }
   public Species getBigType() {

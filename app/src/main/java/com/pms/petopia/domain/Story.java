@@ -1,6 +1,7 @@
 package com.pms.petopia.domain;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class Story {
 
@@ -9,14 +10,17 @@ public class Story {
   private String url;
   private String site;
   private Date registeredDate;
-  private Member admin;
+
+  // 날짜 값을 특정 포맷의 문자열로 만들어 리턴한다.
+  public String getRegisteredDate2() {
+    return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(registeredDate);
+  }
 
   @Override
   public String toString() {
     return "Story [no=" + no + ", title=" + title + ", url=" + url + ", site=" + site
-        + ", registeredDate=" + registeredDate + ", admin=" + admin + "]";
+        + ", registeredDate=" + registeredDate + "]";
   }
-
   public int getNo() {
     return no;
   }
@@ -46,12 +50,6 @@ public class Story {
   }
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
-  }
-  public Member getAdmin() {
-    return admin;
-  }
-  public void setAdmin(Member admin) {
-    this.admin = admin;
   }
 
 }

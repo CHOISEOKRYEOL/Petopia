@@ -1,8 +1,7 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,37 +19,29 @@ public class MemberDeleteHandler extends HttpServlet {
       throws ServletException, IOException {
 
     MemberService memberService = (MemberService) request.getServletContext().getAttribute("memberService");
+    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<title>회원 탈퇴</title>");
-    out.println("</head>");
-    out.println("<body>");
+    Member m = new Member();
+    m.setNo(loginUser.getNo());
+    m.setEmail(UUID.randomUUID().toString());
+    m.setName(UUID.randomUUID().toString());
+    m.setPassword(UUID.randomUUID().toString());
+    m.setTel(UUID.randomUUID().toString());
+    m.setNick(UUID.randomUUID().toString());
+    m.setStatus(0);
 
     try {
-      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
-      memberService.delete(loginUser.getNo());
+      memberService.delete(m);
       request.getSession().invalidate();
-
-      out.println("<h1>그동안 Petopia 를 이용해주셔서 감사합니다.</h1>");
-
-      response.setHeader("Refresh", "content=1;url='../main'");
+      response.setContentType("text/html;charset=UTF-8");
+      request.getRequestDispatcher("/jsp/member/delete.jsp").include(request, response);
+      response.setHeader("Refresh", "1;url='../main'");
 
     } catch (Exception e) {
-      StringWriter strWriter = new StringWriter();
-      PrintWriter printWriter = new PrintWriter(strWriter);
-      e.printStackTrace(printWriter);
-      out.println("<h1>회원 탈퇴 오류 발생</h1>");
-      out.printf("<pre>%s</pre>\n", strWriter.toString());
+      throw new ServletException(e);
     }
 
-    out.println("</body>");
-    out.println("</html>");
   }
 }
 

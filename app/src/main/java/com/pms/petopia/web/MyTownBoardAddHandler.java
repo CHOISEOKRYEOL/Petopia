@@ -2,7 +2,7 @@ package com.pms.petopia.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.StringWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,40 +23,21 @@ public class MyTownBoardAddHandler extends HttpServlet{
       throws ServletException, IOException {
 
     SmallAddressService smallAddressService = (SmallAddressService) request.getServletContext().getAttribute("smallAddressService");
-    //SmallAddress s = new SmallAddress();
     response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
 
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<meta charset='UTF-8'>");
-    out.println("<title>우리동네 새 게시글</title>");
-    out.println("</head>");
-    out.println("<body>");
-
-    Integer.parseInt(request.getParameter("stateNo")); //일단 가져왔음
-    int no = Integer.parseInt(request.getParameter("cityNo"));
+    int stateNo= Integer.parseInt(request.getParameter("stateNo")); //일단 가져왔음
+    int cityNo = Integer.parseInt(request.getParameter("cityNo"));
     try {
-      SmallAddress small = smallAddressService.get(no);
-      out.printf("<h1>%s %s</h1>", small.getBigAddress().getName(), small.getName());
+      SmallAddress smallAddress = smallAddressService.get(cityNo);
+      List<SmallAddress> smallAddresses = smallAddressService.list();
 
-      out.println("<h2>우리동네 새 게시글</h2>");
-      out.println("<form action='add' method='post'>");
-      out.printf("지역: <input type='text' name='cityNo' value ='%d' readonly> <br>\n", small.getNo());
-      out.println("제목: <input type='text' name='title'><br>");
-      out.println("내용: <textarea name='content' rows='10' cols='60'></textarea><br>");
-
-      out.printf("<a href='list?stateNo=%d&cityNo=%d'>목록</a>",small.getBigAddress().getNo(), small.getNo());
+      request.setAttribute("smallAddress", smallAddress);
+      request.setAttribute("smallAddresses", smallAddresses);
+      request.getRequestDispatcher("/jsp/mytownboard/form.jsp").include(request, response);
 
     } catch (Exception e) {
       throw new ServletException(e);
     }
-    out.println("<input type='submit' value='등록'>");
-
-    out.println("</form>");
-    out.println("</body>");
-    out.println("</html>");
   }
 
   @Override
@@ -91,25 +72,8 @@ public class MyTownBoardAddHandler extends HttpServlet{
       String webAdress= String.format("list?stateNo=%s&cityNo=%s", s.getBigAddress().getNo(), s.getNo());
       response.sendRedirect(webAdress);
 
-      //      out.printf("<meta http-equiv='Refresh' content='1;url=list?stateNo=%d&cityNo=%d>",
-      //          s.getBigAddress().getNo(), s.getNo());
-      //      out.println("</head>");
-      //      out.println("<body>");
-      //      out.println("<h1>게시글 등록</h1>");
-      //      out.println("<p>게시글을 등록했습니다.<p>");
-
-      response.setHeader("Refresh", "1;url=../main");
     } catch (Exception e) {
-      // 상세 오류 내용을 StringWriter로 출력한다.
-      StringWriter strWriter = new StringWriter();
-      PrintWriter printWriter = new PrintWriter(strWriter);
-      e.printStackTrace(printWriter);
-
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>게시글 등록 오류</h1>");
-      out.printf("<pre>%s</pre>\n", strWriter.toString());
-      out.println("<a href='list'>목록</a></p>\n");
+      throw new ServletException(e);
     }
     out.println("</body>");
     out.println("</html>");

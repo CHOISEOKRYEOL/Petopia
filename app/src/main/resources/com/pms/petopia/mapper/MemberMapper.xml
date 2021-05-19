@@ -4,62 +4,130 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.pms.petopia.dao.MemberDao">
-  
-  <resultMap id="memberMap" type="member">
-    <id column="mno" property="no"/>
-    <result column="name" property="name"/>
-    <result column="nick" property="nick"/>
-    <result column="id" property="id"/>
-    <result column="email" property="email"/>
-    <result column="photo" property="photo"/>
-    <result column="phone" property="tel"/> 
-    <result column="date" property="registeredDate"/>
-  </resultMap>
-  
-  <insert id="insert" parameterType="member">
-    insert into pet_user(name, id, email, nick, pwd, phone, role) 
-    values(#{name}, #{id}, #{email}, #{nick}, password(#{password}), #{tel}, 1)
-  </insert>
-  
-  <select id="findByIdPassword" resultMap="memberMap" parameterType="map">
-    select 
-      mno,
-      name,
-      nick,
-      id,
-      email,
-      phone
-    from pet_user 
-    where id = #{id} and pwd = password(#{password})
-  </select>
-  
-  <update id="update" parameterType="member">
-    update pet_user 
-    <set> 
-      <if test="nick != ''">nick=#{nick},</if>
-      <if test="password != ''">pwd=password(#{password}),</if>
-      <if test="tel != ''">phone=#{tel}</if> 
-    </set>
-    where mno=#{no}
-  </update>
-  
-  <delete id="delete" parameterType="int">
-    delete from pet_user 
-    where mno=#{value}
-  </delete>
-  
-  <delete id="sharingMarketDelete" parameterType="int">
-    delete from pet_mytown
-    where tno=#{value}
-  </delete>
-  
-  <delete id="myTownDelete" parameterType="int">
-    delete from pet_mark
-    where sno=#{value}
-  </delete>
-  
-  
-  
+
+	<resultMap id="memberMap" type="member">
+		<id column="mno" property="no" />
+		<result column="name" property="name" />
+		<result column="nick" property="nick" />
+		<result column="id" property="id" />
+		<result column="email" property="email" />
+		<result column="photo" property="photo" />
+		<result column="phone" property="tel" />
+		<result column="status" property="status" />
+		<result column="rdt" property="registeredDate" />
+	</resultMap>
+
+	<sql id="user">
+		select
+		mno,
+		name,
+		nick,
+		id,
+		email,
+		phone,
+		status,
+		rdt,
+		role
+		from
+		pet_user
+	</sql>
+
+	<insert id="insert" parameterType="member">
+		insert into pet_user(name, id,
+		email, nick, pwd, phone, role)
+		values(#{name}, #{id}, #{email},
+		#{nick}, password(#{password}),
+		#{tel}, 1)
+	</insert>
+
+	<select id="findByIdPassword" resultMap="memberMap"
+		parameterType="map">
+		<include refid="user" />
+		where id = #{id} and pwd = password(#{password})
+	</select>
+
+	<select id="findByEmailPassword" resultMap="memberMap"
+		parameterType="map">
+		<include refid="user" />
+		where email = #{id} and pwd = password(#{password})
+	</select>
+
+	<select id="findByKeyword" resultMap="memberMap"
+		parameterType="map">
+		<include refid="user" />
+		<where>
+			<if test="item == 1 or item == 0">
+				id like concat('%', #{keyword}, '%')
+			</if>
+			<if test="item == 2 or item == 0">
+				or nick like concat('%', #{keyword}, '%')
+			</if>
+			<if test="item == 3 or item == 0">
+				or email like concat('%', #{keyword}, '%')
+			</if>
+			<if test="item == 4 or item == 0">
+				or phone like concat('%', #{keyword}, '%')
+			</if>
+		</where>
+		order by rdt desc
+	</select>
+
+	<select id="findAll" resultMap="memberMap">
+		select
+		mno, name, nick, id, email,
+		phone, rdt, status, role
+		from pet_user
+		where status = 1
+		order by rdt desc
+	</select>
+
+	<update id="update" parameterType="member">
+		update pet_user
+		<set>
+			<if test="nick != ''">nick=#{nick},</if>
+			<if test="password != ''">pwd=password(#{password}),</if>
+			<if test="tel != ''">phone=#{tel}</if>
+		</set>
+		where mno=#{no}
+	</update>
+
+	<update id="delete" parameterType="member">
+		update pet_user set
+		name =
+		#{name},
+		nick = #{nick},
+		pwd = #{password},
+		phone = #{tel},
+		email =
+		#{email},
+		status = #{status}
+		where mno=#{no}
+	</update>
+
+	<delete id="deleteMember" parameterType="int">
+		<!-- 일괄 삭제 기능 준비 -->
+		delete from pet_user
+		where mno=#{value}
+	</delete>
+
+	<delete id="deleteSharingMarketBoardPost" parameterType="int">
+		<!-- 일괄 삭제 기능 준비 -->
+		delete from pet_mytown
+		where tno=#{value}
+	</delete>
+
+	<delete id="deleteMyTownBoardPost" parameterType="int">
+		<!-- 일괄 삭제 기능 준비 -->
+		delete from pet_mark
+		where sno=#{value}
+	</delete>
+
+	<delete id="deleteHospitalInfo" parameterType="int">
+		<!-- 일괄 삭제 기능 준비 -->
+		delete from pet_hp;
+		where hno=#{value}
+	</delete>
+
 </mapper>
 
 

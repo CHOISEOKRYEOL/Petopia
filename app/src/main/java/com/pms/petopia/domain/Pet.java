@@ -13,7 +13,6 @@ public class Pet {
   private Member owner;
   private Type type;
 
-
   public int getNo() {
     return no;
   }

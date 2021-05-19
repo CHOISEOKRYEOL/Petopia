@@ -10,12 +10,7 @@
     <result column="title" property="title"/>
     <result column="url" property="url"/>
     <result column="site" property="site"/>
-    <result column="date" property="registeredDate"/>
-
-    <association property="admin" javaType="member">
-      <id column="admin_no" property="no"/>
-      <result column="admin_name" property="name"/>
-    </association>
+    <result column="rdt" property="registeredDate"/>
   </resultMap>
   
   <insert id="insert" parameterType="story">
@@ -29,7 +24,7 @@
       title,
       url,
       site,
-      date
+      rdt
     from pet_st_news
     order by nno desc
   </select>
@@ -40,7 +35,7 @@
       title,
       url,
       site,
-      date
+      rdt
     from pet_st_news
     where nno = #{value}
   </select>
@@ -64,7 +59,7 @@
       title,
       url,
       site,
-      date
+      rdt
     from pet_st_news
     <if test="value != null">
     where 

@@ -1,8 +1,6 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.MyTownBoard;
+import com.pms.petopia.domain.SmallAddress;
 import com.pms.petopia.service.MyTownBoardService;
+import com.pms.petopia.service.SmallAddressService;
 
 @SuppressWarnings("serial")
 @WebServlet("/mytown/list")
@@ -21,88 +21,38 @@ public class MytownBoardListHandler extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    MyTownBoardService myTownBoardService = (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
+    MyTownBoardService myTownBoardService =
+        (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
+    SmallAddressService smallAddressService =
+        (SmallAddressService) request.getServletContext().getAttribute("smallAddressService");
 
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
     int stateNo = Integer.parseInt(request.getParameter("stateNo"));
     int cityNo = Integer.parseInt(request.getParameter("cityNo"));
     String keyword = request.getParameter("keyword");
 
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.printf("<title>게시글 목록</title>");
-    out.println("</head>");
-    out.println("<body>");
-
-
     try {
-      List<MyTownBoard> boards = myTownBoardService.list(cityNo,stateNo);
-      MyTownBoard board = boards.get(0);
-      out.printf("<h1>%s %s</h1>", board.getBigAddress().getName(), board.getSmallAddress().getName());
-      out.printf("<p><a href='add?stateNo=%d&cityNo=%d'>새 글</a><p>", board.getBigAddress().getNo(), board.getSmallAddress().getNo());
+      List<MyTownBoard> boards = myTownBoardService.list(cityNo, stateNo);
+      SmallAddress smallAddress = smallAddressService.get(cityNo);
+      List<SmallAddress> smallAddresses = smallAddressService.list();
 
-      if (keyword != null && keyword.length() > 0) {
-        boards = myTownBoardService.search(keyword);
-      } else {
-        boards = myTownBoardService.list(stateNo, cityNo);
+      if (boards.size() > 0) {
+
+        if (keyword != null && keyword.length() > 0) {
+          boards = myTownBoardService.search(stateNo, cityNo, keyword);
+        } else {
+          boards = myTownBoardService.list(stateNo, cityNo);
+        }
       }
 
-      out.println("<table border='1'>");
-      out.println("<thead>");
-      out.println("<tr>");
-      out.println("<th>번호</th> <th>제목</th> <th>작성자</th> <th>등록일</th> <th>조회수</th> <th>댓글수</th>");
-      out.println("</tr>");
-      out.println("</thead>");
-      out.println("<tbody>");
-
-      if(boards.size() == 0) {
-        out.println("게시글이 없습니다.");
-      }
-
-      for (MyTownBoard b : boards) {
-        out.printf("<tr>"
-            + " <td>%d</td>"
-            + " <td><a href='detail?no=%1$d'>%s</a></td>"
-            + " <td>%s</td>"
-            + " <td>%s</td>"
-            + " <td>%d</td>"
-            + " <td>%d</td></tr>\n", 
-            b.getNo(), 
-            b.getTitle(), 
-            b.getWriter().getNick(),
-            b.getCreatedDate(),
-            b.getViewCount(),
-            b.getCommentCount());
-      }
-
-      out.println("</tbody>");
-      out.println("</table>");
-
-      out.println("<form action='list' method='get'>");
-      out.println("<input type='search' name ='keyword'>");
-      out.println("<button> 검색 </button>");
-      out.println("</form>");
+      response.setContentType("text/html;charset=UTF-8");
+      request.setAttribute("boards", boards);
+      request.setAttribute("smallAddresses", smallAddresses);
+      request.setAttribute("smallAddress", smallAddress);
+      request.getRequestDispatcher("/jsp/mytownboard/list.jsp").include(request, response);
     } catch (Exception e) {
-      // 상세 오류 내용을 StringWriter로 출력한다.
-      StringWriter strWriter = new StringWriter();
-      PrintWriter printWriter = new PrintWriter(strWriter);
-      e.printStackTrace(printWriter);
-
-      // StringWriter에 들어있는 출력 내용을 꺼내 클라이언트로 보낸다.
-      out.printf("<pre>%s</pre>\n", strWriter.toString());
+      throw new ServletException(e);
     }
-    out.println("</body>");
-    out.println("</html>");
   }
-
-
-
 }
-
-
-
-
 
 
