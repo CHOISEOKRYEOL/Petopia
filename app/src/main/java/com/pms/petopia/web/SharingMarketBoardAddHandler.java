@@ -24,7 +24,6 @@ public class SharingMarketBoardAddHandler extends HttpServlet {
 	    request.setAttribute("catList", sharingMarketBoardCategoryService.list());
 	    response.setContentType("text/html;charset=UTF-8");
 	    request.getRequestDispatcher("/jsp/sharingmarketboard/form.jsp").include(request, response);
-	    
     	
     } catch (Exception e) {
     	throw new ServletException(e);
