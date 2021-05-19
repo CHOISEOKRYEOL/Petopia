@@ -13,4 +13,6 @@ public interface MyTownBoardCommentDao {
   MyTownBoardComment findByNo(int myTownBoardCommentNo) throws Exception;
 
   int delete(int no) throws Exception;
+
+  int countComment(int myTownBoardNo) throws Exception;
 }

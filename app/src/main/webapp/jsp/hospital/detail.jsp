@@ -39,9 +39,9 @@
 	                         <option value='2'>경기도</option>
 	                         <option value='3'>인천광역시</option></select>
 	      <select name='cno'><option value=''>분류</option>
-	      <optgroup label='서울특별시'><option value='1'>강남구</option></optgroup>
-	      <optgroup label='경기도'><option value='2'>김포시</option></optgroup>
-	      <optgroup label='인천광역시'><option value='3'>중구</option></optgroup></select></td></tr>
+	      <optgroup label='서울특별시'><option value='1' ${hospital.smallAddress.no == 1 ? "selected" : ""}>강남구</option></optgroup>
+	      <optgroup label='경기도'><option value='2' ${hospital.smallAddress.no == 2 ? "selected" : ""}>김포시</option></optgroup>
+	      <optgroup label='인천광역시'><option value='3' ${hospital.smallAddress.no == 3 ? "selected" : ""}>중구</option></optgroup></select></td></tr>
 	<tr>
 	  <th>상세주소</th> 
 	  <td><input type='text' name='address' value='${hospital.address}'></td></tr>
@@ -78,10 +78,6 @@
 <p><a href='list'>목록</a></p>
 <p><a href='../main'>메인</a></p>
 
-<h2>병원 리뷰</h2>
-<%-- 
 <jsp:include page="/jsp/review/list.jsp"/>
---%>
-<p><a href='../review/add'>새 리뷰 작성</a></p>
 </body>
 </html>

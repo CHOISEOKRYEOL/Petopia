@@ -129,6 +129,7 @@
     delete from pet_mytown
     where tno=#{value}
   </delete>
+  
 
 </mapper>
 

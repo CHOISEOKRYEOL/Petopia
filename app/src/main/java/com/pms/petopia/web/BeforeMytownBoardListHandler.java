@@ -139,9 +139,6 @@ public class BeforeMytownBoardListHandler extends HttpServlet {
     out.println("</body>");
     out.println("</html>");
   }
-
-
-
 }
 
 

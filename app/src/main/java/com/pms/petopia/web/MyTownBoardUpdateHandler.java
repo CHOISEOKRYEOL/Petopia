@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.pms.petopia.domain.BigAddress;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.MyTownBoard;
 import com.pms.petopia.domain.SmallAddress;
@@ -54,16 +55,20 @@ public class MyTownBoardUpdateHandler extends HttpServlet {
       board.setContent(request.getParameter("content"));
       Integer.parseInt(request.getParameter("stateNo")); // 일단 받아와
       int cityNo = Integer.parseInt(request.getParameter("cityNo"));
-      out.println(cityNo);
       SmallAddress smallAddress = smallAddressService.get(cityNo);
+      BigAddress bigAddress = smallAddress.getBigAddress();
+      board.setBigAddress(bigAddress);
       board.setSmallAddress(smallAddress);
       myTownBoardService.update(board);
+
+      System.out.println(board.getBigAddress());
+      System.out.println(board.getSmallAddress());
 
       out.println("</head>");
       out.println("<body>");
       out.println("<h1>게시글 변경</h1>");
       out.println("<p>게시글을 변경하였습니다.</p>");
-      String webAddress = String.format("1;url=../mytown/detail?stateNo=%d&cityNo=%d&no=%d\n", 
+      String webAddress = String.format("detail?stateNo=%d&cityNo=%d&no=%d\n", 
           board.getBigAddress().getNo(), board.getSmallAddress().getNo(), board.getNo());
       response.sendRedirect(webAddress);
 

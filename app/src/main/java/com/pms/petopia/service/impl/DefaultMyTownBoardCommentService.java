@@ -38,6 +38,10 @@ public class DefaultMyTownBoardCommentService implements MyTownBoardCommentServi
     return myTownBoardCommentDao.delete(no);
   }
 
+  @Override
+  public int count(int myTownBoardNo) throws Exception {
+    return myTownBoardCommentDao.countComment(myTownBoardNo);
+  }
 
 
 
