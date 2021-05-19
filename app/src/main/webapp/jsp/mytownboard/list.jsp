@@ -14,7 +14,8 @@
 <h1>${smallAddress.bigAddress.name}&nbsp;${smallAddress.name}</h1>
 <!-- ${s.bigAddress.no == smallAddress.bigAddress.no ? "selected" : ""}   
  ${s.no == smallAddress.no ? "selected" : ""}-->
-<c:set var="smallAddress" value="smallAddress"/> 
+<c:set var="smallAddress" value="smallAddress"/>-->
+<!--<jsp:useBean id="smallAddress" type = "com.pms.petopia.domain.SmallAddress" scope = "request"/>-->
 <form action='list' method='get'>
 광역시/도 : 
 <select name ='stateNo'>
