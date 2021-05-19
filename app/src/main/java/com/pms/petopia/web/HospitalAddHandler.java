@@ -33,43 +33,6 @@ public class HospitalAddHandler extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
-
-    Hospital hospital = new Hospital();
-
-    hospital.setName(request.getParameter("name"));
-    hospital.setTel(request.getParameter("tel"));
-    hospital.setAddress(request.getParameter("address"));
-    hospital.setStartTime(Integer.valueOf(request.getParameter("startTime")));
-    hospital.setEndTime(Integer.valueOf(request.getParameter("endTime")));
-    hospital.setParking(Integer.valueOf(request.getParameter("parking")));
-    hospital.setVeterinarian(Integer.valueOf(request.getParameter("vet")));
-
-    Part photoPart = request.getPart("photo");
-    if (photoPart.getSize() > 0) {
-      // 파일을 선택해서 업로드 했다면,
-      String filename = UUID.randomUUID().toString();
-      photoPart.write(this.uploadDir + "/" + filename);
-      hospital.setPhoto(filename);
-
-      // 썸네일 이미지 생성
-      Thumbnails.of(this.uploadDir + "/" + filename)
-      .size(300, 300)
-      .outputFormat("jpg")
-      .crop(Positions.CENTER)
-      .toFiles(new Rename() {
-        @Override
-        public String apply(String name, ThumbnailParameter param) {
-          return name + "_300x300";
-        }
-      });
-    }
-
-    SmallAddress smallAddress = new SmallAddress();
-    smallAddress.setNo(Integer.parseInt(request.getParameter("cno")));
-    hospital.setSmallAddress(smallAddress);
-
-
     response.setContentType("text/html;charset=UTF-8");
     request.getRequestDispatcher("/jsp/hospital/form.jsp").include(request, response);
   }
