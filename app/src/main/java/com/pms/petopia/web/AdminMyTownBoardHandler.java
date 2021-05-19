@@ -67,7 +67,7 @@ public class AdminMyTownBoardHandler extends HttpServlet {
             b.getWriter().getNick(),
             b.getCreatedDate(),
             b.getViewCount(),
-            b.getRecommendCount());
+            b.getLikeCount());
         out.printf("<a href='mytown/delete=no?" + b.getNo() + "'> 삭제</a> ");
       }
       out.println("</tbody>");

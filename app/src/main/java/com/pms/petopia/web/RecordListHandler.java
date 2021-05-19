@@ -42,7 +42,7 @@ public class RecordListHandler extends HttpServlet {
       out.println("<table border='1'>");
       out.println("<thead>");
       out.println("<tr>");
-      out.println("<th>번호</th> <th>이름</th> <th>나이</th> <th>생일</th> <th>품종</th> <th>사진</th>");
+      out.println("<th>번호</th> <th>상태</th> <th>기록</th>");
       out.println("</tr>");
       out.println("</thead>");
       out.println("<tbody>");

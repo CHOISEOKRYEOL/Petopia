@@ -9,9 +9,9 @@
     <id column="tno" property="no"/>
     <result column="title" property="title"/>
     <result column="cont" property="content"/>
-    <result column="date" property="createdDate"/>
+    <result column="cdt" property="createdDate"/>
     <result column="vw_cnt" property="viewCount"/>
-    <result column="rc_cnt" property="recommendCount"/>
+    <result column="like_cnt" property="likeCount"/>
     
     <association property="writer" javaType="member">
       <id column="writer_no" property="no"/>
@@ -28,14 +28,6 @@
       <result column="smallAddress_name" property="name"/>
     </association>
     
-    <!-- 
-    <association property="comment" javaType="comment">
-      <id column="comment_no" property="no"/>
-      <id column="comment_content" property="content"/>
-      <id column="comment_writer" property="writer"/>      
-    </association>
-     -->
-     
   </resultMap>
   
   <insert id="insert" parameterType="mytownboard">
@@ -47,9 +39,9 @@
     select
       t.tno, 
       t.title, 
-      t.date, 
+      t.cdt, 
       t.vw_cnt,
-      t.cmt_cnt,
+      t.like_cnt,
       m.mno as writer_no, 
       m.nick as writer_nick,
       s.gno as bigAddress_no, 
@@ -68,9 +60,9 @@
     select
       t.tno, 
       t.title, 
-      t.date, 
+      t.cdt, 
       t.vw_cnt,
-      t.cmt_cnt,
+      t.like_cnt,
       m.mno as writer_no, 
       m.nick as writer_nick,
 		  s.gno as state_no, 
@@ -94,9 +86,9 @@
       t.tno,
       t.title,
       t.cont,
-      t.date,
+      t.cdt,
       t.vw_cnt,
-      t.cmt_cnt,
+      t.like_cnt,
       m.mno as writer_no,
       m.nick as writer_nick,
       s.gno as bigAddress_no,
@@ -115,7 +107,7 @@
       cno = #{smallAddress.no},
       title = #{title},
       cont = #{content},
-      date = now()
+      cdt = now()
     where tno=#{no}
   </update>
   
