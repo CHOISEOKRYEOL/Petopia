@@ -29,6 +29,7 @@ public class PetDetailHandler extends HttpServlet {
 
       Pet pet = petService.get(no);
       request.setAttribute("pet",pet);
+      request.getSession().setAttribute("petInfo", pet);
 
       response.setContentType("text/html;charset=UTF-8");
       request.getRequestDispatcher("/jsp/pet/detail.jsp").include(request, response);

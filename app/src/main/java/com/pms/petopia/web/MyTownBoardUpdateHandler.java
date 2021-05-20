@@ -1,7 +1,6 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,16 +24,6 @@ public class MyTownBoardUpdateHandler extends HttpServlet {
     MyTownBoardService myTownBoardService = (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
     SmallAddressService smallAddressService = (SmallAddressService) request.getServletContext().getAttribute("smallAddressService");
     response.setContentType("text/html;charset=UTF-8");
-
-    PrintWriter out = response.getWriter();
-
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<title>게시글 변경</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>게시글 변경</h1>");
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
@@ -64,20 +53,15 @@ public class MyTownBoardUpdateHandler extends HttpServlet {
       System.out.println(board.getBigAddress());
       System.out.println(board.getSmallAddress());
 
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>게시글 변경</h1>");
-      out.println("<p>게시글을 변경하였습니다.</p>");
       String webAddress = String.format("detail?stateNo=%d&cityNo=%d&no=%d\n", 
           board.getBigAddress().getNo(), board.getSmallAddress().getNo(), board.getNo());
-      response.sendRedirect(webAddress);
+      request.getRequestDispatcher("/jsp/mytownboard/update.jsp").include(request, response);
+      response.setHeader("Refresh", "3;url=" + webAddress);
 
     } catch (Exception e) {
       throw new ServletException(e);
     }
 
-    out.println("</body>");
-    out.println("</html>");
   }
 }
 

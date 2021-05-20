@@ -42,12 +42,16 @@ public class MytownBoardListHandler extends HttpServlet {
         } else {
           boards = myTownBoardService.list(stateNo, cityNo);
         }
+        //boards = myTownBoardService.listAll();
       }
 
       response.setContentType("text/html;charset=UTF-8");
       request.setAttribute("boards", boards);
       request.setAttribute("smallAddresses", smallAddresses);
       request.setAttribute("smallAddress", smallAddress);
+      request.setAttribute("keyword", keyword);
+      request.setAttribute("stateNo", stateNo);
+      request.setAttribute("cityNo", cityNo);
       request.getRequestDispatcher("/jsp/mytownboard/list.jsp").include(request, response);
     } catch (Exception e) {
       throw new ServletException(e);

@@ -35,6 +35,27 @@
     values(#{smallAddress.no}, #{title}, #{content}, #{writer.no})
   </insert>
   
+  
+  <select id="findAll" resultMap="myTownBoardMap">
+    select
+      t.tno, 
+      t.title, 
+      t.cdt, 
+      t.vw_cnt,
+      t.like_cnt,
+      m.mno as writer_no, 
+      m.nick as writer_nick,
+      s.gno as bigAddress_no, 
+      s.gname as bigAddress_name,
+      c.cno as smallAddress_no, 
+      c.cname as smallAddress_name
+    from pet_state s
+      inner join pet_city c on s.gno=c.gno
+      inner join pet_mytown t on c.cno=t.cno
+    order by t.tno desc
+  </select>
+  
+  
   <select id="findByArea" resultMap="myTownBoardMap" parameterType="map">
     select
       t.tno, 
@@ -117,9 +138,16 @@
     where tno = #{value}
   </update>
   
+  <delete id="deleteAll" parameterType="int">
+  delete 
+    c, b 
+  from pet_mytown_comt c 
+    left join pet_mytown b on b.tno=c.tno where c.tno = #{value};
+  </delete>
+  
   <delete id="delete" parameterType="int">
-    delete from pet_mytown
-    where tno=#{value}
+  delete from pet_mytown
+  where tno=#{value}
   </delete>
   
 
