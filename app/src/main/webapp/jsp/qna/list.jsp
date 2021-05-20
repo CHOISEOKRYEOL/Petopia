@@ -13,7 +13,7 @@
      <table border='1'>
   <thead> 
   <tr>
-  <th>번호</th> <th>제목</th> <th>작성자</th> <th>등록일</th> 
+  <th>번호</th> <th>제목</th> <th>작성자</th> <th>등록일</th> <th>답변</th> 
   </tr>
   </thead>
   <tbody>
@@ -24,6 +24,8 @@
 <td><a href='detail?no=${q.no}'>${q.title}</a></td>
 <td>${q.writer.nick}</td>
 <td>${q.createdDate}</td>
+<c:if test="${q.state == 0}"><td>대기</td></c:if>
+<c:if test="${q.state == 1}"><td>완료</td></c:if>
 </tr>
 </c:if>
 </c:forEach>

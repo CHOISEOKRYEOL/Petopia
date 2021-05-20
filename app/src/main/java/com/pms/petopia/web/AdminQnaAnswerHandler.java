@@ -24,7 +24,7 @@ public class AdminQnaAnswerHandler extends HttpServlet {
     try {
       qnaService.answer(qna);
       response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/qna/update.jsp").include(request, response);
+      request.getRequestDispatcher("/jsp/admin/qna_answer.jsp").include(request, response);
       response.setHeader("Refresh", "1;url=qnalist");
     }
     catch (Exception e) {

@@ -37,6 +37,11 @@
 	<c:if test="${not empty loginUser and loginUser.id eq 'admin'}">
 		<h1>관리자</h1>
 		<p>
+		  <form action='logout' method='post'>
+      <input name='logout' type='submit' value='로그아웃'>
+    </form>
+		</p>
+		<p>
 			<a href='admin/memberlist'>ADMIN 회원 리스트</a>
 		</p>
 		<p>

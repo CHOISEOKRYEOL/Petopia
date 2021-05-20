@@ -6,9 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Q&A 수정 성공</title>
+<title>Q&A 답변 성공</title>
 </head>
 <body>
-<h1>Q&A 수정이 완료되었습니다.</h1>
+<h1>답변이 등록되었습니다.</h1>
 </body>
 </html>

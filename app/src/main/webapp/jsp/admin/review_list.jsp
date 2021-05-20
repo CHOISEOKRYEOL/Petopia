@@ -44,7 +44,7 @@
 			<option value='3' ${param.item == "3" ? "selected" : ""}>작성일</option>
 		</select> <input type='search' name='keyword' value='${param.keyword}'>
 		<button>검색</button>
-		<a href='../main'>돌아가기</a>
+		<a href='../main'>뒤로가기</a>
 	</form>
 </body>
 </html>

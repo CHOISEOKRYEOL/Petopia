@@ -28,6 +28,6 @@ ${qna.answer}</c:if></textarea></td></tr><br>
 <input type='hidden' name='no' value='${qna.no}'>
 <input type='submit' value='수정'>
 </form>
-<p><a href='qnalist'>목록</a>
+<a href='qnalist'>목록</a>
 </body>
 </html>

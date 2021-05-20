@@ -33,5 +33,7 @@
 </c:forEach>
   </tbody>
   </table>
+  <br>
+<a href='../main'>뒤로가기</a>
    </body>
 </html>
