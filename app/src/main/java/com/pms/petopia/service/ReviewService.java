@@ -10,6 +10,8 @@ public interface ReviewService {
 
   List<Review> list(int no) throws Exception;
 
+  List<Review> listAll() throws Exception;
+
   int update(Review review) throws Exception;
 
   int delete(int no) throws Exception;

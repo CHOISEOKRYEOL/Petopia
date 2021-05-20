@@ -47,9 +47,9 @@ public class MainHandler extends HttpServlet {
       out.println("<p><a href='pet/add'>마이펫 등록</a></p>");
       out.println("<p><a href='pet/list'>마이펫 리스트</a></p>");
       out.println("<p><a href='record/record.html'>진찰기록</a></p>");
-      out.println("<p><a href='hospital/form.html'>병원 찾기</a></p>");
+      out.println("<p><a href='hospital/add'>병원 등록</a></p>");
+      out.println("<p><a href='hospital/list'>병원 찾기</a></p>");
       out.println("<p><a href='pet/record.html'>진찰기록</a></p>");
-      out.println("<p><a href='hospital/add'>병원 찾기</a></p>");
       out.println("<p><a href='story/add'>스토리</a></p>");
       out.println("<p><a href='sharingmarketboard/list'>나눔 장터</a></p>");
       out.println("<p><a href='mytown/main'>우리 동네</a></p>");
@@ -58,6 +58,9 @@ public class MainHandler extends HttpServlet {
       out.println("<p><a href='qna/add'>Q&A 작성</a></p>");
       out.println("<p><a href='qna/list'>Q&A 목록</a></p>");
       out.println("<p><a href='admin/memberlist'>ADMIN 회원 리스트</a></p>");
+      out.println("<p><a href='admin/reviewlist'>ADMIN 리뷰 리스트</a></p>");
+      out.println("<p><a href='admin/qnalist'>ADMIN Q&A 리스트</a></p>");
+      out.println("<p><a href='admin/boardlist'>ADMIN 게시판 리스트</a></p>");
     }
     out.println("</body>");
     out.println("</html>");

@@ -30,6 +30,11 @@ public class DefaultReviewService implements ReviewService {
     return reviewDao.findAll(no);
   }
 
+  @Override
+  public List<Review> listAll() throws Exception {
+    return reviewDao.findAllList();
+  }
+
   // 변경 업무
   @Override
   public int update(Review review) throws Exception {

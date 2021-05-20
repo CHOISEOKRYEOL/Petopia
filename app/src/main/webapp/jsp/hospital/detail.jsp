@@ -78,7 +78,7 @@
 
 <p><a href='list'>목록</a></p>
 <p><a href='../main'>메인</a></p>
-
-<jsp:include page="/jsp/review/list.jsp"/>
+<jsp:include page="/jsp/review/list.jsp" />
+<c:import url="/jsp/review/list.jsp" />
 </body>
 </html>

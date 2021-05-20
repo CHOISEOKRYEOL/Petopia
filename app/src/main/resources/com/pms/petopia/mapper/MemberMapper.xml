@@ -90,8 +90,7 @@
 
 	<update id="delete" parameterType="member">
 		update pet_user set
-		name =
-		#{name},
+		name = #{name},
 		nick = #{nick},
 		pwd = #{password},
 		phone = #{tel},

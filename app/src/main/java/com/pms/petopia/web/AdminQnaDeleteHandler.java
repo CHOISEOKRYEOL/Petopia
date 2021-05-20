@@ -6,29 +6,26 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.pms.petopia.domain.Qna;
 import com.pms.petopia.service.QnaService;
 
 @SuppressWarnings("serial")
-@WebServlet("/admin/qnaupdate")
-public class QnaUpdateHandler extends HttpServlet {
+@WebServlet("/admin/qnadelete")
+public class AdminQnaDeleteHandler extends HttpServlet {
 
   @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
     QnaService qnaService = (QnaService) request.getServletContext().getAttribute("qnaService");
 
-    Qna qna = new Qna();
-    qna.setNo(Integer.parseInt(request.getParameter("no")));
-    qna.setTitle(request.getParameter("title"));
-    qna.setContent(request.getParameter("content"));
+    int no = Integer.parseInt(request.getParameter("no"));
 
     try {
-      qnaService.update(qna);
+
+      qnaService.delete(no);
       response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/admin/qna_update.jsp").include(request, response);
+      request.getRequestDispatcher("/jsp/admin/qna_delete.jsp").include(request, response);
       response.setHeader("Refresh", "1;url=qnalist");
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       throw new ServletException(e);
 
     }

@@ -10,27 +10,26 @@ import com.pms.petopia.domain.Qna;
 import com.pms.petopia.service.QnaService;
 
 @SuppressWarnings("serial")
-@WebServlet("/admin/qnaupdate")
-public class QnaUpdateHandler extends HttpServlet {
+@WebServlet("/admin/qnadetail")
+public class AdminQnaDetailHandler extends HttpServlet {
 
   @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+
     QnaService qnaService = (QnaService) request.getServletContext().getAttribute("qnaService");
 
-    Qna qna = new Qna();
-    qna.setNo(Integer.parseInt(request.getParameter("no")));
-    qna.setTitle(request.getParameter("title"));
-    qna.setContent(request.getParameter("content"));
+    int no = Integer.parseInt(request.getParameter("no"));
 
     try {
-      qnaService.update(qna);
+      Qna q = qnaService.get(no);
+      request.setAttribute("qna", q);
       response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/admin/qna_update.jsp").include(request, response);
-      response.setHeader("Refresh", "1;url=qnalist");
+      request.getRequestDispatcher("/jsp/admin/qna_detail.jsp").include(request, response);
+
     }
     catch (Exception e) {
       throw new ServletException(e);
-
     }
   }
 }
