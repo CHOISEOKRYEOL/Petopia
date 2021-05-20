@@ -18,6 +18,25 @@
 	    <result column="owner_name" property="name"/>
     </association>
     
+    <!--  
+    <association property="role" javaType="member">
+      <id column="role_no" property="no"/>
+      <result column="role_name" property="name"/>
+    </association>
+    
+     <association property="state" javaType="member">
+      <id column="state_no" property="no"/>
+      <result column="state_name" property="name"/>
+    </association>
+    -->
+    
+    <!--  
+    <association property="role" javaType="member">
+      <id column="role_no" property="no"/>
+      <result column="role_name" property="name"/>
+    </association>
+    -->
+    
     <!-- 
     <association property="species" javaType="species">
       <id column="species_no" property="no"/>

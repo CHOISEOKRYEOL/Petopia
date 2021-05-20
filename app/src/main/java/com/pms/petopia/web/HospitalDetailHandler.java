@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.Hospital;
 import com.pms.petopia.service.HospitalService;
-import com.pms.petopia.service.ReviewService;
 
 @SuppressWarnings("serial")
 @WebServlet("/hospital/detail")
@@ -19,7 +18,6 @@ public class HospitalDetailHandler extends HttpServlet {
       throws ServletException, IOException {
 
     HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
-    ReviewService reviewService = (ReviewService) request.getServletContext().getAttribute("reviewService");
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
@@ -30,7 +28,6 @@ public class HospitalDetailHandler extends HttpServlet {
       }
 
       request.setAttribute("hospital", hospital);
-      request.setAttribute("reviews", reviewService.list(no));
 
       response.setContentType("text/html;charset=UTF-8");
       request.getRequestDispatcher("/jsp/hospital/detail.jsp").include(request, response);

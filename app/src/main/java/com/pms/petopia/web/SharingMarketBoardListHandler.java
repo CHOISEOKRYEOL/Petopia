@@ -23,8 +23,8 @@ public class SharingMarketBoardListHandler extends HttpServlet{
 		SharingMarketBoardCategoryService sharingMarketBoardCategoryService = (SharingMarketBoardCategoryService) request.getServletContext().getAttribute("sharingMarketBoardCategoryService");
 	    
 	    try {
-	        String item = request.getParameter("item");
-	        String keyword = request.getParameter("keyword");
+//	        String item = request.getParameter("item");
+//	        String keyword = request.getParameter("keyword");
 	        String category = request.getParameter("category");
 	        
 	        int categoryNo = 0;
