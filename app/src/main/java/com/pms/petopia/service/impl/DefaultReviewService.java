@@ -1,6 +1,8 @@
 package com.pms.petopia.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import com.pms.petopia.dao.ReviewDao;
 import com.pms.petopia.domain.Review;
 import com.pms.petopia.service.ReviewService;
@@ -17,13 +19,11 @@ public class DefaultReviewService implements ReviewService {
     return reviewDao.insert(review);
   }
 
-  // 상세 조회 업무
   @Override
   public Review get(int no) throws Exception {
     return reviewDao.findByNo(no);
   }
 
-  // 사용자 조회 업무
   @Override
   public List<Review> list(int no) throws Exception {
 
@@ -35,13 +35,20 @@ public class DefaultReviewService implements ReviewService {
     return reviewDao.findAllList();
   }
 
-  // 변경 업무
+  @Override
+  public List<Review> search(String item, String keyword) throws Exception {
+    Map<String,Object> params = new HashMap<>();
+    params.put("item", item);
+    params.put("keyword", keyword);
+
+    return reviewDao.findByKeyword(params);
+  }
+
   @Override
   public int update(Review review) throws Exception {
     return reviewDao.update(review);
   }
 
-  // 삭제 업무
   @Override
   public int delete(int no) throws Exception {
     return reviewDao.delete(no);

@@ -29,7 +29,17 @@ public class AdminReviewListHandler extends HttpServlet {
     }
     else {
       try {
-        List<Review> list = reviewService.listAll();
+        List<Review> list = null;
+
+        String item = request.getParameter("item");
+        String keyword = request.getParameter("keyword");
+
+        if(item != null && keyword != null && keyword.length() > 0) {
+          list = reviewService.search(item, keyword);
+        }
+        else {
+          list = reviewService.listAll();
+        }
 
         request.setAttribute("list", list);
         response.setContentType("text/html;charset=UTF-8");

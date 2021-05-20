@@ -42,6 +42,23 @@
     values(#{serviceRating}, #{cleanlinessRating}, #{costRating}, #{comment}, #{writer.no}, #{hospital.no}, #{photo})
   </insert>
   
+  <select id="findByKeyword" resultMap="reviewMap"
+    parameterType="map">
+    <include refid="find" />
+    <where>
+      <if test="item == 1 or item == 0">
+        m.nick like concat('%', #{keyword}, '%')
+      </if>
+      <if test="item == 2 or item == 0">
+        or r.cont like concat('%', #{keyword}, '%')
+      </if>
+      <if test="item == 3 or item == 0">
+        or r.cdt like concat('%', #{keyword}, '%')
+      </if>
+    </where>
+    order by cdt desc
+  </select>
+  
   <select id="findAll" resultMap="reviewMap" parameterType="int">
     <include refid="find"/>
     where h.hno = #{no}

@@ -11,7 +11,7 @@ import com.pms.petopia.service.QnaService;
 
 @SuppressWarnings("serial")
 @WebServlet("/admin/answer")
-public class AdminQnaUpdateHandler extends HttpServlet {
+public class AdminQnaAnswerHandler extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -20,7 +20,7 @@ public class AdminQnaUpdateHandler extends HttpServlet {
     Qna qna = new Qna();
     qna.setNo(Integer.parseInt(request.getParameter("no")));
     qna.setAnswer(request.getParameter("answer"));
-
+    qna.setState(1);
     try {
       qnaService.answer(qna);
       response.setContentType("text/html;charset=UTF-8");

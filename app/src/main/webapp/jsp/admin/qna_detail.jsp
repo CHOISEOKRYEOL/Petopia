@@ -14,7 +14,7 @@
 <table border = '1'>
 <tbody>
 <tr><th>질문</th><td><textarea rows='10' cols='60' readonly>${qna.content}
-<c:if test="${not empty qna.answer}">
+<c:if test="${qna.state == 1}">
 
 
 

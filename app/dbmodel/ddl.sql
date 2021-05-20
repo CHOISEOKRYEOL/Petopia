@@ -94,7 +94,7 @@ ALTER TABLE `pet_user`
 -- 회원
 ALTER TABLE `pet_user`
   ADD CONSTRAINT `CK_pet_user2` -- 회원 체크 제약2
-    CHECK (status = 1 or status = 0);
+    CHECK (state= 1 or state= 0);
 
 -- 회원 유니크 인덱스
 CREATE UNIQUE INDEX `UIX_pet_user`
@@ -302,7 +302,8 @@ CREATE TABLE `pet_qna` (
   `cont`   LONGTEXT    NOT NULL, -- 내용
   `cdt`    DATETIME    NOT NULL DEFAULT now(), -- 작성일
   `ans`    LONGTEXT    NULL,     -- 답변
-  `adt`    DATETIME    NULL      -- 답변일
+  `adt`    DATETIME    NULL,     -- 답변일
+  `state`  INTEGER     NOT NULL DEFAULT 0 -- 답변여부
 );
 
 -- Q&A
@@ -311,6 +312,11 @@ ALTER TABLE `pet_qna`
     PRIMARY KEY (
       `qno` -- Q&A번호
     );
+
+-- Q&A
+ALTER TABLE `pet_qna`
+  ADD CONSTRAINT `CK_pet_qna` -- Q&A 체크 제약
+    CHECK (state = 0 or state = 1);
 
 ALTER TABLE `pet_qna`
   MODIFY COLUMN `qno` INTEGER NOT NULL AUTO_INCREMENT;
