@@ -57,7 +57,6 @@
     order by c.trno asc
   </select>
   
-  
   <update id="update" parameterType="myTownBoardComment">
     update pet_mytown_comt set
       cont = #{content}
@@ -69,16 +68,9 @@
     where trno=#{value}
   </delete>
 
-  <select id="countComment" resultType="Integer" parameterType="int">
+  <select id="countComment" resultType="String" parameterType="int">
     select count(*) from pet_mytown_comt
     where tno = #{value}
   </select>
 
 </mapper>
-
-
-
-
-
-
-

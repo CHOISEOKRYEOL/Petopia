@@ -13,7 +13,7 @@
 		<result column="email" property="email" />
 		<result column="photo" property="photo" />
 		<result column="phone" property="tel" />
-		<result column="states" property="state" />
+		<result column="state" property="state" />
 		<result column="rdt" property="registeredDate" />
 	</resultMap>
 
@@ -72,7 +72,7 @@
 
 	<select id="findAll" resultMap="memberMap">
 		<include refid="user" />
-		where state = 1
+		where state = 0
 		order by rdt desc
 	</select>
 
