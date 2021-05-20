@@ -61,6 +61,9 @@ DROP TABLE IF EXISTS pet_mark_cat RESTRICT;
 -- 추천
 DROP TABLE IF EXISTS pet_recomt RESTRICT;
 
+-- 새 테이블
+DROP TABLE IF EXISTS 진찰기록 RESTRICT;
+
 -- 회원
 CREATE TABLE pet_user (
   mno   INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
@@ -395,9 +398,8 @@ ALTER TABLE pet_like
 -- 진찰기록
 CREATE TABLE pet_hprecord (
   exno    INTEGER  NOT NULL COMMENT '진찰기록번호', -- 진찰기록번호
-  pno     INTEGER  NOT NULL COMMENT '마이펫번호', -- 마이펫번호
-  hno     INTEGER  NOT NULL COMMENT '병원번호', -- 병원번호
-  state   INTEGER  NOT NULL COMMENT '입원상태', -- 입원상태
+  pet     INTEGER  NOT NULL COMMENT '마이펫', -- 마이펫
+  hname   INTEGER  NOT NULL COMMENT '병원명', -- 병원명
   history LONGTEXT NOT NULL COMMENT '진찰내역' -- 진찰내역
 )
 COMMENT '진찰기록';
@@ -527,6 +529,11 @@ CREATE TABLE pet_recomt (
   tno INTEGER NULL COMMENT '우리동네번호' -- 우리동네번호
 )
 COMMENT '추천';
+
+-- 새 테이블
+CREATE TABLE 진찰기록 (
+)
+COMMENT '새 테이블';
 
 -- 펫
 ALTER TABLE pet_mypet
@@ -742,7 +749,7 @@ ALTER TABLE pet_like
 ALTER TABLE pet_hprecord
   ADD CONSTRAINT FK_pet_mypet_TO_pet_hprecord -- 펫 -> 진찰기록
     FOREIGN KEY (
-      pno -- 마이펫번호
+      pet -- 마이펫
     )
     REFERENCES pet_mypet ( -- 펫
       pno -- 마이펫번호
@@ -752,7 +759,7 @@ ALTER TABLE pet_hprecord
 ALTER TABLE pet_hprecord
   ADD CONSTRAINT FK_pet_hp_TO_pet_hprecord -- 병원 -> 진찰기록
     FOREIGN KEY (
-      hno -- 병원번호
+      hname -- 병원명
     )
     REFERENCES pet_hp ( -- 병원
       hno -- 병원번호

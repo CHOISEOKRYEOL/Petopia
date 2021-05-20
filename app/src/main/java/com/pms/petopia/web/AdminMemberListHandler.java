@@ -30,7 +30,6 @@ public class AdminMemberListHandler extends HttpServlet {
     }
     else {
       try {
-        //        List<Member> list = memberService.list();
         List<Member> list = null;
 
         String item = request.getParameter("item");
