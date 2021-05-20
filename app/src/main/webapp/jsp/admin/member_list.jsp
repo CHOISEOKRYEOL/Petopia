@@ -22,7 +22,6 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${list}" var="m">
-				<form method="post">
 					<c:if test="${m.role == 1}">
 						<tr>
 							<td>${m.id}</td>
@@ -35,7 +34,6 @@
 						</tr>
 					</c:if>
 			</c:forEach>
-			</form>
 		</tbody>
 	</table>
 	<form method='get'>
