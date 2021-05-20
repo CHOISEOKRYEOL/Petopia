@@ -10,7 +10,7 @@ import com.pms.petopia.domain.Qna;
 import com.pms.petopia.service.QnaService;
 
 @SuppressWarnings("serial")
-@WebServlet("/qna/update")
+@WebServlet("/admin/answer")
 public class AdminQnaUpdateHandler extends HttpServlet {
 
   @Override
@@ -19,14 +19,13 @@ public class AdminQnaUpdateHandler extends HttpServlet {
 
     Qna qna = new Qna();
     qna.setNo(Integer.parseInt(request.getParameter("no")));
-    qna.setTitle(request.getParameter("title"));
-    qna.setContent(request.getParameter("content"));
+    qna.setAnswer(request.getParameter("answer"));
 
     try {
-      qnaService.update(qna);
+      qnaService.answer(qna);
       response.setContentType("text/html;charset=UTF-8");
       request.getRequestDispatcher("/jsp/qna/update.jsp").include(request, response);
-      response.setHeader("Refresh", "1;url=list");
+      response.setHeader("Refresh", "1;url=qnalist");
     }
     catch (Exception e) {
       throw new ServletException(e);

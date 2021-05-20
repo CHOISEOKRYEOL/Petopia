@@ -21,7 +21,7 @@
   
   <sql id="select">
     select
-      q.qno, q.title, q.cont, q.cdt,
+      q.qno, q.title, q.cont, q.cdt, q.ans, q.adt,
       m.mno as writer_no, m.nick as writer_nick
     from pet_qna q
       inner join pet_user m on m.mno = q.writer
@@ -31,6 +31,7 @@
     insert into pet_qna(title, cont, writer)
     values(#{title}, #{content}, #{writer.no})
   </insert>
+  
 
   <select id="findByNo" resultMap="qnaMap" parameterType="int">
     <include refid="select"/>
@@ -41,6 +42,13 @@
     <include refid="select"/>
     order by q.cdt desc
   </select>
+
+  <update id="answer" parameterType="qna">
+    update pet_qna set
+      ans = #{answer},
+      adt = now()
+      where qno = #{no}
+  </update>
   
   <update id="update" parameterType="qna">
     update pet_qna set
