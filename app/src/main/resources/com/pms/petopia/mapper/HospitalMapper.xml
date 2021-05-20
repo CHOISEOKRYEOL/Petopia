@@ -42,10 +42,13 @@
       h.address,
       h.startTime,
       h.endTime,
+      s.gno as state_no,
+      s.gname as state_name,    
       c.cno as city_no,
       c.cname as city_name
-    from pet_hp h
-      inner join pet_city c on c.cno=h.cno
+    from pet_city c
+      inner join pet_state s on s.gno=c.gno
+      inner join pet_hp h on c.cno=h.cno
     order by hno desc
   </select>
   
@@ -61,10 +64,13 @@
       h.vet,
       h.photo,
       h.grade,
+      s.gno as state_no,
+      s.gname as state_name,    
       c.cno as city_no,
       c.cname as city_name
-    from pet_hp h
-      inner join pet_city c on c.cno=h.cno
+    from pet_city c
+      inner join pet_state s on s.gno=c.gno
+      inner join pet_hp h on c.cno=h.cno
     where h.hno=#{value}
   </select>
   

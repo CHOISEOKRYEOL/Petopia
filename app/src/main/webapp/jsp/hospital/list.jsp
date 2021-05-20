@@ -41,7 +41,7 @@
   <td>${h.no}</td>
   <td><a href='detail?no=${h.no}'>${h.name}</a></td>
   <td>${h.tel}</td>
-  <td>${h.smallAddress.name}</td>
+  <td>${h.bigAddress.name}&nbsp;${h.smallAddress.name}</td>
   <td>${h.address}</td>
   <td>${h.startTime}시 ~ ${h.endTime}시</td>
   <td>${h.rate}</td>
