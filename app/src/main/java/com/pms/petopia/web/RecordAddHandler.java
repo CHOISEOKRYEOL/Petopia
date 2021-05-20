@@ -45,10 +45,10 @@ public class RecordAddHandler extends HttpServlet {
       Pet pet = (Pet) request.getSession().getAttribute("pet");
       r.setPetNo(pet);
 
+      out.println(r);
+
       Hospital hospital = (Hospital) request.getSession().getAttribute("hospital");
       r.setHospitalNo(hospital);
-
-
 
       //      Hospital hospital = new Hospital();
       //      int hospitalNo = hospital.getNo();  
