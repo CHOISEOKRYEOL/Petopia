@@ -15,6 +15,7 @@
 		<result column="phone" property="tel" />
 		<result column="state" property="state" />
 		<result column="rdt" property="registeredDate" />
+		<result column="role" property="role" />
 	</resultMap>
 
 	<sql id="user">

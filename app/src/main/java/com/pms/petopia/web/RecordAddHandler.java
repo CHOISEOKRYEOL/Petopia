@@ -35,8 +35,7 @@ public class RecordAddHandler extends HttpServlet {
 
     try {
       Record r = new Record();
-      //      r.setState(Integer.parseInt(request.getParameter("state")));
-      //      r.setRecord(request.getParameter("record"));
+      r.setRecord(request.getParameter("record"));
 
       Pet petNo = (Pet) request.getSession().getAttribute("petNo");
       r.setPetNo(petNo);

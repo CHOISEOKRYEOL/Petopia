@@ -35,7 +35,7 @@
 						<td>${r.createdDate}</td>
 						<td><a href='${photoUrl}'><img src='${thumbnail}'></a>
 							<c:if test="${r.writer.no == loginUser.no}">
-								<td><a href='delete?no=${r.no}'>삭제</a></td>
+								<td><a href='../review/delete?no=${r.no}'>삭제</a></td>
 							</c:if>
 					</tr>
 				</tbody>
