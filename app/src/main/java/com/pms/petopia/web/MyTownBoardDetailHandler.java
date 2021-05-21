@@ -47,7 +47,7 @@ public class MyTownBoardDetailHandler extends HttpServlet {
       request.setAttribute("smallAddress", smallAddress);
       request.setAttribute("comments", comments);
       request.setAttribute("commentCount", commentCount);
-      request.getRequestDispatcher("/jsp/mytownboard/detail.jsp").include(request, response);
+      request.getRequestDispatcher("/jsp/mytown/detail.jsp").include(request, response);
     } catch (Exception e) {
       throw new ServletException(e);
     }

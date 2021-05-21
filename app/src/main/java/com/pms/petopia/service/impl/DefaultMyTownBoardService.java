@@ -72,6 +72,11 @@ public class DefaultMyTownBoardService implements MyTownBoardService {
 
     return myTownBoardDao.findByKeyword(params);
   }
+
+  @Override
+  public int updateRecommentCount(int no) throws Exception {
+    return myTownBoardDao.updateRecommentCount(no);
+  }
 }
 
 

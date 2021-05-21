@@ -11,7 +11,6 @@
 <title>우리동네 게시글 목록</title>
 </head>
 <body>
-
 	<h1>${smallAddress.bigAddress.name}&nbsp;${smallAddress.name}</h1>
 	<form action='list' method='get'>
 		광역시/도 : <select name='stateNo'>
@@ -37,6 +36,7 @@
 				<th>작성자</th>
 				<th>등록일</th>
 				<th>조회수</th>
+				<th>추천수</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -48,6 +48,7 @@
 					<td>${t.writer.nick}</td>
 					<td>${t.createdDate}</td>
 					<td>${t.viewCount}</td>
+					<td>${t.recommentCount}</td>
 				</tr>
 			</c:forEach>
 		</tbody>

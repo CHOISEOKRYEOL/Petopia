@@ -11,6 +11,7 @@
     <result column="cont" property="content"/>
     <result column="cdt" property="createdDate"/>
     <result column="vw_cnt" property="viewCount"/>
+    <result column="rc_cnt" property="recommentCount"/>
     
     <association property="writer" javaType="member">
       <id column="writer_no" property="no"/>
@@ -41,6 +42,7 @@
       t.title, 
       t.cdt, 
       t.vw_cnt,
+      t.rc_cnt,
       m.mno as writer_no, 
       m.nick as writer_nick,
       s.gno as bigAddress_no, 
@@ -60,6 +62,7 @@
       t.title, 
       t.cdt, 
       t.vw_cnt,
+      t.rc_cnt,
       m.mno as writer_no, 
       m.nick as writer_nick,
       s.gno as bigAddress_no, 
@@ -80,6 +83,7 @@
       t.title, 
       t.cdt, 
       t.vw_cnt,
+      t.rc_cnt,
       m.mno as writer_no, 
       m.nick as writer_nick,
 		  s.gno as state_no, 
@@ -105,6 +109,7 @@
       t.cont,
       t.cdt,
       t.vw_cnt,
+      t.rc_cnt,
       m.mno as writer_no,
       m.nick as writer_nick,
       s.gno as bigAddress_no,
@@ -130,6 +135,12 @@
   <update id="updateViewCount" parameterType="int">
     update pet_mytown set 
       vw_cnt = vw_cnt + 1 
+    where tno = #{value}
+  </update>
+  
+  <update id="updateRecommentCount" parameterType="int">
+    update pet_mytown set 
+      rc_cnt = rc_cnt + 1
     where tno = #{value}
   </update>
   

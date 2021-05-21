@@ -10,7 +10,6 @@
 <title>우리동네 새 게시글</title>
 </head>
 <body>
-<jsp:useBean id="smallAddress" type = "com.pms.petopia.domain.SmallAddress" scope = "request"/>
 <h1>${small.bigAddress.name} ${small.name}</h1>
 <h2>우리동네 새 게시글</h2>
 <form action='add' method='post'>

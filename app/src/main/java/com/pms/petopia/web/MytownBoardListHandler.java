@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.MyTownBoard;
 import com.pms.petopia.domain.SmallAddress;
 import com.pms.petopia.service.MyTownBoardService;
+import com.pms.petopia.service.RecommentService;
 import com.pms.petopia.service.SmallAddressService;
 
 @SuppressWarnings("serial")
@@ -25,6 +26,7 @@ public class MytownBoardListHandler extends HttpServlet {
         (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
     SmallAddressService smallAddressService =
         (SmallAddressService) request.getServletContext().getAttribute("smallAddressService");
+    RecommentService recommentService = (RecommentService)request.getServletContext().getAttribute("RecommentService");
 
     int stateNo = Integer.parseInt(request.getParameter("stateNo"));
     int cityNo = Integer.parseInt(request.getParameter("cityNo"));
@@ -42,9 +44,7 @@ public class MytownBoardListHandler extends HttpServlet {
         } else {
           boards = myTownBoardService.list(stateNo, cityNo);
         }
-        //boards = myTownBoardService.listAll();
       }
-
       response.setContentType("text/html;charset=UTF-8");
       request.setAttribute("boards", boards);
       request.setAttribute("smallAddresses", smallAddresses);
@@ -52,7 +52,7 @@ public class MytownBoardListHandler extends HttpServlet {
       request.setAttribute("keyword", keyword);
       request.setAttribute("stateNo", stateNo);
       request.setAttribute("cityNo", cityNo);
-      request.getRequestDispatcher("/jsp/mytownboard/list.jsp").include(request, response);
+      request.getRequestDispatcher("/jsp/mytown/list.jsp").include(request, response);
     } catch (Exception e) {
       throw new ServletException(e);
     }

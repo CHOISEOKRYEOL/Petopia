@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pms.petopia.dao.RecommentDao">
+  
+  <resultMap id="recommentMap" type="recomment">
+    <id column="rno" property="no"/>
+    <result column="is_reco" property="isReco"/> <!-- test -->
+       
+    <association property="recommender" javaType="member">
+      <id column="recommender_no" property="no"/>
+      <result column="recommender_nick" property="nick"/>
+    </association>
+    
+    <association property="myTownBoard" javaType="myTownBoard">
+      <id column="myTownBoard_no" property="no"/>
+      <result column="myTownBoard_title" property="title"/>
+    </association>
+
+  </resultMap>
+  
+  <insert id="insert" parameterType="recomment">
+    insert into pet_recomt(mno, tno) 
+    values(#{recommender.no}, #{myTownBoard.no})
+  </insert>
+  
+  <select id="findAll" resultMap="recommentMap">
+	 select
+	   r.rno,
+	   t.tno as myTownBoard_no,
+	   t.title as myTownBoard_title,
+	   m.mno as recommender_no,
+	   m.nick as recommender_nick
+	 from pet_mytown t
+	   inner join pet_recomt r on t.tno=r.tno
+	   inner join pet_user m on r.mno=m.mno
+  </select>
+  
+  <delete id="delete" parameterType="int">
+  delete from pet_recommt
+  where rno=#{value}
+  </delete>
+  
+  <select id="countReco" resultType="String" parameterType="int">
+  select count(*) from pet_recomt
+  where tno=#{value}
+  </select>
+
+</mapper>
+
+
+
+
+
+
+

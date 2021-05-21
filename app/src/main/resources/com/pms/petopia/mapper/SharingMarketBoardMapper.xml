@@ -32,7 +32,7 @@
   </insert>
   
   
-      <select id="findAll" resultMap="sharingmarketboardMap" parameterType="sharingmarketboard">
+  <select id="findAll" resultMap="sharingmarketboardMap" parameterType="sharingmarketboard">
     select
       mark.sno,
       mark.title,
@@ -49,8 +49,8 @@
       order by mark.sno desc
   </select>
   
-    <select id="findByNo" resultMap="sharingmarketboardMap" parameterType="int">
-      select
+  <select id="findByNo" resultMap="sharingmarketboardMap" parameterType="int">
+    select
       mark.sno,
       mark.title,
       mark.cont,
@@ -66,8 +66,8 @@
     where mark.sno = #{value}
   </select>
   
-      <select id="findCategory" resultMap="sharingmarketboardMap" parameterType="int">
-      select
+  <select id="findCategory" resultMap="sharingmarketboardMap" parameterType="int">
+    select
       mark.sno,
       mark.title,
       mark.cont,
@@ -83,13 +83,13 @@
     where cat.cno = #{value}
   </select>
   
-    <update id="updateViewCount" parameterType="int">
+  <update id="updateViewCount" parameterType="int">
     update pet_mark set 
       vw_cnt = vw_cnt + 1 
     where sno = #{value}
   </update>
   
-    <update id="update" parameterType="sharingmarketboard">
+  <update id="update" parameterType="sharingmarketboard">
     update pet_mark set
     	cno = #{category.no},
         title = #{title},
@@ -97,10 +97,9 @@
         cont = #{content}
     where sno = #{no}
   </update>
-  
  
   <select id="findByKeyword" resultMap="sharingmarketboardMap" parameterType="string">
-      select
+    select
       mark.sno,
       mark.title,
       mark.cont,
@@ -114,12 +113,12 @@
       inner join pet_user mem on mem.mno = mark.writer
       inner join pet_mark_cat cat on cat.cno = mark.cno
    <where>	
-		    <if test="item == 1 or item == 0">
+		  <if test="item == 1 or item == 0">
 		    mark.title like concat('%', #{keyword}, '%')
-		    </if>
-		    <if test="item == 2 or item == 0">
+		  </if>
+		  <if test="item == 2 or item == 0">
 		    or mem.name like concat('%', #{keyword}, '%')
-		    </if>
+		  </if>
     </where>
     order by title asc
   </select>

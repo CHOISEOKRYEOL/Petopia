@@ -11,9 +11,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:useBean id="comments" type = "List<MyTownBoardComment>" scope = "request"/>
-<jsp:useBean id="myTownBoard" type = "com.pms.petopia.domain.MyTownBoard" scope = "request"/>
-
 <p>댓글 개수 : ${commentCount}</p>
 <c:forEach items="${comments}" var="c">
 <c:if test="${myTownBoard.no == c.myTownBoard.no}">

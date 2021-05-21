@@ -21,6 +21,8 @@ public interface MyTownBoardDao {
 
   int updateViewCount(int no) throws Exception;
 
+  int updateRecommentCount(int no) throws Exception;
+
   int deleteAll(int no) throws Exception;
 
   int delete(int no) throws Exception;

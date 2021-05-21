@@ -1,7 +1,6 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,7 +32,7 @@ public class MyTownBoardAddHandler extends HttpServlet{
 
       request.setAttribute("smallAddress", smallAddress);
       request.setAttribute("smallAddresses", smallAddresses);
-      request.getRequestDispatcher("/jsp/mytownboard/form.jsp").include(request, response);
+      request.getRequestDispatcher("/jsp/mytown/form.jsp").include(request, response);
 
     } catch (Exception e) {
       throw new ServletException(e);
@@ -49,7 +48,6 @@ public class MyTownBoardAddHandler extends HttpServlet{
 
     response.setContentType("text/html;charset=UTF-8");
     request.setCharacterEncoding("UTF-8");
-    PrintWriter out = response.getWriter();
 
     MyTownBoard b = new MyTownBoard();
 
@@ -63,11 +61,6 @@ public class MyTownBoardAddHandler extends HttpServlet{
       b.setWriter(loginUser);
 
 
-      out.println("<!DOCTYPE html>");
-      out.println("<html>");
-      out.println("<head>");
-      out.println("<title>게시글 등록</title>");
-
       myTownBoardService.add(b);
       String webAdress= String.format("list?stateNo=%s&cityNo=%s", s.getBigAddress().getNo(), s.getNo());
       response.sendRedirect(webAdress);
@@ -75,8 +68,6 @@ public class MyTownBoardAddHandler extends HttpServlet{
     } catch (Exception e) {
       throw new ServletException(e);
     }
-    out.println("</body>");
-    out.println("</html>");
   }
 }
 

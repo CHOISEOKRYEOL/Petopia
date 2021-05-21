@@ -19,6 +19,8 @@ public interface MyTownBoardService {
 
   int deleteAll(int no) throws Exception;
 
+  int updateRecommentCount(int no) throws Exception;
+
   List<MyTownBoard> search(int stateNo, int cityNo, String keyword) throws Exception;
 }
 
