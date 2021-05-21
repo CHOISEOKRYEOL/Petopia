@@ -9,14 +9,15 @@ public class Qna {
   private String content;
   private Date createdDate;
   private String answer;
+  private int state;
   private Date answeredDate;
   private Member writer;
 
   @Override
   public String toString() {
     return "Qna [no=" + no + ", title=" + title + ", content=" + content + ", createdDate="
-        + createdDate + ", answer=" + answer + ", answeredDate=" + answeredDate + ", writer="
-        + writer + "]";
+        + createdDate + ", answer=" + answer + ", state=" + state + ", answeredDate=" + answeredDate
+        + ", writer=" + writer + "]";
   }
 
   public int getNo() {
@@ -48,6 +49,12 @@ public class Qna {
   }
   public void setAnswer(String answer) {
     this.answer = answer;
+  }
+  public int getState() {
+    return state;
+  }
+  public void setState(int state) {
+    this.state = state;
   }
   public Date getAnsweredDate() {
     return answeredDate;

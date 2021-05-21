@@ -33,9 +33,11 @@
 	</sql>
 
 	<insert id="insert" parameterType="member">
-		insert into pet_user(name, id, email, nick, pwd, phone)
+		insert into pet_user(name, id,
+		email, nick, pwd, phone)
 		values(#{name}, #{id}, #{email},
-		#{nick}, password(#{password}), #{tel})
+		#{nick},
+		password(#{password}), #{tel})
 	</insert>
 
 	<select id="findByIdPassword" resultMap="memberMap"
@@ -88,13 +90,11 @@
 
 	<update id="delete" parameterType="member">
 		update pet_user set
-		name =
-		#{name},
+		name = #{name},
 		nick = #{nick},
 		pwd = #{password},
 		phone = #{tel},
-		email =
-		#{email},
+		email = #{email},
 		state = #{state}
 		where mno=#{no}
 	</update>
