@@ -208,7 +208,8 @@ CREATE TABLE pet_mytown (
   title  VARCHAR(50) NOT NULL COMMENT '제목', -- 제목
   cont   LONGTEXT    NOT NULL COMMENT '내용(사진)', -- 내용(사진)
   cdt    DATETIME    NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
-  vw_cnt INTEGER     NULL     DEFAULT 0 COMMENT '조회수' -- 조회수
+  vw_cnt INTEGER     NULL     DEFAULT 0 COMMENT '조회수', -- 조회수
+  rc_cnt INTEGER     NULL     DEFAULT 0 COMMENT '추천수' -- 추천수
 )
 COMMENT '우리동네';
 
@@ -518,10 +519,28 @@ ALTER TABLE pet_mark_cat
 
 -- 추천
 CREATE TABLE pet_recomt (
-  mno INTEGER NULL COMMENT '회원번호', -- 회원번호
-  tno INTEGER NULL COMMENT '우리동네번호' -- 우리동네번호
+  rno INTEGER NOT NULL COMMENT '추천번호', -- 추천번호
+  mno INTEGER NULL     COMMENT '회원번호', -- 회원번호
+  tno INTEGER NULL     COMMENT '우리동네번호' -- 우리동네번호
 )
 COMMENT '추천';
+
+-- 추천
+ALTER TABLE pet_recomt
+  ADD CONSTRAINT PK_pet_recomt -- 추천 기본키
+    PRIMARY KEY (
+      rno -- 추천번호
+    );
+
+-- 추천 유니크 인덱스
+CREATE UNIQUE INDEX UIX_pet_recomt
+  ON pet_recomt ( -- 추천
+    mno ASC, -- 회원번호
+    tno ASC  -- 우리동네번호
+  );
+
+ALTER TABLE pet_recomt
+  MODIFY COLUMN rno INTEGER NOT NULL AUTO_INCREMENT COMMENT '추천번호';
 
 -- 펫
 ALTER TABLE pet_mypet
