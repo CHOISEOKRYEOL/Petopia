@@ -11,11 +11,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>게시글 상세</title>
+<title>게시글 변경</title>
 </head>
 <body>
 <h1>${oldBoard.bigAddress.name}&nbsp;${oldBoard.smallAddress.name}</h1>
-<h2>게시글 상세보기</h2>
+<h2>게시글 변경</h2>
 <form action='update' method='post'><table border='1'>
 <tbody>
 <tr><th>광역시/도</th> 

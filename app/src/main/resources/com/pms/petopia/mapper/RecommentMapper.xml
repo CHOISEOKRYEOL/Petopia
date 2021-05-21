@@ -7,7 +7,6 @@
   
   <resultMap id="recommentMap" type="recomment">
     <id column="rno" property="no"/>
-    <result column="is_reco" property="isReco"/> <!-- test -->
        
     <association property="recommender" javaType="member">
       <id column="recommender_no" property="no"/>

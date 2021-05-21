@@ -34,27 +34,54 @@ public class MyTownBoardRecommentAddHandler extends HttpServlet {
       recomment.setMyTownBoard(myTownBoard);
       Member loginUser = (Member)request.getSession().getAttribute("loginUser");
       recomment.setRecommender(loginUser);
-
+      int count = 0;
+      String result = "fail";
       List<Recomment> recomments = recommentService.list();
+      if (recomments.size() == 0) {
+        recommentService.add(recomment);
+        myTownBoardService.updateRecommentCount(boardNo);
+        result = "success";
 
-      for(Recomment reco : recomments) {
-        if ((reco.getMyTownBoard().getNo() == boardNo) && (reco.getRecommender().getNo() == loginUser.getNo())) {
-          System.out.println(loginUser);
-          System.out.println("같은 사람");
-        } else {
-          recommentService.add(recomment);
-          myTownBoardService.updateRecommentCount(boardNo);
+      } else{
+
+        for(Recomment reco : recomments) {
+          if (reco.getRecommender().getNo() != loginUser.getNo() && reco.getMyTownBoard().getNo() != boardNo
+              || reco.getRecommender().getNo() == loginUser.getNo() && reco.getMyTownBoard().getNo() != boardNo
+              || reco.getRecommender().getNo() != loginUser.getNo() && reco.getMyTownBoard().getNo() == boardNo) {
+
+            System.out.println(reco.getRecommender().getNo());
+            System.out.println(loginUser.getNo());
+            System.out.println(reco.getMyTownBoard().getNo());
+            System.out.println(boardNo);
+            //System.out.println("-----> 추천할 수 있어!");
+            count++;
+            if (count == recomments.size()) {
+              //System.out.println("**********************");
+              System.out.println(reco.getRecommender().getNo());
+              System.out.println(loginUser.getNo());
+              System.out.println(reco.getMyTownBoard().getNo());
+              System.out.println(boardNo);
+              recommentService.add(recomment);
+              myTownBoardService.updateRecommentCount(boardNo);
+              result = "success";
+              break;
+            }
+
+          }else {
+            System.out.println(reco.getRecommender().getNo());
+            System.out.println(loginUser.getNo());
+            System.out.println(reco.getMyTownBoard().getNo());
+            System.out.println(boardNo);
+            System.out.println("==> 2. 추천은 안돼!");
+            break;
+          }
         }
       }
-
-      request.setAttribute("boardNo", boardNo);
-      request.setAttribute("recomments", recomments);
-      request.setAttribute("recommnet", recomment);
-      request.setAttribute("myTownBoard", myTownBoard);
+      request.setAttribute("result", result);
 
       request.getRequestDispatcher("/jsp/mytown/recommentadd.jsp").include(request, response);
 
-      String webAddress= String.format("5;url=../mytown/detail?stateNo=%d&cityNo=%d&no=%d\n", 
+      String webAddress= String.format("2;url=../mytown/detail?stateNo=%d&cityNo=%d&no=%d\n", 
           myTownBoard.getBigAddress().getNo(), myTownBoard.getSmallAddress().getNo(), boardNo);
       response.setHeader("Refresh",webAddress);
 
@@ -63,3 +90,4 @@ public class MyTownBoardRecommentAddHandler extends HttpServlet {
     }
   }
 }
+
