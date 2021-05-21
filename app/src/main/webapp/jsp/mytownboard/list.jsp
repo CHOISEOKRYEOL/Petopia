@@ -37,7 +37,6 @@
 				<th>작성자</th>
 				<th>등록일</th>
 				<th>조회수</th>
-				<th>추천수</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -49,7 +48,6 @@
 					<td>${t.writer.nick}</td>
 					<td>${t.createdDate}</td>
 					<td>${t.viewCount}</td>
-					<td>${t.likeCount}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
