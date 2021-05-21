@@ -22,7 +22,8 @@ public class ReviewListHandler extends HttpServlet {
     ReviewService reviewService = (ReviewService) request.getServletContext().getAttribute("reviewService");
 
     Hospital h = new Hospital();
-    h.setNo(1);
+
+    h.setNo(Integer.parseInt(request.getParameter("no")));
 
     try {
       List<Review> list = reviewService.list(h.getNo());
