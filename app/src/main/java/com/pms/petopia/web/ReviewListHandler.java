@@ -27,13 +27,11 @@ public class ReviewListHandler extends HttpServlet {
 
     try {
       List<Review> list = reviewService.list(h.getNo());
-      System.out.println(list);
       request.setAttribute("hospital", h);
       request.setAttribute("list", list);
 
       response.setContentType("text/html;charset=UTF-8");
       request.getRequestDispatcher("/jsp/review/list.jsp").include(request, response);
-      System.out.println("접근");
     } catch (Exception e) {
       throw new ServletException(e);
     }

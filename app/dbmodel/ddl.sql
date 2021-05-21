@@ -308,7 +308,8 @@ CREATE TABLE pet_qna (
   cont   LONGTEXT    NOT NULL COMMENT '내용', -- 내용
   cdt    DATETIME    NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
   ans    LONGTEXT    NULL     COMMENT '답변', -- 답변
-  adt    DATETIME    NULL     COMMENT '답변일' -- 답변일
+  adt    DATETIME    NULL     COMMENT '답변일', -- 답변일
+  state  INTEGER     NOT NULL COMMENT '답변여부' -- 답변여부
 )
 COMMENT 'Q&A';
 
