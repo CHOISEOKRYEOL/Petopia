@@ -106,7 +106,6 @@ public class BeforeMytownBoardListHandler extends HttpServlet {
               + " <td><a href='detail?stateNo=%d&cityNo=%d&no=%1$d'>%s</a></td>"
               + " <td>%s</td>"
               + " <td>%s</td>"
-              + " <td>%d</td>"
               + " <td>%d</td></tr>\n",
               b.getNo(),
               s.getBigAddress().getNo(),
@@ -114,8 +113,7 @@ public class BeforeMytownBoardListHandler extends HttpServlet {
               b.getTitle(), 
               b.getWriter().getNick(),
               b.getCreatedDate(),
-              b.getViewCount(),
-              b.getLikeCount());
+              b.getViewCount());
         }
 
         out.println("</tbody>");

@@ -11,7 +11,6 @@
     <result column="cont" property="content"/>
     <result column="cdt" property="createdDate"/>
     <result column="vw_cnt" property="viewCount"/>
-    <result column="like_cnt" property="likeCount"/>
     
     <association property="writer" javaType="member">
       <id column="writer_no" property="no"/>
@@ -42,7 +41,6 @@
       t.title, 
       t.cdt, 
       t.vw_cnt,
-      t.like_cnt,
       m.mno as writer_no, 
       m.nick as writer_nick,
       s.gno as bigAddress_no, 
@@ -62,7 +60,6 @@
       t.title, 
       t.cdt, 
       t.vw_cnt,
-      t.like_cnt,
       m.mno as writer_no, 
       m.nick as writer_nick,
       s.gno as bigAddress_no, 
@@ -83,7 +80,6 @@
       t.title, 
       t.cdt, 
       t.vw_cnt,
-      t.like_cnt,
       m.mno as writer_no, 
       m.nick as writer_nick,
 		  s.gno as state_no, 
@@ -109,7 +105,6 @@
       t.cont,
       t.cdt,
       t.vw_cnt,
-      t.like_cnt,
       m.mno as writer_no,
       m.nick as writer_nick,
       s.gno as bigAddress_no,
