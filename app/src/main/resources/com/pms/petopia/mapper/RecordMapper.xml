@@ -10,10 +10,12 @@
     <result column="state" property="state"/>
     <result column="history" property="record"/>
     
+    <!--  
     <association property="owner" javaType="member">
       <id column="owner_no" property="no"/>
       <result column="owner_name" property="name"/>
     </association>
+    -->
     
     <association property="petNo" javaType="pet">
       <id column="petNo_no" property="no"/>

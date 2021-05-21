@@ -95,23 +95,25 @@
     where hno=#{value}
   </delete>
   
-     <!-- 
-  <select id="findByKeyword" resultMap="hospitalMap" parameterType="string">
-    select
-      hno,
-      name,
-      tel,
-      address,
-      parking,
-      vet,
-      time,
-      grade
-    from pet_hp
-    <if test="value != null">
+  <!--  
+  <select id="findByKeyword" resultMap="hospitalMap" parameterType="map">
+    select 
+      h.hno,
+      h.name,
+      h.tel,
+      h.address,
+      h.startTime,
+      h.endTime,
+      s.gno as state_no,
+      s.gname as state_name,    
+      c.cno as city_no,
+      c.cname as city_name
+    from pet_state s
+      inner join pet_city c on s.gno=c.gno
+      inner join pet_hp h on c.cno=h.cno
     where 
-      address like concat('%', #{value},'%')
-    </if>
-    order by hno desc
+      c.cno=#{cno} and s.gno=#{gno}
+    order by h.hno desc
   </select>
-    -->
+  -->
 </mapper>

@@ -37,7 +37,6 @@
 <tr><th>작성자</th> <td>${myTownBoard.writer.nick}</td></tr>
 <tr><th>등록일</th> <td>${myTownBoard.createdDate}</td></tr>
 <tr><th>조회수</th> <td>${myTownBoard.viewCount}</td></tr>
-<tr><th>추천수</th> <td>${myTownBoard.likeCount}</td></tr>
 
 <c:if test="${not empty loginUser and myTownBoard.writer.no == loginUser.no}">
 <tr>

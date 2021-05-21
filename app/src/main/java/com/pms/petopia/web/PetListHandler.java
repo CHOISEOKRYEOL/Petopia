@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import com.pms.petopia.domain.Pet;
 import com.pms.petopia.service.PetService;
 
@@ -32,6 +33,9 @@ public class PetListHandler extends HttpServlet {
       }
 
       List<Pet> pets = petService.list();
+
+      HttpSession session = request.getSession();
+      session.setAttribute("petNo", request.getParameter("petNo"));
 
       request.setAttribute("list", pets);
       response.setContentType("text/html;charset=UTF-8");
