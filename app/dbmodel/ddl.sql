@@ -92,7 +92,7 @@ ALTER TABLE pet_user
 -- 회원
 ALTER TABLE pet_user
   ADD CONSTRAINT CK_pet_user2 -- 회원 체크 제약2
-    CHECK (status = 1 or status = 0);
+    CHECK (state = 1 or state = 0);
 
 -- 회원 유니크 인덱스
 CREATE UNIQUE INDEX UIX_pet_user
@@ -407,11 +407,6 @@ ALTER TABLE pet_hprecord
     PRIMARY KEY (
       exno -- 진찰기록번호
     );
-
--- 진찰기록
-ALTER TABLE pet_hprecord
-  ADD CONSTRAINT CK_pet_hprecord -- 진찰기록 체크 제약
-    CHECK (state = 1 or state = 0);
 
 ALTER TABLE pet_hprecord
   MODIFY COLUMN exno INTEGER NOT NULL AUTO_INCREMENT COMMENT '진찰기록번호';
