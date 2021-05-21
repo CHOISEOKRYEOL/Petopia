@@ -10,6 +10,7 @@ import com.pms.petopia.domain.Hospital;
 import com.pms.petopia.domain.Pet;
 import com.pms.petopia.domain.Record;
 import com.pms.petopia.service.HospitalService;
+import com.pms.petopia.service.PetService;
 import com.pms.petopia.service.RecordService;
 
 @SuppressWarnings("serial")
@@ -21,7 +22,7 @@ public class RecordAddHandler extends HttpServlet {
       throws ServletException, IOException {
 
     response.setContentType("text/html;charset=UTF-8");
-    request.getRequestDispatcher("/jsp/record/form.jsp");
+    request.getRequestDispatcher("/jsp/record/form.jsp").include(request, response);;
   }
 
   @Override
@@ -30,24 +31,19 @@ public class RecordAddHandler extends HttpServlet {
 
     RecordService recordService = (RecordService) request.getServletContext().getAttribute("recordService");
     HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
-
-    Pet petInfo = (Pet) request.getSession().getAttribute("petInfo");
+    PetService petService = (PetService) request.getServletContext().getAttribute("petService");
 
     try {
       Record r = new Record();
-      Hospital h = hospitalService.get(Integer.parseInt(request.getParameter("no")));
+      //      r.setState(Integer.parseInt(request.getParameter("state")));
+      //      r.setRecord(request.getParameter("record"));
 
-      r.setState(Integer.parseInt(request.getParameter("state")));
-      r.setRecord(request.getParameter("record"));
-      // 로딩해야 할 값 : / 펫 정보 / 병원 정보
-      r.setPetNo(petInfo);
+      Pet petNo = (Pet) request.getSession().getAttribute("petNo");
+      r.setPetNo(petNo);
 
+      Hospital hospital = (Hospital) request.getSession().getAttribute("hospital");
+      r.setHospitalNo(hospital);
 
-
-      r.setHospitalNo(h);
-
-
-      System.out.println(r);
       recordService.add(r);
 
       response.setHeader("Refresh", "1;url=../main");
@@ -55,7 +51,7 @@ public class RecordAddHandler extends HttpServlet {
     } catch (Exception e) {
       throw new ServletException(e);
     }
-
+    //
   }
 
 }
