@@ -24,16 +24,6 @@ public class MyTownBoardCommentUpdateHandler extends HttpServlet {
     MyTownBoardService myTownBoardService = (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
     response.setContentType("text/html;charset=UTF-8");
 
-    //PrintWriter out = response.getWriter();
-
-    //    out.println("<!DOCTYPE html>");
-    //    out.println("<html>");
-    //    out.println("<head>");
-    //    out.println("<title>댓글 변경</title>");
-    //    out.println("</head>");
-    //    out.println("<body>");
-    //    out.println("<h1>댓글 변경</h1>");
-
     try {
       int no = Integer.parseInt(request.getParameter("no"));
 
@@ -54,12 +44,6 @@ public class MyTownBoardCommentUpdateHandler extends HttpServlet {
       myTownBoardCommentService.update(comment);
       MyTownBoard board = myTownBoardService.get(oldBoardComment.getMyTownBoard().getNo());
 
-      //      out.printf("<meta http-equiv='Refresh' content='1;url=list?stateNo=%d&cityNo=%d>",
-      //          board.getBigAddress().getNo(), board.getSmallAddress().getNo());
-      //      out.println("</head>");
-      //      out.println("<body>");
-      //      out.println("<h1>댓글 변경</h1>");
-      //      out.println("<p>댓글을 변경하였습니다.</p>");
       String webAddress = String.format("../mytown/detail?stateNo=%d&cityNo=%d&no=%d", 
           board.getBigAddress().getNo(), board.getSmallAddress().getNo(), board.getNo());
       response.sendRedirect(webAddress);
@@ -68,7 +52,5 @@ public class MyTownBoardCommentUpdateHandler extends HttpServlet {
       throw new ServletException(e);
     }
 
-    //    out.println("</body>");
-    //    out.println("</html>");
   }
 }
