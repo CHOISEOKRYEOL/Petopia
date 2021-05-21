@@ -34,6 +34,8 @@ public class ReviewAddHandler extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
+    int num = Integer.parseInt(request.getParameter("num"));
+    request.setAttribute("num", num);
     response.setContentType("text/html;charset=UTF-8");
     request.getRequestDispatcher("/jsp/review/review_form.jsp").include(request, response);
   }
@@ -75,7 +77,7 @@ public class ReviewAddHandler extends HttpServlet {
     r.setWriter(loginUser);
 
     Hospital h = new Hospital();
-    h.setNo(1);
+    h.setNo(Integer.parseInt(request.getParameter("no")));
     r.setHospital(h);
 
     try {

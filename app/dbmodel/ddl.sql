@@ -41,7 +41,7 @@ DROP TABLE IF EXISTS pet_hp_bookmark RESTRICT;
 DROP TABLE IF EXISTS pet_like RESTRICT;
 
 -- 진찰기록
-DROP TABLE IF EXISTS pet_hprecord RESTRICT;
+DROP TABLE IF EXISTS pet_hp_record RESTRICT;
 
 -- 시군구
 DROP TABLE IF EXISTS pet_city RESTRICT;
@@ -394,7 +394,7 @@ ALTER TABLE pet_like
     );
 
 -- 진찰기록
-CREATE TABLE pet_hprecord (
+CREATE TABLE pet_hp_record (
   exno    INTEGER  NOT NULL COMMENT '진찰기록번호', -- 진찰기록번호
   pet     INTEGER  NOT NULL COMMENT '마이펫', -- 마이펫
   hname   INTEGER  NOT NULL COMMENT '병원명', -- 병원명
@@ -403,13 +403,13 @@ CREATE TABLE pet_hprecord (
 COMMENT '진찰기록';
 
 -- 진찰기록
-ALTER TABLE pet_hprecord
-  ADD CONSTRAINT PK_pet_hprecord -- 진찰기록 기본키
+ALTER TABLE pet_hp_record
+  ADD CONSTRAINT PK_pet_hp_record -- 진찰기록 기본키
     PRIMARY KEY (
       exno -- 진찰기록번호
     );
 
-ALTER TABLE pet_hprecord
+ALTER TABLE pet_hp_record
   MODIFY COLUMN exno INTEGER NOT NULL AUTO_INCREMENT COMMENT '진찰기록번호';
 
 -- 시군구
@@ -734,8 +734,8 @@ ALTER TABLE pet_like
     );
 
 -- 진찰기록
-ALTER TABLE pet_hprecord
-  ADD CONSTRAINT FK_pet_mypet_TO_pet_hprecord -- 펫 -> 진찰기록
+ALTER TABLE pet_hp_record
+  ADD CONSTRAINT FK_pet_mypet_TO_pet_hp_record -- 펫 -> 진찰기록
     FOREIGN KEY (
       pet -- 마이펫
     )
@@ -744,8 +744,8 @@ ALTER TABLE pet_hprecord
     );
 
 -- 진찰기록
-ALTER TABLE pet_hprecord
-  ADD CONSTRAINT FK_pet_hp_TO_pet_hprecord -- 병원 -> 진찰기록
+ALTER TABLE pet_hp_record
+  ADD CONSTRAINT FK_pet_hp_TO_pet_hp_record -- 병원 -> 진찰기록
     FOREIGN KEY (
       hname -- 병원명
     )

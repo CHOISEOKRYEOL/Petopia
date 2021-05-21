@@ -79,5 +79,9 @@
 <p><a href='list'>목록</a></p>
 <p><a href='../main'>메인</a></p>
 <c:import url="../review/list" />
+<form action="../review/add" method="get">
+<input type='hidden' name='num' value='${hospital.no}'>
+<input type="submit" value="리뷰 작성">
+</form>
 </body>
 </html>
