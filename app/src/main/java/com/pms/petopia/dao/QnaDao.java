@@ -13,5 +13,7 @@ public interface QnaDao {
 
   int update(Qna qna) throws Exception;
 
+  int answer(Qna qna) throws Exception;
+
   int delete(int no) throws Exception;
 }

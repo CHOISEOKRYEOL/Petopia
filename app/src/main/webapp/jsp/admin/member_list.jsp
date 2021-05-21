@@ -22,20 +22,18 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${list}" var="m">
-				<form method="post">
-					<c:if test="${m.role == 1}">
-						<tr>
-							<td>${m.id}</td>
-							<td>${m.nick}</td>
-							<td>${m.name}</td>
-							<td>${m.email}</td>
-							<td>${m.tel}</td>
-							<td>${m.registeredDate}</td>
-							<td><a href='memberdelete?no=${m.no}'>강제 탈퇴</a></td>
-						</tr>
-					</c:if>
+				<c:if test="${m.role == 1}">
+					<tr>
+						<td>${m.id}</td>
+						<td>${m.nick}</td>
+						<td>${m.name}</td>
+						<td>${m.email}</td>
+						<td>${m.tel}</td>
+						<td>${m.registeredDate}</td>
+						<td><a href='memberdelete?no=${m.no}'>강제 탈퇴</a></td>
+					</tr>
+				</c:if>
 			</c:forEach>
-			</form>
 		</tbody>
 	</table>
 	<form method='get'>
@@ -49,6 +47,5 @@
 		<button>검색</button>
 		<a href="../main">뒤로가기</a>
 	</form>
-
 </body>
 </html>

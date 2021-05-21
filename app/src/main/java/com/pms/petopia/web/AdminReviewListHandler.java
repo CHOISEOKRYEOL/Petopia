@@ -8,17 +8,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.Member;
-import com.pms.petopia.service.MemberService;
+import com.pms.petopia.domain.Review;
+import com.pms.petopia.service.ReviewService;
 
 @SuppressWarnings("serial")
-@WebServlet("/admin/memberlist")
-public class AdminMemberListHandler extends HttpServlet {
+@WebServlet("/admin/reviewlist")
+public class AdminReviewListHandler extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    MemberService memberService = (MemberService) request.getServletContext().getAttribute("memberService");
+    ReviewService reviewService = (ReviewService) request.getServletContext().getAttribute("reviewService");
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
     if(loginUser.getRole() == 1) {
@@ -28,26 +29,25 @@ public class AdminMemberListHandler extends HttpServlet {
     }
     else {
       try {
-        List<Member> list = null;
+        List<Review> list = null;
 
         String item = request.getParameter("item");
         String keyword = request.getParameter("keyword");
 
-        if (item != null && keyword != null && keyword.length() > 0) {
-          list = memberService.search(item, keyword);
+        if(item != null && keyword != null && keyword.length() > 0) {
+          list = reviewService.search(item, keyword);
         }
         else {
-          list = memberService.list();
+          list = reviewService.listAll();
         }
 
         request.setAttribute("list", list);
         response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher("/jsp/admin/member_list.jsp").include(request, response);
-
-      } catch (Exception e) {
+        request.getRequestDispatcher("/jsp/admin/review_list.jsp").include(request, response);
+      }
+      catch (Exception e) {
         throw new ServletException(e);
       }
     }
   }
 }
-

@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,17 +10,24 @@
 </head>
 <body>
 
-<form action='update' method='post'>
 <table border = '1'>
 <tbody>
-<tr><th>제목</th><td><input name='title' type='text' value='${qna.title}'></td></tr>
-<tr><th>내용</th><td><textarea name='content' rows='10' cols='60'>${qna.content}</textarea></td></tr><br>
+<tr><th>제목</th><td><input name='title' type='text' value='${qna.title}' readonly></td></tr>
+<tr><th>내용</th><td><textarea name='content' rows='10' cols='60' readonly>${qna.content}
+<c:if test="${qna.state == 1}">
+
+
+
+■ 관리자 답변 ■
+
+${qna.answer}</c:if>
+</textarea></td></tr><br>
 </tbody>
 </table>
-<input type='hidden' name='no' value='${qna.no}'>
-<input type='submit' value='수정'>
-</form>
+<c:if test="${qna.state == 0}">
+<a href='update?no=${qna.no}'>수정</a>
+</c:if>
 <a href='delete?no=${qna.no}'>삭제</a> 
-<p><a href='list'>목록</a>
+<a href='list'>목록</a>
 </body>
 </html>

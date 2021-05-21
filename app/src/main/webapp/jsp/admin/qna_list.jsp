@@ -5,31 +5,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>내 Q&A 목록</title>
+<title>관리자 Q&A 목록</title>
 </head>
 <body>
-<h1>${loginUser.nick}님의 Q&A 목록</h1>
-<p><a href='add'>새 Q&A 작성</a></p>
+<h1>관리자 Q&A 목록</h1>
      <table border='1'>
   <thead> 
   <tr>
-  <th>번호</th> <th>제목</th> <th>작성자</th> <th>등록일</th> <th>답변</th> 
+  <th>번호</th> <th>제목</th> <th>작성자</th> <th>등록일</th> <th>답변</th> <th>처리</th>
   </tr>
   </thead>
   <tbody>
   <c:forEach items="${list}" var="q">
-  <c:if test="${q.writer.no == loginUser.no}">
 <tr>
 <td>${q.no}</td>
-<td><a href='detail?no=${q.no}'>${q.title}</a></td>
+<td><a href='qnadetail?no=${q.no}'>${q.title}</a></td>
 <td>${q.writer.nick}</td>
 <td>${q.createdDate}</td>
-<c:if test="${q.state == 0}"><td>대기</td></c:if>
-<c:if test="${q.state == 1}"><td>완료</td></c:if>
-</tr>
+<c:if test="${q.state == 1}">
+<td>완료</td>
 </c:if>
+<c:if test="${q.state == 0}">
+<td>대기</td>
+</c:if>
+<td><a href='qnadelete?no=${q.no}'>삭제</a></td>
+</tr>
 </c:forEach>
   </tbody>
   </table>
+  <br>
+<a href='../main'>뒤로가기</a>
    </body>
 </html>

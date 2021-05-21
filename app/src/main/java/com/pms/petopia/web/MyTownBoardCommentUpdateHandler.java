@@ -1,8 +1,6 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,16 +24,6 @@ public class MyTownBoardCommentUpdateHandler extends HttpServlet {
     MyTownBoardService myTownBoardService = (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
     response.setContentType("text/html;charset=UTF-8");
 
-    PrintWriter out = response.getWriter();
-
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<title>댓글 변경</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>댓글 변경</h1>");
-
     try {
       int no = Integer.parseInt(request.getParameter("no"));
 
@@ -53,30 +41,16 @@ public class MyTownBoardCommentUpdateHandler extends HttpServlet {
       comment.setNo(oldBoardComment.getNo());
       comment.setContent(request.getParameter("content"));
 
-      MyTownBoard board = myTownBoardService.get(comment.getMyTownBoard().getNo());
+      myTownBoardCommentService.update(comment);
+      MyTownBoard board = myTownBoardService.get(oldBoardComment.getMyTownBoard().getNo());
 
-      out.printf("<meta http-equiv='Refresh' content='1;url=list?stateNo=%d&cityNo=%d>",
-          board.getBigAddress().getNo(), board.getSmallAddress().getNo());
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>댓글 변경</h1>");
-      out.println("<p>댓글을 변경하였습니다.</p>");
-      //response.setHeader("Refresh", "1;url=../main");
+      String webAddress = String.format("../mytown/detail?stateNo=%d&cityNo=%d&no=%d", 
+          board.getBigAddress().getNo(), board.getSmallAddress().getNo(), board.getNo());
+      response.sendRedirect(webAddress);
 
     } catch (Exception e) {
-      StringWriter strWriter = new StringWriter();
-      PrintWriter printWriter = new PrintWriter(strWriter);
-      e.printStackTrace(printWriter);
-
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>댓글 변경 오류</h1>");
-      out.printf("<p>%s</p>\n",e.getMessage());
-      out.printf("<pre>%s</pre>\n", strWriter.toString());
-      out.println("<a href='list'>목록</a></p>\n");
+      throw new ServletException(e);
     }
 
-    out.println("</body>");
-    out.println("</html>");
   }
 }

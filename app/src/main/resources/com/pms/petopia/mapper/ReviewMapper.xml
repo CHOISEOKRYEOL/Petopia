@@ -26,13 +26,8 @@
   </association>
     
   </resultMap>
-
-  <insert id="insert" parameterType="review">
-    insert into pet_hp_review(service, clean, cost, cont, writer, hname, rphoto)
-    values(#{serviceRating}, #{cleanlinessRating}, #{costRating}, #{comment}, #{writer.no}, #{hospital.no}, #{photo})
-  </insert>
   
-  <select id="findAll" resultMap="reviewMap" parameterType="int">
+  <sql id="find">
     select
       r.rno, r.service, r.clean, r.cost, r.cont, r.cdt, r.rphoto,
       m.mno as writer_no, m.nick as writer_nick,
@@ -40,7 +35,38 @@
     from pet_hp_review r
       inner join pet_user m on m.mno=r.writer
       inner join pet_hp h on h.hno=r.hname
+  </sql>
+
+  <insert id="insert" parameterType="review">
+    insert into pet_hp_review(service, clean, cost, cont, writer, hname, rphoto)
+    values(#{serviceRating}, #{cleanlinessRating}, #{costRating}, #{comment}, #{writer.no}, #{hospital.no}, #{photo})
+  </insert>
+  
+  <select id="findByKeyword" resultMap="reviewMap"
+    parameterType="map">
+    <include refid="find" />
+    <where>
+      <if test="item == 1 or item == 0">
+        m.nick like concat('%', #{keyword}, '%')
+      </if>
+      <if test="item == 2 or item == 0">
+        or r.cont like concat('%', #{keyword}, '%')
+      </if>
+      <if test="item == 3 or item == 0">
+        or r.cdt like concat('%', #{keyword}, '%')
+      </if>
+    </where>
+    order by cdt desc
+  </select>
+  
+  <select id="findAll" resultMap="reviewMap" parameterType="int">
+    <include refid="find"/>
     where h.hno = #{no}
+  </select>
+  
+  <select id="findAllList" resultMap="reviewMap">
+    <include refid="find"/>
+    order by r.cdt desc
   </select>
 
   <delete id="delete" parameterType="int">
