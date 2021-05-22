@@ -24,10 +24,15 @@ ${qna.answer}</c:if>
 </textarea></td></tr><br>
 </tbody>
 </table>
+<c:if test="${loginUser.id ne 'admin'}">
 <c:if test="${qna.state == 0}">
 <a href='update?no=${qna.no}'>수정</a>
 </c:if>
 <a href='delete?no=${qna.no}'>삭제</a> 
 <a href='list'>목록</a>
+</c:if>
+<c:if test="${loginUser.id eq 'admin'}">
+<a href='../admin/qnalist'>돌아가기</a>
+</c:if>
 </body>
 </html>

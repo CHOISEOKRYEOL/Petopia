@@ -30,13 +30,7 @@
     
   </resultMap>
   
-  <insert id="insert" parameterType="mytownboard">
-    insert into pet_mytown(cno, title, cont, writer) 
-    values(#{smallAddress.no}, #{title}, #{content}, #{writer.no})
-  </insert>
-  
-  
-  <select id="findAll" resultMap="myTownBoardMap">
+  <sql id="find">
     select
       t.tno, 
       t.title, 
@@ -49,6 +43,16 @@
       s.gname as bigAddress_name,
       c.cno as smallAddress_no, 
       c.cname as smallAddress_name
+  </sql>
+  
+  <insert id="insert" parameterType="mytownboard">
+    insert into pet_mytown(cno, title, cont, writer) 
+    values(#{smallAddress.no}, #{title}, #{content}, #{writer.no})
+  </insert>
+  
+  
+  <select id="findAll" resultMap="myTownBoardMap">
+    <include refid="find"/>
     from pet_state s
       inner join pet_city c on s.gno=c.gno
       inner join pet_mytown t on c.cno=t.cno
@@ -57,18 +61,7 @@
   
   
   <select id="findByArea" resultMap="myTownBoardMap" parameterType="map">
-    select
-      t.tno, 
-      t.title, 
-      t.cdt, 
-      t.vw_cnt,
-      t.rc_cnt,
-      m.mno as writer_no, 
-      m.nick as writer_nick,
-      s.gno as bigAddress_no, 
-      s.gname as bigAddress_name,
-      c.cno as smallAddress_no, 
-      c.cname as smallAddress_name
+    <include refid="find"/>
     from pet_state s
       inner join pet_city c on s.gno=c.gno
       inner join pet_mytown t on c.cno=t.cno
@@ -78,18 +71,7 @@
   </select>
 
   <select id="findByKeyword" resultMap="myTownBoardMap" parameterType="map">
-    select
-      t.tno, 
-      t.title, 
-      t.cdt, 
-      t.vw_cnt,
-      t.rc_cnt,
-      m.mno as writer_no, 
-      m.nick as writer_nick,
-		  s.gno as state_no, 
-			s.gname as state_name,
-			c.cno as city_no, 
-			c.cname as city_name
+    <include refid="find"/>
 		from pet_state s
 		  inner join pet_city c on s.gno=c.gno
 		  inner join pet_mytown t on c.cno=t.cno
@@ -103,19 +85,7 @@
   </select>
   
   <select id="findByNo" resultMap="myTownBoardMap" parameterType="int">
-    select
-      t.tno,
-      t.title,
-      t.cont,
-      t.cdt,
-      t.vw_cnt,
-      t.rc_cnt,
-      m.mno as writer_no,
-      m.nick as writer_nick,
-      s.gno as bigAddress_no,
-      s.gname as bigAddress_name,
-      c.cno as smallAddress_no,
-      c.cname as smallAddress_name
+    <include refid="find"/>
     from pet_city c
       inner join pet_state s on s.gno=c.gno
       inner join pet_mytown t on c.cno=t.cno

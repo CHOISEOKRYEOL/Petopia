@@ -11,8 +11,8 @@
 <title>마이펫 목록</title>
 </head>
 <body>
-<h1>마이펫 목록(JSP + JSP 액션태그 + EL)</h1>
-<p><a href='form.html'>새 펫</a>
+<h1>마이펫 목록</h1>
+<p><a href='add'>새 펫</a>
 <table border='1'>
 <thead>
 <tr>

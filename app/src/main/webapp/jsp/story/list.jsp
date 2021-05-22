@@ -45,7 +45,14 @@
 <tbody>
 <c:forEach items="${list}" var="s">
 <tr> 
-  <td><a href='detail?no=${s.no}'>${s.no}</a></td> 
+  <td>
+  <c:if test="${loginUser.id eq 'admin'}">
+  <a href='detail?no=${s.no}'>${s.no}</a>
+  </c:if>
+  <c:if test="${loginUser.id ne 'admin'}">
+  ${s.no}
+  </c:if>
+  </td> 
   <td><a href='${s.url}'>${s.title}</a></td> 
   <td>${s.site}</td> 
   <td>${s.registeredDate}</td> 
