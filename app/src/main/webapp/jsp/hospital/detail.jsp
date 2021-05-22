@@ -71,6 +71,24 @@
 	</table>
 	</form>
 </c:if>
+<!-- 회원 or 즐찾 상태가 아니면 -->
+<c:if test="${not empty loginUser and empty bookmark}">
+<form action="../member/bookmarkadd" method="post">
+<input type="hidden" name="mno" value="${loginUser.no}">
+<input type="hidden" name="hno" value="${hospital.no}">
+<input type="submit" value="즐겨찾기">
+</form>
+</c:if>
+
+<!-- 회원 or 즐찾 상태가 맞으면 -->
+<c:if test="${not empty loginUser and not empty bookmark}">
+<form action="../member/bookmarkdelete" method="post">
+<input type="hidden" name="bno" value="${bookmark.no}">
+<input type="hidden" name="hno" value="${hospital.no}">
+<input type="submit" value="즐겨찾기 취소">
+</form>
+</c:if>
+
 <h1>병원 리뷰</h1>
 <c:import url="../review/list" />
 <form action="../review/add">
