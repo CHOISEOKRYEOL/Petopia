@@ -287,6 +287,7 @@ ALTER TABLE pet_hp_review
 
 -- 스크랩
 CREATE TABLE pet_st_scrap (
+  sno INTEGER NOT NULL COMMENT '스크랩번호', -- 스크랩번호
   nno INTEGER NOT NULL COMMENT '뉴스번호', -- 뉴스번호
   mno INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
   rdt DATE    NOT NULL DEFAULT now() COMMENT '등록일' -- 등록일
@@ -297,9 +298,18 @@ COMMENT '스크랩';
 ALTER TABLE pet_st_scrap
   ADD CONSTRAINT PK_pet_st_scrap -- 스크랩 기본키
     PRIMARY KEY (
-      nno, -- 뉴스번호
-      mno  -- 회원번호
+      sno -- 스크랩번호
     );
+
+-- 스크랩 유니크 인덱스
+CREATE UNIQUE INDEX UIX_pet_st_scrap
+  ON pet_st_scrap ( -- 스크랩
+    nno ASC, -- 뉴스번호
+    mno ASC  -- 회원번호
+  );
+
+ALTER TABLE pet_st_scrap
+  MODIFY COLUMN sno INTEGER NOT NULL AUTO_INCREMENT COMMENT '스크랩번호';
 
 -- Q&A
 CREATE TABLE pet_qna (
@@ -366,6 +376,7 @@ ALTER TABLE pet_mytown_comt
 
 -- 병원 즐겨찾기
 CREATE TABLE pet_hp_bookmark (
+  bno INTEGER NOT NULL COMMENT '즐겨찾기번호', -- 즐겨찾기번호
   mno INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
   hno INTEGER NOT NULL COMMENT '병원번호' -- 병원번호
 )
@@ -375,12 +386,22 @@ COMMENT '병원 즐겨찾기';
 ALTER TABLE pet_hp_bookmark
   ADD CONSTRAINT PK_pet_hp_bookmark -- 병원 즐겨찾기 기본키
     PRIMARY KEY (
-      mno, -- 회원번호
-      hno  -- 병원번호
+      bno -- 즐겨찾기번호
     );
+
+-- 병원 즐겨찾기 유니크 인덱스
+CREATE UNIQUE INDEX UIX_pet_hp_bookmark
+  ON pet_hp_bookmark ( -- 병원 즐겨찾기
+    mno ASC, -- 회원번호
+    hno ASC  -- 병원번호
+  );
+
+ALTER TABLE pet_hp_bookmark
+  MODIFY COLUMN bno INTEGER NOT NULL AUTO_INCREMENT COMMENT '즐겨찾기번호';
 
 -- 내 찜
 CREATE TABLE pet_like (
+  lno INTEGER NOT NULL COMMENT '찜번호', -- 찜번호
   mno INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
   sno INTEGER NOT NULL COMMENT '나눔장터번호' -- 나눔장터번호
 )
@@ -390,9 +411,18 @@ COMMENT '내 찜';
 ALTER TABLE pet_like
   ADD CONSTRAINT PK_pet_like -- 내 찜 기본키
     PRIMARY KEY (
-      mno, -- 회원번호
-      sno  -- 나눔장터번호
+      lno -- 찜번호
     );
+
+-- 내 찜 유니크 인덱스
+CREATE UNIQUE INDEX UIX_pet_like
+  ON pet_like ( -- 내 찜
+    mno ASC, -- 회원번호
+    sno ASC  -- 나눔장터번호
+  );
+
+ALTER TABLE pet_like
+  MODIFY COLUMN lno INTEGER NOT NULL AUTO_INCREMENT COMMENT '찜번호';
 
 -- 진찰기록
 CREATE TABLE pet_hp_record (
