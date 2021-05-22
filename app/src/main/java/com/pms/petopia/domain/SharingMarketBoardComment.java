@@ -8,15 +8,16 @@ public class SharingMarketBoardComment {
   private String content;
   private Member writer;
   private Date createdDate;
-  private SharingMarketBoard sharingMarketBoard;
+  private SharingMarketBoard sharingmarketboard;
+  
   
   
 @Override
 public String toString() {
-	return "Comment [no=" + no + ", content=" + content + ", writer=" + writer + ", createdDAte=" + createdDate
-			+ ", sharingMarketBoard=" + sharingMarketBoard + "]";
-	
+	return "SharingMarketBoardComment [no=" + no + ", content=" + content + ", writer=" + writer + ", createdDate="
+			+ createdDate + ", sharingmarketboard=" + sharingmarketboard + "]";
 }
+
 public int getNo() {
 	return no;
 }
@@ -35,18 +36,20 @@ public Member getWriter() {
 public void setWriter(Member writer) {
 	this.writer = writer;
 }
-public Date getCreatedDAte() {
+public Date getCreatedDate() {
 	return createdDate;
 }
-public void setCreatedDAte(Date createdDAte) {
-	this.createdDate = createdDAte;
+public void setCreatedDate(Date createdDate) {
+	this.createdDate = createdDate;
 }
-public SharingMarketBoard getSharingMarketBoard() {
-	return sharingMarketBoard;
+public SharingMarketBoard getSharingmarketboard() {
+	return sharingmarketboard;
 }
-public void setSharingMarketBoard(SharingMarketBoard sharingMarketBoard) {
-	this.sharingMarketBoard = sharingMarketBoard;
+public void setSharingmarketboard(SharingMarketBoard sharingmarketboard) {
+	this.sharingmarketboard = sharingmarketboard;
 }
+  
+
 
 
 }

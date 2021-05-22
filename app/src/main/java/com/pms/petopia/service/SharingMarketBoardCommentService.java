@@ -10,11 +10,11 @@ public interface SharingMarketBoardCommentService {
 	
 	List<SharingMarketBoardComment> list() throws Exception;
 	
-	SharingMarketBoardComment get(int no) throws Exception;
+	List<SharingMarketBoardComment> get(int no) throws Exception;
 	
 	int update(SharingMarketBoardComment comt) throws Exception;
 	
 	int delete(int no) throws Exception;
 	
-
+	SharingMarketBoardComment getNo(int no) throws Exception;
 }

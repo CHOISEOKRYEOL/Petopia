@@ -39,9 +39,10 @@
       inner join pet_mark mark on mark.sno = comt.sno
       order by comt.sno desc
   </select>
+ 
   
     <select id="findByNo" resultMap="sharingmarketboardCommentMap" parameterType="int">
-      select
+       select
       comt.srno,
       comt.cont,
       comt.cdt,
@@ -51,20 +52,33 @@
     from pet_mark_comt comt
       inner join pet_user mem on mem.mno = comt.writer
       inner join pet_mark mark on mark.sno = comt.sno
-      order by comt.sno desc
-    where comt.sno = #{value}
+    where mark.sno = #{no}
+  </select>
+  
+      <select id="findBySrno" resultMap="sharingmarketboardCommentMap" parameterType="int">
+       select
+      comt.srno,
+      comt.cont,
+      comt.cdt,
+      mem.mno as writer_no,
+      mem.name as writer_name,
+      mark.sno as sharingmarketboard_no
+    from pet_mark_comt comt
+      inner join pet_user mem on mem.mno = comt.writer
+      inner join pet_mark mark on mark.sno = comt.sno
+    where comt.srno = #{no}
   </select>
   
   <update id="update" parameterType="sharingmarketboardcomment">
     update pet_mark_comt set
         cdt = now(), 
         cont = #{content}
-    where sno = #{no}
+    where srno = #{no}
   </update>
   
     <delete id="delete" parameterType="int">
     delete from pet_mark_comt
-    where sno = #{value}
+    where srno = #{value}
   </delete>
 
 

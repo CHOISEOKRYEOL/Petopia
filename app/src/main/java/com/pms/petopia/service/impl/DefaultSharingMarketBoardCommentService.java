@@ -3,6 +3,7 @@ package com.pms.petopia.service.impl;
 import java.util.List;
 
 import com.pms.petopia.dao.SharingMarketBoardCommentDao;
+import com.pms.petopia.domain.SharingMarketBoard;
 import com.pms.petopia.domain.SharingMarketBoardComment;
 import com.pms.petopia.service.SharingMarketBoardCommentService;
 
@@ -25,7 +26,7 @@ public class DefaultSharingMarketBoardCommentService implements SharingMarketBoa
 	}
 
 	@Override
-	public SharingMarketBoardComment get(int no) throws Exception {
+	public List<SharingMarketBoardComment> get(int no) throws Exception {
 		return sharingMarketBoardCommentDao.findByNo(no);
 	}
 
@@ -39,7 +40,10 @@ public class DefaultSharingMarketBoardCommentService implements SharingMarketBoa
 		return sharingMarketBoardCommentDao.delete(no);
 	}
 	
-	
+	@Override
+	public SharingMarketBoardComment getNo(int no) throws Exception {
+		return sharingMarketBoardCommentDao.findBySrno(no);
+	}
 	
 	
 }

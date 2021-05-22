@@ -98,7 +98,6 @@
     where sno = #{no}
   </update>
   
- 
   <select id="findByKeyword" resultMap="sharingmarketboardMap" parameterType="string">
       select
       mark.sno,
