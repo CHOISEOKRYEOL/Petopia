@@ -5,7 +5,6 @@ public class Scrap {
   private int no;
   private Member member;
   private Story story;
-  private int isScrap;
 
   public int getNo() {
     return no;
@@ -25,13 +24,6 @@ public class Scrap {
   public void setStory(Story story) {
     this.story = story;
   }
-  public int getIsScrap() {
-    return isScrap;
-  }
-  public void setIsScrap(int isScrap) {
-    this.isScrap = isScrap;
-  }
-
 
 
 }
