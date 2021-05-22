@@ -19,6 +19,7 @@ import com.pms.petopia.dao.QnaDao;
 import com.pms.petopia.dao.RecommentDao;
 import com.pms.petopia.dao.RecordDao;
 import com.pms.petopia.dao.ReviewDao;
+import com.pms.petopia.dao.ScrapDao;
 import com.pms.petopia.dao.SharingMarketBoardCategoryDao;
 import com.pms.petopia.dao.SharingMarketBoardCommentDao;
 import com.pms.petopia.dao.SharingMarketBoardDao;
@@ -34,6 +35,7 @@ import com.pms.petopia.service.QnaService;
 import com.pms.petopia.service.RecommentService;
 import com.pms.petopia.service.RecordService;
 import com.pms.petopia.service.ReviewService;
+import com.pms.petopia.service.ScrapService;
 import com.pms.petopia.service.SharingMarketBoardCategoryService;
 import com.pms.petopia.service.SharingMarketBoardCommentService;
 import com.pms.petopia.service.SharingMarketBoardService;
@@ -49,6 +51,7 @@ import com.pms.petopia.service.impl.DefaultQnaService;
 import com.pms.petopia.service.impl.DefaultRecommentService;
 import com.pms.petopia.service.impl.DefaultRecordService;
 import com.pms.petopia.service.impl.DefaultReviewService;
+import com.pms.petopia.service.impl.DefaultScrapService;
 import com.pms.petopia.service.impl.DefaultSharingMarketBoardCategoryService;
 import com.pms.petopia.service.impl.DefaultSharingMarketBoardCommentService;
 import com.pms.petopia.service.impl.DefaultSharingMarketBoardService;
@@ -89,6 +92,7 @@ public class ContextLoaderListener implements ServletContextListener {
       SharingMarketBoardCategoryDao sharingMarketBoardCategoryDao = daoFactory.createDao(SharingMarketBoardCategoryDao.class);
       SharingMarketBoardCommentDao sharingMarketBoardCommentDao = daoFactory.createDao(SharingMarketBoardCommentDao.class);
       QnaDao qnaDao = daoFactory.createDao(QnaDao.class);
+      ScrapDao scrapDao = daoFactory.createDao(ScrapDao.class);
 
       // 3) 서비스 관련 객체 준비
       MemberService memberService = new DefaultMemberService(memberDao);
@@ -106,6 +110,7 @@ public class ContextLoaderListener implements ServletContextListener {
       SharingMarketBoardCategoryService sharingMarketBoardCategoryService = new DefaultSharingMarketBoardCategoryService(sharingMarketBoardCategoryDao);
       SharingMarketBoardCommentService sharingMarketBoardCommentService = new DefaultSharingMarketBoardCommentService(sharingMarketBoardCommentDao);
       QnaService qnaService = new DefaultQnaService(qnaDao);
+      ScrapService scrapService = new DefaultScrapService(scrapDao);
 
       // 4) 서비스 객체를 ServletContext 보관소에 저장한다.
       servletContext.setAttribute("memberService", memberService);
@@ -123,6 +128,7 @@ public class ContextLoaderListener implements ServletContextListener {
       servletContext.setAttribute("sharingMarketBoardCategoryService", sharingMarketBoardCategoryService);
       servletContext.setAttribute("sharingMarketBoardCommentService", sharingMarketBoardCommentService);
       servletContext.setAttribute("qnaService", qnaService);
+      servletContext.setAttribute("scrapService", scrapService);
 
     } catch (Exception e) {
       e.printStackTrace();

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
-@WebServlet("/mypage")
+@WebServlet("/mypage/main")
 public class MyPageHandler extends HttpServlet {
 
   @Override
@@ -16,6 +16,6 @@ public class MyPageHandler extends HttpServlet {
       throws ServletException, IOException {
 
     response.setContentType("text/html;charset=UTF-8");
-    request.getRequestDispatcher("/jsp/mypage.jsp").include(request, response);
+    request.getRequestDispatcher("/jsp/mypage/main.jsp").include(request, response);
   }
 }

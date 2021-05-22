@@ -9,5 +9,10 @@
 <body>
 <h1>마이페이지</h1>
 ${loginUser.nick}님의 페이지입니다!
+<br>
+<br>
+<form action='scraplist' method='post'>
+<input type='submit' value='나의 스크랩'><br>
+</form>
 </body>
 </html>

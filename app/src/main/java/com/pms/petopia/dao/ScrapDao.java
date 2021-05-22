@@ -7,7 +7,9 @@ public interface ScrapDao {
 
   int insert(Scrap scrap) throws Exception;
 
-  List<Scrap> findAll() throws Exception;
+  List<Scrap> findByUser(int memberNo) throws Exception;
+
+  Scrap findByNo(int scrapNo) throws Exception;
 
   String countScrap(int memberNo) throws Exception;
 

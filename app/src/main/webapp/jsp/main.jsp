@@ -97,7 +97,7 @@
 			<a href='qna/list'>Q&A 목록</a>
 		</p>
 		<p>
-		  <a href='mypage'>My Page</a>
+		  <a href='mypage/main'>My Page</a>
 		</p>
 	</c:if>
 </body>

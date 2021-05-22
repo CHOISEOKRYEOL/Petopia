@@ -19,8 +19,13 @@ public class DefaultScrapService implements ScrapService {
   }
 
   @Override
-  public List<Scrap> list() throws Exception {
-    return scrapDao.findAll();
+  public List<Scrap> list(int memberNo) throws Exception {
+    return scrapDao.findByUser(memberNo);
+  }
+
+  @Override
+  public Scrap get(int scrapNo) throws Exception {
+    return scrapDao.findByNo(scrapNo);
   }
 
   @Override
