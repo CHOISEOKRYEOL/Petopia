@@ -1,65 +1,65 @@
--- 회원
-DROP TABLE IF EXISTS pet_user RESTRICT;
-
--- 펫
-DROP TABLE IF EXISTS pet_mypet RESTRICT;
-
--- 병원
-DROP TABLE IF EXISTS pet_hp RESTRICT;
-
--- 나눔장터
-DROP TABLE IF EXISTS pet_mark RESTRICT;
-
--- 우리동네
-DROP TABLE IF EXISTS pet_mytown RESTRICT;
-
--- 뉴스
-DROP TABLE IF EXISTS pet_st_news RESTRICT;
-
--- 나눔장터사진
-DROP TABLE IF EXISTS pet_mark_phot RESTRICT;
-
--- 리뷰
-DROP TABLE IF EXISTS pet_hp_review RESTRICT;
-
--- 스크랩
-DROP TABLE IF EXISTS pet_st_scrap RESTRICT;
-
--- Q&A
-DROP TABLE IF EXISTS pet_qna RESTRICT;
-
--- 나눔장터 댓글
-DROP TABLE IF EXISTS pet_mark_comt RESTRICT;
-
--- 우리동네 댓글
-DROP TABLE IF EXISTS pet_mytown_comt RESTRICT;
-
--- 병원 즐겨찾기
-DROP TABLE IF EXISTS pet_hp_bookmark RESTRICT;
-
--- 내 찜
-DROP TABLE IF EXISTS pet_like RESTRICT;
-
--- 진찰기록
-DROP TABLE IF EXISTS pet_hp_record RESTRICT;
-
--- 시군구
-DROP TABLE IF EXISTS pet_city RESTRICT;
-
--- 광역시도
-DROP TABLE IF EXISTS pet_state RESTRICT;
-
--- 품종
-DROP TABLE IF EXISTS pet_type RESTRICT;
-
--- 종
-DROP TABLE IF EXISTS pet_species RESTRICT;
-
--- 나눔장터 카테고리
-DROP TABLE IF EXISTS pet_mark_cat RESTRICT;
-
--- 추천
-DROP TABLE IF EXISTS pet_recomt RESTRICT;
+	-- 회원
+	DROP TABLE IF EXISTS pet_user RESTRICT;
+	
+	-- 펫
+	DROP TABLE IF EXISTS pet_mypet RESTRICT;
+	
+	-- 병원
+	DROP TABLE IF EXISTS pet_hp RESTRICT;
+	
+	-- 나눔장터
+	DROP TABLE IF EXISTS pet_mark RESTRICT;
+	
+	-- 우리동네
+	DROP TABLE IF EXISTS pet_mytown RESTRICT;
+	
+	-- 뉴스
+	DROP TABLE IF EXISTS pet_st_news RESTRICT;
+	
+	-- 나눔장터사진
+	DROP TABLE IF EXISTS pet_mark_phot RESTRICT;
+	
+	-- 리뷰
+	DROP TABLE IF EXISTS pet_hp_review RESTRICT;
+	
+	-- 스크랩
+	DROP TABLE IF EXISTS pet_st_scrap RESTRICT;
+	
+	-- Q&A
+	DROP TABLE IF EXISTS pet_qna RESTRICT;
+	
+	-- 나눔장터 댓글
+	DROP TABLE IF EXISTS pet_mark_comt RESTRICT;
+	
+	-- 우리동네 댓글
+	DROP TABLE IF EXISTS pet_mytown_comt RESTRICT;
+	
+	-- 병원 즐겨찾기
+	DROP TABLE IF EXISTS pet_hp_bookmark RESTRICT;
+	
+	-- 내 찜
+	DROP TABLE IF EXISTS pet_like RESTRICT;
+	
+	-- 진찰기록
+	DROP TABLE IF EXISTS pet_hp_record RESTRICT;
+	
+	-- 시군구
+	DROP TABLE IF EXISTS pet_city RESTRICT;
+	
+	-- 광역시도
+	DROP TABLE IF EXISTS pet_state RESTRICT;
+	
+	-- 품종
+	DROP TABLE IF EXISTS pet_type RESTRICT;
+	
+	-- 종
+	DROP TABLE IF EXISTS pet_species RESTRICT;
+	
+	-- 나눔장터 카테고리
+	DROP TABLE IF EXISTS pet_mark_cat RESTRICT;
+	
+	-- 추천
+	DROP TABLE IF EXISTS pet_recomt RESTRICT;
 
 -- 회원
 CREATE TABLE pet_user (

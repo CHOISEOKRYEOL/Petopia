@@ -35,6 +35,7 @@ public class MyTownBoardDetailHandler extends HttpServlet {
     int cityNo = Integer.parseInt(request.getParameter("cityNo"));
 
     try {
+
       MyTownBoard myTownBoard = myTownBoardService.get(no);
       SmallAddress smallAddress = smallAddressService.get(cityNo);
       List<SmallAddress> smallAddresses = smallAddressService.list();

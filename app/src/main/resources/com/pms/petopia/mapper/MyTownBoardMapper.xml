@@ -85,7 +85,19 @@
   </select>
   
   <select id="findByNo" resultMap="myTownBoardMap" parameterType="int">
-    <include refid="find"/>
+        select
+      t.tno, 
+      t.title, 
+      t.cdt,
+      t.cont,
+      t.vw_cnt,
+      t.rc_cnt,
+      m.mno as writer_no, 
+      m.nick as writer_nick,
+      s.gno as bigAddress_no, 
+      s.gname as bigAddress_name,
+      c.cno as smallAddress_no, 
+      c.cname as smallAddress_name
     from pet_city c
       inner join pet_state s on s.gno=c.gno
       inner join pet_mytown t on c.cno=t.cno
