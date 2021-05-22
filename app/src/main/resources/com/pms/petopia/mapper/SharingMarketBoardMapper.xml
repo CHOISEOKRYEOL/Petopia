@@ -76,7 +76,7 @@
         cont = #{content}
     where sno = #{no}
   </update>
- 
+  
   <select id="findByKeyword" resultMap="sharingmarketboardMap" parameterType="string">
     <include refid='select'/>
    <where>	

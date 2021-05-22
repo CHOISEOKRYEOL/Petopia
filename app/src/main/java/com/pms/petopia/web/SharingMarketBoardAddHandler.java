@@ -30,8 +30,6 @@ public class SharingMarketBoardAddHandler extends HttpServlet {
     }
   }
 	
-	
-	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		SharingMarketBoardService sharingMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("sharingMarketBoardService");

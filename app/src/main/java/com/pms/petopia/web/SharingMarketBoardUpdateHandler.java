@@ -1,7 +1,6 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,24 +14,39 @@ import com.pms.petopia.service.SharingMarketBoardService;
 @SuppressWarnings("serial")
 @WebServlet("/sharingmarketboard/update")
 public class SharingMarketBoardUpdateHandler extends HttpServlet{
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	SharingMarketBoardCategoryService sharingMarketBoardCategoryService = (SharingMarketBoardCategoryService) request.getServletContext().getAttribute("sharingMarketBoardCategoryService");
+	SharingMarketBoardService sharingMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("sharingMarketBoardService");
+	
+    try {
+    	
+    int no = Integer.parseInt(request.getParameter("no"));
+    	 
+    request.setAttribute("smb", sharingMarketBoardService.get(no));
+    request.setAttribute("catList", sharingMarketBoardCategoryService.list());
+    response.setContentType("text/html;charset=UTF-8");
+    request.getRequestDispatcher("/jsp/sharingmarketboard/update.jsp").include(request, response);
+	
+} catch (Exception e) {
+	throw new ServletException(e);
+}
+}
+	
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     SharingMarketBoardService sharingMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("sharingMarketBoardService");
     SharingMarketBoardCategoryService sharingMarketBoardCategoryService = (SharingMarketBoardCategoryService) request.getServletContext().getAttribute("sharingMarketBoardCategoryService");
-    
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<title>나눔장터 게시글 변경</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>나눔장터 게시글 변경</h1>");
+ 
 
     try {
+    	
+    	 response.setContentType("text/html;charset=UTF-8");
+	     request.getRequestDispatcher("/jsp/sharingmarketboard/update.jsp").include(request, response);
+	      
+	      
       int no = Integer.parseInt(request.getParameter("no"));
 
       SharingMarketBoard oldBoard = sharingMarketBoardService.get(no);
@@ -48,7 +62,8 @@ public class SharingMarketBoardUpdateHandler extends HttpServlet{
       SharingMarketBoard smbBoard = new SharingMarketBoard();
       smbBoard.setNo(oldBoard.getNo());
      
-      smbBoard.setCategory(sharingMarketBoardCategoryService.get( oldBoard.getCategory().getNo()));
+      int categoryNo = Integer.parseInt(request.getParameter("category"));
+      smbBoard.setCategory(sharingMarketBoardCategoryService.get(categoryNo));
       
       smbBoard.setTitle(request.getParameter("title"));
       smbBoard.setContent(request.getParameter("content"));
@@ -60,9 +75,6 @@ public class SharingMarketBoardUpdateHandler extends HttpServlet{
     } catch (Exception e) {
     	 throw new ServletException(e);
     }
-
-    out.println("</body>");
-    out.println("</html>");
 
 
   }

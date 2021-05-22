@@ -62,6 +62,21 @@ DROP TABLE IF EXISTS `pet_mark_cat` RESTRICT;
 DROP TABLE IF EXISTS `pet_recomt` RESTRICT;
 
 -- 회원
+<<<<<<< HEAD
+CREATE TABLE pet_user (
+	mno   INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+	name  VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
+	nick  VARCHAR(50)  NOT NULL COMMENT '닉네임', -- 닉네임
+	id    VARCHAR(50)  NOT NULL COMMENT '아이디', -- 아이디
+	pwd   VARCHAR(100) NOT NULL COMMENT '암호', -- 암호
+	email VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
+	phone VARCHAR(30)  NOT NULL COMMENT '휴대전화', -- 휴대전화
+	role  INTEGER      NOT NULL DEFAULT 1 COMMENT '역할', -- 역할
+	rdt   DATE         NOT NULL DEFAULT now() COMMENT '가입일', -- 가입일
+	state INTEGER      NOT NULL DEFAULT 0 COMMENT '탈퇴여부' -- 탈퇴여부
+)
+COMMENT '회원';
+=======
 CREATE TABLE `pet_user` (
   `mno`   INTEGER      NOT NULL, -- 회원번호
   `name`  VARCHAR(50)  NOT NULL, -- 이름
@@ -74,6 +89,7 @@ CREATE TABLE `pet_user` (
   `rdt`   DATE         NOT NULL DEFAULT now(), -- 가입일
   `state` INTEGER      NOT NULL DEFAULT 0 -- 탈퇴여부
 );
+>>>>>>> branch 'main' of https://github.com/yoontaehoonDev/Petopia.git
 
 -- 회원
 ALTER TABLE `pet_user`

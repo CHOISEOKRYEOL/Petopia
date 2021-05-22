@@ -14,5 +14,7 @@ public interface SharingMarketBoardCommentDao {
 
 	  int delete(int no) throws Exception;
 
-	 SharingMarketBoardComment findByNo(int no) throws Exception;
+	  List<SharingMarketBoardComment> findByNo(int no) throws Exception;
+	  
+	  SharingMarketBoardComment findBySrno(int no) throws Exception;
 }
