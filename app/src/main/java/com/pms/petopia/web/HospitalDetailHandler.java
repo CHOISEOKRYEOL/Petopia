@@ -28,7 +28,6 @@ public class HospitalDetailHandler extends HttpServlet {
       }
 
       request.setAttribute("hospital", hospital);
-
       response.setContentType("text/html;charset=UTF-8");
       request.getRequestDispatcher("/jsp/hospital/detail.jsp").include(request, response);
 

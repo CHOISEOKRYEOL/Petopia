@@ -77,7 +77,7 @@ public class ReviewAddHandler extends HttpServlet {
     r.setWriter(loginUser);
 
     Hospital h = new Hospital();
-    h.setNo(Integer.parseInt(request.getParameter("no")));
+    h.setNo(Integer.parseInt(request.getParameter("num")));
     r.setHospital(h);
 
     try {

@@ -28,9 +28,6 @@
 			<a href='mytown/main'>우리 동네</a>
 		</p>
 		<p>
-			<a href='review/list'>리뷰 목록</a>
-		</p>
-		<p>
 			<a href='qna/list'>Q&A 목록</a>
 		</p>
 	</c:if>
@@ -92,12 +89,6 @@
 		</p>
 		<p>
 			<a href='mytown/main'>우리 동네 목록</a>
-		</p>
-		<p>
-			<a href='review/add'>리뷰 작성</a>
-		</p>
-		<p>
-			<a href='review/list'>리뷰 목록</a>
 		</p>
 		<p>
 			<a href='qna/add'>Q&A 작성</a>

@@ -43,9 +43,6 @@
 		</c:if>
 	</c:forEach>
 	<p>
-		<a href='../review/add'>새 리뷰 작성</a>
-	</p>
-	<p>
 		<a href='../main'>돌아가기</a>
 	</p>
 </body>

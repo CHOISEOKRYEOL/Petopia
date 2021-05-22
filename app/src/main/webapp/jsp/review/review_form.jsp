@@ -40,7 +40,8 @@
 <textarea name="comment" rows='10' cols='60'></textarea><br>
 
 영수증 : <input type="file" name="photo" accept="image/*"><br>
-<input type="hidden" name="no" value="${no}">
+<h1>${num} 병원 번호</h1>
+<input type="hidden" name="no" value="${num}">
 <input type="submit" value="등록하기">
 </form>
 <form action="../main">
