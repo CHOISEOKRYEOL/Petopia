@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.pms.mybatis.MybatisDaoFactory;
 import com.pms.mybatis.SqlSessionFactoryProxy;
 import com.pms.petopia.dao.BigAddressDao;
+import com.pms.petopia.dao.BookmarkDao;
 import com.pms.petopia.dao.HospitalDao;
 import com.pms.petopia.dao.MemberDao;
 import com.pms.petopia.dao.MyTownBoardCommentDao;
@@ -26,6 +27,7 @@ import com.pms.petopia.dao.SharingMarketBoardDao;
 import com.pms.petopia.dao.SmallAddressDao;
 import com.pms.petopia.dao.StoryDao;
 import com.pms.petopia.service.BigAddressService;
+import com.pms.petopia.service.BookmarkService;
 import com.pms.petopia.service.HospitalService;
 import com.pms.petopia.service.MemberService;
 import com.pms.petopia.service.MyTownBoardCommentService;
@@ -42,6 +44,7 @@ import com.pms.petopia.service.SharingMarketBoardService;
 import com.pms.petopia.service.SmallAddressService;
 import com.pms.petopia.service.StoryService;
 import com.pms.petopia.service.impl.DefaultBigAddressService;
+import com.pms.petopia.service.impl.DefaultBookmarkService;
 import com.pms.petopia.service.impl.DefaultHospitalService;
 import com.pms.petopia.service.impl.DefaultMemberService;
 import com.pms.petopia.service.impl.DefaultMyTownBoardCommentService;
@@ -93,6 +96,7 @@ public class ContextLoaderListener implements ServletContextListener {
       SharingMarketBoardCommentDao sharingMarketBoardCommentDao = daoFactory.createDao(SharingMarketBoardCommentDao.class);
       QnaDao qnaDao = daoFactory.createDao(QnaDao.class);
       ScrapDao scrapDao = daoFactory.createDao(ScrapDao.class);
+      BookmarkDao bookmarkDao = daoFactory.createDao(BookmarkDao.class);
 
       // 3) 서비스 관련 객체 준비
       MemberService memberService = new DefaultMemberService(memberDao);
@@ -111,6 +115,7 @@ public class ContextLoaderListener implements ServletContextListener {
       SharingMarketBoardCommentService sharingMarketBoardCommentService = new DefaultSharingMarketBoardCommentService(sharingMarketBoardCommentDao);
       QnaService qnaService = new DefaultQnaService(qnaDao);
       ScrapService scrapService = new DefaultScrapService(scrapDao);
+      BookmarkService bookmarkService = new DefaultBookmarkService(bookmarkDao);
 
       // 4) 서비스 객체를 ServletContext 보관소에 저장한다.
       servletContext.setAttribute("memberService", memberService);
@@ -129,6 +134,7 @@ public class ContextLoaderListener implements ServletContextListener {
       servletContext.setAttribute("sharingMarketBoardCommentService", sharingMarketBoardCommentService);
       servletContext.setAttribute("qnaService", qnaService);
       servletContext.setAttribute("scrapService", scrapService);
+      servletContext.setAttribute("bookmarkService", bookmarkService);
 
     } catch (Exception e) {
       e.printStackTrace();

@@ -1,11 +1,10 @@
-<%@page import="com.pms.petopia.domain.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>내 계정 관리</title>
+<title>내 정보</title>
 </head>
 <body>
 <form action='update' method='post'>

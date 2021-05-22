@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pms.petopia.dao.BookmarkDao">
+  
+  <resultMap id="bookmarkMap" type="bookmark">
+    <id column="bno" property="no"/>
+       
+    <association property="member" javaType="member">
+      <id column="member_no" property="no"/>
+      <result column="member_nick" property="nick"/>
+    </association>
+    
+    <association property="hospital" javaType="hospital">
+      <id column="hospital_no" property="no"/>
+      <result column="hospital_name" property="name"/>
+    </association>
+  </resultMap>
+  
+  <insert id="insert" parameterType="bookmark">
+    insert into pet_hp_bookmark(mno, hno)
+    values(#{member.no}, #{hospital.no})
+  </insert>
+  
+  <select id="findAll" resultMap="bookmarkMap" parameterType="int">
+    select
+      b.bno,
+      m.mno as member_no, m.nick as member_nick,
+      h.hno as hospital_no, h.name as hospital_name
+    from pet_hp_bookmark b
+      inner join pet_user m on m.mno = b.mno
+      inner join pet_hp h on h.hno = b.hno
+    where m.mno = #{no}
+    order by h.name
+  </select>
+  
+  <select id="findByNumbers" resultMap="bookmarkMap" parameterType="map">
+    select b.bno, m.mno as member_no, h.hno as hospital_no
+    from pet_hp_bookmark b
+    inner join pet_user m on m.mno = b.mno
+      inner join pet_hp h on h.hno = b.hno
+      where m.mno = ${member} and h.hno = ${hospital}
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    delete from pet_hp_bookmark
+    where bno = #{no}
+  </delete>
+
+</mapper>
+
+
+
+
+
+
+
