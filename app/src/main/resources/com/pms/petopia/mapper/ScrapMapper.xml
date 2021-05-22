@@ -7,6 +7,7 @@
   
   <resultMap id="scrapMap" type="scrap">
     <id column="sno" property="no"/>
+    <result column="is_scrap" property="isScrap"/>
        
     <association property="member" javaType="member">
       <id column="member_no" property="no"/>
@@ -31,6 +32,7 @@
   <select id="findByUser" resultMap="scrapMap" parameterType="int">
 	  select
 	    s.sno,
+	    s.is_scrap,
       n.nno as story_no,
       n.title as story_title,
       n.url as story_url,
@@ -48,6 +50,7 @@
   <select id="findByNo" resultMap="scrapMap" parameterType="int">
     select
       s.sno,
+      s.is_scrap,
       n.nno as story_no,
       n.title as story_title,
       n.url as story_url,
