@@ -24,10 +24,6 @@ public class HospitalListHandler extends HttpServlet {
       List<Hospital> hospitals = hospitalService.list();
 
       request.setAttribute("list", hospitals);
-
-      //      HttpSession session = request.getSession();
-      //      session.setAttribute("list", request.getParameter("list"));
-
       response.setContentType("text/html;charset=UTF-8");
       request.getRequestDispatcher("/jsp/hospital/list.jsp").include(request, response);
 

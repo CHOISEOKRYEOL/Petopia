@@ -22,7 +22,7 @@ public class ReviewDeleteHandler extends HttpServlet {
       int no = Integer.parseInt(request.getParameter("no"));
       reviewService.delete(no);
 
-      response.setHeader("Refresh", "1;url=list");
+      response.setHeader("Refresh", "1;url=../main");
 
     } catch (Exception e) {
       throw new ServletException(e);

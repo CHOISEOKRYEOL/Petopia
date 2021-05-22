@@ -71,11 +71,7 @@
 	</table>
 	</form>
 </c:if>
-
-<c:if test="${empty hospital}">
-  <p>해당 번호의 병원이 없습니다.</p>
-</c:if>
-<h1>병원 번호 : ${hospital.no}</h1>
+<h1>병원 리뷰</h1>
 <c:import url="../review/list" />
 <form action="../review/add">
 <input type='hidden' name='num' value='${hospital.no}'>
