@@ -18,15 +18,10 @@ public class HospitalDetailHandler extends HttpServlet {
       throws ServletException, IOException {
 
     HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
-
     try {
       int no = Integer.parseInt(request.getParameter("no"));
 
       Hospital hospital = hospitalService.get(no);
-      if (hospital == null) {
-        throw new Exception("해당 번호의 병원이 없습니다.");
-      }
-
       request.setAttribute("hospital", hospital);
       response.setContentType("text/html;charset=UTF-8");
       request.getRequestDispatcher("/jsp/hospital/detail.jsp").include(request, response);

@@ -20,7 +20,6 @@
 		<tr><th>사이트</th> <td><input name='site' type='text' value='${story.site}'></td></tr>
 		<tr><th>등록일</th> <td>${story.registeredDate2}</td></tr>
   </tbody>
-
   <tfoot>
     <tr><td colspan='2'>
       <input type='submit' value='변경'> <a href='delete?no=${story.no}'>삭제</a></td>

@@ -24,6 +24,22 @@
     
   </resultMap>
   
+  <sql id='select'>
+    select
+      mark.sno,
+      mark.title,
+      mark.cont,
+      mark.cdt,
+      mark.vw_cnt,
+      mem.mno as writer_no,
+      mem.name as writer_name,
+      cat.cno as category_no,
+      cat.cat_name as category_name
+    from pet_mark mark
+      inner join pet_user mem on mem.mno = mark.writer
+      inner join pet_mark_cat cat on cat.cno = mark.cno
+  </sql>
+  
   
   <insert id="insert" parameterType="sharingmarketboard">
     insert into pet_mark(cno, title, cont, writer) 
@@ -31,55 +47,18 @@
    
   </insert>
   
-  
   <select id="findAll" resultMap="sharingmarketboardMap" parameterType="sharingmarketboard">
-    select
-      mark.sno,
-      mark.title,
-      mark.cont,
-      mark.cdt,
-      mark.vw_cnt,
-      mem.mno as writer_no,
-      mem.name as writer_name,
-      cat.cno as category_no,
-      cat.cat_name as category_name
-    from pet_mark mark
-      inner join pet_user mem on mem.mno = mark.writer
-      inner join pet_mark_cat cat on cat.cno = mark.cno
+  <include refid='select'/>
       order by mark.sno desc
   </select>
   
   <select id="findByNo" resultMap="sharingmarketboardMap" parameterType="int">
-    select
-      mark.sno,
-      mark.title,
-      mark.cont,
-      mark.cdt,
-      mark.vw_cnt,
-      mem.mno as writer_no,
-      mem.name as writer_name,
-      cat.cno as category_no,
-      cat.cat_name as category_name
-    from pet_mark mark
-      inner join pet_user mem on mem.mno = mark.writer
-      inner join pet_mark_cat cat on cat.cno = mark.cno
+    <include refid='select'/>
     where mark.sno = #{value}
   </select>
   
   <select id="findCategory" resultMap="sharingmarketboardMap" parameterType="int">
-    select
-      mark.sno,
-      mark.title,
-      mark.cont,
-      mark.cdt,
-      mark.vw_cnt,
-      mem.mno as writer_no,
-      mem.name as writer_name,
-      cat.cno as category_no,
-      cat.cat_name as category_name
-    from pet_mark mark
-      inner join pet_user mem on mem.mno = mark.writer
-      inner join pet_mark_cat cat on cat.cno = mark.cno
+    <include refid='select'/>
     where cat.cno = #{value}
   </select>
   
@@ -97,21 +76,9 @@
         cont = #{content}
     where sno = #{no}
   </update>
- 
+  
   <select id="findByKeyword" resultMap="sharingmarketboardMap" parameterType="string">
-    select
-      mark.sno,
-      mark.title,
-      mark.cont,
-      mark.cdt,
-      mark.vw_cnt,
-      mem.mno as writer_no,
-      mem.name as writer_name,
-      cat.cno as category_no,
-      cat.cat_name as category_name
-    from pet_mark mark
-      inner join pet_user mem on mem.mno = mark.writer
-      inner join pet_mark_cat cat on cat.cno = mark.cno
+    <include refid='select'/>
    <where>	
 		  <if test="item == 1 or item == 0">
 		    mark.title like concat('%', #{keyword}, '%')

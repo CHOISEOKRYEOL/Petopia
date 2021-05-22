@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>${loginUser.nick}님의 Q&A 목록</h1>
-<p><a href='add'>새 Q&A 작성</a></p>
+
      <table border='1'>
   <thead> 
   <tr>
@@ -31,5 +31,7 @@
 </c:forEach>
   </tbody>
   </table>
+  <p><a href='add'>새 Q&A 작성</a></p>
+  <p><a href='../main'>돌아가기</a></p>
    </body>
 </html>

@@ -19,5 +19,6 @@ public interface SharingMarketBoardService {
 	List<SharingMarketBoard> searchByDetail(String item, String keyword) throws Exception;
 	
     List<SharingMarketBoard> getCategory(int catNo) throws Exception;
+    
 	
 }
