@@ -34,6 +34,11 @@ public class DefaultQnaService implements QnaService {
   }
 
   @Override
+  public int answer(Qna qna) throws Exception {
+    return qnaDao.answer(qna);
+  }
+
+  @Override
   public int delete(int no) throws Exception {
     return qnaDao.delete(no);
   }

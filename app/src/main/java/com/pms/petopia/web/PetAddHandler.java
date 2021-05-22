@@ -1,7 +1,6 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.UUID;
 import javax.servlet.ServletException;
@@ -33,20 +32,18 @@ public class PetAddHandler extends HttpServlet {
   }
 
   @Override
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+
+    response.setContentType("text/html;charset=UTF-8");
+    request.getRequestDispatcher("/jsp/pet/form.jsp").include(request, response);
+  }
+
+  @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     PetService petService = (PetService) request.getServletContext().getAttribute("petService");
-
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>마이펫 등록</h1>");
 
     try {
 
@@ -97,14 +94,12 @@ public class PetAddHandler extends HttpServlet {
 
       petService.add(p);
 
-      out.println("<h1>마이펫 등록 성공</h1>");
       response.setHeader("Refresh", "1;url=list");
 
     } catch (Exception e) {
       throw new ServletException(e);
     }
 
-    out.println("</body>");
-    out.println("</html>");
+
   }
 }

@@ -21,16 +21,13 @@ public class AdminMemberListHandler extends HttpServlet {
     MemberService memberService = (MemberService) request.getServletContext().getAttribute("memberService");
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-    System.out.println(loginUser);
-
     if(loginUser.getRole() == 1) {
       response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/admin/memberlist_fail.jsp").include(request, response);
+      request.getRequestDispatcher("/jsp/admin/access_fail.jsp").include(request, response);
       response.setHeader("Refresh", "1;url=../main");
     }
     else {
       try {
-        //        List<Member> list = memberService.list();
         List<Member> list = null;
 
         String item = request.getParameter("item");

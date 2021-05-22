@@ -39,7 +39,7 @@ public class DefaultMyTownBoardCommentService implements MyTownBoardCommentServi
   }
 
   @Override
-  public int count(int myTownBoardNo) throws Exception {
+  public String count(int myTownBoardNo) throws Exception {
     return myTownBoardCommentDao.countComment(myTownBoardNo);
   }
 

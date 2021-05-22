@@ -9,6 +9,8 @@ public interface MyTownBoardDao {
 
   int insert(MyTownBoard board) throws Exception;
 
+  List<MyTownBoard> findAll() throws Exception;
+
   List<MyTownBoard> findByArea(Map<String,Object> params) throws Exception;
 
   List<MyTownBoard> findByKeyword(Map<String,Object> params) throws Exception;
@@ -18,6 +20,10 @@ public interface MyTownBoardDao {
   int update(MyTownBoard board) throws Exception;
 
   int updateViewCount(int no) throws Exception;
+
+  int updateRecommentCount(int no) throws Exception;
+
+  int deleteAll(int no) throws Exception;
 
   int delete(int no) throws Exception;
 

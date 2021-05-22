@@ -28,10 +28,12 @@ public class StoryAddHandler extends HttpServlet {
     StoryService storyService = (StoryService) request.getServletContext().getAttribute("storyService");
 
     Story s = new Story();
-
     s.setTitle(request.getParameter("title"));
     s.setUrl(request.getParameter("url"));
     s.setSite(request.getParameter("site"));
+
+    System.out.printf("%s, %s, %s", s.getTitle(), s.getUrl(), s.getSite());
+
 
     try {
       storyService.add(s);

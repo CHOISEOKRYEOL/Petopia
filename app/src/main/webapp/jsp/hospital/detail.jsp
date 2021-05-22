@@ -35,9 +35,9 @@
 	<tr>
 	  <th>기본주소</th> 
 	  <td><select name='gno'><option value=''>분류</option>
-	                         <option value='1'>서울특별시</option>
-	                         <option value='2'>경기도</option>
-	                         <option value='3'>인천광역시</option></select>
+	                         <option value='1' ${hospital.bigAddress.no == 1 ? "selected" : ""}>서울특별시</option>
+	                         <option value='2' ${hospital.bigAddress.no == 2 ? "selected" : ""}>경기도</option>
+	                         <option value='3' ${hospital.bigAddress.no == 3 ? "selected" : ""}>인천광역시</option></select>
 	      <select name='cno'><option value=''>분류</option>
 	      <optgroup label='서울특별시'><option value='1' ${hospital.smallAddress.no == 1 ? "selected" : ""}>강남구</option></optgroup>
 	      <optgroup label='경기도'><option value='2' ${hospital.smallAddress.no == 2 ? "selected" : ""}>김포시</option></optgroup>
@@ -71,13 +71,13 @@
 	</table>
 	</form>
 </c:if>
-
-<c:if test="${empty hospital}">
-  <p>해당 번호의 병원이 없습니다.</p>
-</c:if>
+<h1>병원 리뷰</h1>
+<c:import url="../review/list" />
+<form action="../review/add">
+<input type='hidden' name='num' value='${hospital.no}'>
+<input type="submit" value="리뷰 작성">
+</form>
 <p><a href='list'>목록</a></p>
 <p><a href='../main'>메인</a></p>
-
-<jsp:include page="/jsp/review/list.jsp"/>
 </body>
 </html>

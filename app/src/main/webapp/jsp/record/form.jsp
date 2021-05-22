@@ -1,3 +1,7 @@
+<%@ page language="java" 
+    contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
+    trimDirectiveWhitespaces="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,8 +10,7 @@
 </head>
 <body>
 <h1>진찰 기록</h1>
-<form action="add" method="post">
-상태 : <input type="text" name="state"><br>
+<form action="add" method="post" enctype="multipart/form-data">
 기록 : <input type="text" name="record"><br>
 <input type="submit" value="등록하기">
 </form>

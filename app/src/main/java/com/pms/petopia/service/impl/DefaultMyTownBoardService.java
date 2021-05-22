@@ -20,6 +20,11 @@ public class DefaultMyTownBoardService implements MyTownBoardService {
     return myTownBoardDao.insert(board);
   }
 
+  @Override
+  public List<MyTownBoard> listAll() throws Exception {
+    return myTownBoardDao.findAll();
+  }
+
   // 게시글 목록 조회 업무
   @Override
   public List<MyTownBoard> list(int stateNo, int cityNo) throws Exception {
@@ -52,6 +57,11 @@ public class DefaultMyTownBoardService implements MyTownBoardService {
     return myTownBoardDao.delete(no);
   }
 
+  @Override
+  public int deleteAll(int no) throws Exception {
+    return myTownBoardDao.deleteAll(no);
+  }
+
   // 게시글 검색 업무
   @Override
   public List<MyTownBoard> search(int stateNo, int cityNo, String keyword) throws Exception {
@@ -61,6 +71,11 @@ public class DefaultMyTownBoardService implements MyTownBoardService {
     params.put("keyword", keyword);
 
     return myTownBoardDao.findByKeyword(params);
+  }
+
+  @Override
+  public int updateRecommentCount(int no) throws Exception {
+    return myTownBoardDao.updateRecommentCount(no);
   }
 }
 

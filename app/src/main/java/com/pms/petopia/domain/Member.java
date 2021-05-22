@@ -34,6 +34,7 @@ public class Member {
     result = prime * result + ((password == null) ? 0 : password.hashCode());
     result = prime * result + ((registeredDate == null) ? 0 : registeredDate.hashCode());
     result = prime * result + role;
+    result = prime * result + state;
     result = prime * result + ((tel == null) ? 0 : tel.hashCode());
     return result;
   }
@@ -81,6 +82,8 @@ public class Member {
       return false;
     if (role != other.role)
       return false;
+    if (state != other.state)
+      return false;
     if (tel == null) {
       if (other.tel != null)
         return false;
@@ -89,13 +92,6 @@ public class Member {
     return true;
   }
 
-
-  public int getState() {
-    return state;
-  }
-  public void setState(int state) {
-    this.state = state;
-  }
   public int getNo() {
     return no;
   }
@@ -149,6 +145,12 @@ public class Member {
   }
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
+  }
+  public int getState() {
+    return state;
+  }
+  public void setState(int state) {
+    this.state = state;
   }
 
 }

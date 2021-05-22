@@ -23,17 +23,8 @@ war {
 }
 
 dependencies {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 
-	implementation 'javax.servlet:jstl:1.2'
-=======
-    
->>>>>>> fd2dd3235e91f733cf5abe6918e607f02e8ec402
-    implementation 'javax.servlet:jstl:1.2'
     implementation 'net.coobird:thumbnailator:0.4.13'
->>>>>>> branch 'main' of https://github.com/yoontaehoonDev/Petopia.git
     providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
     implementation 'javax.servlet:jstl:1.2'
     implementation 'org.mybatis:mybatis:3.5.6'

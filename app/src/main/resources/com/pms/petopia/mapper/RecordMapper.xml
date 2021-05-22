@@ -7,34 +7,34 @@
   
   <resultMap id="recordMap" type="record">
     <id column="exno" property="no"/>
-    <result column="state" property="state"/>
     <result column="history" property="record"/>
     
+    <!--  
     <association property="owner" javaType="member">
       <id column="owner_no" property="no"/>
       <result column="owner_name" property="name"/>
     </association>
+    -->
     
-    <association property="petNo" javaType="pet">
-      <id column="petNo_no" property="no"/>
+    <association property="pet" javaType="pet">
+      <id column="pet_no" property="no"/>
     </association>
     
-     <association property="hospitalNo" javaType="hospital">
-      <id column="hospitalNo_no" property="no"/>
+     <association property="hospital" javaType="hospital">
+      <id column="hospital_no" property="no"/>
     </association>
     
   </resultMap>
     
   <insert id="insert" parameterType="record">
-    insert into pet_hprecord(pno,hno,state,history) 
-    values(#{petNo.no},#{hospitalNo.no},#{state},#{record})
+    insert into pet_hprecord(pno,hno,history) 
+    values(#{pet.no},#{hospital.no},#{record})
   </insert>
   
   <select id="findAll" resultMap="recordMap">
     select 
       pno,
       hno,
-      state,
       history
     from pet_hprecord 
     order by exno asc
@@ -44,7 +44,6 @@
     select 
       pno,
       hno,
-      state,
       history
     from pet_hprecord
     where exno = #{value}
@@ -54,9 +53,7 @@
   <update id="update" parameterType="record">
      update pet_hprecord
     <set>
-      <if test="state != null or state != ''">
-        state = #{state},
-      </if>
+
       <if test="record != null or record != ''">
         history = #{record}
       </if>

@@ -13,8 +13,9 @@
 		<result column="email" property="email" />
 		<result column="photo" property="photo" />
 		<result column="phone" property="tel" />
-		<result column="states" property="state" />
+		<result column="state" property="state" />
 		<result column="rdt" property="registeredDate" />
+		<result column="role" property="role" />
 	</resultMap>
 
 	<sql id="user">
@@ -33,9 +34,11 @@
 	</sql>
 
 	<insert id="insert" parameterType="member">
-		insert into pet_user(name, id, email, nick, pwd, phone)
+		insert into pet_user(name, id,
+		email, nick, pwd, phone)
 		values(#{name}, #{id}, #{email},
-		#{nick}, password(#{password}), #{tel})
+		#{nick},
+		password(#{password}), #{tel})
 	</insert>
 
 	<select id="findByIdPassword" resultMap="memberMap"
@@ -72,7 +75,7 @@
 
 	<select id="findAll" resultMap="memberMap">
 		<include refid="user" />
-		where state = 1
+		where state = 0
 		order by rdt desc
 	</select>
 
@@ -88,13 +91,11 @@
 
 	<update id="delete" parameterType="member">
 		update pet_user set
-		name =
-		#{name},
+		name = #{name},
 		nick = #{nick},
 		pwd = #{password},
 		phone = #{tel},
-		email =
-		#{email},
+		email = #{email},
 		state = #{state}
 		where mno=#{no}
 	</update>

@@ -1,7 +1,7 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,22 +19,42 @@ import com.pms.petopia.service.SmallAddressService;
 public class MyTownBoardUpdateHandler extends HttpServlet {
 
   @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     MyTownBoardService myTownBoardService = (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
     SmallAddressService smallAddressService = (SmallAddressService) request.getServletContext().getAttribute("smallAddressService");
     response.setContentType("text/html;charset=UTF-8");
 
-    PrintWriter out = response.getWriter();
+    int no = Integer.parseInt(request.getParameter("no"));
 
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<title>게시글 변경</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>게시글 변경</h1>");
+    try {
+      List<SmallAddress> smallAddresses = smallAddressService.list();
+      MyTownBoard oldBoard = myTownBoardService.get(no);
+      if (oldBoard == null) {
+        throw new Exception ("해당 번호의 게시글이 없습니다.");
+      }
+      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+      if (oldBoard.getWriter().getNo() != loginUser.getNo()) {
+        throw new Exception("변경 권한이 없습니다!");
+      }
+
+      request.setAttribute("oldBoard", oldBoard);
+      request.setAttribute("smallAddresses", smallAddresses);
+      request.getRequestDispatcher("/jsp/mytown/update.jsp").include(request, response);
+
+    } catch (Exception e) {
+      throw new ServletException(e);
+    }
+  }
+
+  @Override
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+
+    MyTownBoardService myTownBoardService = (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
+    SmallAddressService smallAddressService = (SmallAddressService) request.getServletContext().getAttribute("smallAddressService");
+    response.setContentType("text/html;charset=UTF-8");
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
@@ -61,23 +81,15 @@ public class MyTownBoardUpdateHandler extends HttpServlet {
       board.setSmallAddress(smallAddress);
       myTownBoardService.update(board);
 
-      System.out.println(board.getBigAddress());
-      System.out.println(board.getSmallAddress());
-
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>게시글 변경</h1>");
-      out.println("<p>게시글을 변경하였습니다.</p>");
       String webAddress = String.format("detail?stateNo=%d&cityNo=%d&no=%d\n", 
           board.getBigAddress().getNo(), board.getSmallAddress().getNo(), board.getNo());
+      request.getRequestDispatcher("/jsp/mytown/update.jsp").include(request, response);
       response.sendRedirect(webAddress);
 
     } catch (Exception e) {
       throw new ServletException(e);
     }
 
-    out.println("</body>");
-    out.println("</html>");
   }
 }
 

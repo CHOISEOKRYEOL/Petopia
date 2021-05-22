@@ -32,6 +32,7 @@
     <mapper resource="com/pms/petopia/mapper/RecordMapper.xml"/>
     <mapper resource="com/pms/petopia/mapper/MyTownBoardMapper.xml"/>
     <mapper resource="com/pms/petopia/mapper/MyTownBoardCommentMapper.xml"/>
+     <mapper resource="com/pms/petopia/mapper/RecommentMapper.xml"/>
     <mapper resource="com/pms/petopia/mapper/SmallAddressMapper.xml"/>
     <mapper resource="com/pms/petopia/mapper/SharingMarketBoardMapper.xml"/>
     <mapper resource="com/pms/petopia/mapper/SharingMarketBoardCategoryMapper.xml"/>

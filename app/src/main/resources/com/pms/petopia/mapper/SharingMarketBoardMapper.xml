@@ -24,15 +24,7 @@
     
   </resultMap>
   
-  
-  <insert id="insert" parameterType="sharingmarketboard">
-    insert into pet_mark(cno, title, cont, writer) 
-    values(#{category.no}, #{title}, #{content}, #{writer.no})
-   
-  </insert>
-  
-  
-      <select id="findAll" resultMap="sharingmarketboardMap" parameterType="sharingmarketboard">
+  <sql id='select'>
     select
       mark.sno,
       mark.title,
@@ -46,50 +38,37 @@
     from pet_mark mark
       inner join pet_user mem on mem.mno = mark.writer
       inner join pet_mark_cat cat on cat.cno = mark.cno
+  </sql>
+  
+  
+  <insert id="insert" parameterType="sharingmarketboard">
+    insert into pet_mark(cno, title, cont, writer) 
+    values(#{category.no}, #{title}, #{content}, #{writer.no})
+   
+  </insert>
+  
+  <select id="findAll" resultMap="sharingmarketboardMap" parameterType="sharingmarketboard">
+  <include refid='select'/>
       order by mark.sno desc
   </select>
   
-    <select id="findByNo" resultMap="sharingmarketboardMap" parameterType="int">
-      select
-      mark.sno,
-      mark.title,
-      mark.cont,
-      mark.cdt,
-      mark.vw_cnt,
-      mem.mno as writer_no,
-      mem.name as writer_name,
-      cat.cno as category_no,
-      cat.cat_name as category_name
-    from pet_mark mark
-      inner join pet_user mem on mem.mno = mark.writer
-      inner join pet_mark_cat cat on cat.cno = mark.cno
+  <select id="findByNo" resultMap="sharingmarketboardMap" parameterType="int">
+    <include refid='select'/>
     where mark.sno = #{value}
   </select>
   
-      <select id="findCategory" resultMap="sharingmarketboardMap" parameterType="int">
-      select
-      mark.sno,
-      mark.title,
-      mark.cont,
-      mark.cdt,
-      mark.vw_cnt,
-      mem.mno as writer_no,
-      mem.name as writer_name,
-      cat.cno as category_no,
-      cat.cat_name as category_name
-    from pet_mark mark
-      inner join pet_user mem on mem.mno = mark.writer
-      inner join pet_mark_cat cat on cat.cno = mark.cno
+  <select id="findCategory" resultMap="sharingmarketboardMap" parameterType="int">
+    <include refid='select'/>
     where cat.cno = #{value}
   </select>
   
-    <update id="updateViewCount" parameterType="int">
+  <update id="updateViewCount" parameterType="int">
     update pet_mark set 
       vw_cnt = vw_cnt + 1 
     where sno = #{value}
   </update>
   
-    <update id="update" parameterType="sharingmarketboard">
+  <update id="update" parameterType="sharingmarketboard">
     update pet_mark set
     	cno = #{category.no},
         title = #{title},
@@ -99,26 +78,14 @@
   </update>
   
   <select id="findByKeyword" resultMap="sharingmarketboardMap" parameterType="string">
-      select
-      mark.sno,
-      mark.title,
-      mark.cont,
-      mark.cdt,
-      mark.vw_cnt,
-      mem.mno as writer_no,
-      mem.name as writer_name,
-      cat.cno as category_no,
-      cat.cat_name as category_name
-    from pet_mark mark
-      inner join pet_user mem on mem.mno = mark.writer
-      inner join pet_mark_cat cat on cat.cno = mark.cno
+    <include refid='select'/>
    <where>	
-		    <if test="item == 1 or item == 0">
+		  <if test="item == 1 or item == 0">
 		    mark.title like concat('%', #{keyword}, '%')
-		    </if>
-		    <if test="item == 2 or item == 0">
+		  </if>
+		  <if test="item == 2 or item == 0">
 		    or mem.name like concat('%', #{keyword}, '%')
-		    </if>
+		  </if>
     </where>
     order by title asc
   </select>

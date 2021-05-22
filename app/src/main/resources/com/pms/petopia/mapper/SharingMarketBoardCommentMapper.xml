@@ -21,13 +21,8 @@
     
   </resultMap>
   
-    <insert id="insert" parameterType="sharingmarketboardcomment">
-    insert into pet_mark_comt( cont, writer, sno) 
-    values(#{content}, #{writer.no}, #{sharingmarketboard.no})
-  </insert>
-
-      <select id="findAll" resultMap="sharingmarketboardCommentMap" parameterType="sharingmarketboardcomment">
-      select
+  <sql id="find">
+    select
       comt.srno,
       comt.cont,
       comt.cdt,
@@ -38,6 +33,15 @@
       inner join pet_user mem on mem.mno = comt.writer
       inner join pet_mark mark on mark.sno = comt.sno
       order by comt.sno desc
+  </sql>
+  
+    <insert id="insert" parameterType="sharingmarketboardcomment">
+    insert into pet_mark_comt( cont, writer, sno) 
+    values(#{content}, #{writer.no}, #{sharingmarketboard.no})
+  </insert>
+
+      <select id="findAll" resultMap="sharingmarketboardCommentMap" parameterType="sharingmarketboardcomment">
+      <include refid="find"/>
   </select>
  
   

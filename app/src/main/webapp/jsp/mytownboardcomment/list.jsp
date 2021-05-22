@@ -3,6 +3,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,27 +11,29 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:useBean id="comments" type = "List<MyTownBoardComment>" scope = "request"/>
-<jsp:useBean id="myTownBoard" type = "com.pms.petopia.domain.MyTownBoard" scope = "request"/>
-<jsp:useBean id="commentCount" type = "java.lang.Integer" scope = "request"/>
-
-<p>댓글 개수 : <%=commentCount%></p>
-<%
-for(MyTownBoardComment c : comments) {
-  if(myTownBoard.getNo() == c.getMyTownBoard().getNo()) {
-%>
+<p>댓글 개수 : ${commentCount}</p>
+<c:forEach items="${comments}" var="c">
+<c:if test="${myTownBoard.no == c.myTownBoard.no}">
+<form action='../mytowncomment/update' method='post'>
 <table border='1'>
 <tbody>
-<tr><th>작성자</th><td><%=c.getWriter().getNick()%></td>
-<th>작성일</th><td><%=c.getCreatedDate()%></td></tr>
-<tr><th>내용</th><td><%=c.getContent()%></td></tr><a href='../mytowncomment/delete?no=<%=c.getNo()%>'> 삭제</a>  <br>
+<tr><th>작성자</th><td>${c.writer.nick}</td>
+<th>작성일</th><td>${c.createdDate}</td></tr>
+<tr><th>내용</th><td><textarea name='content'>${c.content}</textarea></td></tr>
+<c:if test="${not empty loginUser and c.writer.no == loginUser.no}">
+<tr>
+  <td colspan='2'>
+    <input type='submit' value='변경'>
+    <a href='../mytowncomment/delete?no=${c.no}'> 삭제</a><br>
+  </td>
+</tr>
+</c:if>
 </tbody>
 </table>
+<input type='hidden' name='no' value='${c.no}'/>
+</form>
 <br>
-
-<%    
-  }
-}
-%>
+</c:if>
+</c:forEach>
 </body>
 </html>

@@ -28,7 +28,7 @@ public class MemberDeleteHandler extends HttpServlet {
     m.setPassword(UUID.randomUUID().toString());
     m.setTel(UUID.randomUUID().toString());
     m.setNick(UUID.randomUUID().toString());
-    m.setState(0);
+    m.setState(1);
 
     try {
 

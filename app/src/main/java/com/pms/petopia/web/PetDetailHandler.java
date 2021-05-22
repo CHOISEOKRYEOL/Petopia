@@ -1,7 +1,6 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +20,6 @@ public class PetDetailHandler extends HttpServlet {
     PetService petService = (PetService) request.getServletContext().getAttribute("petService");
 
     response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
 
     int no = Integer.parseInt(request.getParameter("no"));
 
@@ -29,6 +27,7 @@ public class PetDetailHandler extends HttpServlet {
 
       Pet pet = petService.get(no);
       request.setAttribute("pet",pet);
+      //      request.getSession().setAttribute("petInfo", pet);
 
       response.setContentType("text/html;charset=UTF-8");
       request.getRequestDispatcher("/jsp/pet/detail.jsp").include(request, response);

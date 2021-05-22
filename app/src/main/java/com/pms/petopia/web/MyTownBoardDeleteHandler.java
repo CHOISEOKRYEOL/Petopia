@@ -1,7 +1,6 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.MyTownBoard;
+import com.pms.petopia.service.MyTownBoardCommentService;
 import com.pms.petopia.service.MyTownBoardService;
 
 @SuppressWarnings("serial")
@@ -21,15 +21,7 @@ public class MyTownBoardDeleteHandler extends HttpServlet {
 
     response.setContentType("text/html;charset=UTF-8");
     MyTownBoardService myTownBoardService = (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
-    PrintWriter out = response.getWriter();
-
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<title>게시글 삭제</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>게시글 삭제</h1>");
+    MyTownBoardCommentService myTownBoardCommentService = (MyTownBoardCommentService) request.getServletContext().getAttribute("myTownBoardCommentService");
 
     int no = Integer.parseInt(request.getParameter("no"));
 
@@ -44,27 +36,19 @@ public class MyTownBoardDeleteHandler extends HttpServlet {
         throw new Exception("삭제 권한이 없습니다!");
       }
 
-      myTownBoardService.delete(no);
+      if (myTownBoardCommentService.count(no).equals("0")) {
+        myTownBoardService.delete(no);
+      } else {
+        myTownBoardService.deleteAll(no); // 댓글까지 지우기 
+      }
 
-      out.printf("<meta http-equiv='Refresh' content='1;url=list?stateNo=%d&cityNo=%d>",
-          oldBoard.getBigAddress().getNo(), oldBoard.getNo());
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>게시글 삭제</h1>");
-      out.println("<p>게시글을 삭제하였습니다.</p>");
-
-      response.setHeader("Refresh", "1;url=../main");
+      String webAddress = String.format("list?stateNo=%d&cityNo=%d", 
+          oldBoard.getBigAddress().getNo(), oldBoard.getSmallAddress().getNo());
+      request.getRequestDispatcher("/jsp/mytown/delete.jsp").include(request, response);
+      response.setHeader("Refresh", "3;url=" + webAddress);
 
     } catch (Exception e) {
       throw new ServletException(e);
     }
-    out.println("</body>");
-    out.println("</html>");
   }
 }
-
-
-
-
-
-

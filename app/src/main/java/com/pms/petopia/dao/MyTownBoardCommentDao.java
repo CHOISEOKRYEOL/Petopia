@@ -14,5 +14,5 @@ public interface MyTownBoardCommentDao {
 
   int delete(int no) throws Exception;
 
-  int countComment(int myTownBoardNo) throws Exception;
+  String countComment(int myTownBoardNo) throws Exception;
 }

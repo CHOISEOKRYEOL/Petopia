@@ -48,6 +48,7 @@ public class DefaultMemberService implements MemberService {
     Map<String,Object> params = new HashMap<>();
     params.put("item", item);
     params.put("keyword", keyword);
+
     return memberDao.findByKeyword(params);
   }
 
