@@ -11,6 +11,8 @@ public interface MyTownBoardService {
 
   List<MyTownBoard> list(int stateNo, int cityNo) throws Exception;
 
+  List<MyTownBoard> listRecomment(int stateNo, int cityNo) throws Exception;
+
   MyTownBoard get(int no) throws Exception;
 
   int update(MyTownBoard board) throws Exception;

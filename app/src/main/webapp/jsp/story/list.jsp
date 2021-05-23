@@ -52,12 +52,6 @@
   <td>${s.site}</td> 
   <td>${s.registeredDate}</td> 
   <td>
-  <%-- <c:if test="${loginUser ne null}">
-    <form action='scrapadd' method='get'>
-      <input type='hidden' name='newsNo' value ='${s.no}'>
-      <input type='submit' value ='스크랩'>
-    </form>
-  </c:if> --%>
   <c:set var="count" value="0"/>
   <c:set var="scrapLength" value="${fn:length(scrapList)}"/>
   <c:if test="${not empty loginUser}">

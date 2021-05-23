@@ -35,6 +35,15 @@ public class DefaultMyTownBoardService implements MyTownBoardService {
     return myTownBoardDao.findByArea(params);
   }
 
+  // 게시글 추천수대로 출력 
+  @Override
+  public List<MyTownBoard> listRecomment(int stateNo, int cityNo) throws Exception {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("gno", stateNo);
+    params.put("cno", cityNo);
+    return myTownBoardDao.findByRecomment(params);
+  }
+
   // 게시글 상세 조회 업무
   @Override
   public MyTownBoard get(int no) throws Exception {
