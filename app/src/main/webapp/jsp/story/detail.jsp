@@ -15,10 +15,6 @@
 <div class="container">
 <h1>스토리 상세보기</h1>
 
-<c:if test="${empty story}">
-<p>해당 번호의 스토리가 없습니다.</p>
-</c:if>
-
 <c:if test="${not empty story}">
 <form action='update' method='post'>
 <div class="mb-3 row">
@@ -51,13 +47,23 @@
       <input type="text" class="form-control-plaintext" id="registeredDate" value='${story.registeredDate2}'>
     </div>
   </div>
+  
+<!-- <div class="modal-footer justify-content-between"> -->
+  <div class="d-flex justify-content-between">
+    <div>
       <input class="btn" style="background-color: #FFADAD;" type='submit' value='변경'>
       <a href='delete?no=${story.no}' class="btn btn-danger">삭제</a>
+    </div>
       <a href='list' class="btn btn-secondary">목록</a>
+  </div>
+</div>
 </form>
 </c:if>
 
-
+<c:if test="${empty story}">
+<p>해당 번호의 스토리가 없습니다.</p>
+<a href='list' class="btn btn-secondary">목록</a>
+</c:if>
 
 </div>
 </body>

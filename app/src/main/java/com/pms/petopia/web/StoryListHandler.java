@@ -7,7 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.pms.petopia.domain.Member;
+import com.pms.petopia.domain.Scrap;
 import com.pms.petopia.domain.Story;
+import com.pms.petopia.service.ScrapService;
 import com.pms.petopia.service.StoryService;
 
 @SuppressWarnings("serial")
@@ -19,7 +22,7 @@ public class StoryListHandler extends HttpServlet {
       throws ServletException, IOException {
 
     StoryService storyService = (StoryService) request.getServletContext().getAttribute("storyService");
-
+    ScrapService scrapService = (ScrapService) request.getServletContext().getAttribute("scrapService");
     try {
       String keyword = request.getParameter("keyword");
       List<Story> storys = null;
@@ -28,9 +31,27 @@ public class StoryListHandler extends HttpServlet {
       } else {
         storys = storyService.list();
       }
+      List<Scrap> scrapList = null;
+      if ((Member)request.getSession().getAttribute("loginUser") != null) {
+        Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 
-      request.setAttribute("list", storys);
+        scrapList = scrapService.list(loginUser.getNo());
+        //        System.out.println(scrapList);
+        //        for(Scrap scrap : scrapList) {
+        //          System.out.println("for 1");
+        //          for(Story story : storys) {
+        //            System.out.println("for 2");
+        //            if(scrap.getStory().getNo() == story.getNo()) {
+        //              scrap.setIsScrap(1);
+        //            } else {
+        //              scrap.setIsScrap(0);
+        //            }
+        //          }
+        //        }
+      }
 
+      request.setAttribute("scrapList", scrapList);
+      request.setAttribute("storys", storys);
       response.setContentType("text/html;charset=UTF-8");
       request.getRequestDispatcher("/jsp/story/list.jsp").include(request, response);
 

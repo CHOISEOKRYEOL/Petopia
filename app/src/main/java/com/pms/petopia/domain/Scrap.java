@@ -25,4 +25,5 @@ public class Scrap {
     this.story = story;
   }
 
+
 }

@@ -6,9 +6,14 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <head>
 <meta charset="UTF-8">
-<title>추천 실패</title>
+<title>스크랩</title>
 </head>
 <body>
-이미 추천한 게시물입니다.
+<c:if test="${result eq 'success'}">
+    뉴스를 스크랩하였습니다!
+</c:if>
+<c:if test="${result eq 'fail'}">
+    이미 스크랩한 뉴스입니다!
+</c:if>
 </body>
 </html>
