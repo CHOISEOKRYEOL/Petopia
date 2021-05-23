@@ -59,6 +59,11 @@
     delete from pet_hp_bookmark
     where bno = #{no}
   </delete>
+  
+  <delete id="deleteAll" parameterType="int">
+    delete from pet_hp_bookmark
+    where mno = #{no}
+  </delete>
 
 </mapper>
 

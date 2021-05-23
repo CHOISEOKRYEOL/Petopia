@@ -43,5 +43,9 @@ public class DefaultBookmarkService implements BookmarkService {
     return bookmarkDao.delete(no);
   }
 
+  @Override
+  public int deleteAll(int no) throws Exception {
+    return bookmarkDao.deleteAll(no);
+  }
 
 }

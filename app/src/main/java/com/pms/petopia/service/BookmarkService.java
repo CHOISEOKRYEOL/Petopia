@@ -14,4 +14,6 @@ public interface BookmarkService {
   Bookmark get(int member, int hospital) throws Exception;
 
   int delete(int no) throws Exception;
+
+  int deleteAll(int no) throws Exception;
 }

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.Member;
+import com.pms.petopia.service.BookmarkService;
 import com.pms.petopia.service.MemberService;
 
 @SuppressWarnings("serial")
@@ -19,6 +20,7 @@ public class MemberDeleteHandler extends HttpServlet {
       throws ServletException, IOException {
 
     MemberService memberService = (MemberService) request.getServletContext().getAttribute("memberService");
+    BookmarkService bookmarkService = (BookmarkService) request.getServletContext().getAttribute("bookmarkService");
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
     Member m = new Member();
@@ -32,6 +34,7 @@ public class MemberDeleteHandler extends HttpServlet {
 
     try {
 
+      bookmarkService.deleteAll(loginUser.getNo());
       memberService.delete(m);
       request.getSession().invalidate();
       response.setContentType("text/html;charset=UTF-8");

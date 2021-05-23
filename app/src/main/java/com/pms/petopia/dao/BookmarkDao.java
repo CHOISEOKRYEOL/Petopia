@@ -15,4 +15,6 @@ public interface BookmarkDao {
   Bookmark findByNumbers(Map<String,Integer> params) throws Exception;
 
   int delete(int no) throws Exception;
+
+  int deleteAll(int no) throws Exception;
 }
