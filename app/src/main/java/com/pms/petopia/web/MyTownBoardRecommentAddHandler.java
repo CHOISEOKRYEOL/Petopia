@@ -49,18 +49,8 @@ public class MyTownBoardRecommentAddHandler extends HttpServlet {
               || reco.getRecommender().getNo() == loginUser.getNo() && reco.getMyTownBoard().getNo() != boardNo
               || reco.getRecommender().getNo() != loginUser.getNo() && reco.getMyTownBoard().getNo() == boardNo) {
 
-            System.out.println(reco.getRecommender().getNo());
-            System.out.println(loginUser.getNo());
-            System.out.println(reco.getMyTownBoard().getNo());
-            System.out.println(boardNo);
-            //System.out.println("-----> 추천할 수 있어!");
             count++;
             if (count == recomments.size()) {
-              //System.out.println("**********************");
-              System.out.println(reco.getRecommender().getNo());
-              System.out.println(loginUser.getNo());
-              System.out.println(reco.getMyTownBoard().getNo());
-              System.out.println(boardNo);
               recommentService.add(recomment);
               myTownBoardService.updateRecommentCount(boardNo);
               result = "success";
@@ -68,11 +58,6 @@ public class MyTownBoardRecommentAddHandler extends HttpServlet {
             }
 
           }else {
-            System.out.println(reco.getRecommender().getNo());
-            System.out.println(loginUser.getNo());
-            System.out.println(reco.getMyTownBoard().getNo());
-            System.out.println(boardNo);
-            System.out.println("==> 2. 추천은 안돼!");
             break;
           }
         }

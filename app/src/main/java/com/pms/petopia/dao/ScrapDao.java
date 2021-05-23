@@ -15,6 +15,8 @@ public interface ScrapDao {
 
   int delete(int no) throws Exception;
 
+  int updateScrap(int no) throws Exception;
+
 }
 
 

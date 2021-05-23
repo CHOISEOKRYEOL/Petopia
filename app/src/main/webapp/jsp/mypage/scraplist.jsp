@@ -28,10 +28,12 @@
         <td><a href='${s.story.url}'>${s.story.title}</a></td>
         <td>${s.story.site}</td>
         <td>${s.story.registeredDate}</td>
-        <form action='scrapdelete'>
-          <input type="hidden" name='scrapNo' value ='${s.no}'>
-          <td><input type="submit" value ='삭제'></td>
+        <td>
+        <form action='../story/scrapdelete' method='get'>
+          <input type="hidden" name='scrapNo' value ='${s.story.no}'>
+          <input type="submit" value ='삭제'>
         </form>
+        </td>
       </tr>
     </c:forEach>
   </tbody>
