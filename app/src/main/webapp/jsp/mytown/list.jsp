@@ -45,7 +45,12 @@
 					<td>${t.no}</td>
 					<td><a
 						href='detail?stateNo=${smallAddress.bigAddress.no}&cityNo=${smallAddress.no}&no=${t.no}'>${t.title}</a></td>
+					<c:if test="${t.writer.state == 1}">
+          <td>탈퇴 회원</td>					
+					</c:if>
+					<c:if test="${t.writer.state == 0}">
 					<td>${t.writer.nick}</td>
+					</c:if>
 					<td>${t.createdDate}</td>
 					<td>${t.viewCount}</td>
 					<td>${t.recommentCount}</td>

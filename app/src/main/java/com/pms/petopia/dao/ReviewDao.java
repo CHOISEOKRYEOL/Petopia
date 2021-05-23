@@ -20,4 +20,5 @@ public interface ReviewDao {
 
   int delete(int no) throws Exception;
 
+  int deleteAll(int no) throws Exception;
 }

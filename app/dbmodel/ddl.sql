@@ -311,7 +311,7 @@ CREATE TABLE `pet_qna` (
   `cdt`    DATETIME    NOT NULL DEFAULT now(), -- 작성일
   `ans`    LONGTEXT    NULL,     -- 답변
   `adt`    DATETIME    NULL,     -- 답변일
-  `state`  INTEGER     NOT NULL  -- 답변여부
+  `state`  INTEGER     NOT NULL DEFAULT 0 -- 답변여부
 );
 
 -- Q&A

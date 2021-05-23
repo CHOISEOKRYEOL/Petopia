@@ -61,8 +61,14 @@
   
   <delete id="delete" parameterType="int">
     delete from pet_qna
-    where qno = #{value}
+    where qno = #{no}
   </delete>
+  
+  <delete id="deleteAll" parameterType="int">
+    delete from pet_qna
+    where writer = #{no};
+  </delete>
+  
 </mapper>
 
 

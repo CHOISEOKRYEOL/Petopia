@@ -71,7 +71,12 @@
 
   <delete id="delete" parameterType="int">
     delete from pet_hp_review 
-    where rno=#{value}
+    where rno=#{no}
+  </delete>
+  
+  <delete id="deleteAll" parameterType="int">
+    delete from pet_hp_review
+    where writer=#{no}
   </delete>
 
 </mapper>

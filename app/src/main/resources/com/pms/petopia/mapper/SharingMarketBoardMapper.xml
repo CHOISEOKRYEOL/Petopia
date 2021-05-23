@@ -14,7 +14,8 @@
     
     <association property="writer" javaType="member">
 	    <id column="writer_no" property="no"/>
-	    <result column="writer_name" property="name"/>
+	    <result column="writer_nick" property="nick"/>
+	    <result column="writer_state" property="state"/>
     </association>
     
         <association property="category" javaType="sharingmarketboardcategory">
@@ -32,7 +33,8 @@
       mark.cdt,
       mark.vw_cnt,
       mem.mno as writer_no,
-      mem.name as writer_name,
+      mem.name as writer_nick,
+      mem.state as writer_state,
       cat.cno as category_no,
       cat.cat_name as category_name
     from pet_mark mark

@@ -88,8 +88,8 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan='2'><input type='submit' value='변경'> <a
-							href='delete?no=${hospital.no}'>삭제</a></td>
+						<td colspan='2'><input type='submit' value='변경'> 
+						<a href='delete?no=${hospital.no}'>삭제</a></td>
 					</tr>
 				</tfoot>
 			</table>
