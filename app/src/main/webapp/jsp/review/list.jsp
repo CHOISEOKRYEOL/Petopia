@@ -15,6 +15,9 @@
 					<th>내용</th>
 					<th>등록일</th>
 					<th>사진</th>
+					<c:if test="${loginUser.no == r.writer.no}">
+					<th>권한</th>
+					</c:if>
 				</tr>
 			</thead>
 			<tbody>
@@ -25,10 +28,16 @@
 					<td>${r.writer.nick}</td>
 					<td>${r.comment}</td>
 					<td>${r.createdDate}</td>
-					<td><a href='${photoUrl}'><img src='${thumbnail}'></a> <c:if
-							test="${r.writer.no == loginUser.no}">
-							<td><a href='../review/delete?no=${r.no}'>삭제</a></td>
-						</c:if>
+					<td><a href='${photoUrl}'><img src='${thumbnail}'></a> 
+					<c:if test="${r.writer.no == loginUser.no}">
+					<td>
+					<form action="../review/delete">
+					<input type="hidden" name="hno" value="${r.hospital.no}">
+					<input type="hidden" name="no" value="${r.no}">
+					<input type="submit" value="삭제">
+					</form>
+					</td>
+					</c:if>
 				</tr>
 			</tbody>
 		</table>

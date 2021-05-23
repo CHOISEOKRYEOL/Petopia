@@ -54,4 +54,9 @@ public class DefaultReviewService implements ReviewService {
     return reviewDao.delete(no);
   }
 
+  @Override
+  public int deleteAll(int no) throws Exception {
+    return reviewDao.deleteAll(no);
+  }
+
 }
