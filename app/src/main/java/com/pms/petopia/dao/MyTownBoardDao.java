@@ -17,6 +17,8 @@ public interface MyTownBoardDao {
 
   List<MyTownBoard> findByRecomment(Map<String,Object> params) throws Exception;
 
+  List<MyTownBoard> findByMember(int memberNo) throws Exception;
+
   MyTownBoard findByNo(int no) throws Exception;
 
   int update(MyTownBoard board) throws Exception;

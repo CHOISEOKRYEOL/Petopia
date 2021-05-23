@@ -44,6 +44,12 @@ public class DefaultMyTownBoardService implements MyTownBoardService {
     return myTownBoardDao.findByRecomment(params);
   }
 
+  // 나의 게시글
+  @Override
+  public List<MyTownBoard> listMine(int MemberNo) throws Exception {
+    return myTownBoardDao.findByMember(MemberNo);
+  }
+
   // 게시글 상세 조회 업무
   @Override
   public MyTownBoard get(int no) throws Exception {

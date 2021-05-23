@@ -8,33 +8,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.Member;
-import com.pms.petopia.domain.Scrap;
-import com.pms.petopia.service.ScrapService;
+import com.pms.petopia.domain.MyTownBoard;
+import com.pms.petopia.service.MyTownBoardService;
 
 @SuppressWarnings("serial")
-@WebServlet("/mypage/scraplist")
-public class ScrapListHandler extends HttpServlet{
+@WebServlet("/mypage/mytownlist")
+public class MyTownMyListHandler extends HttpServlet{
 
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    ScrapService scrapService = (ScrapService) request.getServletContext().getAttribute("scrapService");
+    MyTownBoardService myTownBoardService =
+        (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
     response.setContentType("text/html;charset=UTF-8");
+
+    //int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 
     try {
 
       Member loginUser = (Member)request.getSession().getAttribute("loginUser");
-      List<Scrap> scrapList = scrapService.list(loginUser.getNo());
+      List<MyTownBoard> myTownList = myTownBoardService.listMine(loginUser.getNo());
 
       String emptyList = null;
-      if (scrapList.size() == 0) {
+      if (myTownList.size() == 0) {
         emptyList = "true";
       }
 
       request.setAttribute("emptyList", emptyList);
-      request.setAttribute("scrapList", scrapList);
-      request.getRequestDispatcher("/jsp/mypage/scraplist.jsp").include(request, response);
+      request.setAttribute("myTownList", myTownList);
+      request.getRequestDispatcher("/jsp/mypage/mytownlist.jsp").include(request, response);
     } catch (Exception e) {
 
       throw new ServletException(e);
