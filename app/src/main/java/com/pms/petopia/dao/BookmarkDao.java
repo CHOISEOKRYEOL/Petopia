@@ -10,6 +10,8 @@ public interface BookmarkDao {
 
   List<Bookmark> findAll(int no) throws Exception;
 
+  List<Bookmark> findByNo(int no) throws Exception;
+
   Bookmark findByNumbers(Map<String,Integer> params) throws Exception;
 
   int delete(int no) throws Exception;

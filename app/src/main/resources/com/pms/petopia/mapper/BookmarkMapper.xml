@@ -10,12 +10,13 @@
        
     <association property="member" javaType="member">
       <id column="member_no" property="no"/>
-      <result column="member_nick" property="nick"/>
     </association>
     
     <association property="hospital" javaType="hospital">
       <id column="hospital_no" property="no"/>
       <result column="hospital_name" property="name"/>
+      <result column="hospital_address" property="address"/>
+      <result column="hospital_tel" property="tel"/>
     </association>
   </resultMap>
   
@@ -27,13 +28,23 @@
   <select id="findAll" resultMap="bookmarkMap" parameterType="int">
     select
       b.bno,
-      m.mno as member_no, m.nick as member_nick,
-      h.hno as hospital_no, h.name as hospital_name
+      m.mno as member_no,
+      h.hno as hospital_no, h.name as hospital_name,
+      h.addr as hospital_address, h.tel as hospital_tel
     from pet_hp_bookmark b
       inner join pet_user m on m.mno = b.mno
       inner join pet_hp h on h.hno = b.hno
     where m.mno = #{no}
     order by h.name
+  </select>
+  
+  <select id="findByNo" resultMap="bookmarkMap" parameterType="int">
+    select
+      b.bno, m.mno as member_no, h.hno as hospital_no
+    from pet_hp_bookmark b
+      inner join pet_user m on m.mno = b.mno
+      inner join pet_hp h on h.hno = b.hno
+    where m.mno = #{no}
   </select>
   
   <select id="findByNumbers" resultMap="bookmarkMap" parameterType="map">

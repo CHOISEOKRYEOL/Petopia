@@ -32,13 +32,18 @@ public class MemberBookmarkAddHandler extends HttpServlet {
     b.setMember(m);
     b.setHospital(h);
 
+    int check = Integer.parseInt(request.getParameter("hiddenNo"));
+
     try {
 
       bookmarkService.add(b);
 
-      response.setContentType("text/html;charset=UTF-8");
-      response.sendRedirect("../hospital/detail?no=" + h.getNo());
-
+      if(check == 0) {
+        response.sendRedirect("../hospital/detail?no=" + h.getNo());
+      }
+      else {
+        response.sendRedirect("../hospital/list");
+      }
     }
     catch(Exception e) {
       throw new ServletException(e);

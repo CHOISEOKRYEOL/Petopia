@@ -9,6 +9,8 @@ public interface BookmarkService {
 
   List<Bookmark> list(int no) throws Exception;
 
+  List<Bookmark> get(int no) throws Exception;
+
   Bookmark get(int member, int hospital) throws Exception;
 
   int delete(int no) throws Exception;

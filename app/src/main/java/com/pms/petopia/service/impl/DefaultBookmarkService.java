@@ -25,6 +25,11 @@ public class DefaultBookmarkService implements BookmarkService {
   }
 
   @Override
+  public List<Bookmark> get(int no) throws Exception {
+    return bookmarkDao.findByNo(no);
+  }
+
+  @Override
   public Bookmark get(int member, int hospital) throws Exception {
     HashMap<String, Integer> params = new HashMap<>();
     params.put("member", member);

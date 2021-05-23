@@ -9,10 +9,10 @@
     <id column="hno" property="no"/>
     <result column="name" property="name"/>
     <result column="tel" property="tel"/>
-    <result column="address" property="address"/>
-    <result column="startTime" property="startTime"/>
-    <result column="endTime" property="endTime"/>
-    <result column="parking" property="parking"/>
+    <result column="addr" property="address"/>
+    <result column="stime" property="startTime"/>
+    <result column="etime" property="endTime"/>
+    <result column="park" property="parking"/>
     <result column="vet" property="veterinarian"/>
     <result column="photo" property="photo"/>
     <result column="grade" property="rate"/>
@@ -30,7 +30,7 @@
   </resultMap>
   
   <insert id="insert" parameterType="hospital">
-    insert into pet_hp(name, tel, address, startTime, endTime, parking, vet, photo, cno) 
+    insert into pet_hp(name, tel, addr, stime, etime, park, vet, photo, cno) 
     values(#{name}, #{tel}, #{address}, #{startTime}, #{endTime}, #{parking}, #{veterinarian}, #{photo}, #{smallAddress.no})
   </insert>
 
@@ -39,9 +39,9 @@
       h.hno,
       h.name,
       h.tel,
-      h.address,
-      h.startTime,
-      h.endTime,
+      h.addr,
+      h.stime,
+      h.etime,
       s.gno as state_no,
       s.gname as state_name,    
       c.cno as city_no,
@@ -57,10 +57,10 @@
       h.hno,
       h.name,
       h.tel,
-      h.address,
-      h.startTime,
-      h.endTime,
-      h.parking,
+      h.addr,
+      h.stime,
+      h.etime,
+      h.park,
       h.vet,
       h.photo,
       h.grade,
@@ -80,10 +80,10 @@
       name=#{name},
       tel=#{tel},
       cno=#{smallAddress.no},
-      address=#{address},
-      startTime=#{startTime},
-      endTime=#{endTime},
-      parking=#{parking},
+      addr=#{address},
+      stime=#{startTime},
+      etime=#{endTime},
+      park=#{parking},
       photo=#{photo},
       vet=#{veterinarian}
     </set>
