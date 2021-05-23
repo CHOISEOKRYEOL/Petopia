@@ -20,9 +20,10 @@ public class ReviewDeleteHandler extends HttpServlet {
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
+      int hno = Integer.parseInt(request.getParameter("hno"));
       reviewService.delete(no);
 
-      response.sendRedirect("../hospital/detail?no=" + no);
+      response.sendRedirect("../hospital/detail?no=" + hno);
       //      response.setHeader("Refresh", "1;url=../main");
 
     } catch (Exception e) {
