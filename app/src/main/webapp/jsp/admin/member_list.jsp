@@ -30,7 +30,12 @@
 						<td>${m.email}</td>
 						<td>${m.tel}</td>
 						<td>${m.registeredDate}</td>
-						<td><a href='memberdelete?no=${m.no}'>강제 탈퇴</a></td>
+						<td>
+						<form action="../member/delete" method="post">
+						<input type="hidden" name="no" value="${m.no}">
+						<input type="submit" value="강제 탈퇴">
+						</form>
+						</td>
 					</tr>
 				</c:if>
 			</c:forEach>

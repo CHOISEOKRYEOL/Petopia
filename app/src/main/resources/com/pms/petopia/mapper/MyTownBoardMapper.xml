@@ -16,6 +16,7 @@
     <association property="writer" javaType="member">
       <id column="writer_no" property="no"/>
       <result column="writer_nick" property="nick"/>
+      <result column="writer_state" property="state"/>
     </association>
     
     <association property="bigAddress" javaType="bigAddress">
@@ -39,6 +40,7 @@
       t.rc_cnt,
       m.mno as writer_no, 
       m.nick as writer_nick,
+      m.state as writer_state,
       s.gno as bigAddress_no, 
       s.gname as bigAddress_name,
       c.cno as smallAddress_no, 
@@ -59,6 +61,15 @@
     order by t.tno desc
   </select>
   
+  <select id="findByRecomment" resultMap="myTownBoardMap">
+    <include refid="find"/>
+    from pet_state s
+      inner join pet_city c on s.gno=c.gno
+      inner join pet_mytown t on c.cno=t.cno
+      inner join pet_user m on t.writer=m.mno  
+    where c.cno=#{cno} and s.gno=#{gno}
+    order by t.rc_cnt desc
+  </select>
   
   <select id="findByArea" resultMap="myTownBoardMap" parameterType="map">
     <include refid="find"/>
@@ -84,8 +95,30 @@
     order by t.tno desc
   </select>
   
-  <select id="findByNo" resultMap="myTownBoardMap" parameterType="int">
+  <select id="findByMember" resultMap="myTownBoardMap" parameterType="int">
     <include refid="find"/>
+    from pet_state s
+      inner join pet_city c on s.gno=c.gno
+      inner join pet_mytown t on c.cno=t.cno
+      inner join pet_user m on t.writer=m.mno
+    where m.mno=#{value}
+  </select>
+  
+  <select id="findByNo" resultMap="myTownBoardMap" parameterType="int">
+    select
+      t.tno, 
+      t.title, 
+      t.cdt,
+      t.cont,
+      t.vw_cnt,
+      t.rc_cnt,
+      m.mno as writer_no, 
+      m.nick as writer_nick,
+      m.state as writer_state,
+      s.gno as bigAddress_no, 
+      s.gname as bigAddress_name,
+      c.cno as smallAddress_no, 
+      c.cname as smallAddress_name
     from pet_city c
       inner join pet_state s on s.gno=c.gno
       inner join pet_mytown t on c.cno=t.cno

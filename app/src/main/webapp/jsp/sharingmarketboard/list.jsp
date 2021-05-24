@@ -64,7 +64,13 @@
 <td>${smb.no}</td>
 <td>${smb.category.name}</td>
 <td><a href='detail?no=${smb.no}'>${smb.title}</a></td>
-<td>${smb.writer.name}</td>
+
+<c:if test="${smb.writer.state == 0}">
+<td>${smb.writer.nick}</td>
+</c:if>
+<c:if test="${smb.writer.state == 1}">
+<td>탈퇴 회원</td>
+</c:if>
 <td>${smb.createdDate}</td>
 </tr>
 </c:forEach>

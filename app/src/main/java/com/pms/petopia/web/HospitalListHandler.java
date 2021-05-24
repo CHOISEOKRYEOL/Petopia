@@ -7,8 +7,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.pms.petopia.domain.Bookmark;
 import com.pms.petopia.domain.Hospital;
+import com.pms.petopia.domain.Member;
+import com.pms.petopia.domain.SmallAddress;
+import com.pms.petopia.service.BookmarkService;
 import com.pms.petopia.service.HospitalService;
+import com.pms.petopia.service.SmallAddressService;
 
 @SuppressWarnings("serial")
 @WebServlet("/hospital/list")
@@ -19,11 +24,20 @@ public class HospitalListHandler extends HttpServlet {
       throws ServletException, IOException {
 
     HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
+    BookmarkService bookmarkService = (BookmarkService) request.getServletContext().getAttribute("bookmarkService");
+    SmallAddressService smallAddressService = (SmallAddressService) request.getServletContext().getAttribute("smallAddressService");
+    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
     try {
       List<Hospital> hospitals = hospitalService.list();
+      List<SmallAddress> area = smallAddressService.list();
+      if(loginUser != null) {
+        List<Bookmark> book = bookmarkService.get(loginUser.getNo());
+        request.setAttribute("book", book);
+      }
 
       request.setAttribute("list", hospitals);
+      request.setAttribute("area", area);
       response.setContentType("text/html;charset=UTF-8");
       request.getRequestDispatcher("/jsp/hospital/list.jsp").include(request, response);
 

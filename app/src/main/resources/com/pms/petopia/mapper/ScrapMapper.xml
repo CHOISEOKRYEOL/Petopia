@@ -7,10 +7,11 @@
   
   <resultMap id="scrapMap" type="scrap">
     <id column="sno" property="no"/>
+    <result column="is_scrap" property="isScrap"/>
        
-    <association property="user" javaType="member">
-      <id column="user_no" property="no"/>
-      <result column="user_nick" property="nick"/>
+    <association property="member" javaType="member">
+      <id column="member_no" property="no"/>
+      <result column="member_nick" property="nick"/>
     </association>
     
     <association property="story" javaType="story">
@@ -18,6 +19,7 @@
       <result column="story_title" property="title"/>
       <result column="story_url" property="url"/>
       <result column="story_site" property="site"/>
+      <result column="story_rdt" property="registeredDate"/>
     </association>
 
   </resultMap>
@@ -27,24 +29,51 @@
     values(#{story.no}, #{member.no});
   </insert>
   
-  <select id="findAll" resultMap="scrapMap">
+  <update id="updateScrap" parameterType="int">
+    update pet_st_scrap set
+      is_scrap = 1
+    where nno = #{value} 
+  </update>
+  
+  <select id="findByUser" resultMap="scrapMap" parameterType="int">
 	  select
-      s.nno,
+	    s.sno,
+	    s.is_scrap,
       n.nno as story_no,
       n.title as story_title,
       n.url as story_url,
       n.site as story_site,
-      m.mno as user_no,
-      m.nick as user_nick,
+      n.rdt as story_rdt,
+      m.mno as member_no,
+      m.nick as member_nick,
       s.rdt
     from pet_st_news n
       inner join pet_st_scrap s on n.nno=s.nno
       inner join pet_user m on s.mno=m.mno
+    where m.mno=#{value}
+  </select>
+  
+  <select id="findByNo" resultMap="scrapMap" parameterType="int">
+    select
+      s.sno,
+      s.is_scrap,
+      n.nno as story_no,
+      n.title as story_title,
+      n.url as story_url,
+      n.site as story_site,
+      n.rdt as story_rdt,
+      m.mno as member_no,
+      m.nick as member_nick,
+      s.rdt
+    from pet_st_news n
+      inner join pet_st_scrap s on n.nno=s.nno
+      inner join pet_user m on s.mno=m.mno
+    where s.sno=#{value}
   </select>
   
   <delete id="delete" parameterType="int">
   delete from pet_st_scrap
-  where sno=#{value}
+  where nno=#{value}
   </delete>
   
   <select id="countScrap" resultType="String" parameterType="int">

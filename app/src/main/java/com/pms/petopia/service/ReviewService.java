@@ -18,4 +18,5 @@ public interface ReviewService {
 
   int delete(int no) throws Exception;
 
+  int deleteAll(int no) throws Exception;
 }

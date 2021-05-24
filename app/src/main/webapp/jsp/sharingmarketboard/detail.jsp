@@ -13,7 +13,14 @@
 <tbody>
 <tr><th>번호</th> <td>${smb.no}</td>
 <th>분류</th> <td colspan="3">${smb.category.name}</td></tr>
-<tr><th>작성자</th> <td>${smb.writer.name}</td>
+<tr><th>작성자</th> 
+<c:if test="${smb.writer.state == 0}">
+<td>${smb.writer.name}</td>
+</c:if>
+<c:if test="${smb.writer.state == 1}">
+<td>탈퇴 회원</td>
+</c:if>
+
 <th>작성일</th> <td>${smb.createdDate}</td>
 <th>조회수</th> <td>${smb.viewCount}</td></tr>
 <tr><th>제목</th> <td colspan="5">${smb.title}</td></tr>

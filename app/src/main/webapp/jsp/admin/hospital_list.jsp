@@ -4,10 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지</title>
+<title>Insert title here</title>
 </head>
 <body>
-<h1>마이페이지</h1>
-${loginUser.nick}님의 페이지입니다!
+
 </body>
 </html>

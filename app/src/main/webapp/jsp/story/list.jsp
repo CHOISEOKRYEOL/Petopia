@@ -3,19 +3,14 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <title>스토리</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-<style>
-  .container {
-    border: 1px solid lightgray;
-    width: 800px;
-    margin: 0px auto;
-  }
-</style>
+<link href="../css/common.css" rel="stylesheet" >
 </head>
 <body>
 <div class="container">
@@ -38,12 +33,12 @@
 <table class="table table-hover">
 <thead>
 <tr>
-<th>번호</th> <th>제목</th> <th>사이트</th> <th>등록일</th>
+<th>번호</th> <th>제목</th> <th>사이트</th> <th>등록일</th> <th>스크랩</th>
 </tr>
 </thead>
 
 <tbody>
-<c:forEach items="${list}" var="s">
+<c:forEach items="${storys}" var="s">
 <tr> 
   <td>
   <c:if test="${loginUser.id eq 'admin'}">
@@ -56,6 +51,42 @@
   <td><a href='${s.url}'>${s.title}</a></td> 
   <td>${s.site}</td> 
   <td>${s.registeredDate}</td> 
+  <td>
+  <c:set var="count" value="0"/>
+  <c:set var="scrapLength" value="${fn:length(scrapList)}"/>
+  <c:if test="${not empty loginUser}">
+  <c:if test="${empty scrapList}">
+  <form action='scrapadd' method='get'>
+      <input type='hidden' name='newsNo' value ='${s.no}'>
+      <input type='submit' value ='스크랩'>
+    </form>
+  </c:if>
+  <c:if test="${not empty scrapList}">
+  <form action='scrapdelete' method='get'>
+    <c:forEach items="${scrapList}" var="scrap">
+        <c:if test="${scrap.story.no eq s.no}">
+          <c:if test="${scrap.isScrap eq 1}">
+            <input type='hidden' name='scrapNo' value ='${s.no}'>
+            <input type='submit' value ='스크랩취소'>
+          </c:if>
+        </c:if>
+    </c:forEach>
+   </form>
+   <form action='scrapadd' method='get'>
+     <c:set var="count" value="0"/>
+     <c:forEach items="${scrapList}" var="scrap">
+        <c:if test="${scrap.story.no ne s.no}">
+            <c:set var="count" value="${count+1}"/>
+            <c:if test="${fn:length(scrapList) eq count}">
+            <input type='hidden' name='newsNo' value ='${s.no}'>
+            <input type='submit' value ='스크랩'>
+            </c:if>
+        </c:if>
+     </c:forEach> 
+   </form>
+   </c:if>
+   </c:if>
+  </td>
 </tr>
 </c:forEach>
 </tbody>

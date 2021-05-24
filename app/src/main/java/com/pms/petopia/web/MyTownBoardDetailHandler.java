@@ -1,7 +1,6 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -29,12 +28,12 @@ public class MyTownBoardDetailHandler extends HttpServlet {
     SmallAddressService smallAddressService = (SmallAddressService) request.getServletContext().getAttribute("smallAddressService");
     MyTownBoardCommentService myTownBoardCommentService = (MyTownBoardCommentService) request.getServletContext().getAttribute("myTownBoardCommentService");
     response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
     int no = Integer.parseInt(request.getParameter("no"));
     int stateNo= Integer.parseInt(request.getParameter("stateNo")); //일단 가져왔음
     int cityNo = Integer.parseInt(request.getParameter("cityNo"));
 
     try {
+
       MyTownBoard myTownBoard = myTownBoardService.get(no);
       SmallAddress smallAddress = smallAddressService.get(cityNo);
       List<SmallAddress> smallAddresses = smallAddressService.list();
@@ -52,8 +51,6 @@ public class MyTownBoardDetailHandler extends HttpServlet {
       throw new ServletException(e);
     }
 
-    out.println("</body>");
-    out.println("</html>");
   }
 }
 

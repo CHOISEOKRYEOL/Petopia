@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.pms.mybatis.MybatisDaoFactory;
 import com.pms.mybatis.SqlSessionFactoryProxy;
 import com.pms.petopia.dao.BigAddressDao;
+import com.pms.petopia.dao.BookmarkDao;
 import com.pms.petopia.dao.HospitalDao;
 import com.pms.petopia.dao.MemberDao;
 import com.pms.petopia.dao.MyTownBoardCommentDao;
@@ -19,6 +20,7 @@ import com.pms.petopia.dao.QnaDao;
 import com.pms.petopia.dao.RecommentDao;
 import com.pms.petopia.dao.RecordDao;
 import com.pms.petopia.dao.ReviewDao;
+import com.pms.petopia.dao.ScrapDao;
 import com.pms.petopia.dao.SharingMarketBoardCategoryDao;
 import com.pms.petopia.dao.SharingMarketBoardCommentDao;
 import com.pms.petopia.dao.SharingMarketBoardDao;
@@ -26,6 +28,7 @@ import com.pms.petopia.dao.SharingMarketBoardPhotoDao;
 import com.pms.petopia.dao.SmallAddressDao;
 import com.pms.petopia.dao.StoryDao;
 import com.pms.petopia.service.BigAddressService;
+import com.pms.petopia.service.BookmarkService;
 import com.pms.petopia.service.HospitalService;
 import com.pms.petopia.service.MemberService;
 import com.pms.petopia.service.MyTownBoardCommentService;
@@ -35,6 +38,7 @@ import com.pms.petopia.service.QnaService;
 import com.pms.petopia.service.RecommentService;
 import com.pms.petopia.service.RecordService;
 import com.pms.petopia.service.ReviewService;
+import com.pms.petopia.service.ScrapService;
 import com.pms.petopia.service.SharingMarketBoardCategoryService;
 import com.pms.petopia.service.SharingMarketBoardCommentService;
 import com.pms.petopia.service.SharingMarketBoardPhotoService;
@@ -42,6 +46,7 @@ import com.pms.petopia.service.SharingMarketBoardService;
 import com.pms.petopia.service.SmallAddressService;
 import com.pms.petopia.service.StoryService;
 import com.pms.petopia.service.impl.DefaultBigAddressService;
+import com.pms.petopia.service.impl.DefaultBookmarkService;
 import com.pms.petopia.service.impl.DefaultHospitalService;
 import com.pms.petopia.service.impl.DefaultMemberService;
 import com.pms.petopia.service.impl.DefaultMyTownBoardCommentService;
@@ -51,6 +56,7 @@ import com.pms.petopia.service.impl.DefaultQnaService;
 import com.pms.petopia.service.impl.DefaultRecommentService;
 import com.pms.petopia.service.impl.DefaultRecordService;
 import com.pms.petopia.service.impl.DefaultReviewService;
+import com.pms.petopia.service.impl.DefaultScrapService;
 import com.pms.petopia.service.impl.DefaultSharingMarketBoardCategoryService;
 import com.pms.petopia.service.impl.DefaultSharingMarketBoardCommentService;
 import com.pms.petopia.service.impl.DefaultSharingMarketBoardPhotoService;
@@ -93,6 +99,8 @@ public class ContextLoaderListener implements ServletContextListener {
       SharingMarketBoardCommentDao sharingMarketBoardCommentDao = daoFactory.createDao(SharingMarketBoardCommentDao.class);
       SharingMarketBoardPhotoDao sharingMarketBoardPhotoDao = daoFactory.createDao(SharingMarketBoardPhotoDao.class);
       QnaDao qnaDao = daoFactory.createDao(QnaDao.class);
+      ScrapDao scrapDao = daoFactory.createDao(ScrapDao.class);
+      BookmarkDao bookmarkDao = daoFactory.createDao(BookmarkDao.class);
 
       // 3) 서비스 관련 객체 준비
       MemberService memberService = new DefaultMemberService(memberDao);
@@ -111,6 +119,8 @@ public class ContextLoaderListener implements ServletContextListener {
       SharingMarketBoardCommentService sharingMarketBoardCommentService = new DefaultSharingMarketBoardCommentService(sharingMarketBoardCommentDao);
       SharingMarketBoardPhotoService sharingMarketBoardPhotoService = new DefaultSharingMarketBoardPhotoService(sharingMarketBoardPhotoDao);
       QnaService qnaService = new DefaultQnaService(qnaDao);
+      ScrapService scrapService = new DefaultScrapService(scrapDao);
+      BookmarkService bookmarkService = new DefaultBookmarkService(bookmarkDao);
 
       // 4) 서비스 객체를 ServletContext 보관소에 저장한다.
       servletContext.setAttribute("memberService", memberService);
@@ -129,6 +139,8 @@ public class ContextLoaderListener implements ServletContextListener {
       servletContext.setAttribute("sharingMarketBoardCommentService", sharingMarketBoardCommentService);
       servletContext.setAttribute("sharingMarketBoardPhotoService", sharingMarketBoardPhotoService);
       servletContext.setAttribute("qnaService", qnaService);
+      servletContext.setAttribute("scrapService", scrapService);
+      servletContext.setAttribute("bookmarkService", bookmarkService);
 
     } catch (Exception e) {
       e.printStackTrace();

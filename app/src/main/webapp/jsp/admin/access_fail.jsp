@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-    trimDirectiveWhitespaces="true"
-    %>
+	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +7,6 @@
 <title>관리자 전용 페이지</title>
 </head>
 <body>
-<h1>관리자 권한이 필요합니다.</h1>
+	<h1>관리자 권한이 필요합니다.</h1>
 </body>
 </html>

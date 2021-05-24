@@ -83,7 +83,7 @@ public class ReviewAddHandler extends HttpServlet {
     try {
       reviewService.add(r);
 
-      response.sendRedirect("../main");
+      response.sendRedirect("../hospital/detail?no=" + h.getNo());
 
     } catch (Exception e) {
       throw new ServletException(e);

@@ -43,6 +43,9 @@ public class DefaultQnaService implements QnaService {
     return qnaDao.delete(no);
   }
 
-
+  @Override
+  public int deleteAll(int no) throws Exception {
+    return qnaDao.deleteAll(no);
+  }
 
 }

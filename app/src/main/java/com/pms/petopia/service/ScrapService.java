@@ -7,11 +7,15 @@ public interface ScrapService {
 
   int add(Scrap scrap) throws Exception;
 
-  List<Scrap> list() throws Exception;
+  List<Scrap> list(int memberNo) throws Exception;
+
+  Scrap get(int scrapNo) throws Exception;
 
   String count(int memberNo) throws Exception;
 
   int delete(int no) throws Exception;
+
+  int updateScrap (int no) throws Exception;
 
 }
 

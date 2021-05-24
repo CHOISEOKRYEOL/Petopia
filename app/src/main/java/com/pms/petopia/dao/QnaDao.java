@@ -16,4 +16,6 @@ public interface QnaDao {
   int answer(Qna qna) throws Exception;
 
   int delete(int no) throws Exception;
+
+  int deleteAll(int no) throws Exception;
 }
