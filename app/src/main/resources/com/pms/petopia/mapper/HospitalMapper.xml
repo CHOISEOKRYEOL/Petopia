@@ -15,7 +15,7 @@
     <result column="park" property="parking"/>
     <result column="vet" property="veterinarian"/>
     <result column="photo" property="photo"/>
-    <result column="grade" property="rate"/>
+    <result column="grade" property="rating"/>
 
     <association property="bigAddress" javaType="bigAddress">
       <id column="state_no" property="no"/>
@@ -87,6 +87,13 @@
       photo=#{photo},
       vet=#{veterinarian}
     </set>
+    where hno=#{no}
+  </update>
+  
+  <update id="updateRating" parameterType="hospital">
+    update pet_hp
+    
+    
     where hno=#{no}
   </update>
   

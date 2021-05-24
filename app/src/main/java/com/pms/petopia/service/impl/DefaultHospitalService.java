@@ -43,4 +43,8 @@ public class DefaultHospitalService implements HospitalService {
     return hospitalDao.findByKeyword(keyword);
   }
 
+  @Override
+  public float rate(float no) throws Exception {
+    return hospitalDao.updateRating(no);
+  }
 }

@@ -6,8 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.pms.petopia.domain.Hospital;
+import com.pms.petopia.service.BookmarkService;
 import com.pms.petopia.service.HospitalService;
+import com.pms.petopia.service.ReviewService;
 
 @SuppressWarnings("serial")
 @WebServlet("/hospital/delete")
@@ -18,17 +19,16 @@ public class HospitalDeleteHandler extends HttpServlet {
       throws ServletException, IOException {
 
     HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
+    ReviewService reviewService = (ReviewService) request.getServletContext().getAttribute("reviewService");
+    BookmarkService bookmarkService = (BookmarkService) request.getServletContext().getAttribute("bookmarkService");
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
 
-      Hospital oldHospital = hospitalService.get(no);
-      if (oldHospital == null) {
-        throw new Exception("해당 번호의 병원이 없습니다.");
-      }
-
+      reviewService.deleteByAdmin(no);
+      bookmarkService.deleteByAdmin(no);
       hospitalService.delete(no);
-      response.sendRedirect("list");
+      response.sendRedirect("../admin/hospitallist");
 
     } catch (Exception e) {
       throw new ServletException(e);

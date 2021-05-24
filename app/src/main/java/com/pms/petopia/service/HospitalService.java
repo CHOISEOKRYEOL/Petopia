@@ -17,4 +17,6 @@ public interface HospitalService {
 
   List<Hospital> search(String keyword) throws Exception;
 
+  float rate(float no) throws Exception;
+
 }

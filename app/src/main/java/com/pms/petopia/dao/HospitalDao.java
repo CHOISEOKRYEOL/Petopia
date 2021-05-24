@@ -17,4 +17,6 @@ public interface HospitalDao {
 
   int delete(int no) throws Exception;
 
+  float updateRating(float no) throws Exception;
+
 }

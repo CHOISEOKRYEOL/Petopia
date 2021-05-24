@@ -12,6 +12,7 @@ import javax.servlet.http.Part;
 import com.pms.petopia.domain.Hospital;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.Review;
+import com.pms.petopia.service.HospitalService;
 import com.pms.petopia.service.ReviewService;
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnails;
@@ -45,6 +46,7 @@ public class ReviewAddHandler extends HttpServlet {
       throws ServletException, IOException {
 
     ReviewService reviewService = (ReviewService) request.getServletContext().getAttribute("reviewService");
+    HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
 
     Review r = new Review();
 
@@ -52,6 +54,8 @@ public class ReviewAddHandler extends HttpServlet {
     r.setCleanlinessRating(Integer.parseInt(request.getParameter("cleanlinessRating")));
     r.setCostRating(Integer.parseInt(request.getParameter("costRating")));
     r.setComment(request.getParameter("comment"));
+
+    float average = r.getServiceRating() + r.getCleanlinessRating() + r.getCostRating();
 
     Part photoPart = request.getPart("photo");
 
@@ -78,11 +82,12 @@ public class ReviewAddHandler extends HttpServlet {
 
     Hospital h = new Hospital();
     h.setNo(Integer.parseInt(request.getParameter("num")));
+    h.setRating(average);
     r.setHospital(h);
 
     try {
       reviewService.add(r);
-
+      hospitalService.rate(h.getRating());
       response.sendRedirect("../hospital/detail?no=" + h.getNo());
 
     } catch (Exception e) {
