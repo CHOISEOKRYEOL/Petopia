@@ -9,6 +9,9 @@
 <html>
 <head>
 <title>게시글 상세</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<link href="../css/common.css" rel="stylesheet">
 </head>
 <body>
 	<h1>${smallAddress.bigAddress.name}&nbsp;${smallAddress.name}</h1>
@@ -41,11 +44,11 @@
 					<th>조회수</th>
 					<td>${myTownBoard.viewCount}</td>
 					<th>추천수</th>
-					<td>${myTownBoard.recommentCount}</td>
+					<td colspan="3">${myTownBoard.recommentCount}</td>
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td>${myTownBoard.content}</td>
+					<td colspan="5">${myTownBoard.content}</td>
 				</tr>
 
 				<c:if
@@ -74,5 +77,25 @@
 		<textarea name='content' rows='1' cols='30'></textarea>
 		<br> <input type='submit' value='등록'>
 	</form>
+	<c:if test="${result eq 'success'}">
+<%-- 	<script>
+	  swal({
+	  title: "댓글 추천 완료!",
+	  text: "You clicked the button!",
+	  icon: "success"
+	  });
+	    <!-- 게시물을 추천하였습니다! -->
+	</script>
+	</c:if>
+	<c:if test="${result eq 'fail'}">
+	<script>
+	  swal({
+	  title: "이미 추천한 게시물 입니다!",
+	  text: "You clicked the button!",
+	  icon: "warning"
+	  });
+	    <!-- 이미 추천한 게시물입니다! -->
+	</script> --%>
+</c:if>
 </body>
 </html>

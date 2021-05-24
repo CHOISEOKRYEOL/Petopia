@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,32 +52,40 @@
   <td>${s.site}</td> 
   <td>${s.registeredDate}</td> 
   <td>
-  <c:if test="${loginUser ne null}">
-    <form action='scrapadd' method='get'>
+  <c:set var="count" value="0"/>
+  <c:set var="scrapLength" value="${fn:length(scrapList)}"/>
+  <c:if test="${not empty loginUser}">
+  <c:if test="${empty scrapList}">
+  <form action='scrapadd' method='get'>
       <input type='hidden' name='newsNo' value ='${s.no}'>
       <input type='submit' value ='스크랩'>
     </form>
   </c:if>
-  <%-- <form action='scrapadd' method='get'>
-   <c:forEach items="${scrapList}" var="scrap">
-    <c:forEach items="${storys}" var="s">
-      <c:if test="${scrap.story.no eq story.no}">
-        <input type='hidden' name='newsNo' value ='${s.no}'>
-        <input type='submit' value ='스크랩'>
-      </c:if>
-      </c:forEach>
+  <c:if test="${not empty scrapList}">
+  <form action='scrapdelete' method='get'>
+    <c:forEach items="${scrapList}" var="scrap">
+        <c:if test="${scrap.story.no eq s.no}">
+          <c:if test="${scrap.isScrap eq 1}">
+            <input type='hidden' name='scrapNo' value ='${s.no}'>
+            <input type='submit' value ='스크랩취소'>
+          </c:if>
+        </c:if>
     </c:forEach>
    </form>
-   <form action='scrapdelete' method='get'>
+   <form action='scrapadd' method='get'>
+     <c:set var="count" value="0"/>
      <c:forEach items="${scrapList}" var="scrap">
-     <c:forEach items="${storys}" var="s">
-       <c:if test="${scrap.story.no ne story.no}">
-         <input type='hidden' name='newsNo' value ='${s.no}'>
-         <input type='submit' value ='스크랩취소'>
-       </c:if>
-     </c:forEach>
+        <c:if test="${scrap.story.no ne s.no}">
+            <c:set var="count" value="${count+1}"/>
+            <c:if test="${fn:length(scrapList) eq count}">
+            <input type='hidden' name='newsNo' value ='${s.no}'>
+            <input type='submit' value ='스크랩'>
+            </c:if>
+        </c:if>
      </c:forEach> 
-   </form> --%>
+   </form>
+   </c:if>
+   </c:if>
   </td>
 </tr>
 </c:forEach>

@@ -61,6 +61,15 @@
     order by t.tno desc
   </select>
   
+  <select id="findByRecomment" resultMap="myTownBoardMap">
+    <include refid="find"/>
+    from pet_state s
+      inner join pet_city c on s.gno=c.gno
+      inner join pet_mytown t on c.cno=t.cno
+      inner join pet_user m on t.writer=m.mno  
+    where c.cno=#{cno} and s.gno=#{gno}
+    order by t.rc_cnt desc
+  </select>
   
   <select id="findByArea" resultMap="myTownBoardMap" parameterType="map">
     <include refid="find"/>
@@ -86,8 +95,17 @@
     order by t.tno desc
   </select>
   
+  <select id="findByMember" resultMap="myTownBoardMap" parameterType="int">
+    <include refid="find"/>
+    from pet_state s
+      inner join pet_city c on s.gno=c.gno
+      inner join pet_mytown t on c.cno=t.cno
+      inner join pet_user m on t.writer=m.mno
+    where m.mno=#{value}
+  </select>
+  
   <select id="findByNo" resultMap="myTownBoardMap" parameterType="int">
-        select
+    select
       t.tno, 
       t.title, 
       t.cdt,

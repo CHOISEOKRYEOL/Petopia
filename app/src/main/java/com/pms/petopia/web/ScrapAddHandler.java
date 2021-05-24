@@ -53,6 +53,7 @@ public class ScrapAddHandler extends HttpServlet{
             count++;
             if(count == scraps.size()) {
               scrapService.add(scrap);
+              scrapService.updateScrap(newsNo);
               result = "success";
               break;
             }

@@ -7,6 +7,7 @@
   
   <resultMap id="scrapMap" type="scrap">
     <id column="sno" property="no"/>
+    <result column="is_scrap" property="isScrap"/>
        
     <association property="member" javaType="member">
       <id column="member_no" property="no"/>
@@ -28,9 +29,16 @@
     values(#{story.no}, #{member.no});
   </insert>
   
+  <update id="updateScrap" parameterType="int">
+    update pet_st_scrap set
+      is_scrap = 1
+    where nno = #{value} 
+  </update>
+  
   <select id="findByUser" resultMap="scrapMap" parameterType="int">
 	  select
 	    s.sno,
+	    s.is_scrap,
       n.nno as story_no,
       n.title as story_title,
       n.url as story_url,
@@ -48,6 +56,7 @@
   <select id="findByNo" resultMap="scrapMap" parameterType="int">
     select
       s.sno,
+      s.is_scrap,
       n.nno as story_no,
       n.title as story_title,
       n.url as story_url,
@@ -64,7 +73,7 @@
   
   <delete id="delete" parameterType="int">
   delete from pet_st_scrap
-  where sno=#{value}
+  where nno=#{value}
   </delete>
   
   <select id="countScrap" resultType="String" parameterType="int">

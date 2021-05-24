@@ -49,18 +49,8 @@ public class MyTownBoardRecommentAddHandler extends HttpServlet {
               || reco.getRecommender().getNo() == loginUser.getNo() && reco.getMyTownBoard().getNo() != boardNo
               || reco.getRecommender().getNo() != loginUser.getNo() && reco.getMyTownBoard().getNo() == boardNo) {
 
-            System.out.println(reco.getRecommender().getNo());
-            System.out.println(loginUser.getNo());
-            System.out.println(reco.getMyTownBoard().getNo());
-            System.out.println(boardNo);
-            //System.out.println("-----> 추천할 수 있어!");
             count++;
             if (count == recomments.size()) {
-              //System.out.println("**********************");
-              System.out.println(reco.getRecommender().getNo());
-              System.out.println(loginUser.getNo());
-              System.out.println(reco.getMyTownBoard().getNo());
-              System.out.println(boardNo);
               recommentService.add(recomment);
               myTownBoardService.updateRecommentCount(boardNo);
               result = "success";
@@ -68,22 +58,18 @@ public class MyTownBoardRecommentAddHandler extends HttpServlet {
             }
 
           }else {
-            System.out.println(reco.getRecommender().getNo());
-            System.out.println(loginUser.getNo());
-            System.out.println(reco.getMyTownBoard().getNo());
-            System.out.println(boardNo);
-            System.out.println("==> 2. 추천은 안돼!");
             break;
           }
         }
       }
       request.setAttribute("result", result);
-
+      request.setAttribute("myTownBoard", myTownBoard);
       request.getRequestDispatcher("/jsp/mytown/recommentadd.jsp").include(request, response);
+      //request.getRequestDispatcher("/jsp/mytown/detail.jsp").include(request, response);
 
-      String webAddress= String.format("2;url=../mytown/detail?stateNo=%d&cityNo=%d&no=%d\n", 
-          myTownBoard.getBigAddress().getNo(), myTownBoard.getSmallAddress().getNo(), boardNo);
-      response.setHeader("Refresh",webAddress);
+      //      String webAddress= String.format("3;url=../mytown/detail?stateNo=%d&cityNo=%d&no=%d\n", 
+      //          myTownBoard.getBigAddress().getNo(), myTownBoard.getSmallAddress().getNo(), boardNo);
+      //      response.setHeader("Refresh",webAddress);
 
     } catch (Exception e) {
       throw new ServletException(e);

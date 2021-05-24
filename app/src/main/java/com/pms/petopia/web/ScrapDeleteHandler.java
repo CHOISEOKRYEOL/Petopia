@@ -7,11 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.Member;
-import com.pms.petopia.domain.Scrap;
 import com.pms.petopia.service.ScrapService;
 
 @SuppressWarnings("serial")
-@WebServlet("/mypage/scrapdelete")
+@WebServlet("/story/scrapdelete")
 public class ScrapDeleteHandler extends HttpServlet{
 
   @Override
@@ -23,24 +22,13 @@ public class ScrapDeleteHandler extends HttpServlet{
     int scrapNo = Integer.parseInt(request.getParameter("scrapNo"));
 
     try {
-      Scrap oldScrap = scrapService.get(scrapNo);
-      System.out.println(oldScrap);
-
-      if (oldScrap == null) {
-        throw new Exception("해당 번호의 스크랩이 없습니다.");
-      }
 
       Member loginUser = (Member)request.getSession().getAttribute("loginUser");
-      System.out.println(oldScrap.getMember());
-      System.out.println(loginUser);
-      if (oldScrap.getMember().getNo() != loginUser.getNo()) {
-        throw new Exception("삭제 권한이 없습니다!");
-      }
 
       scrapService.delete(scrapNo);
 
       //request.getRequestDispatcher("/jsp/mypage/scrapdelete.jsp").include(request, response);
-      response.sendRedirect("scraplist");
+      response.sendRedirect("../mypage/scraplist");
 
     } catch (Exception e) {
 
