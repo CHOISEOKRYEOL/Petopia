@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.pms.petopia.domain.Member;
 import com.pms.petopia.service.ReviewService;
 
 @SuppressWarnings("serial")
@@ -17,15 +18,19 @@ public class ReviewDeleteHandler extends HttpServlet {
       throws ServletException, IOException {
 
     ReviewService reviewService = (ReviewService) request.getServletContext().getAttribute("reviewService");
+    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+
+    int no = Integer.parseInt(request.getParameter("no"));
 
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
-      int hno = Integer.parseInt(request.getParameter("hno"));
       reviewService.delete(no);
-
-      response.sendRedirect("../hospital/detail?no=" + hno);
-      //      response.setHeader("Refresh", "1;url=../main");
-
+      if(loginUser.getRole() == 1) {
+        int hno = Integer.parseInt(request.getParameter("hno"));
+        response.sendRedirect("../hospital/detail?no=" + hno);
+      }
+      else {
+        response.sendRedirect("../admin/reviewlist");
+      }
     } catch (Exception e) {
       throw new ServletException(e);
     }
