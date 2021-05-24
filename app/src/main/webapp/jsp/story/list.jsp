@@ -13,13 +13,46 @@
 <link href="../css/common.css" rel="stylesheet" >
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FFADAD;">
+  <div class="container-fluid">
+  <a class="navbar-brand" href="../main" style="color: #FFFFFF;">Petopia</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="../hospital/list">병원찾기</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="../sharingmarketboard/list">나눔장터</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="../story/list">스토리</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="../mytown/main">우리동네</a>
+        </li>
+        </ul>
+        <div class="d-flex justify-content-between">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="../login">로그인</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="../mypage/main">마이페이지</a>
+        </li>
+        </ul>
+        </div>
+    </div>
+  </div>
+</nav>
+
 <div class="container">
-<h1>스토리</h1>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
   <li class="nav-item">
-    <a href='../main' class="btn" style="background-color: #FFADAD;">메인</a>
     <a href='add' class="btn" style="background-color: #FFADAD;">새 글</a>
     </li>
     </ul>
@@ -92,6 +125,14 @@
 </tbody>
 </table>
 </div>
+
+ <div id="footer">
+  Petopia
+  <address>서울시 서초구 서초동 비트아카데미빌딩 3층</address>
+  (주)비트컴퓨터 서초지점
+  <p>Copyright by BITCamp</p>
+  </div>
+
 </body>
 </html>
     
