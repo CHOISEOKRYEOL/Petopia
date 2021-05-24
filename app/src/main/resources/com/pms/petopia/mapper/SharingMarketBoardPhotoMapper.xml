@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pms.petopia.dao.SharingMarketBoardPhotoDao">
+  
+  <resultMap id="sharingmarketboardPhotoMap" type="sharingmarketboardphoto">
+    <id column="spno" property="no"/>
+    <result column="photo" property="photo"/>
+    
+        <association property="sharingmarketboard" javaType="sharingmarketboard">
+	    <id column="sharingmarketboard_webaddress" property="webaddress"/>
+    </association>
+  </resultMap>
+  
+  <sql id="find">
+       select
+      phot.spno,
+      phot.photo,
+      mark.sno as sharingmarketboard_webaddress
+    from pet_mark_phot phot
+      inner join pet_mark mark on mark.sno = phot.sno
+  </sql>
+  
+    <insert id="insert" parameterType="sharingmarketboardphoto">
+    insert into pet_mark_comt(photo, sno) 
+    values(#{photo}, #{sharingmarketboard.no})
+  </insert>
+
+      <select id="findAll" resultMap="sharingmarketboardPhotoMap" parameterType="int">
+      <include refid="find"/>
+      where phot.sno = #{no}
+  </select>
+ 
+  
+    <select id="findByNo" resultMap="sharingmarketboardPhotoMap" parameterType="int">
+    <include refid="find"/>
+       where phot.spno = #{no}
+  </select>
+  
+  
+  <update id="update" parameterType="sharingmarketboardphoto">
+    update pet_mark_phot set
+        photo = #{photo}
+    where spno = #{no}
+  </update>
+  
+    <delete id="delete" parameterType="int">
+    delete from pet_mark_phot
+    where spno = #{value}
+  </delete>
+
+
+</mapper>
+
+
+
+
+
+
+

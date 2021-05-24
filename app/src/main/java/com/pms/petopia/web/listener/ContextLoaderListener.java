@@ -22,6 +22,7 @@ import com.pms.petopia.dao.ReviewDao;
 import com.pms.petopia.dao.SharingMarketBoardCategoryDao;
 import com.pms.petopia.dao.SharingMarketBoardCommentDao;
 import com.pms.petopia.dao.SharingMarketBoardDao;
+import com.pms.petopia.dao.SharingMarketBoardPhotoDao;
 import com.pms.petopia.dao.SmallAddressDao;
 import com.pms.petopia.dao.StoryDao;
 import com.pms.petopia.service.BigAddressService;
@@ -36,6 +37,7 @@ import com.pms.petopia.service.RecordService;
 import com.pms.petopia.service.ReviewService;
 import com.pms.petopia.service.SharingMarketBoardCategoryService;
 import com.pms.petopia.service.SharingMarketBoardCommentService;
+import com.pms.petopia.service.SharingMarketBoardPhotoService;
 import com.pms.petopia.service.SharingMarketBoardService;
 import com.pms.petopia.service.SmallAddressService;
 import com.pms.petopia.service.StoryService;
@@ -51,6 +53,7 @@ import com.pms.petopia.service.impl.DefaultRecordService;
 import com.pms.petopia.service.impl.DefaultReviewService;
 import com.pms.petopia.service.impl.DefaultSharingMarketBoardCategoryService;
 import com.pms.petopia.service.impl.DefaultSharingMarketBoardCommentService;
+import com.pms.petopia.service.impl.DefaultSharingMarketBoardPhotoService;
 import com.pms.petopia.service.impl.DefaultSharingMarketBoardService;
 import com.pms.petopia.service.impl.DefaultSmallAddressService;
 import com.pms.petopia.service.impl.DefaultStorylService;
@@ -88,6 +91,7 @@ public class ContextLoaderListener implements ServletContextListener {
       ReviewDao reviewDao = daoFactory.createDao(ReviewDao.class);
       SharingMarketBoardCategoryDao sharingMarketBoardCategoryDao = daoFactory.createDao(SharingMarketBoardCategoryDao.class);
       SharingMarketBoardCommentDao sharingMarketBoardCommentDao = daoFactory.createDao(SharingMarketBoardCommentDao.class);
+      SharingMarketBoardPhotoDao sharingMarketBoardPhotoDao = daoFactory.createDao(SharingMarketBoardPhotoDao.class);
       QnaDao qnaDao = daoFactory.createDao(QnaDao.class);
 
       // 3) 서비스 관련 객체 준비
@@ -105,6 +109,7 @@ public class ContextLoaderListener implements ServletContextListener {
       ReviewService reviewService = new DefaultReviewService(reviewDao);
       SharingMarketBoardCategoryService sharingMarketBoardCategoryService = new DefaultSharingMarketBoardCategoryService(sharingMarketBoardCategoryDao);
       SharingMarketBoardCommentService sharingMarketBoardCommentService = new DefaultSharingMarketBoardCommentService(sharingMarketBoardCommentDao);
+      SharingMarketBoardPhotoService sharingMarketBoardPhotoService = new DefaultSharingMarketBoardPhotoService(sharingMarketBoardPhotoDao);
       QnaService qnaService = new DefaultQnaService(qnaDao);
 
       // 4) 서비스 객체를 ServletContext 보관소에 저장한다.
@@ -122,6 +127,7 @@ public class ContextLoaderListener implements ServletContextListener {
       servletContext.setAttribute("reviewService", reviewService);
       servletContext.setAttribute("sharingMarketBoardCategoryService", sharingMarketBoardCategoryService);
       servletContext.setAttribute("sharingMarketBoardCommentService", sharingMarketBoardCommentService);
+      servletContext.setAttribute("sharingMarketBoardPhotoService", sharingMarketBoardPhotoService);
       servletContext.setAttribute("qnaService", qnaService);
 
     } catch (Exception e) {

@@ -18,8 +18,32 @@
 <th>조회수</th> <td>${smb.viewCount}</td></tr>
 <tr><th>제목</th> <td colspan="5">${smb.title}</td></tr>
 <tr><th>내용</th> <td colspan="5">${smb.content}</td></tr>
+<tr><th>사진</th>
+
+<td>
+<form action='../sharingmarketboardphoto/add' method='post'>
+<c:forEach items="${photList}" var="phot">
+  <c:if test="${not empty phot.photo}">
+    <c:set var="photoUrl">../upload/${phot.photo}_30x30.jpg</c:set>
+  </c:if>
+  <c:if test="${empty phot.photo}">
+    <c:set var="photoUrl">../images/person_30x30.jpg</c:set>
+  </c:if>
+	<tr> 
+	  <td>${phot.no}</td> 
+	  <td><img src='${photoUrl}'></td> 
+	  <td><a href='detail?no=${phot.no}'>${phot.name}</a></td> 
+	</tr>
+	<tr><td><input type='submit' value='등록'></td></tr>
+</c:forEach>
+</form>
+</td>
+</tr>
+
 </tbody>
 </table>
+
+
 <c:if test="${not empty loginUser and loginUser.no == smb.writer.no}">
 	<tfoot>
 	<tr>
@@ -37,15 +61,18 @@
 
 <jsp:include page="/jsp/sharingmarketboardcomment/list.jsp"/>
 
-<c:if test="${not empty loginUser and loginUser.no == smb.writer.no}">
-<form action='../sharingmarketboardcomment/add' method='post'>
+<!--<c:if test="${not empty loginUser and loginUser.no == smb.writer.no}">
+<form action='../sharingmarketboardcomment/add' method='post' enctype="multipart/form-data">
 <table border='1'>
 <tr><td><input type='hidden' name='no' value='${smb.no}'> <br></td>
-<td><textarea name='content' rows='10' cols='60'></textarea></td>
+<td><textarea name='content' rows='10' cols='20'></textarea></td>
 <td><input type='submit' value='등록'></td></tr>
   </table>
   </form>
-  </c:if>
+  </c:if>-->
+  
+ <jsp:include page="/jsp/sharingmarketboardphoto/form.jsp"/>
+  
   
 <p><a href='list'>목록</a></p>
 </body>

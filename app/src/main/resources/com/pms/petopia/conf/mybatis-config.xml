@@ -37,6 +37,7 @@
     <mapper resource="com/pms/petopia/mapper/SharingMarketBoardMapper.xml"/>
     <mapper resource="com/pms/petopia/mapper/SharingMarketBoardCategoryMapper.xml"/>
     <mapper resource="com/pms/petopia/mapper/SharingMarketBoardCommentMapper.xml"/>
+    <mapper resource="com/pms/petopia/mapper/SharingMarketBoardPhotoMapper.xml"/>
     <mapper resource="com/pms/petopia/mapper/QnaMapper.xml"/>
   </mappers>
 </configuration>
