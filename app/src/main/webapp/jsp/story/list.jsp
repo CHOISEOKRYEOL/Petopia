@@ -66,9 +66,9 @@
     <c:forEach items="${scrapList}" var="scrap">
         <c:if test="${scrap.story.no eq s.no}">
           <c:if test="${scrap.isScrap eq 1}">
-          <input type='hidden' name='scrapNo' value ='${s.no}'>
-          <input type='submit' value ='스크랩취소'>
-        </c:if>
+            <input type='hidden' name='scrapNo' value ='${s.no}'>
+            <input type='submit' value ='스크랩취소'>
+          </c:if>
         </c:if>
     </c:forEach>
    </form>

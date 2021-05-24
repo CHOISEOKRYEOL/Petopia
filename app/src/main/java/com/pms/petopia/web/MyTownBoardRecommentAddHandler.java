@@ -63,12 +63,13 @@ public class MyTownBoardRecommentAddHandler extends HttpServlet {
         }
       }
       request.setAttribute("result", result);
-
+      request.setAttribute("myTownBoard", myTownBoard);
       request.getRequestDispatcher("/jsp/mytown/recommentadd.jsp").include(request, response);
+      //request.getRequestDispatcher("/jsp/mytown/detail.jsp").include(request, response);
 
-      String webAddress= String.format("2;url=../mytown/detail?stateNo=%d&cityNo=%d&no=%d\n", 
-          myTownBoard.getBigAddress().getNo(), myTownBoard.getSmallAddress().getNo(), boardNo);
-      response.setHeader("Refresh",webAddress);
+      //      String webAddress= String.format("3;url=../mytown/detail?stateNo=%d&cityNo=%d&no=%d\n", 
+      //          myTownBoard.getBigAddress().getNo(), myTownBoard.getSmallAddress().getNo(), boardNo);
+      //      response.setHeader("Refresh",webAddress);
 
     } catch (Exception e) {
       throw new ServletException(e);

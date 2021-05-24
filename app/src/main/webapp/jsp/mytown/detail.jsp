@@ -44,11 +44,11 @@
 					<th>조회수</th>
 					<td>${myTownBoard.viewCount}</td>
 					<th>추천수</th>
-					<td>${myTownBoard.recommentCount}</td>
+					<td colspan="3">${myTownBoard.recommentCount}</td>
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td>${myTownBoard.content}</td>
+					<td colspan="5">${myTownBoard.content}</td>
 				</tr>
 
 				<c:if
@@ -77,5 +77,25 @@
 		<textarea name='content' rows='1' cols='30'></textarea>
 		<br> <input type='submit' value='등록'>
 	</form>
+	<c:if test="${result eq 'success'}">
+<%-- 	<script>
+	  swal({
+	  title: "댓글 추천 완료!",
+	  text: "You clicked the button!",
+	  icon: "success"
+	  });
+	    <!-- 게시물을 추천하였습니다! -->
+	</script>
+	</c:if>
+	<c:if test="${result eq 'fail'}">
+	<script>
+	  swal({
+	  title: "이미 추천한 게시물 입니다!",
+	  text: "You clicked the button!",
+	  icon: "warning"
+	  });
+	    <!-- 이미 추천한 게시물입니다! -->
+	</script> --%>
+</c:if>
 </body>
 </html>
