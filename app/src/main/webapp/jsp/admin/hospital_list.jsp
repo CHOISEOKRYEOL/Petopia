@@ -52,7 +52,7 @@
           <td>${h.bigAddress.name}&nbsp;${h.smallAddress.name}</td>
           <td>${h.address}</td>
           <td>${h.startTime}시~${h.endTime}시</td>
-          <td>${h.rate}</td>
+          <td>${h.rating}</td>
           <td>
           <a href="../hospital/delete?no=${h.no}">삭제</a>
           </td>

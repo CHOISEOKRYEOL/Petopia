@@ -55,8 +55,6 @@ public class ReviewAddHandler extends HttpServlet {
     r.setCostRating(Integer.parseInt(request.getParameter("costRating")));
     r.setComment(request.getParameter("comment"));
 
-    float average = r.getServiceRating() + r.getCleanlinessRating() + r.getCostRating();
-
     Part photoPart = request.getPart("photo");
 
     if(photoPart.getSize() > 0) {
@@ -82,12 +80,31 @@ public class ReviewAddHandler extends HttpServlet {
 
     Hospital h = new Hospital();
     h.setNo(Integer.parseInt(request.getParameter("num")));
-    h.setRating(average);
     r.setHospital(h);
 
     try {
       reviewService.add(r);
-      hospitalService.rate(h.getRating());
+
+      String temp = reviewService.countReview(h.getNo());
+      int count = Integer.parseInt(temp);
+
+      float average = (r.getServiceRating() + r.getCleanlinessRating() + r.getCostRating()) / 3.0F;
+      h.setAccumulatedRating(average);
+      hospitalService.setAccumulatedRating(h);
+
+      Hospital rating = hospitalService.getRating(h.getNo());
+      float finalRating = 0;
+      if(count > 1) {
+        float original = rating.getAccumulatedRating();
+        finalRating = original / (count * 1.0F);
+      }
+      else {
+        finalRating = average * 1.0F;
+      }
+      rating.setRating(finalRating);
+
+      hospitalService.rate(rating);
+
       response.sendRedirect("../hospital/detail?no=" + h.getNo());
 
     } catch (Exception e) {

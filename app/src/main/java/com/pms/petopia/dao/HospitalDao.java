@@ -17,6 +17,10 @@ public interface HospitalDao {
 
   int delete(int no) throws Exception;
 
-  float updateRating(float no) throws Exception;
+  int updateRating(Hospital hospital) throws Exception;
+
+  int accumulateRating(Hospital hospital) throws Exception;
+
+  Hospital getRating(int no) throws Exception;
 
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,7 +56,14 @@
 					<td>${h.bigAddress.name}&nbsp;${h.smallAddress.name}</td>
 					<td>${h.address}</td>
 					<td>${h.startTime}시~${h.endTime}시</td>
-					<td>${h.rate}</td>
+					<td>
+					<c:if test="${h.rating == 0}">
+					0
+					</c:if>
+					<c:if test="${h.rating > 0 }">
+					<fmt:formatNumber value="${h.rating}" pattern=".00" />
+					</c:if>
+					</td>
 
 					<c:if test="${not empty loginUser}">
 						<c:set var="loop" value="false" />

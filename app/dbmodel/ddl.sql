@@ -143,19 +143,20 @@ ALTER TABLE `pet_mypet`
 
 -- 병원
 CREATE TABLE `pet_hp` (
-  `hno`   INTEGER      NOT NULL, -- 병원번호
-  `cno`   INTEGER      NOT NULL, -- 시군구번호
-  `name`  VARCHAR(50)  NOT NULL, -- 이름
-  `tel`   VARCHAR(30)  NOT NULL, -- 전화번호
-  `addr`  VARCHAR(255) NOT NULL, -- 상세주소
-  `stime` INTEGER      NOT NULL, -- 진료시작시간
-  `etime` INTEGER      NOT NULL, -- 진료종료시간
-  `park`  INTEGER      NOT NULL, -- 주차여부
-  `vet`   INTEGER      NOT NULL, -- 수의사
-  `photo` VARCHAR(255) NULL,     -- 사진
-  `grade` INTEGER      NULL     DEFAULT 0, -- 평점
-  `lat`   FLOAT        NULL,     -- 위도
-  `lon`   FLOAT        NULL      -- 경도
+  `hno`      INTEGER      NOT NULL, -- 병원번호
+  `cno`      INTEGER      NOT NULL, -- 시군구번호
+  `name`     VARCHAR(50)  NOT NULL, -- 이름
+  `tel`      VARCHAR(30)  NOT NULL, -- 전화번호
+  `addr`     VARCHAR(255) NOT NULL, -- 상세주소
+  `stime`    INTEGER      NOT NULL, -- 진료시작시간
+  `etime`    INTEGER      NOT NULL, -- 진료종료시간
+  `park`     INTEGER      NOT NULL, -- 주차여부
+  `vet`      INTEGER      NOT NULL, -- 수의사
+  `photo`    VARCHAR(255) NULL,     -- 사진
+  `rating`   FLOAT        NULL     DEFAULT 0, -- 최종평점
+  `lat`      FLOAT        NULL,     -- 위도
+  `lon`      FLOAT        NULL,     -- 경도
+  `a_rating` FLOAT        NULL     DEFAULT 0 -- 누적평점
 );
 
 -- 병원

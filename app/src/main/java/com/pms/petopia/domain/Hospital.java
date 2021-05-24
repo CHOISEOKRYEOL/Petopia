@@ -12,6 +12,7 @@ public class Hospital {
   private int veterinarian;
   private String photo;
   private float rating;
+  private float accumulatedRating;
   private BigAddress bigAddress;
   private SmallAddress smallAddress;
   private Review review;
@@ -22,8 +23,9 @@ public class Hospital {
   public String toString() {
     return "Hospital [no=" + no + ", name=" + name + ", tel=" + tel + ", address=" + address
         + ", startTime=" + startTime + ", endTime=" + endTime + ", parking=" + parking
-        + ", veterinarian=" + veterinarian + ", photo=" + photo + ", rating=" + rating + ", bigAddress="
-        + bigAddress + ", smallAddress=" + smallAddress + ", review=" + review + "]";
+        + ", veterinarian=" + veterinarian + ", photo=" + photo + ", rating=" + rating
+        + ", accumulatedRating=" + accumulatedRating + ", bigAddress=" + bigAddress
+        + ", smallAddress=" + smallAddress + ", review=" + review + "]";
   }
 
   public int getNo() {
@@ -85,6 +87,12 @@ public class Hospital {
   }
   public void setRating(float rating) {
     this.rating = rating;
+  }
+  public float getAccumulatedRating() {
+    return accumulatedRating;
+  }
+  public void setAccumulatedRating(float accumulatedRating) {
+    this.accumulatedRating = accumulatedRating;
   }
   public BigAddress getBigAddress() {
     return bigAddress;

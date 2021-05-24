@@ -23,4 +23,6 @@ public interface ReviewDao {
   int deleteAll(int no) throws Exception;
 
   int deleteByAdmin(int no) throws Exception;
+
+  String countReview(int no) throws Exception;
 }

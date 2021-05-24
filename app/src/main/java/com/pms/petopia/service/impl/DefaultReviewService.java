@@ -64,4 +64,9 @@ public class DefaultReviewService implements ReviewService {
     return reviewDao.deleteByAdmin(no);
   }
 
+  @Override
+  public String countReview(int no) throws Exception {
+    return reviewDao.countReview(no);
+  }
+
 }
