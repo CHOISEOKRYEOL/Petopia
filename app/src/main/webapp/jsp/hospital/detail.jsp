@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,6 +113,15 @@
 				type="submit" value="★">
 		</form>
 	</c:if>
+  
+  <h1>평점 : 
+  <c:if test="${hospital.rating == 0}">
+  0
+  </c:if>
+  <c:if test="${hospital.rating > 0}">
+  <fmt:formatNumber value="${hospital.rating}" pattern=".00" />
+  </c:if>
+  </h1>
 
 	<h1>병원 리뷰</h1>
 	<c:import url="../review/list" />

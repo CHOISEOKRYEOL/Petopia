@@ -78,5 +78,15 @@
     delete from pet_hp_review
     where writer=#{no}
   </delete>
+  
+  <delete id="deleteByAdmin" parameterType="int">
+    delete from pet_hp_review
+    where hname=#{no}
+  </delete>
+  
+    <select id="countReview" resultType="String" parameterType="int">
+    select count(*) from pet_hp_review
+    where hname = #{no}
+  </select>
 
 </mapper>

@@ -42,6 +42,9 @@
 			<a href='admin/memberlist'>ADMIN 회원 리스트</a>
 		</p>
 		<p>
+		  <a href='admin/hospitallist'>ADMIN 병원 리스트</a>
+		</p>
+		<p>
 			<a href='admin/reviewlist'>ADMIN 리뷰 리스트</a>
 		</p>
 		<p>

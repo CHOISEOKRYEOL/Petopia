@@ -17,4 +17,11 @@ public interface HospitalService {
 
   List<Hospital> search(String keyword) throws Exception;
 
+  int rate(Hospital hospital) throws Exception;
+
+  int setAccumulatedRating(Hospital hospital) throws Exception;
+
+  Hospital getRating(int no) throws Exception;
+
+
 }

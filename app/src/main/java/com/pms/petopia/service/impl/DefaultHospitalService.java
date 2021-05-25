@@ -43,4 +43,18 @@ public class DefaultHospitalService implements HospitalService {
     return hospitalDao.findByKeyword(keyword);
   }
 
+  @Override
+  public int rate(Hospital hospital) throws Exception {
+    return hospitalDao.updateRating(hospital);
+  }
+
+  @Override
+  public Hospital getRating(int no) throws Exception {
+    return hospitalDao.getRating(no);
+  }
+
+  @Override
+  public int setAccumulatedRating(Hospital hospital) throws Exception {
+    return hospitalDao.accumulateRating(hospital);
+  }
 }
