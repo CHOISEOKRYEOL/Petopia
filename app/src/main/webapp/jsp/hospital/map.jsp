@@ -69,7 +69,7 @@ function placesSearchCB (data, status, pagination) {
             displayMarker(data[i]);    
             bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
             var tr = "<tr>" 
-            + "<td>"+ i +"</td>"
+            + "<td>"+ ++i +"</td>"
             + "<td>"+ data[i].place_name + "</td>"
             + "<td>"+ data[i].phone +"</td>"
             + "<td>"+ data[i].address_name +"</td>"
