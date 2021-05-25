@@ -32,11 +32,14 @@ public class MyTownBoardRecommentAddHandler extends HttpServlet {
       int boardNo = Integer.parseInt(request.getParameter("no"));
       MyTownBoard myTownBoard = myTownBoardService.get(boardNo);
       recomment.setMyTownBoard(myTownBoard);
+
       Member loginUser = (Member)request.getSession().getAttribute("loginUser");
       recomment.setRecommender(loginUser);
+
       int count = 0;
       String result = "fail";
       List<Recomment> recomments = recommentService.list();
+
       if (recomments.size() == 0) {
         recommentService.add(recomment);
         myTownBoardService.updateRecommentCount(boardNo);
