@@ -59,6 +59,13 @@
     order by cdt desc
   </select>
   
+  <select id="findByNo" resultMap="reviewMap" parameterType="int">
+    select
+    rno, hname, service, clean, cost
+    from pet_hp_review
+    where rno=#{no}
+  </select>
+  
   <select id="findAll" resultMap="reviewMap" parameterType="int">
     <include refid="find"/>
     where h.hno = #{no}
