@@ -36,6 +36,8 @@
   </div>
 </nav>
 
+<jsp:include page="/jsp/hospital/map.jsp"></jsp:include>
+
 <table class="table table-hover">
 <thead>
 <tr>
