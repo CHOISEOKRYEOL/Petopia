@@ -169,7 +169,7 @@ ALTER TABLE `pet_hp`
 -- 병원
 ALTER TABLE `pet_hp`
   ADD CONSTRAINT `CK_pet_hp` -- 병원 체크 제약
-    CHECK (parking=1 or parking=0);
+    CHECK (park=1 or park=0);
 
 ALTER TABLE `pet_hp`
   MODIFY COLUMN `hno` INTEGER NOT NULL AUTO_INCREMENT;
