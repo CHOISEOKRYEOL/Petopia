@@ -72,7 +72,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 
 <div class="container">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-<a class="navbar-brand" style="font-size: 30px;">스토리</a>
+<a class="navbar-brand" style="font-size: 30px;">Story</a>
   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
   <li class="nav-item">
     <a href='add' class="btn" style="background-color: #FFADAD;">새 글</a>
