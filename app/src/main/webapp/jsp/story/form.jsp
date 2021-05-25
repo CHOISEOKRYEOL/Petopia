@@ -95,8 +95,8 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     </div>
   </div>
 <div class="modal-footer justify-content-between">
-<input class="btn" style="background-color: #FFADAD;" type='submit' value='등록'>
 <a href='list' class="btn btn-secondary">목록</a>
+<input class="btn" style="background-color: #FFADAD;" type='submit' value='등록'>
 </div>
 </form>
 </div>

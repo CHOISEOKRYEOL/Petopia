@@ -77,31 +77,31 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 <form action='update' method='post'>
 <div class="mb-3 row">
     <label for="no" class="col-sm-1 col-form-label">번호</label>
-    <div class="col-sm-7">
+    <div class="col-sm-10">
       <input type="text" class="form-control-plaintext" id="no" name="no" value='${story.no}'>
     </div>
   </div>
 <div class="mb-3 row">
     <label for="title" class="col-sm-1 col-form-label">제목</label>
-    <div class="col-sm-7">
+    <div class="col-sm-10">
       <input type="text" class="form-control" id="title" name="title" value='${story.title}'>
     </div>
   </div>
   <div class="mb-3 row">
     <label for="url" class="col-sm-1 col-form-label">URL</label>
-    <div class="col-sm-7">
+    <div class="col-sm-10">
       <input type="url" class="form-control" id="url" name="url" value='${story.url}'>
     </div>
   </div>
     <div class="mb-3 row">
     <label for="site" class="col-sm-1 col-form-label">사이트</label>
-    <div class="col-sm-7">
+    <div class="col-sm-10">
       <input type="text" class="form-control" id="site" name="site" value='${story.site}'>
     </div>
   </div>
   <div class="mb-3 row">
     <label for="registeredDate" class="col-sm-1 col-form-label">등록일</label>
-    <div class="col-sm-7">
+    <div class="col-sm-10">
       <input type="text" class="form-control-plaintext" id="registeredDate" value='${story.registeredDate2}'>
     </div>
   </div>
@@ -109,10 +109,10 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 <!-- <div class="d-flex justify-content-between"> -->
   <div class="modal-footer justify-content-between">
     <div>
-      <input class="btn" style="background-color: #FFADAD;" type='submit' value='변경'>
+      <a href='list' class="btn btn-secondary">목록</a>
       <a href='delete?no=${story.no}' class="btn btn-danger">삭제</a>
     </div>
-      <a href='list' class="btn btn-secondary">목록</a>
+      <input class="btn" style="background-color: #FFADAD;" type='submit' value='변경'>
   </div>
 </div>
 </form>
