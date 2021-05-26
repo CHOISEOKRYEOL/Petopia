@@ -19,6 +19,8 @@ public interface MemberService {
 
   Member getNick(String nick) throws Exception;
 
+  Member getIdEmail(String name, String nick) throws Exception;
+
   List<Member> search(String item, String keyword) throws Exception;
 
   int update(Member member) throws Exception;

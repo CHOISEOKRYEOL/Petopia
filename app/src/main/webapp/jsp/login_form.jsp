@@ -36,7 +36,9 @@
   <div class="mb-3 form-check">
     <input type="checkbox" class="form-check-input" id="saveIdOrEmail" name="saveIdOrEmail">
     <label class="form-check-label" for="saveEmail">ID/Email 저장</label>
+    <a href="member/findKey">아이디/비밀번호 찾기</a>
   </div>
+  
 <button class="btn btn-primary btn-sm">로그인</button>
 </form>
 </div>

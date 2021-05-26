@@ -59,6 +59,15 @@ public class DefaultMemberService implements MemberService {
   }
 
   @Override
+  public Member getIdEmail(String name, String nick) throws Exception {
+    Map<String, Object> params = new HashMap<>();
+    params.put("name", name);
+    params.put("nick", nick);
+
+    return memberDao.findIdEmailKey(params);
+  }
+
+  @Override
   public List<Member> search(String item, String keyword) throws Exception {
     Map<String,Object> params = new HashMap<>();
     params.put("item", item);

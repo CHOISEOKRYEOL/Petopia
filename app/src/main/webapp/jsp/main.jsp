@@ -67,6 +67,8 @@
 			<input name='logout' type='submit' value='로그아웃'>
 		</form>
 		<p>
+		</p>
+		<p>
 			<a href='pet/add'>마이펫 등록</a>
 		</p>
 		<p>

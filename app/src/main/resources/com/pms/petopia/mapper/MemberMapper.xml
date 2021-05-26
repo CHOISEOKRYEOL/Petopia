@@ -74,6 +74,19 @@
     where nick = #{nick};
   </select>
 
+  <select id="findIdEmailKey" resultMap="memberMap" parameterType="map">
+    select
+    mno, id, email
+    from pet_user
+    where name = #{name} and nick = #{nick}
+  </select>
+  
+  <update id="setNewPassword" parameterType="member">
+    update pet_user
+    pwd = password(#{password})
+    where mno = #{no}
+  </update>
+
 	<select id="findByKeyword" resultMap="memberMap"
 		parameterType="map">
 		<include refid="user" />
