@@ -16,7 +16,7 @@ import com.pms.petopia.service.SmallAddressService;
 @SuppressWarnings("serial")
 @WebServlet("/mytown/list")
 
-public class MyTownBoardListHandler extends HttpServlet { 
+public class MyTownBoardListHandler extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -31,6 +31,7 @@ public class MyTownBoardListHandler extends HttpServlet {
     int stateNo = Integer.parseInt(request.getParameter("stateNo"));
     int cityNo = Integer.parseInt(request.getParameter("cityNo"));
     String keyword = request.getParameter("keyword");
+    String r = request.getParameter("r");
 
     try {
       List<MyTownBoard> boards = myTownBoardService.list(cityNo, stateNo);
@@ -39,9 +40,11 @@ public class MyTownBoardListHandler extends HttpServlet {
 
       if (boards.size() > 0) {
 
-        if (keyword != null && keyword.length() > 0) {
+        if (keyword != null && keyword.length() > 0 && r == null) {
           boards = myTownBoardService.search(stateNo, cityNo, keyword);
-        } else {
+        }else if(keyword == null && r != null) {
+          boards = myTownBoardService.listRecomment(stateNo, cityNo);
+        }else {
           boards = myTownBoardService.list(stateNo, cityNo);
         }
       }
@@ -50,6 +53,7 @@ public class MyTownBoardListHandler extends HttpServlet {
       request.setAttribute("smallAddresses", smallAddresses);
       request.setAttribute("smallAddress", smallAddress);
       request.setAttribute("keyword", keyword);
+      request.setAttribute("r", r);
       request.setAttribute("stateNo", stateNo);
       request.setAttribute("cityNo", cityNo);
       request.getRequestDispatcher("/jsp/mytown/list.jsp").include(request, response);
