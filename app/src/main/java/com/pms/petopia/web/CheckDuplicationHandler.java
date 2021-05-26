@@ -24,8 +24,6 @@ public class CheckDuplicationHandler extends HttpServlet {
     String email = request.getParameter("email");
     String nick = request.getParameter("nick");
 
-    System.out.printf("id = %s, email = %s, nick = %s\n", id, email, nick);
-
     try {
 
       Member m = null;
@@ -39,8 +37,6 @@ public class CheckDuplicationHandler extends HttpServlet {
       else if(nick != null && id == null && email == null) {
         m = memberService.getNick(nick);
       }
-
-      System.out.println(m);
 
       response.setContentType("text/plain;charset=UTF-8");
       PrintWriter out = response.getWriter();
