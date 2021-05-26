@@ -56,16 +56,5 @@
   </div>
 </nav>
 
-<div class="wrap">
-<img src="../images/20180115_115933.jpg" class="img-fluid width:100%;"
-style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
-  <div class="text-group">
-    <p style="font-size: 50px;">펫토피아</p>
-    <p style="font-size: 30px;">우리 아이들의 이야기</p>
-    <p>동네 커뮤니티로 정보를 나누고, 수다 떨며,<br>
-    같이 산책할 내 반려동물의 친구를 사귀어 보세요.</p> 
-  </div>
-</div>
-
 </body>
 </html>
