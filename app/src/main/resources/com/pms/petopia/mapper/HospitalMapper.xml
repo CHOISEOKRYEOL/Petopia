@@ -105,6 +105,12 @@
     where hno=#{no}
   </update>
   
+  <update id="accumulatedRatingInitializer" parameterType="int">
+    update pet_hp set
+    a_rating = 0
+    where hno=#{no}
+  </update>
+  
   <update id="updateRating" parameterType="hospital">
     update pet_hp set
     rating = #{rating}

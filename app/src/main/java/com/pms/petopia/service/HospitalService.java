@@ -21,6 +21,8 @@ public interface HospitalService {
 
   int setAccumulatedRating(Hospital hospital) throws Exception;
 
+  int initAccumulatedRating(int no) throws Exception;
+
   Hospital getRating(int no) throws Exception;
 
 

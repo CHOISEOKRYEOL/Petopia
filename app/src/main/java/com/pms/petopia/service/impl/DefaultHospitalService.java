@@ -54,6 +54,11 @@ public class DefaultHospitalService implements HospitalService {
   }
 
   @Override
+  public int initAccumulatedRating(int no) throws Exception {
+    return hospitalDao.accumulatedRatingInitializer(no);
+  }
+
+  @Override
   public int setAccumulatedRating(Hospital hospital) throws Exception {
     return hospitalDao.accumulateRating(hospital);
   }

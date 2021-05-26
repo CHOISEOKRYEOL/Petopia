@@ -21,6 +21,8 @@ public interface HospitalDao {
 
   int accumulateRating(Hospital hospital) throws Exception;
 
+  int accumulatedRatingInitializer(int no) throws Exception;
+
   Hospital getRating(int no) throws Exception;
 
 }
