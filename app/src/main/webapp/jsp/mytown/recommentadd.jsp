@@ -12,7 +12,12 @@
 <body>
 <c:if test="${result eq 'success'}">
 <script>
-  swal({
+var e = document.getElementById("reco")
+e.addEventListener("click", function(e) {
+  alert("게시물을 추천하였습니다!"));
+});
+
+  /* swal({
   title: "댓글 추천 완료!",
   text: "You clicked the button!",
   icon: "success"
@@ -27,7 +32,7 @@
     } else {
       swal("Your imaginary file is safe!");
     }
-  });
+  }); */
   <!-- .then(value) => {
     case "확인" :
       location.href = 'detail?stateNo='+ ${myTownBoard.bigAddress.no} + '&cityNo=' + ${myTownBoard.smallAddress.no} + '&no=' + ${myTownBoard.no}
@@ -37,11 +42,15 @@
 </c:if>
 <c:if test="${result eq 'fail'}">
 <script>
-  swal({
+var e = document.getElementById("reco")
+e.addEventListener("click", function(e) {
+  alert("이미 추천한 게시물입니다!"));
+});
+  /* swal({
   title: "이미 추천한 게시물 입니다!",
   text: "You clicked the button!",
   icon: "warning"
-  });
+  }); */
     <!-- 이미 추천한 게시물입니다! -->
 </script>
 </c:if>

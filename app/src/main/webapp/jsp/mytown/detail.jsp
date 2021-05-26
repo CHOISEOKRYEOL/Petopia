@@ -9,6 +9,7 @@
 <html>
 <head>
 <title>게시글 상세</title>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <link href="../css/common.css" rel="stylesheet">
@@ -63,10 +64,14 @@
 	</form>
 	<c:if test="${not empty loginUser}">
 		<tr>
-			<td colspan='2'><a href='recommentadd?no=${myTownBoard.no}'>추천</a>
+			<td colspan='2'>
+			    <input id="board-no" type="hidden" name="no" value="${myTownBoard.no}">
+			    <button id="reco" type="button">추천</button>
+			  <!--  <a href='recommentadd?no=${myTownBoard.no}' class ='btn'>추천</a> -->
 			</td>
 		</tr>
 	</c:if>
+	<h1>${result}</h1>
 	<a
 		href='list?stateNo=${smallAddress.bigAddress.no}&cityNo=${smallAddress.no}'>목록</a>
 	<br>
@@ -77,25 +82,18 @@
 		<textarea name='content' rows='1' cols='30'></textarea>
 		<br> <input type='submit' value='등록'>
 	</form>
-	<c:if test="${result eq 'success'}">
-<%-- 	<script>
-	  swal({
-	  title: "댓글 추천 완료!",
-	  text: "You clicked the button!",
-	  icon: "success"
-	  });
-	    <!-- 게시물을 추천하였습니다! -->
-	</script>
-	</c:if>
-	<c:if test="${result eq 'fail'}">
-	<script>
-	  swal({
-	  title: "이미 추천한 게시물 입니다!",
-	  text: "You clicked the button!",
-	  icon: "warning"
-	  });
-	    <!-- 이미 추천한 게시물입니다! -->
-	</script> --%>
-</c:if>
+  <script>
+	  document.querySelector("#reco").onclick = function() {
+		  var boardNo = document.querySelector("#board-no");
+		  var xhr = new XMLHttpRequest();
+		  xhr.open("GET", "recommentadd?no=" + boardNo.value, false);
+		  xhr.send();
+		  if (xhr.responseText == "fail") {
+		    alert("이미 추천한 게시물입니다.");
+		  } else {
+		    alert("게시물을 추천하였습니다.") 
+		  }
+		};
+	</script>  
 </body>
 </html>
