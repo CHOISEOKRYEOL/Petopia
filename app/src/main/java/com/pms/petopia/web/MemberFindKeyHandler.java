@@ -32,16 +32,13 @@ public class MemberFindKeyHandler extends HttpServlet {
     String name = request.getParameter("name");
     String nick = request.getParameter("nick");
 
-    String id = request.getParameter("id");
-    String email = request.getParameter("email");
-
-
     try {
 
       Member m = memberService.getIdEmail(name, nick);
 
       request.setAttribute("member", m);
-      request.getRequestDispatcher("/jsp/member/findid.jsp").include(request, response);
+      response.setContentType("text/html;charset=UTF-8");
+      request.getRequestDispatcher("/jsp/member/find_id_email.jsp").include(request, response);
 
     }
     catch (Exception e) {

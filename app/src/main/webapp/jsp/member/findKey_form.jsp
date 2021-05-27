@@ -34,7 +34,7 @@
   </div>
   <div class="mb-3 row">
     <div class="col-sm-9">
-      <input type="password" class="form-control form-control-sm" id="nick" name="nick" placeholder="닉네임">
+      <input type="text" class="form-control form-control-sm" id="nick" name="nick" placeholder="닉네임">
     </div>
   </div>
 <button class="btn btn-primary btn-sm">아이디 찾기</button>
@@ -63,6 +63,10 @@
 <button class="btn btn-primary btn-sm">비밀번호 찾기</button>
 </form>
 </div>
+<script>
 
+
+
+</script>
 </body>
 </html>

@@ -11,8 +11,8 @@ import com.pms.petopia.domain.Member;
 import com.pms.petopia.service.MemberService;
 
 @SuppressWarnings("serial")
-@WebServlet("/member/check")
-public class CheckDuplicationHandler extends HttpServlet {
+@WebServlet("/member/checkid")
+public class CheckIdDuplicationHandler extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -21,25 +21,15 @@ public class CheckDuplicationHandler extends HttpServlet {
     MemberService memberService = (MemberService) request.getServletContext().getAttribute("memberService");
 
     String id = request.getParameter("id");
-    String email = request.getParameter("email");
-    String nick = request.getParameter("nick");
 
     try {
 
-      Member m = null;
-
-      if(id != null && email == null && nick == null) {
-        m = memberService.getId(id);
-      }
-      else if(email != null && id == null && nick == null) {
-        m = memberService.getEmail(email);
-      }
-      else if(nick != null && id == null && email == null) {
-        m = memberService.getNick(nick);
-      }
+      Member m = memberService.getId(id);
 
       response.setContentType("text/plain;charset=UTF-8");
       PrintWriter out = response.getWriter();
+
+      System.out.printf("입력 ID : %s\n", id);
 
       if(m != null) {
         out.print("1");
