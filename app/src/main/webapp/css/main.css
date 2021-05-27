@@ -23,6 +23,7 @@
 
 .container_section02 {
     /* Take full size */
+    display: flex;
     height: 200px;
     width: 100%;
     border: 5px solid lightgray;
@@ -37,9 +38,29 @@
 
 .container_section04 {
     /* Take full size */
+    display: flex;
     height: 400px;
     width: 100%;
     border: 5px solid lightgray;
 }
 
 
+.container_left01 {
+  width: 30%;
+  border: 5px solid #808000;
+}
+
+.container_right01 {
+    flex: 1;
+    border: 5px solid #004080;
+}
+
+.container_left02 {
+    flex: 1;
+    border: 5px solid #808000;
+}
+
+.container_right02 {
+    flex: 1;
+    border: 5px solid #004080;
+}
