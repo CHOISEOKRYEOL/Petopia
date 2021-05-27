@@ -29,8 +29,6 @@ public class CheckNickDuplicationHandler extends HttpServlet {
       response.setContentType("text/plain;charset=UTF-8");
       PrintWriter out = response.getWriter();
 
-      System.out.printf("입력 Nick : %s\n", nick);
-
       if(m != null) {
         out.print("1");
       }
