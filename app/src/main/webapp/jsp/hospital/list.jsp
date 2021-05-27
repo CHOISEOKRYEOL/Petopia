@@ -16,7 +16,7 @@
 <body>
 <header id="header"></header>
 <div class="wrap">
-<img src="../images/Screenshot_2017-01-05-23-08-49.png" class="img-fluid width:100%;"
+<img src="../images/242photo.jpg" class="img-fluid width:100%;"
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="text-group">
     <p style="font-size: 50px;">펫토피아</p>
@@ -26,12 +26,11 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   </div>
 </div>
 <div class="container">
-<h1>병원 찾기</h1>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<a class="navbar-brand" style="font-size: 30px;">병원 찾기</a>
   <div class="container-fluid">
   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
   <li class="nav-item">
-    <a href='../main' class="btn" style="background-color: #FFADAD;">메인</a>
     <a href='add' class="btn" style="background-color: #FFADAD;">새 글</a>
     </li>
     </ul>
