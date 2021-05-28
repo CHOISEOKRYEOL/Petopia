@@ -24,14 +24,14 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="text-group">
     <p style="font-size: 50px;">펫토피아</p>
     <p style="font-size: 30px;">우리 아이들의 이야기</p>
-    <p>동네 커뮤니티로 정보를 나누고, 수다 떨며,<br>
-    같이 산책할 내 반려동물의 친구를 사귀어 보세요.</p> 
+    <p>동물에 관련된 정보만 빠르게<br>
+    한눈에 볼 수 있도록 전달해 드립니다</p> 
   </div>
 </div>
 
 <div class="container">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-<a class="navbar-brand" style="font-size: 30px;">새 스토리</a>
+<a class="navbar-brand">새 스토리</a>
 </nav>
 <div class="addform">
 <form action='add' method='post'>

@@ -14,6 +14,14 @@ public interface MemberDao {
 
   Member findByEmailPassword(Map<String,Object> params) throws Exception;
 
+  Member findById(String id) throws Exception;
+
+  Member findByEmail(String email) throws Exception;
+
+  Member findByNick(String nick) throws Exception;
+
+  Member findIdEmailKey(Map<String,Object> params) throws Exception;
+
   List<Member> findByKeyword(Map<String,Object> params) throws Exception;
 
   List<Member> findAll() throws Exception;

@@ -3,12 +3,11 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset='UTF-8'>
-<title>마이 페이지</title>
+<meta charset="UTF-8">
+<title>아이디 찾기 결과</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -18,31 +17,18 @@
 </head>
 <body>
 <header id="header"></header>
-<div class="wrap">
-<img src="../images/20180115_115933.jpg" class="img-fluid width:100%;"
-style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
-  <div class="text-group">
-    <p style="font-size: 50px;">펫토피아</p>
-    <p style="font-size: 30px;">우리 아이들의 이야기</p>
-    <p>동네 커뮤니티로 정보를 나누고, 수다 떨며<br>
-    같이 산책할 내 반려동물의 친구를 사귀어 보세요</p> 
-  </div>
-</div>
-
-<div class="container">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-<a class="navbar-brand">My Page</a> <%--  style="font-size: 30px;" --%>
-</nav>
-<p>${loginUser.nick}님의 페이지입니다!</p>
 <br>
-<form action='scraplist' method='post'>
-<input type='submit' value='나의 스크랩'><br>
-</form>
-<form action='mytownlist' method='post'>
-<input type='submit' value='우리동네 나의 게시글'><br>
-</form>
-
-</div>
+<br>
+<br>
+<c:if test="${not empty member}">
+<h1>아이디 : ${member.id} 이메일 : ${member.email}</h1>
+</c:if>
+<c:if test="${empty member}">
+<h1>존재하지 않는 아이디 혹은 닉네임 입니다.</h1>
+</c:if>
+<br>
+<br>
+<br>
 <footer id="footer"></footer>
 </body>
 </html>

@@ -44,6 +44,30 @@ public class DefaultMemberService implements MemberService {
   }
 
   @Override
+  public Member getId(String id) throws Exception {
+    return memberDao.findById(id);
+  }
+
+  @Override
+  public Member getEmail(String email) throws Exception {
+    return memberDao.findByEmail(email);
+  }
+
+  @Override
+  public Member getNick(String nick) throws Exception {
+    return memberDao.findByNick(nick);
+  }
+
+  @Override
+  public Member getIdEmail(String name, String nick) throws Exception {
+    Map<String, Object> params = new HashMap<>();
+    params.put("name", name);
+    params.put("nick", nick);
+
+    return memberDao.findIdEmailKey(params);
+  }
+
+  @Override
   public List<Member> search(String item, String keyword) throws Exception {
     Map<String,Object> params = new HashMap<>();
     params.put("item", item);
@@ -51,7 +75,6 @@ public class DefaultMemberService implements MemberService {
 
     return memberDao.findByKeyword(params);
   }
-
 
   @Override
   public int update(Member member) throws Exception {
