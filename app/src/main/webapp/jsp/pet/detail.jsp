@@ -10,7 +10,7 @@
 <title>게시글 상세</title>
 </head>
 <body>
-<h1>게시글 상세보기(JSP + JSP 액션태그 +EL + JSTL)</h1>
+<h1>게시글 상세보기</h1>
 
 <c:if test="${not empty pet}">
   <c:if test="${not empty pet.photo}">

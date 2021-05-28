@@ -124,7 +124,8 @@ CREATE TABLE pet_mypet (
   age    INTEGER      NOT NULL COMMENT '나이', -- 나이
   birth  DATE         NOT NULL COMMENT '생년월일', -- 생년월일
   gender INTEGER      NOT NULL COMMENT '성별', -- 성별
-  photo  VARCHAR(255) NULL     COMMENT '사진' -- 사진
+  photo  VARCHAR(255) NULL     COMMENT '사진', -- 사진
+  m_pet  INTEGER      NULL     DEFAULT 0 COMMENT '대표' -- 대표
 )
 COMMENT '펫';
 
@@ -138,7 +139,8 @@ ALTER TABLE pet_mypet
 -- 펫
 ALTER TABLE pet_mypet
   ADD CONSTRAINT CK_pet_mypet -- 펫 체크 제약
-    CHECK (gender = 0 or gender = 1);
+    CHECK (gender = 0 or gender = 1
+    m_pet = 0 or m_pet = 1);
 
 ALTER TABLE pet_mypet
   MODIFY COLUMN pno INTEGER NOT NULL AUTO_INCREMENT COMMENT '마이펫번호';
@@ -511,8 +513,8 @@ ALTER TABLE pet_type
 
 -- 종
 CREATE TABLE pet_species (
-  sno  INTEGER      NOT NULL COMMENT '종번호', -- 종번호
-  type VARCHAR(255) NOT NULL COMMENT '종' -- 종
+  sno  INTEGER NOT NULL COMMENT '종번호', -- 종번호
+  type INTEGER NOT NULL COMMENT '종' -- 종
 )
 COMMENT '종';
 
@@ -526,7 +528,7 @@ ALTER TABLE pet_species
 -- 종
 ALTER TABLE pet_species
   ADD CONSTRAINT CK_pet_species -- 종 체크 제약
-    CHECK (type = 0 or type = 1 or type = 2);
+    CHECK (type = 1 or type = 2 or type = 3);
 
 ALTER TABLE pet_species
   MODIFY COLUMN sno INTEGER NOT NULL AUTO_INCREMENT COMMENT '종번호';

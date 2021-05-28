@@ -13,6 +13,8 @@ public class Pet {
   private Member owner;
   private Member role;
   private Type type;
+  private int leader;
+
   public int getNo() {
     return no;
   }
@@ -67,6 +69,12 @@ public class Pet {
   public void setType(Type type) {
     this.type = type;
   }
+  public int getLeader() {
+    return leader;
+  }
+  public void setLeader(int leader) {
+    this.leader = leader;
+  }
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -74,6 +82,7 @@ public class Pet {
     result = prime * result + age;
     result = prime * result + ((birthDay == null) ? 0 : birthDay.hashCode());
     result = prime * result + gender;
+    result = prime * result + leader;
     result = prime * result + ((name == null) ? 0 : name.hashCode());
     result = prime * result + no;
     result = prime * result + ((owner == null) ? 0 : owner.hashCode());
@@ -99,6 +108,8 @@ public class Pet {
     } else if (!birthDay.equals(other.birthDay))
       return false;
     if (gender != other.gender)
+      return false;
+    if (leader != other.leader)
       return false;
     if (name == null) {
       if (other.name != null)
@@ -133,10 +144,7 @@ public class Pet {
   public String toString() {
     return "Pet [no=" + no + ", name=" + name + ", age=" + age + ", birthDay=" + birthDay
         + ", gender=" + gender + ", photo=" + photo + ", owner=" + owner + ", role=" + role
-        + ", type=" + type + "]";
+        + ", type=" + type + ", leader=" + leader + "]";
   }
-
-
-
 
 }
