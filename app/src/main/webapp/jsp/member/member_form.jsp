@@ -1,4 +1,3 @@
-
 <%@ page language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
@@ -117,13 +116,11 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 <footer id="footer"></footer>
 
 <script>
-
 var idCheck = 0;
 var pwdCheck = 0;
 var emailCheck = 0;
 var nickCheck = 0;
 var emailValidator = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-
 function checkId() {
  var userId = $('#id').val();
  $.ajax({
@@ -154,69 +151,66 @@ function checkId() {
      }
  });
 }
-
 function checkEmail() {
-	 var userEmail = $('#email').val();
-	 $.ajax({
-	     url : "checkemail",
-	     data : {
-	         email : userEmail
-	     },
-	     success : function(data) {
-	         if(userEmail=="" && data=='0') {
-	             $(".btn").prop("disabled", true);
-	             $(".btn").css("background-color", "#aaaaaa");
-	             $("#email").css("background-color", "#FFCECE");
-	             emailCheck = 0;
-	         } else if (data == '0') {
-	             $("#email").css("background-color", "#B0F6AC");
-	             emailCheck = 1;
-	             if(idCheck==1 && pwdCheck == 1 && emailCheck == 1 && nickCheck == 1) {
-	                 $(".btn").prop("disabled", false);
-	                 $(".btn").css("background-color", "#FFADAD");
-	                 nameCheck();
-	             } 
-	         } else if (data == '1') {
-	             $(".btn").prop("disabled", true);
-	             $(".btn").css("background-color", "#aaaaaa");
-	             $("#email").css("background-color", "#FFCECE");
-	             emailCheck = 0;
-	         } 
-	     }
-	 });
-	}
-
+   var userEmail = $('#email').val();
+   $.ajax({
+       url : "checkemail",
+       data : {
+           email : userEmail
+       },
+       success : function(data) {
+           if(userEmail=="" && data=='0') {
+               $(".btn").prop("disabled", true);
+               $(".btn").css("background-color", "#aaaaaa");
+               $("#email").css("background-color", "#FFCECE");
+               emailCheck = 0;
+           } else if (data == '0') {
+               $("#email").css("background-color", "#B0F6AC");
+               emailCheck = 1;
+               if(idCheck==1 && pwdCheck == 1 && emailCheck == 1 && nickCheck == 1) {
+                   $(".btn").prop("disabled", false);
+                   $(".btn").css("background-color", "#FFADAD");
+                   nameCheck();
+               } 
+           } else if (data == '1') {
+               $(".btn").prop("disabled", true);
+               $(".btn").css("background-color", "#aaaaaa");
+               $("#email").css("background-color", "#FFCECE");
+               emailCheck = 0;
+           } 
+       }
+   });
+  }
 function checkNick() {
-	   var userNick = $('#nick').val();
-	   $.ajax({
-	       url : "checknick",
-	       data : {
-	           nick : userNick
-	       },
-	       success : function(data) {
-	           if(userNick=="" && data=='0') {
-	               $(".btn").prop("disabled", true);
-	               $(".btn").css("background-color", "#aaaaaa");
-	               $("#nick").css("background-color", "#FFCECE");
-	               nickCheck = 0;
-	           } else if (data == '0') {
-	               $("#nick").css("background-color", "#B0F6AC");
-	               nickCheck = 1;
-	               if(idCheck==1 && pwdCheck == 1 && emailCheck == 1 && nickCheck == 1) {
-	                   $(".btn").prop("disabled", false);
-	                   $(".btn").css("background-color", "#FFADAD");
-	                   nameCheck();
-	               } 
-	           } else if (data == '1') {
-	               $(".btn").prop("disabled", true);
-	               $(".btn").css("background-color", "#aaaaaa");
-	               $("#nick").css("background-color", "#FFCECE");
-	               nickCheck = 0;
-	           } 
-	       }
-	   });
-	  }
-
+     var userNick = $('#nick').val();
+     $.ajax({
+         url : "checknick",
+         data : {
+             nick : userNick
+         },
+         success : function(data) {
+             if(userNick=="" && data=='0') {
+                 $(".btn").prop("disabled", true);
+                 $(".btn").css("background-color", "#aaaaaa");
+                 $("#nick").css("background-color", "#FFCECE");
+                 nickCheck = 0;
+             } else if (data == '0') {
+                 $("#nick").css("background-color", "#B0F6AC");
+                 nickCheck = 1;
+                 if(idCheck==1 && pwdCheck == 1 && emailCheck == 1 && nickCheck == 1) {
+                     $(".btn").prop("disabled", false);
+                     $(".btn").css("background-color", "#FFADAD");
+                     nameCheck();
+                 } 
+             } else if (data == '1') {
+                 $(".btn").prop("disabled", true);
+                 $(".btn").css("background-color", "#aaaaaa");
+                 $("#nick").css("background-color", "#FFCECE");
+                 nickCheck = 0;
+             } 
+         }
+     });
+    }
 function checkPwd() {
     var originalPassword = $('#password').val();
     var repeatedPassword = $('#checkPassword').val();
@@ -241,16 +235,13 @@ function checkPwd() {
         
     }
 }
-
 function nameCheck() {
-	  var name = $("#name").val();
-	  if(name == "") {
-	    $(".btn").prop("disabled", true);
-	    $(".btn").css("background-color", "#aaaaaa");
-	  }
-	}
-
-
+    var name = $("#name").val();
+    if(name == "") {
+      $(".btn").prop("disabled", true);
+      $(".btn").css("background-color", "#aaaaaa");
+    }
+  }
 $(".cancelbtn").click(function(){
         $("#name").val('');
         $("#id").val('');
@@ -266,8 +257,6 @@ $(".cancelbtn").click(function(){
         $("#nick").css("background-color", "#FFFFFF");
         $("#checkPassword").css("background-color", "#FFFFFF");
 });
-
-
 </script>
 
 </body>
