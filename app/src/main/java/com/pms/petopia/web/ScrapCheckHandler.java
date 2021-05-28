@@ -1,6 +1,7 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,8 +15,8 @@ import com.pms.petopia.service.ScrapService;
 import com.pms.petopia.service.StoryService;
 
 @SuppressWarnings("serial")
-@WebServlet("/story/list")
-public class StoryListHandler extends HttpServlet {
+@WebServlet("/story/scrapcheck")
+public class ScrapCheckHandler extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -24,6 +25,7 @@ public class StoryListHandler extends HttpServlet {
     StoryService storyService = (StoryService) request.getServletContext().getAttribute("storyService");
     ScrapService scrapService = (ScrapService) request.getServletContext().getAttribute("scrapService");
 
+    PrintWriter out = response.getWriter();
 
     try {
       String keyword = request.getParameter("keyword");
@@ -38,13 +40,28 @@ public class StoryListHandler extends HttpServlet {
         Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 
         scrapList = scrapService.list(loginUser.getNo());
+        System.out.println("여");
+        if (scrapList.size() == 0) {
+          for (Story story : storys) {
+            System.out.println("beforescrap" + story.getNo());
+            out.print("beforescrap");
+          }
+        } else {
 
+          for (Scrap scrap : scrapList) {
+            for(Story story : storys) {
+              if (scrap.getStory().getNo() != story.getNo() || scrap == null) {
+                System.out.println("beforescrap" + story.getNo());
+                out.print("beforescrap");
+              } else {
+                System.out.println("alreadyscrap" + story.getNo());
+                out.print("alreadyscrap");
+              }
+            }
+          }
+
+        }
       }
-
-      request.setAttribute("scrapList", scrapList);
-      request.setAttribute("storys", storys);
-      response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/story/list.jsp").include(request, response);
 
     } catch (Exception e) {
       throw new ServletException(e);

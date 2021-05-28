@@ -24,6 +24,10 @@ war {
 
 dependencies {
 
+    // JSON 포맷을 다루는 라이브러리 
+    implementation 'com.google.code.gson:gson:2.8.7'
+
+
     implementation 'net.coobird:thumbnailator:0.4.13'
     providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
     implementation 'javax.servlet:jstl:1.2'
