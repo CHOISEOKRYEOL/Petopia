@@ -19,7 +19,7 @@
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="text-group">
     <p style="font-size: 50px;">펫토피아</p>
-    <p style="font-size: 30px;">집에서 가까운 병원 찾기</p>
+    <p style="font-size: 30px;">추억을 나누는 나눔 장터</p>
     <p>사용하지 않는 반려동물 용품을<br>
     버리지 말고 동네 친구들에게 나눠 보세요</p>
   </div>
