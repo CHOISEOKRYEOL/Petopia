@@ -25,6 +25,11 @@ public class DefaultPetService implements PetService {
     return petDao.findByNo(no);
   }
 
+  @Override
+  public int setLeaderPet(int no) throws Exception {
+    return petDao.setLeaderPet(no);
+  }
+
   //사용자 조회 업무
   @Override
   public List<Pet> list() throws Exception {

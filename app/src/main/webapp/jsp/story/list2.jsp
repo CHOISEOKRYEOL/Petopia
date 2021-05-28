@@ -72,47 +72,36 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   </td>
 </tr>
 
+
 </c:forEach>
 </tbody>
 </table>
+
 
 </div>
   <script>
    var scrapList = document.querySelectorAll(".scrap");
    var scrapcancelList = document.querySelectorAll(".scrapcancel");
-  /*  $.ajax({"scrapcheck",
-	   dataType : "String",
-	   success(scrap){
-		   scrap.forEach(if 
-		    )
-	   }
-   }); */
    (function() {
 	   for (var scrap of scrapList) {
-		   console.log(scrap);
 		   var xhr = new XMLHttpRequest();
 		   console.log(xhr.responseText);
-		   
-		   
 		   xhr.onreadystatechange = () => {
 	       if (xhr.readyState == 4) {
 	         if (xhr.status == 200) {
+	        	 console.log("------------");
 	        	 console.log(xhr.responseText);
-	        	/*  console.log("------------");
-			       if (xhr.responseText == "0") {
-			         console.log("0");
-			         $(".scrap").hide();
-			       } else if (xhr.responseText == "1") {
-			    	   console.log("1");
-			    	   $(".scrap-cancel").hide();
-			       }  */
-			      
+			       if (xhr.responseText == "beforescrap") {
+			         console.log("beforescrap");
+			       } else if (xhr.responseText == "alreadyscrap") {
+			    	   console.log("alreadyscrap");
+			       } 
 		       } else {
 		          alert("실행 오류 입니다!");
 		       }
 		     }
 		   };
-		   xhr.open("GET", "scrapcheck?no=" + scrap.getAttribute("data-no"), true);
+		   xhr.open("GET", "scrapcheck", true);
 		   xhr.send();
 		   console.log(xhr.responseText);
 		   console.log("send() 리턴함.");

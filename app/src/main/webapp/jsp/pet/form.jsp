@@ -14,7 +14,8 @@
 이름: <input type="text" name="name"><br>
 나이: <input type="int" name="age"><br>
 생일: <input type="date" name="birthDay"><br>
-성별: <input type="int" name="gender"><br>
+성별: <input type="radio" name="gender" value="0">암
+      <input type="radio" name="gender" value="1">수<br>
 품종: <input type="int" name="type"><br>
 사진: <input type="file" name="photo"><br>
 <input type="submit" value="등록">
