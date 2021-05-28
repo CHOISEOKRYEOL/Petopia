@@ -11,7 +11,7 @@
 
 <context-param>
     <param-name>mybatis-config</param-name>
-    <param-value>com/pms/petopia/conf/mybatis-config.xml</param-value>
+    <param-value>com/pms/petopia/config/mybatis-config.xml</param-value>
 </context-param>
 
 

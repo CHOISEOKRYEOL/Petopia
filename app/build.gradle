@@ -23,16 +23,10 @@ war {
 }
 
 dependencies {
-<<<<<<< HEAD
-  
+    
+    implementation 'org.springframework:spring-jdbc:5.3.7'
     implementation 'org.springframework:spring-webmvc:5.3.7'
-=======
-
-    // JSON 포맷을 다루는 라이브러리 
     implementation 'com.google.code.gson:gson:2.8.7'
-
-
->>>>>>> ebbb7de7a9d13eb8578034209e192bbdfa5a1ea2
     implementation 'net.coobird:thumbnailator:0.4.13'
     providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
     implementation 'javax.servlet:jstl:1.2'

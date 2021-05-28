@@ -1,10 +1,32 @@
 package com.pms.petopia.config;
 
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @ComponentScan("com.pms.petopia")
 @EnableWebMvc
+@PropertySource("classpath:com/pms/petopia/config/jdbc.properties")
+@EnableTransactionManagement
 public class AppConfig {
+
+  @Bean
+  public DataSource dataSource(
+      @Value("${jdbc.driver}") String jdbcDriver,
+      @Value("${jdbc.url}") String jdbcUrl,
+      @Value("${jdbc.username}") String jdbcUsername,
+      @Value("${jdbc.password}") String jdbcPassword) {
+    DriverManagerDataSource ds = new DriverManagerDataSource();
+    ds.setDriverClassName(jdbcDriver);
+    ds.setUrl(jdbcUrl);
+    ds.setUsername(jdbcUsername);
+    ds.setPassword(jdbcPassword);
+    return ds;
+  }
 
 }
