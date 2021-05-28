@@ -23,7 +23,8 @@ war {
 }
 
 dependencies {
-
+  
+    implementation 'org.springframework:spring-webmvc:5.3.7'
     implementation 'net.coobird:thumbnailator:0.4.13'
     providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
     implementation 'javax.servlet:jstl:1.2'
