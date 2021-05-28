@@ -29,8 +29,6 @@ public class CheckIdDuplicationHandler extends HttpServlet {
       response.setContentType("text/plain;charset=UTF-8");
       PrintWriter out = response.getWriter();
 
-      System.out.printf("입력 ID : %s\n", id);
-
       if(m != null) {
         out.print("1");
       }
