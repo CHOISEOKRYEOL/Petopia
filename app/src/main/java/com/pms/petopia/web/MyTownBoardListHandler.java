@@ -42,7 +42,7 @@ public class MyTownBoardListHandler extends HttpServlet {
 
         if (keyword != null && keyword.length() > 0 && r == null) {
           boards = myTownBoardService.search(stateNo, cityNo, keyword);
-        }if(keyword == null && r != null) {
+        }else if(keyword == null && r != null) {
           boards = myTownBoardService.listRecomment(stateNo, cityNo);
         }else {
           boards = myTownBoardService.list(stateNo, cityNo);
@@ -62,5 +62,3 @@ public class MyTownBoardListHandler extends HttpServlet {
     }
   }
 }
-
-

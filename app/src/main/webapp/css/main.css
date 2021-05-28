@@ -1,0 +1,238 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+.container {
+    /*overflow: scroll;*/
+    font-family: 'Noto Sans KR', sans-serif;
+    width: 900px;
+    margin: 0px auto;
+    padding-top: 10px;
+    min-height: 100vh;
+}
+
+.box1 {
+    box-sizing:context-box;
+    position: relative; 
+    height: 100px;
+    width: 100%;
+    border: 1px solid lightgray;
+    
+    /* Stick to the top 
+    position: sticky;
+    top: 0;*/
+}
+
+.box1 {
+    box-sizing:context-box;
+    position: relative; 
+    height: 100px;
+    width: 100%;
+    border: 1px solid lightgray;
+    
+    /* Stick to the top 
+    position: sticky;
+    top: 0;*/
+}
+
+.box2 {
+    box-sizing:context-box;
+    display: flex;
+    height: 50px;
+    width: 100%;
+    border: 1px solid lightgray;
+}
+
+.container_navleft01 {
+	  align-items: center;
+    display: flex;
+    width: 30%;
+    border: 1px solid lightgray;
+}
+
+.container_navright01 {
+	  align-items: center;
+    display: flex;
+    flex: 1;
+    border: 1px solid lightgray;
+}
+
+.box3 {
+	  box-sizing:context-box;
+    display: flex;
+    height: 300px;
+    width: 100%;
+    border: 1px solid lightgray;
+}
+
+.container_left01 {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 30%;
+    background-color: #F0F0F0;
+    border-radius: 30px;
+    border: 1px solid lightgray;
+}
+
+.container_right01 {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    border: 1px solid lightgray;
+}
+
+.box4 {
+	  box-sizing:context-box;
+	  align-items: center;
+    display: flex;
+    height: 50px;
+    width: 100%;
+    border: 1px solid lightgray;
+}
+
+.box5 {
+	  box-sizing:context-box;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 300px;
+    width: 100%;
+    border: 1px solid lightgray;
+}
+
+.box6 {
+    box-sizing:context-box;
+    display: flex;
+    height: 50px;
+    width: 100%;
+    border: 1px solid lightgray;
+}
+
+.container_navleft02 {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    border: 1px solid lightgray;
+}
+
+.container_navright02 {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    border: 1px solid lightgray;
+}
+
+.box7 {
+    box-sizing:context-box;
+    display: flex;
+    height: 400px;
+    width: 100%;
+    border: 1px solid lightgray;
+}
+
+.container_left02 {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    border: 1px solid lightgray;
+}
+
+.container_right02 {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    border: 1px solid lightgray;
+}
+
+.pagination {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    display: flex;
+    width: 610px;
+    height: 60px;
+    justify-content: center;
+    border: 5px solid #FFADAD;
+}
+
+.pagination_item01 {
+    width: 70px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background-color: #F0F0F0;
+}
+
+.pagination_item02 {
+    width: 130px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination_item03 {
+    width: 100px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background-color: #F0F0F0;
+}
+
+.pagination_item04 {
+    width: 250px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination_item05 {
+    width: 50px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background-color: #F0F0F0;
+}
+
+ .pagination_item01 + .pagination_item02 + .pagination_item03 + .pagination_item04 + .pagination_item05 {
+    border-right: none;
+}
+
+.gno {
+	width: 130px;
+	height: 50px;
+	border: none;
+}
+
+.cno {
+	width: 250px;
+	height: 50px;
+	border: none;
+}
+
+.img-search-btn {
+    background: url( "../images/search.png" ) no-repeat;
+    border: none;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+ }
+ 
+ .img-mypet {
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+ }
+ 
+ .mypetpic {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+ }
+ 

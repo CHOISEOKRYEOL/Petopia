@@ -23,6 +23,8 @@ public class StoryListHandler extends HttpServlet {
 
     StoryService storyService = (StoryService) request.getServletContext().getAttribute("storyService");
     ScrapService scrapService = (ScrapService) request.getServletContext().getAttribute("scrapService");
+
+
     try {
       String keyword = request.getParameter("keyword");
       List<Story> storys = null;
@@ -36,18 +38,7 @@ public class StoryListHandler extends HttpServlet {
         Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 
         scrapList = scrapService.list(loginUser.getNo());
-        //        System.out.println(scrapList);
-        //        for(Scrap scrap : scrapList) {
-        //          System.out.println("for 1");
-        //          for(Story story : storys) {
-        //            System.out.println("for 2");
-        //            if(scrap.getStory().getNo() == story.getNo()) {
-        //              scrap.setIsScrap(1);
-        //            } else {
-        //              scrap.setIsScrap(0);
-        //            }
-        //          }
-        //        }
+
       }
 
       request.setAttribute("scrapList", scrapList);

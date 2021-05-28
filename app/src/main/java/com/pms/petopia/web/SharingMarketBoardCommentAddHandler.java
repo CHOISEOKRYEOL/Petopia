@@ -18,12 +18,6 @@ import com.pms.petopia.service.SharingMarketBoardService;
 @WebServlet("/sharingmarketboardcomment/add")
 public class SharingMarketBoardCommentAddHandler extends HttpServlet{
 	
-//	@Override
-//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.setContentType("text/html;charset=UTF-8");
-//		request.getRequestDispatcher("/jsp/sharingmarketboardcomment/list.jsp").include(request, response);
-//	}
-	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		SharingMarketBoardService sharingMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("sharingMarketBoardService");

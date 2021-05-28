@@ -147,19 +147,20 @@ ALTER TABLE pet_mypet
 
 -- 병원
 CREATE TABLE pet_hp (
-  hno   INTEGER      NOT NULL COMMENT '병원번호', -- 병원번호
-  cno   INTEGER      NOT NULL COMMENT '시군구번호', -- 시군구번호
-  name  VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
-  tel   VARCHAR(30)  NOT NULL COMMENT '전화번호', -- 전화번호
-  addr  VARCHAR(255) NOT NULL COMMENT '상세주소', -- 상세주소
-  stime INTEGER      NOT NULL COMMENT '진료시작시간', -- 진료시작시간
-  etime INTEGER      NOT NULL COMMENT '진료종료시간', -- 진료종료시간
-  park  INTEGER      NOT NULL COMMENT '주차여부', -- 주차여부
-  vet   INTEGER      NOT NULL COMMENT '수의사', -- 수의사
-  photo VARCHAR(255) NULL     COMMENT '사진', -- 사진
-  grade INTEGER      NULL     COMMENT '평점', -- 평점
-  lat   FLOAT        NULL     COMMENT '위도', -- 위도
-  lon   FLOAT        NULL     COMMENT '경도' -- 경도
+  hno      INTEGER      NOT NULL COMMENT '병원번호', -- 병원번호
+  cno      INTEGER      NOT NULL COMMENT '시군구번호', -- 시군구번호
+  name     VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
+  tel      VARCHAR(30)  NOT NULL COMMENT '전화번호', -- 전화번호
+  addr     VARCHAR(255) NOT NULL COMMENT '상세주소', -- 상세주소
+  stime    INTEGER      NOT NULL COMMENT '진료시작시간', -- 진료시작시간
+  etime    INTEGER      NOT NULL COMMENT '진료종료시간', -- 진료종료시간
+  park     INTEGER      NOT NULL COMMENT '주차여부', -- 주차여부
+  vet      INTEGER      NOT NULL COMMENT '수의사', -- 수의사
+  photo    VARCHAR(255) NULL     COMMENT '사진', -- 사진
+  rating   FLOAT        NULL     DEFAULT 0 COMMENT '최종평점', -- 최종평점
+  lat      FLOAT        NULL     COMMENT '위도', -- 위도
+  lon      FLOAT        NULL     COMMENT '경도', -- 경도
+  a_rating FLOAT        NULL     DEFAULT 0 COMMENT '누적평점' -- 누적평점
 )
 COMMENT '병원';
 
@@ -173,7 +174,7 @@ ALTER TABLE pet_hp
 -- 병원
 ALTER TABLE pet_hp
   ADD CONSTRAINT CK_pet_hp -- 병원 체크 제약
-    CHECK (parking=1 or parking=0);
+    CHECK (park=1 or park=0);
 
 ALTER TABLE pet_hp
   MODIFY COLUMN hno INTEGER NOT NULL AUTO_INCREMENT COMMENT '병원번호';

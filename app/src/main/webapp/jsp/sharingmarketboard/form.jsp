@@ -16,9 +16,13 @@
 </c:forEach>
 </select>
 제목: <input type='text' name='title' ><br>
+사진: <input type="file" name="photo"><br>
 내용: <textarea name='content' rows='10' cols='60'></textarea><br>
 <input type='submit' value='등록'>
 </form>
  <a href='list'>목록</a></p>
+ 
+ 
+ <a></a>
 </body>
 </html>
