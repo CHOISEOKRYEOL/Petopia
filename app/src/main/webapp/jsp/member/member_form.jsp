@@ -46,25 +46,25 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="mb-3 row">
     <label for="id" class="col-sm-2 col-form-label">아이디</label>
     <div class="col-sm-6">
-      <input type="text" required class="id" id="id" name="id" placeholder="아이디" oninput="checkId()">
+      <input type="text" required class="form-control" id="id" name="id" placeholder="아이디" oninput="checkId()">
     </div>
   </div>
   <div class="mb-3 row">
     <label for="email" class="col-sm-2 col-form-label">이메일</label>
     <div class="col-sm-6">
-      <input type="email" required class="email" id="email" name="email" placeholder="이메일" oninput="checkEmail()">
+      <input type="email" required class="form-control" id="email" name="email" placeholder="이메일" oninput="checkEmail()">
     </div>
   </div>
   <div class="mb-3 row">
     <label for="nick" class="col-sm-2 col-form-label">닉네임</label>
     <div class="col-sm-6">
-      <input type="text" required class="nick" id="nick" name="nick" placeholder="닉네임" oninput="checkNick()">
+      <input type="text" required class="form-control" id="nick" name="nick" placeholder="닉네임" oninput="checkNick()">
     </div>
   </div>
   <div class="mb-3 row">
     <label for="password" class="col-sm-2 col-form-label">비밀번호</label>
     <div class="col-sm-6">
-      <input type="password" required class="password" id="password" name="password" placeholder="비밀번호">
+      <input type="password" required class="form-control" id="password" name="password" placeholder="비밀번호">
     </div>
   </div>
   
@@ -72,7 +72,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <label for="password" class="col-sm-2 col-form-label">비밀번호 확인</label>
   <div class="col-sm-6">
             <input type="password" placeholder="비밀번호 확인" name="checkPassword" 
-                required class="password" id="checkPassword" oninput="checkPwd()">
+                required class="form-control" id="checkPassword" oninput="checkPwd()">
   </div>
   </div>
 
