@@ -1,4 +1,3 @@
-
 <%@ page language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
@@ -40,31 +39,46 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="mt-3 mb-3 row">
     <label for="name" class="col-sm-2 col-form-label">이름</label>
     <div class="col-sm-6">
-      <input type="text" required class="form-control" id="name" name="name" placeholder="이름">
+      <input type="text" required class="form-control form-control-sm" id="name" name="name" placeholder="이름">
     </div>
   </div>
   <div class="mb-3 row">
     <label for="id" class="col-sm-2 col-form-label">아이디</label>
     <div class="col-sm-6">
-      <input type="text" required class="form-control" id="id" name="id" placeholder="아이디" oninput="checkId()">
+      <input type="text" class="form-control form-control-sm" id="id" name="id" placeholder="아이디" required oninput="checkId()">
     </div>
   </div>
   <div class="mb-3 row">
     <label for="email" class="col-sm-2 col-form-label">이메일</label>
     <div class="col-sm-6">
-      <input type="email" required class="form-control" id="email" name="email" placeholder="이메일" oninput="checkEmail()">
+      <input type="email" required class="form-control form-control-sm" id="email" name="email" placeholder="이메일" oninput="checkEmail()">
+ <!-- 
+ <input type="text" id="email_id" name="email_id" class="form_w200" value="" title="이메일 아이디" placeholder="이메일" maxlength="18" > @ 
+<input type="text" id="email_domain" name="email_domain" class="form_w200" value="" title="이메일 도메인" placeholder="이메일 도메인" maxlength="18"> 
+<select class="select" title="이메일 도메인 주소 선택" onclick="setEmailDomain(this.value);return false;">
+    <option value="">-선택-</option>
+    <option value="naver.com">naver.com</option>
+    <option value="gmail.com">gmail.com</option>
+    <option value="hanmail.net">hanmail.net</option>
+    <option value="hotmail.com">hotmail.com</option>
+    <option value="korea.com">korea.com</option>
+    <option value="nate.com">nate.com</option>
+    <option value="yahoo.com">yahoo.com</option>
+</select>
+  -->
+ 
     </div>
   </div>
   <div class="mb-3 row">
     <label for="nick" class="col-sm-2 col-form-label">닉네임</label>
     <div class="col-sm-6">
-      <input type="text" required class="form-control" id="nick" name="nick" placeholder="닉네임" oninput="checkNick()">
+      <input type="text" required class="form-control form-control-sm" id="nick" name="nick" placeholder="닉네임" oninput="checkNick()">
     </div>
   </div>
   <div class="mb-3 row">
     <label for="password" class="col-sm-2 col-form-label">비밀번호</label>
     <div class="col-sm-6">
-      <input type="password" required class="form-control" id="password" name="password" placeholder="비밀번호">
+      <input type="password" required class="form-control form-control-sm" id="password" name="password" placeholder="비밀번호">
     </div>
   </div>
   
@@ -72,14 +86,14 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <label for="password" class="col-sm-2 col-form-label">비밀번호 확인</label>
   <div class="col-sm-6">
             <input type="password" placeholder="비밀번호 확인" name="checkPassword" 
-                required class="form-control" id="checkPassword" oninput="checkPwd()">
+                required class="form-control form-control-sm" id="checkPassword" oninput="checkPwd()">
   </div>
   </div>
 
   <div class="mb-3 row">
     <label for="tel" class="col-sm-2 col-form-label">휴대전화</label>
     <div class="col-sm-6">
-      <input type="tel" required class="form-control" id="tel" name="tel">
+      <input type="tel" required class="form-control form-control-sm" id="tel" name="tel" placeholder="휴대전화 입력">
       <input type="button" name="checkTel" value="인증번호 받기">
     </div>
   </div>
@@ -87,7 +101,11 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 <div class="modal-footer justify-content-between">
 <a href='../main' class="btn btn-secondary">메인</a>
 
-<button type="submit" class="btn" style="background-color: #FFADAD;" disabled="disabled">가입하기</button>
+<button type="button" class="cancelbtn" 
+                onclick='$("#_joinsung").css("display", "none")' >초기화</button>
+
+
+<button type="submit" class="btn" style="background-color: #aaaaaa;" disabled="disabled">가입하기</button>
 </div>
 
 </form>
@@ -98,13 +116,13 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 <footer id="footer"></footer>
 
 <script>
-
 var idCheck = 0;
 var pwdCheck = 0;
 var emailCheck = 0;
 var nickCheck = 0;
+var emailValidator = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 function checkId() {
- var userId = $('.id').val();
+ var userId = $('#id').val();
  $.ajax({
      url : "checkid",
      data : {
@@ -121,7 +139,7 @@ function checkId() {
              idCheck = 1;
              if(idCheck==1 && pwdCheck == 1 && emailCheck == 1 && nickCheck == 1) {
                  $(".btn").prop("disabled", false);
-                 $(".btn").css("background-color", "#4CAF50");
+                 $(".btn").css("background-color", "#FFADAD");
                  nameCheck();
              } 
          } else if (data == '1') {
@@ -133,74 +151,68 @@ function checkId() {
      }
  });
 }
-
-
 function checkEmail() {
-	 var userEmail = $('.email').val();
-	 $.ajax({
-	     url : "checkemail",
-	     data : {
-	         email : userEmail
-	     },
-	     success : function(data) {
-	         if(userEmail=="" && data=='0') {
-	             $(".btn").prop("disabled", true);
-	             $(".btn").css("background-color", "#aaaaaa");
-	             $("#email").css("background-color", "#FFCECE");
-	             emailCheck = 0;
-	         } else if (data == '0') {
-	             $("#email").css("background-color", "#B0F6AC");
-	             emailCheck = 1;
-	             if(idCheck==1 && pwdCheck == 1 && emailCheck == 1 && nickCheck == 1) {
-	                 $(".btn").prop("disabled", false);
-	                 $(".btn").css("background-color", "#4CAF50");
-	                 nameCheck();
-	             } 
-	         } else if (data == '1') {
-	             $(".btn").prop("disabled", true);
-	             $(".btn").css("background-color", "#aaaaaa");
-	             $("#email").css("background-color", "#FFCECE");
-	             emailCheck = 0;
-	         } 
-	     }
-	 });
-	}
-
+   var userEmail = $('#email').val();
+   $.ajax({
+       url : "checkemail",
+       data : {
+           email : userEmail
+       },
+       success : function(data) {
+           if(userEmail=="" && data=='0') {
+               $(".btn").prop("disabled", true);
+               $(".btn").css("background-color", "#aaaaaa");
+               $("#email").css("background-color", "#FFCECE");
+               emailCheck = 0;
+           } else if (data == '0') {
+               $("#email").css("background-color", "#B0F6AC");
+               emailCheck = 1;
+               if(idCheck==1 && pwdCheck == 1 && emailCheck == 1 && nickCheck == 1) {
+                   $(".btn").prop("disabled", false);
+                   $(".btn").css("background-color", "#FFADAD");
+                   nameCheck();
+               } 
+           } else if (data == '1') {
+               $(".btn").prop("disabled", true);
+               $(".btn").css("background-color", "#aaaaaa");
+               $("#email").css("background-color", "#FFCECE");
+               emailCheck = 0;
+           } 
+       }
+   });
+  }
 function checkNick() {
-	   var userNick = $('.nick').val();
-	   $.ajax({
-	       url : "checknick",
-	       data : {
-	           nick : userNick
-	       },
-	       success : function(data) {
-	           if(userNick=="" && data=='0') {
-	               $(".btn").prop("disabled", true);
-	               $(".btn").css("background-color", "#aaaaaa");
-	               $("#nick").css("background-color", "#FFCECE");
-	               nickCheck = 0;
-	           } else if (data == '0') {
-	               $("#nick").css("background-color", "#B0F6AC");
-	               nickCheck = 1;
-	               if(idCheck==1 && pwdCheck == 1 && emailCheck == 1 && nickCheck == 1) {
-	                   $(".btn").prop("disabled", false);
-	                   $(".btn").css("background-color", "#4CAF50");
-	                   nameCheck();
-	               } 
-	           } else if (data == '1') {
-	               $(".btn").prop("disabled", true);
-	               $(".btn").css("background-color", "#aaaaaa");
-	               $("#nick").css("background-color", "#FFCECE");
-	               nickCheck = 0;
-	           } 
-	       }
-	   });
-	  }
-
-
-
+     var userNick = $('#nick').val();
+     $.ajax({
+         url : "checknick",
+         data : {
+             nick : userNick
+         },
+         success : function(data) {
+             if(userNick=="" && data=='0') {
+                 $(".btn").prop("disabled", true);
+                 $(".btn").css("background-color", "#aaaaaa");
+                 $("#nick").css("background-color", "#FFCECE");
+                 nickCheck = 0;
+             } else if (data == '0') {
+                 $("#nick").css("background-color", "#B0F6AC");
+                 nickCheck = 1;
+                 if(idCheck==1 && pwdCheck == 1 && emailCheck == 1 && nickCheck == 1) {
+                     $(".btn").prop("disabled", false);
+                     $(".btn").css("background-color", "#FFADAD");
+                     nameCheck();
+                 } 
+             } else if (data == '1') {
+                 $(".btn").prop("disabled", true);
+                 $(".btn").css("background-color", "#aaaaaa");
+                 $("#nick").css("background-color", "#FFCECE");
+                 nickCheck = 0;
+             } 
+         }
+     });
+    }
 function checkPwd() {
-    var originalPassword = $('.password').val();
+    var originalPassword = $('#password').val();
     var repeatedPassword = $('#checkPassword').val();
     if(repeatedPassword=="" && (originalPassword != repeatedPassword || originalPassword == repeatedPassword)){
         $(".btn").prop("disabled", true);
@@ -212,7 +224,7 @@ function checkPwd() {
         pwdCheck = 1;
         if(idCheck==1 && pwdCheck == 1 && emailCheck == 1 && nickCheck == 1) {
             $(".btn").prop("disabled", false);
-            $(".btn").css("background-color", "#4CAF50");
+            $(".btn").css("background-color", "#FFADAD");
             nameCheck();
         }
     } else if (originalPassword != repeatedPassword) {
@@ -223,28 +235,28 @@ function checkPwd() {
         
     }
 }
-
 function nameCheck() {
-	  var name = $("#name").val();
-	  if(name == "") {
-	    $(".btn").prop("disabled", true);
-	    $(".btn").css("background-color", "#aaaaaa");
-	  }
-	}
-
-
+    var name = $("#name").val();
+    if(name == "") {
+      $(".btn").prop("disabled", true);
+      $(".btn").css("background-color", "#aaaaaa");
+    }
+  }
 $(".cancelbtn").click(function(){
-        $(".name").val('');
-        $(".id").val('');
-        $(".email").val('');
-        $(".nick").val('');
-        $(".password").val('');
-        $(".checkpassword").val('');
+        $("#name").val('');
+        $("#id").val('');
+        $("#email").val('');
+        $("#nick").val('');
+        $("#password").val('');
+        $("#checkpassword").val('');
+        $("#tel").val('');
         $(".btn").prop("disabled", true);
         $(".btn").css("background-color", "#aaaaaa");
+        $("#id").css("background-color", "#FFFFFF");
+        $("#email").css("background-color", "#FFFFFF");
+        $("#nick").css("background-color", "#FFFFFF");
+        $("#checkPassword").css("background-color", "#FFFFFF");
 });
-
-
 </script>
 
 </body>

@@ -89,9 +89,11 @@
 		  xhr.open("GET", "recommentadd?no=" + boardNo.value, false);
 		  xhr.send();
 		  if (xhr.responseText == "fail") {
-		    alert("이미 추천한 게시물입니다.");
+			  swal("이미 추천한 게시물입니다!", "감사합니다", "warning");
+		    //alert("이미 추천한 게시물입니다.");
 		  } else {
-		    alert("게시물을 추천하였습니다.") 
+			  swal("게시물을 추천하였습니다!", "감사합니다.", "success");
+		    //alert("게시물을 추천하였습니다.") 
 		  }
 		};
 	</script>  
