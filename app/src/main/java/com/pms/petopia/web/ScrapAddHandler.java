@@ -1,6 +1,7 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,24 +28,26 @@ public class ScrapAddHandler extends HttpServlet{
 
     int newsNo = Integer.parseInt(request.getParameter("newsNo"));
 
+    PrintWriter out = response.getWriter();
     Scrap scrap = new Scrap();
     int count = 0;
-    String result = "fail";
     try {
       Story story = storyService.get(newsNo);
       scrap.setStory(story);
       Member loginUser = (Member)request.getSession().getAttribute("loginUser");
       if(loginUser == null) {
-        result = "login";
+        out.print("login");
       }
       scrap.setMember(loginUser);
 
       //여기서 로그인 체크
       List<Scrap> scraps = scrapService.list(loginUser.getNo());
 
+
+
       if(scraps.size() == 0) {
         scrapService.add(scrap);
-        result = "success";
+        out.print("success");
       } else {
         for(Scrap s : scraps) {
           if (s.getStory().getNo() != newsNo && s.getMember().getNo() != loginUser.getNo()
@@ -54,20 +57,14 @@ public class ScrapAddHandler extends HttpServlet{
             if(count == scraps.size()) {
               scrapService.add(scrap);
               scrapService.updateScrap(newsNo);
-              result = "success";
-              break;
+              out.print("success");
             }
           } else {
-            break;
+            out.print("fail");
           }
         }
       }
 
-      request.setAttribute("result", result);
-
-      request.getRequestDispatcher("/jsp/story/scrapadd.jsp").include(request, response);
-
-      response.setHeader("Refresh", "2;url=list");
     } catch (Exception e) {
 
       throw new ServletException(e);

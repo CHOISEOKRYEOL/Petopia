@@ -20,14 +20,15 @@
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="text-group">
     <p style="font-size: 50px;">펫토피아</p>
-    <p style="font-size: 30px;">우리 아이들의 이야기</p>
-    <p>동네 커뮤니티로 정보를 나누고, 수다 떨며,<br>
-    같이 산책할 내 반려동물의 친구를 사귀어 보세요.</p> 
+    <p style="font-size: 30px;">집에서 가까운 병원 찾기</p>
+    <p>직접 동네 병원을 검색할 필요 없이<br>
+    내 집에서 가장 가까운 병원을, 상세 리뷰와 함께 보여드립니다</p> 
   </div>
 </div>
+
 <div class="container">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-<a class="navbar-brand" style="font-size: 30px;">병원 찾기</a>
+<a class="navbar-brand">병원 찾기</a>
   <div class="container-fluid">
   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
   <li class="nav-item">
@@ -35,16 +36,16 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     </li>
     </ul>
     <form class="d-flex" action='list' method='get'>
-<select name='gno'>
-  <c:forEach items="${area}" var="a">
-    <option value='${a.bigAddress.no}'>${a.bigAddress.name}</option>
-  </c:forEach>
-</select>
-<select name='cno'>
-  <c:forEach items="${area}" var="a">
-    <option value='${a.no}'>${a.name}</option>
-  </c:forEach>
-</select>
+			<select name='gno'>
+			  <c:forEach items="${area}" var="a">
+			    <option value='${a.bigAddress.no}'>${a.bigAddress.name}</option>
+			  </c:forEach>
+			</select>
+			<select name='cno'>
+			  <c:forEach items="${area}" var="a">
+			    <option value='${a.no}'>${a.name}</option>
+			  </c:forEach>
+			</select>
       <button class="btn btn-outline-success col-sm-3" type="submit">검색</button>
     </form>
   </div>
@@ -55,7 +56,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 <table class="table table-hover">
 <thead>
 <tr>
-<th>번호</th> <th>이름</th> <th>전화</th> <th>기본주소</th> <th>상세주소</th> <th>진료시간</th> <th>평점</th>
+<th>번호</th> <th>이름</th> <th>전화 번호</th> <th>기본주소</th> <th>상세주소</th> <th>진료시간</th> <th>평점</th>
 <c:if test="${not empty loginUser}">
           <th>즐겨찾기</th>
         </c:if>
@@ -114,6 +115,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 		</tbody>
 	</table>
 </div>
+
 <footer id="footer"></footer>
 </body>
 </html>

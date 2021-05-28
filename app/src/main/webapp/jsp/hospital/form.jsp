@@ -23,15 +23,15 @@
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="text-group">
     <p style="font-size: 50px;">펫토피아</p>
-    <p style="font-size: 30px;">우리 아이들의 이야기</p>
-    <p>동네 커뮤니티로 정보를 나누고, 수다 떨며,<br>
-    같이 산책할 내 반려동물의 친구를 사귀어 보세요.</p> 
+    <p style="font-size: 30px;">집에서 가까운 병원 찾기</p>
+    <p>직접 동네 병원을 검색할 필요 없이<br>
+    내 집에서 가장 가까운 병원을, 상세 리뷰와 함께 보여드립니다</p> 
   </div>
 </div>
 
 <div class="container">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-<a class="navbar-brand" style="font-size: 30px;">병원 등록</a>
+<a class="navbar-brand">병원 등록</a>
 </nav>
 <div class="addform">
 <form action="add" method="post" enctype="multipart/form-data">
