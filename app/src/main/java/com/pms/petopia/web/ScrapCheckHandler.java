@@ -8,9 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.Scrap;
-import com.pms.petopia.domain.Story;
 import com.pms.petopia.service.ScrapService;
-import com.pms.petopia.service.StoryService;
 
 @Controller
 public class ScrapCheckHandler {
@@ -18,6 +16,7 @@ public class ScrapCheckHandler {
   StoryService storyService;
   ScrapService scrapService;
 
+<<<<<<< HEAD
   public ScrapCheckHandler(StoryService storyService, ScrapService scrapService) {
     this.storyService = storyService;
     this.scrapService = scrapService;
@@ -58,10 +57,37 @@ public class ScrapCheckHandler {
               System.out.println("alreadyscrap" + story.getNo());
               out.print("alreadyscrap");
             }
+=======
+    ScrapService scrapService = (ScrapService) request.getServletContext().getAttribute("scrapService");
+
+    PrintWriter out = response.getWriter();
+
+    try {
+
+      int newsNo = Integer.parseInt(request.getParameter("no"));
+
+      List<Scrap> scrapList = null;
+      if ((Member)request.getSession().getAttribute("loginUser") != null) {
+        Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+
+        scrapList = scrapService.list(loginUser.getNo());
+
+        for (Scrap scrap : scrapList) {
+          if (scrap.getMember().getNo() == loginUser.getNo() && scrap.getStory().getNo() == newsNo) {
+            out.print("1");
+          } else {
+            out.print("0");
+>>>>>>> d845db09d0d03e1454ec3adeb83c7eadf992e9f3
           }
         }
 
+<<<<<<< HEAD
       }
+=======
+
+    } catch (Exception e) {
+      throw new ServletException(e);
+>>>>>>> d845db09d0d03e1454ec3adeb83c7eadf992e9f3
     }
     return ""; // 체크
   }

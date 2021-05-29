@@ -13,11 +13,14 @@ public interface PetDao {
 
   int update(Pet pet) throws Exception;
 
+  int setLeaderPet(int no) throws Exception;
+
   int delete(int no) throws Exception;
 
   Pet findByName(String name) throws Exception;
 
   List<Pet> findByKeyword(String keyword) throws Exception;
+
 
 
 }

@@ -10,143 +10,143 @@
     min-height: 100vh;
 }
 
+/* 병원라인 */
 .box1 {
-    box-sizing:context-box;
+    box-sizing: context-box;
     position: relative; 
     height: 100px;
     width: 100%;
-    border: 1px solid lightgray;
+    border-top: 2px solid gray;
+    border-bottom: 2px solid gray;
     
     /* Stick to the top 
     position: sticky;
     top: 0;*/
 }
 
-.box1 {
-    box-sizing:context-box;
-    position: relative; 
-    height: 100px;
-    width: 100%;
-    border: 1px solid lightgray;
-    
-    /* Stick to the top 
-    position: sticky;
-    top: 0;*/
-}
-
+/* 마이펫이름 */
 .box2 {
-    box-sizing:context-box;
+    box-sizing: context-box;
     display: flex;
     height: 50px;
     width: 100%;
-    border: 1px solid lightgray;
+    border-bottom: 2px solid gray;
 }
 
 .container_navleft01 {
 	  align-items: center;
     display: flex;
-    width: 30%;
-    border: 1px solid lightgray;
+    width: 20%;
 }
 
 .container_navright01 {
 	  align-items: center;
     display: flex;
     flex: 1;
-    border: 1px solid lightgray;
 }
 
+/* 마이펫내용 */
 .box3 {
-	  box-sizing:context-box;
+	  box-sizing: context-box;
     display: flex;
     height: 300px;
     width: 100%;
-    border: 1px solid lightgray;
+    border-bottom: 2px solid gray;
 }
 
+/* 마이펫사진 */
 .container_left01 {
     align-items: center;
     display: flex;
     justify-content: center;
-    width: 30%;
+    width: 20%;
+}
+
+/* 진찰기록 */
+.container_right01 {
+    display: flex;
+    justify-content: left;
+    margin: 20px;
     background-color: #F0F0F0;
     border-radius: 30px;
-    border: 1px solid lightgray;
-}
-
-.container_right01 {
-    align-items: center;
-    display: flex;
-    justify-content: center;
+    padding-top: 20px;
+    padding-left: 20px;
     flex: 1;
-    border: 1px solid lightgray;
 }
 
+/* 나눔장터이름 */
 .box4 {
-	  box-sizing:context-box;
+	  box-sizing: context-box;
 	  align-items: center;
     display: flex;
     height: 50px;
     width: 100%;
-    border: 1px solid lightgray;
+    border-bottom: 2px solid gray;
 }
 
+/* 나눔장터 */
 .box5 {
-	  box-sizing:context-box;
+	  box-sizing: context-box;
     align-items: center;
     display: flex;
     justify-content: center;
     height: 300px;
     width: 100%;
-    border: 1px solid lightgray;
+    border-bottom: 2px solid gray;
 }
 
+/* 스토리동네이름 */
 .box6 {
-    box-sizing:context-box;
+    box-sizing: context-box;
     display: flex;
     height: 50px;
     width: 100%;
-    border: 1px solid lightgray;
+    border-bottom: 2px solid gray;
 }
 
 .container_navleft02 {
     align-items: center;
     display: flex;
     flex: 1;
-    border: 1px solid lightgray;
 }
 
 .container_navright02 {
     align-items: center;
     display: flex;
     flex: 1;
-    border: 1px solid lightgray;
 }
 
+/* 스토리동네내용 */
 .box7 {
-    box-sizing:context-box;
+    box-sizing: context-box;
     display: flex;
     height: 400px;
     width: 100%;
-    border: 1px solid lightgray;
 }
 
+/* 스토리 */
 .container_left02 {
     align-items: center;
     display: flex;
     justify-content: center;
     flex: 1;
-    border: 1px solid lightgray;
+    margin: 20px;
+    background-color: #F0F0F0;
+    border-radius: 30px;
 }
 
+/* 동네 */
 .container_right02 {
     align-items: center;
     display: flex;
     justify-content: center;
     flex: 1;
-    border: 1px solid lightgray;
+    margin: 20px;
+    background-color: #F0F0F0;
+    border-radius: 30px;
 }
 
+/* 병원검색상자 */
 .pagination {
     position: absolute;
     top: 50%;
@@ -157,9 +157,10 @@
     width: 610px;
     height: 60px;
     justify-content: center;
-    border: 5px solid #FFADAD;
+    border: 5px solid #ffadad;
 }
 
+/* 시도 */
 .pagination_item01 {
     width: 70px;
     align-items: center;
@@ -175,6 +176,7 @@
     justify-content: center;
 }
 
+/* 시군구 */
 .pagination_item03 {
     width: 100px;
     align-items: center;
@@ -190,6 +192,7 @@
     justify-content: center;
 }
 
+/* 돋보기 */
 .pagination_item05 {
     width: 50px;
     align-items: center;
@@ -202,18 +205,21 @@
     border-right: none;
 }
 
+/* 시도리스트 */
 .gno {
 	width: 130px;
 	height: 50px;
 	border: none;
 }
 
+/* 시군구리스트 */
 .cno {
 	width: 250px;
 	height: 50px;
 	border: none;
 }
 
+/* 돋보기버튼 */
 .img-search-btn {
     background: url( "../images/search.png" ) no-repeat;
     border: none;
@@ -222,17 +228,92 @@
     cursor: pointer;
  }
  
+ /* 펫사진바탕 */
  .img-mypet {
     border-radius: 50%;
     display: flex;
     justify-content: center;
     width: 200px;
-    height: 200px;
  }
  
+ .img-mypet:hover {
+    background-color: gray;
+ }
+ 
+ /* 펫사진 */
  .mypetpic {
     border-radius: 50%;
     width: 100%;
     height: 100%;
  }
+ 
+ /* 진찰기록탐라 */
+ .timeline {
+    position: relative;
+}
+
+/* 라인 */
+.timeline_line {
+    border-right: 2px solid #ffadad;
+
+    left: 13px;
+    position: absolute;
+    top: 0px;
+
+    height: 100%;
+}
+
+.timeline_items {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.timeline_item {
+    margin-bottom: 10px;
+}
+
+.timeline_top {
+    align-items: center;
+    display: flex;
+}
+
+/* 동그라미 */
+.timeline_circle {
+    background-color: #ffadad;
+    border-radius: 9999px;
+
+    height: 26px;
+    width: 26px;
+    
+    margin-right: 10px;
+}
+
+.timeline_title {
+    flex: 1;
+}
+
+.timeline_desc {
+    margin-left: 52px;
+}
+
+/* 장터 */
+.market {
+    display: flex;
+}
+
+.market_column {
+    flex: 1;
+    /* Space between columns */
+    margin: 0 8px;
+
+    /* Layout each column */
+    display: flex;
+    flex-direction: column;
+}
+
+.market_content {
+    /* Take available height */
+    flex: 1;
+}
  
