@@ -41,40 +41,39 @@ public class LoginHandler {
       return "/jsp/login_form.jsp";
     }
 
-
-    String id = request.getParameter("id");
-    boolean check = isEmail(id);
-    String password = request.getParameter("password");
-    Member member = null;
-
-    if(request.getParameter("saveIdOrEmail") != null) {
-      Cookie cookie = new Cookie("id", id);
-      cookie.setMaxAge(60 * 60 * 24);
-      response.addCookie(cookie);
-    }
     else {
-      Cookie cookie = new Cookie("id", "");
-      cookie.setMaxAge(0);
-      response.addCookie(cookie);
-    }
+      String id = request.getParameter("id");
+      boolean check = isEmail(id);
+      String password = request.getParameter("password");
+      Member member = null;
 
-    if(check) {
-      member = memberService.getEmail(id, password);
-    }
-    else {
-      member = memberService.getId(id, password);
-    }
+      if(request.getParameter("saveIdOrEmail") != null) {
+        Cookie cookie = new Cookie("id", id);
+        cookie.setMaxAge(60 * 60 * 24);
+        response.addCookie(cookie);
+      }
+      else {
+        Cookie cookie = new Cookie("id", "");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+      }
 
-    response.setContentType("text/html;charset=UTF-8");
+      if(check) {
+        member = memberService.getEmail(id, password);
+      }
+      else {
+        member = memberService.getId(id, password);
+      }
 
-    if (member == null) {
-      request.getSession().invalidate();
-      return "/jsp/login_fail.jsp";
-      //      response.setHeader("Refresh", "1;url=login");
-    }
-    else {
-      request.getSession().setAttribute("loginUser", member);
-      return "redirect:main";
+      if (member == null) {
+        request.getSession().invalidate();
+        return "/jsp/login_fail.jsp";
+        //      response.setHeader("Refresh", "1;url=login");
+      }
+      else {
+        request.getSession().setAttribute("loginUser", member);
+        return "redirect:main";
+      }
     }
   }
 

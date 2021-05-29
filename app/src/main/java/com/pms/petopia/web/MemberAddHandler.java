@@ -23,23 +23,21 @@ public class MemberAddHandler {
     if(request.getMethod().equals("GET")) {
       return "/jsp/member/member_form.jsp";
     }
+    else {
+      Member m = new Member();
+      m.setName(request.getParameter("name"));
+      m.setId(request.getParameter("id"));
+      m.setNick(request.getParameter("nick"));
+      m.setEmail(request.getParameter("email"));
+      m.setPassword(request.getParameter("password"));
+      m.setTel(request.getParameter("tel"));
 
-    Member m = new Member();
-    m.setName(request.getParameter("name"));
-    m.setId(request.getParameter("id"));
-    m.setNick(request.getParameter("nick"));
-    m.setEmail(request.getParameter("email"));
-    m.setPassword(request.getParameter("password"));
-    m.setTel(request.getParameter("tel"));
+      memberService.add(m);
+      request.setAttribute("member", m);
 
-
-    memberService.add(m);
-    request.setAttribute("member", m);
-
-    return "/jsp/member/add_success.jsp";
-    //    response.setHeader("Refresh", "1;url=../main");
-
-
+      return "/jsp/member/add_success.jsp";
+      //    response.setHeader("Refresh", "1;url=../main");
+    }
   }
 }
 

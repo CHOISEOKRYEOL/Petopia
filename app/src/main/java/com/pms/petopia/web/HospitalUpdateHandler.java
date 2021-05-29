@@ -1,7 +1,6 @@
 package com.pms.petopia.web;
 
 import java.util.UUID;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
@@ -25,11 +24,6 @@ public class HospitalUpdateHandler {
   }
 
   private String uploadDir;
-
-  @Override
-  public void init() throws ServletException {
-    this.uploadDir = this.getServletContext().getRealPath("/upload");
-  }
 
   @RequestMapping("/hospital/update")
   public String execute(HttpServletRequest request, HttpServletResponse response)

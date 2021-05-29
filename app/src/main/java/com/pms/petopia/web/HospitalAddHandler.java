@@ -48,24 +48,24 @@ public class HospitalAddHandler {
 
     photoPart.write(saveFilePath);
 
-    if (photoPart.getSize() > 0) {
-      // 파일을 선택해서 업로드 했다면,
-      String filename = UUID.randomUUID().toString();
-      photoPart.write(this.uploadDir + "/" + filename);
-      hospital.setPhoto(filename);
-
-      // 썸네일 이미지 생성
-      Thumbnails.of(this.uploadDir + "/" + filename)
-      .size(300, 300)
-      .outputFormat("jpg")
-      .crop(Positions.CENTER)
-      .toFiles(new Rename() {
-        @Override
-        public String apply(String name, ThumbnailParameter param) {
-          return name + "_300x300";
-        }
-      });
-    }
+    //    if (photoPart.getSize() > 0) {
+    //      // 파일을 선택해서 업로드 했다면,
+    //      String filename = UUID.randomUUID().toString();
+    //      photoPart.write(this.uploadDir + "/" + filename);
+    //      hospital.setPhoto(filename);
+    //
+    //      // 썸네일 이미지 생성
+    //      Thumbnails.of(this.uploadDir + "/" + filename)
+    //      .size(300, 300)
+    //      .outputFormat("jpg")
+    //      .crop(Positions.CENTER)
+    //      .toFiles(new Rename() {
+    //        @Override
+    //        public String apply(String name, ThumbnailParameter param) {
+    //          return name + "_300x300";
+    //        }
+    //      });
+    //    }
 
     SmallAddress smallAddress = new SmallAddress();
     smallAddress.setNo(Integer.parseInt(request.getParameter("cno")));

@@ -38,7 +38,8 @@ public class AppConfig {
   }
 
   @Bean
-  public PlatformTransactionManager transactionManager(DataSource dataSource) {
+  public PlatformTransactionManager transactionManager(
+      DataSource dataSource) {
     return new DataSourceTransactionManager(dataSource);
   }
 
@@ -51,10 +52,8 @@ public class AppConfig {
     sqlSessionFactoryBean.setDataSource(dataSource);
 
     sqlSessionFactoryBean.setTypeAliasesPackage("com.pms.petopia.domain");
-    sqlSessionFactoryBean.setMapperLocations(appCtx.getResources("classpath:com/pms/petopia/mapper/*Mapper.xml"));
-
+    sqlSessionFactoryBean.setMapperLocations(appCtx.getResources("classpath:com/pms/petopia/mapper/*Mapper"));
     return sqlSessionFactoryBean.getObject();
-
   }
 
 }

@@ -1,9 +1,7 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
@@ -64,7 +62,7 @@ public class RecordListHandler {
 
     out.println("</body>");
     out.println("</html>");
-    return "" // 체크
+    return ""; // 체크
   }
 }
 
