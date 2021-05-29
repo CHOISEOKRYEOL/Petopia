@@ -25,6 +25,7 @@
     </association>
     
   </resultMap>
+  
   <insert id="insert" parameterType="pet">
     insert into pet_mypet(pname, age, birth, gender, photo, owner, type) 
     values(#{name}, #{age}, #{birthDay}, #{gender}, #{photo}, #{owner.no}, #{type.no})

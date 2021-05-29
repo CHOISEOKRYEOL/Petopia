@@ -43,35 +43,35 @@ public class PetAddHandler {
 
     Part photoPart = request.getPart("photo");
 
-    //    if (photoPart.getSize() > 0) {
-    //      // 파일을 선택해서 업로드 했다면,
-    //      String filename = UUID.randomUUID().toString();
-    //      photoPart.write(this.uploadDir + "/" + filename);
-    //      p.setPhoto(filename);
-    //
-    //      // 썸네일 이미지 생성
-    //      Thumbnails.of(this.uploadDir + "/" + filename)
-    //      .size(30, 30)
-    //      .outputFormat("jpg")
-    //      .crop(Positions.CENTER)
-    //      .toFiles(new Rename() {
-    //        @Override
-    //        public String apply(String name, ThumbnailParameter param) {
-    //          return name + "_30x30";
-    //        }
-    //      });
-    //
-    //      Thumbnails.of(this.uploadDir + "/" + filename)
-    //      .size(80, 80)
-    //      .outputFormat("jpg")
-    //      .crop(Positions.CENTER)
-    //      .toFiles(new Rename() {
-    //        @Override
-    //        public String apply(String name, ThumbnailParameter param) {
-    //          return name + "_80x80";
-    //        }
-    //      });
-    //    }
+        if (photoPart.getSize() > 0) {
+          // 파일을 선택해서 업로드 했다면,
+          String filename = UUID.randomUUID().toString();
+          photoPart.write(this.uploadDir + "/" + filename);
+          p.setPhoto(filename);
+    
+          // 썸네일 이미지 생성
+          Thumbnails.of(this.uploadDir + "/" + filename)
+          .size(30, 30)
+          .outputFormat("jpg")
+          .crop(Positions.CENTER)
+          .toFiles(new Rename() {
+            @Override
+            public String apply(String name, ThumbnailParameter param) {
+              return name + "_30x30";
+            }
+          });
+    
+          Thumbnails.of(this.uploadDir + "/" + filename)
+          .size(80, 80)
+          .outputFormat("jpg")
+          .crop(Positions.CENTER)
+          .toFiles(new Rename() {
+            @Override
+            public String apply(String name, ThumbnailParameter param) {
+              return name + "_80x80";
+            }
+          });
+        }
 
     petService.add(p);
 

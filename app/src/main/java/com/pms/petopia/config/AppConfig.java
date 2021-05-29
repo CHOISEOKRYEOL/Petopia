@@ -52,7 +52,6 @@ public class AppConfig {
 
     sqlSessionFactoryBean.setTypeAliasesPackage("com.pms.petopia.domain");
     sqlSessionFactoryBean.setMapperLocations(appCtx.getResources("classpath:com/pms/petopia/mapper/*Mapper.xml"));
-
     return sqlSessionFactoryBean.getObject();
 
   }
