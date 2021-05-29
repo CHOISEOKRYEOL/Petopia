@@ -1,10 +1,11 @@
 package com.pms.petopia.service.impl;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 import com.pms.petopia.dao.SmallAddressDao;
 import com.pms.petopia.domain.SmallAddress;
 import com.pms.petopia.service.SmallAddressService;
-
+@Service
 public class DefaultSmallAddressService implements SmallAddressService {
 
 
@@ -14,6 +15,7 @@ public class DefaultSmallAddressService implements SmallAddressService {
     this.smallAddressDao = smallAddressDao;
   }
 
+  @Override
   public int add(SmallAddress s) throws Exception {
     return smallAddressDao.insert(s);
   }

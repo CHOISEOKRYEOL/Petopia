@@ -1,37 +1,31 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Story;
 import com.pms.petopia.service.StoryService;
 
-@SuppressWarnings("serial")
-@WebServlet("/story/detail")
-public class StoryDetailHandler extends HttpServlet {
+@Controller
+public class StoryDetailHandler {
 
-  SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+  StoryService storyService;
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  public StoryDetailHandler(StoryService storyService) {
+    this.storyService = storyService;
+  }
 
-    StoryService storyService = (StoryService) request.getServletContext().getAttribute("storyService");
+  @RequestMapping("/story/detail")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
 
-    try {
-      int no = Integer.parseInt(request.getParameter("no"));
+    int no = Integer.parseInt(request.getParameter("no"));
 
-      Story story = storyService.get(no);
-      request.setAttribute("story", story);
-      response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/story/detail.jsp").include(request, response);
+    Story story = storyService.get(no);
+    request.setAttribute("story", story);
 
-    } catch (Exception e) {
-      throw new ServletException(e);
-    }
+    return "/jsp/story/detail.jsp";
+
   }
 }

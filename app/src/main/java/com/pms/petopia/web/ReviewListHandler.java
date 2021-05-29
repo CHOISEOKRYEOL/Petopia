@@ -1,40 +1,36 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
 import java.util.List;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Hospital;
 import com.pms.petopia.domain.Review;
 import com.pms.petopia.service.ReviewService;
 
-@SuppressWarnings("serial")
-@WebServlet("/review/list")
-public class ReviewListHandler extends HttpServlet {
+@Controller
+public class ReviewListHandler{
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  ReviewService reviewService;
 
-    ReviewService reviewService = (ReviewService) request.getServletContext().getAttribute("reviewService");
+  public ReviewListHandler(ReviewService reviewService) {
+    this.reviewService = reviewService;
+  }
+
+  @RequestMapping("/review/list")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
 
     Hospital h = new Hospital();
 
     h.setNo(Integer.parseInt(request.getParameter("no")));
 
-    try {
-      List<Review> list = reviewService.list(h.getNo());
-      request.setAttribute("hospital", h);
-      request.setAttribute("list", list);
+    List<Review> list = reviewService.list(h.getNo());
+    request.setAttribute("hospital", h);
+    request.setAttribute("list", list);
 
-      response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/review/list.jsp").include(request, response);
-    } catch (Exception e) {
-      throw new ServletException(e);
-    }
+    return "/jsp/review/list.jsp";
 
   }
 }

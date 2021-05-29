@@ -8,23 +8,28 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.Scrap;
 import com.pms.petopia.domain.Story;
 import com.pms.petopia.service.ScrapService;
 import com.pms.petopia.service.StoryService;
 
-@SuppressWarnings("serial")
-@WebServlet("/story/scrapadd")
-public class ScrapAddHandler extends HttpServlet{
+@Controller
+public class ScrapAddHandler {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  ScrapService scrapService;
+  StoryService storyService;
 
-    ScrapService scrapService = (ScrapService) request.getServletContext().getAttribute("scrapService");
-    StoryService storyService = (StoryService) request.getServletContext().getAttribute("storyService");
-    response.setContentType("text/html;charset=UTF-8");
+  public ScrapAddHandler(ScrapService scrapService, StoryService storyService) {
+    this.scrapService = scrapService;
+    this.storyService = storyService;
+  }
+
+  @RequestMapping("/story/scrapadd")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
 
     int newsNo = Integer.parseInt(request.getParameter("newsNo"));
 
@@ -64,10 +69,7 @@ public class ScrapAddHandler extends HttpServlet{
           }
         }
       }
-
-    } catch (Exception e) {
-
-      throw new ServletException(e);
     }
+    return ""; // 체크
   }
 }

@@ -1,49 +1,46 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.service.MemberService;
 
-@SuppressWarnings("serial")
-@WebServlet("/login")
-public class LoginHandler extends HttpServlet {
+@Controller
+public class LoginHandler {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  MemberService memberService;
 
-    String id = "";
-
-    Cookie[] cookies = request.getCookies();
-
-    if(cookies != null) {
-      for(Cookie c : cookies) {
-        if(c.getName().equals("id")) {
-          id = c.getValue();
-          break;
-        }
-      }
-    }
-
-    request.setAttribute("id", id);
-    response.setContentType("text/html;charset=UTF-8");
-    request.getRequestDispatcher("/jsp/login_form.jsp").include(request, response);
-
+  public LoginHandler(MemberService memberService) {
+    this.memberService = memberService;
   }
 
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  @RequestMapping("/login")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
 
-    MemberService memberService = (MemberService) request.getServletContext().getAttribute("memberService");
+    if(request.getMethod().equals("GET")) {
+      String id = "";
+
+      Cookie[] cookies = request.getCookies();
+
+      if(cookies != null) {
+        for(Cookie c : cookies) {
+          if(c.getName().equals("id")) {
+            id = c.getValue();
+            break;
+          }
+        }
+      }
+
+      request.setAttribute("id", id);
+      return "/jsp/login_form.jsp";
+    }
+
 
     String id = request.getParameter("id");
     boolean check = isEmail(id);
@@ -61,27 +58,23 @@ public class LoginHandler extends HttpServlet {
       response.addCookie(cookie);
     }
 
-    try {
-      if(check) {
-        member = memberService.getEmail(id, password);
-      }
-      else {
-        member = memberService.getId(id, password);
-      }
+    if(check) {
+      member = memberService.getEmail(id, password);
+    }
+    else {
+      member = memberService.getId(id, password);
+    }
 
-      response.setContentType("text/html;charset=UTF-8");
+    response.setContentType("text/html;charset=UTF-8");
 
-      if (member == null) {
-        request.getSession().invalidate();
-        request.getRequestDispatcher("/jsp/login_fail.jsp").include(request, response);
-        response.setHeader("Refresh", "1;url=login");
-      }
-      else {
-        request.getSession().setAttribute("loginUser", member);
-        response.sendRedirect("main");
-      }
-    } catch (Exception e) {
-      throw new ServletException(e);
+    if (member == null) {
+      request.getSession().invalidate();
+      return "/jsp/login_fail.jsp";
+      //      response.setHeader("Refresh", "1;url=login");
+    }
+    else {
+      request.getSession().setAttribute("loginUser", member);
+      return "redirect:main";
     }
   }
 

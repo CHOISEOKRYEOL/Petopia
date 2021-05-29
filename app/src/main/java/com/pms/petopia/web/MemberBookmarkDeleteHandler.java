@@ -1,42 +1,38 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.service.BookmarkService;
 
-@SuppressWarnings("serial")
-@WebServlet("/member/bookmarkdelete")
-public class MemberBookmarkDeleteHandler extends HttpServlet {
+@Controller
+public class MemberBookmarkDeleteHandler {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  BookmarkService bookmarkService;
 
-    BookmarkService bookmarkService = (BookmarkService) request.getServletContext().getAttribute("bookmarkService");
+  public MemberBookmarkDeleteHandler(BookmarkService bookmarkService) {
+    this.bookmarkService = bookmarkService;
+  }
+
+  @RequestMapping("/member/bookmarkdelete")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
 
     int no = Integer.parseInt(request.getParameter("no"));
     int hno = Integer.parseInt(request.getParameter("hno"));
 
-    try {
 
-      bookmarkService.delete(no);
+    bookmarkService.delete(no);
 
-      if(hno == -1) {
-        response.sendRedirect("../hospital/list");
-      }
-      else if(hno == 0){
-        response.sendRedirect("bookmarklist");
-      }
-      else {
-        response.sendRedirect("../hospital/detail?no=" + hno);
-      }
+    if(hno == -1) {
+      return "redirect:../hospital/list";
     }
-    catch (Exception e) {
-      throw new ServletException(e);
+    else if(hno == 0){
+      return "redirect:bookmarklist";
+    }
+    else {
+      return "redirect:../hospital/detail?no=" + hno;
     }
 
   }

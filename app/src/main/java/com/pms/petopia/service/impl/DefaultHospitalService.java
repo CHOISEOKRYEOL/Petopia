@@ -1,10 +1,12 @@
 package com.pms.petopia.service.impl;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 import com.pms.petopia.dao.HospitalDao;
 import com.pms.petopia.domain.Hospital;
 import com.pms.petopia.service.HospitalService;
 
+@Service
 public class DefaultHospitalService implements HospitalService {
 
   HospitalDao hospitalDao;

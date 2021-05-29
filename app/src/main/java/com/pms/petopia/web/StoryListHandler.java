@@ -1,53 +1,50 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
 import java.util.List;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.Scrap;
 import com.pms.petopia.domain.Story;
 import com.pms.petopia.service.ScrapService;
 import com.pms.petopia.service.StoryService;
 
-@SuppressWarnings("serial")
-@WebServlet("/story/list")
-public class StoryListHandler extends HttpServlet {
+@Controller
+public class StoryListHandler {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  StoryService storyService;
+  ScrapService scrapService;
 
-    StoryService storyService = (StoryService) request.getServletContext().getAttribute("storyService");
-    ScrapService scrapService = (ScrapService) request.getServletContext().getAttribute("scrapService");
+  public StoryListHandler(StoryService storyService, ScrapService scrapService) {
+    this.storyService = storyService;
+    this.scrapService = scrapService;
+  }
 
+  @RequestMapping("/story/list")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
 
-    try {
-      String keyword = request.getParameter("keyword");
-      List<Story> storys = null;
-      if (keyword != null && keyword.length() > 0) {
-        storys = storyService.search(keyword);
-      } else {
-        storys = storyService.list();
-      }
-      List<Scrap> scrapList = null;
-      if ((Member)request.getSession().getAttribute("loginUser") != null) {
-        Member loginUser = (Member)request.getSession().getAttribute("loginUser");
-
-        scrapList = scrapService.list(loginUser.getNo());
-
-      }
-
-      request.setAttribute("scrapList", scrapList);
-      request.setAttribute("storys", storys);
-      response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/story/list.jsp").include(request, response);
-
-    } catch (Exception e) {
-      throw new ServletException(e);
+    String keyword = request.getParameter("keyword");
+    List<Story> storys = null;
+    if (keyword != null && keyword.length() > 0) {
+      storys = storyService.search(keyword);
+    } else {
+      storys = storyService.list();
     }
+    List<Scrap> scrapList = null;
+    if ((Member)request.getSession().getAttribute("loginUser") != null) {
+      Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+
+      scrapList = scrapService.list(loginUser.getNo());
+
+    }
+
+    request.setAttribute("scrapList", scrapList);
+    request.setAttribute("storys", storys);
+
+    return "/jsp/story/list.jsp";
+
   }
 }

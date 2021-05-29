@@ -1,14 +1,11 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
 import java.util.UUID;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Hospital;
 import com.pms.petopia.domain.SmallAddress;
 import com.pms.petopia.service.HospitalService;
@@ -17,71 +14,95 @@ import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
 import net.coobird.thumbnailator.name.Rename;
 
-@SuppressWarnings("serial")
-@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
-@WebServlet("/hospital/add")
-public class HospitalAddHandler extends HttpServlet {
+@Controller
+public class HospitalAddHandler {
 
-  private String uploadDir;
+  HospitalService hospitalService;
 
-  @Override
-  public void init() throws ServletException {
-    this.uploadDir = this.getServletContext().getRealPath("/upload");
+  public HospitalAddHandler(HospitalService hospitalService) {
+    this.hospitalService = hospitalService;
   }
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
 
-    response.setContentType("text/html;charset=UTF-8");
-    request.getRequestDispatcher("/jsp/hospital/form.jsp").include(request, response);
+  @RequestMapping("/hospital/add")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
+
+    if(request.getMethod().equals("GET")) {
+      return "/jsp/hospital/form.jsp";
+    }
+
+    Hospital hospital = new Hospital();
+    hospital.setName(request.getParameter("name"));
+    hospital.setTel(request.getParameter("tel"));
+    hospital.setAddress(request.getParameter("address"));
+    hospital.setStartTime(Integer.valueOf(request.getParameter("startTime")));
+    hospital.setEndTime(Integer.valueOf(request.getParameter("endTime")));
+    hospital.setParking(Integer.valueOf(request.getParameter("parking")));
+    hospital.setVeterinarian(Integer.valueOf(request.getParameter("vet")));
+
+    Part photoPart = request.getPart("photo");
+
+    String filename = UUID.randomUUID().toString();
+    String saveFilePath = request.getServletContext().getRealPath("/upload/" + filename);
+
+    photoPart.write(saveFilePath);
+
+    if (photoPart.getSize() > 0) {
+      // 파일을 선택해서 업로드 했다면,
+      String filename = UUID.randomUUID().toString();
+      photoPart.write(this.uploadDir + "/" + filename);
+      hospital.setPhoto(filename);
+
+      // 썸네일 이미지 생성
+      Thumbnails.of(this.uploadDir + "/" + filename)
+      .size(300, 300)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_300x300";
+        }
+      });
+    }
+
+    SmallAddress smallAddress = new SmallAddress();
+    smallAddress.setNo(Integer.parseInt(request.getParameter("cno")));
+    hospital.setSmallAddress(smallAddress);
+
+    hospitalService.add(hospital);
+
+    return "redirect:list";
+
   }
 
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-
-    HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
-
+  private void generatePhotoThumbnail(String saveFilePath) {
     try {
-      Hospital hospital = new Hospital();
-      hospital.setName(request.getParameter("name"));
-      hospital.setTel(request.getParameter("tel"));
-      hospital.setAddress(request.getParameter("address"));
-      hospital.setStartTime(Integer.valueOf(request.getParameter("startTime")));
-      hospital.setEndTime(Integer.valueOf(request.getParameter("endTime")));
-      hospital.setParking(Integer.valueOf(request.getParameter("parking")));
-      hospital.setVeterinarian(Integer.valueOf(request.getParameter("vet")));
+      Thumbnails.of(saveFilePath)
+      .size(30, 30)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_30x30";
+        }
+      });
 
-      Part photoPart = request.getPart("photo");
-      if (photoPart.getSize() > 0) {
-        // 파일을 선택해서 업로드 했다면,
-        String filename = UUID.randomUUID().toString();
-        photoPart.write(this.uploadDir + "/" + filename);
-        hospital.setPhoto(filename);
-
-        // 썸네일 이미지 생성
-        Thumbnails.of(this.uploadDir + "/" + filename)
-        .size(300, 300)
-        .outputFormat("jpg")
-        .crop(Positions.CENTER)
-        .toFiles(new Rename() {
-          @Override
-          public String apply(String name, ThumbnailParameter param) {
-            return name + "_300x300";
-          }
-        });
-      }
-
-      SmallAddress smallAddress = new SmallAddress();
-      smallAddress.setNo(Integer.parseInt(request.getParameter("cno")));
-      hospital.setSmallAddress(smallAddress);
-
-      hospitalService.add(hospital);
-      response.sendRedirect("list");
-
+      Thumbnails.of(saveFilePath)
+      .size(120, 120)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_300x300";
+        }
+      });
     } catch (Exception e) {
-      throw new ServletException(e);
+      e.printStackTrace();
     }
   }
+
 }

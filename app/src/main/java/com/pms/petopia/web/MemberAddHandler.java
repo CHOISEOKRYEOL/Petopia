@@ -1,32 +1,28 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.service.MemberService;
 
-@SuppressWarnings("serial")
-@WebServlet("/member/add")
-public class MemberAddHandler extends HttpServlet {
+@Controller
+public class MemberAddHandler {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  MemberService memberService;
 
-    response.setContentType("text/html;charset=UTF-8");
-    request.getRequestDispatcher("/jsp/member/member_form.jsp").include(request, response);
-
+  public MemberAddHandler(MemberService memberService) {
+    this.memberService = memberService;
   }
 
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  @RequestMapping("/member/add")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
 
-    MemberService memberService = (MemberService) request.getServletContext().getAttribute("memberService");
+    if(request.getMethod().equals("GET")) {
+      return "/jsp/member/member_form.jsp";
+    }
 
     Member m = new Member();
     m.setName(request.getParameter("name"));
@@ -37,16 +33,12 @@ public class MemberAddHandler extends HttpServlet {
     m.setTel(request.getParameter("tel"));
 
 
-    try {
-      memberService.add(m);
-      request.setAttribute("member", m);
-      response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/member/add_success.jsp").include(request, response);
-      response.setHeader("Refresh", "1;url=../main");
+    memberService.add(m);
+    request.setAttribute("member", m);
 
-    } catch (Exception e) {
-      throw new ServletException(e);
-    }
+    return "/jsp/member/add_success.jsp";
+    //    response.setHeader("Refresh", "1;url=../main");
+
 
   }
 }

@@ -1,40 +1,34 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Pet;
 import com.pms.petopia.service.PetService;
 
-@SuppressWarnings("serial")
-@WebServlet("/pet/detail")
-public class PetDetailHandler extends HttpServlet {
+@Controller
+public class PetDetailHandler {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  PetService petService;
 
-    PetService petService = (PetService) request.getServletContext().getAttribute("petService");
+  public PetDetailHandler(PetService petService) {
+    this.petService = petService;
+  }
 
-    response.setContentType("text/html;charset=UTF-8");
+  @RequestMapping("/pet/detail")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
 
     int no = Integer.parseInt(request.getParameter("no"));
 
-    try {
 
-      Pet pet = petService.get(no);
-      request.setAttribute("pet",pet);
-      //      request.getSession().setAttribute("petInfo", pet);
+    Pet pet = petService.get(no);
+    request.setAttribute("pet",pet);
+    //      request.getSession().setAttribute("petInfo", pet);
 
-      response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/pet/detail.jsp").include(request, response);
+    return "/jsp/pet/detail.jsp";
 
-    } catch (Exception e) {
-      throw new ServletException(e);
-    }
   }
 }
 

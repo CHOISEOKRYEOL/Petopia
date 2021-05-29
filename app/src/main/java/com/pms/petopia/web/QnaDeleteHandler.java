@@ -1,42 +1,35 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.service.QnaService;
 
-@SuppressWarnings("serial")
-@WebServlet("/qna/delete")
-public class QnaDeleteHandler extends HttpServlet {
+@Controller
+public class QnaDeleteHandler {
 
+  QnaService qnaService;
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    QnaService qnaService = (QnaService) request.getServletContext().getAttribute("qnaService");
+  public QnaDeleteHandler(QnaService qnaService) {
+    this.qnaService = qnaService;
+  }
+
+  @RequestMapping("/qna/delete")
+  public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
-    try {
+    int no = Integer.parseInt(request.getParameter("no"));
+    qnaService.delete(no);
 
-      int no = Integer.parseInt(request.getParameter("no"));
-      qnaService.delete(no);
-
-      response.setContentType("text/html;charset=UTF-8");
-      if(loginUser.getRole() == 0) {
-        request.getRequestDispatcher("/jsp/admin/qna_delete.jsp").include(request, response);
-        response.setHeader("Refresh", "1;url=qnalist");
-      }
-      else {
-        request.getRequestDispatcher("/jsp/qna/delete.jsp").include(request, response);
-        response.setHeader("Refresh", "1;url=list");
-      }
+    if(loginUser.getRole() == 0) {
+      return "/jsp/admin/qna_delete.jsp";
+      //      response.setHeader("Refresh", "1;url=qnalist");
     }
-    catch (Exception e) {
-      throw new ServletException(e);
-
+    else {
+      return "/jsp/qna/delete.jsp";
+      //      response.setHeader("Refresh", "1;url=list");
     }
   }
 }

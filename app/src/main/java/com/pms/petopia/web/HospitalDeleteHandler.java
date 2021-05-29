@@ -1,37 +1,37 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.service.BookmarkService;
 import com.pms.petopia.service.HospitalService;
 import com.pms.petopia.service.ReviewService;
 
-@SuppressWarnings("serial")
-@WebServlet("/hospital/delete")
-public class HospitalDeleteHandler extends HttpServlet {
+@Controller
+public class HospitalDeleteHandler {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  HospitalService hospitalService;
+  ReviewService reviewService;
+  BookmarkService bookmarkService;
 
-    HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
-    ReviewService reviewService = (ReviewService) request.getServletContext().getAttribute("reviewService");
-    BookmarkService bookmarkService = (BookmarkService) request.getServletContext().getAttribute("bookmarkService");
+  public HospitalDeleteHandler(HospitalService hospitalService, ReviewService reviewService, BookmarkService bookmarkService) {
+    this.hospitalService = hospitalService;
+    this.reviewService = reviewService;
+    this.bookmarkService = bookmarkService;
+  }
 
-    try {
-      int no = Integer.parseInt(request.getParameter("no"));
+  @RequestMapping("/hospital/delete")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
 
-      reviewService.deleteByAdmin(no);
-      bookmarkService.deleteByAdmin(no);
-      hospitalService.delete(no);
-      response.sendRedirect("../admin/hospitallist");
+    int no = Integer.parseInt(request.getParameter("no"));
 
-    } catch (Exception e) {
-      throw new ServletException(e);
-    }
+    reviewService.deleteByAdmin(no);
+    bookmarkService.deleteByAdmin(no);
+    hospitalService.delete(no);
+
+    return "../admin/hospitallist";
+
   }
 }

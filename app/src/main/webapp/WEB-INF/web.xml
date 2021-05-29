@@ -6,7 +6,6 @@
   version="4.0">
 
   <display-name>petopia</display-name>
-
   
   <!-- 스프링 웹 MVC 사용을 위한 서블릿 설정 -->
   <servlet>
@@ -25,9 +24,7 @@
     <multipart-config>
       <max-file-size>10000000</max-file-size>
     </multipart-config>  
-  
   </servlet>
-
   
 <!--  필터 등록 및 필터를 적용할 URL 설정 -->
 

@@ -1,49 +1,39 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
 import java.util.Random;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.service.MemberService;
 
-@SuppressWarnings("serial")
-@WebServlet("/member/findKey")
-public class MemberFindKeyHandler extends HttpServlet {
+@Controller
+public class MemberFindKeyHandler {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  MemberService memberService;
 
-    response.setContentType("text/html;charset=UTF-8");
-    request.getRequestDispatcher("/jsp/member/findKey_form.jsp").include(request, response);
-
+  public MemberFindKeyHandler(MemberService memberService) {
+    this.memberService = memberService;
   }
 
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  @RequestMapping("/member/findKey")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
 
-    MemberService memberService = (MemberService) request.getServletContext().getAttribute("memberService");
+    if(request.getMethod().equals("GET")) {
+      return "/jsp/member/findKey_form.jsp";
+    }
 
     String name = request.getParameter("name");
     String nick = request.getParameter("nick");
 
-    try {
 
-      Member m = memberService.getIdEmail(name, nick);
+    Member m = memberService.getIdEmail(name, nick);
 
-      request.setAttribute("member", m);
-      response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/member/find_id_email.jsp").include(request, response);
+    request.setAttribute("member", m);
 
-    }
-    catch (Exception e) {
-      throw new ServletException(e);
-    }
+    return "/jsp/member/find_id_email.jsp";
 
   }
 

@@ -1,14 +1,11 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
 import java.util.UUID;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Pet;
 import com.pms.petopia.service.PetService;
 import net.coobird.thumbnailator.ThumbnailParameter;
@@ -16,22 +13,19 @@ import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
 import net.coobird.thumbnailator.name.Rename;
 
-@SuppressWarnings("serial")
-@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
-@WebServlet("/pet/update")
-public class PetUpdateHandler extends HttpServlet {
+@Controller
+public class PetUpdateHandler {
 
-  private String uploadDir;
+  PetService petService;
 
-  @Override
-  public void init() throws ServletException {
-    this.uploadDir = this.getServletContext().getRealPath("/upload");
+  public PetUpdateHandler(PetService petService) {
+    this.petService = petService;
   }
 
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-    PetService petService = (PetService) request.getServletContext().getAttribute("petService");
+
+  @RequestMapping("/pet/update")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
 
     Pet p = new Pet();
     p.setNo(Integer.parseInt(request.getParameter("no")));
@@ -68,18 +62,11 @@ public class PetUpdateHandler extends HttpServlet {
       });
     }
 
-    try {
+    petService.update(p);
+    request.setAttribute("pet", p);
 
-      petService.update(p);
-      request.setAttribute("pet", p);
-      response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/pet/update.jsp").include(request, response);
-      response.setHeader("Refresh", "1;url=list");
-
-    } catch (Exception e) {
-      throw new ServletException(e);
-    }
-
+    return "/jsp/pet/update.jsp";
+    //      response.setHeader("Refresh", "1;url=list");
 
   }
 }

@@ -1,35 +1,32 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Qna;
 import com.pms.petopia.service.QnaService;
 
-@SuppressWarnings("serial")
-@WebServlet("/qna/detail")
-public class QnaDetailHandler extends HttpServlet {
+@Controller
+public class QnaDetailHandler {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  QnaService qnaService;
 
-    QnaService qnaService = (QnaService) request.getServletContext().getAttribute("qnaService");
+  public QnaDetailHandler(QnaService qnaService) {
+    this.qnaService = qnaService;
+  }
+
+  @RequestMapping("/qna/detail")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
 
     int no = Integer.parseInt(request.getParameter("no"));
 
-    try {
-      Qna q = qnaService.get(no);
-      request.setAttribute("qna", q);
-      response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/qna/detail.jsp").include(request, response);
+    Qna q = qnaService.get(no);
+    request.setAttribute("qna", q);
 
-    }
-    catch (Exception e) {
-      throw new ServletException(e);
-    }
+    return "/jsp/qna/detail.jsp";
+
   }
 }

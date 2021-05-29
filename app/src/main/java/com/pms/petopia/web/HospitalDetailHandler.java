@@ -1,44 +1,40 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Bookmark;
 import com.pms.petopia.domain.Hospital;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.service.BookmarkService;
 import com.pms.petopia.service.HospitalService;
 
-@SuppressWarnings("serial")
-@WebServlet("/hospital/detail")
-public class HospitalDetailHandler extends HttpServlet {
+public class HospitalDetailHandler {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  HospitalService hospitalService;
+  BookmarkService bookmarkService;
 
-    HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
-    BookmarkService bookmarkService = (BookmarkService) request.getServletContext().getAttribute("bookmarkService");
+  public HospitalDetailHandler(HospitalService hospitalService, BookmarkService bookmarkService) {
+    this.hospitalService = hospitalService;
+    this.bookmarkService = bookmarkService;
+  }
+
+  @RequestMapping("/hospital/detail")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
+
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
+    int no = Integer.parseInt(request.getParameter("no"));
 
-    try {
-      int no = Integer.parseInt(request.getParameter("no"));
+    Hospital hospital = hospitalService.get(no);
 
-      Hospital hospital = hospitalService.get(no);
+    Bookmark bookmark = bookmarkService.get(loginUser.getNo(), hospital.getNo());
 
-      Bookmark bookmark = bookmarkService.get(loginUser.getNo(), hospital.getNo());
+    request.setAttribute("bookmark", bookmark);
+    request.setAttribute("hospital", hospital);
 
-      request.setAttribute("bookmark", bookmark);
-      request.setAttribute("hospital", hospital);
-      response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/hospital/detail.jsp").include(request, response);
+    return "/jsp/hospital/detail.jsp";
 
-    } catch (Exception e) {
-      throw new ServletException(e);
-    }
   }
 }

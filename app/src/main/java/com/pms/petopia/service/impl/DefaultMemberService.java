@@ -3,10 +3,12 @@ package com.pms.petopia.service.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.stereotype.Service;
 import com.pms.petopia.dao.MemberDao;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.service.MemberService;
 
+@Service
 public class DefaultMemberService implements MemberService {
 
   MemberDao memberDao;

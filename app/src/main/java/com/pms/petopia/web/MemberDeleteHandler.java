@@ -1,30 +1,35 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
 import java.util.UUID;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.service.BookmarkService;
 import com.pms.petopia.service.MemberService;
 import com.pms.petopia.service.QnaService;
 import com.pms.petopia.service.ReviewService;
 
-@SuppressWarnings("serial")
-@WebServlet("/member/delete")
-public class MemberDeleteHandler extends HttpServlet {
+@Controller
+public class MemberDeleteHandler {
 
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  MemberService memberService;
+  BookmarkService bookmarkService;
+  ReviewService reviewService;
+  QnaService qnaService;
 
-    MemberService memberService = (MemberService) request.getServletContext().getAttribute("memberService");
-    BookmarkService bookmarkService = (BookmarkService) request.getServletContext().getAttribute("bookmarkService");
-    ReviewService reviewService = (ReviewService) request.getServletContext().getAttribute("reviewService");
-    QnaService qnaService = (QnaService) request.getServletContext().getAttribute("qnaService");
+  public MemberDeleteHandler(MemberService memberService, BookmarkService bookmarkService, ReviewService reviewService, QnaService qnaService) {
+    this.memberService = memberService;
+    this.bookmarkService = bookmarkService;
+    this.reviewService = reviewService;
+    this.qnaService = qnaService;
+  }
+
+  @RequestMapping("/member/delete")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
+
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
     Member m = new Member();
@@ -41,32 +46,28 @@ public class MemberDeleteHandler extends HttpServlet {
     m.setNick(UUID.randomUUID().toString());
     m.setState(1);
 
-    try {
-      if(loginUser.getRole() == 0) {
-        reviewService.deleteAll(m.getNo());
-        bookmarkService.deleteAll(m.getNo());
-        qnaService.deleteAll(m.getNo());
-      }
-      else {
-        reviewService.deleteAll(loginUser.getNo());
-        bookmarkService.deleteAll(loginUser.getNo());
-        qnaService.deleteAll(loginUser.getNo());
-      }
+    if(loginUser.getRole() == 0) {
+      reviewService.deleteAll(m.getNo());
+      bookmarkService.deleteAll(m.getNo());
+      qnaService.deleteAll(m.getNo());
+    }
+    else {
+      reviewService.deleteAll(loginUser.getNo());
+      bookmarkService.deleteAll(loginUser.getNo());
+      qnaService.deleteAll(loginUser.getNo());
+    }
 
-      memberService.delete(m);
-      response.setContentType("text/html;charset=UTF-8");
+    memberService.delete(m);
+    response.setContentType("text/html;charset=UTF-8");
 
-      if(loginUser.getRole() == 0) {
-        request.getRequestDispatcher("/jsp/admin/member_delete.jsp").include(request, response);
-        response.setHeader("Refresh", "1;url='../admin/memberlist'");
-      }
-      else {
-        request.getSession().invalidate();
-        request.getRequestDispatcher("/jsp/member/delete.jsp").include(request, response);
-        response.setHeader("Refresh", "1;url='../main'");
-      }
-    } catch (Exception e) {
-      throw new ServletException(e);
+    if(loginUser.getRole() == 0) {
+      return "/jsp/admin/member_delete.jsp";
+      //      response.setHeader("Refresh", "1;url='../admin/memberlist'");
+    }
+    else {
+      request.getSession().invalidate();
+      return "/jsp/member/delete.jsp";
+      //      response.setHeader("Refresh", "1;url='../main'");
     }
 
   }

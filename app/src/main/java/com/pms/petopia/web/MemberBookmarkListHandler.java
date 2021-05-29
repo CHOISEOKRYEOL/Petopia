@@ -1,37 +1,34 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
 import java.util.List;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Bookmark;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.service.BookmarkService;
 
-@SuppressWarnings("serial")
-@WebServlet("/member/bookmarklist")
-public class MemberBookmarkListHandler extends HttpServlet {
+@Controller
+public class MemberBookmarkListHandler {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  BookmarkService bookmarkService;
 
-    BookmarkService bookmarkService = (BookmarkService) request.getServletContext().getAttribute("bookmarkService");
+  public MemberBookmarkListHandler(BookmarkService bookmarkService) {
+    this.bookmarkService = bookmarkService;
+  }
+
+  @RequestMapping("/member/bookmarklist")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
-    try {
-      List<Bookmark> list = bookmarkService.list(loginUser.getNo());
+    List<Bookmark> list = bookmarkService.list(loginUser.getNo());
 
-      request.setAttribute("list", list);
-      response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/member/bookmark.jsp").include(request, response);
+    request.setAttribute("list", list);
 
-    } catch (Exception e) {
-      throw new ServletException(e);
-    }
+    return "/jsp/member/bookmark.jsp";
+
   }
 }

@@ -1,23 +1,25 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.service.MemberService;
 
-@SuppressWarnings("serial")
-@WebServlet("/member/update")
-public class MemberUpdateHandler extends HttpServlet {
+@Controller
+public class MemberUpdateHandler {
 
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  MemberService memberService;
 
-    MemberService memberService = (MemberService) request.getServletContext().getAttribute("memberService");
+  public MemberUpdateHandler(MemberService memberService) {
+    this.memberService = memberService;
+  }
+
+  @RequestMapping("/member/update")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
+
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
     Member m = new Member();
@@ -27,16 +29,12 @@ public class MemberUpdateHandler extends HttpServlet {
     m.setPassword(request.getParameter("password"));
     m.setTel(request.getParameter("tel"));
 
-    try {
-      memberService.update(m);
-      request.setAttribute("member", m);
-      response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/member/update.jsp").include(request, response);
-      response.setHeader("Refresh", "1;url=../main");
+    memberService.update(m);
+    request.setAttribute("member", m);
 
-    } catch (Exception e) {
-      throw new ServletException(e);
-    }
+    return "/jsp/member/update.jsp";
+    //      response.setHeader("Refresh", "1;url=../main");
+
   }
 }
 
