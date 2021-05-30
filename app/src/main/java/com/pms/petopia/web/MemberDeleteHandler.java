@@ -58,16 +58,13 @@ public class MemberDeleteHandler {
     }
 
     memberService.delete(m);
-    response.setContentType("text/html;charset=UTF-8");
 
     if(loginUser.getRole() == 0) {
-      return "/jsp/admin/member_delete.jsp";
-      //      response.setHeader("Refresh", "1;url='../admin/memberlist'");
+      return "redirect:../admin/memberlist";
     }
     else {
       request.getSession().invalidate();
       return "/jsp/member/delete.jsp";
-      //      response.setHeader("Refresh", "1;url='../main'");
     }
 
   }

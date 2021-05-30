@@ -25,7 +25,6 @@ public class AdminQnaAnswerHandler {
     qna.setState(1);
     qnaService.answer(qna);
 
-    return "/jsp/admin/qna_answer.jsp";
-    //    response.setHeader("Refresh", "1;url=qnalist");
+    return "redirect:qnalist";
   }
 }

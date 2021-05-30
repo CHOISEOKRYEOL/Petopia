@@ -10,6 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link href="./css/common.css" rel="stylesheet" >
 <style>
   #login-form {
@@ -41,13 +42,44 @@
     <a href="member/findKey">아이디/비밀번호 찾기</a>
   </div>
   
-<button class="btn btn-primary btn-sm">로그인</button>
+<button id="login" class="btn btn-primary btn-sm">로그인</button>
 </form>
 </div>
 </div>
 <script>
 
+var idCheck = 0;
+var pwdCheck = 0;
 
+$('#login').click(function() {
+	var id = $('#id').val();
+	var pwd = $('#password').val();
+	
+	console.log(id);
+	console.log("구분");
+	console.log(pwd);
+	
+	$.ajax({
+		type : "POST",
+		url : "login",
+		data : {
+			id : id,
+			password : pwd
+		},
+		success : function(response) {
+			console.log("구분");
+			console.log(response);
+			console.log("구분");
+			if(response == "123") {
+				swal("로그인 실패", "비밀번호가 틀렸습니다.", "error", { button: "확인" });
+			}
+			else {
+				swal("로그인 성공", "환영합니다.", "success", { button: "확인" });
+			}
+		}
+	})
+	
+});
 
 </script>
 

@@ -10,7 +10,7 @@ import com.pms.petopia.domain.Review;
 import com.pms.petopia.service.ReviewService;
 
 @Controller
-public class ReviewListHandler{
+public class ReviewListHandler {
 
   ReviewService reviewService;
 

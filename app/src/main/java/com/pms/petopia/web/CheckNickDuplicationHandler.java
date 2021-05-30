@@ -23,10 +23,8 @@ public class CheckNickDuplicationHandler {
 
     String nick = request.getParameter("nick");
 
-    System.out.println(nick);
     Member m = memberService.getNick(nick);
 
-    System.out.println(m);
     response.setContentType("text/plain;charset=UTF-8");
     PrintWriter out = response.getWriter();
 

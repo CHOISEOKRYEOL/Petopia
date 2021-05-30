@@ -65,10 +65,10 @@ public class LoginHandler {
         member = memberService.getId(id, password);
       }
 
+
       if (member == null) {
-        request.getSession().invalidate();
-        return "/jsp/login_fail.jsp";
-        //      response.setHeader("Refresh", "1;url=login");
+        return "123";
+        //        request.getSession().invalidate();
       }
       else {
         request.getSession().setAttribute("loginUser", member);
