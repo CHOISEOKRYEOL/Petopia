@@ -117,7 +117,7 @@
   
   <h1>평점 : 
   <c:if test="${hospital.rating == 0}">
-  0
+  0.0
   </c:if>
   <c:if test="${hospital.rating > 0}">
   <fmt:formatNumber value="${hospital.rating}" pattern=".00" />
@@ -125,10 +125,12 @@
   </h1>
 
 	<h1>병원 리뷰</h1>
-	<c:import url="../review/list" />
+	
+	<c:import url="/review/list" />
+  	
 	<form action="../review/add">
-		<input type='hidden' name='num' value='${hospital.no}'> <input
-			type="submit" value="리뷰 작성">
+		<input type='hidden' name='num' value='${hospital.no}'>
+		<input type="submit" value="리뷰 작성">
 	</form>
 	<p>
 		<a href='list'>목록</a>

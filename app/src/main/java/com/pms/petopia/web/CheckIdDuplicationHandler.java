@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.service.MemberService;
 
+
 @Controller
 public class CheckIdDuplicationHandler {
 
@@ -18,11 +19,10 @@ public class CheckIdDuplicationHandler {
   }
 
   @RequestMapping("/member/checkid")
-  public String execute(HttpServletRequest request, HttpServletResponse response)
+  public void execute(HttpServletRequest request, HttpServletResponse response)
       throws Exception {
 
     String id = request.getParameter("id");
-
 
     Member m = memberService.getId(id);
 
@@ -35,8 +35,6 @@ public class CheckIdDuplicationHandler {
     else {
       out.print("0");
     }
-
-    return "";
 
   }
 }

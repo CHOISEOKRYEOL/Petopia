@@ -1,3 +1,8 @@
+<%@ page language="java" 
+    contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
+    trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,20 +85,20 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
       
       <div class="container_right01">
       <div class="timeline">
-		    <div class="timeline_line"></div>
-		    <ul class="timeline_items">
-		        <li class="timeline_item">
-		            <div class="timeline_top">
-		                <div class="timeline_circle"></div>
-		                <div class="timeline_title">
-		                ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
-		                </div>
-		            </div>
-		            <div class="timeline_desc">
-		            2020.02.22
-		            </div>
-		        </li>
-		        <li class="timeline_item">
+        <div class="timeline_line"></div>
+        <ul class="timeline_items">
+            <li class="timeline_item">
+                <div class="timeline_top">
+                    <div class="timeline_circle"></div>
+                    <div class="timeline_title">
+                    ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+                    </div>
+                </div>
+                <div class="timeline_desc">
+                2020.02.22
+                </div>
+            </li>
+            <li class="timeline_item">
                 <div class="timeline_top">
                     <div class="timeline_circle"></div>
                     <div class="timeline_title">
@@ -115,8 +120,8 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
                 2020.12.22
                 </div>
             </li>
-    		  </ul>
-		    </div>
+          </ul>
+        </div>
       </div>
     </div>
     
@@ -131,25 +136,25 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     </div>
     
     <div class="box5">
-	    <div class="row justify-content-evenly">
-		    <div class="col-3">
-		      <a href=""><img src="../images/20180111_205149.jpg" style="width: 216px; height: 250px;"></a>
-		      <p class="market_contents">dkdkdksssssssssssssssssssssssssssssssssss</p>
-		    </div>
-		    <div class="col-3">
-          <a href=""><img src="../images/20180111_205149.jpg" style="width: 216px; height: 250px;"></a>
+      <div class="market">
+        <div class="market_column">
+          <a href=""><img src="../images/20180111_205149.jpg" style="width: 200px; height: 250px;"></a>
+          <p class="market_contents">dkdkdksssssssssssssssssssssssssssssssssss</p>
+        </div>
+        <div class="market_column">
+          <a href=""><img src="../images/20180111_205149.jpg" style="width: 200px; height: 250px;"></a>
           <p class="market_contents">dkdkdkssssssssssssssssssss</p>
-		    </div>
-		    <div class="col-3">
-          <a href=""><img src="../images/20180111_205149.jpg" style="width: 216px; height: 250px;"></a>
+        </div>
+        <div class="market_column">
+          <a href=""><img src="../images/20180111_205149.jpg" style="width: 200px; height: 250px;"></a>
           <p class="market_contents">dkdkdkssssssssssssssssssssssssss</p>
         </div>
-		    <div class="col-3">
-          <a href=""><img src="../images/20180111_205149.jpg" style="width: 216px; height: 250px;"></a>
+        <div class="market_column">
+          <a href=""><img src="../images/20180111_205149.jpg" style="width: 200px; height: 250px;"></a>
           <p class="market_contents">dkdkdksssssssssssssss</p>
         </div>
-		 </div>
-		 </div>
+     </div>
+     </div>
     
     <div class="box6">
       <div class="container_navleft02">

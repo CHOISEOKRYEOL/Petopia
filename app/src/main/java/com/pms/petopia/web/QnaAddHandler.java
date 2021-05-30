@@ -25,6 +25,7 @@ public class QnaAddHandler {
     if(request.getMethod().equals("GET")) {
       return "/jsp/qna/qna_form.jsp";
     }
+
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
     if(loginUser == null) {
@@ -37,6 +38,7 @@ public class QnaAddHandler {
     qna.setWriter(loginUser);
 
     qnaService.add(qna);
+
 
     return "/jsp/qna/qna_add_success.jsp";
     //    response.setHeader("Refresh", "1;url=list");

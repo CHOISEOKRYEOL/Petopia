@@ -2,9 +2,18 @@ package com.pms.petopia.web;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+<<<<<<< HEAD
+=======
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import com.pms.petopia.domain.Bookmark;
+import com.pms.petopia.domain.Hospital;
+import com.pms.petopia.domain.Member;
+>>>>>>> branch 'main' of https://github.com/yoontaehoonDev/Petopia.git
 import com.pms.petopia.service.BookmarkService;
 import com.pms.petopia.service.HospitalService;
 
+@Controller
 public class HospitalDetailHandler {
 
   HospitalService hospitalService;
@@ -31,6 +40,5 @@ public class HospitalDetailHandler {
     //    request.setAttribute("hospital", hospital);
     //
     return "/jsp/hospital/detail.jsp";
-
   }
 }

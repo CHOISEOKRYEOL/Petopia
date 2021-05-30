@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Q&A 등록 완료</title>
+<meta http-equiv="Refresh" content="1;url=list">
 </head>
 <body>
 	<h1>Q&A에 글이 성공적으로 등록되었습니다.</h1>
