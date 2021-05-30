@@ -22,10 +22,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
 	integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
 	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../css/common.css">
 
 <script type="text/javascript" src="../../js/page.js"></script>
@@ -121,12 +118,10 @@
 				</div>
 
 				<div class="mb-3 row">
-					<label for="tel" class="col-sm-2 col-form-label">번호 인증</label>
+					<label for="tel" id="authenticationLabel" style="display: none" class="col-sm-2 col-form-label">번호 인증</label>
 					<div class="col-sm-6">
-						<input type="tel" required class="form-control form-control-sm"
-							id="authenticationNumber" name="authenticationNumber"
-							placeholder="인증번호 입력" maxlength='4'> <input type="button"
-							id="authenticationButton" name="authenticationButton" value="확인">
+						<input type="tel" style="display: none" required class="form-control form-control-sm" id="authenticationNumber" name="authenticationNumber" placeholder="인증번호 입력" maxlength='6'> 
+							<input type="button" style="display: none" id="authenticationButton" name="authenticationButton" value="확인">
 					</div>
 				</div>
 
@@ -393,6 +388,7 @@
 			$("#password").val('');
 			$("#checkPassword").val('');
 			$("#tel").val('');
+			$("#authenticationNumber").val('');
 			$(".btn").prop("disabled", true);
 			$(".btn").css("background-color", "#aaaaaa");
 			$("#id").css("background-color", "#FFFFFF");
@@ -410,10 +406,18 @@
 			$("#pwdLength").hide();
 			$("#pwdSame").hide();
 			$("#telCheck").hide();
+			$("#authenticationButton").hide();
+		  $("#authenticationNumber").hide();
+		  $("#authenticationLabel").hide();
 		});
 
 		$('#sendNumber').click(function() {
-			alert("번호가 전송되었습니다.");
+			$("#authenticationButton").show();
+			$("#authenticationNumber").show();
+		  $("#authenticationLabel").show();
+			
+		  swal("인증 번호 전송", "인증 번호를 입력해주세요.", "info", { button: "확인" });
+		  
 			var phoneNumber = $('#tel').val();
 			$.ajax({
 				type : "GET",
@@ -431,7 +435,9 @@
 			tempNumber = $('#authenticationNumber').val();
 			if (confirmNumber == tempNumber) {
 				authenticationCheck = 1;
-				alert("성공");
+				
+				swal("인증 성공", "회원 가입이 가능합니다.", "success", { button: "확인"});
+				
 				  if (idCheck == 1 && pwdCheck == 1 && emailCheck == 1
 				            && nickCheck == 1 && telCheck == 1 && authenticationCheck == 1) {
 				          $(".btn").prop("disabled", false);
@@ -441,7 +447,7 @@
 
 			} else {
 				authenticationCheck = 0;
-				alert("실패");
+				swal("인증 실패", "다시 인증 해주세요.", "error", { button: "확인"});
 			}
 		});
 	</script>
