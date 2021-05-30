@@ -25,7 +25,6 @@ public class ReviewListHandler{
     Hospital h = new Hospital();
 
     h.setNo(Integer.parseInt(request.getParameter("no")));
-
     List<Review> list = reviewService.list(h.getNo());
     request.setAttribute("hospital", h);
     request.setAttribute("list", list);

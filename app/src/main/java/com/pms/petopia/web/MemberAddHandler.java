@@ -36,7 +36,6 @@ public class MemberAddHandler {
       request.setAttribute("member", m);
 
       return "/jsp/member/add_success.jsp";
-      //    response.setHeader("Refresh", "1;url=../main");
     }
   }
 }

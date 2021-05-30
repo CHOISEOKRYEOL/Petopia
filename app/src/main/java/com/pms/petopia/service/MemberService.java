@@ -5,6 +5,8 @@ import com.pms.petopia.domain.Member;
 
 public interface MemberService {
 
+  void certifyNumber(String phoneNumber, String authenticationNumber) throws Exception;
+
   int add(Member member) throws Exception;
 
   Member get(int no) throws Exception;

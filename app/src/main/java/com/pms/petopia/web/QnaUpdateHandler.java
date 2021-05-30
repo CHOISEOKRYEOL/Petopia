@@ -33,7 +33,7 @@ public class QnaUpdateHandler {
     qna.setContent(request.getParameter("content"));
     qnaService.update(qna);
 
-    return "/jsp/admin/qna_update.jsp";
+    return "/jsp/qna/update.jsp";
     //    response.setHeader("Refresh", "1;url=list");
   }
 }
