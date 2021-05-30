@@ -51,10 +51,8 @@ public class MyTownBoardAddHandler {
     b.setWriter(loginUser);
 
     myTownBoardService.add(b);
-    String webAdress= String.format("list?stateNo=%s&cityNo=%s", s.getBigAddress().getNo(), s.getNo());
 
-    return "webAdress";
-    //      response.sendRedirect(webAdress);
+    return "redirect:list?stateNo=" + s.getBigAddress().getNo() + "&cityNo=" + s.getNo();
 
   }
 }

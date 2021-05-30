@@ -8,6 +8,7 @@
 <title>병원 상세</title>
 </head>
 <body>
+<jsp:include page="/jsp/hospital/map_detail.jsp"></jsp:include>
 	<h1>병원 상세보기</h1>
 	<c:if test="${not empty hospital}">
 		<c:if test="${not empty hospital.photo}">

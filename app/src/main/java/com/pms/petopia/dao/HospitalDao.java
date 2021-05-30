@@ -9,6 +9,8 @@ public interface HospitalDao {
 
   List<Hospital> findAll() throws Exception;
 
+  Hospital findByName(String hname) throws Exception;
+
   Hospital findByNo(int no) throws Exception;
 
   List<Hospital> findByKeyword(String keyword) throws Exception;

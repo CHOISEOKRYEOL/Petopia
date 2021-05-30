@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<!-- <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -52,28 +52,6 @@
       inner join pet_state s on s.gno=c.gno
       inner join pet_hp h on c.cno=h.cno
     order by hno desc
-  </select>
-  
-  <select id="findByName" resultMap="hospitalMap" parameterType="String">
-    select
-      h.hno,
-      h.name,
-      h.tel,
-      h.addr,
-      h.stime,
-      h.etime,
-      h.park,
-      h.vet,
-      h.photo,
-      h.rating,
-      s.gno as state_no,
-      s.gname as state_name,    
-      c.cno as city_no,
-      c.cname as city_name
-    from pet_city c
-      inner join pet_state s on s.gno=c.gno
-      inner join pet_hp h on c.cno=h.cno
-    where h.name=#{value}
   </select>
   
   <select id="findByNo" resultMap="hospitalMap" parameterType="int">
@@ -145,7 +123,7 @@
   </delete>
   
   
-  <!--  
+   
   <select id="findByKeyword" resultMap="hospitalMap" parameterType="map">
     select 
       h.hno,
@@ -165,5 +143,5 @@
       c.cno=#{cno} and s.gno=#{gno}
     order by h.hno desc
   </select>
-  -->
-</mapper>
+ 
+</mapper> -->
