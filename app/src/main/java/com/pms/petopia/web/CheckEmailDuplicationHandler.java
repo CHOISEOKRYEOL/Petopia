@@ -18,7 +18,7 @@ public class CheckEmailDuplicationHandler {
   }
 
   @RequestMapping("/member/checkemail")
-  public String execute(HttpServletRequest request, HttpServletResponse response)
+  public void execute(HttpServletRequest request, HttpServletResponse response)
       throws Exception {
 
     String email = request.getParameter("email");
@@ -34,8 +34,6 @@ public class CheckEmailDuplicationHandler {
     else {
       out.print("0");
     }
-
-    return "";
 
   }
 }

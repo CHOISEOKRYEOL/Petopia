@@ -1,5 +1,6 @@
 package com.pms.petopia.web;
 
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
@@ -31,8 +32,7 @@ public class ReviewAddHandler {
 
       int num = Integer.parseInt(request.getParameter("num"));
       request.setAttribute("num", num);
-      response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/review/review_form.jsp").include(request, response);
+      return "/jsp/review/review_form.jsp";
     }
 
     Review r = new Review();
@@ -44,23 +44,23 @@ public class ReviewAddHandler {
 
     Part photoPart = request.getPart("photo");
 
-    //    if(photoPart.getSize() > 0) {
-    //      String filename = UUID.randomUUID().toString();
-    //      photoPart.write(this.uploadDir + "/" + filename);
-    //      r.setPhoto(filename);
-    //
-    //
-    //      Thumbnails.of(this.uploadDir + "/" + filename)
-    //      .size(100, 100)
-    //      .outputFormat("jpg")
-    //      .crop(Positions.CENTER)
-    //      .toFiles(new Rename() {
-    //        @Override
-    //        public String apply(String name, ThumbnailParameter param) {
-    //          return name + "_100x100";
-    //        }
-    //      });
-    //    }
+    if(photoPart.getSize() > 0) {
+      String filename = UUID.randomUUID().toString();
+      //      photoPart.write(this.uploadDir + "/" + filename);
+      r.setPhoto(filename);
+
+
+      //      Thumbnails.of(this.uploadDir + "/" + filename)
+      //      .size(100, 100)
+      //      .outputFormat("jpg")
+      //      .crop(Positions.CENTER)
+      //      .toFiles(new Rename() {
+      //        @Override
+      //        public String apply(String name, ThumbnailParameter param) {
+      //          return name + "_100x100";
+      //        }
+      //      });
+    }
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
     r.setWriter(loginUser);

@@ -8,7 +8,9 @@
 <title>로그인</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-<link href="css/common.css" rel="stylesheet" >
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<link href="./css/common.css" rel="stylesheet" >
 <style>
   #login-form {
     width: 500px;
@@ -24,13 +26,13 @@
   <div class="mb-3 row">
     <label for="id" class="col-sm-3 col-form-label">아이디/이메일</label>
     <div class="col-sm-9">
-      <input type="id" class="form-control form-control-sm" id="id" name="id" value='${cookie.id.value}' placeholder="아이디 또는 이메일을 입력하세요.">
+      <input type="id" class="form-control form-control-sm" id="id" name="id" value='${cookie.id.value}' placeholder="아이디 또는 이메일을 입력하세요." required>
     </div>
   </div>
   <div class="mb-3 row">
     <label for="password" class="col-sm-3 col-form-label">암호</label>
     <div class="col-sm-9">
-      <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="비밀번호를 입력하세요.">
+      <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="비밀번호를 입력하세요." required>
     </div>
   </div>
   <div class="mb-3 form-check">
@@ -43,5 +45,11 @@
 </form>
 </div>
 </div>
+<script>
+
+
+
+</script>
+
 </body>
 </html>

@@ -11,15 +11,18 @@ public class Member {
   private String password;
   private String email;
   private String tel;
+  private String authenticationNumber;
   private int role;
   private Date registeredDate;
   private int state;
 
+
   @Override
   public String toString() {
     return "Member [no=" + no + ", name=" + name + ", nick=" + nick + ", id=" + id + ", password="
-        + password + ", email=" + email + ", tel=" + tel + ", role=" + role + ", registeredDate="
-        + registeredDate + ", state=" + state + "]";
+        + password + ", email=" + email + ", tel=" + tel + ", authenticationNumber="
+        + authenticationNumber + ", role=" + role + ", registeredDate=" + registeredDate
+        + ", state=" + state + "]";
   }
 
   @Override
@@ -92,6 +95,14 @@ public class Member {
     return true;
   }
 
+
+
+  public String getAuthenticationNumber() {
+    return authenticationNumber;
+  }
+  public void setAuthenticationNumber(String authenticationNumber) {
+    this.authenticationNumber = authenticationNumber;
+  }
   public int getNo() {
     return no;
   }
