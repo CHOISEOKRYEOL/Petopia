@@ -44,7 +44,7 @@ public class MyTownBoardRecommentDeleteHandler {
     String webAdress= String.format("../mytown/detail?stateNo=%d&cityNo=%d&no=%d", 
         oldBoard.getBigAddress().getNo(), oldBoard.getSmallAddress().getNo(), oldBoard.getNo());
 
-    return "redirect:webAdress";
+    return "redirect:" + webAdress;
 
   }
 }

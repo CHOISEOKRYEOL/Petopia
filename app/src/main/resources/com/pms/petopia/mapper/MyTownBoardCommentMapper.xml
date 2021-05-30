@@ -65,7 +65,7 @@
   
   <delete id="delete" parameterType="int">
     delete from pet_mytown_comt
-    where trno=#{value}
+    where tno=#{value}
   </delete>
 
   <select id="countComment" resultType="String" parameterType="int">

@@ -148,7 +148,7 @@
   </update>
   
   <delete id="deleteAll" parameterType="int">
-  delete 
+  delete from pet_mytown
   where tno = #{value};
   </delete>
   

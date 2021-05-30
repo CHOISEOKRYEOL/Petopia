@@ -26,6 +26,11 @@ public class DefaultHospitalService implements HospitalService {
   }
 
   @Override
+  public Hospital get(String hname) throws Exception {
+    return hospitalDao.findByName(hname);
+  }
+
+  @Override
   public Hospital get(int no) throws Exception {
     return hospitalDao.findByNo(no);
   }

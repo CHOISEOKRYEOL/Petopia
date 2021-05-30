@@ -34,10 +34,10 @@ public class MyTownBoardCommentAddHandler {
     c.setContent(request.getParameter("content"));
 
     myTownBoardCommentService.add(c);
-    String webAdress= String.format("../mytown/detail?stateNo=%d&cityNo=%d&no=%d\n", 
+    String webAddress= String.format("../mytown/detail?stateNo=%d&cityNo=%d&no=%d\n", 
         t.getBigAddress().getNo(), t.getSmallAddress().getNo(), boardNo);
 
-    return "redirect:webAdress";
+    return "redirect:" + webAddress;
     //      response.sendRedirect(webAdress);
 
   }

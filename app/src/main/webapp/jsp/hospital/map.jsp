@@ -108,7 +108,7 @@ function displayMarker(locPosition, message) {
     map.setCenter(locPosition);      
 }    
 
-
+console.log(address);
 // 키워드 검색 완료 시 호출되는 콜백함수 입니다
 function placesSearchCB (data, status, pagination) {
     if (status === kakao.maps.services.Status.OK) {
@@ -118,12 +118,13 @@ function placesSearchCB (data, status, pagination) {
         // LatLngBounds 객체에 좌표를 추가합니다
         var bounds = new kakao.maps.LatLngBounds();
 
+            console.log(address);
         for (var i=0; i<data.length; i++) {
             displayMarker(data[i]);    
             bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
             var tr = "<tr>" 
             + "<td>"+ i +"</td>"
-            + "<td>"+ data[i].place_name + "</td>"
+            + "<td><a href=detail?a=" + address + "&h="+ data[i].place_name + ">" + data[i].place_name + "</a>" + "</td>"
             + "<td>"+ data[i].phone +"</td>"
             + "<td>"+ data[i].address_name +"</td>"
             + "<td> &nbsp;&nbsp;"+ i +"</td>"
