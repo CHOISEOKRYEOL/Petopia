@@ -29,26 +29,23 @@ public class QnaController {
   }
 
   @PostMapping("add")
-  public String add(HttpServletRequest request, HttpSession session)
+  public String add(Qna qna, HttpSession session)
       throws Exception {
 
     Member loginUser = (Member) session.getAttribute("loginUser");
 
     if(loginUser == null) {
-      throw new ServletException("로그인 후 이용하세요.");
+      throw new ServletException("로그인 후 이용 가능합니다.");
     }
 
-    Qna qna = new Qna();
-    qna.setTitle(request.getParameter("title"));
-    qna.setContent(request.getParameter("content"));
     qna.setWriter(loginUser);
 
     qnaService.add(qna);
 
-    return "qna_add_success";
+    return "qna/qna_add_success";
   }
 
-  @RequestMapping("delete")
+  @GetMapping("delete")
   public String delete(int no, HttpServletRequest request, HttpSession session) throws Exception {
     Member loginUser = (Member) session.getAttribute("loginUser");
 
@@ -58,7 +55,7 @@ public class QnaController {
       return "redirect:../admin/qnalist";
     }
     else {
-      return "delete";
+      return "redirect:list";
     }
   }
 

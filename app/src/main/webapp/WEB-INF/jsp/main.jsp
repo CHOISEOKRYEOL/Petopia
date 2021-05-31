@@ -10,10 +10,10 @@
 	<c:if test="${empty loginUser}">
 		<h1>비회원</h1>
 		<p>
-			<a href='member/add'>가입</a>
+			<a href='member/member_form'>가입</a>
 		</p>
 		<p>
-			<a href='login'>로그인</a>
+			<a href='login_form'>로그인</a>
 		</p>
 		<p>
 			<a href='hospital/list'>병원 찾기</a>
@@ -96,7 +96,7 @@
 			<a href='mytown/main'>우리 동네 목록</a>
 		</p>
 		<p>
-			<a href='qna/add'>Q&A 작성</a>
+			<a href='qna/qna_form'>Q&A 작성</a>
 		</p>
 		<p>
 			<a href='qna/list'>Q&A 목록</a>

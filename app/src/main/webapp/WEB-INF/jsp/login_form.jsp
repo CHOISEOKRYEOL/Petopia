@@ -23,7 +23,7 @@
 <div class="container">
 <div id="login-form">
 <h1>Petopia 로그인</h1>
-<form method='post'>
+<form action="login" method='post'>
   <div class="mb-3 row">
     <label for="id" class="col-sm-3 col-form-label">아이디/이메일</label>
     <div class="col-sm-9">
@@ -39,7 +39,7 @@
   <div class="mb-3 form-check">
     <input type="checkbox" class="form-check-input" id="saveIdOrEmail" name="saveIdOrEmail">
     <label class="form-check-label" for="saveEmail">ID/Email 저장</label>
-    <a href="member/findKey">아이디/비밀번호 찾기</a>
+    <a href="member/findKey_form">아이디/비밀번호 찾기</a>
   </div>
   
 <button id="login" class="btn btn-primary btn-sm">로그인</button>
@@ -47,35 +47,6 @@
 </div>
 </div>
 <script>
-
-var idCheck = 0;
-var pwdCheck = 0;
-
-$('#login').click(function() {
-	var id = $('#id').val();
-	var pwd = $('#password').val();
-	
-	$.ajax({
-		type : "POST",
-		url : "login",
-		data : {
-			id : id,
-			password : pwd
-		},
-		success : function(response) {
-			
-			if(response == "0") {
-				swal('실패', '실패', 'error');
-				return false;
-			}
-			else {
-				swal('성공', '성공', 'success');
-				return true;
-			}
-		}
-	})
-});
-
 </script>
 
 </body>
