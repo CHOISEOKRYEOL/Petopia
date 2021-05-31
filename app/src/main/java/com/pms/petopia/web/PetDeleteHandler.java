@@ -1,36 +1,29 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.service.PetService;
 
-@SuppressWarnings("serial")
-@WebServlet("/pet/delete")
-public class PetDeleteHandler extends HttpServlet {
+@Controller
+public class PetDeleteHandler {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  PetService petService;
 
-    PetService petService = (PetService) request.getServletContext().getAttribute("petService");
-
-
-    try {
-      int no = Integer.parseInt(request.getParameter("no"));
-      petService.delete(no);
-
-      response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/pet/delete.jsp").include(request, response);
-      response.setHeader("Refresh", "1;url=list");
-
-
-    } catch (Exception e) {
-      throw new ServletException(e);
-    }
+  public PetDeleteHandler(PetService petService) {
+    this.petService = petService;
   }
 
+  @RequestMapping("/pet/delete")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
+
+    int no = Integer.parseInt(request.getParameter("no"));
+    petService.delete(no);
+
+    return "/jsp/pet/delete.jsp";
+    //    response.setHeader("Refresh", "1;url=list");
+
+  }
 }

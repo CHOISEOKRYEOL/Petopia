@@ -148,10 +148,8 @@
   </update>
   
   <delete id="deleteAll" parameterType="int">
-  delete 
-    c, b 
-  from pet_mytown_comt c 
-    left join pet_mytown b on b.tno=c.tno where c.tno = #{value};
+  delete from pet_mytown
+  where tno = #{value};
   </delete>
   
   <delete id="delete" parameterType="int">

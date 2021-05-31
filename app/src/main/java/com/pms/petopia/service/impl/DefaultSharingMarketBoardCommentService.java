@@ -1,44 +1,34 @@
 package com.pms.petopia.service.impl;
 
 import java.util.List;
-
+import org.springframework.stereotype.Service;
 import com.pms.petopia.dao.SharingMarketBoardCommentDao;
-import com.pms.petopia.domain.SharingMarketBoard;
 import com.pms.petopia.domain.SharingMarketBoardComment;
 import com.pms.petopia.service.SharingMarketBoardCommentService;
-
+@Service
 public class DefaultSharingMarketBoardCommentService implements SharingMarketBoardCommentService{
 
-	SharingMarketBoardCommentDao sharingMarketBoardCommentDao;
-	
-	public DefaultSharingMarketBoardCommentService (SharingMarketBoardCommentDao sharingMarketBoardCommentDao) {
-		this.sharingMarketBoardCommentDao = sharingMarketBoardCommentDao;
-		}
+  SharingMarketBoardCommentDao sharingMarketBoardCommentDao;
 
-	@Override
-	public int add(SharingMarketBoardComment comt) throws Exception {
-		return sharingMarketBoardCommentDao.insert(comt);
-	}
+  public DefaultSharingMarketBoardCommentService (SharingMarketBoardCommentDao sharingMarketBoardCommentDao) {
+    this.sharingMarketBoardCommentDao = sharingMarketBoardCommentDao;
+  }
 
-	@Override
-	public List<SharingMarketBoardComment> list() throws Exception {
-		return sharingMarketBoardCommentDao.findAll();
-	}
+  @Override
+  public int add(SharingMarketBoardComment comt) throws Exception {
+    return sharingMarketBoardCommentDao.insert(comt);
+  }
 
-	@Override
-	public List<SharingMarketBoardComment> get(int no) throws Exception {
-		return sharingMarketBoardCommentDao.findByNo(no);
-	}
+  @Override
+  public List<SharingMarketBoardComment> list() throws Exception {
+    return sharingMarketBoardCommentDao.findAll();
+  }
 
-	@Override
-	public int update(SharingMarketBoardComment comt) throws Exception {
-		return sharingMarketBoardCommentDao.update(comt);
-	}
+  @Override
+  public List<SharingMarketBoardComment> get(int no) throws Exception {
+    return sharingMarketBoardCommentDao.findByNo(no);
+  }
 
-	@Override
-	public int delete(int no) throws Exception {
-		return sharingMarketBoardCommentDao.delete(no);
-	}
 	
 	@Override
 	public SharingMarketBoardComment getNo(int no) throws Exception {
@@ -51,4 +41,15 @@ public class DefaultSharingMarketBoardCommentService implements SharingMarketBoa
 	}
 	
 	
+  @Override
+  public int update(SharingMarketBoardComment comt) throws Exception {
+    return sharingMarketBoardCommentDao.update(comt);
+  }
+
+  @Override
+  public int delete(int no) throws Exception {
+    return sharingMarketBoardCommentDao.delete(no);
+  }
+
+
 }

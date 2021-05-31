@@ -117,6 +117,7 @@ ALTER TABLE pet_user
 
 -- 펫
 CREATE TABLE pet_mypet (
+<<<<<<< HEAD
 	pno    INTEGER      NOT NULL COMMENT '마이펫번호', -- 마이펫번호
 	owner  INTEGER      NOT NULL COMMENT '소유자', -- 소유자
 	type   INTEGER      NOT NULL COMMENT '품종', -- 품종
@@ -125,6 +126,17 @@ CREATE TABLE pet_mypet (
 	birth  DATE         NOT NULL COMMENT '생년월일', -- 생년월일
 	gender INTEGER      NOT NULL COMMENT '성별', -- 성별
 	photo  VARCHAR(255) NULL     COMMENT '사진' -- 사진
+=======
+  pno    INTEGER      NOT NULL COMMENT '마이펫번호', -- 마이펫번호
+  owner  INTEGER      NOT NULL COMMENT '소유자', -- 소유자
+  type   INTEGER      NOT NULL COMMENT '품종', -- 품종
+  pname  VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
+  age    INTEGER      NOT NULL COMMENT '나이', -- 나이
+  birth  DATE         NOT NULL COMMENT '생년월일', -- 생년월일
+  gender INTEGER      NOT NULL COMMENT '성별', -- 성별
+  photo  VARCHAR(255) NULL     COMMENT '사진', -- 사진
+  m_pet  INTEGER      NULL     DEFAULT 0 COMMENT '대표' -- 대표
+>>>>>>> branch 'main' of https://github.com/yoontaehoonDev/Petopia.git
 )
 COMMENT '펫';
 
@@ -137,14 +149,21 @@ ALTER TABLE pet_mypet
 
 -- 펫
 ALTER TABLE pet_mypet
+<<<<<<< HEAD
 	ADD CONSTRAINT CK_pet_mypet -- 펫 체크 제약
 		CHECK (gender = 0 or gender = 1);
+=======
+  ADD CONSTRAINT CK_pet_mypet -- 펫 체크 제약
+    CHECK (gender = 0 or gender = 1
+    m_pet = 0 or m_pet = 1);
+>>>>>>> branch 'main' of https://github.com/yoontaehoonDev/Petopia.git
 
 ALTER TABLE pet_mypet
 	MODIFY COLUMN pno INTEGER NOT NULL AUTO_INCREMENT COMMENT '마이펫번호';
 
 -- 병원
 CREATE TABLE pet_hp (
+<<<<<<< HEAD
 	hno   INTEGER      NOT NULL COMMENT '병원번호', -- 병원번호
 	cno   INTEGER      NOT NULL COMMENT '시군구번호', -- 시군구번호
 	name  VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
@@ -158,6 +177,22 @@ CREATE TABLE pet_hp (
 	grade INTEGER      NULL     COMMENT '평점', -- 평점
 	lat   FLOAT        NULL     COMMENT '위도', -- 위도
 	lon   FLOAT        NULL     COMMENT '경도' -- 경도
+=======
+  hno      INTEGER      NOT NULL COMMENT '병원번호', -- 병원번호
+  cno      INTEGER      NOT NULL COMMENT '시군구번호', -- 시군구번호
+  name     VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
+  tel      VARCHAR(30)  NOT NULL COMMENT '전화번호', -- 전화번호
+  addr     VARCHAR(255) NOT NULL COMMENT '상세주소', -- 상세주소
+  stime    INTEGER      NOT NULL COMMENT '진료시작시간', -- 진료시작시간
+  etime    INTEGER      NOT NULL COMMENT '진료종료시간', -- 진료종료시간
+  park     INTEGER      NOT NULL COMMENT '주차여부', -- 주차여부
+  vet      INTEGER      NOT NULL COMMENT '수의사', -- 수의사
+  photo    VARCHAR(255) NULL     COMMENT '사진', -- 사진
+  rating   FLOAT        NULL     DEFAULT 0 COMMENT '최종평점', -- 최종평점
+  lat      FLOAT        NULL     COMMENT '위도', -- 위도
+  lon      FLOAT        NULL     COMMENT '경도', -- 경도
+  a_rating FLOAT        NULL     DEFAULT 0 COMMENT '누적평점' -- 누적평점
+>>>>>>> branch 'main' of https://github.com/yoontaehoonDev/Petopia.git
 )
 COMMENT '병원';
 
@@ -170,8 +205,13 @@ ALTER TABLE pet_hp
 
 -- 병원
 ALTER TABLE pet_hp
+<<<<<<< HEAD
 	ADD CONSTRAINT CK_pet_hp -- 병원 체크 제약
 		CHECK (park=1 or park=0);
+=======
+  ADD CONSTRAINT CK_pet_hp -- 병원 체크 제약
+    CHECK (park=1 or park=0);
+>>>>>>> branch 'main' of https://github.com/yoontaehoonDev/Petopia.git
 
 ALTER TABLE pet_hp
 	MODIFY COLUMN hno INTEGER NOT NULL AUTO_INCREMENT COMMENT '병원번호';
@@ -511,8 +551,13 @@ ALTER TABLE pet_type
 
 -- 종
 CREATE TABLE pet_species (
+<<<<<<< HEAD
 	sno  INTEGER      NOT NULL COMMENT '종번호', -- 종번호
 	type VARCHAR(255) NOT NULL COMMENT '종' -- 종
+=======
+  sno  INTEGER NOT NULL COMMENT '종번호', -- 종번호
+  type INTEGER NOT NULL COMMENT '종' -- 종
+>>>>>>> branch 'main' of https://github.com/yoontaehoonDev/Petopia.git
 )
 COMMENT '종';
 
@@ -525,8 +570,13 @@ ALTER TABLE pet_species
 
 -- 종
 ALTER TABLE pet_species
+<<<<<<< HEAD
 	ADD CONSTRAINT CK_pet_species -- 종 체크 제약
 		CHECK (type = 0 or type = 1 or type = 2);
+=======
+  ADD CONSTRAINT CK_pet_species -- 종 체크 제약
+    CHECK (type = 1 or type = 2 or type = 3);
+>>>>>>> branch 'main' of https://github.com/yoontaehoonDev/Petopia.git
 
 ALTER TABLE pet_species
 	MODIFY COLUMN sno INTEGER NOT NULL AUTO_INCREMENT COMMENT '종번호';

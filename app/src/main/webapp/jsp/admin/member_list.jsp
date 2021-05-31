@@ -33,7 +33,7 @@
 						<td>
 						<form action="../member/delete" method="post">
 						<input type="hidden" name="no" value="${m.no}">
-						<input type="submit" value="강제 탈퇴">
+						<input type="submit" id="remove" value="강제 탈퇴">
 						</form>
 						</td>
 					</tr>
@@ -52,5 +52,11 @@
 		<button>검색</button>
 		<a href="../main">뒤로가기</a>
 	</form>
+	
+	<script>
+	
+	
+	
+	</script>
 </body>
 </html>

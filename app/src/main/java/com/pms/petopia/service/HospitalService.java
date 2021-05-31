@@ -9,6 +9,8 @@ public interface HospitalService {
 
   List<Hospital> list() throws Exception;
 
+  Hospital get(String hname) throws Exception;
+
   Hospital get(int no) throws Exception;
 
   int update(Hospital hospital) throws Exception;
@@ -16,5 +18,14 @@ public interface HospitalService {
   int delete(int no) throws Exception;
 
   List<Hospital> search(String keyword) throws Exception;
+
+  int rate(Hospital hospital) throws Exception;
+
+  int setAccumulatedRating(Hospital hospital) throws Exception;
+
+  int initAccumulatedRating(int no) throws Exception;
+
+  Hospital getRating(int no) throws Exception;
+
 
 }

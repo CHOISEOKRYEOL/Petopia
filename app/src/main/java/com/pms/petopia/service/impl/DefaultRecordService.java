@@ -2,10 +2,11 @@ package com.pms.petopia.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import org.springframework.stereotype.Service;
 import com.pms.petopia.dao.RecordDao;
 import com.pms.petopia.domain.Record;
 import com.pms.petopia.service.RecordService;
-
+@Service
 public class DefaultRecordService implements RecordService {
 
   RecordDao recordDao;

@@ -13,6 +13,8 @@ public interface PetService {
 
   int update(Pet pet) throws Exception;
 
+  int setLeaderPet(int no) throws Exception;
+
   int delete(int no) throws Exception;
 
   List<Pet> search(String keyword) throws Exception;

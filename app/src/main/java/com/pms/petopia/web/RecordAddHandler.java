@@ -1,11 +1,9 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Hospital;
 import com.pms.petopia.domain.Pet;
 import com.pms.petopia.domain.Record;
@@ -13,44 +11,39 @@ import com.pms.petopia.service.HospitalService;
 import com.pms.petopia.service.PetService;
 import com.pms.petopia.service.RecordService;
 
-@SuppressWarnings("serial")
-@WebServlet("/record/add")
-public class RecordAddHandler extends HttpServlet {
+@Controller
+public class RecordAddHandler {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  RecordService recordService;
+  HospitalService hospitalService;
+  PetService petService;
 
-    response.setContentType("text/html;charset=UTF-8");
-    request.getRequestDispatcher("/jsp/record/form.jsp").include(request, response);;
-  }
+  public RecordAddHandler(RecordService recordService, HospitalService hospitalService, PetService petService) {
+    this.recordService = recordService;
+    this.hospitalService = hospitalService;
+    this.petService = petService;
+  }  
 
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  @RequestMapping("/record/add")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
 
-    RecordService recordService = (RecordService) request.getServletContext().getAttribute("recordService");
-    HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
-    PetService petService = (PetService) request.getServletContext().getAttribute("petService");
+    if(request.getMethod().equals("GET")) {
 
-    try {
-      Record r = new Record();
-      r.setRecord(request.getParameter("record"));
-
-      Pet petNo = (Pet) request.getSession().getAttribute("petNo");
-      r.setPetNo(petNo);
-
-      Hospital hospital = (Hospital) request.getSession().getAttribute("hospital");
-      r.setHospitalNo(hospital);
-
-      recordService.add(r);
-
-      response.setHeader("Refresh", "1;url=../main");
-
-    } catch (Exception e) {
-      throw new ServletException(e);
+      return "/jsp/record/form.jsp";
     }
-    //
-  }
+    Record r = new Record();
+    r.setRecord(request.getParameter("record"));
 
+    Pet petNo = (Pet) request.getSession().getAttribute("petNo");
+    r.setPetNo(petNo);
+
+    Hospital hospital = (Hospital) request.getSession().getAttribute("hospital");
+    r.setHospitalNo(hospital);
+
+    recordService.add(r);
+
+    return "../main";
+    //            response.setHeader("Refresh", "1;url=../main");
+  }
 }

@@ -16,4 +16,6 @@ public interface BookmarkService {
   int delete(int no) throws Exception;
 
   int deleteAll(int no) throws Exception;
+
+  int deleteByAdmin(int no) throws Exception;
 }

@@ -1,31 +1,30 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.Qna;
 import com.pms.petopia.service.QnaService;
 
-@SuppressWarnings("serial")
-@WebServlet("/qna/add")
-public class QnaAddHandler extends HttpServlet {
+@Controller
+public class QnaAddHandler {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  QnaService qnaService;
 
-    response.setContentType("text/html;charset=UTF-8");
-    request.getRequestDispatcher("/jsp/qna/qna_form.jsp").include(request, response);
+  public QnaAddHandler(QnaService qnaService) {
+    this.qnaService = qnaService;
   }
 
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    QnaService qnaService = (QnaService) request.getServletContext().getAttribute("qnaService");
+  @RequestMapping("/qna/add")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
 
+    if(request.getMethod().equals("GET")) {
+      return "/jsp/qna/qna_form.jsp";
+    }
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
@@ -38,14 +37,10 @@ public class QnaAddHandler extends HttpServlet {
     qna.setContent(request.getParameter("content"));
     qna.setWriter(loginUser);
 
-    try {
-      qnaService.add(qna);
-      response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/qna/qna_add_success.jsp").include(request, response);
-      response.setHeader("Refresh", "1;url=list");
-    }
-    catch (Exception e) {
-      throw new ServletException(e);
-    }
+    qnaService.add(qna);
+
+
+    return "/jsp/qna/qna_add_success.jsp";
+    //    response.setHeader("Refresh", "1;url=list");
   }
 }

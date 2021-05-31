@@ -5,6 +5,7 @@
 <html>
 <head>
 <title>회원가입 성공</title>
+<meta http-equiv="Refresh" content="1;url=../main">
 </head>
 <body>
 	<h1>${member.nick}님 Petopia에 오신 걸 환영합니다.</h1>

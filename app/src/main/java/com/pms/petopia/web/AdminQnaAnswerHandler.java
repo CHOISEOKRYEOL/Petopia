@@ -1,35 +1,30 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Qna;
 import com.pms.petopia.service.QnaService;
 
-@SuppressWarnings("serial")
-@WebServlet("/admin/answer")
-public class AdminQnaAnswerHandler extends HttpServlet {
+@Controller
+public class AdminQnaAnswerHandler {
 
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    QnaService qnaService = (QnaService) request.getServletContext().getAttribute("qnaService");
+  QnaService qnaService;
+
+  public AdminQnaAnswerHandler(QnaService qnaService) {
+    this.qnaService = qnaService;
+  }
+
+  @RequestMapping("/admin/answer")
+  public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
     Qna qna = new Qna();
     qna.setNo(Integer.parseInt(request.getParameter("no")));
     qna.setAnswer(request.getParameter("answer"));
     qna.setState(1);
-    try {
-      qnaService.answer(qna);
-      response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/admin/qna_answer.jsp").include(request, response);
-      response.setHeader("Refresh", "1;url=qnalist");
-    }
-    catch (Exception e) {
-      throw new ServletException(e);
+    qnaService.answer(qna);
 
-    }
+    return "redirect:qnalist";
   }
 }

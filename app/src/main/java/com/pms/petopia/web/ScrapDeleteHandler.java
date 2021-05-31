@@ -1,38 +1,29 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.pms.petopia.domain.Member;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.service.ScrapService;
 
-@SuppressWarnings("serial")
-@WebServlet("/story/scrapdelete")
-public class ScrapDeleteHandler extends HttpServlet{
+@Controller
+public class ScrapDeleteHandler {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  ScrapService scrapService;
 
-    ScrapService scrapService = (ScrapService) request.getServletContext().getAttribute("scrapService");
-    response.setContentType("text/html;charset=UTF-8");
+  public ScrapDeleteHandler(ScrapService scrapService) {
+    this.scrapService = scrapService;
+  }
+
+  @RequestMapping("/story/scrapdelete")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
+
     int scrapNo = Integer.parseInt(request.getParameter("scrapNo"));
 
-    try {
+    scrapService.delete(scrapNo);
 
-      Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+    return "redirect:../mypage/scraplist";
 
-      scrapService.delete(scrapNo);
-
-      //request.getRequestDispatcher("/jsp/mypage/scrapdelete.jsp").include(request, response);
-      response.sendRedirect("../mypage/scraplist");
-
-    } catch (Exception e) {
-
-      throw new ServletException(e);
-    }
   }
 }

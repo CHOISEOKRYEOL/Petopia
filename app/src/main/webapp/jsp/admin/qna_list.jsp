@@ -34,7 +34,7 @@
 						<td>대기</td>
 					</c:if>
 					<td><a href='qnadetail?no=${q.no}'>답변</a></td>
-					<td><a href='qnadelete?no=${q.no}'>삭제</a></td>
+					<td><a href='../qna/delete?no=${q.no}'>삭제</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

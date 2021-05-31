@@ -1,17 +1,15 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
 import java.sql.Date;
 import java.util.UUID;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.Pet;
+import com.pms.petopia.domain.Species;
 import com.pms.petopia.domain.Type;
 import com.pms.petopia.service.PetService;
 import net.coobird.thumbnailator.ThumbnailParameter;
@@ -19,86 +17,80 @@ import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
 import net.coobird.thumbnailator.name.Rename;
 
-@SuppressWarnings("serial")
-@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
-@WebServlet("/pet/add")
-public class PetAddHandler extends HttpServlet {
+@Controller
+public class PetAddHandler {
 
-  private String uploadDir;
+  PetService petService;
 
-  @Override
-  public void init() throws ServletException {
-    this.uploadDir = this.getServletContext().getRealPath("/upload");
+  public PetAddHandler(PetService petService) {
+    this.petService = petService;
   }
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  @RequestMapping("/pet/add")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
 
-    response.setContentType("text/html;charset=UTF-8");
-    request.getRequestDispatcher("/jsp/pet/form.jsp").include(request, response);
-  }
+    String uploadDir = request.getServletContext().getRealPath("/upload");
 
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-
-    PetService petService = (PetService) request.getServletContext().getAttribute("petService");
-
-    try {
-
-      Pet p = new Pet();
-      p.setName(request.getParameter("name"));
-      p.setAge(Integer.parseInt(request.getParameter("age")));
-      p.setBirthDay(Date.valueOf(request.getParameter(("birthDay"))));
-      p.setGender(Integer.parseInt(request.getParameter("gender")));
-
-      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-      p.setOwner(loginUser);
-
-      Type t = new Type();
-      t.setNo(Integer.parseInt(request.getParameter("type")));
-      p.setType(t);
-
-      Part photoPart = request.getPart("photo");
-
-      if (photoPart.getSize() > 0) {
-        // 파일을 선택해서 업로드 했다면,
-        String filename = UUID.randomUUID().toString();
-        photoPart.write(this.uploadDir + "/" + filename);
-        p.setPhoto(filename);
-
-        // 썸네일 이미지 생성
-        Thumbnails.of(this.uploadDir + "/" + filename)
-        .size(30, 30)
-        .outputFormat("jpg")
-        .crop(Positions.CENTER)
-        .toFiles(new Rename() {
-          @Override
-          public String apply(String name, ThumbnailParameter param) {
-            return name + "_30x30";
-          }
-        });
-
-        Thumbnails.of(this.uploadDir + "/" + filename)
-        .size(80, 80)
-        .outputFormat("jpg")
-        .crop(Positions.CENTER)
-        .toFiles(new Rename() {
-          @Override
-          public String apply(String name, ThumbnailParameter param) {
-            return name + "_80x80";
-          }
-        });
-      }
-
-      petService.add(p);
-
-      response.setHeader("Refresh", "1;url=list");
-
-    } catch (Exception e) {
-      throw new ServletException(e);
+    if(request.getMethod().equals("GET")) {
+      return "/jsp/pet/form.jsp";
     }
+
+    Pet p = new Pet();
+    p.setName(request.getParameter("name"));
+    p.setAge(Integer.parseInt(request.getParameter("age")));
+    p.setBirthDay(Date.valueOf(request.getParameter(("birthDay"))));
+    p.setGender(Integer.parseInt(request.getParameter("gender")));
+
+    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    p.setOwner(loginUser);
+
+    Species s = new Species();
+    s.setNo(Integer.parseInt(request.getParameter("species")));
+    p.setSpecies(s);
+
+    Type t = new Type();
+    t.setNo(Integer.parseInt(request.getParameter("type")));
+    p.setType(t);
+
+
+    Part photoPart = request.getPart("photo");
+
+    if (photoPart.getSize() > 0) {
+      // 파일을 선택해서 업로드 했다면,
+      String filename = UUID.randomUUID().toString();
+      photoPart.write(uploadDir + "/" + filename);
+      p.setPhoto(filename);
+
+      // 썸네일 이미지 생성
+      Thumbnails.of(uploadDir + "/" + filename)
+      .size(30, 30)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_30x30";
+        }
+      });
+
+      Thumbnails.of(uploadDir + "/" + filename)
+      .size(80, 80)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_80x80";
+        }
+      });
+    }
+
+    petService.add(p);
+
+    return "list";
+    // 체크
+    //    response.setHeader("Refresh", "1;url=list");
 
 
   }

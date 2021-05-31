@@ -53,6 +53,40 @@
 		where email = #{id} and pwd = password(#{password})
 	</select>
 
+  <select id="findById" resultMap="memberMap" parameterType="String">
+    select
+    mno, id
+    from pet_user
+    where id = #{id};
+  </select>
+
+<select id="findByEmail" resultMap="memberMap" parameterType="String">
+    select
+    mno, email
+    from pet_user
+    where email = #{email};
+  </select>
+
+<select id="findByNick" resultMap="memberMap" parameterType="String">
+    select
+    mno, nick
+    from pet_user
+    where nick = #{nick};
+  </select>
+
+  <select id="findIdEmailKey" resultMap="memberMap" parameterType="map">
+    select
+    mno, id, email, name
+    from pet_user
+    where name = #{name} and nick = #{nick}
+  </select>
+  
+  <update id="setNewPassword" parameterType="member">
+    update pet_user
+    pwd = password(#{password})
+    where mno = #{no}
+  </update>
+
 	<select id="findByKeyword" resultMap="memberMap"
 		parameterType="map">
 		<include refid="user" />

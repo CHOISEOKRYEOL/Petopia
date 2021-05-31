@@ -1,37 +1,37 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.pms.petopia.domain.Hospital;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import com.pms.petopia.service.BookmarkService;
 import com.pms.petopia.service.HospitalService;
+import com.pms.petopia.service.ReviewService;
 
-@SuppressWarnings("serial")
-@WebServlet("/hospital/delete")
-public class HospitalDeleteHandler extends HttpServlet {
+@Controller
+public class HospitalDeleteHandler {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  HospitalService hospitalService;
+  ReviewService reviewService;
+  BookmarkService bookmarkService;
 
-    HospitalService hospitalService = (HospitalService) request.getServletContext().getAttribute("hospitalService");
+  public HospitalDeleteHandler(HospitalService hospitalService, ReviewService reviewService, BookmarkService bookmarkService) {
+    this.hospitalService = hospitalService;
+    this.reviewService = reviewService;
+    this.bookmarkService = bookmarkService;
+  }
 
-    try {
-      int no = Integer.parseInt(request.getParameter("no"));
+  @RequestMapping("/hospital/delete")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
 
-      Hospital oldHospital = hospitalService.get(no);
-      if (oldHospital == null) {
-        throw new Exception("해당 번호의 병원이 없습니다.");
-      }
+    int no = Integer.parseInt(request.getParameter("no"));
 
-      hospitalService.delete(no);
-      response.sendRedirect("list");
+    reviewService.deleteByAdmin(no);
+    bookmarkService.deleteByAdmin(no);
+    hospitalService.delete(no);
 
-    } catch (Exception e) {
-      throw new ServletException(e);
-    }
+    return "../admin/hospitallist";
+
   }
 }

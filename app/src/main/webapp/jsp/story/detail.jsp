@@ -9,12 +9,28 @@
 <title>스토리 상세</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-<link href="../css/common.css" rel="stylesheet" >
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="../css/common.css">
+<script type="text/javascript" src="../js/page.js"></script>
 </head>
 <body>
-<div class="container">
-<h1>스토리 상세보기</h1>
+<header id="header"></header>
+<div class="wrap">
+<img src="../images/20180115_120703.jpg" class="img-fluid width:100%;"
+style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
+  <div class="text-group">
+    <p style="font-size: 50px;">펫토피아</p>
+    <p style="font-size: 30px;">우리 아이들의 이야기</p>
+    <p>동물에 관련된 정보만 빠르게<br>
+    한눈에 볼 수 있도록 전달해 드립니다</p> 
+  </div>
+</div>
 
+<div class="container">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<a class="navbar-brand">스토리 상세보기</a>
+</nav>
 <c:if test="${not empty story}">
 <form action='update' method='post'>
 <div class="mb-3 row">
@@ -48,13 +64,13 @@
     </div>
   </div>
   
-<!-- <div class="modal-footer justify-content-between"> -->
-  <div class="d-flex justify-content-between">
+<!-- <div class="d-flex justify-content-between"> -->
+  <div class="modal-footer justify-content-between">
     <div>
-      <input class="btn" style="background-color: #FFADAD;" type='submit' value='변경'>
+      <a href='list' class="btn btn-secondary">목록</a>
       <a href='delete?no=${story.no}' class="btn btn-danger">삭제</a>
     </div>
-      <a href='list' class="btn btn-secondary">목록</a>
+      <input class="btn" style="background-color: #FFADAD;" type='submit' value='변경'>
   </div>
 </div>
 </form>
@@ -66,5 +82,7 @@
 </c:if>
 
 </div>
+
+<footer id="footer"></footer>
 </body>
 </html>

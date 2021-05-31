@@ -2,10 +2,12 @@ package com.pms.petopia.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import org.springframework.stereotype.Service;
 import com.pms.petopia.dao.BookmarkDao;
 import com.pms.petopia.domain.Bookmark;
 import com.pms.petopia.service.BookmarkService;
 
+@Service
 public class DefaultBookmarkService implements BookmarkService {
 
   BookmarkDao bookmarkDao;
@@ -46,6 +48,11 @@ public class DefaultBookmarkService implements BookmarkService {
   @Override
   public int deleteAll(int no) throws Exception {
     return bookmarkDao.deleteAll(no);
+  }
+
+  @Override
+  public int deleteByAdmin(int no) throws Exception {
+    return bookmarkDao.deleteByAdmin(no);
   }
 
 }

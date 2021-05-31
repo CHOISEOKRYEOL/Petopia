@@ -9,6 +9,8 @@ public interface HospitalDao {
 
   List<Hospital> findAll() throws Exception;
 
+  Hospital findByName(String hname) throws Exception;
+
   Hospital findByNo(int no) throws Exception;
 
   List<Hospital> findByKeyword(String keyword) throws Exception;
@@ -16,5 +18,13 @@ public interface HospitalDao {
   int update(Hospital hospital) throws Exception;
 
   int delete(int no) throws Exception;
+
+  int updateRating(Hospital hospital) throws Exception;
+
+  int accumulateRating(Hospital hospital) throws Exception;
+
+  int accumulatedRatingInitializer(int no) throws Exception;
+
+  Hospital getRating(int no) throws Exception;
 
 }

@@ -1,10 +1,11 @@
 package com.pms.petopia.service.impl;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 import com.pms.petopia.dao.ScrapDao;
 import com.pms.petopia.domain.Scrap;
 import com.pms.petopia.service.ScrapService;
-
+@Service
 public class DefaultScrapService implements ScrapService {
 
   ScrapDao scrapDao; 

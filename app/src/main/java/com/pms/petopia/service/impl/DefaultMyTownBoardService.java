@@ -2,10 +2,11 @@ package com.pms.petopia.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import org.springframework.stereotype.Service;
 import com.pms.petopia.dao.MyTownBoardDao;
 import com.pms.petopia.domain.MyTownBoard;
 import com.pms.petopia.service.MyTownBoardService;
-
+@Service
 public class DefaultMyTownBoardService implements MyTownBoardService {
 
   MyTownBoardDao myTownBoardDao; 

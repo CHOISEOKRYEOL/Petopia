@@ -8,6 +8,7 @@
   <resultMap id="TypeMap" type="Type">
     <id column="rno" property="no"/>
     <result column="type" property="type"/>
+    
     <association property="species" javaType="species">
       <id column="species_no" property="no"/>
       <result column="species_type" property="type"/>
@@ -18,32 +19,6 @@
   insert into pet_type(sno, type)
   values(#{species.no}, #{type})
   </insert>
- 
-  <select id="findAll"  resultMap="typeMap">
-  
-  </select>
-
-  <select id="findByNo" resultMap="petMap" parameterType="int">
-  
-  </select>
-   
-  <update id="update" parameterType="pet">
-    update pet_mypet
-    <set>
-      <if test="name != null or name != ''">
-        pname = #{name},
-      </if>
-      <if test="photo != null or photo != ''">
-        photo = #{photo}
-      </if>
-    </set>
-    where pno = #{no}
-  </update>
-  
-  <delete id="delete" parameterType="int">
-    delete from pet_mypet
-    where pno = #{value}
-  </delete>
 </mapper>
 
 

@@ -1,40 +1,38 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.service.RecordService;
 
-@SuppressWarnings("serial")
-@WebServlet("/record/delete")
-public class RecordDeleteHandler extends HttpServlet {
+@Controller
+public class RecordDeleteHandler {
 
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  RecordService recordService;
 
-    RecordService recordService = (RecordService) request.getServletContext().getAttribute("RecordService");
+  public RecordDeleteHandler(RecordService recordService) {
+    this.recordService = recordService;
+  }
+
+  @RequestMapping("/record/delete")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
 
     response.setContentType("text/plain;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
     out.println("[진료기록 삭제]");
 
-    try {
-      int no = Integer.parseInt(request.getParameter("no"));
+    int no = Integer.parseInt(request.getParameter("no"));
 
-      if (recordService.delete(no) == 0) {
-        out.println("해당 번호의 펫이 없습니다.");
-      } else {
-        out.println("펫을 삭제하였습니다.");
-      }
-    } catch (Exception e) {
-      throw new ServletException(e);
+    if (recordService.delete(no) == 0) {
+      out.println("해당 번호의 펫이 없습니다.");
+    } else {
+      out.println("펫을 삭제하였습니다.");
     }
-  }
 
+    return ""; // 체크
+  }
 }

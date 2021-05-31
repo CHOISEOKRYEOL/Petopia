@@ -15,8 +15,9 @@
     <result column="park" property="parking"/>
     <result column="vet" property="veterinarian"/>
     <result column="photo" property="photo"/>
-    <result column="grade" property="rate"/>
-
+    <result column="rating" property="rating"/>
+    <result column="a_rating" property="accumulatedRating"/>
+  
     <association property="bigAddress" javaType="bigAddress">
       <id column="state_no" property="no"/>
       <result column="state_name" property="name"/>
@@ -42,6 +43,7 @@
       h.addr,
       h.stime,
       h.etime,
+      h.rating,
       s.gno as state_no,
       s.gname as state_name,    
       c.cno as city_no,
@@ -50,6 +52,28 @@
       inner join pet_state s on s.gno=c.gno
       inner join pet_hp h on c.cno=h.cno
     order by hno desc
+  </select>
+  
+  <select id="findByName" resultMap="hospitalMap" parameterType="String">
+    select
+      h.hno,
+      h.name,
+      h.tel,
+      h.addr,
+      h.stime,
+      h.etime,
+      h.park,
+      h.vet,
+      h.photo,
+      h.rating,
+      s.gno as state_no,
+      s.gname as state_name,    
+      c.cno as city_no,
+      c.cname as city_name
+    from pet_city c
+      inner join pet_state s on s.gno=c.gno
+      inner join pet_hp h on c.cno=h.cno
+    where h.name=#{value}
   </select>
   
   <select id="findByNo" resultMap="hospitalMap" parameterType="int">
@@ -63,7 +87,7 @@
       h.park,
       h.vet,
       h.photo,
-      h.grade,
+      h.rating,
       s.gno as state_no,
       s.gname as state_name,    
       c.cno as city_no,
@@ -73,7 +97,7 @@
       inner join pet_hp h on c.cno=h.cno
     where h.hno=#{value}
   </select>
-  
+
   <update id="update" parameterType="hospital">
     update pet_hp 
     <set> 
@@ -90,10 +114,36 @@
     where hno=#{no}
   </update>
   
+  <select id="getRating" resultMap="hospitalMap" parameterType="int">
+    select
+    hno, a_rating
+    from pet_hp
+    where hno=#{no}
+  </select>
+  
+  <update id="accumulateRating" parameterType="hospital">
+    update pet_hp set
+    a_rating = a_rating + #{accumulatedRating}
+    where hno=#{no}
+  </update>
+  
+  <update id="accumulatedRatingInitializer" parameterType="int">
+    update pet_hp set
+    a_rating = 0
+    where hno=#{no}
+  </update>
+  
+  <update id="updateRating" parameterType="hospital">
+    update pet_hp set
+    rating = #{rating}
+    where hno=#{no}
+  </update>
+  
   <delete id="delete" parameterType="int">
     delete from pet_hp 
-    where hno=#{value}
+    where hno=#{no}
   </delete>
+  
   
   <!--  
   <select id="findByKeyword" resultMap="hospitalMap" parameterType="map">

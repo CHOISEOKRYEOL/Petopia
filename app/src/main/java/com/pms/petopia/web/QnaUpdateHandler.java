@@ -1,53 +1,39 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Qna;
 import com.pms.petopia.service.QnaService;
 
-@SuppressWarnings("serial")
-@WebServlet("/qna/update")
-public class QnaUpdateHandler extends HttpServlet {
+@Controller
+public class QnaUpdateHandler {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  QnaService qnaService;
 
-    QnaService qnaService = (QnaService) request.getServletContext().getAttribute("qnaService");
-
-    int no = Integer.parseInt(request.getParameter("no"));
-    try {
-      Qna q = qnaService.get(no);
-      request.setAttribute("qna", q);
-      response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/qna/modifying_form.jsp").include(request, response);
-
-    } catch (Exception e) {
-      throw new ServletException(e);
-    }
+  public QnaUpdateHandler(QnaService qnaService) {
+    this.qnaService = qnaService;
   }
 
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    QnaService qnaService = (QnaService) request.getServletContext().getAttribute("qnaService");
+  @RequestMapping("/qna/update")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
+
+    if(request.getMethod().equals("GET")) {
+      int no = Integer.parseInt(request.getParameter("no"));
+      Qna q = qnaService.get(no);
+      request.setAttribute("qna", q);
+      return "/jsp/qna/modifying_form.jsp";
+    }
 
     Qna qna = new Qna();
     qna.setNo(Integer.parseInt(request.getParameter("no")));
     qna.setTitle(request.getParameter("title"));
     qna.setContent(request.getParameter("content"));
-    try {
-      qnaService.update(qna);
-      response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/jsp/admin/qna_update.jsp").include(request, response);
-      response.setHeader("Refresh", "1;url=list");
-    }
-    catch (Exception e) {
-      throw new ServletException(e);
+    qnaService.update(qna);
 
-    }
+    return "/jsp/qna/update.jsp";
+    //    response.setHeader("Refresh", "1;url=list");
   }
 }

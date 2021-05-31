@@ -31,7 +31,7 @@
 					<td>${r.writer.nick}</td>
 					<td>${r.comment}</td>
 					<td>${r.createdDate}</td>
-					<td><a href='reviewdelete?no=${r.no}'>삭제</a></td>
+					<td><a href='../review/delete?no=${r.no}'>삭제</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

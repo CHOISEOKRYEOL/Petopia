@@ -1,46 +1,36 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Story;
 import com.pms.petopia.service.StoryService;
 
-@SuppressWarnings("serial")
-@WebServlet("/story/add")
-public class StoryAddHandler extends HttpServlet {
+@Controller
+public class StoryAddHandler {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  StoryService storyService;
 
-    response.setContentType("text/html;charset=UTF-8");
-    request.getRequestDispatcher("/jsp/story/form.jsp").include(request, response);
+  public StoryAddHandler(StoryService storyService) {
+    this.storyService = storyService;
   }
 
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  @RequestMapping("/story/add")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
 
-    StoryService storyService = (StoryService) request.getServletContext().getAttribute("storyService");
+    if(request.getMethod().equals("GET")) {
+      return "/jsp/story/form.jsp";
+    }
 
     Story s = new Story();
     s.setTitle(request.getParameter("title"));
     s.setUrl(request.getParameter("url"));
     s.setSite(request.getParameter("site"));
 
-    System.out.printf("%s, %s, %s", s.getTitle(), s.getUrl(), s.getSite());
+    storyService.add(s);
 
-
-    try {
-      storyService.add(s);
-      response.sendRedirect("list");
-
-    } catch (Exception e) {
-      throw new ServletException(e);
-    }
+    return "redirect:list";
   }
 }

@@ -1,10 +1,12 @@
 package com.pms.petopia.service.impl;
 
 import java.util.List;
+
+import org.springframework.stereotype.Service;
 import com.pms.petopia.dao.SharingMarketBoardPhotoDao;
 import com.pms.petopia.domain.SharingMarketBoardPhoto;
 import com.pms.petopia.service.SharingMarketBoardPhotoService;
-
+@Service
 public class DefaultSharingMarketBoardPhotoService implements SharingMarketBoardPhotoService{
 
   SharingMarketBoardPhotoDao sharingMarketBoardPhotoDao;
@@ -46,7 +48,6 @@ public class DefaultSharingMarketBoardPhotoService implements SharingMarketBoard
   public SharingMarketBoardPhoto listMin(int boardNo) {
     return sharingMarketBoardPhotoDao.findByMin(boardNo);
   }
-
 
 
 }

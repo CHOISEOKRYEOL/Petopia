@@ -1,37 +1,34 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Story;
 import com.pms.petopia.service.StoryService;
 
-@SuppressWarnings("serial")
-@WebServlet("/story/delete")
-public class StoryDeleteHandler extends HttpServlet {
+@Controller
+public class StoryDeleteHandler {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  StoryService storyService;
 
-    StoryService storyService = (StoryService) request.getServletContext().getAttribute("storyService");
+  public StoryDeleteHandler(StoryService storyService) {
+    this.storyService = storyService;
+  }
 
-    try {
-      int no = Integer.parseInt(request.getParameter("no"));
+  @RequestMapping("/story/delete")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
 
-      Story oldStory = storyService.get(no);
-      if (oldStory == null) {
-        throw new Exception("해당 번호의 스토리가 없습니다.");
-      }
+    int no = Integer.parseInt(request.getParameter("no"));
 
-      storyService.delete(no);
-      response.sendRedirect("list");
-
-    } catch (Exception e) {
-      throw new ServletException(e);
+    Story oldStory = storyService.get(no);
+    if (oldStory == null) {
+      throw new Exception("해당 번호의 스토리가 없습니다.");
     }
+
+    storyService.delete(no);
+
+    return "redirect:list";
   }
 }

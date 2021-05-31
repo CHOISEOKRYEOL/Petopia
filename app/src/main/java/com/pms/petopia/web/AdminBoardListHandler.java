@@ -1,52 +1,46 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
 import java.util.List;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.MyTownBoard;
 import com.pms.petopia.domain.SharingMarketBoard;
 import com.pms.petopia.service.MyTownBoardService;
 import com.pms.petopia.service.SharingMarketBoardService;
 
-@SuppressWarnings("serial")
-@WebServlet("/admin/boardlist")
-public class AdminBoardListHandler extends HttpServlet {
+@Controller
+public class AdminBoardListHandler {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  SharingMarketBoardService sharingMarketBoardService;
+  MyTownBoardService myTownBoardService;
 
-    SharingMarketBoardService sharingMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("sharingMarketBoardService");
-    MyTownBoardService myTownBoardService = (MyTownBoardService) request.getServletContext().getAttribute("myTownBoardService");
+  public AdminBoardListHandler(SharingMarketBoardService sharingMarketBoardService, MyTownBoardService myTownBoardService) {
+    this.sharingMarketBoardService = sharingMarketBoardService;
+    this.myTownBoardService = myTownBoardService;
+  }
+
+  @RequestMapping("/admin/boardlist")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
+
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 
     if(loginUser.getRole() == 1) {
-      if(loginUser.getRole() == 1) {
-        response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher("/jsp/admin/access_fail.jsp").include(request, response);
-        response.setHeader("Refresh", "1;url=../main");
-      }
+      return "/jsp/admin/access_fail.jsp";
+      //        response.setHeader("Refresh", "1;url=../main");
     }
     else {
-      try {
-        List<SharingMarketBoard> sList = sharingMarketBoardService.list();
-        List<MyTownBoard> mList = myTownBoardService.listAll();
+      List<SharingMarketBoard> sList = sharingMarketBoardService.list();
+      List<MyTownBoard> mList = myTownBoardService.listAll();
 
-        request.setAttribute("sList", sList);
-        request.setAttribute("mList", mList);
+      request.setAttribute("sList", sList);
+      request.setAttribute("mList", mList);
 
-        response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher("/jsp/admin/board_list.jsp").include(request, response);
+      return "/jsp/admin/board_list.jsp";
 
-      }
-      catch (Exception e) {
-        throw new ServletException(e);
-      }
     }
   }
 }

@@ -2,10 +2,11 @@ package com.pms.petopia.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import org.springframework.stereotype.Service;
 import com.pms.petopia.dao.SharingMarketBoardDao;
 import com.pms.petopia.domain.SharingMarketBoard;
 import com.pms.petopia.service.SharingMarketBoardService;
-
+@Service
 public class DefaultSharingMarketBoardService implements SharingMarketBoardService{
 
   SharingMarketBoardDao sharingMarketBoardDao;
@@ -60,6 +61,5 @@ public class DefaultSharingMarketBoardService implements SharingMarketBoardServi
   public int deleteAll(int no) throws Exception {
     return sharingMarketBoardDao.deleteByNo(no);
   }
-
 
 }

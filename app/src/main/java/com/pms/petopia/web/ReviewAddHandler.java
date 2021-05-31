@@ -1,67 +1,64 @@
 package com.pms.petopia.web;
 
-import java.io.IOException;
 import java.util.UUID;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Hospital;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.Review;
+import com.pms.petopia.service.HospitalService;
 import com.pms.petopia.service.ReviewService;
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
 import net.coobird.thumbnailator.name.Rename;
 
-@SuppressWarnings("serial")
-@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
-@WebServlet("/review/add")
-public class ReviewAddHandler extends HttpServlet {
+@Controller
+public class ReviewAddHandler {
 
-  private String uploadDir;
+  ReviewService reviewService;
+  HospitalService hospitalService;
 
-  @Override
-  public void init() throws ServletException {
-    this.uploadDir = this.getServletContext().getRealPath("/upload");
+  public ReviewAddHandler(ReviewService reviewService, HospitalService hospitalService) {
+    this.reviewService = reviewService;
+    this.hospitalService = hospitalService;
   }
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
 
-    int num = Integer.parseInt(request.getParameter("num"));
-    request.setAttribute("num", num);
-    response.setContentType("text/html;charset=UTF-8");
-    request.getRequestDispatcher("/jsp/review/review_form.jsp").include(request, response);
-  }
+  @RequestMapping("/review/add")
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
 
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+    String uploadDir = request.getServletContext().getRealPath("/upload");
 
-    ReviewService reviewService = (ReviewService) request.getServletContext().getAttribute("reviewService");
+    if(request.getMethod().equals("GET")) {
+
+      int num = Integer.parseInt(request.getParameter("num"));
+      request.setAttribute("num", num);
+      return "/jsp/review/review_form.jsp";
+    }
 
     Review r = new Review();
 
-    r.setServiceRating(Integer.parseInt(request.getParameter("serviceRating")));
-    r.setCleanlinessRating(Integer.parseInt(request.getParameter("cleanlinessRating")));
-    r.setCostRating(Integer.parseInt(request.getParameter("costRating")));
+    r.setServiceRating(Integer.parseInt(request.getParameter("star-input")));
+    r.setCleanlinessRating(Integer.parseInt(request.getParameter("second-star-input")));
+    r.setCostRating(Integer.parseInt(request.getParameter("third-star-input")));
     r.setComment(request.getParameter("comment"));
+
+    System.out.println(r);
 
     Part photoPart = request.getPart("photo");
 
     if(photoPart.getSize() > 0) {
       String filename = UUID.randomUUID().toString();
-      photoPart.write(this.uploadDir + "/" + filename);
+      photoPart.write(uploadDir + "/" + filename);
       r.setPhoto(filename);
 
 
-      Thumbnails.of(this.uploadDir + "/" + filename)
+      Thumbnails.of(uploadDir + "/" + filename)
       .size(100, 100)
       .outputFormat("jpg")
       .crop(Positions.CENTER)
@@ -80,14 +77,30 @@ public class ReviewAddHandler extends HttpServlet {
     h.setNo(Integer.parseInt(request.getParameter("num")));
     r.setHospital(h);
 
-    try {
-      reviewService.add(r);
+    reviewService.add(r);
 
-      response.sendRedirect("../hospital/detail?no=" + h.getNo());
+    String temp = reviewService.countReview(h.getNo());
+    int count = Integer.parseInt(temp);
 
-    } catch (Exception e) {
-      throw new ServletException(e);
+    float average = (r.getServiceRating() + r.getCleanlinessRating() + r.getCostRating()) / 3.0F;
+    h.setAccumulatedRating(average);
+    hospitalService.setAccumulatedRating(h);
+
+    Hospital rating = hospitalService.getRating(h.getNo());
+    float finalRating = 0;
+    if(count > 1) {
+      float original = rating.getAccumulatedRating();
+      finalRating = original / (count * 1.0F);
     }
+    else {
+      finalRating = average * 1.0F;
+    }
+    rating.setRating(finalRating);
+
+    hospitalService.rate(rating);
+
+    return "redirect:../hospital/detail?no=" + h.getNo();
+
   }
 }
 
