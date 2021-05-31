@@ -13,9 +13,9 @@
 </head>
 <body>
 <h1>게시글 등록</h1>
-<form action='add' method='post' enctype="multipart/form-data">
+<form action='add' method='post' enctype='multipart/form-data'>
 분류: <select name='category'>
-<c:forEach items="${catList}" var="category">
+<c:forEach items="${catList}" var='category'>
 <option value='${category.no}'>${category.name}</option>
 </c:forEach>
 </select>

@@ -23,7 +23,7 @@
 <div class="container">
 <div id="login-form">
 <h1>Petopia 로그인</h1>
-<form action="add" method='post'>
+<form action="login" method='post'>
   <div class="mb-3 row">
     <label for="id" class="col-sm-3 col-form-label">아이디/이메일</label>
     <div class="col-sm-9">
@@ -47,35 +47,6 @@
 </div>
 </div>
 <script>
-
-var idCheck = 0;
-var pwdCheck = 0;
-
-$('#login').click(function() {
-	var id = $('#id').val();
-	var pwd = $('#password').val();
-	
-	$.ajax({
-		type : "POST",
-		url : "login",
-		data : {
-			id : id,
-			password : pwd
-		},
-		success : function(response) {
-			
-			if(response == "0") {
-				swal('실패', '실패', 'error');
-				return false;
-			}
-			else {
-				swal('성공', '성공', 'success');
-				return true;
-			}
-		}
-	})
-});
-
 </script>
 
 </body>

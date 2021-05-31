@@ -4,10 +4,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.SharingMarketBoard;
@@ -22,31 +27,36 @@ import net.coobird.thumbnailator.geometry.Positions;
 import net.coobird.thumbnailator.name.Rename;
 
 @Controller
-@RequestMapping("/sharingmarketboard")
+@RequestMapping("/sharingmarketboard/")
 public class SharingMarketBoardController {
 
   SharingMarketBoardCategoryService sharingMarketBoardCategoryService;
   SharingMarketBoardService sharingMarketBoardService;
   SharingMarketBoardPhotoService sharingMarketBoardPhotoService;
   SharingMarketBoardCommentService sharingMarketBoardCommentService;
+  ServletContext sc;
 
-  public SharingMarketBoardController(SharingMarketBoardCategoryService sharingMarketBoardCategoryService, SharingMarketBoardService sharingMarketBoardService, SharingMarketBoardPhotoService sharingMarketBoardPhotoService,  SharingMarketBoardCommentService sharingMarketBoardCommentService) {
+  public SharingMarketBoardController(SharingMarketBoardCategoryService sharingMarketBoardCategoryService, SharingMarketBoardService sharingMarketBoardService,
+      SharingMarketBoardPhotoService sharingMarketBoardPhotoService,  SharingMarketBoardCommentService sharingMarketBoardCommentService,
+      ServletContext sc) {
     this.sharingMarketBoardCategoryService = sharingMarketBoardCategoryService;
     this.sharingMarketBoardService = sharingMarketBoardService;
     this.sharingMarketBoardPhotoService = sharingMarketBoardPhotoService;
     this.sharingMarketBoardCommentService = sharingMarketBoardCommentService;
+    this.sc = sc;
 
   }
 
-  @RequestMapping("add")
-  public String add(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  @GetMapping("form")
+  public String form(Model model) throws Exception {
+    model.addAttribute("catList", sharingMarketBoardCategoryService.list());
+    return "/sharingmarketboard/form";
+  }
+
+  @PostMapping("add")
+  public String add(HttpServletRequest request, HttpSession session) throws Exception {
 
     String uploadDir = request.getServletContext().getRealPath("/upload");
-
-    if (request.getMethod().equals("GET")) {
-      request.setAttribute("catList", sharingMarketBoardCategoryService.list());
-      return "/jsp/sharingmarketboard/form.jsp";
-    }
 
     SharingMarketBoard smb = new SharingMarketBoard();
     List<SharingMarketBoardPhoto> phots = new ArrayList<>();
@@ -109,43 +119,34 @@ public class SharingMarketBoardController {
     return "redirect:list";
   }
 
-  @RequestMapping("update")
-  public String update(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  @GetMapping("update")
+  public String update(int no, Model model) throws Exception {
 
-    if (request.getMethod().equals("GET")) {
+    model.addAttribute("smb", sharingMarketBoardService.get(no));
+    model.addAttribute("catList", sharingMarketBoardCategoryService.list());
+    return "/jsp/sharingmarketboard/update.jsp";
+  }
 
-      int no = Integer.parseInt(request.getParameter("no"));
+  @PostMapping("update")
+  public String update(SharingMarketBoard board,HttpSession session,SharingMarketBoard smbBoard) throws Exception {
 
-      request.setAttribute("smb", sharingMarketBoardService.get(no));
-      request.setAttribute("catList", sharingMarketBoardCategoryService.list());
-      response.setContentType("text/html;charset=UTF-8");
-      return "/jsp/sharingmarketboard/update.jsp";
-    }
-
-    response.setContentType("text/html;charset=UTF-8");
-    request.getRequestDispatcher("/jsp/sharingmarketboard/update.jsp").include(request, response);
-
-
-    int no = Integer.parseInt(request.getParameter("no"));
-
-    SharingMarketBoard oldBoard = sharingMarketBoardService.get(no);
+    SharingMarketBoard oldBoard = sharingMarketBoardService.get(board.getNo());
     if (oldBoard == null) {
       throw new Exception("해당 번호의 게시글이 없습니다.");
     } 
 
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
     if (oldBoard.getWriter().getNo() != loginUser.getNo()) {
       throw new Exception("변경 권한이 없습니다!");
     }
-
-    SharingMarketBoard smbBoard = new SharingMarketBoard();
-    smbBoard.setNo(oldBoard.getNo());
-
-    int categoryNo = Integer.parseInt(request.getParameter("category"));
-    smbBoard.setCategory(sharingMarketBoardCategoryService.get(categoryNo));
-
-    smbBoard.setTitle(request.getParameter("title"));
-    smbBoard.setContent(request.getParameter("content"));
+    //    SharingMarketBoard smbBoard = new SharingMarketBoard();
+    //    smbBoard.setNo(oldBoard.getNo());
+    //
+    //    int categoryNo = Integer.parseInt(request.getParameter("category"));
+    //    smbBoard.setCategory(sharingMarketBoardCategoryService.get(categoryNo));
+    //
+    //    smbBoard.setTitle(request.getParameter("title"));
+    //    smbBoard.setContent(request.getParameter("content"));
 
     sharingMarketBoardService.update(smbBoard);
 
@@ -181,7 +182,7 @@ public class SharingMarketBoardController {
 
   }
 
-  @RequestMapping("detail")
+  @GetMapping("detail")
   public String detail(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
     int no = Integer.parseInt(request.getParameter("no"));
@@ -196,10 +197,10 @@ public class SharingMarketBoardController {
     request.setAttribute("comtList", sharingMarketBoardCommentService.get(no));
     request.setAttribute("photList", sharingMarketBoardPhotoService.list(no));
 
-    return"/jsp/sharingmarketboard/detail.jsp";
+    return"/sharingmarketboard/detail";
   }
 
-  @RequestMapping("list")
+  @GetMapping("list")
   public String list(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
     //    String item = request.getParameter("item");
@@ -231,7 +232,7 @@ public class SharingMarketBoardController {
     request.setAttribute("catList", sharingMarketBoardCategoryService.list());
     request.setAttribute("smBoards", smBoards);
 
-    return "/jsp/sharingmarketboard/list.jsp";
+    return "/sharingmarketboard/list";
 
   }
 

@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h1>Q&A 작성</h1>
-	<form method='post'>
+	<form action="add" method='post'>
 		<table border='1'>
 			<tbody>
 				<tr>

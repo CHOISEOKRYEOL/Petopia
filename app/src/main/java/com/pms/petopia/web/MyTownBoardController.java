@@ -4,7 +4,11 @@ import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.BigAddress;
 import com.pms.petopia.domain.Member;
@@ -36,47 +40,32 @@ public class MyTownBoardController {
     this.recommentService = recommentService;
   }
 
-  @RequestMapping("form")
-  public String add(HttpServletRequest request, HttpServletResponse response)
+  @GetMapping("form")
+  public void form(int stateNo, int cityNo, Model model) throws Exception {
+
+    SmallAddress smallAddress = smallAddressService.get(cityNo);
+    List<SmallAddress> smallAddresses = smallAddressService.list();
+
+    model.addAttribute("smallAddress", smallAddress);
+    model.addAttribute("smallAddresses", smallAddresses);
+  }
+
+  @PostMapping("add")
+  public String add(int cityNo, MyTownBoard b, HttpSession session)
       throws Exception {
 
-    if(request.getMethod().equals("GET")) {
-
-      int stateNo= Integer.parseInt(request.getParameter("stateNo")); //일단 가져왔음
-      int cityNo = Integer.parseInt(request.getParameter("cityNo"));
-      SmallAddress smallAddress = smallAddressService.get(cityNo);
-      List<SmallAddress> smallAddresses = smallAddressService.list();
-
-      request.setAttribute("smallAddress", smallAddress);
-      request.setAttribute("smallAddresses", smallAddresses);
-
-      return "/jsp/mytown/form.jsp";
-
-    }
-
-    MyTownBoard b = new MyTownBoard();
-
-    int no = Integer.parseInt(request.getParameter("cityNo"));
-    SmallAddress s = smallAddressService.get(no);
+    SmallAddress s = smallAddressService.get(cityNo);
     b.setSmallAddress(s);
-    b.setTitle(request.getParameter("title"));
-    b.setContent(request.getParameter("content"));
-    Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+    Member loginUser = (Member)session.getAttribute("loginUser");
     b.setWriter(loginUser);
 
     myTownBoardService.add(b);
-
     return "redirect:list?stateNo=" + s.getBigAddress().getNo() + "&cityNo=" + s.getNo();
   }
 
   @RequestMapping("detail")
-  public String detail(HttpServletRequest request, HttpServletResponse response)
+  public String detail(int no, int stateNo, int cityNo, Model model)
       throws Exception {
-
-    int no = Integer.parseInt(request.getParameter("no"));
-    int stateNo= Integer.parseInt(request.getParameter("stateNo")); //일단 가져왔음 / Good job
-    int cityNo = Integer.parseInt(request.getParameter("cityNo"));
-
 
     MyTownBoard myTownBoard = myTownBoardService.get(no);
     SmallAddress smallAddress = smallAddressService.get(cityNo);
@@ -85,11 +74,11 @@ public class MyTownBoardController {
     List<MyTownBoardComment> comments = myTownBoardCommentService.list(no);
     String commentCount = myTownBoardCommentService.count(no);
 
-    request.setAttribute("myTownBoard", myTownBoard);
-    request.setAttribute("smallAddresses", smallAddresses);
-    request.setAttribute("smallAddress", smallAddress);
-    request.setAttribute("comments", comments);
-    request.setAttribute("commentCount", commentCount);
+    model.addAttribute("myTownBoard", myTownBoard);
+    model.addAttribute("smallAddresses", smallAddresses);
+    model.addAttribute("smallAddress", smallAddress);
+    model.addAttribute("comments", comments);
+    model.addAttribute("commentCount", commentCount);
 
     return "/jsp/mytown/detail.jsp";
 
@@ -231,14 +220,9 @@ public class MyTownBoardController {
   }
 
 
-  @RequestMapping("list")
-  public String list(HttpServletRequest request, HttpServletResponse response)
+  @GetMapping("list")
+  public void list(int stateNo, int cityNo, String keyword, String r, Model model)
       throws Exception {
-
-    int stateNo = Integer.parseInt(request.getParameter("stateNo"));
-    int cityNo = Integer.parseInt(request.getParameter("cityNo"));
-    String keyword = request.getParameter("keyword");
-    String r = request.getParameter("r");
 
     List<MyTownBoard> boards = myTownBoardService.list(cityNo, stateNo);
     SmallAddress smallAddress = smallAddressService.get(cityNo);
@@ -254,27 +238,21 @@ public class MyTownBoardController {
         boards = myTownBoardService.list(stateNo, cityNo);
       }
     }
-    request.setAttribute("boards", boards);
-    request.setAttribute("smallAddresses", smallAddresses);
-    request.setAttribute("smallAddress", smallAddress);
-    request.setAttribute("keyword", keyword);
-    request.setAttribute("r", r);
-    request.setAttribute("stateNo", stateNo);
-    request.setAttribute("cityNo", cityNo);
-
-    return "/jsp/mytown/list.jsp";
+    model.addAttribute("boards", boards);
+    model.addAttribute("smallAddresses", smallAddresses);
+    model.addAttribute("smallAddress", smallAddress);
+    model.addAttribute("keyword", keyword);
+    model.addAttribute("r", r);
+    model.addAttribute("stateNo", stateNo);
+    model.addAttribute("cityNo", cityNo);
   }
 
-  @RequestMapping("main")
-  public String main(HttpServletRequest request, HttpServletResponse response)
-      throws Exception {
+  @RequestMapping("/main")
+  public void main(Model model) throws Exception {
 
     List<SmallAddress> smallAddresses = smallAddressService.list();
 
-    request.setAttribute("smallAddresses", smallAddresses);
-
-    return "/jsp/mytown/main.jsp";
-
+    model.addAttribute("smallAddresses", smallAddresses);
   }
 
   @RequestMapping("recommentAdd")

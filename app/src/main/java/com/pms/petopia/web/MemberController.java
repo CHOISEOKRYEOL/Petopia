@@ -109,7 +109,7 @@ public class MemberController {
 
   }
 
-  @PostMapping("findKey")
+  @PostMapping("findkey")
   public String findKey(String name, String nick, Model model)
       throws Exception {
 

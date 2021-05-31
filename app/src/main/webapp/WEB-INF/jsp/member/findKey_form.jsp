@@ -37,7 +37,7 @@
       <input type="text" class="form-control form-control-sm" id="nick" name="nick" placeholder="닉네임">
     </div>
   </div>
-<button class="btn btn-primary btn-sm">아이디 찾기</button>
+<button class="btn btn-primary btn-sm" id="findById">아이디 찾기</button>
 </form>
 </div>
 
@@ -64,7 +64,6 @@
 </form>
 </div>
 <script>
-
 
 
 </script>
