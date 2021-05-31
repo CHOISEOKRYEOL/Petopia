@@ -71,7 +71,7 @@
   <div>
     <input type="radio" name="leader" value="1"> ${pets.no} </td> 
   </div>
-  <td><img src='${photoUrl}'></td> 
+  <td><img src='${photoUrl}'></td>
   <td>${pets.type.type}</td>
   <td><a href='detail?no=${pets.no}'>${pets.name}</a></td> 
   <td>${pets.age}</td>
@@ -84,7 +84,7 @@
 </c:forEach>
 </tbody>
 </table>
-<a class="d-grid gap-2 d-md-flex justify-content-md-end" href="update" role="button">대표펫 등록</a>
+<a class="d-grid gap-2 d-md-flex justify-content-md-end" href="setLeaderPet" role="button">대표펫 등록</a>
 <a class="d-grid gap-2 d-md-flex justify-content-md-end" href="add" role="button">새 펫</a>
 
   <div class="btn-group me-2" role="group" aria-label="First group">
