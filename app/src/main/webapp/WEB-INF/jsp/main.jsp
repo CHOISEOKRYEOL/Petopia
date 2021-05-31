@@ -96,7 +96,7 @@
 			<a href='mytown/main'>우리 동네 목록</a>
 		</p>
 		<p>
-			<a href='qna/add'>Q&A 작성</a>
+			<a href='qna/qna_form'>Q&A 작성</a>
 		</p>
 		<p>
 			<a href='qna/list'>Q&A 목록</a>

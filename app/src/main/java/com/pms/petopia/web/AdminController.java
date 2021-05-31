@@ -91,7 +91,7 @@ public class AdminController {
     Member loginUser = (Member) session.getAttribute("loginUser");
     if(loginUser.getRole() == 1) {
 
-      return "access_fail";
+      return "admin/access_fail";
 
     }
     else {
@@ -104,8 +104,9 @@ public class AdminController {
         list = memberService.list();
       }
 
+
       model.addAttribute("list", list);
-      return "member_list";
+      return "admin/member_list";
 
     }
   }
@@ -138,14 +139,14 @@ public class AdminController {
 
     Member loginUser = (Member) session.getAttribute("loginUser");
     if(loginUser.getRole() == 1) {
-      return "access_fail";
+      return "admin/access_fail";
     }
     else {
       List<Qna> list = qnaService.list();
 
       model.addAttribute("list", list);
 
-      return "qna_list";
+      return "admin/qna_list";
     }
   }
 
@@ -157,7 +158,7 @@ public class AdminController {
     Member loginUser = (Member) session.getAttribute("loginUser");
     if(loginUser.getRole() == 1) {
 
-      return "access_fail";
+      return "admin/access_fail";
     }
     else {
       List<Review> list = null;
@@ -171,7 +172,7 @@ public class AdminController {
 
       model.addAttribute("list", list);
 
-      return "review_list";
+      return "admin/review_list";
     }
   }
 }

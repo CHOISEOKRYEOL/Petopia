@@ -21,12 +21,12 @@ public class AuthController {
     this.memberService = memberService;
   }
 
-  @GetMapping("login_form")
+  @GetMapping("/login_form")
   public void execute()
       throws Exception {
   }
 
-  @PostMapping("login")
+  @PostMapping("/login")
   public String login(String id, String password, String saveIdOrEmail, HttpServletResponse response, HttpSession session)
       throws Exception {
 
@@ -53,11 +53,11 @@ public class AuthController {
 
     if (member == null) {
       session.invalidate();
-      return "/login_form";
+      return "login_form";
     }
     else {
       session.setAttribute("loginUser", member);
-      return "../main";
+      return "main";
     }
   }
 

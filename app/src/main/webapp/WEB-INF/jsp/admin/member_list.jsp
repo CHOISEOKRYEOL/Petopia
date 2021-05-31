@@ -52,10 +52,7 @@
 		<button>검색</button>
 		<a href="../main">뒤로가기</a>
 	</form>
-	
 	<script>
-	
-	
 	
 	</script>
 </body>
