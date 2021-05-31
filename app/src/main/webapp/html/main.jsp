@@ -58,7 +58,8 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
       <nav class="navbar navbar-expand-lg navbar-light">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../pet/list"><img src="../images/pawprintfull.png"> 마이펫</a>
+          <a class="nav-link active" aria-current="page" href="../app/pet/list">
+          <img src="../images/pawprintfull.png"> 마이펫</a>
         </li>
       </ul>
       </nav>
@@ -67,7 +68,8 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
       <nav class="navbar navbar-expand-lg navbar-light">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../record/list"><img src="../images/pawprintfull.png"> 진찰기록</a>
+          <a class="nav-link active" aria-current="page" href="../app/record/list">
+          <img src="../images/pawprintfull.png"> 진찰기록</a>
         </li>
       </ul>
       </nav>
@@ -129,29 +131,42 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     <nav class="navbar navbar-expand-lg navbar-light">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../sharingmarketboard/list"><img src="../images/pawprintfull.png"> 나눔장터</a>
+          <a class="nav-link active" aria-current="page" href="../app/sharingmarketboard/list">
+          <img src="../images/pawprintfull.png"> 나눔장터</a>
         </li>
       </ul>
     </nav>
     </div>
     
     <div class="box5">
-      <div class="market">
-        <div class="market_column">
-          <a href=""><img src="../images/20180111_205149.jpg" style="width: 200px; height: 250px;"></a>
-          <p class="market_contents">dkdkdksssssssssssssssssssssssssssssssssss</p>
+      <div class="row justify-content-evenly">
+        <div class="col-3">
+          <a href="https://www.naver.com/">
+          <img src="../images/20180111_205149.jpg" style="width: 216px; height: 250px;"></a>
+          <p class="market_contents">
+          <a href="https://www.naver.com/" class="link-dark" style="text-decoration:none;">
+          dkdkdksssssssssssssssssssssssssssssssssss</a></p>
         </div>
-        <div class="market_column">
-          <a href=""><img src="../images/20180111_205149.jpg" style="width: 200px; height: 250px;"></a>
-          <p class="market_contents">dkdkdkssssssssssssssssssss</p>
+        <div class="col-3">
+          <a href="https://www.daum.net/">
+          <img src="../images/20180111_205149.jpg" style="width: 216px; height: 250px;"></a>
+          <p class="market_contents">
+          <a href="https://www.daum.net/" class="link-dark" style="text-decoration:none;">
+          dkdkdkssssssssssssssssssss</a></p>
         </div>
-        <div class="market_column">
-          <a href=""><img src="../images/20180111_205149.jpg" style="width: 200px; height: 250px;"></a>
-          <p class="market_contents">dkdkdkssssssssssssssssssssssssss</p>
+        <div class="col-3">
+          <a href="https://twitter.com/">
+          <img src="../images/20180111_205149.jpg" style="width: 216px; height: 250px;"></a>
+          <p class="market_contents">
+          <a href="https://twitter.com/" class="link-dark" style="text-decoration:none;">
+          dkdkdkssssssssssssssssssssssssss</a></p>
         </div>
-        <div class="market_column">
-          <a href=""><img src="../images/20180111_205149.jpg" style="width: 200px; height: 250px;"></a>
-          <p class="market_contents">dkdkdksssssssssssssss</p>
+        <div class="col-3">
+          <a href="https://www.netflix.com/">
+          <img src="../images/20180111_205149.jpg" style="width: 216px; height: 250px;"></a>
+          <p class="market_contents">
+          <a href="https://www.netflix.com/" class="link-dark" style="text-decoration:none;">
+          dkdkdksssssssssssssss</a></p>
         </div>
      </div>
      </div>
@@ -161,7 +176,8 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
       <nav class="navbar navbar-expand-lg navbar-light">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../story/list"><img src="../images/pawprintfull.png"> 스토리</a>
+          <a class="nav-link active" aria-current="page" href="../app/story/list">
+          <img src="../images/pawprintfull.png"> 스토리</a>
         </li>
       </ul>
       </nav>
@@ -170,7 +186,8 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
       <nav class="navbar navbar-expand-lg navbar-light">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../mytown/list"><img src="../images/pawprintfull.png"> 우리동네</a>
+          <a class="nav-link active" aria-current="page" href="../app/mytown/list">
+          <img src="../images/pawprintfull.png"> 우리동네</a>
         </li>
       </ul>
       </nav>    

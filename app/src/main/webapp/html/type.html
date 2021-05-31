@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>품종</title>
+</head>
+<body>
+<select id="species" name="species">
+  <option value="1">강아지</option>
+  <option value="2">고양이</option>
+  <option value="3">기타</option>
+</select>
+<script>
+var t1 = document.querySelector("#species");
+t1.onchange = function() {
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", "type2.jsp?type=" + t1.vlaue, false);
+	xhr.send();
+}
+</script>
+</body>
+</html>

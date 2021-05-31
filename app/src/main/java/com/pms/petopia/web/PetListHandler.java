@@ -34,6 +34,11 @@ public class PetListHandler {
     HttpSession session = request.getSession();
     session.setAttribute("petNo", request.getParameter("petNo"));
 
+    //    int leader = Integer.parseInt(request.getParameter("leader"));
+    //    if(leader == 1 ) {
+    //      
+    //    }
+
     request.setAttribute("list", pets);
     return "/jsp/pet/list.jsp";
 

@@ -32,10 +32,9 @@ public class SharingMarketBoardDetailHandler extends HttpServlet{
 	     System.out.println(no);
 	     List<SharingMarketBoardPhoto> photo = sharingMarketBoardPhotoService.list(no);
 		System.out.println(photo);
-	     
+		
 	      request.setAttribute("smb", sharingMarketBoardService.get(no));
 	      request.setAttribute("catList", sharingMarketBoardCategoryService.list());
-	      request.setAttribute("sharingmarketboard", no);
 	      request.setAttribute("comtList", sharingMarketBoardCommentService.get(no));
 	      request.setAttribute("photList", sharingMarketBoardPhotoService.list(no));
 	      

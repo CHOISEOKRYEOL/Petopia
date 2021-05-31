@@ -29,6 +29,18 @@ public class DefaultSharingMarketBoardCommentService implements SharingMarketBoa
     return sharingMarketBoardCommentDao.findByNo(no);
   }
 
+	
+	@Override
+	public SharingMarketBoardComment getNo(int no) throws Exception {
+		return sharingMarketBoardCommentDao.findBySrno(no);
+	}
+	
+	@Override
+	public String count(int smBoardNo) throws Exception {
+		return sharingMarketBoardCommentDao.comtCount(smBoardNo);
+	}
+	
+	
   @Override
   public int update(SharingMarketBoardComment comt) throws Exception {
     return sharingMarketBoardCommentDao.update(comt);
@@ -37,11 +49,6 @@ public class DefaultSharingMarketBoardCommentService implements SharingMarketBoa
   @Override
   public int delete(int no) throws Exception {
     return sharingMarketBoardCommentDao.delete(no);
-  }
-
-  @Override
-  public SharingMarketBoardComment getNo(int no) throws Exception {
-    return sharingMarketBoardCommentDao.findBySrno(no);
   }
 
 

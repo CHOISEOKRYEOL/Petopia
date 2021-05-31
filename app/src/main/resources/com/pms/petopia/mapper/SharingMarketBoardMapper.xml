@@ -43,10 +43,10 @@
   </sql>
   
   
-  <insert id="insert" parameterType="sharingmarketboard">
+  <insert id="insert" parameterType="sharingmarketboard"
+        useGeneratedKeys="true" keyColumn="sno" keyProperty="no">
     insert into pet_mark(cno, title, cont, writer) 
     values(#{category.no}, #{title}, #{content}, #{writer.no})
-   
   </insert>
   
   <select id="findAll" resultMap="sharingmarketboardMap" parameterType="sharingmarketboard">
@@ -97,6 +97,14 @@
   <delete id="delete" parameterType="int">
     delete from pet_mark 
     where sno = #{value}
+  </delete>
+  
+  <delete id="deleteByNo">
+  delete
+  comt,mark
+  from pet_mark_comt comt
+  left join pet_mark mark on mark.sno = comt.sno
+    where comt.sno = #{value}
   </delete>
 
 </mapper>

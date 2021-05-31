@@ -27,7 +27,6 @@ public class AdminReviewListHandler {
     if(loginUser.getRole() == 1) {
 
       return "/jsp/admin/access_fail.jsp";
-      //      response.setHeader("Refresh", "1;url=../main");
     }
     else {
       List<Review> list = null;

@@ -126,12 +126,13 @@
 
 	<h1>병원 리뷰</h1>
 	
-	<c:import url="/review/list" />
+	<c:import url="/app/review/list">
+  </c:import>
   	
 	<form action="../review/add">
-		<input type='hidden' name='num' value='${hospital.no}'>
-		<input type="submit" value="리뷰 작성">
-	</form>
+    <input type='hidden' name='num' value='${hospital.no}'>
+    <input type="submit" value="리뷰 작성">
+  </form>
 	<p>
 		<a href='list'>목록</a>
 	</p>

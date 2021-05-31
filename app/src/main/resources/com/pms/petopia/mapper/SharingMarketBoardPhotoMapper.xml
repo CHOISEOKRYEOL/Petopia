@@ -10,7 +10,7 @@
     <result column="photo" property="photo"/>
     
         <association property="sharingmarketboard" javaType="sharingmarketboard">
-	    <id column="sharingmarketboard_webaddress" property="webaddress"/>
+	    <id column="sharingmarketboard_no" property="no"/>
     </association>
   </resultMap>
   
@@ -18,15 +18,20 @@
        select
       phot.spno,
       phot.photo,
-      mark.sno as sharingmarketboard_webaddress
+      mark.sno as sharingmarketboard_no
     from pet_mark_phot phot
       inner join pet_mark mark on mark.sno = phot.sno
   </sql>
   
     <insert id="insert" parameterType="sharingmarketboardphoto">
-    insert into pet_mark_comt(photo, sno) 
+    insert into pet_mark_phot(photo, sno) 
     values(#{photo}, #{sharingmarketboard.no})
   </insert>
+
+      <select id="findAllList" resultMap="sharingmarketboardPhotoMap" parameterType="int">
+      <include refid="find"/>
+  </select>
+
 
       <select id="findAll" resultMap="sharingmarketboardPhotoMap" parameterType="int">
       <include refid="find"/>
@@ -37,6 +42,16 @@
     <select id="findByNo" resultMap="sharingmarketboardPhotoMap" parameterType="int">
     <include refid="find"/>
        where phot.spno = #{no}
+  </select>
+  
+      <select id="findByMin" resultMap="sharingmarketboardPhotoMap" parameterType="int">
+       select 
+       min(spno),
+        phot.photo,
+        mark.sno as sharingmarketboard_no
+      from pet_mark_phot phot
+      inner join pet_mark mark on mark.sno = phot.sno
+       where phot.sno = #{no}
   </select>
   
   

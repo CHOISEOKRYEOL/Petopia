@@ -27,7 +27,6 @@ public class AdminMemberListHandler {
 
       return "/jsp/admin/access_fail.jsp";
 
-      //      response.setHeader("Refresh", "1;url=../main");
     }
     else {
       List<Member> list = null;

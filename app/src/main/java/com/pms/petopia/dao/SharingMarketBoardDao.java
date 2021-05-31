@@ -22,4 +22,5 @@ public interface SharingMarketBoardDao {
 
   int delete(int no) throws Exception;
 
+  int deleteByNo(int no)throws Exception;
 }

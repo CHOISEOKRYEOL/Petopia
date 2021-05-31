@@ -24,7 +24,7 @@ public class QnaDeleteHandler {
     qnaService.delete(no);
 
     if(loginUser.getRole() == 0) {
-      return "/jsp/admin/qna_delete.jsp";
+      return "redirect:../admin/qnalist";
       //      response.setHeader("Refresh", "1;url=qnalist");
     }
     else {

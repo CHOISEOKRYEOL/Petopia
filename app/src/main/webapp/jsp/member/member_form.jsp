@@ -102,7 +102,6 @@
 						<input type="password" placeholder="비밀번호 확인" name="checkPassword"
 							required class="form-control form-control-sm" id="checkPassword" oninput="checkRepeatedPwd()" maxlength='20'>
 						<div id="pwdSame" style="display: none">비밀번호가 일치하지 않습니다.</div>
-						<div id="pwdLength2" style="display: none">8자 이상 입력하세요.</div>
 					</div>
 				</div>
 
@@ -121,6 +120,7 @@
 					<label for="tel" id="authenticationLabel" style="display: none" class="col-sm-2 col-form-label">번호 인증</label>
 					<div class="col-sm-6">
 						<input type="tel" style="display: none" required class="form-control form-control-sm" id="authenticationNumber" name="authenticationNumber" placeholder="인증번호 입력" maxlength='6'> 
+							<br>
 							<input type="button" style="display: none" id="authenticationButton" name="authenticationButton" value="확인">
 					</div>
 				</div>
@@ -145,6 +145,7 @@
 	<script>
 		var idCheck = 0;
 		var pwdCheck = 0;
+		var repeatedPwdCheck = 0;
 		var emailCheck = 0;
 		var nickCheck = 0;
 		var telCheck = 0;
@@ -153,7 +154,7 @@
 		var confirmNumber = 0;
 		var idValidator = /^[A-za-z0-9]{6,15}/g;
 		var emailValidator = /^[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[@]{1}[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[.]{1}[A-Za-z]{2,3}$/;
-		var nickValidator = /([^가-힣\x20a-zA-Z])/i;
+		var nickValidator = /([^가-힣\x20a-zA-Z0-9])/i;
 		var telValidator = /^[0-9]*$/;
 
 		function checkId() {
@@ -184,9 +185,8 @@
 								$("#idLength").hide();
 								$("#idCheck").hide();
 								idCheck = 1;
-								if (idCheck == 1 && pwdCheck == 1
-										&& emailCheck == 1 && nickCheck == 1
-										&& telCheck == 1 && authenticationCheck == 1) {
+						        if (idCheck == 1 && pwdCheck == 1 && repeatedPwdCheck == 1 && emailCheck == 1
+						                && nickCheck == 1 && telCheck == 1 && authenticationCheck == 1) {
 									$(".btn").prop("disabled", false);
 									$(".btn")
 											.css("background-color", "#FFADAD");
@@ -231,9 +231,8 @@
 						$("#emailPattern").hide();
 						$("#emailCheck").hide();
 						emailCheck = 1;
-						//userEmail.match(emailValidator) != null
-						if (idCheck == 1 && pwdCheck == 1 && emailCheck == 1
-								&& nickCheck == 1 && telCheck == 1 && authenticationCheck == 1) {
+				        if (idCheck == 1 && pwdCheck == 1 && repeatedPwdCheck == 1 && emailCheck == 1
+				                && nickCheck == 1 && telCheck == 1 && authenticationCheck == 1) {
 							$(".btn").prop("disabled", false);
 							$(".btn").css("background-color", "#FFADAD");
 							nameCheck();
@@ -288,8 +287,8 @@
 						$("#nickCheck").hide();
 						$("#nickPattern").hide();
 						nickCheck = 1;
-						if (idCheck == 1 && pwdCheck == 1 && emailCheck == 1
-								&& nickCheck == 1 && telCheck == 1 && authenticationCheck == 1) {
+				        if (idCheck == 1 && pwdCheck == 1 && repeatedPwdCheck == 1 && emailCheck == 1
+				                && nickCheck == 1 && telCheck == 1 && authenticationCheck == 1) {
 							$(".btn").prop("disabled", false);
 							$(".btn").css("background-color", "#FFADAD");
 							nameCheck();
@@ -315,8 +314,8 @@
 			} else if (userTel.match(telValidator) != null) {
 				$("#telCheck").hide();
 				telCheck = 1;
-				if (idCheck == 1 && pwdCheck == 1 && emailCheck == 1
-						&& nickCheck == 1 && telCheck == 1 && authenticationCheck == 1) {
+		        if (idCheck == 1 && pwdCheck == 1 && repeatedPwdCheck == 1 && emailCheck == 1
+		                && nickCheck == 1 && telCheck == 1 && authenticationCheck == 1) {
 					$(".btn").prop("disabled", false);
 					$(".btn").css("background-color", "#FFADAD");
 					nameCheck();
@@ -329,46 +328,48 @@
 			if (originalPassword == '' || originalPassword.length < 8) {
 				$("#password").css("background-color", "#FFCECE");
 				$("#pwdLength").show();
+		    $(".btn").prop("disabled", true);
+		    $(".btn").css("background-color", "#aaaaaa");
+		    pwdCheck = 0;
+				
 			} else {
 				$("#password").css("background-color", "#B0F6AC");
 				$("#pwdLength").hide();
+				pwdCheck = 1;
+		        if (idCheck == 1 && pwdCheck == 1 && repeatedPwdCheck == 1 && emailCheck == 1
+		                && nickCheck == 1 && telCheck == 1 && authenticationCheck == 1) {
+		    $(".btn").prop("disabled", false);
+		    $(".btn").css("background-color", "#FFADAD");
+				}
 			}
 		}
 
 		function checkRepeatedPwd() {
 			var originalPassword = $('#password').val();
 			var repeatedPassword = $('#checkPassword').val();
-			if (repeatedPassword == ""
-					&& (originalPassword != repeatedPassword || originalPassword == repeatedPassword)) {
+			if (repeatedPassword == "" && (originalPassword != repeatedPassword || originalPassword == repeatedPassword)) {
+				repeatedPwdCheck = 0;
 				$(".btn").prop("disabled", true);
 				$(".btn").css("background-color", "#aaaaaa");
 				$("#checkPassword").css("background-color", "#FFCECE");
 				$("#pwdSame").show();
-				$("#pwdLength2").hide();
-			} else if (repeatedPassword.length < 8) {
-				$(".btn").prop("disabled", true);
-				$(".btn").css("background-color", "#aaaaaa");
-				$("#checkPassword").css("background-color", "#FFCECE");
-				$("#pwdLength2").show();
-				$("#pwdSame").hide();
-			} else if (originalPassword == repeatedPassword) {
+			} 
+			 else if (originalPassword == repeatedPassword) {
 				$("#checkPassword").css("background-color", "#B0F6AC");
 				$("#pwdSame").hide();
-				$("#pwdLength2").hide();
-				pwdCheck = 1;
-				if (idCheck == 1 && pwdCheck == 1 && emailCheck == 1
+				repeatedPwdCheck = 1;
+				if (idCheck == 1 && pwdCheck == 1 && repeatedPwdCheck == 1 && emailCheck == 1
 						&& nickCheck == 1 && telCheck == 1 && authenticationCheck == 1) {
 					$(".btn").prop("disabled", false);
 					$(".btn").css("background-color", "#FFADAD");
 					nameCheck();
 				}
 			} else if (originalPassword != repeatedPassword) {
-				pwdCheck = 0;
+				repeatedPwdCheck = 0;
 				$(".btn").prop("disabled", true);
 				$(".btn").css("background-color", "#aaaaaa");
 				$("#checkPassword").css("background-color", "#FFCECE");
 				$("#pwdSame").show();
-				$("#pwdLength2").hide();
 
 			}
 		}
@@ -409,6 +410,7 @@
 			$("#authenticationButton").hide();
 		  $("#authenticationNumber").hide();
 		  $("#authenticationLabel").hide();
+		  $("#tel").prop("disabled", false);
 		});
 
 		$('#sendNumber').click(function() {
@@ -420,7 +422,6 @@
 		  
 			var phoneNumber = $('#tel').val();
 			$.ajax({
-				type : "GET",
 				url : "checknumber",
 				data : {
 					tel : phoneNumber
@@ -435,11 +436,11 @@
 			tempNumber = $('#authenticationNumber').val();
 			if (confirmNumber == tempNumber) {
 				authenticationCheck = 1;
-				
 				swal("인증 성공", "회원 가입이 가능합니다.", "success", { button: "확인"});
 				
-				  if (idCheck == 1 && pwdCheck == 1 && emailCheck == 1
-				            && nickCheck == 1 && telCheck == 1 && authenticationCheck == 1) {
+				
+		        if (idCheck == 1 && pwdCheck == 1 && repeatedPwdCheck == 1 && emailCheck == 1
+		                && nickCheck == 1 && telCheck == 1 && authenticationCheck == 1) {
 				          $(".btn").prop("disabled", false);
 				          $(".btn").css("background-color", "#FFADAD");
 				          nameCheck();
@@ -447,6 +448,8 @@
 
 			} else {
 				authenticationCheck = 0;
+				$(".btn").prop("disabled", true);
+        $(".btn").css("background-color", "#aaaaaa");
 				swal("인증 실패", "다시 인증 해주세요.", "error", { button: "확인"});
 			}
 		});

@@ -56,4 +56,10 @@ public class DefaultSharingMarketBoardService implements SharingMarketBoardServi
   public List<SharingMarketBoard> getCategory(int catNo) throws Exception {
     return sharingMarketBoardDao.findCategory(catNo);
   }
+
+  @Override
+  public int deleteAll(int no) throws Exception {
+    return sharingMarketBoardDao.deleteByNo(no);
+  }
+
 }

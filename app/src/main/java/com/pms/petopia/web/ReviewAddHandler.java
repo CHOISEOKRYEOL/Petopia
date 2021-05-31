@@ -11,6 +11,10 @@ import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.Review;
 import com.pms.petopia.service.HospitalService;
 import com.pms.petopia.service.ReviewService;
+import net.coobird.thumbnailator.ThumbnailParameter;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
+import net.coobird.thumbnailator.name.Rename;
 
 @Controller
 public class ReviewAddHandler {
@@ -28,6 +32,8 @@ public class ReviewAddHandler {
   public String execute(HttpServletRequest request, HttpServletResponse response)
       throws Exception {
 
+    String uploadDir = request.getServletContext().getRealPath("/upload");
+
     if(request.getMethod().equals("GET")) {
 
       int num = Integer.parseInt(request.getParameter("num"));
@@ -37,29 +43,31 @@ public class ReviewAddHandler {
 
     Review r = new Review();
 
-    r.setServiceRating(Integer.parseInt(request.getParameter("serviceRating")));
-    r.setCleanlinessRating(Integer.parseInt(request.getParameter("cleanlinessRating")));
-    r.setCostRating(Integer.parseInt(request.getParameter("costRating")));
+    r.setServiceRating(Integer.parseInt(request.getParameter("star-input")));
+    r.setCleanlinessRating(Integer.parseInt(request.getParameter("second-star-input")));
+    r.setCostRating(Integer.parseInt(request.getParameter("third-star-input")));
     r.setComment(request.getParameter("comment"));
+
+    System.out.println(r);
 
     Part photoPart = request.getPart("photo");
 
     if(photoPart.getSize() > 0) {
       String filename = UUID.randomUUID().toString();
-      //      photoPart.write(this.uploadDir + "/" + filename);
+      photoPart.write(uploadDir + "/" + filename);
       r.setPhoto(filename);
 
 
-      //      Thumbnails.of(this.uploadDir + "/" + filename)
-      //      .size(100, 100)
-      //      .outputFormat("jpg")
-      //      .crop(Positions.CENTER)
-      //      .toFiles(new Rename() {
-      //        @Override
-      //        public String apply(String name, ThumbnailParameter param) {
-      //          return name + "_100x100";
-      //        }
-      //      });
+      Thumbnails.of(uploadDir + "/" + filename)
+      .size(100, 100)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_100x100";
+        }
+      });
     }
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
