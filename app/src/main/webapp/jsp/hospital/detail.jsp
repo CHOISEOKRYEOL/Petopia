@@ -127,7 +127,6 @@
 	<h1>병원 리뷰</h1>
 	
 	<c:import url="/app/review/list">
-   <c:param name="no" value="${hospital.no}"></c:param>
   </c:import>
   	
 	<form action="../review/add">
