@@ -16,7 +16,10 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
 
 @ComponentScan("com.pms.petopia")
 @EnableWebMvc
@@ -61,6 +64,20 @@ public class AppConfig {
   @Bean
   public MultipartResolver multipartResolver() {
     return new StandardServletMultipartResolver();
+  }
+
+  @Bean
+  public ViewResolver viewResolver() {
+    // 기존의 기본 ViewResolver를 이 메소드가 리턴하는 객체로 대체한다.
+    // 요청 핸들러가 리턴한 jsp 이름을 가지고 앞뒤로 경로를 붙여서 찾는다.
+    InternalResourceViewResolver vr = new InternalResourceViewResolver();
+
+    vr.setViewClass(JstlView.class); // JSTL을 처리해줄 클래스 지정
+    vr.setPrefix("/WEB-INF/jsp/");
+    vr.setSuffix(".jsp");
+
+    return vr;
+
   }
 
 }

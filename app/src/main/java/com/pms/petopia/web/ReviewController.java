@@ -1,5 +1,6 @@
 package com.pms.petopia.web;
 
+import java.util.List;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,19 +18,19 @@ import net.coobird.thumbnailator.geometry.Positions;
 import net.coobird.thumbnailator.name.Rename;
 
 @Controller
-public class ReviewAddHandler {
+@RequestMapping("/review")
+public class ReviewController {
 
   ReviewService reviewService;
   HospitalService hospitalService;
 
-  public ReviewAddHandler(ReviewService reviewService, HospitalService hospitalService) {
+  public ReviewController(ReviewService reviewService, HospitalService hospitalService) {
     this.reviewService = reviewService;
     this.hospitalService = hospitalService;
   }
 
-
-  @RequestMapping("/review/add")
-  public String execute(HttpServletRequest request, HttpServletResponse response)
+  @RequestMapping("add")
+  public String add(HttpServletRequest request, HttpServletResponse response)
       throws Exception {
 
     String uploadDir = request.getServletContext().getRealPath("/upload");
@@ -102,6 +103,79 @@ public class ReviewAddHandler {
     return "redirect:../hospital/detail?no=" + h.getNo();
 
   }
+
+
+  @RequestMapping("delete")
+  public String delete(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
+    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+
+    int no = Integer.parseInt(request.getParameter("no"));
+    int hno = Integer.parseInt(request.getParameter("hno"));
+
+    Review r = reviewService.get(no);
+
+    float deletingRating = (r.getCleanlinessRating() + r.getServiceRating() + r.getCostRating()) / 3.0F;
+
+    Hospital h = hospitalService.getRating(hno);
+
+    float accumulatedRating = h.getAccumulatedRating();
+
+    reviewService.delete(no);
+
+    String temp = reviewService.countReview(h.getNo());
+    int count = Integer.parseInt(temp);
+
+    float newAccumulatedRating = accumulatedRating - deletingRating;
+    float finalRating = newAccumulatedRating / (count * 1.0F);
+
+    hospitalService.initAccumulatedRating(hno);
+
+    h.setAccumulatedRating(newAccumulatedRating);
+    hospitalService.setAccumulatedRating(h);
+
+    if(count != 0) {
+      h.setRating(finalRating);
+    }
+    else {
+      h.setRating(0);
+      hospitalService.initAccumulatedRating(hno);
+    }
+
+    hospitalService.rate(h);
+
+    if(loginUser.getRole() == 1) {
+      return "redirect:../hospital/detail?no=" + hno;
+    }
+    else {
+      return "redirect:../admin/reviewlist";
+    }
+  }
+
+  @RequestMapping("list")
+  public String list(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
+
+    Hospital h = new Hospital();
+
+    h.setNo(Integer.parseInt(request.getParameter("no")));
+    List<Review> list = reviewService.list(h.getNo());
+    request.setAttribute("hospital", h);
+    request.setAttribute("list", list);
+
+    return "/jsp/review/list.jsp";
+
+  }
+
+
+
+
+
+
+
+
+
+
 }
 
 

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.service.MemberService;
 
@@ -67,6 +68,17 @@ public class AuthController {
       out.write("1");
     }
   }
+
+  @RequestMapping("/logout")
+  public String logout(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
+
+    request.getSession().invalidate();
+
+    return "redirect:main";
+
+  }
+
 
   private boolean isEmail(String id) { 
     boolean check = false; 

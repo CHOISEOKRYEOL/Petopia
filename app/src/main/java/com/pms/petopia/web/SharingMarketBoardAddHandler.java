@@ -6,12 +6,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.SharingMarketBoard;
 import com.pms.petopia.domain.SharingMarketBoardPhoto;
@@ -23,17 +22,9 @@ import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
 import net.coobird.thumbnailator.name.Rename;
 
-@SuppressWarnings("serial")
-@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
-@WebServlet("/sharingmarketboard/add")
-public class SharingMarketBoardAddHandler extends HttpServlet {
-
-  private String uploadDir;
-
-  @Override
-  public void init() throws ServletException {
-    this.uploadDir = this.getServletContext().getRealPath("/upload");
-  }
+@Controller
+@RequestMapping("/sharingmarketboard")
+public class SharingMarketBoardAddHandler {
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -118,7 +109,6 @@ public class SharingMarketBoardAddHandler extends HttpServlet {
     }catch (Exception e) {
       throw new ServletException(e);
     }
-
 
   }
 }
