@@ -5,8 +5,11 @@ import java.util.Random;
 import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.service.BookmarkService;
@@ -33,34 +36,31 @@ public class MemberController {
     this.qnaService = qnaService;
   }
 
-  @RequestMapping("add")
-  public String form(HttpServletRequest request, HttpServletResponse response)
-      throws Exception {
+  @GetMapping("member_form")
+  public void form()
+      throws Exception {}
 
-    if(request.getMethod().equals("GET")) {
-      return "/jsp/member/member_form.jsp";
-    }
-    else {
-      Member m = new Member();
-      m.setName(request.getParameter("name"));
-      m.setId(request.getParameter("id"));
-      m.setNick(request.getParameter("nick"));
-      m.setEmail(request.getParameter("email"));
-      m.setPassword(request.getParameter("password"));
-      m.setTel(request.getParameter("tel"));
+  @PostMapping("add")
+  public String add(HttpServletRequest request, Model model) throws Exception {
+    Member m = new Member();
+    m.setName(request.getParameter("name"));
+    m.setId(request.getParameter("id"));
+    m.setNick(request.getParameter("nick"));
+    m.setEmail(request.getParameter("email"));
+    m.setPassword(request.getParameter("password"));
+    m.setTel(request.getParameter("tel"));
 
-      memberService.add(m);
-      request.setAttribute("member", m);
+    memberService.add(m);
+    model.addAttribute("member", m);
 
-      return "/jsp/member/add_success.jsp";
-    }
+    return "add_success";
   }
 
   @RequestMapping("delete")
-  public String delete(HttpServletRequest request, HttpServletResponse response)
+  public String delete(HttpServletRequest request, HttpSession session)
       throws Exception {
 
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
 
     Member m = new Member();
     if(loginUser.getRole() == 0) {
@@ -94,48 +94,45 @@ public class MemberController {
     }
     else {
       request.getSession().invalidate();
-      return "/jsp/member/delete.jsp";
+      return "member/delete";
     }
 
   }
 
   @RequestMapping("detail")
-  public String detail(HttpServletRequest request, HttpServletResponse response)
+  public String detail(HttpSession session, Model model)
       throws ServletException, IOException {
 
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
 
-    request.setAttribute("member", loginUser);
+    model.addAttribute("member", loginUser);
 
-    return "/jsp/member/detail.jsp";
+    return "member/detail";
 
   }
 
-  @RequestMapping("findKey")
-  public String findKey(HttpServletRequest request, HttpServletResponse response)
+  @GetMapping("findKey_form")
+  public void findKeyForm() throws Exception {
+
+  }
+
+  @PostMapping("findKey")
+  public String findKey(String name, String nick, Model model)
       throws Exception {
-
-    if(request.getMethod().equals("GET")) {
-      return "/jsp/member/findKey_form.jsp";
-    }
-
-    String name = request.getParameter("name");
-    String nick = request.getParameter("nick");
-
 
     Member m = memberService.getIdEmail(name, nick);
 
-    request.setAttribute("member", m);
+    model.addAttribute("member", m);
 
-    return "/jsp/member/find_id_email.jsp";
+    return "member/find_id_email";
 
   }
 
-  @RequestMapping("update")
-  public String update(HttpServletRequest request, HttpServletResponse response)
+  @PostMapping("update")
+  public String update(HttpServletRequest request, HttpSession session, Model model)
       throws Exception {
 
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
 
     Member m = new Member();
     m.setNo(loginUser.getNo());
@@ -145,9 +142,9 @@ public class MemberController {
     m.setTel(request.getParameter("tel"));
 
     memberService.update(m);
-    request.setAttribute("member", m);
+    model.addAttribute("member", m);
 
-    return "/jsp/member/update.jsp";
+    return "member/update";
 
   }
 

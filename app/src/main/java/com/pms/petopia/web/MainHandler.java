@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainHandler {
 
-  @RequestMapping("/main")
-  public String execute(HttpServletRequest request, HttpServletResponse response)
+  @RequestMapping("main")
+  public void execute(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    return "/jsp/main.jsp";
   }
 }

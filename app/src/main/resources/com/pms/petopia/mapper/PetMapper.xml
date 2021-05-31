@@ -13,7 +13,6 @@
     <result column="gender" property="gender"/>
     <result column="photo" property="photo"/>
     <result column="m_pet" property="leader"/>
-    <result column="s_pet" property="species"/>
     
     <association property="owner" javaType="member">
 	    <id column="owner_no" property="no"/>
@@ -28,8 +27,8 @@
   </resultMap>
   
   <insert id="insert" parameterType="pet">
-    insert into pet_mypet(pname, age, birth, gender, photo, owner, species ,type) 
-    values(#{name}, #{age}, #{birthDay}, #{gender}, #{photo}, #{owner.no}, #{species}, #{type.no})
+    insert into pet_mypet(pname, age, birth, gender, photo, owner ,type) 
+    values(#{name}, #{age}, #{birthDay}, #{gender}, #{photo}, #{owner.no}, #{type.no})
   </insert>
  
  <update id="setLeaderPet" parameterType="int">

@@ -3,9 +3,12 @@ package com.pms.petopia.web;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Hospital;
 import com.pms.petopia.domain.Member;
@@ -29,18 +32,18 @@ public class ReviewController {
     this.hospitalService = hospitalService;
   }
 
-  @RequestMapping("add")
-  public String add(HttpServletRequest request, HttpServletResponse response)
+  @GetMapping("review_form")
+  public void form(HttpServletRequest request, Model model) throws Exception {
+
+    int num = Integer.parseInt(request.getParameter("num"));
+    model.addAttribute("num", num);
+  }
+
+  @PostMapping("add")
+  public String add(HttpServletRequest request, HttpSession session)
       throws Exception {
 
     String uploadDir = request.getServletContext().getRealPath("/upload");
-
-    if(request.getMethod().equals("GET")) {
-
-      int num = Integer.parseInt(request.getParameter("num"));
-      request.setAttribute("num", num);
-      return "/jsp/review/review_form.jsp";
-    }
 
     Review r = new Review();
 
@@ -71,7 +74,7 @@ public class ReviewController {
       });
     }
 
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
     r.setWriter(loginUser);
 
     Hospital h = new Hospital();
@@ -106,9 +109,9 @@ public class ReviewController {
 
 
   @RequestMapping("delete")
-  public String delete(HttpServletRequest request, HttpServletResponse response)
+  public String delete(HttpServletRequest request, HttpSession session)
       throws Exception {
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
 
     int no = Integer.parseInt(request.getParameter("no"));
     int hno = Integer.parseInt(request.getParameter("hno"));
@@ -152,18 +155,16 @@ public class ReviewController {
     }
   }
 
-  @RequestMapping("list")
-  public String list(HttpServletRequest request, HttpServletResponse response)
+  @GetMapping("list")
+  public void list(HttpServletRequest request, Model model)
       throws Exception {
 
     Hospital h = new Hospital();
 
     h.setNo(Integer.parseInt(request.getParameter("no")));
     List<Review> list = reviewService.list(h.getNo());
-    request.setAttribute("hospital", h);
-    request.setAttribute("list", list);
-
-    return "/jsp/review/list.jsp";
+    model.addAttribute("hospital", h);
+    model.addAttribute("list", list);
 
   }
 

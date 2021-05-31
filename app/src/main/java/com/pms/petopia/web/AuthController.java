@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,14 +23,13 @@ public class AuthController {
     this.memberService = memberService;
   }
 
-  @GetMapping("/login")
-  public String form()
+  @GetMapping("login_form")
+  public void form()
       throws Exception {
-
-    return "/jsp/login_form.jsp";
   }
+
   @PostMapping("/login")
-  public void login(HttpServletRequest request, HttpServletResponse response)
+  public void login(HttpServletRequest request, HttpServletResponse response, HttpSession session)
       throws Exception {
 
     String id = request.getParameter("id");
@@ -60,25 +60,23 @@ public class AuthController {
 
 
     if (member == null) {
-      request.getSession().invalidate();
+      session.invalidate();
       out.write("0");
     }
     else {
-      request.getSession().setAttribute("loginUser", member);
+      session.setAttribute("loginUser", member);
       out.write("1");
     }
   }
 
-  @RequestMapping("/logout")
-  public String logout(HttpServletRequest request, HttpServletResponse response)
+  @RequestMapping("logout")
+  public String logout(HttpSession session)
       throws Exception {
+    session.invalidate();
 
-    request.getSession().invalidate();
-
-    return "redirect:main";
+    return "redirect:login_form";
 
   }
-
 
   private boolean isEmail(String id) { 
     boolean check = false; 
