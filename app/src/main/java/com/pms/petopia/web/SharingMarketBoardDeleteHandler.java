@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.SharingMarketBoard;
+import com.pms.petopia.service.SharingMarketBoardCommentService;
+import com.pms.petopia.service.SharingMarketBoardPhotoService;
 import com.pms.petopia.service.SharingMarketBoardService;
 
 @SuppressWarnings("serial")
@@ -16,7 +18,8 @@ public class SharingMarketBoardDeleteHandler extends HttpServlet{
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     SharingMarketBoardService sharingMarketBoardService = (SharingMarketBoardService) request.getServletContext().getAttribute("sharingMarketBoardService");
-
+    SharingMarketBoardCommentService sharingMarketBoardCommentService =(SharingMarketBoardCommentService)request.getServletContext().getAttribute("sharingMarketBoardCommentService");
+    SharingMarketBoardPhotoService sharingMarketBoardPhotoService =(SharingMarketBoardPhotoService)request.getServletContext().getAttribute("sharingMarketBoardPhotoService");
     try {
     	
       int no = Integer.parseInt(request.getParameter("no"));
@@ -30,7 +33,14 @@ public class SharingMarketBoardDeleteHandler extends HttpServlet{
         throw new Exception("삭제 권한이 없습니다!");
       }
 
-      sharingMarketBoardService.delete(no);
+      
+      if (sharingMarketBoardCommentService.count(no).equals("0")) {
+    	  sharingMarketBoardService.delete(no);
+    	  sharingMarketBoardPhotoService.delete(no);
+        } else {
+        	sharingMarketBoardService.deleteAll(no);
+        	sharingMarketBoardPhotoService.delete(no);
+        }
 
       response.sendRedirect("list");
 

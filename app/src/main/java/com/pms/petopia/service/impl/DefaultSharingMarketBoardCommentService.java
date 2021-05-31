@@ -45,5 +45,10 @@ public class DefaultSharingMarketBoardCommentService implements SharingMarketBoa
 		return sharingMarketBoardCommentDao.findBySrno(no);
 	}
 	
+	@Override
+	public String count(int smBoardNo) throws Exception {
+		return sharingMarketBoardCommentDao.comtCount(smBoardNo);
+	}
+	
 	
 }

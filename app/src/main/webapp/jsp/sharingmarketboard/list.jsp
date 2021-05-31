@@ -6,65 +6,41 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>나눔장터 게시글 목록</title>
+<style>
+.list-table{
+width: 500px;
+margin: 0 auto;
+border: 1px solid #cccccc;
+}
+</style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="../main">
-     <img src="https://image.flaticon.com/icons/png/512/3047/3047827.png" alt="" width="30" height="24">
-     Petopia
-    </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    
-     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-		  <li class="nav-item">
-		    <a class="nav-link" href="../hospital/list">병원찾기</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" href="../story/list">스토리</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link active" aria-current="page" href="../sharingmarketboard/list">나눔장터</a>
-		  </li>
-		  	  <li class="nav-item">
-		    <a class="nav-link" href="../mytown/main">우리동네</a>
-		  </li>
-		</ul>
-		
-		<ul class="nav">
-		  <li class="nav-item">
-		    <a class="nav-link" href="#">myPage</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" href="#">Login</a>
-		  </li>
-		</ul>
-		
-	</div>
-  </div>
-</nav>
-
 <h1>나눔 장터 게시글 목록</h1>
-
 <p><a href='/web/sharingmarketboard/add'>새 글</a></p>
-<table border='1'>
+<table class="list-table">
 <thead>
 <tr>
-<th>번호</th> <th>분류</th> <th>제목</th> <th>작성자</th> <th>작성일</th>
+<th>번호</th> <th>사진</th> <th>분류</th> <th>제목</th> <th>작성자</th> <th>작성일</th>
 </tr>
 </thead>
 <tbody>
-
 <c:forEach items="${smBoards}" var="smb">
 <tr>
 <td>${smb.no}</td>
+<td><c:forEach items="${photList}" var="p">
+  <c:if test="${not empty p.sharingmarketboard.no and smb.no == p.sharingmarketboard.no}">
+    <c:set var="photoUrl">../upload/${p.photo}_30x30.jpg</c:set>
+    <img src='${photoUrl}'>
+  </c:if>
+  <c:if test="${empty p.sharingmarketboard.no}">
+    <c:set var="photoUrl">../images/person_30x30.jpg</c:set>
+    <img src='${photoUrl}'>
+  </c:if>
+</c:forEach></td>
 <td>${smb.category.name}</td>
 <td><a href='detail?no=${smb.no}'>${smb.title}</a></td>
-
 <c:if test="${smb.writer.state == 0}">
 <td>${smb.writer.nick}</td>
 </c:if>
@@ -90,17 +66,20 @@
 </c:forEach>
 </select>
 
+
+ <c:if test="${smb.category.no == cat.no}">
 <select name='item'>
   <option value='0' ${param.item == "0" ? "selected" : ""}>전체</option>
   <option value='1' ${param.item == "1" ? "selected" : ""}>제목</option>
   <option value='2' ${param.item == "2" ? "selected" : ""}>작성자</option>
 </select>
-<input type='search' name='keyword' value=''> 
-<button type="button" class="btn btn-outline-primary">검색</button>
-</tbody>
- </table>
+</c:if>
+<input type='search' name='keyword' value='${param.keyword}'> 
+<button>검색</button>
 </form>
 
 </body>
 </html>
+
+
     

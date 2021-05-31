@@ -17,4 +17,6 @@ public interface SharingMarketBoardCommentDao {
 	  List<SharingMarketBoardComment> findByNo(int no) throws Exception;
 	  
 	  SharingMarketBoardComment findBySrno(int no) throws Exception;
+	  
+	  String comtCount(int smBoardNo) throws Exception;
 }

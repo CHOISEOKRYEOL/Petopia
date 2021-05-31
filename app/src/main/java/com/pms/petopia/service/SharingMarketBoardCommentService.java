@@ -17,4 +17,6 @@ public interface SharingMarketBoardCommentService {
 	int delete(int no) throws Exception;
 	
 	SharingMarketBoardComment getNo(int no) throws Exception;
+	
+	 String count(int smBoardNo) throws Exception;
 }

@@ -1,6 +1,7 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -36,8 +37,8 @@ public class SharingMarketBoardPhotoAddHandler extends HttpServlet {
 	  @Override
 	  protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	      throws ServletException, IOException {
-	    response.setContentType("text/html;charset=UTF-8");
-	    request.getRequestDispatcher("/jsp/member/form.jsp").include(request, response);
+		    response.setContentType("text/html;charset=UTF-8");
+		    request.getRequestDispatcher("/jsp/sharingmarketboard/form.jsp").include(request, response);
 	  }
 	
 	@Override
@@ -48,47 +49,50 @@ public class SharingMarketBoardPhotoAddHandler extends HttpServlet {
 		try {
 			
 			SharingMarketBoardPhoto phot = new SharingMarketBoardPhoto();
-			int no = Integer.parseInt(request.getParameter("no"));
-			phot.setNo(no);
-			SharingMarketBoard smboard = sharingMarketBoardService.get(no);
-			phot.setSharingMarketBoard(smboard);
-			//request.setAttribute("smboard", smboard);
+			int boardNo = Integer.parseInt(request.getParameter("no"));
+		    SharingMarketBoard oldBoard = sharingMarketBoardService.get(boardNo);
+			phot.setSharingmarketboard(oldBoard);
 			
-			Part photoPart = request.getPart("photo");
-		      
-			 if (photoPart.getSize() > 0) {
-			        // 파일을 선택해서 업로드 했다면,
-			        String filename = UUID.randomUUID().toString();
-			        photoPart.write(this.uploadDir + "/" + filename);
-			        phot.setPhoto(filename);
+			Collection<Part> photoParts = request.getParts();
+			for (Part p : photoParts) {
+				if(!p.getName().equals("photo")) {
+					continue;
+				}
+				
+				 if (p.getSize() > 0) {
+				        // 파일을 선택해서 업로드 했다면,
+				        String filename = UUID.randomUUID().toString();
+				        p.write(this.uploadDir + "/" + filename);
+				        phot.setPhoto(filename);
 
-			        // 썸네일 이미지 생성
-			        Thumbnails.of(this.uploadDir + "/" + filename)
-			        .size(30, 30)
-			        .outputFormat("jpg")
-			        .crop(Positions.CENTER)
-			        .toFiles(new Rename() {
-			          @Override
-			          public String apply(String name, ThumbnailParameter param) {
-			            return name + "_30x30";
-			          }
-			        });
+				        // 썸네일 이미지 생성
+				        Thumbnails.of(this.uploadDir + "/" + filename)
+				        .size(30, 30)
+				        .outputFormat("jpg")
+				        .crop(Positions.CENTER)
+				        .toFiles(new Rename() {
+				          @Override
+				          public String apply(String name, ThumbnailParameter param) {
+				            return name + "_30x30";
+				          }
+				        });
 
-			        Thumbnails.of(this.uploadDir + "/" + filename)
-			        .size(80, 80)
-			        .outputFormat("jpg")
-			        .crop(Positions.CENTER)
-			        .toFiles(new Rename() {
-			          @Override
-			          public String apply(String name, ThumbnailParameter param) {
-			            return name + "_80x80";
-			          }
-			        });
-			      }
-			 
-			 sharingMarketBoardPhotoService.add(phot);
-		      response.sendRedirect("../sharingmarketboard/detail?no="+smboard.getNo());
-		      
+				        Thumbnails.of(this.uploadDir + "/" + filename)
+				        .size(80, 80)
+				        .outputFormat("jpg")
+				        .crop(Positions.CENTER)
+				        .toFiles(new Rename() {
+				          @Override
+				          public String apply(String name, ThumbnailParameter param) {
+				            return name + "_80x80";
+				          }
+				        });
+				      }
+				 
+				 sharingMarketBoardPhotoService.add(phot);
+			      response.sendRedirect("../sharingmarketboard/detail?no="+oldBoard.getNo());
+			    
+			}
 		      }catch (Exception e) {
 			throw new ServletException(e);
 		    }

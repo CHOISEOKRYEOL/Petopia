@@ -85,6 +85,10 @@
     where srno = #{value}
   </delete>
 
+  <select id="comtCount" resultType="String" parameterType="int">
+    select count(*) from pet_mark_comt
+    where sno = #{value}
+  </select>
 
 </mapper>
 
