@@ -26,7 +26,7 @@
 
 <div id="id-form">
 <h1>아이디 찾기</h1>
-<form method='post'>
+<form action="findkey" method='post'>
   <div class="mb-3 row">
     <div class="col-sm-9">
       <input type="text" class="form-control form-control-sm" id="name" name="name" placeholder="이름">

@@ -41,19 +41,12 @@ public class MemberController {
       throws Exception {}
 
   @PostMapping("add")
-  public String add(HttpServletRequest request, Model model) throws Exception {
-    Member m = new Member();
-    m.setName(request.getParameter("name"));
-    m.setId(request.getParameter("id"));
-    m.setNick(request.getParameter("nick"));
-    m.setEmail(request.getParameter("email"));
-    m.setPassword(request.getParameter("password"));
-    m.setTel(request.getParameter("tel"));
+  public String add(Member m, Model model) throws Exception {
 
     memberService.add(m);
     model.addAttribute("member", m);
 
-    return "add_success";
+    return "member/add_success";
   }
 
   @RequestMapping("delete")
