@@ -55,10 +55,6 @@ $('#login').click(function() {
 	var id = $('#id').val();
 	var pwd = $('#password').val();
 	
-	console.log(id);
-	console.log("구분");
-	console.log(pwd);
-	
 	$.ajax({
 		type : "POST",
 		url : "login",
@@ -67,18 +63,17 @@ $('#login').click(function() {
 			password : pwd
 		},
 		success : function(response) {
-			console.log("구분");
-			console.log(response);
-			console.log("구분");
-			if(response == "123") {
-				swal("로그인 실패", "비밀번호가 틀렸습니다.", "error", { button: "확인" });
+			
+			if(response == "0") {
+				swal('실패', '실패', 'error');
+				return false;
 			}
 			else {
-				swal("로그인 성공", "환영합니다.", "success", { button: "확인" });
+				swal('성공', '성공', 'success');
+				return true;
 			}
 		}
 	})
-	
 });
 
 </script>

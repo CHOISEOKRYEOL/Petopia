@@ -436,7 +436,6 @@
 			tempNumber = $('#authenticationNumber').val();
 			if (confirmNumber == tempNumber) {
 				authenticationCheck = 1;
-				$("#tel").prop("disabled", true);
 				swal("인증 성공", "회원 가입이 가능합니다.", "success", { button: "확인"});
 				
 				

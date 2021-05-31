@@ -3,7 +3,6 @@ package com.pms.petopia.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Hospital;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.service.BookmarkService;
@@ -20,7 +19,7 @@ public class HospitalMapDetailHandler {
     this.bookmarkService = bookmarkService;
   }
 
-  @RequestMapping("/hospital/detail")
+  //  @RequestMapping("/hospital/detail")
   public String execute(HttpServletRequest request, HttpServletResponse response)
       throws Exception {
 

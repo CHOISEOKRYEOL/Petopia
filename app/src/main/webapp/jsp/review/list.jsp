@@ -40,8 +40,6 @@
 
 <body>
 
-
-
 <c:forEach items="${list}" var="r">
 	<c:set var="photoUrl">../../upload/${r.photo}</c:set>
 	<c:set var="thumbnail">../../upload/${r.photo}_100x100.jpg</c:set>
@@ -95,7 +93,6 @@
           </c:if>
 					
 					</td>
-					cleanlinessRating
 					
 					<td>
           <c:if test="${r.cleanlinessRating == 1}">
