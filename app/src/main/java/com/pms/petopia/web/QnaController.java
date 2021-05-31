@@ -3,8 +3,11 @@ package com.pms.petopia.web;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.Qna;
@@ -20,15 +23,16 @@ public class QnaController {
     this.qnaService = qnaService;
   }
 
-  @RequestMapping("add")
-  public String add(HttpServletRequest request, HttpServletResponse response)
+  @GetMapping("qna_form")
+  public void form() throws Exception {
+
+  }
+
+  @PostMapping("add")
+  public String add(HttpServletRequest request, HttpSession session)
       throws Exception {
 
-    if(request.getMethod().equals("GET")) {
-      return "/jsp/qna/qna_form.jsp";
-    }
-
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
 
     if(loginUser == null) {
       throw new ServletException("로그인 후 이용하세요.");
@@ -41,76 +45,58 @@ public class QnaController {
 
     qnaService.add(qna);
 
-
-    return "/jsp/qna/qna_add_success.jsp";
-    //    response.setHeader("Refresh", "1;url=list");
+    return "qna_add_success";
   }
 
   @RequestMapping("delete")
-  public String delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+  public String delete(int no, HttpServletRequest request, HttpSession session) throws Exception {
+    Member loginUser = (Member) session.getAttribute("loginUser");
 
-    int no = Integer.parseInt(request.getParameter("no"));
     qnaService.delete(no);
 
     if(loginUser.getRole() == 0) {
       return "redirect:../admin/qnalist";
-      //      response.setHeader("Refresh", "1;url=qnalist");
     }
     else {
-      return "/jsp/qna/delete.jsp";
-      //      response.setHeader("Refresh", "1;url=list");
+      return "delete";
     }
   }
 
 
-  @RequestMapping("detail")
-  public String detail(HttpServletRequest request, HttpServletResponse response)
+  @GetMapping("detail")
+  public void detail(int no, Model model)
       throws Exception {
 
-    int no = Integer.parseInt(request.getParameter("no"));
-
     Qna q = qnaService.get(no);
-    request.setAttribute("qna", q);
-
-    return "/jsp/qna/detail.jsp";
+    model.addAttribute("qna", q);
 
   }
 
 
-  @RequestMapping("list")
-  public String list(HttpServletRequest request, HttpServletResponse response)
+  @GetMapping("list")
+  public void list(HttpSession session, Model model)
       throws Exception {
-    Member loginUser = (Member) request.getServletContext().getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
 
     List<Qna> list = qnaService.list();
 
-    request.setAttribute("loginUser", loginUser);
-    request.setAttribute("list", list);
-
-    return "/jsp/qna/list.jsp";
+    model.addAttribute("loginUser", loginUser);
+    model.addAttribute("list", list);
 
   }
 
-  @RequestMapping("/qna/update")
-  public String execute(HttpServletRequest request, HttpServletResponse response)
+  @GetMapping("modifying_form")
+  public void modifyingForm(int no, Model model) throws Exception {
+    Qna q = qnaService.get(no);
+    model.addAttribute("qna", q);
+  }
+
+
+  @PostMapping("update")
+  public void execute(Qna qna)
       throws Exception {
 
-    if(request.getMethod().equals("GET")) {
-      int no = Integer.parseInt(request.getParameter("no"));
-      Qna q = qnaService.get(no);
-      request.setAttribute("qna", q);
-      return "/jsp/qna/modifying_form.jsp";
-    }
-
-    Qna qna = new Qna();
-    qna.setNo(Integer.parseInt(request.getParameter("no")));
-    qna.setTitle(request.getParameter("title"));
-    qna.setContent(request.getParameter("content"));
     qnaService.update(qna);
-
-    return "/jsp/qna/update.jsp";
-    //    response.setHeader("Refresh", "1;url=list");
   }
 
 

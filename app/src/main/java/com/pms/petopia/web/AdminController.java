@@ -2,8 +2,10 @@ package com.pms.petopia.web;
 
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Hospital;
 import com.pms.petopia.domain.Member;
@@ -48,59 +50,52 @@ public class AdminController {
     this.reviewService = reviewService;
   }
 
-  @RequestMapping("boardlist")
-  public String boardList(HttpServletRequest request, HttpServletResponse response)
+  @GetMapping("boardlist")
+  public String boardList(HttpSession session, Model model)
       throws Exception {
 
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
 
     if(loginUser.getRole() == 1) {
-      return "/jsp/admin/access_fail.jsp";
+      return "access_fail";
     }
     else {
       List<SharingMarketBoard> sList = sharingMarketBoardService.list();
       List<MyTownBoard> mList = myTownBoardService.listAll();
 
-      request.setAttribute("sList", sList);
-      request.setAttribute("mList", mList);
+      model.addAttribute("sList", sList);
+      model.addAttribute("mList", mList);
 
-      return "/jsp/admin/board_list.jsp";
+      return "board_list";
 
     }
   }
 
 
-
-  @RequestMapping("hospitallist")
-  public String hosList(HttpServletRequest request, HttpServletResponse response)
+  @GetMapping("hospital_list")
+  public void hosList(Model model)
       throws Exception {
 
     List<Hospital> hospitals = hospitalService.list();
     List<SmallAddress> area = smallAddressService.list();
 
-    request.setAttribute("list", hospitals);
-    request.setAttribute("area", area);
-
-    return "/jsp/admin/hospital_list.jsp";
+    model.addAttribute("list", hospitals);
+    model.addAttribute("area", area);
 
   }
 
-  @RequestMapping("memberlist")
-  public String memberList(HttpServletRequest request, HttpServletResponse response)
+  @GetMapping("memberlist")
+  public String memberList(String item, String keyword, HttpSession session, Model model)
       throws Exception {
 
-
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
     if(loginUser.getRole() == 1) {
 
-      return "/jsp/admin/access_fail.jsp";
+      return "access_fail";
 
     }
     else {
       List<Member> list = null;
-
-      String item = request.getParameter("item");
-      String keyword = request.getParameter("keyword");
 
       if (item != null && keyword != null && keyword.length() > 0) {
         list = memberService.search(item, keyword);
@@ -109,14 +104,14 @@ public class AdminController {
         list = memberService.list();
       }
 
-      request.setAttribute("list", list);
-      return "/jsp/admin/member_list.jsp";
+      model.addAttribute("list", list);
+      return "member_list";
 
     }
   }
 
-  @RequestMapping("answer")
-  public String answerQna(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  @GetMapping("answer")
+  public String answerQna(HttpServletRequest request) throws Exception {
 
     Qna qna = new Qna();
     qna.setNo(Integer.parseInt(request.getParameter("no")));
@@ -128,52 +123,44 @@ public class AdminController {
   }
 
 
-  @RequestMapping("qnadetail")
-  public String qnaDetail(HttpServletRequest request, HttpServletResponse response)
+  @GetMapping("qna_detail")
+  public void qnaDetail(int no, Model model)
       throws Exception {
 
-    int no = Integer.parseInt(request.getParameter("no"));
-
     Qna q = qnaService.get(no);
-    request.setAttribute("qna", q);
-
-    return "/jsp/admin/qna_detail.jsp";
+    model.addAttribute("qna", q);
 
   }
 
-  @RequestMapping("qnalist")
-  public String qnaList(HttpServletRequest request, HttpServletResponse response)
+  @GetMapping("qnalist")
+  public String qnaList(HttpSession session, Model model)
       throws Exception {
 
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
     if(loginUser.getRole() == 1) {
-      return "/jsp/admin/access_fail.jsp";
-      //      response.setHeader("Refresh", "1;url=../main");
+      return "access_fail";
     }
     else {
       List<Qna> list = qnaService.list();
 
-      request.setAttribute("list", list);
+      model.addAttribute("list", list);
 
-      return "/jsp/admin/qna_list.jsp";
+      return "qna_list";
     }
   }
 
-  @RequestMapping("reviewlist")
-  public String reviewList(HttpServletRequest request, HttpServletResponse response)
+  @GetMapping("reviewlist")
+  public String reviewList(String item, String keyword, HttpSession session, Model model)
       throws Exception {
 
 
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
     if(loginUser.getRole() == 1) {
 
-      return "/jsp/admin/access_fail.jsp";
+      return "access_fail";
     }
     else {
       List<Review> list = null;
-
-      String item = request.getParameter("item");
-      String keyword = request.getParameter("keyword");
 
       if(item != null && keyword != null && keyword.length() > 0) {
         list = reviewService.search(item, keyword);
@@ -182,9 +169,9 @@ public class AdminController {
         list = reviewService.listAll();
       }
 
-      request.setAttribute("list", list);
+      model.addAttribute("list", list);
 
-      return "/jsp/admin/review_list.jsp";
+      return "review_list";
     }
   }
 }
