@@ -9,7 +9,7 @@
 <body>
 <h1>나눔장터 게시글 변경</h1>
 <c:if test="${not empty smb}">
-<form method='post'>
+<form action='update' method='post'>
 <table border='1'>
 <tbody>
 <tr><th>번호</th> <td><input type='text' name='no' value='${smb.no}' readonly></td></tr>
