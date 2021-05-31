@@ -82,20 +82,21 @@
     <textarea name='content' rows='1' cols='30'></textarea>
     <br> <input type='submit' value='등록'>
   </form>
-  <script>
+    <script>
     document.querySelector("#reco").onclick = function() {
       var boardNo = document.querySelector("#board-no");
       var xhr = new XMLHttpRequest();
       xhr.open("GET", "recommentadd?no=" + boardNo.value, false);
       xhr.send();
       if (xhr.responseText == "fail") {
-        swal("이미 추천한 게시물입니다!", "감사합니다", "warning");
-        //alert("이미 추천한 게시물입니다.");
+        alert("이미 추천한 게시물입니다.");
       } else {
-        swal("게시물을 추천하였습니다!", "감사합니다.", "success");
-        //alert("게시물을 추천하였습니다.") 
+        alert("게시물을 추천하였습니다.") 
       }
     };
-  </script>  
+    $btn("#reco").click()(() => {
+    	$("#btn1").click(() => {
+    });
+  </script>
 </body>
 </html>

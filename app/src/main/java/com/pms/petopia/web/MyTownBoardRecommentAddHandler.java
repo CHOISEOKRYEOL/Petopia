@@ -57,11 +57,13 @@ public class MyTownBoardRecommentAddHandler {
           if (count == recomments.size()) {
             recommentService.add(recomment);
             myTownBoardService.updateRecommentCount(boardNo);
+            System.out.println("success");
             out.print("success");
             break;
           }
 
         }else {
+          System.out.println("fail");
           out.print("fail");
         }
       }

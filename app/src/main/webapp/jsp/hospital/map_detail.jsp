@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>키워드로 장소검색하기</title>
+    <title>${hname}</title>
 </head>
 <body>
 <input type="hidden" id="a" value="${address}"> 

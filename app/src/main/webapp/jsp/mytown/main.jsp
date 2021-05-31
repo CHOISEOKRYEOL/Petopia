@@ -29,6 +29,9 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <a class="navbar-brand">우리 동네 찾기</a>
 </nav>
+
+<!--<c:import url="aaa.html"/>-->
+
 <form action='list' method='get'>
     광역시/도 : <select name='stateNo'>
       <c:forEach items="${smallAddresses}" var="s">
