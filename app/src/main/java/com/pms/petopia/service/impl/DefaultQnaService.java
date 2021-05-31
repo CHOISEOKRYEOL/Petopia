@@ -1,10 +1,11 @@
 package com.pms.petopia.service.impl;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 import com.pms.petopia.dao.QnaDao;
 import com.pms.petopia.domain.Qna;
 import com.pms.petopia.service.QnaService;
-
+@Service
 public class DefaultQnaService implements QnaService {
 
   QnaDao qnaDao;

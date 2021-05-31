@@ -1,10 +1,12 @@
 package com.pms.petopia.service.impl;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 import com.pms.petopia.dao.StoryDao;
 import com.pms.petopia.domain.Story;
 import com.pms.petopia.service.StoryService;
 
+@Service
 public class DefaultStorylService implements StoryService {
 
   StoryDao storyDao;

@@ -1,10 +1,11 @@
 package com.pms.petopia.service.impl;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 import com.pms.petopia.dao.MyTownBoardCommentDao;
 import com.pms.petopia.domain.MyTownBoardComment;
 import com.pms.petopia.service.MyTownBoardCommentService;
-
+@Service
 public class DefaultMyTownBoardCommentService implements MyTownBoardCommentService{
 
   MyTownBoardCommentDao myTownBoardCommentDao;

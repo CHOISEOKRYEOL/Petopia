@@ -13,6 +13,9 @@ public class Pet {
   private Member owner;
   private Member role;
   private Type type;
+  private Species species;
+  private int leader;
+
   public int getNo() {
     return no;
   }
@@ -67,6 +70,18 @@ public class Pet {
   public void setType(Type type) {
     this.type = type;
   }
+  public Species getSpecies() {
+    return species;
+  }
+  public void setSpecies(Species species) {
+    this.species = species;
+  }
+  public int getLeader() {
+    return leader;
+  }
+  public void setLeader(int leader) {
+    this.leader = leader;
+  }
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -74,11 +89,13 @@ public class Pet {
     result = prime * result + age;
     result = prime * result + ((birthDay == null) ? 0 : birthDay.hashCode());
     result = prime * result + gender;
+    result = prime * result + leader;
     result = prime * result + ((name == null) ? 0 : name.hashCode());
     result = prime * result + no;
     result = prime * result + ((owner == null) ? 0 : owner.hashCode());
     result = prime * result + ((photo == null) ? 0 : photo.hashCode());
     result = prime * result + ((role == null) ? 0 : role.hashCode());
+    result = prime * result + ((species == null) ? 0 : species.hashCode());
     result = prime * result + ((type == null) ? 0 : type.hashCode());
     return result;
   }
@@ -99,6 +116,8 @@ public class Pet {
     } else if (!birthDay.equals(other.birthDay))
       return false;
     if (gender != other.gender)
+      return false;
+    if (leader != other.leader)
       return false;
     if (name == null) {
       if (other.name != null)
@@ -122,6 +141,11 @@ public class Pet {
         return false;
     } else if (!role.equals(other.role))
       return false;
+    if (species == null) {
+      if (other.species != null)
+        return false;
+    } else if (!species.equals(other.species))
+      return false;
     if (type == null) {
       if (other.type != null)
         return false;
@@ -133,9 +157,8 @@ public class Pet {
   public String toString() {
     return "Pet [no=" + no + ", name=" + name + ", age=" + age + ", birthDay=" + birthDay
         + ", gender=" + gender + ", photo=" + photo + ", owner=" + owner + ", role=" + role
-        + ", type=" + type + "]";
+        + ", type=" + type + ", species=" + species + ", leader=" + leader + "]";
   }
-
 
 
 

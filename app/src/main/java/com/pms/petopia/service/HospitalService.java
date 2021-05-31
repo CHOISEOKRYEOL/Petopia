@@ -9,6 +9,8 @@ public interface HospitalService {
 
   List<Hospital> list() throws Exception;
 
+  Hospital get(String hname) throws Exception;
+
   Hospital get(int no) throws Exception;
 
   int update(Hospital hospital) throws Exception;

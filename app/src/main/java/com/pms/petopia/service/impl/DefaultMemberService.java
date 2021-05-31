@@ -3,10 +3,14 @@ package com.pms.petopia.service.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.stereotype.Service;
 import com.pms.petopia.dao.MemberDao;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.service.MemberService;
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
+@Service
 public class DefaultMemberService implements MemberService {
 
   MemberDao memberDao;
@@ -14,6 +18,29 @@ public class DefaultMemberService implements MemberService {
   public DefaultMemberService(MemberDao memberDao) {
     this.memberDao = memberDao;
   }  
+
+  @Override
+  public void certifyNumber(String phoneNumber, String authenticationNumber) throws Exception {
+
+    Key k = new Key();
+
+    String api_key = k.getApi_key();
+    String api_secret = k.getApi_secret_key();
+    Message message = new Message(api_key, api_secret);
+
+    HashMap<String, String> params = new HashMap<String, String>();
+    params.put("to", phoneNumber);
+    params.put("from", "01090986073");
+    params.put("type", "SMS");
+    params.put("text", "Petopia 회원가입 인증번호 " + "["+authenticationNumber+"]");
+
+    try {
+      message.send(params);
+
+    } catch (CoolsmsException e) {
+      throw new Exception(e);
+    }
+  }
 
   @Override
   public int add(Member member) throws Exception {

@@ -3,10 +3,12 @@ package com.pms.petopia.service.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.stereotype.Service;
 import com.pms.petopia.dao.ReviewDao;
 import com.pms.petopia.domain.Review;
 import com.pms.petopia.service.ReviewService;
 
+@Service
 public class DefaultReviewService implements ReviewService {
   ReviewDao reviewDao;
 

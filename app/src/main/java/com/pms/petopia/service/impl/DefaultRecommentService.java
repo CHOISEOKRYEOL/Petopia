@@ -1,10 +1,11 @@
 package com.pms.petopia.service.impl;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 import com.pms.petopia.dao.RecommentDao;
 import com.pms.petopia.domain.Recomment;
 import com.pms.petopia.service.RecommentService;
-
+@Service
 public class DefaultRecommentService implements RecommentService {
 
   RecommentDao recommentDao; 

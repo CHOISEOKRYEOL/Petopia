@@ -1,0 +1,147 @@
+<!-- <?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pms.petopia.dao.HospitalDao">
+  
+  <resultMap id="hospitalMap" type="hospital">
+    <id column="hno" property="no"/>
+    <result column="name" property="name"/>
+    <result column="tel" property="tel"/>
+    <result column="addr" property="address"/>
+    <result column="stime" property="startTime"/>
+    <result column="etime" property="endTime"/>
+    <result column="park" property="parking"/>
+    <result column="vet" property="veterinarian"/>
+    <result column="photo" property="photo"/>
+    <result column="rating" property="rating"/>
+    <result column="a_rating" property="accumulatedRating"/>
+  
+    <association property="bigAddress" javaType="bigAddress">
+      <id column="state_no" property="no"/>
+      <result column="state_name" property="name"/>
+    </association>
+
+    <association property="smallAddress" javaType="smallAddress">
+      <id column="city_no" property="no"/>
+      <result column="city_name" property="name"/>
+    </association>
+
+  </resultMap>
+  
+  <insert id="insert" parameterType="hospital">
+    insert into pet_hp(name, tel, addr, stime, etime, park, vet, photo, cno) 
+    values(#{name}, #{tel}, #{address}, #{startTime}, #{endTime}, #{parking}, #{veterinarian}, #{photo}, #{smallAddress.no})
+  </insert>
+
+  <select id="findAll" resultMap="hospitalMap">
+    select 
+      h.hno,
+      h.name,
+      h.tel,
+      h.addr,
+      h.stime,
+      h.etime,
+      h.rating,
+      s.gno as state_no,
+      s.gname as state_name,    
+      c.cno as city_no,
+      c.cname as city_name
+    from pet_city c
+      inner join pet_state s on s.gno=c.gno
+      inner join pet_hp h on c.cno=h.cno
+    order by hno desc
+  </select>
+  
+  <select id="findByNo" resultMap="hospitalMap" parameterType="int">
+    select
+      h.hno,
+      h.name,
+      h.tel,
+      h.addr,
+      h.stime,
+      h.etime,
+      h.park,
+      h.vet,
+      h.photo,
+      h.rating,
+      s.gno as state_no,
+      s.gname as state_name,    
+      c.cno as city_no,
+      c.cname as city_name
+    from pet_city c
+      inner join pet_state s on s.gno=c.gno
+      inner join pet_hp h on c.cno=h.cno
+    where h.hno=#{value}
+  </select>
+
+  <update id="update" parameterType="hospital">
+    update pet_hp 
+    <set> 
+      name=#{name},
+      tel=#{tel},
+      cno=#{smallAddress.no},
+      addr=#{address},
+      stime=#{startTime},
+      etime=#{endTime},
+      park=#{parking},
+      photo=#{photo},
+      vet=#{veterinarian}
+    </set>
+    where hno=#{no}
+  </update>
+  
+  <select id="getRating" resultMap="hospitalMap" parameterType="int">
+    select
+    hno, a_rating
+    from pet_hp
+    where hno=#{no}
+  </select>
+  
+  <update id="accumulateRating" parameterType="hospital">
+    update pet_hp set
+    a_rating = a_rating + #{accumulatedRating}
+    where hno=#{no}
+  </update>
+  
+  <update id="accumulatedRatingInitializer" parameterType="int">
+    update pet_hp set
+    a_rating = 0
+    where hno=#{no}
+  </update>
+  
+  <update id="updateRating" parameterType="hospital">
+    update pet_hp set
+    rating = #{rating}
+    where hno=#{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from pet_hp 
+    where hno=#{no}
+  </delete>
+  
+  
+   
+  <select id="findByKeyword" resultMap="hospitalMap" parameterType="map">
+    select 
+      h.hno,
+      h.name,
+      h.tel,
+      h.address,
+      h.startTime,
+      h.endTime,
+      s.gno as state_no,
+      s.gname as state_name,    
+      c.cno as city_no,
+      c.cname as city_name
+    from pet_state s
+      inner join pet_city c on s.gno=c.gno
+      inner join pet_hp h on c.cno=h.cno
+    where 
+      c.cno=#{cno} and s.gno=#{gno}
+    order by h.hno desc
+  </select>
+ 
+</mapper> -->

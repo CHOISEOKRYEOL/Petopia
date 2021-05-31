@@ -38,6 +38,8 @@ public interface MemberDao {
 
   int deleteHospitalInfo(int no) throws Exception;
 
+  int putAuthenticationNumber() throws Exception;
+
 }
 
 

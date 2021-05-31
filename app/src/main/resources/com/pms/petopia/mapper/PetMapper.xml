@@ -12,6 +12,7 @@
     <result column="birth" property="birthDay"/>
     <result column="gender" property="gender"/>
     <result column="photo" property="photo"/>
+    <result column="m_pet" property="leader"/>
     
     <association property="owner" javaType="member">
 	    <id column="owner_no" property="no"/>
@@ -24,10 +25,17 @@
     </association>
     
   </resultMap>
+  
   <insert id="insert" parameterType="pet">
-    insert into pet_mypet(pname, age, birth, gender, photo, owner, type) 
+    insert into pet_mypet(pname, age, birth, gender, photo, owner ,type) 
     values(#{name}, #{age}, #{birthDay}, #{gender}, #{photo}, #{owner.no}, #{type.no})
   </insert>
+ 
+ <update id="setLeaderPet" parameterType="int">
+  update pet_mypet set
+  m_pet = 1;
+  from pno = #{no}
+ </update>
  
   <select id="findAll"  resultMap="petMap">
     select
@@ -41,8 +49,8 @@
       m.name as owner_name,
       t.rno as type_no, t.type as type_type, t.sno as type_species
     from pet_mypet p
-    inner join pet_type t on p.type = t.rno
-    inner join pet_species s on s.sno = t.sno
+    inner join pet_type t on p.type = t.sno
+    inner join pet_species s on s.type = t.sno
     inner join pet_user m on m.mno=p.owner
   </select>
 <!-- 

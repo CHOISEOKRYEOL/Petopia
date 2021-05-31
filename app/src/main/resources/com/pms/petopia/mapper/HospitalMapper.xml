@@ -54,6 +54,28 @@
     order by hno desc
   </select>
   
+  <select id="findByName" resultMap="hospitalMap" parameterType="String">
+    select
+      h.hno,
+      h.name,
+      h.tel,
+      h.addr,
+      h.stime,
+      h.etime,
+      h.park,
+      h.vet,
+      h.photo,
+      h.rating,
+      s.gno as state_no,
+      s.gname as state_name,    
+      c.cno as city_no,
+      c.cname as city_name
+    from pet_city c
+      inner join pet_state s on s.gno=c.gno
+      inner join pet_hp h on c.cno=h.cno
+    where h.name=#{value}
+  </select>
+  
   <select id="findByNo" resultMap="hospitalMap" parameterType="int">
     select
       h.hno,
