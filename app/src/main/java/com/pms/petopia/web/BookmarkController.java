@@ -2,8 +2,11 @@ package com.pms.petopia.web;
 
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Bookmark;
 import com.pms.petopia.domain.Hospital;
@@ -20,8 +23,8 @@ public class BookmarkController {
     this.bookmarkService = bookmarkService;
   }
 
-  @RequestMapping("add")
-  public String add(HttpServletRequest request, HttpServletResponse response)
+  @PostMapping("add")
+  public String add(HttpServletRequest request)
       throws Exception {
 
     Bookmark b = new Bookmark();
@@ -49,12 +52,11 @@ public class BookmarkController {
   }
 
   @RequestMapping("delete")
-  public String delete(HttpServletRequest request, HttpServletResponse response)
+  public String delete(HttpServletRequest request)
       throws Exception {
 
     int no = Integer.parseInt(request.getParameter("no"));
     int hno = Integer.parseInt(request.getParameter("hno"));
-
 
     bookmarkService.delete(no);
 
@@ -62,24 +64,22 @@ public class BookmarkController {
       return "redirect:../hospital/list";
     }
     else if(hno == 0){
-      return "redirect:bookmarklist";
+      return "redirect:list";
     }
     else {
       return "redirect:../hospital/detail?no=" + hno;
     }
   }
 
-  @RequestMapping("list")
-  public String list(HttpServletRequest request, HttpServletResponse response)
+  @GetMapping("bookmark")
+  public void list(HttpSession session, Model model)
       throws Exception {
 
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
 
     List<Bookmark> list = bookmarkService.list(loginUser.getNo());
 
-    request.setAttribute("list", list);
-
-    return "/jsp/member/bookmark.jsp";
+    model.addAttribute("list", list);
 
   }
 
