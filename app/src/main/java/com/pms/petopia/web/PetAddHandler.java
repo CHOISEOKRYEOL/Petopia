@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.Pet;
+import com.pms.petopia.domain.Species;
 import com.pms.petopia.domain.Type;
 import com.pms.petopia.service.PetService;
 import net.coobird.thumbnailator.ThumbnailParameter;
@@ -43,6 +44,10 @@ public class PetAddHandler {
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
     p.setOwner(loginUser);
+
+    Species s = new Species();
+    s.setNo(Integer.parseInt(request.getParameter("species")));
+    p.setSpecies(s);
 
     Type t = new Type();
     t.setNo(Integer.parseInt(request.getParameter("type")));
