@@ -1,15 +1,16 @@
 package com.pms.petopia.web;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.UUID;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.Pet;
 import com.pms.petopia.domain.Species;
 import com.pms.petopia.domain.Type;
@@ -23,46 +24,29 @@ import net.coobird.thumbnailator.name.Rename;
 @RequestMapping("/pet")
 public class PetController {
 
+  ServletContext sc;
   PetService petService;
 
-  public PetController(PetService petService) {
+  public PetController(PetService petService, ServletContext sc, Species s, Type t) {
     this.petService = petService;
+    this.sc = sc;
   }
 
-  @RequestMapping("add")
-  public String add(HttpServletRequest request, HttpServletResponse response)
+  @GetMapping("form")
+  public void form() throws Exception {
+  }
+
+  @PostMapping("add")
+  public String add(Pet p, Part photoFile)
       throws Exception {
 
-    String uploadDir = request.getServletContext().getRealPath("/upload");
-
-    if(request.getMethod().equals("GET")) {
-      return "/jsp/pet/form.jsp";
-    }
-
-    Pet p = new Pet();
-    p.setName(request.getParameter("name"));
-    p.setAge(Integer.parseInt(request.getParameter("age")));
-    p.setBirthDay(Date.valueOf(request.getParameter(("birthDay"))));
-    p.setGender(Integer.parseInt(request.getParameter("gender")));
-
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-    p.setOwner(loginUser);
-
-    Species s = new Species();
-    s.setNo(Integer.parseInt(request.getParameter("species")));
-    p.setSpecies(s);
-
-    Type t = new Type();
-    t.setNo(Integer.parseInt(request.getParameter("type")));
-    p.setType(t);
+    String uploadDir = sc.getRealPath("/upload");
 
 
-    Part photoPart = request.getPart("photo");
-
-    if (photoPart.getSize() > 0) {
+    if (photoFile.getSize() > 0) {
       // 파일을 선택해서 업로드 했다면,
       String filename = UUID.randomUUID().toString();
-      photoPart.write(uploadDir + "/" + filename);
+      photoFile.write(uploadDir + "/" + filename);
       p.setPhoto(filename);
 
       // 썸네일 이미지 생성
@@ -96,7 +80,7 @@ public class PetController {
     //    response.setHeader("Refresh", "1;url=list");
   }
 
-  @RequestMapping("delete")
+  @GetMapping("delete")
   public String delete(HttpServletRequest request, HttpServletResponse response)
       throws Exception {
 
