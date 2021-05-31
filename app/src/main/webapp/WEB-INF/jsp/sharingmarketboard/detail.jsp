@@ -97,7 +97,7 @@ bottom-padding: 10px;
 <p>해당 번호의 게시글이 없습니다.</p>
 </c:if>
 
-<jsp:include page="/jsp/sharingmarketboardcomment/list.jsp"/>
+<!-- <jsp:include page="/jsp/sharingmarketboardcomment/list.jsp"/> -->
 
 <c:if test="${not empty loginUser}">
 <form action='../sharingmarketboardcomment/add' method='post'>

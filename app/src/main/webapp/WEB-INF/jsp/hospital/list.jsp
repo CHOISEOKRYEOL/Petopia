@@ -51,7 +51,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   </div>
 </nav>
 
-<jsp:include page="/jsp/hospital/map.jsp"></jsp:include>
+<!-- <jsp:include page="/jsp/hospital/map.jsp"></jsp:include> -->
 
 <table class="table table-hover">
 <thead>

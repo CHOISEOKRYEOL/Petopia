@@ -75,7 +75,7 @@
   <a
     href='list?stateNo=${smallAddress.bigAddress.no}&cityNo=${smallAddress.no}'>목록</a>
   <br>
-  <jsp:include page="/jsp/mytownboardcomment/list.jsp" />
+<!--   <jsp:include page="/jsp/mytownboardcomment/list.jsp" /> -->
   <form action='../mytowncomment/add' method='post'>
     <input type='hidden' name='boardNo' value='${myTownBoard.no}'>
     <br> 댓글:
