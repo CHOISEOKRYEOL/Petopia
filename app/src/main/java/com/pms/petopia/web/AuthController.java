@@ -1,10 +1,8 @@
 package com.pms.petopia.web;
 
-import java.io.PrintWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -23,21 +21,19 @@ public class AuthController {
     this.memberService = memberService;
   }
 
-  @GetMapping("login_form")
-  public void form()
+  @GetMapping("/login_form")
+  public void execute()
       throws Exception {
   }
 
   @PostMapping("/login")
-  public void login(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+  public String login(String id, String password, String saveIdOrEmail, HttpServletResponse response, HttpSession session)
       throws Exception {
 
-    String id = request.getParameter("id");
     boolean check = isEmail(id);
-    String password = request.getParameter("password");
     Member member = null;
 
-    if(request.getParameter("saveIdOrEmail") != null) {
+    if(saveIdOrEmail != null) {
       Cookie cookie = new Cookie("id", id);
       cookie.setMaxAge(60 * 60 * 24);
       response.addCookie(cookie);
@@ -55,25 +51,20 @@ public class AuthController {
       member = memberService.getId(id, password);
     }
 
-    response.setContentType("text/plain;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-
-
     if (member == null) {
       session.invalidate();
-      out.write("0");
+      return "login_form";
     }
     else {
       session.setAttribute("loginUser", member);
-      out.write("1");
+      return "main";
     }
   }
 
-  @RequestMapping("logout")
+  @RequestMapping("/logout")
   public String logout(HttpSession session)
       throws Exception {
     session.invalidate();
-
     return "redirect:login_form";
 
   }

@@ -125,7 +125,6 @@
 					</div>
 				</div>
 
-
 				<div class="modal-footer justify-content-between">
 					<a href='../main' class="btn btn-secondary">메인</a>
 
@@ -252,6 +251,7 @@
 			var userNick = $('#nick').val();
 			$.ajax({
 				url : "checknick",
+				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 				data : {
 					nick : userNick
 				},

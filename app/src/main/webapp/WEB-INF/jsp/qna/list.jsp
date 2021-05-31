@@ -39,7 +39,7 @@
 		</tbody>
 	</table>
 	<p>
-		<a href='add'>새 Q&A 작성</a>
+		<a href='qna_form'>새 Q&A 작성</a>
 	</p>
 	<p>
 		<a href='../main'>돌아가기</a>

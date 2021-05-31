@@ -32,7 +32,7 @@ ${qna.answer}</c:if>
 	</table>
 	<c:if test="${loginUser.id ne 'admin'}">
 		<c:if test="${qna.state == 0}">
-			<a href='update?no=${qna.no}'>수정</a>
+			<a href='modifying_form?no=${qna.no}'>수정</a>
 		</c:if>
 		<a href='delete?no=${qna.no}'>삭제</a>
 		<a href='list'>목록</a>
