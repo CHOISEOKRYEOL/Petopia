@@ -9,7 +9,7 @@
 <body>
 <h1>나눔장터 게시글 변경</h1>
 <c:if test="${not empty smb}">
-<form action='update' method='post'>
+<form action='update' method='post' enctype='multipart/form-data'>
 <table border='1'>
 <tbody>
 <tr><th>번호</th> <td><input type='text' name='no' value='${smb.no}' readonly></td></tr>
@@ -23,6 +23,7 @@
 <tr><th>작성자</th> <td>${smb.writer.name}</td></tr>
 <tr><th>작성일</th> <td>${smb.createdDate}</td></tr>
 <tr><th>조회수</th> <td>${smb.viewCount}</td></tr>
+<tr><th>사진</th> <td><input type="file" multiple="multiple" name=photo></td></tr>
 </tbody>
 
 <c:if test="${not empty loginUser and loginUser.no == smb.writer.no}">

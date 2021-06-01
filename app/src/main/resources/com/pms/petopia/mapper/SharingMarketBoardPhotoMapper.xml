@@ -50,7 +50,7 @@
         phot.photo,
         mark.sno as sharingmarketboard_no
       from pet_mark_phot phot
-      inner join pet_mark mark on mark.sno = phot.sno
+      right join pet_mark mark on mark.sno = phot.sno
        where phot.sno = #{no}
   </select>
   

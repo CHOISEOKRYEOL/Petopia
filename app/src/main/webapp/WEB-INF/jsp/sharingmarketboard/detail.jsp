@@ -6,7 +6,7 @@
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-<link href="../css/common.css" rel="stylesheet" >
+<link href="../../css/common.css" rel="stylesheet" >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>나눔장터 게시글 상세</title>
 <style>
@@ -70,17 +70,15 @@ bottom-padding: 10px;
 <c:if test="${not empty photList}">
 <td colspan="5"><c:forEach items="${photList}" var="p">
   <c:if test="${not empty p.sharingmarketboard.no and smb.no == p.sharingmarketboard.no}">
-    <c:set var="photoUrl">../upload/${p.photo}_80x80.jpg</c:set>
+    <c:set var="photoUrl">../../upload/${p.photo}_80x80.jpg</c:set>
     <img src='${photoUrl}'>
   </c:if>
   <c:if test="${empty p.sharingmarketboard.no}">
-    <c:set var="photoUrl">../images/person_80x80.jpg</c:set>
+    <c:set var="photoUrl">../../images/person_80x80.jpg</c:set>
     <img src='${photoUrl}'>
   </c:if>
 </c:forEach></td>
   </c:if>
-<%--   	  <td><a href='${photoUrl}'>
-	  <img src='${photo80x80Url}'></a></td> --%>
  </tr>
  <c:if test="${not empty loginUser and loginUser.no == smb.writer.no}">
   <tr>
@@ -97,10 +95,11 @@ bottom-padding: 10px;
 <p>해당 번호의 게시글이 없습니다.</p>
 </c:if>
 
-<!-- <jsp:include page="/jsp/sharingmarketboardcomment/list.jsp"/> -->
+<jsp:include page="/WEB-INF/jsp/sharingmarketboardcomment/list.jsp" />
+
 
 <c:if test="${not empty loginUser}">
-<form action='../sharingmarketboardcomment/add' method='post'>
+<form action='/sharingmarketboardcomment/add' method='post'>
 <input id="detail-add-no" type='hidden' name='no' value='${smb.no}'>
 <table class="detail-add-table">
 <tr>
@@ -110,9 +109,9 @@ bottom-padding: 10px;
   </form>
   </c:if>
   
-  
-<p><a href='list'>목록</a></p>
+  <a href='list' class="btn" style="background-color: #FFADAD;">목록</a>
 
+</div>
 <script>
 "use strict"
 
@@ -143,7 +142,7 @@ $("#detail-add-comment-btn").click(function() {
 
 
 </script>
-</div>
+
 </body>
 </html>
 
