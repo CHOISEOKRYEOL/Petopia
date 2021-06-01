@@ -89,7 +89,7 @@
 </head>
 <body>
 	<h1>리뷰 등록</h1>
-	<form method="post" enctype="multipart/form-data">
+	<form action="add" method="post" enctype="multipart/form-data">
 	
 	
 	

@@ -79,7 +79,7 @@ public class ReviewController {
     r.setWriter(loginUser);
 
     Hospital h = new Hospital();
-    h.setNo(Integer.parseInt(request.getParameter("num")));
+    h.setNo(Integer.parseInt(request.getParameter("no")));
     r.setHospital(h);
 
     reviewService.add(r);

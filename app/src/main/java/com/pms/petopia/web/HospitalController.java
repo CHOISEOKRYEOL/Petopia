@@ -89,8 +89,12 @@ public class HospitalController {
   }
 
   @GetMapping("detail")
-  public void detail(int no, Model model, HttpSession session) throws Exception {
+  public String detail(int no, Model model, HttpSession session) throws Exception {
+
+    System.out.println("접근");
     Hospital hospital = hospitalService.get(no);
+
+    System.out.println("접근");
 
     Member loginUser = (Member) session.getAttribute("loginUser");
 
@@ -98,6 +102,9 @@ public class HospitalController {
 
     model.addAttribute("hospital", hospital);
     model.addAttribute("bookmark", bookmark);
+    System.out.println("접근");
+
+    return "hospital/detail";
   }
 
   @GetMapping("list")

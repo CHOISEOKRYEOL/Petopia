@@ -25,7 +25,7 @@
 					<td>${b.hospital.address}</td>
 					<td>${b.hospital.tel}</td>
 					<td>
-						<form action="bookmarkdelete">
+						<form action="delete">
 							<input type="hidden" name="no" value="${b.no}"> <input
 								type="hidden" name="hno" value="0"> <input type="submit"
 								value="★">
