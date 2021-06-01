@@ -1,10 +1,11 @@
 package com.pms.petopia.web;
 
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.Scrap;
 import com.pms.petopia.domain.Story;
@@ -18,33 +19,24 @@ public class StoryController {
   StoryService storyService;
   ScrapService scrapService;
 
-  public StoryController(StoryService storyService) {
+  public StoryController(StoryService storyService, ScrapService scrapService) {
     this.storyService = storyService;
+    this.scrapService = scrapService;
   }
 
-  @RequestMapping("add")
-  public String add(HttpServletRequest request, HttpServletResponse response)
-      throws Exception {
+  @RequestMapping(path="form", method = RequestMethod.GET)
+  public void form() throws Exception {
+  }
 
-    if(request.getMethod().equals("GET")) {
-      return "/jsp/story/form.jsp";
-    }
-
-    Story s = new Story();
-    s.setTitle(request.getParameter("title"));
-    s.setUrl(request.getParameter("url"));
-    s.setSite(request.getParameter("site"));
+  @RequestMapping(path="add", method = RequestMethod.POST)
+  public String add(Story s) throws Exception {
 
     storyService.add(s);
-
     return "redirect:list";
   }
 
-  @RequestMapping("delete")
-  public String delete(HttpServletRequest request, HttpServletResponse response)
-      throws Exception {
-
-    int no = Integer.parseInt(request.getParameter("no"));
+  @RequestMapping(path="delete", method = RequestMethod.GET)
+  public String delete(int no) throws Exception {
 
     Story oldStory = storyService.get(no);
     if (oldStory == null) {
@@ -56,66 +48,41 @@ public class StoryController {
     return "redirect:list";
   }
 
-  @RequestMapping("detail")
-  public String detail(HttpServletRequest request, HttpServletResponse response)
-      throws Exception {
-
-    int no = Integer.parseInt(request.getParameter("no"));
-
-    Story story = storyService.get(no);
-    request.setAttribute("story", story);
-
-    return "/jsp/story/detail.jsp";
-
+  @RequestMapping(path="detail", method = RequestMethod.GET)
+  public void detail(int no, Model model) throws Exception {
+    model.addAttribute("story", storyService.get(no));
   }
 
-  @RequestMapping("list")
-  public String list(HttpServletRequest request, HttpServletResponse response)
-      throws Exception {
+  @RequestMapping(path="list", method = RequestMethod.GET)
+  public void list(String keyword, Model model, HttpSession session) throws Exception {
 
-    String keyword = request.getParameter("keyword");
     List<Story> storys = null;
     if (keyword != null && keyword.length() > 0) {
       storys = storyService.search(keyword);
     } else {
       storys = storyService.list();
     }
+
     List<Scrap> scrapList = null;
-    if ((Member)request.getSession().getAttribute("loginUser") != null) {
-      Member loginUser = (Member)request.getSession().getAttribute("loginUser");
-
+    if ((Member) session.getAttribute("loginUser") != null) {
+      Member loginUser = (Member) session.getAttribute("loginUser");
       scrapList = scrapService.list(loginUser.getNo());
-
     }
 
-    request.setAttribute("scrapList", scrapList);
-    request.setAttribute("storys", storys);
-
-    return "/jsp/story/list.jsp";
-
+    model.addAttribute("scrapList", scrapList);
+    model.addAttribute("storys", storys);
   }
 
-  @RequestMapping("update")
-  public String update(HttpServletRequest request, HttpServletResponse response)
-      throws Exception {
+  @RequestMapping(path="update", method = RequestMethod.POST)
+  public String update(Story story) throws Exception {
 
-    int no = Integer.parseInt(request.getParameter("no"));
-
-    Story oldStory = storyService.get(no);
+    Story oldStory = storyService.get(story.getNo());
     if (oldStory == null) {
       throw new Exception("해당 번호의 스토리가 없습니다.");
     }
 
-    Story story = new Story();
-    story.setNo(oldStory.getNo());
-    story.setTitle(request.getParameter("title"));
-    story.setUrl(request.getParameter("url"));
-    story.setSite(request.getParameter("site"));
-
     storyService.update(story);
 
     return "redirect:list";
-
   }
-
 }
