@@ -40,7 +40,6 @@ public class BookmarkController {
 
     int check = Integer.parseInt(request.getParameter("hiddenNo"));
 
-
     bookmarkService.add(b);
 
     if(check == 0) {
@@ -51,7 +50,7 @@ public class BookmarkController {
     }
   }
 
-  @RequestMapping("delete")
+  @GetMapping("delete")
   public String delete(HttpServletRequest request)
       throws Exception {
 
@@ -71,7 +70,7 @@ public class BookmarkController {
     }
   }
 
-  @GetMapping("bookmark")
+  @GetMapping("list")
   public void list(HttpSession session, Model model)
       throws Exception {
 

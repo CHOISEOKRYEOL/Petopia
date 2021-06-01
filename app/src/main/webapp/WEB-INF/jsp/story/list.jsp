@@ -34,7 +34,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 <a class="navbar-brand">스토리</a>
   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
     <li class="nav-item">
-      <a href='add' class="btn" style="background-color: #FFADAD;">새 글</a>
+      <a href='form' class="btn" style="background-color: #FFADAD;">새 글</a>
     </li>
   </ul>
   <form class="d-flex">

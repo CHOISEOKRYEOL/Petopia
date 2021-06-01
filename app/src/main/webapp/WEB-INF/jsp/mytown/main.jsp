@@ -30,7 +30,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 <a class="navbar-brand">우리 동네 찾기</a>
 </nav>
 
-<!--<c:import url="aaa.html"/>-->
+<jsp:include page="../../../html/state.html"/>
 
 <form action='list' method='get'>
     광역시/도 : <select name='stateNo'>

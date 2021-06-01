@@ -2,10 +2,13 @@ package com.pms.petopia.web;
 
 import java.util.List;
 import java.util.UUID;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Bookmark;
 import com.pms.petopia.domain.Hospital;
@@ -24,6 +27,7 @@ import net.coobird.thumbnailator.name.Rename;
 @RequestMapping("hospital")
 public class HospitalController {
 
+  ServletContext sc;
   HospitalService hospitalService;
   ReviewService reviewService;
   BookmarkService bookmarkService;
@@ -32,45 +36,31 @@ public class HospitalController {
   public HospitalController(HospitalService hospitalService, 
       ReviewService reviewService, 
       BookmarkService bookmarkService, 
-      SmallAddressService smallAddressService) {
+      SmallAddressService smallAddressService,
+      ServletContext sc) {
     this.hospitalService = hospitalService;
     this.reviewService = reviewService;
     this.bookmarkService = bookmarkService;
     this.smallAddressService = smallAddressService;
+    this.sc = sc;
   }
 
-  @RequestMapping("add")
-  public String form(HttpServletRequest request, HttpServletResponse response)
-      throws Exception {
+  @GetMapping("form")
+  public void form() throws Exception {
+  }
 
-    if(request.getMethod().equals("GET")) {
-      return "/jsp/hospital/form.jsp";
-    }
+  @PostMapping("add")
+  public String add(int cityNo, Hospital hospital, Part photoFile) throws Exception {
+    String uploadDir = sc.getRealPath("/upload");
 
-    Hospital hospital = new Hospital();
-    hospital.setName(request.getParameter("name"));
-    hospital.setTel(request.getParameter("tel"));
-    hospital.setAddress(request.getParameter("address"));
-    hospital.setStartTime(Integer.valueOf(request.getParameter("startTime")));
-    hospital.setEndTime(Integer.valueOf(request.getParameter("endTime")));
-    hospital.setParking(Integer.valueOf(request.getParameter("parking")));
-    hospital.setVeterinarian(Integer.valueOf(request.getParameter("vet")));
-
-    Part photoPart = request.getPart("photo");
-
-    String filename = UUID.randomUUID().toString();
-    String saveFilePath = request.getServletContext().getRealPath("/upload/" + filename);
-
-    photoPart.write(saveFilePath);
-
-    if (photoPart.getSize() > 0) {
+    if(photoFile.getSize() > 0) {
       // 파일을 선택해서 업로드 했다면,
       String filename = UUID.randomUUID().toString();
-      photoPart.write(this.uploadDir + "/" + filename);
+      photoFile.write(uploadDir + "/" + filename);
       hospital.setPhoto(filename);
 
       // 썸네일 이미지 생성
-      Thumbnails.of(this.uploadDir + "/" + filename)
+      Thumbnails.of(uploadDir + "/" + filename)
       .size(300, 300)
       .outputFormat("jpg")
       .crop(Positions.CENTER)
@@ -82,82 +72,61 @@ public class HospitalController {
       });
     }
 
-    SmallAddress smallAddress = new SmallAddress();
-    smallAddress.setNo(Integer.parseInt(request.getParameter("cno")));
+    SmallAddress smallAddress = smallAddressService.get(cityNo);
     hospital.setSmallAddress(smallAddress);
 
     hospitalService.add(hospital);
-
     return "redirect:list";
-
   }
 
   @RequestMapping("delete")
-  public String delete(HttpServletRequest request, HttpServletResponse response)
-      throws Exception {
-
-    int no = Integer.parseInt(request.getParameter("no"));
-
+  public String delete(int no) throws Exception {
     reviewService.deleteByAdmin(no);
     bookmarkService.deleteByAdmin(no);
     hospitalService.delete(no);
 
     return "../admin/hospitallist";
-
   }
 
-  @RequestMapping("detail")
-  public String detail(HttpServletRequest request, HttpServletResponse response)
-      throws Exception {
+  @GetMapping("detail")
+  public String detail(int no, Model model, HttpSession session) throws Exception {
 
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-
-    int no = Integer.parseInt(request.getParameter("no"));
-
+    System.out.println("접근");
     Hospital hospital = hospitalService.get(no);
+
+    System.out.println("접근");
+
+    Member loginUser = (Member) session.getAttribute("loginUser");
 
     Bookmark bookmark = bookmarkService.get(loginUser.getNo(), hospital.getNo());
 
-    request.setAttribute("bookmark", bookmark);
-    request.setAttribute("hospital", hospital);
+    model.addAttribute("hospital", hospital);
+    model.addAttribute("bookmark", bookmark);
+    System.out.println("접근");
 
-    return "/jsp/hospital/detail.jsp";
+    return "hospital/detail";
   }
 
-  @RequestMapping("list")
-  public String list(HttpServletRequest request, HttpServletResponse response)
+  @GetMapping("list")
+  public void list(Model model, HttpSession session)
       throws Exception {
 
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-
-    String gno = request.getParameter("gno");
-    String cno = request.getParameter("cno");
+    Member loginUser = (Member) session.getAttribute("loginUser");
 
     List<Hospital> hospitals = hospitalService.list();
     List<SmallAddress> area = smallAddressService.list();
+
     if(loginUser != null) {
       List<Bookmark> book = bookmarkService.get(loginUser.getNo());
-      request.setAttribute("book", book);
+      model.addAttribute("book", book);
     }
 
-    if (gno != null && cno != null) {
-      int cityNo = Integer.parseInt(cno);
-      String cityName = smallAddressService.get(cityNo).getName();
-      String stateName = smallAddressService.get(cityNo).getBigAddress().getName();
-      request.setAttribute("stateName", stateName);
-      request.setAttribute("cityName", cityName);
-      //이름으로 넘길까? 그래야 검색하지 
-
-    }
-
-    request.setAttribute("list", hospitals);
-    request.setAttribute("area", area);
-
-    return "/jsp/hospital/list.jsp";
+    model.addAttribute("hospitals", hospitals);
+    model.addAttribute("area", area);
 
   }
 
-  //@RequestMapping("/hospital/detail")
+  /*@RequestMapping("/hospital/detail")
   public String execute(HttpServletRequest request, HttpServletResponse response)
       throws Exception {
 
@@ -181,36 +150,19 @@ public class HospitalController {
     return "/jsp/hospital/detail.jsp";
 
   }
-
+   */
   @RequestMapping("update")
-  public String update(HttpServletRequest request, HttpServletResponse response)
-      throws Exception {
+  public String update(int cityNo, Hospital hospital, Part photoFile) throws Exception {
+    String uploadDir = sc.getRealPath("/upload");
 
-    int no = Integer.parseInt(request.getParameter("no"));
-
-    Hospital oldHospital = hospitalService.get(no);
-    if (oldHospital == null) {
-      throw new Exception("해당 번호의 병원이 없습니다.");
-    }
-
-    Hospital hospital = new Hospital();
-    hospital.setNo(oldHospital.getNo());
-    hospital.setName(request.getParameter("name"));
-    hospital.setTel(request.getParameter("tel"));
-    hospital.setAddress(request.getParameter("address"));
-    hospital.setStartTime(Integer.valueOf(request.getParameter("startTime")));
-    hospital.setEndTime(Integer.valueOf(request.getParameter("endTime")));
-    hospital.setParking(Integer.valueOf(request.getParameter("parking")));
-    hospital.setVeterinarian(Integer.valueOf(request.getParameter("vet")));
-
-    Part photoPart = request.getPart("photo");
-    if (photoPart.getSize() > 0) {
+    if(photoFile.getSize() > 0) {
+      // 파일을 선택해서 업로드 했다면,
       String filename = UUID.randomUUID().toString();
-      photoPart.write(this.uploadDir + "/" + filename);
+      photoFile.write(uploadDir + "/" + filename);
       hospital.setPhoto(filename);
 
       // 썸네일 이미지 생성
-      Thumbnails.of(this.uploadDir + "/" + filename)
+      Thumbnails.of(uploadDir + "/" + filename)
       .size(300, 300)
       .outputFormat("jpg")
       .crop(Positions.CENTER)
@@ -222,14 +174,11 @@ public class HospitalController {
       });
     }
 
-    SmallAddress smallAddress = new SmallAddress();
-    smallAddress.setNo(Integer.parseInt(request.getParameter("cno")));
+    SmallAddress smallAddress = smallAddressService.get(cityNo);
     hospital.setSmallAddress(smallAddress);
 
     hospitalService.update(hospital);
 
     return "redirect:list";
-
   }
-
 }

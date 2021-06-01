@@ -89,7 +89,7 @@
 </head>
 <body>
 	<h1>리뷰 등록</h1>
-	<form method="post" enctype="multipart/form-data">
+	<form action="add" method="post" enctype="multipart/form-data">
 	
 	
 	
@@ -143,8 +143,8 @@
 	
 	
 		<br> <br> 내용 : <br>
-		<textarea name="comment" rows='10' cols='60'></textarea>
-		<br> 영수증 : <input type="file" name="photo" accept="image/*"><br>
+		<textarea name="comment" rows='10' cols='60' minlength="5"></textarea>
+		<br> 영수증 : <input type="file" name="photoFile" accept="image/*"><br>
 		<input type="hidden" name="no" value="${num}"> <input type="submit" value="등록하기">
 	</form>
 	<form action="../main">

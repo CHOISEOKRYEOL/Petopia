@@ -13,11 +13,11 @@
 			<tbody>
 				<tr>
 					<th>제목</th>
-					<td><input name='title' type='text' value='${qna.title}'></td>
+					<td><input name='title' type='text' value='${qna.title}' minlength="3"></td>
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td><textarea name='content' rows='10' cols='60'>${qna.content}</textarea></td>
+					<td><textarea name='content' rows='10' cols='60' minlength="5">${qna.content}</textarea></td>
 				</tr>
 				<br>
 			</tbody>

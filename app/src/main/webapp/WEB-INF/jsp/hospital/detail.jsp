@@ -8,7 +8,7 @@
 <title>병원 상세</title>
 </head>
 <body>
-<!-- <jsp:include page="/jsp/hospital/map_detail.jsp"></jsp:include> -->
+
 	<h1>병원 상세보기</h1>
 	<c:if test="${not empty hospital}">
 		<c:if test="${not empty hospital.photo}">
@@ -99,7 +99,7 @@
 	</c:if>
 
 	<c:if test="${not empty loginUser and empty bookmark}">
-		<form action="../member/bookmarkadd" method="post">
+		<form action="../bookmark/add" method="post">
 			<input type="hidden" name="mno" value="${loginUser.no}"> <input
 				type="hidden" name="hno" value="${hospital.no}"> <input
 				type="hidden" name="hiddenNo" value="0"> <input
@@ -108,7 +108,7 @@
 	</c:if>
 
 	<c:if test="${not empty loginUser and not empty bookmark}">
-		<form action="../member/bookmarkdelete">
+		<form action="../bookmark/delete">
 			<input type="hidden" name="no" value="${bookmark.no}"> <input
 				type="hidden" name="hno" value="${hospital.no}"> <input
 				type="submit" value="★">
@@ -125,11 +125,8 @@
   </h1>
 
 	<h1>병원 리뷰</h1>
-	
-	<c:import url="/app/review/list">
-  </c:import>
   	
-	<form action="../review/add">
+	<form action="../review/review_form">
     <input type='hidden' name='num' value='${hospital.no}'>
     <input type="submit" value="리뷰 작성">
   </form>

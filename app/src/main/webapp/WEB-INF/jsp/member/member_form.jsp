@@ -251,7 +251,7 @@
 			var userNick = $('#nick').val();
 			$.ajax({
 				url : "checknick",
-				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+				contentType: 'application/x-www-form-urlencoded; charset=euc-kr',
 				data : {
 					nick : userNick
 				},
