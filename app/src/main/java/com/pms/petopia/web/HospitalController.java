@@ -101,7 +101,7 @@ public class HospitalController {
   }
 
   @GetMapping("list")
-  public String list(String gno, String cno, int cityNo, Model model, HttpSession session)
+  public void list(Model model, HttpSession session)
       throws Exception {
 
     Member loginUser = (Member) session.getAttribute("loginUser");
@@ -114,17 +114,8 @@ public class HospitalController {
       model.addAttribute("book", book);
     }
 
-    if (gno != null && cno != null) {
-      String cityName = smallAddressService.get(cityNo).getName();
-      String stateName = smallAddressService.get(cityNo).getBigAddress().getName();
-      model.addAttribute("stateName", stateName);
-      model.addAttribute("cityName", cityName);
-    }
-
     model.addAttribute("hospitals", hospitals);
     model.addAttribute("area", area);
-
-    return "/jsp/hospital/list.jsp";
 
   }
 

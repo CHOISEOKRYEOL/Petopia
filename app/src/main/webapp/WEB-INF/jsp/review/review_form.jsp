@@ -143,7 +143,7 @@
 	
 	
 		<br> <br> 내용 : <br>
-		<textarea name="comment" rows='10' cols='60'></textarea>
+		<textarea name="comment" rows='10' cols='60' minlength="5"></textarea>
 		<br> 영수증 : <input type="file" name="photoFile" accept="image/*"><br>
 		<input type="hidden" name="no" value="${num}"> <input type="submit" value="등록하기">
 	</form>
