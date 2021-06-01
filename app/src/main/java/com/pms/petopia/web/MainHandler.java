@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainHandler {
 
   @RequestMapping("/main")
-  public void execute()
-      throws Exception {
-
+  public void execute()throws Exception {
   }
 }

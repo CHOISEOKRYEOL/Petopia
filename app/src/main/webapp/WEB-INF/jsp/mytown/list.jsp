@@ -31,7 +31,7 @@
   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
   <li class="nav-item">
     <a href='../main' class="btn" style="background-color: #FFADAD;">메인</a>
-		<a href='add?stateNo=${smallAddress.bigAddress.no}&cityNo=${smallAddress.no}' class="btn" style="background-color: #FFADAD;">새 글</a>
+		<a href='form?stateNo=${smallAddress.bigAddress.no}&cityNo=${smallAddress.no}' class="btn" style="background-color: #FFADAD;">새 글</a>
 		<form class="d-flex" action='list'>
 		  <input type='hidden' name='stateNo' value='${smallAddress.bigAddress.no}'>
       <input type='hidden' name='cityNo' value='${smallAddress.no}'>
