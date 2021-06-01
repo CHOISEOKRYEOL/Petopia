@@ -40,7 +40,7 @@ public class ReviewController {
   }
 
   @PostMapping("add")
-  public String add(HttpServletRequest request, HttpSession session)
+  public String add(HttpServletRequest request, HttpSession session, Part photoFile)
       throws Exception {
 
     String uploadDir = request.getServletContext().getRealPath("/upload");
@@ -60,7 +60,6 @@ public class ReviewController {
       String filename = UUID.randomUUID().toString();
       photoPart.write(uploadDir + "/" + filename);
       r.setPhoto(filename);
-
 
       Thumbnails.of(uploadDir + "/" + filename)
       .size(100, 100)
