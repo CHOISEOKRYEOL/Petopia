@@ -6,7 +6,7 @@
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-<link href="../css/common.css" rel="stylesheet" >
+<link href="../../css/common.css" rel="stylesheet" >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>나눔장터 댓글</title>
 <style>
@@ -16,7 +16,7 @@ margin: 0 auto;
 border: 1px solid #cccccc;
 }
 #comment-remove, #comment-modify {
-display: none;
+/*display: none;*/
 margin: 10px;
 }
 button {
@@ -30,7 +30,14 @@ padding: 5px;
 </head>
 <body>
 <c:if test="${not empty comtList}">
+<div id="comment-modify">
+      <textarea id="modify-content" rows="3" cols="50"></textarea>
+      <button type="button" id="comment-modify-btn">수정 확인</button>
+     <button type="button" id="comment-modify-cancle-btn">수정 취소</button>
+</div>
+          
 <c:forEach items="${comtList}" var="comt">
+
 <table class ="comment-table">
 <tr><td bgcolor="pink">작성자</td><td bgcolor="pink">작성일</td></tr>
 <tr>
@@ -45,7 +52,7 @@ padding: 5px;
     </div>
   </c:if></td></tr>
   
-<tr id="c-tr"><td class="c-cont"  data-no="${comt.no}" colspan="2">${comt.content}</td></tr>
+  <tr><td class="c-cont"  data-no="${comt.no}" colspan="2"><span>${comt.content}</span></td></tr>
 </table>
   </c:forEach>
 </c:if>
@@ -59,13 +66,9 @@ padding: 5px;
 <c:if test="${not empty comtList}">
 <c:forEach items="${comtList}" var="comt">
         <c:if test="${not empty loginUser and loginUser.no == smb.writer.no}">
-          <div id="comment-modify">
-                <textarea id="modify-content" rows="3" cols="50">${comt.content}</textarea>
-                <button type="button" class="modify-detail-btn" onclick='modifyComment(${comt.no});'>수정 확인</button>
-               <button type="button" id="modify-cancle-btn">수정 취소</button>
-          </div>
+          
             
-      <div id="comment-remove">
+      <div id="comment-removex">
           <div id="remove-message">
           <b>정말 삭제하시겠습니까?</b>
               <button type="button" class="remove-detail-btn" onclick='deleteComment(${comt.no});'>삭제 완료</button>
@@ -79,30 +82,48 @@ padding: 5px;
 <script>	
 "use strict"
 
-function initModify(){
-	$("#modify-content").val("");
-};
+var commentModifyDiv = $('#comment-modify'),
+    commentModifyTa = commentModifyDiv.find('textarea');
+    
+commentModifyDiv.css('display', 'none');
 
-	var el =document.querySelectorAll(".modify-btn");
+$('.modify-btn').click(function(e) {
+	var comtNo = $(this).attr("data-no");
+	var comtTd = $('.c-cont[data-no=' + comtNo + ']');
+	var comtSpan = comtTd.find('span');
+	comtSpan.css('display', 'none');
+	comtTd.append(commentModifyDiv);
+	commentModifyTa.val(comtSpan.html());
+	commentModifyTa.attr('data-no', comtNo);
+	commentModifyDiv.css('display', '');
+});
+
+$('#comment-modify-btn').click(function(e) {
+	var commentText = commentModifyTa.val();
+	var commentNo = commentModifyTa.attr('data-no');
+	console.log(commentNo, commentText);
+	// ajax
+	commentModifyDiv.css('display', 'none');
 	
-	var btnClick = (e) => {
-	  console.log(e.target.getAttribute("data-no"));
-	  var no = e.target.getAttribute("data-no");
-	  console.log(e.target);
-	  console.log(no);
-	 /*  console.log($(".modify-btn").data("no")); */
-/* 	  console.log($(".modify-btn")[no].getAttribute("data-no")); */
-	};
-	for(var e of el){
-	  e.addEventListener("click",btnClick);
-	}
+	var comtTd = $('.c-cont[data-no=' + commentNo + ']');
+	var comtSpan = comtTd.find('span');
+	comtSpan.html(commentText);
+	comtSpan.css('display', '');
+});
 	
- 	$(".modify-btn").click(function() {
+	
+ 	$(".modify-btnx").click(function() {
+ 		
+ 		var x = $('.modify-btn').val();//value값으로 넣었을때.
+ 		var y = $('[data-no]');
+ 		 console.log(y);
 		   //console.log(this);
+/* 		   console.log($('.modify-btn[data-no=15]').val()); */
 		   console.log(this.parentElement);
 		   $(this.parentElement).find('.modify-btn').hide();
 		   $(this.parentElement).find('.remove-btn').hide(); 
-		   $("#comment-modify").show().appendTo("#c-tr");
+		   $(".comment-modify").show().appendTo("#c-tr");
+/* 		   $(".comment-modify['data-no']").show().appendTo("#c-tr"); */
 		   $(".c-cont").hide();
 		  }); 
 	

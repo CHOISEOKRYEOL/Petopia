@@ -33,7 +33,7 @@
         <div class="d-flex justify-content-between">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="../login">로그인</a>
+              <a class="nav-link active" aria-current="page" href="../login_form">로그인</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="../member/add">회원가입</a>
