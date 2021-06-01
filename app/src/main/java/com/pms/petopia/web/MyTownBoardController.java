@@ -331,10 +331,7 @@ public class MyTownBoardController {
   }
 
   @GetMapping("city")
-  public void city(int sido, Model model) throws Exception {
-
-    model.addAttribute("sido", sido);
-
+  public void city() throws Exception {
   }
 
 
