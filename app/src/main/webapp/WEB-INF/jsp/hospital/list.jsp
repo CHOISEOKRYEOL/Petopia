@@ -22,7 +22,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     <p style="font-size: 50px;">펫토피아</p>
     <p style="font-size: 30px;">집에서 가까운 병원 찾기</p>
     <p>직접 동네 병원을 검색할 필요 없이<br>
-    내 집에서 가장 가까운 병원을, 상세 리뷰와 함께 보여드립니다</p> 
+    내 집에서 가장 가까운 병원을, 상세 리뷰와 함께 보여드립니다</p>
   </div>
 </div>
 
@@ -51,8 +51,6 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   </div>
 </nav>
 
-<!-- <jsp:include page="/jsp/hospital/map.jsp"></jsp:include> -->
-
 <table class="table table-hover">
 <thead>
 <tr>
@@ -63,8 +61,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 </tr>
 </thead>
 <tbody>
-
-			<c:forEach items="${list}" var="h">
+			<c:forEach items="${hospitals}" var="h">
 				<tr>
 					<td>${h.no}</td>
 					<td><a href='detail?no=${h.no}'>${h.name}</a></td>
@@ -88,7 +85,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 								<c:if
 									test="${b.member.no == loginUser.no and b.hospital.no == h.no}">
 									<td>
-										<form action="../member/bookmarkdelete">
+										<form action="../bookmark/delete">
 											<input type="hidden" name="no" value="${b.no}"> <input
 												type="hidden" name="hno" value="-1"> <input
 												type="submit" value="★">
@@ -100,7 +97,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 						</c:forEach>
 						<c:if test="${not loop}">
 							<td>
-								<form action="../member/bookmarkadd" method="post">
+								<form action="../bookmark/add" method="post">
 									<input type="hidden" name="mno" value="${loginUser.no}">
 									<input type="hidden" name="hno" value="${h.no}"> 
 									<input type="hidden" name="hiddenNo" value="1"> 
@@ -108,7 +105,6 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 								</form>
 							</td>
 						</c:if>
-
 					</c:if>
 				</tr>
 			</c:forEach>

@@ -1,7 +1,6 @@
 package com.pms.petopia.web;
 
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -112,11 +111,8 @@ public class AdminController {
   }
 
   @GetMapping("answer")
-  public String answerQna(HttpServletRequest request) throws Exception {
+  public String answerQna(Qna qna) throws Exception {
 
-    Qna qna = new Qna();
-    qna.setNo(Integer.parseInt(request.getParameter("no")));
-    qna.setAnswer(request.getParameter("answer"));
     qna.setState(1);
     qnaService.answer(qna);
 

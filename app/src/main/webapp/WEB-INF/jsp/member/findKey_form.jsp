@@ -46,18 +46,19 @@
 <form method='post'>
   <div class="mb-3 row">
     <div class="col-sm-9">
-      <input type="id" class="form-control form-control-sm" id="id" name="id" placeholder="아이디 or 이메일">
+      <input type="id" class="form-control form-control-sm" id="id" name="id" placeholder="아이디">
     </div>
   </div>
   <div class="mb-3 row">
     <div class="col-sm-9">
       <input type="tel" class="form-control form-control-sm" id="tel" name="tel" placeholder="휴대전화번호">
-      <button>인증번호 받기</button>
+      <button id="firstAuthentication" disabled="disabled">인증번호 받기</button>
     </div>
   </div>
   <div class="mb-3 row">
     <div class="col-sm-9">
-      <input type="number" class="form-control form-control-sm" id="number" name="number" placeholder="인증번호 입력"><button id="find">인증</button>
+      <input type="number" class="form-control form-control-sm" id="number" name="number" placeholder="인증번호 입력">
+      <button id="secondAuthentication" style="display: none">인증</button>
     </div>
   </div>
 <button class="btn btn-primary btn-sm">비밀번호 찾기</button>
