@@ -13,12 +13,13 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <link href="../css/common.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
   <h1>${smallAddress.bigAddress.name}&nbsp;${smallAddress.name}</h1>
   <h2>게시글 상세보기</h2>
   <form action='update' method='post'>
-    <table border='1'>
+    <table border='1' id="detailTable">
       <tbody>
         <tr>
           <th>번호</th>
@@ -41,7 +42,7 @@
           <th>등록일</th>
           <td>${myTownBoard.createdDate}</td>
         </tr>
-        <tr>
+        <tr id="recomentCount">
           <th>조회수</th>
           <td>${myTownBoard.viewCount}</td>
           <th>추천수</th>
@@ -66,6 +67,7 @@
     <tr>
       <td colspan='2'>
           <input id="board-no" type="hidden" name="no" value="${myTownBoard.no}">
+          <input id="reco-count" type="hidden" name="rcount" value="${myTownBoard.recommentCount}">
           <button id="reco" type="button">추천</button>
         <!--  <a href='recommentadd?no=${myTownBoard.no}' class ='btn'>추천</a> -->
       </td>
@@ -75,27 +77,37 @@
   <a
     href='list?stateNo=${smallAddress.bigAddress.no}&cityNo=${smallAddress.no}'>목록</a>
   <br>
-<!--   <jsp:include page="/jsp/mytownboardcomment/list.jsp" /> -->
-  <form action='../mytowncomment/add' method='post'>
+  <jsp:include page="list_comment.jsp" />
+  <form action='../mytown/addComment' method='post'>
     <input type='hidden' name='boardNo' value='${myTownBoard.no}'>
     <br> 댓글:
     <textarea name='content' rows='1' cols='30'></textarea>
     <br> <input type='submit' value='등록'>
   </form>
-    <script>
-    document.querySelector("#reco").onclick = function() {
-      var boardNo = document.querySelector("#board-no");
-      var xhr = new XMLHttpRequest();
-      xhr.open("GET", "recommentadd?no=" + boardNo.value, false);
-      xhr.send();
-      if (xhr.responseText == "fail") {
-        alert("이미 추천한 게시물입니다.");
-      } else {
-        alert("게시물을 추천하였습니다.") 
-      }
-    };
-    $btn("#reco").click()(() => {
-    	$("#btn1").click(() => {
+  <script>
+   
+    var boardNo = $('#board-no').val();
+    var recommentCount = Number($('#detailTable > tbody > tr:nth-child(3) > td:nth-child(4)').html());
+    // var recommentCount =  document.querySelector('#recommentCount').innerHTML
+    console.log(recommentCount);
+    
+    $('#reco').click(function(){
+	    $.ajax({
+	    	url : "recommentAdd",
+	    	data : {
+	    		no : boardNo
+	    	},
+	    	success : function(data) {
+	    		console.log(data);
+	    		if(data == "fail") {
+	    			alert("이미 추천한 게시물입니다.");
+	    		} else {
+	    			alert("게시물을 추천하였습니다.");
+	    			$('#detailTable > tbody > tr:nth-child(3) > td:nth-child(4)').html(recommentCount + 1);
+	    			console.log($('#detailTable > tbody > tr:nth-child(3) > td:nth-child(4)').html());
+	    		}
+	    	}
+	    });
     });
   </script>
 </body>

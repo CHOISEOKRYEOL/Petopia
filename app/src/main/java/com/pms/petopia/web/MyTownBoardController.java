@@ -1,6 +1,5 @@
 package com.pms.petopia.web;
 
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +13,6 @@ import com.pms.petopia.domain.BigAddress;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.MyTownBoard;
 import com.pms.petopia.domain.MyTownBoardComment;
-import com.pms.petopia.domain.Recomment;
 import com.pms.petopia.domain.SmallAddress;
 import com.pms.petopia.service.MyTownBoardCommentService;
 import com.pms.petopia.service.MyTownBoardService;
@@ -63,8 +61,8 @@ public class MyTownBoardController {
     return "redirect:list?stateNo=" + s.getBigAddress().getNo() + "&cityNo=" + s.getNo();
   }
 
-  @RequestMapping("detail")
-  public String detail(int no, int stateNo, int cityNo, Model model)
+  @GetMapping("detail")
+  public void detail(int no, int stateNo, int cityNo, Model model)
       throws Exception {
 
     MyTownBoard myTownBoard = myTownBoardService.get(no);
@@ -79,24 +77,18 @@ public class MyTownBoardController {
     model.addAttribute("smallAddress", smallAddress);
     model.addAttribute("comments", comments);
     model.addAttribute("commentCount", commentCount);
-
-    return "/jsp/mytown/detail.jsp";
-
   }
 
-  @RequestMapping("delete")
-  public String delete(HttpServletRequest request, HttpServletResponse response)
+  @GetMapping("delete")
+  public String delete(int no, HttpSession session)
       throws Exception {
-
-
-    int no = Integer.parseInt(request.getParameter("no"));
 
     MyTownBoard oldBoard = myTownBoardService.get(no);
     if (oldBoard == null) {
       throw new Exception("해당 번호의 게시글이 없습니다.");
     }
 
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
     if (oldBoard.getWriter().getNo() != loginUser.getNo()) {
       throw new Exception("삭제 권한이 없습니다!");
     }
@@ -110,31 +102,26 @@ public class MyTownBoardController {
     String webAddress = String.format("list?stateNo=%d&cityNo=%d", 
         oldBoard.getBigAddress().getNo(), oldBoard.getSmallAddress().getNo());
 
-    return "/jsp/mytown/delete.jsp";
+    return "redirect:" + webAddress;
 
     //      response.setHeader("Refresh", "3;url=" + webAddress);
 
   }
 
-  @RequestMapping("updateComment")
-  public String updateComment(HttpServletRequest request, HttpServletResponse response)
+  @PostMapping("updateComment")
+  public String updateComment(MyTownBoardComment comment, HttpSession session)
       throws Exception {
 
-    int no = Integer.parseInt(request.getParameter("no"));
-
-
-    MyTownBoardComment oldBoardComment = myTownBoardCommentService.get(no);
+    MyTownBoardComment oldBoardComment = myTownBoardCommentService.get(comment.getNo());
     if (oldBoardComment == null) {
       throw new Exception ("해당 번호의 댓글이 없습니다.");
     }
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
     if (oldBoardComment.getWriter().getNo() != loginUser.getNo()) {
       throw new Exception("변경 권한이 없습니다!");
     }
-
-    MyTownBoardComment comment = new MyTownBoardComment();
-    comment.setNo(oldBoardComment.getNo());
-    comment.setContent(request.getParameter("content"));
+    //MyTownBoardComment comment = new MyTownBoardComment();
+    //comment.setNo(oldBoardComment.getNo());
 
     myTownBoardCommentService.update(comment);
     MyTownBoard board = myTownBoardService.get(oldBoardComment.getMyTownBoard().getNo());
@@ -142,51 +129,26 @@ public class MyTownBoardController {
     String webAddress = String.format("../mytown/detail?stateNo=%d&cityNo=%d&no=%d", 
         board.getBigAddress().getNo(), board.getSmallAddress().getNo(), board.getNo());
 
-    return "redirect:webAddress";
-    //      response.sendRedirect(webAddress);
+    return "redirect:" + webAddress;
 
 
   }
 
-  @RequestMapping("listComment")
-  public String listComment(HttpServletRequest request, HttpServletResponse response)
-      throws Exception {
-
-
-    MyTownBoardComment c = new MyTownBoardComment();
-    int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-    MyTownBoard t = myTownBoardService.get(boardNo);
-    c.setMyTownBoard(t);
-    Member loginUser = (Member)request.getSession().getAttribute("loginUser");
-    c.setWriter(loginUser);
-    c.setContent(request.getParameter("content"));
-
-    myTownBoardCommentService.add(c);
-    String webAdress= String.format("../mytown/detail?stateNo=%d&cityNo=%d&no=%d\n", 
-        t.getBigAddress().getNo(), t.getSmallAddress().getNo(), boardNo);
-
-    return "redirect:webAdress";
-    //    response.sendRedirect(webAdress);
-
-  }
-
-  @RequestMapping("deleteComment")
-  public String deleteComment(HttpServletRequest request, HttpServletResponse response)
-      throws Exception {
-
-    int no = Integer.parseInt(request.getParameter("no"));
+  @GetMapping("deleteComment")
+  public String deleteComment(int no, HttpSession session) throws Exception {
 
     MyTownBoardComment oldBoardComment = myTownBoardCommentService.get(no);
     if (oldBoardComment == null) {
       throw new Exception("해당 번호의 댓글이 없습니다.");
     }
 
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
     if (oldBoardComment.getWriter().getNo() != loginUser.getNo()) {
       throw new Exception("삭제 권한이 없습니다!");
     }
-
+    System.out.println("delete");
     myTownBoardCommentService.delete(no);
+
     int oldBoardNo = oldBoardComment.getMyTownBoard().getNo();
     MyTownBoard oldBoard = myTownBoardService.get(oldBoardNo);
 
@@ -199,16 +161,13 @@ public class MyTownBoardController {
   }
 
   @RequestMapping("addComment")
-  public String addComment(HttpServletRequest request, HttpServletResponse response)
+  public String addComment(MyTownBoardComment c, int boardNo, HttpSession session)
       throws Exception {
 
-    MyTownBoardComment c = new MyTownBoardComment();
-    int boardNo = Integer.parseInt(request.getParameter("boardNo"));
     MyTownBoard t = myTownBoardService.get(boardNo);
     c.setMyTownBoard(t);
-    Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+    Member loginUser = (Member)session.getAttribute("loginUser");
     c.setWriter(loginUser);
-    c.setContent(request.getParameter("content"));
 
     myTownBoardCommentService.add(c);
     String webAddress= String.format("../mytown/detail?stateNo=%d&cityNo=%d&no=%d\n", 
@@ -255,93 +214,86 @@ public class MyTownBoardController {
     model.addAttribute("smallAddresses", smallAddresses);
   }
 
-  @RequestMapping("recommentAdd")
-  public String recommentAdd(HttpServletRequest request, HttpServletResponse response)
-      throws Exception {
-
-    PrintWriter out = response.getWriter();
-
-    Recomment recomment = new Recomment();
-    int boardNo = Integer.parseInt(request.getParameter("no"));
-    MyTownBoard myTownBoard = myTownBoardService.get(boardNo);
-    recomment.setMyTownBoard(myTownBoard);
-
-    Member loginUser = (Member)request.getSession().getAttribute("loginUser");
-    recomment.setRecommender(loginUser);
-
-    int count = 0;
-    List<Recomment> recomments = recommentService.list();
-
-    if (recomments.size() == 0) {
-      recommentService.add(recomment);
-      myTownBoardService.updateRecommentCount(boardNo);
-      out.print("success");
-
-    } else {
-
-      for(Recomment reco : recomments) {
-        if (reco.getRecommender().getNo() != loginUser.getNo() && reco.getMyTownBoard().getNo() != boardNo
-            || reco.getRecommender().getNo() == loginUser.getNo() && reco.getMyTownBoard().getNo() != boardNo
-            || reco.getRecommender().getNo() != loginUser.getNo() && reco.getMyTownBoard().getNo() == boardNo) {
-
-          count++;
-          if (count == recomments.size()) {
-            recommentService.add(recomment);
-            myTownBoardService.updateRecommentCount(boardNo);
-            System.out.println("success");
-            out.print("success");
-            break;
-          }
-
-        }else {
-          System.out.println("fail");
-          out.print("fail");
-        }
-      }
-    }
-    return "";
-  }
-
-
-  @RequestMapping("update")
-  public String update(HttpServletRequest request, HttpServletResponse response)
-      throws Exception {
-    if(request.getMethod().equals("GET")) {
-      int no = Integer.parseInt(request.getParameter("no"));
-
-      List<SmallAddress> smallAddresses = smallAddressService.list();
-      MyTownBoard oldBoard = myTownBoardService.get(no);
-      if (oldBoard == null) {
-        throw new Exception ("해당 번호의 게시글이 없습니다.");
-      }
-      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-      if (oldBoard.getWriter().getNo() != loginUser.getNo()) {
-        throw new Exception("변경 권한이 없습니다!");
-      }
-
-      request.setAttribute("oldBoard", oldBoard);
-      request.setAttribute("smallAddresses", smallAddresses);
-      return "/jsp/mytown/update.jsp";
-    }
-
-    int no = Integer.parseInt(request.getParameter("no"));
+  //  @GetMapping("recommentAdd")
+  //  public String recommentAdd(Recomment recomment, int no, HttpSession session, Model model)
+  //      throws Exception {
+  //
+  //    MyTownBoard t = myTownBoardService.get(no);
+  //    recomment.setMyTownBoard(t);
+  //
+  //    Member loginUser = (Member)session.getAttribute("loginUser");
+  //    recomment.setRecommender(loginUser);
+  //
+  //    int count = 0;
+  //    List<Recomment> recomments = recommentService.list();
+  //
+  //    if (recomments.size() == 0) {
+  //      recommentService.add(recomment);
+  //      myTownBoardService.updateRecommentCount(no);
+  //      model.addAttribute("result", "success");
+  //
+  //    } else {
+  //
+  //      for(Recomment reco : recomments) {
+  //        if (reco.getRecommender().getNo() != loginUser.getNo() && reco.getMyTownBoard().getNo() != no
+  //            || reco.getRecommender().getNo() == loginUser.getNo() && reco.getMyTownBoard().getNo() != no
+  //            || reco.getRecommender().getNo() != loginUser.getNo() && reco.getMyTownBoard().getNo() == no) {
+  //
+  //          count++;
+  //          if (count == recomments.size()) {
+  //            recommentService.add(recomment);
+  //            myTownBoardService.updateRecommentCount(no);
+  //            System.out.println("success");
+  //            model.addAttribute("result", "success");
+  //            break;
+  //          }
+  //
+  //        }else {
+  //          System.out.println("fail");
+  //          model.addAttribute("result", "fail");
+  //        }
+  //      }
+  //    }
+  //    String webAddress= String.format("../mytown/detail?stateNo=%d&cityNo=%d&no=%d\n", 
+  //        t.getBigAddress().getNo(), t.getSmallAddress().getNo(), no);
+  //
+  //    return "redirect:" + webAddress;
+  //  }
 
 
+
+  @GetMapping("update")
+  public void update(int no, HttpSession session, Model model) throws Exception {
+
+    List<SmallAddress> smallAddresses = smallAddressService.list();
     MyTownBoard oldBoard = myTownBoardService.get(no);
     if (oldBoard == null) {
       throw new Exception ("해당 번호의 게시글이 없습니다.");
     }
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
     if (oldBoard.getWriter().getNo() != loginUser.getNo()) {
       throw new Exception("변경 권한이 없습니다!");
     }
 
-    MyTownBoard board = new MyTownBoard();
-    board.setNo(oldBoard.getNo());
-    board.setTitle(request.getParameter("title"));
-    board.setContent(request.getParameter("content"));
-    Integer.parseInt(request.getParameter("stateNo")); // 일단 받아와
-    int cityNo = Integer.parseInt(request.getParameter("cityNo"));
+    model.addAttribute("oldBoard", oldBoard);
+    model.addAttribute("smallAddresses", smallAddresses);
+  }
+
+
+
+  @PostMapping("update")
+  public String update(int no, int cityNo, MyTownBoard board, HttpSession session)
+      throws Exception {
+
+    MyTownBoard oldBoard = myTownBoardService.get(board.getNo());
+    if (oldBoard == null) {
+      throw new Exception ("해당 번호의 게시글이 없습니다.");
+    }
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (oldBoard.getWriter().getNo() != loginUser.getNo()) {
+      throw new Exception("변경 권한이 없습니다!");
+    }
+
     SmallAddress smallAddress = smallAddressService.get(cityNo);
     BigAddress bigAddress = smallAddress.getBigAddress();
     board.setBigAddress(bigAddress);
@@ -351,7 +303,7 @@ public class MyTownBoardController {
     String webAddress = String.format("detail?stateNo=%d&cityNo=%d&no=%d\n", 
         board.getBigAddress().getNo(), board.getSmallAddress().getNo(), board.getNo());
 
-    return "/jsp/mytown/update.jsp";
+    return "redirect:" + webAddress;
     //    response.sendRedirect(webAddress);
 
 
@@ -378,7 +330,12 @@ public class MyTownBoardController {
     return "/jsp/mypage/mytownlist.jsp";
   }
 
+  @GetMapping("city")
+  public void city(int sido, Model model) throws Exception {
 
+    model.addAttribute("sido", sido);
+
+  }
 
 
 
