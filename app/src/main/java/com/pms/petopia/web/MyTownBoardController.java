@@ -183,12 +183,11 @@ public class MyTownBoardController {
   public void list(int stateNo, int cityNo, String keyword, String r, Model model)
       throws Exception {
 
-    List<MyTownBoard> boards = myTownBoardService.list(cityNo, stateNo);
+    List<MyTownBoard> boards = myTownBoardService.list(stateNo, cityNo);
     SmallAddress smallAddress = smallAddressService.get(cityNo);
     List<SmallAddress> smallAddresses = smallAddressService.list();
 
     if (boards.size() > 0) {
-
       if (keyword != null && keyword.length() > 0 && r == null) {
         boards = myTownBoardService.search(stateNo, cityNo, keyword);
       }else if(keyword == null && r != null) {
@@ -275,6 +274,11 @@ public class MyTownBoardController {
       throw new Exception("변경 권한이 없습니다!");
     }
 
+    BigAddress bigAddress = oldBoard.getBigAddress();
+    SmallAddress smallAddress = oldBoard.getSmallAddress();
+
+    model.addAttribute("smallAddress", smallAddress);
+    model.addAttribute("bigAddress", bigAddress);
     model.addAttribute("oldBoard", oldBoard);
     model.addAttribute("smallAddresses", smallAddresses);
   }

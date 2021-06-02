@@ -8,7 +8,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/mytown.css">
+<link rel="stylesheet" type="text/css" href="../../css/layout.css">
 </head>
 <body>
 <header></header>
@@ -22,15 +23,29 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     같이 산책할 내 반려동물의 친구 사귀어 보세요.</p>
   </div>
 </div>
+
+
 <div class="container">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <a class="navbar-brand">우리 동네 찾기</a>
 </nav>
 
-<img src="../../images/IMG_7390.jpg" class="img-fluid width:20%;"
-style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
+<div class="mytownmain">
+<img src="../../images/IMG_7390.PNG" width=50%; style=margin-left:45%;>
+  <div class="mytown-main-group">
+    <p style="font-size: 25px; font-weight: bold;">우리동네 더 행복하게 즐기기</p>
+    <p style="font-size: 20px;">동네 검색을 통해 알아보세요!</p>
+  </div>
+</div>
 
-<jsp:include page="../../../html/state.html"/>
+<div class="hangjung">
+  <jsp:include page="../../../html/state.html"/>
+</div>
+</div>
+
+
+
+
 
 <%-- <form action='list' method='get'>
     광역시/도 : <select name='stateNo'>
@@ -43,7 +58,6 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
       </c:forEach>
     </select> <input type='submit' value='찾기'>
   </form>--%>
-</div> 
 
 <footer></footer>
 <script>

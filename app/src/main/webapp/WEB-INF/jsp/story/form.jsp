@@ -16,7 +16,7 @@
 <link rel="stylesheet" type="text/css" href="../../css/layout.css">
 </head>
 <body>
-<header id="header"></header>
+<header></header>
 <div class="wrap">
 <img src="../../images/20180115_120703.jpg" class="img-fluid width:100%;"
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
@@ -60,7 +60,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 </div>
 </div>
 
-<footer id="footer"></footer>
+<footer></footer>
 <script>
 $(document).ready(function() {
     $("header").load("../../html/header.jsp");
