@@ -25,7 +25,7 @@ public class BookmarkController {
   }
 
   @PostMapping("add")
-  public void add(HttpServletRequest request)
+  public String add(HttpServletRequest request)
       throws Exception {
 
     Bookmark b = new Bookmark();
@@ -41,35 +41,37 @@ public class BookmarkController {
     b.setMember(m);
     b.setHospital(h);
 
+    int check = Integer.parseInt(request.getParameter("hiddenNo"));
+
     bookmarkService.add(b);
 
 
-    //    if(check == 0) {
-    //      return "redirect:../hospital/detail?no=" + h.getNo();
-    //    }
-    //    else {
-    //      return "redirect:../hospital/list";
-    //    }
+    if(check == 0) {
+      return "redirect:../hospital/detail?no=" + h.getNo();
+    }
+    else {
+      return "redirect:../hospital/list";
+    }
   }
 
   @GetMapping("delete")
-  public void delete(HttpServletRequest request, HttpServletResponse response)
+  public String delete(HttpServletRequest request, HttpServletResponse response)
       throws Exception {
 
     int no = Integer.parseInt(request.getParameter("no"));
+    int hno = Integer.parseInt(request.getParameter("hno"));
 
     bookmarkService.delete(no);
 
-
-    //    if(hno == -1) {
-    //      return "redirect:../hospital/list";
-    //    }
-    //    else if(hno == 0){
-    //      return "redirect:list";
-    //    }
-    //    else {
-    //      return "redirect:../hospital/detail?no=" + hno;
-    //    }
+    if(hno == -1) {
+      return "redirect:../hospital/list";
+    }
+    else if(hno == 0){
+      return "redirect:list";
+    }
+    else {
+      return "redirect:../hospital/detail?no=" + hno;
+    }
   }
 
   @GetMapping("list")

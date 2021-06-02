@@ -85,8 +85,11 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 								<c:if
 									test="${b.member.no == loginUser.no and b.hospital.no == h.no}">
 									<td>
-											<input type="hidden" id="deleteNo" name="no" value="${b.no}"> 
-											<button id="bookmarkDelete" value="${b.no}">★</button>
+									<form action="../bookmark/delete">
+									     <input type="hidden" name="no" value="${b.no}"> 
+									     <input type="hidden" name="hno" value="-1"> 
+                        <input type="submit" value="★">
+									</form>
 									</td>
 									<c:set var="loop" value="true" />
 								</c:if>
@@ -94,10 +97,12 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 						</c:forEach>
 						<c:if test="${not loop}">
 							<td>
-									<input type="hidden" id="addMno" name="mno" value="${loginUser.no}">
-									<input type="hidden" id="addHno" name="hno" value="${h.no}"> 
-									<button id="bookmarkAdd" value="${b.no}">☆</button>
-									
+							<form action="../bookmark/add" method="POST">
+							     <input type="hidden" name="mno" value="${loginUser.no}">
+                  <input type="hidden" name="hno" value="${h.no}"> 
+                  <input type="hidden" name="hiddenNo" value="1">
+									<input type="submit" value="☆">
+									</form>
 							</td>
 						</c:if>
 					</c:if>
