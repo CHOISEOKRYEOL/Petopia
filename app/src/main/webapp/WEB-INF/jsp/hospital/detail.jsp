@@ -153,7 +153,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     <input type="submit" value="리뷰 작성">
   </form>
 </nav>
-  
+<div class="reviewlist"></div>
 </div>
 
 <footer></footer>
