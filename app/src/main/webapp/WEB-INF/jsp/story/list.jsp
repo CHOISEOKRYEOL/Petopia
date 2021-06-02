@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="../../css/layout.css">
 </head>
 <body>
-<header id="header"></header>
+<header></header>
 <div class="wrap">
 <img src="../../images/20180115_120703.jpg" class="img-fluid width:100%;"
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
@@ -163,7 +163,7 @@ $(document).ready(function() {
     $("footer").load("../../html/footer.html");
   });
   </script>
-<footer id="footer"></footer>
+<footer></footer>
 </body>
 </html>
     

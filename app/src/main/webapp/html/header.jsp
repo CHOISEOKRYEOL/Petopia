@@ -3,7 +3,6 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #FFADAD;">
   <div class="container-fluid">
     <a class="navbar-brand-main" href="../main"><img src="../../images/Petopia.png"></a>
@@ -28,7 +27,7 @@
               <a class="nav-link active" aria-current="page" href="../login_form">로그인</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="../member/add">회원가입</a>
+              <a class="nav-link active" aria-current="page" href="../member/member_form">회원가입</a>
             </li>
           </ul>
         </div>
