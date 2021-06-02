@@ -105,6 +105,7 @@ $(document).ready(function() {
 	  $("footer").load("../../html/footer.html");
 	});
 </script>
+
 </body>
 </html>
 

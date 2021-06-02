@@ -35,6 +35,12 @@ padding: 5px;
       <button type="button" id="comment-modify-btn">수정 확인</button>
      <button type="button" id="comment-modify-cancle-btn">수정 취소</button>
 </div>
+
+<div id="comment-remove">
+		  <b>정말 삭제하시겠습니까?</b>
+		  <button type="button" id="comment-remove-btn">삭제 확인</button>
+		  <button type="button" id="comment-remove-cancle-btn">삭제 취소</button>
+</div>
           
 <c:forEach items="${comtList}" var="comt">
 
@@ -47,41 +53,31 @@ padding: 5px;
 <tr>
   <tr><td colspan="2"><c:if test="${not empty loginUser and loginUser.no == smb.writer.no}">
     <div id="d2">
-        <button type="button" class='modify-btn' data-no='${comt.no}' >수정</button>
-        <button type="button" class="remove-btn" data-no="${comt.no}">삭제</button>
+        <button type='button' class='modify-btn' data-no='${comt.no}' >수정</button>
+        <button type='button' class='remove-btn' data-no='${comt.no}'>삭제</button>
     </div>
   </c:if></td></tr>
   
-  <tr><td class="c-cont"  data-no="${comt.no}" colspan="2"><span>${comt.content}</span></td></tr>
+  <tr><td class="c-cont"  data-no="${comt.no}" colspan="2" style="white-space:pre;"><span>${comt.content}</span></td></tr>
 </table>
   </c:forEach>
 </c:if>
-
-
       
 <c:if test="${empty comtList}">
-  <p>댓글이 없습니다.</p>
+<!--   <p>댓글이 없습니다.</p> -->
 </c:if>
 
-<c:if test="${not empty comtList}">
-<c:forEach items="${comtList}" var="comt">
-        <c:if test="${not empty loginUser and loginUser.no == smb.writer.no}">
-          
-            
-      <div id="comment-removex">
-          <div id="remove-message">
-          <b>정말 삭제하시겠습니까?</b>
-              <button type="button" class="remove-detail-btn" onclick='deleteComment(${comt.no});'>삭제 완료</button>
-              <button type="button" id="remove-cancle-btn">삭제 취소</button>
-            </div>
-          </div>
-       </c:if>
-       </c:forEach>
-       </c:if> 
 
 <script>	
 "use strict"
 
+//--------------버튼 초기화
+function resetBtn(){
+  $('.modify-btn').css('display', '');
+  $('.remove-btn').css('display', '');
+};
+
+//--------------수정버튼을 눌렀을시
 var commentModifyDiv = $('#comment-modify'),
     commentModifyTa = commentModifyDiv.find('textarea');
     
@@ -98,96 +94,99 @@ $('.modify-btn').click(function(e) {
 	commentModifyDiv.css('display', '');
 });
 
+var commentRemoveDiv = $('#comment-remove');
+
+//--------------삭제버튼을 눌렀을 시
+commentRemoveDiv.css('display', 'none');
+
+$('.remove-btn').click(function(e) {
+	console.log(this);
+	 var comtNoRe = $(this).attr("data-no");
+	 var comtTdRe = $('.c-cont[data-no=' + comtNoRe + ']');
+	 
+	 var comtReBtnRe = $('.remove-btn[data-no=' + comtNoRe + ']');
+	 comtReBtnRe.css('display', 'none');
+	 var comtMoBtnRe = $('.modify-btn[data-no=' + comtNoRe + ']');
+	   comtMoBtnRe.css('display', 'none');
+	   
+	  comtTdRe.append(commentRemoveDiv);
+	  commentRemoveDiv.css('display', '');
+});
+
+//--------------수정 확인버튼을 눌렀을 시
 $('#comment-modify-btn').click(function(e) {
 	var commentText = commentModifyTa.val();
 	var commentNo = commentModifyTa.attr('data-no');
 	console.log(commentNo, commentText);
-	// ajax
-	commentModifyDiv.css('display', 'none');
 	
-	var comtTd = $('.c-cont[data-no=' + commentNo + ']');
-	var comtSpan = comtTd.find('span');
-	comtSpan.html(commentText);
-	comtSpan.css('display', '');
-});
-	
-	
- 	$(".modify-btnx").click(function() {
- 		
- 		var x = $('.modify-btn').val();//value값으로 넣었을때.
- 		var y = $('[data-no]');
- 		 console.log(y);
-		   //console.log(this);
-/* 		   console.log($('.modify-btn[data-no=15]').val()); */
-		   console.log(this.parentElement);
-		   $(this.parentElement).find('.modify-btn').hide();
-		   $(this.parentElement).find('.remove-btn').hide(); 
-		   $(".comment-modify").show().appendTo("#c-tr");
-/* 		   $(".comment-modify['data-no']").show().appendTo("#c-tr"); */
-		   $(".c-cont").hide();
-		  }); 
-	
-function modifyComment(no){
-    console.log(no);
-    var content = $("#modify-content").val();
-    console.log(content);
-    
-    var xhr = new XMLHttpRequest();
+	    var xhr = new XMLHttpRequest();
     xhr.open("POST","../sharingmarketboardcomment/update",true);
       xhr.onreadystatechange = () => {
           if (xhr.readyState == 4) {
             if (xhr.status == 200) {
-                if(xhr.responseText =="empty"){
+                if(commentText ==""){
                     alert("변경할 댓글내용을 입력해주세요.");
-                     $("#modify-content").focus();
                      return;
-                  }else if(xhr.responseText =="working"){
-                      console.log(content);
-                      $("#comment-modify").hide();
-                      $("#d2").find('.modify-btn').data("no").show();
-                      $("#d2").find('.remove-btn').data("no").show(); 
+                  }else if(commentText !=""){
                     alert("댓글을 변경완료 했습니다.");
+                    commentModifyDiv.css('display', 'none');
+                    var comtTd = $('.c-cont[data-no=' + commentNo + ']');
+                    var comtSpan = comtTd.find('span');
+                    comtSpan.html(commentText);
+                    comtSpan.css('display', '');
                   }
                 } else {
               alert("요청오류 : " + xhr.status);
               }
             }
         };
-        var params = "no="+no+"&content="+encodeURIComponent(content);
+        var params = "no="+commentNo+"&content="+encodeURIComponent(commentText);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send(params);
+        });
+	
+	
+//--------------삭제 확인버튼을 눌렀을 시	
+$('#comment-remove-btn').click(function(e) {
+	  var commentNum = $('.remove-btn').attr('data-no');
 
-   
-};
+	 var xhr = new XMLHttpRequest();
+	    xhr.open("GET","../sharingmarketboardcomment/delete?no="+commentNum,true);
+	      xhr.onreadystatechange = () => {
+	          if (xhr.readyState == 4) {
+	            if (xhr.status == 200) {
+	                alert("댓글을 삭제했습니다.");
+	            } else {
+	              alert("요청오류 : " + xhr.status);
+	              }
+	            }
+	        };
+	        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	        xhr.send();
+	        console.log("send() 리턴함.");
+});
 
-/* $(".remove-btn").data("no").click(function() {
-	   $(this.parentElement).find('.modify-btn').data("no").hide();
-	   $(this.parentElement).find('.remove-btn').data("no").hide(); 
-	   $("#comment-remove").show().appendTo("#c-tr");
-}); */
+//--------------수정 취소버튼을 눌렀을 시
+$('#comment-modify-cancle-btn').click(function(e) {
+	$('#comment-modify').css('display', 'none');
+	resetBtn();
+	 var commentNo = commentModifyTa.attr('data-no');
+	 var comtTd = $('.c-cont[data-no=' + commentNo + ']');
+	 var comtSpan = comtTd.find('span');
+	 comtSpan.css('display', '');
+	
+});
+//--------------삭제 취소버튼을 눌렀을 시
+$('#comment-remove-cancle-btn').click(function(e) {
+	$('#comment-remove').css('display', 'none');
+	resetBtn();
+	var commentNo = commentModifyTa.attr('data-no');
+	var comtTd = $('.c-cont[data-no=' + commentNo + ']');
+	var comtSpan = comtTd.find('span');
+	comtSpan.css('display', '');
+  
+});
 
-
-function deleteComment(no){
-    console.log(no);
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET","../sharingmarketboardcomment/delete?no="+no,true);
-      xhr.onreadystatechange = () => {
-          if (xhr.readyState == 4) {
-            if (xhr.status == 200) {
-            	if(xhr.responseText=="working"){
-            		alert("댓글을 삭제했습니다.");
-            		 $("#comment-remove").hide();
-            		 $()
-            	}
-            } else {
-              alert("요청오류 : " + xhr.status);
-              }
-            }
-        };
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.send();
-        console.log("send() 리턴함.");
-};
 
 </script>
 </body>

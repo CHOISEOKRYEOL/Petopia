@@ -6,8 +6,8 @@
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-<link href="../../css/common.css" rel="stylesheet" >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../css/layout.css">
 <title>나눔장터 게시글 상세</title>
 <style>
 .detail-table{
@@ -28,18 +28,40 @@ right-padding: 10px;
 top-padding: 10px;
 bottom-padding: 10px;
 }
+
+photo {
+    align-items: center;
+    display: flex;
+    justify-content: left;
+}
+
+img {
+    align-items: center;
+    display: flex;
+    justify-content: left;
+}
+
 </style>
 </head>
 <body>
+<header></header>
+<div class="wrap">
+<img src="../../images/20180115_1208492.jpg" class="img-fluid width:100%;"
+style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
+  <div class="text-group">
+    <p style="font-size: 50px;">나눔장터</p>
+    <p style="font-size: 30px;">추억을 나누는 나눔 장터</p>
+    <p>사용하지 않는 반려동물 용품을<br>
+    버리지 말고 동네 친구들에게 나눠 보세요</p>
+  </div>
+</div>
 
 <div class="container">
-<h1>나눔 게시판</h1>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
   <li class="nav-item">
-    <a href='../main' class="btn" style="background-color: #FFADAD;">메인</a>
-    <a href='add' class="btn" style="background-color: #FFADAD;">새 글</a>
+    <a href='../sharingmarketboard/list' class="btn" style="background-color: #FFADAD;">목록</a>
     </li>
     </ul>
   </div>
@@ -66,17 +88,19 @@ bottom-padding: 10px;
 <tr><th>내용</th> <td colspan="5">${smb.content}</td></tr>
 
 <tr>
-<th>사진</th> 
+<th></th> 
 <c:if test="${not empty photList}">
 <td colspan="5"><c:forEach items="${photList}" var="p">
+<div>
   <c:if test="${not empty p.sharingmarketboard.no and smb.no == p.sharingmarketboard.no}">
-    <c:set var="photoUrl">../../upload/${p.photo}_80x80.jpg</c:set>
-    <img src='${photoUrl}'>
+    <c:set var="photoUrl">../../upload/${p.photo}_700x700.jpg</c:set>
+    <img class="photo" src='${photoUrl}' style= "align-items: center;">
   </c:if>
   <c:if test="${empty p.sharingmarketboard.no}">
     <c:set var="photoUrl">../../images/person_80x80.jpg</c:set>
     <img src='${photoUrl}'>
   </c:if>
+</div>
 </c:forEach></td>
   </c:if>
  </tr>
@@ -142,7 +166,13 @@ $("#detail-add-comment-btn").click(function() {
 
 
 </script>
-
+<footer></footer>
+<script>
+$(document).ready(function() {
+    $("header").load("../../html/header.jsp");
+    $("footer").load("../../html/footer.html");
+  });
+</script>
 </body>
 </html>
 
