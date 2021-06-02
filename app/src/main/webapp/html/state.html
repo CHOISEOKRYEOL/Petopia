@@ -1,51 +1,44 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>ex04</title>
-</head>
-<body>
-<h1>객체 - 정의</h1>
-<form>
-<!-- <select id="sido" name="sido">
-  <option value="1">서울특별시</option>
-  <option value="2">부산광역시</option>
-  <option value="3">인천광역시</option>
-  <option value="104">대구광역시</option>
-</select>
-<select id="sigungu" name="sigungu">
-  <option value="101">서울</option>
-  <option value="102">부산</option>
-  <option value="103">대구</option>
-  <option value="104">광주</option>
-</select>
-<button>전송</button> -->
-<table>
-  <thead>
-    <tr><th>광역시도</th><th>시군구</th></tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
+<form action='list' method='get'>
+ 광역시/도 : <select id="sido" name="stateNo"></select>
+ 시/군/구 : <select id="sigungu" name="cityNo"></select>
+<input type='submit' value='찾기'>
 </form>
+
 <script>
 "use strict"
 
-var tbody = $("tbody");
-$.getJSON('city.jsp', function(result) {
-    for (var b of result) {
-        $("<tr>")
-          .html("<td>" + b.sido + "</td>" + 
-           "<td>" + b.sigungu.name + "</td>") 
-          .appendTo(tbody);
-    }
+var sidoList;
+
+$.getJSON('city', function(result) {
+	  sidoList = result;
+		for (var sido of result) {
+			  $('<option>').attr('value', sido.no).html(sido.name).appendTo('#sido');	
+		}
+		
+		for (var sigungu of result[0].sigungu) {
+	      $("<option>").attr('value', sigungu.no).html(sigungu.name).appendTo('#sigungu');
+		}
+
+/* 		var sql = '';
+		for (var sido of result) {
+			sql = sql + "insert into pet_state(gno, gname) values('" + sido.no + "', '" + sido.name + "');\n";
+			
+			for (var sigungu of sido.sigungu) {
+				sql = sql + "insert into pet_city(gno, cname) values('" + sido.no + "', '" + sigungu.name + "');\n";
+			}
+		}
+		console.log(sql); */
+		
+  }).fail(function(xhr, textStatus, error) {
+      console.log(error);
+  });
+ 
+$('#sido').change(function() {
+	$('#sigungu').html('');
+	for (var sigungu of sidoList[this.value - 1].sigungu) {
+	    $("<option>").attr('value', sigungu.no).html(sigungu.name).appendTo('#sigungu');
+	}
 });
+
     
 </script>
-</body>
-</html>
-
-
-
-
-

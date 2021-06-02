@@ -10,22 +10,26 @@
 <title>우리동네 게시글 목록</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-<link href="../css/common.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
 </head>
 <body>
+<header id="header"></header>
+<div class="wrap">
+<img src="../../images/20180515_203804.jpg" class="img-fluid width:100%;"
+style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
+  <div class="text-group">
+    <p style="font-size: 50px;">펫토피아</p>
+    <p style="font-size: 30px;">우리동네 친구찾기</p>
+    <p>동네 커뮤니티로 정보를 나누고 수다 떨며<br>
+    같이 산책할 내 반려동물의 친구 사귀어 보세요.</p>
+  </div>
+</div>
 <div class="container">
 	<h1>${smallAddress.bigAddress.name}&nbsp;${smallAddress.name}</h1>
-	<form action='list' method='get'>
-		광역시/도 : <select name='stateNo'>
-			<c:forEach items="${smallAddresses}" var="s">
-				<option value='${s.bigAddress.no}' ${s.bigAddress.no == smallAddress.bigAddress.no ? "selected" : ""}>${s.bigAddress.name}</option>
-			</c:forEach>
-		</select> 시/군/구 : <select name='cityNo'>
-			<c:forEach items="${smallAddresses}" var="s">
-				<option value='${s.no}' ${s.no == smallAddress.no ? "selected" : ""}>${s.name}</option>
-			</c:forEach>
-		</select> <input type='submit' value='찾기'>
-	</form>
+	<a href = "main"> 우리동네찾으러가기</a>
+	
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -79,6 +83,13 @@
 		<button class="btn btn-outline-success col-sm-3" type="submit">검색</button>
 	</form>
 </div>
+<footer id="footer"></footer>
+<script>
+$(document).ready(function() {
+    $("header").load("../../html/header.jsp");
+    $("footer").load("../../html/footer.html");
+  });
+</script>
 </body>
 </html>
 
