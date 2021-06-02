@@ -85,11 +85,8 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 								<c:if
 									test="${b.member.no == loginUser.no and b.hospital.no == h.no}">
 									<td>
-										<form action="../bookmark/delete">
-											<input type="hidden" name="no" value="${b.no}"> <input
-												type="hidden" name="hno" value="-1"> <input
-												type="submit" value="★">
-										</form>
+											<input type="hidden" id="deleteNo" name="no" value="${b.no}"> 
+											<button id="bookmarkDelete" value="${b.no}">★</button>
 									</td>
 									<c:set var="loop" value="true" />
 								</c:if>
@@ -97,12 +94,10 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 						</c:forEach>
 						<c:if test="${not loop}">
 							<td>
-								<form action="../bookmark/add" method="post">
-									<input type="hidden" name="mno" value="${loginUser.no}">
-									<input type="hidden" name="hno" value="${h.no}"> 
-									<input type="hidden" name="hiddenNo" value="1"> 
-									<input type="submit" value="☆">
-								</form>
+									<input type="hidden" id="addMno" name="mno" value="${loginUser.no}">
+									<input type="hidden" id="addHno" name="hno" value="${h.no}"> 
+									<button id="bookmarkAdd" value="${b.no}">☆</button>
+									
 							</td>
 						</c:if>
 					</c:if>
@@ -113,5 +108,42 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 </div>
 
 <footer id="footer"></footer>
+
+<script>
+$('#bookmarkDelete').click(function() {
+	var no = $('#deleteNo').val();
+	var del = $('#bookmarkDelete').val();
+	console.log(del);
+	$.ajax({
+	    url : "../bookmark/delete", 
+	    data : { no : no },
+	    success : function(data) {
+	    	console.log(del);
+	            $(".delete").hide();
+	            $(".add").show();
+	    }
+	});
+});
+
+$('#bookmarkAdd').click(function() {
+	var mno = $('#addMno').val();
+	var hno = $('#addHno').val();
+	var add = $('#bookmarkAdd').val();
+	console.log(add);
+	$.ajax({
+		type : "POST",
+	    url : "../bookmark/add", 
+	     data : {
+	         mno : mno,
+	         hno : hno
+	      },
+	    success : function(data) {
+	    	console.log(add);
+	    		$(".add").hide();
+	    		$(".delete").show();
+	    }
+	});
+});
+</script>
 </body>
 </html>

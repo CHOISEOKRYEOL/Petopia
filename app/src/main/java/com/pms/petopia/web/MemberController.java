@@ -121,6 +121,14 @@ public class MemberController {
 
   }
 
+  @PostMapping("findPassword")
+  public String findPassword(String id, String tel, Model model) throws Exception {
+
+    Member m = memberService.setNewPassword(id, tel);
+
+    return "";
+  }
+
   @PostMapping("update")
   public String update(HttpServletRequest request, HttpSession session, Model model)
       throws Exception {

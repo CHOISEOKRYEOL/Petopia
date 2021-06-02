@@ -112,7 +112,7 @@
 							id="tel" name="tel" placeholder="휴대전화 입력" oninput="checkTel()" maxlength='11'>
 						<div id="telCheck" style="display: none">숫자만 입력 가능합니다.</div>
 						<br> <input type="button" id="sendNumber" name="auth"
-							value="인증번호 받기">
+							value="인증번호 요청">
 					</div>
 				</div>
 
