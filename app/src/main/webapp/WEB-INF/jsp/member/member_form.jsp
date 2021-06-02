@@ -24,11 +24,10 @@
 	crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../css/common.css">
-
-<script type="text/javascript" src="../../js/page.js"></script>
+<link rel="stylesheet" type="text/css" href="../../css/layout.css">
 </head>
 <body>
-	<header id="header"></header>
+	<header></header>
 	<div class="wrap">
 		<img src="../../images/20180115_115933.jpg"
 			class="img-fluid width:100%;"
@@ -139,7 +138,7 @@
 		</div>
 	</div>
 
-	<footer id="footer"></footer>
+	<footer></footer>
 
 	<script>
 		var idCheck = 0;
@@ -453,6 +452,11 @@
 				swal("인증 실패", "다시 인증 해주세요.", "error", { button: "확인"});
 			}
 		});
+		
+		$(document).ready(function() {
+		    $("header").load("../../html/header.jsp");
+		    $("footer").load("../../html/footer.html");
+		  });
 	</script>
 
 </body>

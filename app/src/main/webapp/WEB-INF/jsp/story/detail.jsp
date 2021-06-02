@@ -11,13 +11,13 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" href="../css/common.css">
-<script type="text/javascript" src="../js/page.js"></script>
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/layout.css">
 </head>
 <body>
-<header id="header"></header>
+<header></header>
 <div class="wrap">
-<img src="../images/20180115_120703.jpg" class="img-fluid width:100%;"
+<img src="../../images/20180115_120703.jpg" class="img-fluid width:100%;"
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="text-group">
     <p style="font-size: 50px;">펫토피아</p>
@@ -31,9 +31,10 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <a class="navbar-brand">스토리 상세보기</a>
 </nav>
+
 <c:if test="${not empty story}">
 <form action='update' method='post'>
-<div class="mb-3 row">
+<div class="mt-3 mb-3 row">
     <label for="no" class="col-sm-1 col-form-label">번호</label>
     <div class="col-sm-7">
       <input type="text" class="form-control-plaintext" id="no" name="no" value='${story.no}'>
@@ -72,7 +73,6 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     </div>
       <input class="btn" style="background-color: #FFADAD;" type='submit' value='변경'>
   </div>
-</div>
 </form>
 </c:if>
 
@@ -83,6 +83,12 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 
 </div>
 
-<footer id="footer"></footer>
+<footer></footer>
+<script>
+$(document).ready(function() {
+    $("header").load("../../html/header.jsp");
+    $("footer").load("../../html/footer.html");
+  });
+</script>
 </body>
 </html>

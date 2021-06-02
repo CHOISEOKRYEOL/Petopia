@@ -50,20 +50,19 @@
         phot.photo,
         mark.sno as sharingmarketboard_no
       from pet_mark_phot phot
-      inner join pet_mark mark on mark.sno = phot.sno
+      right join pet_mark mark on mark.sno = phot.sno
        where phot.sno = #{no}
   </select>
   
   
-  <update id="update" parameterType="sharingmarketboardphoto">
+<!--   <update id="update" parameterType="sharingmarketboardphoto">
     update pet_mark_phot set
-        photo = #{photo}
     where spno = #{no}
   </update>
-  
+   -->
     <delete id="delete" parameterType="int">
     delete from pet_mark_phot
-    where spno = #{value}
+    where sno = #{value}
   </delete>
 
 

@@ -14,7 +14,7 @@
 <p>댓글 개수 : ${commentCount}</p>
 <c:forEach items="${comments}" var="c">
 <c:if test="${myTownBoard.no == c.myTownBoard.no}">
-<form action='../mytowncomment/update' method='post'>
+<form action='../mytown/updateComment' method='post'>
 <table border='1'>
 <tbody>
 <tr><th>작성자</th><td>${c.writer.nick}</td>
@@ -23,8 +23,10 @@
 <c:if test="${not empty loginUser and c.writer.no == loginUser.no}">
 <tr>
   <td colspan='2'>
-    <input type='submit' value='변경'>
-    <a href='../mytowncomment/delete?no=${c.no}'> 삭제</a><br>
+    <div id="d2">
+        <button type="button" class='modify-btn' data-no='${comt.no}' >수정</button>
+        <button type="button" class="remove-btn" data-no="${comt.no}">삭제</button>
+    </div>
   </td>
 </tr>
 </c:if>

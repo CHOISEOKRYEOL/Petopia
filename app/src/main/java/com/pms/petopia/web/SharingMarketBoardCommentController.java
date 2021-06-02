@@ -1,9 +1,11 @@
 package com.pms.petopia.web;
 
 import java.io.PrintWriter;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.domain.SharingMarketBoard;
@@ -23,22 +25,19 @@ public class SharingMarketBoardCommentController{
   }
 
   @RequestMapping("add")
-  public String add(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  public String add(SharingMarketBoardComment smbComt,String content,HttpSession session, HttpServletResponse response) throws Exception {
 
-    SharingMarketBoardComment smbComt = new SharingMarketBoardComment();
 
     PrintWriter out = response.getWriter();
-    int boardNo = Integer.parseInt(request.getParameter("no"));
 
-    SharingMarketBoard oldBoard = sharingMarketBoardService.get(boardNo);
+    SharingMarketBoard oldBoard = sharingMarketBoardService.get(smbComt.getNo());
     smbComt.setSharingmarketboard(oldBoard);
-    String content = request.getParameter("content");
     if(content=="") {
       out.print("empty");
     }
     smbComt.setContent(content);
 
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    Member loginUser = (Member)session.getAttribute("loginUser");
     smbComt.setWriter(loginUser);
     sharingMarketBoardCommentService.add(smbComt);
 
@@ -48,13 +47,10 @@ public class SharingMarketBoardCommentController{
     return "redirect:" + webAdress;
   }
 
-  @RequestMapping("delete")
-  public String delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
-    SharingMarketBoardCommentService sharingMarketBoardCommentService = (SharingMarketBoardCommentService)request.getServletContext().getAttribute("sharingMarketBoardCommentService");
+  @GetMapping("delete")
+  public String delete(int no, HttpServletResponse response) throws Exception {
 
-    int no = Integer.parseInt(request.getParameter("no"));
     SharingMarketBoard oldBoard = sharingMarketBoardService.get(no);
-    System.out.println(no);
     PrintWriter out = response.getWriter();
     out.print("working");
     sharingMarketBoardCommentService.delete(no);
@@ -64,31 +60,21 @@ public class SharingMarketBoardCommentController{
 
   }
 
-  @RequestMapping("update")
-  public String update(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  @PostMapping("update")
+  public String update(HttpSession session,String content,
+      SharingMarketBoardComment smbComt, HttpServletResponse response) throws Exception {
 
-    PrintWriter out = response.getWriter();
-    response.setContentType("text/html;charset=UTF-8");
-    int no = Integer.parseInt(request.getParameter("no"));
-    SharingMarketBoard oldBoard = sharingMarketBoardService.get(no);
+    SharingMarketBoard oldBoard = sharingMarketBoardService.get(smbComt.getNo());
 
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
     if (oldBoard.getWriter().getNo() != loginUser.getNo()) {
       throw new Exception("변경 권한이 없습니다!");
     }
 
-    SharingMarketBoardComment oldSmbComt = sharingMarketBoardCommentService.getNo(no);
-    SharingMarketBoardComment smbComt = new SharingMarketBoardComment();
+    SharingMarketBoardComment oldSmbComt = sharingMarketBoardCommentService.getNo(smbComt.getNo());
 
     smbComt.setNo(oldSmbComt.getNo());
     smbComt.setSharingmarketboard(oldBoard);
-    String content = request.getParameter("content");
-
-    if(content == "") {
-      out.print("empty");
-    }else {
-      out.print("working");
-    }
     smbComt.setContent(content);
     sharingMarketBoardCommentService.update(smbComt);
 
