@@ -102,13 +102,13 @@ public class SharingMarketBoardController {
         });
 
         Thumbnails.of(uploadDir + "/" + filename)
-        .size(80, 80)
+        .size(700, 700)
         .outputFormat("jpg")
         .crop(Positions.CENTER)
         .toFiles(new Rename() {
           @Override
           public String apply(String name, ThumbnailParameter param) {
-            return name + "_80x80";
+            return name + "_700x700";
           }
         });
       }
@@ -130,6 +130,7 @@ public class SharingMarketBoardController {
     String uploadDir = sc.getRealPath("/upload");
     int no = Integer.parseInt(request.getParameter("no"));
     SharingMarketBoard oldBoard = sharingMarketBoardService.get(no);
+
     if (oldBoard == null) {
       throw new Exception("해당 번호의 게시글이 없습니다.");
     } 
@@ -146,6 +147,8 @@ public class SharingMarketBoardController {
     smbBoard.setContent(request.getParameter("content"));
 
     sharingMarketBoardService.update(smbBoard);
+    sharingMarketBoardPhotoService.delete(no);
+
     List<SharingMarketBoardPhoto> phots = new ArrayList<>();
     Collection<Part> photoParts = request.getParts();
     for (Part p : photoParts) {
@@ -180,13 +183,13 @@ public class SharingMarketBoardController {
         });
 
         Thumbnails.of(uploadDir + "/" + filename)
-        .size(80, 80)
+        .size(700, 700)
         .outputFormat("jpg")
         .crop(Positions.CENTER)
         .toFiles(new Rename() {
           @Override
           public String apply(String name, ThumbnailParameter param) {
-            return name + "_80x80";
+            return name + "_700x700";
           }
         });
       }
