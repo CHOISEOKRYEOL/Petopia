@@ -1,0 +1,24 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+  .container {
+    /* border: 1px solid lightgray; */
+    width: 900px;
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0px auto;
+    padding-top: 10px;
+    min-height: 100vh;
+  }
+
+  .mytownmain { 
+    position: relative; 
+  }
+  
+  .mytown-main-group { 
+    position: absolute; 
+    top: 40%; 
+    left: 10%;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+   }

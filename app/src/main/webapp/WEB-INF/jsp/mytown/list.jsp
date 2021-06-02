@@ -12,7 +12,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/layout.css">
 </head>
 <body>
 <header id="header"></header>
@@ -27,7 +27,10 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   </div>
 </div>
 <div class="container">
-	<h1>${smallAddress.bigAddress.name}&nbsp;${smallAddress.name}</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<img src="../../images/IMG_7390.PNG" width=10%; style=margin-right:70%;>
+<a class="navbar-brand" style=margin-right:50%>${smallAddress.bigAddress.name}&nbsp;${smallAddress.name}</a>
+</nav>
 	<a href = "main"> 우리동네찾으러가기</a>
 	
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
