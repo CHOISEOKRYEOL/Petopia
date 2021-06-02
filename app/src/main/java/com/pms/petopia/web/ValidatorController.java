@@ -32,10 +32,10 @@ public class ValidatorController {
     PrintWriter out = response.getWriter();
 
     if(m != null) {
-      out.print("1");
+      out.write("1");
     }
     else {
-      out.print("0");
+      out.write("0");
     }
   }
 
@@ -51,10 +51,10 @@ public class ValidatorController {
     PrintWriter out = response.getWriter();
 
     if(m != null) {
-      out.print("1");
+      out.write("1");
     }
     else {
-      out.print("0");
+      out.write("0");
     }
   }
 
@@ -70,10 +70,29 @@ public class ValidatorController {
     PrintWriter out = response.getWriter();
 
     if(m != null) {
-      out.print("1");
+      out.write("1");
     }
     else {
-      out.print("0");
+      out.write("0");
+    }
+  }
+
+  @RequestMapping("checktel")
+  public void checkTel(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    String id = request.getParameter("id");
+    String tel = request.getParameter("tel");
+
+    Member m = memberService.getIdTel(id, tel);
+
+    response.setContentType("text/plain;charset=UTF-8");
+    PrintWriter out = response.getWriter();
+
+    if(m != null) {
+      out.write("1");
+    }
+    else {
+      out.write("0");
     }
   }
 
@@ -89,12 +108,50 @@ public class ValidatorController {
 
     String phoneNumber = request.getParameter("tel");
 
-    memberService.certifyNumber(phoneNumber, authenticationNumber);
+    memberService.certifyNumberForRegister(phoneNumber, authenticationNumber);
 
     response.setContentType("text/plain;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
     out.write(authenticationNumber);
+  }
+
+  @RequestMapping("checknumber2")
+  public void checkNumber2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    Random r  = new Random();
+    String authenticationNumber = "";
+    for(int i = 0; i < 6; i++) {
+      String randomNumber = Integer.toString(r.nextInt(10));
+      authenticationNumber += randomNumber;
+    }
+
+    String phoneNumber = request.getParameter("tel");
+
+    memberService.certifyNumberForPassword(phoneNumber, authenticationNumber);
+
+    response.setContentType("text/plain;charset=UTF-8");
+    PrintWriter out = response.getWriter();
+
+    out.write(authenticationNumber);
+  }
+
+  @RequestMapping("checkpassword")
+  public void checkPassword(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    int min = 97;
+    int max = 122;
+    int length = 10;
+    Random random = new Random();
+    String newPassword = random.ints(min, max + 1)
+        .limit(length)
+        .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+        .toString();
+
+    String phoneNumber = request.getParameter("tel");
+    String id = request.getParameter("id");
+
+    memberService.setNewPassword(id, phoneNumber, newPassword);
 
   }
 

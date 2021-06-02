@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="../../css/layout.css">
 </head>
 <body>
-<header id="header"></header>
+<header></header>
 <div class="wrap">
 <img src="../../images/242photo.jpg" class="img-fluid width:100%;"
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
@@ -85,11 +85,11 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 								<c:if
 									test="${b.member.no == loginUser.no and b.hospital.no == h.no}">
 									<td>
-										<form action="../bookmark/delete">
-											<input type="hidden" name="no" value="${b.no}"> <input
-												type="hidden" name="hno" value="-1"> <input
-												type="submit" value="★">
-										</form>
+									<form action="../bookmark/delete">
+									     <input type="hidden" name="no" value="${b.no}"> 
+									     <input type="hidden" name="hno" value="-1"> 
+                        <input type="submit" value="★">
+									</form>
 									</td>
 									<c:set var="loop" value="true" />
 								</c:if>
@@ -97,12 +97,12 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 						</c:forEach>
 						<c:if test="${not loop}">
 							<td>
-								<form action="../bookmark/add" method="post">
-									<input type="hidden" name="mno" value="${loginUser.no}">
-									<input type="hidden" name="hno" value="${h.no}"> 
-									<input type="hidden" name="hiddenNo" value="1"> 
+							<form action="../bookmark/add" method="POST">
+							     <input type="hidden" name="mno" value="${loginUser.no}">
+                  <input type="hidden" name="hno" value="${h.no}"> 
+                  <input type="hidden" name="hiddenNo" value="1">
 									<input type="submit" value="☆">
-								</form>
+									</form>
 							</td>
 						</c:if>
 					</c:if>
@@ -113,6 +113,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 </div>
 
 <footer id="footer"></footer>
+
 <script>
 $(document).ready(function() {
     $("header").load("../../html/header.jsp");

@@ -1,7 +1,6 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
-import java.util.Random;
 import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -139,21 +138,6 @@ public class MemberController {
 
     return "member/update";
 
-  }
-
-
-  private String randomKey() {
-
-    int min = 97;
-    int max = 122;
-    int length = 10;
-    Random random = new Random();
-    String randomString = random.ints(min, max + 1)
-        .limit(length)
-        .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-        .toString();
-
-    return randomString;
   }
 
 }

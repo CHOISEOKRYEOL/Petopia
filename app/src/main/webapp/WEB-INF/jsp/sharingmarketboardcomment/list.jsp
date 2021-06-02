@@ -44,7 +44,7 @@ padding: 5px;
           
 <c:forEach items="${comtList}" var="comt">
 
-<table class ="comment-table">
+<table class ="comment-table" data-no='${comt.no}'>
 <tr><td bgcolor="pink">작성자</td><td bgcolor="pink">작성일</td></tr>
 <tr>
 <td>${comt.writer.name}</td>
@@ -58,7 +58,7 @@ padding: 5px;
     </div>
   </c:if></td></tr>
   
-  <tr><td class="c-cont"  data-no="${comt.no}" colspan="2" style="white-space:pre;"><span>${comt.content}</span></td></tr>
+  <tr><td class="c-cont"  data-no="${comt.no}" colspan="2" ><span>${comt.content}</span></td></tr>
 </table>
   </c:forEach>
 </c:if>
@@ -94,9 +94,8 @@ $('.modify-btn').click(function(e) {
 	commentModifyDiv.css('display', '');
 });
 
-var commentRemoveDiv = $('#comment-remove');
-
 //--------------삭제버튼을 눌렀을 시
+var commentRemoveDiv = $('#comment-remove');
 commentRemoveDiv.css('display', 'none');
 
 $('.remove-btn').click(function(e) {
@@ -133,6 +132,7 @@ $('#comment-modify-btn').click(function(e) {
                     var comtTd = $('.c-cont[data-no=' + commentNo + ']');
                     var comtSpan = comtTd.find('span');
                     comtSpan.html(commentText);
+                    comtSpan.css('white-space','pre');
                     comtSpan.css('display', '');
                   }
                 } else {
@@ -148,14 +148,19 @@ $('#comment-modify-btn').click(function(e) {
 	
 //--------------삭제 확인버튼을 눌렀을 시	
 $('#comment-remove-btn').click(function(e) {
-	  var commentNum = $('.remove-btn').attr('data-no');
-
+	var commentReNo = $('.remove-btn').attr('data-no');
+	  console.log(commentReNo);
+	  var comtTable = $('.comment-table[data-no=' + commentReNo + ']');
+	  
 	 var xhr = new XMLHttpRequest();
-	    xhr.open("GET","../sharingmarketboardcomment/delete?no="+commentNum,true);
+	    xhr.open("GET","../sharingmarketboardcomment/delete?no="+commentReNo, true);
 	      xhr.onreadystatechange = () => {
 	          if (xhr.readyState == 4) {
 	            if (xhr.status == 200) {
 	                alert("댓글을 삭제했습니다.");
+	                comtTable.css('display', 'none');
+	                commentRemoveDiv.css('display', 'none');
+	                resetBtn();
 	            } else {
 	              alert("요청오류 : " + xhr.status);
 	              }
@@ -164,6 +169,7 @@ $('#comment-remove-btn').click(function(e) {
 	        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	        xhr.send();
 	        console.log("send() 리턴함.");
+	        
 });
 
 //--------------수정 취소버튼을 눌렀을 시
