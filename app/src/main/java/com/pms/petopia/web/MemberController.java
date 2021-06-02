@@ -121,7 +121,7 @@ public class MemberController {
   }
 
   @PostMapping("update")
-  public String update(HttpServletRequest request, HttpSession session, Model model)
+  public String update(String nick, String password, Model model, HttpSession session)
       throws Exception {
 
     Member loginUser = (Member) session.getAttribute("loginUser");
@@ -129,9 +129,8 @@ public class MemberController {
     Member m = new Member();
     m.setNo(loginUser.getNo());
     m.setId(loginUser.getId());
-    m.setNick(request.getParameter("nick"));
-    m.setPassword(request.getParameter("password"));
-    m.setTel(request.getParameter("tel"));
+    m.setNick(nick);
+    m.setPassword(password);
 
     memberService.update(m);
     model.addAttribute("member", m);

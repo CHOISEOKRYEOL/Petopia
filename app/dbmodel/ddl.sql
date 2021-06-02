@@ -63,17 +63,16 @@ DROP TABLE IF EXISTS `pet_recomt` RESTRICT;
 
 -- 회원
 CREATE TABLE `pet_user` (
-  `mno`     INTEGER      NOT NULL, -- 회원번호
-  `name`    VARCHAR(50)  NOT NULL, -- 이름
-  `nick`    VARCHAR(50)  NOT NULL, -- 닉네임
-  `id`      VARCHAR(50)  NOT NULL, -- 아이디
-  `pwd`     VARCHAR(100) NOT NULL, -- 암호
-  `email`   VARCHAR(40)  NOT NULL, -- 이메일
-  `phone`   VARCHAR(40)  NOT NULL, -- 휴대전화
-  `role`    INTEGER      NOT NULL DEFAULT 1, -- 역할
-  `rdt`     DATE         NOT NULL DEFAULT now(), -- 가입일
-  `state`   INTEGER      NOT NULL DEFAULT 0, -- 탈퇴여부
-  `auth_no` INTEGER      NULL      -- 인증번호
+  `mno`   INTEGER      NOT NULL, -- 회원번호
+  `name`  VARCHAR(50)  NOT NULL, -- 이름
+  `nick`  VARCHAR(50)  NOT NULL, -- 닉네임
+  `id`    VARCHAR(50)  NOT NULL, -- 아이디
+  `pwd`   VARCHAR(100) NOT NULL, -- 암호
+  `email` VARCHAR(40)  NOT NULL, -- 이메일
+  `phone` VARCHAR(40)  NOT NULL, -- 휴대전화
+  `role`  INTEGER      NOT NULL DEFAULT 1, -- 역할
+  `rdt`   DATE         NOT NULL DEFAULT now(), -- 가입일
+  `state` INTEGER      NOT NULL DEFAULT 0 -- 탈퇴여부
 );
 
 -- 회원
@@ -112,6 +111,12 @@ CREATE UNIQUE INDEX `UIX_pet_user4`
     `id` ASC -- 아이디
   );
 
+-- 회원 유니크 인덱스2
+CREATE UNIQUE INDEX `UIX_pet_user2`
+  ON `pet_user` ( -- 회원
+    `phone` ASC -- 휴대전화
+  );
+
 ALTER TABLE `pet_user`
   MODIFY COLUMN `mno` INTEGER NOT NULL AUTO_INCREMENT;
 
@@ -146,19 +151,20 @@ ALTER TABLE `pet_mypet`
 
 -- 병원
 CREATE TABLE `pet_hp` (
-  `hno`   INTEGER      NOT NULL, -- 병원번호
-  `cno`   INTEGER      NOT NULL, -- 시군구번호
-  `name`  VARCHAR(50)  NOT NULL, -- 이름
-  `tel`   VARCHAR(30)  NOT NULL, -- 전화번호
-  `addr`  VARCHAR(255) NOT NULL, -- 상세주소
-  `stime` INTEGER      NOT NULL, -- 진료시작시간
-  `etime` INTEGER      NOT NULL, -- 진료종료시간
-  `park`  INTEGER      NOT NULL, -- 주차여부
-  `vet`   INTEGER      NOT NULL, -- 수의사
-  `photo` VARCHAR(255) NULL,     -- 사진
-  `grade` INTEGER      NULL,     -- 평점
-  `lat`   FLOAT        NULL,     -- 위도
-  `lon`   FLOAT        NULL      -- 경도
+  `hno`      INTEGER      NOT NULL, -- 병원번호
+  `cno`      INTEGER      NOT NULL, -- 시군구번호
+  `name`     VARCHAR(50)  NOT NULL, -- 이름
+  `tel`      VARCHAR(30)  NOT NULL, -- 전화번호
+  `addr`     VARCHAR(255) NOT NULL, -- 상세주소
+  `stime`    INTEGER      NOT NULL, -- 진료시작시간
+  `etime`    INTEGER      NOT NULL, -- 진료종료시간
+  `park`     INTEGER      NOT NULL, -- 주차여부
+  `vet`      INTEGER      NOT NULL, -- 수의사
+  `photo`    VARCHAR(255) NULL,     -- 사진
+  `rating`   FLOAT        NULL,     -- 평점
+  `lat`      FLOAT        NULL,     -- 위도
+  `lon`      FLOAT        NULL,     -- 경도
+  `a_rating` FLOAT        NULL      -- 누적평점
 );
 
 -- 병원

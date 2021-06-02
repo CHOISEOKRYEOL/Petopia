@@ -125,8 +125,7 @@
 		update pet_user
 		<set>
 			<if test="nick != ''">nick=#{nick},</if>
-			<if test="password != ''">pwd=password(#{password}),</if>
-			<if test="tel != ''">phone=#{tel}</if>
+			<if test="password != ''">pwd=password(#{password})</if>
 		</set>
 		where mno=#{no}
 	</update>
