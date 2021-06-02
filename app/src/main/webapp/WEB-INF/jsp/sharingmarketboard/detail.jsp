@@ -147,7 +147,7 @@ $("#detail-add-comment-btn").click(function() {
     xhr.onreadystatechange = () => {
         if (xhr.readyState == 4) {
           if (xhr.status == 200) {
-              if(xhr.responseText =="empty"){
+              if(content ==""){
                   alert("댓글내용을 입력해주세요.");
                    return;
                 }
