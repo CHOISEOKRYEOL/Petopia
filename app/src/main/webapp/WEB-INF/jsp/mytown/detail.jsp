@@ -121,7 +121,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
    	success : function(data) {
    		console.log(data);
    		if(data == "fail") {
-   			swal("이미 추천한 게시물입니다!", "You clicked the button!", "success");
+   			swal("이미 추천한 게시물입니다!", "You clicked the button!", "warning");
    		} else {
    			swal("추천이 완료되었습니다!", "You clicked the button!", "success");
    			$('#detailTable > tbody > tr:nth-child(3) > td:nth-child(4)').html(recommentCount + 1);
