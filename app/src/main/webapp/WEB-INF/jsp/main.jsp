@@ -10,13 +10,13 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" href="../css/main.css">
-<link rel="stylesheet" type="text/css" href="../css/layout.css">
+<link rel="stylesheet" type="text/css" href="/web/css/main.css">
+<link rel="stylesheet" type="text/css" href="/web/css/layout.css">
 </head>
 <body>
-<header id="header"></header>
+<header></header>
 <div class="wrap">
-<img src="../images/20180115_121333.jpg" class="img-fluid width:100%;"
+<img src="/web/images/1433886.jpg" class="img-fluid width:100%;"
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="text-group">
     <p style="font-size: 50px;">펫토피아</p>
@@ -57,7 +57,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/web/app/pet/list">
-          <img src="../images/pawprintfull.png"> 마이펫</a>
+          <img src="/web/images/pawprintfull.png"> 마이펫</a>
         </li>
       </ul>
       </nav>
@@ -67,13 +67,14 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/web/app/record/list">
-          <img src="../images/pawprintfull.png"> 진찰기록</a>
+          <img src="/web/images/pawprintfull.png"> 진찰기록</a>
         </li>
       </ul>
       </nav>
       </div>
     </div>
     
+    <c:if test="${not empty loginUser}">
     <div class="box3">
       <div class="container_left01">
         <div class="img-mypet">
@@ -124,50 +125,88 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
         </div>
       </div>
     </div>
+    </c:if>
+    
+    <c:if test="${empty loginUser}">
+    <div class="box3" style="align-items: center; display: flex; justify-content: center;">
+	    <div class="box3-blur" style="width: 850px; height:250px; background-color: #FAF0E6; filter: blur(10px); position: relative;">
+	    </div> 
+	    <div class="box3-text" style="position: absolute;">회원가입 후 이용 가능합니다.</div>
+    </div>
+    </c:if>
     
     <div class="box4">
     <nav class="navbar navbar-expand-lg navbar-light">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/web/app/sharingmarketboard/list">
-          <img src="../images/pawprintfull.png"> 나눔장터</a>
+          <img src="/web/images/pawprintfull.png"> 나눔장터</a>
         </li>
       </ul>
     </nav>
     </div>
     
+    <c:if test="${not empty loginUser}">
     <div class="box5">
       <div class="row justify-content-evenly">
         <div class="col-3">
           <a href="https://www.naver.com/">
-          <img src="../images/20180111_205149.jpg" style="width: 200px; height: 250px;"></a>
+          <img src="/web/images/20180111_205149.jpg" style="width: 200px; height: 250px;"></a>
           <p class="market_contents">
           <a href="https://www.naver.com/" class="link-dark" style="text-decoration:none;">
           dkdkdksssssssssssssssssssssssssssssssssss</a></p>
         </div>
         <div class="col-3">
           <a href="https://www.daum.net/">
-          <img src="../images/20180111_205149.jpg" style="width: 200px; height: 250px;"></a>
+          <img src="/web/images/20180111_205149.jpg" style="width: 200px; height: 250px;"></a>
           <p class="market_contents">
           <a href="https://www.daum.net/" class="link-dark" style="text-decoration:none;">
           dkdkdkssssssssssssssssssss</a></p>
         </div>
         <div class="col-3">
           <a href="https://twitter.com/">
-          <img src="../images/20180111_205149.jpg" style="width: 200px; height: 250px;"></a>
+          <img src="/web/images/20180111_205149.jpg" style="width: 200px; height: 250px;"></a>
           <p class="market_contents">
           <a href="https://twitter.com/" class="link-dark" style="text-decoration:none;">
           dkdkdkssssssssssssssssssssssssss</a></p>
         </div>
         <div class="col-3">
           <a href="https://www.netflix.com/">
-          <img src="../images/20180111_205149.jpg" style="width: 200px; height: 250px;"></a>
+          <img src="/web/images/20180111_205149.jpg" style="width: 200px; height: 250px;"></a>
           <p class="market_contents">
           <a href="https://www.netflix.com/" class="link-dark" style="text-decoration:none;">
           dkdkdksssssssssssssss</a></p>
         </div>
+      </div>
      </div>
+     </c:if>
+     
+     <c:if test="${empty loginUser}">
+     <div class="box5">
+      <div class="row justify-content-evenly">
+        <div class="col-3">
+          <img src="/web/images/20180111_205149.jpg" style="width: 200px; height: 250px;">
+          <p class="market_contents">
+          dkdkdksssssssssssssssssssssssssssssssssss</p>
+        </div>
+        <div class="col-3">
+          <img src="/web/images/20180111_205149.jpg" style="width: 200px; height: 250px;">
+          <p class="market_contents">
+          dkdkdkssssssssssssssssssss</p>
+        </div>
+        <div class="col-3">
+          <img src="/web/images/20180111_205149.jpg" style="width: 200px; height: 250px;">
+          <p class="market_contents">
+          dkdkdkssssssssssssssssssssssssss</p>
+        </div>
+        <div class="col-3">
+          <img src="/web/images/20180111_205149.jpg" style="width: 200px; height: 250px;">
+          <p class="market_contents">
+          dkdkdksssssssssssssss</p>
+        </div>
+      </div>
      </div>
+     </c:if>
     
     <div class="box6">
       <div class="container_navleft02">
@@ -175,7 +214,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/web/app/story/list">
-          <img src="../images/pawprintfull.png"> 스토리</a>
+          <img src="/web/images/pawprintfull.png"> 스토리</a>
         </li>
       </ul>
       </nav>
@@ -185,7 +224,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/web/app/mytown/list">
-          <img src="../images/pawprintfull.png"> 우리동네</a>
+          <img src="/web/images/pawprintfull.png"> 우리동네</a>
         </li>
       </ul>
       </nav>    
@@ -203,7 +242,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     </div>
 </div>
 
-<footer id="footer"></footer>
+<footer></footer>
 <script>
 $(document).ready(function() {
     $("header").load("/web/html/header.jsp");

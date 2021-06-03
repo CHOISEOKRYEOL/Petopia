@@ -8,70 +8,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<meta charset="UTF-8">
+<title>마이펫</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" href="../css/main.css">
-<script type="text/javascript" src="../js/page.js"></script>
 <link rel="stylesheet" type="text/css" href="../../css/common.css">
 <link rel="stylesheet" type="text/css" href="../../css/layout.css">
-
-<style>
-.button {
-
-  background-color: #FFADAD;
-
-  border: none;
-
-  color: white;
-
-  padding: 8px 8px;
-
-  text-align: center;
-
-  text-decoration: none;
-
-  display: inline-block;
-
-  font-size: 16px;
-
-  margin: 4px 2px;
-
-  cursor: pointer;
-
-}
-</style>
-
 </head>
-
 <body>
 <header></header>
-
 <div class="wrap">
-<img src="../../images/20180115_115933.jpg"  class="img-fluid width:100%;"
+<img src="/web/images/mypage.jpg"  class="img-fluid width:100%;"
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="text-group">
-    <p style="font-size: 50px;">마이펫 리스트</p>
+    <p style="font-size: 50px;">마이펫</p>
     <p style="font-size: 30px;">나의 펫 목록을 보여줍니다</p>
   </div>
 </div>
 
-<h1></h1>
-
-
+<div class="container">
 <table class="table table-hover">
 <thead>
 <tr>
-<th style="color:red;">번호</th>
-<th style="color:red;">사진</th>
-<th style="color:red;">품종</th>
-<th style="color:red;">이름</th>
-<th style="color:red;">나이</th>
-<th style="color:red;">생일</th>
-<th style="color:red;">성별</th>
+<th>번호</th>
+<th>사진</th>
+<th>품종</th>
+<th>이름</th>
+<th>나이</th>
+<th>생일</th>
+<th>성별</th>
 </tr>
 </thead>
 <tbody>
@@ -98,20 +64,14 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 </c:forEach>
 </tbody>
 </table>
-</form>
 <a href="form" role="button" class="button">새 펫</a>
-</div>
-</div>
 </div>
 <footer></footer>
 <script>
 $(document).ready(function() {
-    $("header").load("../../html/header.jsp");
-    $("footer").load("../../html/footer.html");
+    $("header").load("/web/html/header.jsp");
+    $("footer").load("/web/html/footer.html");
   });
-  
 </script>
-
 </body>
-</div>
 </html>
