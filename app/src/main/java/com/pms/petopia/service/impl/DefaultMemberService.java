@@ -81,7 +81,7 @@ public class DefaultMemberService implements MemberService {
     params.put("to", phoneNumber);
     params.put("from", "01090986073");
     params.put("type", "SMS");
-    params.put("text", "Petopia 새 암호 " + "["+newPassword+"]");
+    params.put("text", "Petopia 임시 비밀번호는 " + "["+newPassword+"] 입니다.");
 
     try {
       message.send(params);
