@@ -28,10 +28,10 @@ th,tr{
 padding: 5px;
 }
 </style>
-
+<link rel="stylesheet" type="text/css" href="../../css/detailboard.css">
 </head>
 <body>
-<p>댓글 개수 : ${commentCount}</p>
+<p><span class="comment-count">댓글 개수 : ${commentCount}</span></p>
 
 <div id="comment-modify">
       <textarea id="modify-content" rows="3" cols="50"></textarea>
@@ -107,16 +107,19 @@ commentRemoveDiv.css('display', 'none');
 
 $('.remove-btn').click(function(e) {
   console.log(this);
+  
    var comtNoRe = $(this).attr("data-no");
    var comtTdRe = $('.c-cont[data-no=' + comtNoRe + ']');
    
    var comtReBtnRe = $('.remove-btn[data-no=' + comtNoRe + ']');
    comtReBtnRe.css('display', 'none');
    var comtMoBtnRe = $('.modify-btn[data-no=' + comtNoRe + ']');
-     comtMoBtnRe.css('display', 'none');
+   comtMoBtnRe.css('display', 'none');
      
-    comtTdRe.append(commentRemoveDiv);
-    commentRemoveDiv.css('display', '');
+   comtTdRe.append(commentRemoveDiv);
+   $('#comment-remove-btn').attr('data-no', comtNoRe);
+  commentRemoveDiv.css('display', '');
+   
 });
 
 //--------------수정 확인버튼을 눌렀을 시
@@ -152,30 +155,31 @@ $('#comment-modify-btn').click(function(e) {
         });
   
   
-//--------------삭제 확인버튼을 눌렀을 시  
-$('#comment-remove-btn').click(function(e) {
-	var commentReNo = $('.remove-btn').attr('data-no');
-    console.log(commentReNo);
-    var comtTable = $('.comment-table[data-no=' + commentReNo + ']');
+    //--------------삭제 확인버튼을 눌렀을 시  
+      $('#comment-remove-btn').click(function(e) {
+        var commentReNo = $('#comment-remove-btn').attr('data-no');
+          console.log(commentReNo);
+          var comtTable = $('.comment-table[data-no=' + commentReNo + ']');
+         
+         var xhr = new XMLHttpRequest();
+            xhr.open("GET","deleteComment?no="+commentReNo,true);
+              xhr.onreadystatechange = () => {
+                  if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        alert("댓글을 삭제했습니다.");
+                        comtTable.css('display', 'none');
+                        commentRemoveDiv.css('display', 'none');
+                        resetBtn();
+                    } else {
+                      alert("요청오류 : " + xhr.status);
+                      }
+                    }
+                };
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send();
+                console.log("send() 리턴함.");
+      });
 
-   var xhr = new XMLHttpRequest();
-      xhr.open("GET","deleteComment?no="+commentReNo,true);
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState == 4) {
-              if (xhr.status == 200) {
-                  alert("댓글을 삭제했습니다.");
-                  comtTable.css('display', 'none');
-                  commentRemoveDiv.css('display', 'none');
-                  resetBtn();
-              } else {
-                alert("요청오류 : " + xhr.status);
-                }
-              }
-          };
-          xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-          xhr.send();
-          console.log("send() 리턴함.");
-});
 
 //--------------수정 취소버튼을 눌렀을 시
 $('#comment-modify-cancle-btn').click(function(e) {
