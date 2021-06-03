@@ -16,21 +16,62 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="../css/main.css">
 <script type="text/javascript" src="../js/page.js"></script>
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/layout.css">
+
+<style>
+.button {
+
+  background-color: #FFADAD;
+
+  border: none;
+
+  color: white;
+
+  padding: 8px 8px;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  display: inline-block;
+
+  font-size: 16px;
+
+  margin: 4px 2px;
+
+  cursor: pointer;
+
+}
+</style>
 
 </head>
 
 <body>
 <header></header>
 
-<img src="../../images/ggjpg.jpg" class="img-fluid width:50;"
-style="filter:alpha(opacity=60); opacity:0.7; -moz-opacity:0.4;">
+<div class="wrap">
+<img src="../../images/20180115_115933.jpg"  class="img-fluid width:100%;"
+style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="text-group">
+    <p style="font-size: 50px;">마이펫 리스트</p>
+    <p style="font-size: 30px;">나의 펫 목록을 보여줍니다</p>
+  </div>
+</div>
+
 <h1></h1>
+
 
 <table class="table table-hover">
 <thead>
 <tr>
-<th style="color:red;">번호</th> <th style="color:red;">사진</th> <th style="color:red;">품종</th> <th style="color:red;">이름</th> <th style="color:red;">나이</th> <th style="color:red;">생일</th> <th style="color:red;">성별</th>  
+<th style="color:red;">번호</th>
+<th style="color:red;">사진</th>
+<th style="color:red;">품종</th>
+<th style="color:red;">이름</th>
+<th style="color:red;">나이</th>
+<th style="color:red;">생일</th>
+<th style="color:red;">성별</th>
 </tr>
 </thead>
 <tbody>
@@ -42,14 +83,14 @@ style="filter:alpha(opacity=60); opacity:0.7; -moz-opacity:0.4;">
     <c:set var="photoUrl">../../images/person_30x30.jpg</c:set>
   </c:if>
  <tr>
- 
-  <td>${pets.no}   </td> 
+
+  <td>${pets.no}</td>
   <td><img src='${photoUrl}'></td>
   <td>${pets.type.type}</td>
   <td><a href='detail?no=${pets.no}'>${pets.name}</a></td> 
   <td>${pets.age}</td>
   <td>${pets.birthDay}</td>
-  <c:if test="${pets.gender == 0}"> 
+  <c:if test="${pets.gender == 0}">
   <td> 남 </td> </c:if>
   <c:if test="${pets.gender == 1}">
   <td> 여 </td> </c:if>
@@ -57,9 +98,9 @@ style="filter:alpha(opacity=60); opacity:0.7; -moz-opacity:0.4;">
 </c:forEach>
 </tbody>
 </table>
-<a class="d-grid gap-2 d-md-flex justify-content-md-end" href="form" role="button">새 펫</a>
-</div>
 </form>
+<a href="form" role="button" class="button">새 펫</a>
+</div>
 </div>
 </div>
 <footer></footer>
@@ -68,7 +109,9 @@ $(document).ready(function() {
     $("header").load("../../html/header.jsp");
     $("footer").load("../../html/footer.html");
   });
+  
 </script>
+
 </body>
 </div>
 </html>
