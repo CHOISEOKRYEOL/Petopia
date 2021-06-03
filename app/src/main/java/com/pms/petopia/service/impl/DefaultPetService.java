@@ -54,5 +54,4 @@ public class DefaultPetService implements PetService {
     return petDao.findByKeyword(keyword);
   }
 
-
 }

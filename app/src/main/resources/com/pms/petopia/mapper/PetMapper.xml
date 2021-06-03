@@ -12,30 +12,55 @@
     <result column="birth" property="birthDay"/>
     <result column="gender" property="gender"/>
     <result column="photo" property="photo"/>
-    <result column="m_pet" property="leader"/>
-    
+   <result column="type" property="typeNo"/>  
+   
+    <!--    <result column="m_pet" property="leader"/> -->
+   <!--   <result column="owner" property="ownerNo"/> -->
+    <!--  
+    <result column="owner" property="ownerNo"/>
+    <result column="species" property="speciesNo"/>
+    <result column="role" property="roleNo"/>
+    -->
+    <!--  
+     <association property="species" javaType="species">
+      <id column="species_no" property="no"/>
+    </association>
+   -->
+   
     <association property="owner" javaType="member">
 	    <id column="owner_no" property="no"/>
 	    <result column="owner_name" property="name"/>
     </association>
-    
+
     <association property="type" javaType="type">
       <id column="type_no" property="no"/>
       <result column="type_type" property="type"/>
     </association>
-    
   </resultMap>
   
   <insert id="insert" parameterType="pet">
-    insert into pet_mypet(pname, age, birth, gender, photo, owner ,type) 
-    values(#{name}, #{age}, #{birthDay}, #{gender}, #{photo}, #{owner.no}, #{type.no})
+    insert into pet_mypet(owner, type, pname, age, birth, gender, photo) 
+    values(#{owner.no}, #{type.no},#{name}, #{age}, #{birthDay}, #{gender}, #{photo})
   </insert>
  
+ <!-- 
  <update id="setLeaderPet" parameterType="int">
   update pet_mypet set
   m_pet = 1;
   from pno = #{no}
  </update>
+  -->
+  
+ <!--  
+ <update id="updateLeaderPet" parameterType="int">
+ update pet_mypet
+ <set>
+  m_pet =1;
+  
+ </set>
+ where pno = #{no}
+ </update>
+ -->
  
   <select id="findAll"  resultMap="petMap">
     select
@@ -49,15 +74,15 @@
       m.name as owner_name,
       t.rno as type_no, t.type as type_type, t.sno as type_species
     from pet_mypet p
-    inner join pet_type t on p.type = t.sno
-    inner join pet_species s on s.type = t.sno
+    inner join pet_type t on p.type = t.rno
+    inner join pet_species s on s.sno = t.sno
     inner join pet_user m on m.mno=p.owner
   </select>
 <!-- 
     inner join pet_species s on s.sno=t.sno
  -->
   <select id="findByNo" resultMap="petMap" parameterType="int">
-      select
+    select
       p.pno,
       p.pname,
       p.age,
