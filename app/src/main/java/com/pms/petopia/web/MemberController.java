@@ -1,7 +1,6 @@
 package com.pms.petopia.web;
 
 import java.io.IOException;
-import java.util.Random;
 import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -122,7 +121,7 @@ public class MemberController {
   }
 
   @PostMapping("update")
-  public String update(HttpServletRequest request, HttpSession session, Model model)
+  public String update(String nick, String password, Model model, HttpSession session)
       throws Exception {
 
     Member loginUser = (Member) session.getAttribute("loginUser");
@@ -130,30 +129,14 @@ public class MemberController {
     Member m = new Member();
     m.setNo(loginUser.getNo());
     m.setId(loginUser.getId());
-    m.setNick(request.getParameter("nick"));
-    m.setPassword(request.getParameter("password"));
-    m.setTel(request.getParameter("tel"));
+    m.setNick(nick);
+    m.setPassword(password);
 
     memberService.update(m);
     model.addAttribute("member", m);
 
     return "member/update";
 
-  }
-
-
-  private String randomKey() {
-
-    int min = 97;
-    int max = 122;
-    int length = 10;
-    Random random = new Random();
-    String randomString = random.ints(min, max + 1)
-        .limit(length)
-        .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-        .toString();
-
-    return randomString;
   }
 
 }

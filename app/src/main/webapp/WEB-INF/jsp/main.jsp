@@ -69,7 +69,7 @@
 		<p>
 		</p>
 		<p>
-			<a href='pet/add'>마이펫 등록</a>
+			<a href='pet/form'>마이펫 등록</a>
 		</p>
 		<p>
 			<a href='pet/list'>마이펫 리스트</a>

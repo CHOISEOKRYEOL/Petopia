@@ -8,9 +8,6 @@
 <title>펫 정보 수정</title>
 </head>
 <body>
-<%
-Pet p = (Pet) request.getAttribute("pet");
-%>
 <h1>${pet.name}의 정보 수정 완료!</h1>
 <body>
 </body>

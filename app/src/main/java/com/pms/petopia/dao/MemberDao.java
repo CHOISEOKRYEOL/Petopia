@@ -20,13 +20,21 @@ public interface MemberDao {
 
   Member findByNick(String nick) throws Exception;
 
+  Member findByTel(String tel) throws Exception;
+
   Member findIdEmailKey(Map<String,Object> params) throws Exception;
+
+  Member findIdTel(Map<String,Object> params) throws Exception;
+
+  Member findPassword(Map<String,Object> params) throws Exception;
 
   List<Member> findByKeyword(Map<String,Object> params) throws Exception;
 
   List<Member> findAll() throws Exception;
 
   int update(Member member) throws Exception;
+
+  int updatePassword(Member member) throws Exception;
 
   int delete(Member member) throws Exception;
 

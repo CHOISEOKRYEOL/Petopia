@@ -5,7 +5,11 @@ import com.pms.petopia.domain.Member;
 
 public interface MemberService {
 
-  void certifyNumber(String phoneNumber, String authenticationNumber) throws Exception;
+  void certifyNumberForRegister(String phoneNumber, String authenticationNumber) throws Exception;
+
+  void certifyNumberForPassword(String phoneNumber, String authenticationNumber) throws Exception;
+
+  void setNewPassword(String id, String phoneNumber, String newPassword) throws Exception;
 
   int add(Member member) throws Exception;
 
@@ -21,7 +25,11 @@ public interface MemberService {
 
   Member getNick(String nick) throws Exception;
 
+  Member getTel(String tel) throws Exception;
+
   Member getIdEmail(String name, String nick) throws Exception;
+
+  Member getIdTel(String id, String tel) throws Exception;
 
   List<Member> search(String item, String keyword) throws Exception;
 

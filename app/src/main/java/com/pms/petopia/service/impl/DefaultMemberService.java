@@ -20,7 +20,7 @@ public class DefaultMemberService implements MemberService {
   }  
 
   @Override
-  public void certifyNumber(String phoneNumber, String authenticationNumber) throws Exception {
+  public void certifyNumberForRegister(String phoneNumber, String authenticationNumber) throws Exception {
 
     Key k = new Key();
 
@@ -36,6 +36,62 @@ public class DefaultMemberService implements MemberService {
 
     try {
       message.send(params);
+
+    } catch (CoolsmsException e) {
+      throw new Exception(e);
+    }
+  }
+
+
+
+  @Override
+  public void certifyNumberForPassword(String phoneNumber, String authenticationNumber) throws Exception {
+
+    Key k = new Key();
+
+    String api_key = k.getApi_key();
+    String api_secret = k.getApi_secret_key();
+    Message message = new Message(api_key, api_secret);
+
+    HashMap<String, String> params = new HashMap<String, String>();
+    params.put("to", phoneNumber);
+    params.put("from", "01090986073");
+    params.put("type", "SMS");
+    params.put("text", "Petopia 비밀번호 찾기 인증번호 " + "["+authenticationNumber+"]");
+
+    try {
+      message.send(params);
+
+    } catch (CoolsmsException e) {
+      throw new Exception(e);
+    }
+  }
+
+
+  @Override
+  public void setNewPassword(String id, String phoneNumber, String newPassword) throws Exception {
+
+    Key k = new Key();
+
+    String api_key = k.getApi_key();
+    String api_secret = k.getApi_secret_key();
+    Message message = new Message(api_key, api_secret);
+
+    HashMap<String, String> params = new HashMap<String, String>();
+    params.put("to", phoneNumber);
+    params.put("from", "01090986073");
+    params.put("type", "SMS");
+    params.put("text", "Petopia 임시 비밀번호는 " + "["+newPassword+"] 입니다.");
+
+    try {
+      message.send(params);
+      Map<String, Object> temp = new HashMap<>();
+      temp.put("id", id);
+      temp.put("tel", phoneNumber);
+
+      Member m = memberDao.findIdTel(temp);
+      m.setPassword(newPassword);
+      memberDao.updatePassword(m);
 
     } catch (CoolsmsException e) {
       throw new Exception(e);
@@ -70,6 +126,7 @@ public class DefaultMemberService implements MemberService {
     return memberDao.findByEmailPassword(params);
   }
 
+
   @Override
   public Member getId(String id) throws Exception {
     return memberDao.findById(id);
@@ -86,12 +143,27 @@ public class DefaultMemberService implements MemberService {
   }
 
   @Override
+  public Member getTel(String tel) throws Exception {
+    return memberDao.findByTel(tel);
+  }
+
+  @Override
   public Member getIdEmail(String name, String nick) throws Exception {
     Map<String, Object> params = new HashMap<>();
     params.put("name", name);
     params.put("nick", nick);
 
     return memberDao.findIdEmailKey(params);
+  }
+
+  @Override
+  public Member getIdTel(String id, String tel) throws Exception {
+
+    Map<String, Object> params = new HashMap<>();
+    params.put("id", id);
+    params.put("tel", tel);
+
+    return memberDao.findIdTel(params);
   }
 
   @Override
