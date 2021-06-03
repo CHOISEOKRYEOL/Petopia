@@ -107,7 +107,7 @@
 				<div class="mb-3 row">
 					<label for="tel" class="col-sm-2 col-form-label">휴대전화</label>
 					<div class="col-sm-6">
-						<input type="number" required class="form-control form-control-sm" id="tel" name="tel" placeholder="휴대전화 입력" oninput="checkTel()" maxlength='11'>
+						<input type="tel" required class="form-control form-control-sm" id="tel" name="tel" placeholder="휴대전화 입력" oninput="checkTel()" maxlength='11'>
 						<div id="telCheck" style="display: none">(-)없이 11자리 입력하세요.</div>
 						<div id="sameTel" style="display: none">이미 사용 중인 번호입니다.</div>
 						<br> <input type="button" id="sendNumber" name="auth" value="인증번호 요청">

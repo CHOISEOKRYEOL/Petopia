@@ -29,7 +29,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 </div>
 
 <div class="container">
-  <div class="flex-shrink-0 p-3 bg-white" style="width: 280px;">
+  <div class="flex-shrink-0 p-3 bg-white" style="width: 200px;">
     <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
       <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
       <span class="fs-5 fw-semibold">My Page</span>
@@ -48,7 +48,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
         </div>
       </li>
       <li class="mb-1">
-        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="orders-collapse" aria-expanded="false">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="true">
           즐겨찾기
         </button>
         <div class="collapse show" id="orders-collapse">

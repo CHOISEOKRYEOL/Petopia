@@ -9,7 +9,7 @@
 
 var sidoList;
 
-$.getJSON('city', function(result) {
+$.getJSON('/web/app/mytown/city', function(result) {
 	  sidoList = result;
 		for (var sido of result) {
 			  $('<option>').attr('value', sido.no).html(sido.name).appendTo('#sido');	

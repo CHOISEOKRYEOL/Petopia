@@ -4,109 +4,211 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>홈</title>
+<meta charset="UTF-8">
+<title>펫토피아</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+<link rel="stylesheet" type="text/css" href="../css/layout.css">
 </head>
 <body>
-	<c:if test="${empty loginUser}">
-		<h1>비회원</h1>
-		<p>
-			<a href='member/member_form'>가입</a>
-		</p>
-		<p>
-			<a href='login_form'>로그인</a>
-		</p>
-		<p>
-			<a href='hospital/list'>병원 찾기</a>
-		</p>
-		<p>
-			<a href='story/list'>스토리</a>
-		</p>
-		<p>
-			<a href='sharingmarketboard/list'>나눔 장터</a>
-		</p>
-		<p>
-			<a href='mytown/main'>우리 동네</a>
-		</p>
-		<p>
-			<a href='qna/list'>Q&A 목록</a>
-		</p>
-	</c:if>
-	<c:if test="${not empty loginUser and loginUser.id eq 'admin'}">
-		<h1>관리자</h1>
-		<p>
-		  <form action='logout' method='post'>
-      <input name='logout' type='submit' value='로그아웃'>
-    </form>
-		</p>
-		<p>
-			<a href='admin/memberlist'>ADMIN 회원 리스트</a>
-		</p>
-		<p>
-		  <a href='admin/hospitallist'>ADMIN 병원 리스트</a>
-		</p>
-		<p>
-			<a href='admin/reviewlist'>ADMIN 리뷰 리스트</a>
-		</p>
-		<p>
-			<a href='admin/qnalist'>ADMIN Q&A 리스트</a>
-		</p>
-		<p>
-			<a href='admin/boardlist'>ADMIN 게시판 리스트</a>
-		</p>
-	</c:if>
-	<c:if test="${not empty loginUser and loginUser.id ne 'admin'}">
-		<h1>회원</h1>
-		<p>
-		<form action='member/detail' method='get'>
-			</p>
-			<input name='detail' type='submit' value='내 계정 관리'>
-		</form>
-		<p>
-		<form action='logout' method='post'>
-			</p>
-			<input name='logout' type='submit' value='로그아웃'>
-		</form>
-		<p>
-		</p>
-		<p>
-			<a href='pet/form'>마이펫 등록</a>
-		</p>
-		<p>
-			<a href='pet/list'>마이펫 리스트</a>
-		</p>
-		<p>
-			<a href='hospital/add'>병원 등록</a>
-		</p>
-		<p>
-			<a href='hospital/list'>병원 목록</a>
-		</p>
-		<p>
-			<a href='record/add'>진찰기록 등록</a>
-		</p>
-		<p>
-			<a href='story/add'>스토리 추가</a>
-		</p>
-		<p>
-			<a href='story/list'>스토리 목록</a>
-		</p>
-		<p>
-			<a href='sharingmarketboard/list'>나눔 장터 목록</a>
-		</p>
-		<p>
-			<a href='mytown/main'>우리 동네 목록</a>
-		</p>
-		<p>
-			<a href='qna/qna_form'>Q&A 작성</a>
-		</p>
-		<p>
-			<a href='qna/list'>Q&A 목록</a>
-		</p>
-		<p>
-		  <a href='member/bookmarklist'>병원 즐겨찾기</a>
-		</p>
-		<p>
-		  <a href='mypage/main'>My Page</a>
-		</p>
-	</c:if>
+<header id="header"></header>
+<div class="wrap">
+<img src="../images/20180115_121333.jpg" class="img-fluid width:100%;"
+style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
+  <div class="text-group">
+    <p style="font-size: 50px;">펫토피아</p>
+    <p style="font-size: 30px;">우리 아이들의 이야기</p>
+    <p>동네 커뮤니티로 정보를 나누고, 수다 떨며<br>
+    같이 산책할 내 반려동물의 친구를 사귀어 보세요</p> 
+  </div>
+</div>
+
+<div class="container">
+    <div class="box1">
+    <div class="pagination">
+        <div class="pagination_item01">
+           시/도
+        </div>
+        <div class="pagination_item02">
+           <select class="gno" name='gno'>
+           <option value=''>서울특별시</option>
+           </select>
+        </div>
+        <div class="pagination_item03">
+           시/군/구
+        </div>
+        <div class="pagination_item04">
+           <select class="cno" name='cno'>
+           <option value=''>강남구</option>
+           </select>
+        </div>
+        <div class="pagination_item05">
+           <input type="button" class="img-search-btn">
+        </div>
+    </div>
+    </div>
+    
+    <div class="box2">
+      <div class="container_navleft01">
+      <nav class="navbar navbar-expand-lg navbar-light">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/web/app/pet/list">
+          <img src="../images/pawprintfull.png"> 마이펫</a>
+        </li>
+      </ul>
+      </nav>
+      </div>
+      <div class="container_navright01">
+      <nav class="navbar navbar-expand-lg navbar-light">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/web/app/record/list">
+          <img src="../images/pawprintfull.png"> 진찰기록</a>
+        </li>
+      </ul>
+      </nav>
+      </div>
+    </div>
+    
+    <div class="box3">
+      <div class="container_left01">
+        <div class="img-mypet">
+          <img class="mypetpic" src="/web/images/20180111_205149.jpg">
+        </div>
+        <p>name: eeee<br>age: eeee<br>eeeeeddddd
+        </p>
+      </div>
+      
+      <div class="container_right01">
+      <div class="timeline">
+        <div class="timeline_line"></div>
+        <ul class="timeline_items">
+            <li class="timeline_item">
+                <div class="timeline_top">
+                    <div class="timeline_circle"></div>
+                    <div class="timeline_title">
+                    ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+                    </div>
+                </div>
+                <div class="timeline_desc">
+                2020.02.22
+                </div>
+            </li>
+            <li class="timeline_item">
+                <div class="timeline_top">
+                    <div class="timeline_circle"></div>
+                    <div class="timeline_title">
+                    ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ
+                    </div>
+                </div>
+                <div class="timeline_desc">
+                2021.02.22
+                </div>
+            </li>
+            <li class="timeline_item">
+                <div class="timeline_top">
+                    <div class="timeline_circle"></div>
+                    <div class="timeline_title">
+                    ㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱ
+                    </div>
+                </div>
+                <div class="timeline_desc">
+                2020.12.22
+                </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="box4">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/web/app/sharingmarketboard/list">
+          <img src="../images/pawprintfull.png"> 나눔장터</a>
+        </li>
+      </ul>
+    </nav>
+    </div>
+    
+    <div class="box5">
+      <div class="row justify-content-evenly">
+        <div class="col-3">
+          <a href="https://www.naver.com/">
+          <img src="../images/20180111_205149.jpg" style="width: 200px; height: 250px;"></a>
+          <p class="market_contents">
+          <a href="https://www.naver.com/" class="link-dark" style="text-decoration:none;">
+          dkdkdksssssssssssssssssssssssssssssssssss</a></p>
+        </div>
+        <div class="col-3">
+          <a href="https://www.daum.net/">
+          <img src="../images/20180111_205149.jpg" style="width: 200px; height: 250px;"></a>
+          <p class="market_contents">
+          <a href="https://www.daum.net/" class="link-dark" style="text-decoration:none;">
+          dkdkdkssssssssssssssssssss</a></p>
+        </div>
+        <div class="col-3">
+          <a href="https://twitter.com/">
+          <img src="../images/20180111_205149.jpg" style="width: 200px; height: 250px;"></a>
+          <p class="market_contents">
+          <a href="https://twitter.com/" class="link-dark" style="text-decoration:none;">
+          dkdkdkssssssssssssssssssssssssss</a></p>
+        </div>
+        <div class="col-3">
+          <a href="https://www.netflix.com/">
+          <img src="../images/20180111_205149.jpg" style="width: 200px; height: 250px;"></a>
+          <p class="market_contents">
+          <a href="https://www.netflix.com/" class="link-dark" style="text-decoration:none;">
+          dkdkdksssssssssssssss</a></p>
+        </div>
+     </div>
+     </div>
+    
+    <div class="box6">
+      <div class="container_navleft02">
+      <nav class="navbar navbar-expand-lg navbar-light">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/web/app/story/list">
+          <img src="../images/pawprintfull.png"> 스토리</a>
+        </li>
+      </ul>
+      </nav>
+      </div>
+      <div class="container_navright02">
+      <nav class="navbar navbar-expand-lg navbar-light">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/web/app/mytown/list">
+          <img src="../images/pawprintfull.png"> 우리동네</a>
+        </li>
+      </ul>
+      </nav>    
+      </div>
+    </div>
+    
+    <div class="box7">
+      <div class="container_left02">
+      스토리
+      </div>
+      
+      <div class="container_right02">
+      커뮤
+      </div>
+    </div>
+</div>
+
+<footer id="footer"></footer>
+<script>
+$(document).ready(function() {
+    $("header").load("/web/html/header.jsp");
+    $("footer").load("/web/html/footer.html");
+  });
+</script>
 </body>
 </html>
