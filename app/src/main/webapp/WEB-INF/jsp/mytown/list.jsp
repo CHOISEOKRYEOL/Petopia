@@ -45,6 +45,12 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
       <input type='hidden' name='r' value='r'> 
       <button class="btn" style="background-color: #FFFFFF;" type="submit">추천수</button>
     </form>
+    <form action='list' method='get' class="d-flex">
+	    <input type='hidden' name='stateNo' value='${smallAddress.bigAddress.no}'>
+	    <input type='hidden' name='cityNo' value='${smallAddress.no}'><br>
+	    <input class="form-control me-2" type='search' name='keyword' value='${param.keyword}' placeholder="검색" aria-label="검색"> 
+    <button class="btn btn-outline-success col-sm-3" type="submit">검색</button>
+  </form>
   </li>
   </ul>
 	</div>
@@ -79,12 +85,6 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 			</c:forEach>
 		</tbody>
 	</table>
-	<form action='list' method='get' class="d-flex">
-	  <input type='hidden' name='stateNo' value='${smallAddress.bigAddress.no}'>
-    <input type='hidden' name='cityNo' value='${smallAddress.no}'><br>
-		<input class="form-control me-2" type='search' name='keyword' value='${param.keyword}' placeholder="검색" aria-label="검색"> 
-		<button class="btn btn-outline-success col-sm-3" type="submit">검색</button>
-	</form>
 </div>
 <footer id="footer"></footer>
 <script>
