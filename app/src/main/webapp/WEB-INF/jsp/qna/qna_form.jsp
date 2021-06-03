@@ -12,11 +12,11 @@
 			<tbody>
 				<tr>
 					<th>제목</th>
-					<td><input type='text' name='title'></td>
+					<td><input type='text' name='title' minlength="3"></td>
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td><textarea name='content' rows='10' cols='60'></textarea></td>
+					<td><textarea name='content' rows='10' cols='60' minlength="10"></textarea></td>
 				</tr>
 				<tr>
 					<td><input type='submit' value='작성'></td>

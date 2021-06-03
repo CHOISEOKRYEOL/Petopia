@@ -2,6 +2,7 @@ package com.pms.petopia.web;
 
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,18 +31,20 @@ public class BookmarkController {
     Bookmark b = new Bookmark();
 
     Member m = new Member();
-    m.setNo(Integer.parseInt(request.getParameter("mno")));
+    int mno = Integer.parseInt(request.getParameter("mno"));
+    m.setNo(mno);
 
     Hospital h = new Hospital();
-    h.setNo(Integer.parseInt(request.getParameter("hno")));
+    int hno = Integer.parseInt(request.getParameter("hno"));
+    h.setNo(hno);
 
     b.setMember(m);
     b.setHospital(h);
 
     int check = Integer.parseInt(request.getParameter("hiddenNo"));
 
-
     bookmarkService.add(b);
+
 
     if(check == 0) {
       return "redirect:../hospital/detail?no=" + h.getNo();
@@ -51,8 +54,8 @@ public class BookmarkController {
     }
   }
 
-  @RequestMapping("delete")
-  public String delete(HttpServletRequest request)
+  @GetMapping("delete")
+  public String delete(HttpServletRequest request, HttpServletResponse response)
       throws Exception {
 
     int no = Integer.parseInt(request.getParameter("no"));
@@ -71,7 +74,7 @@ public class BookmarkController {
     }
   }
 
-  @GetMapping("bookmark")
+  @GetMapping("list")
   public void list(HttpSession session, Model model)
       throws Exception {
 

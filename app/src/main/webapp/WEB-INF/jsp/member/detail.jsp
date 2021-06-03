@@ -35,7 +35,7 @@
 				</tr>
 				<tr>
 					<th>휴대전화</th>
-					<td><input name='tel' type='tel' value='${member.tel}'></td>
+					<td><input name='tel' type='tel' value='${member.tel}' readonly></td>
 				</tr>
 				<br>
 			</tbody>

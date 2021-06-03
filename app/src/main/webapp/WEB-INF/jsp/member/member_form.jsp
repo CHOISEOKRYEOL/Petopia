@@ -24,11 +24,10 @@
 	crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../css/common.css">
-
-<script type="text/javascript" src="../../js/page.js"></script>
+<link rel="stylesheet" type="text/css" href="../../css/layout.css">
 </head>
 <body>
-	<header id="header"></header>
+	<header></header>
 	<div class="wrap">
 		<img src="../../images/20180115_115933.jpg"
 			class="img-fluid width:100%;"
@@ -112,7 +111,7 @@
 							id="tel" name="tel" placeholder="휴대전화 입력" oninput="checkTel()" maxlength='11'>
 						<div id="telCheck" style="display: none">숫자만 입력 가능합니다.</div>
 						<br> <input type="button" id="sendNumber" name="auth"
-							value="인증번호 받기">
+							value="인증번호 요청">
 					</div>
 				</div>
 
@@ -139,7 +138,7 @@
 		</div>
 	</div>
 
-	<footer id="footer"></footer>
+	<footer></footer>
 
 	<script>
 		var idCheck = 0;
@@ -251,7 +250,7 @@
 			var userNick = $('#nick').val();
 			$.ajax({
 				url : "checknick",
-				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+				contentType: 'application/x-www-form-urlencoded; charset=euc-kr',
 				data : {
 					nick : userNick
 				},
@@ -453,6 +452,11 @@
 				swal("인증 실패", "다시 인증 해주세요.", "error", { button: "확인"});
 			}
 		});
+		
+		$(document).ready(function() {
+		    $("header").load("../../html/header.jsp");
+		    $("footer").load("../../html/footer.html");
+		  });
 	</script>
 
 </body>

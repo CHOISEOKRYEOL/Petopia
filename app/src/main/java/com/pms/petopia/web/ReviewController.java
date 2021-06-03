@@ -2,6 +2,7 @@ package com.pms.petopia.web;
 
 import java.util.List;
 import java.util.UUID;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
@@ -26,10 +27,12 @@ public class ReviewController {
 
   ReviewService reviewService;
   HospitalService hospitalService;
+  ServletContext sc;
 
-  public ReviewController(ReviewService reviewService, HospitalService hospitalService) {
+  public ReviewController(ReviewService reviewService, HospitalService hospitalService, ServletContext sc) {
     this.reviewService = reviewService;
     this.hospitalService = hospitalService;
+    this.sc = sc;
   }
 
   @GetMapping("review_form")
@@ -40,10 +43,10 @@ public class ReviewController {
   }
 
   @PostMapping("add")
-  public String add(HttpServletRequest request, HttpSession session)
+  public String add(HttpServletRequest request, HttpSession session, Part photoFile)
       throws Exception {
 
-    String uploadDir = request.getServletContext().getRealPath("/upload");
+    String uploadDir = sc.getRealPath("/upload");
 
     Review r = new Review();
 
@@ -54,13 +57,11 @@ public class ReviewController {
 
     System.out.println(r);
 
-    Part photoPart = request.getPart("photo");
 
-    if(photoPart.getSize() > 0) {
+    if(photoFile.getSize() > 0) {
       String filename = UUID.randomUUID().toString();
-      photoPart.write(uploadDir + "/" + filename);
+      photoFile.write(uploadDir + "/" + filename);
       r.setPhoto(filename);
-
 
       Thumbnails.of(uploadDir + "/" + filename)
       .size(100, 100)
@@ -78,7 +79,7 @@ public class ReviewController {
     r.setWriter(loginUser);
 
     Hospital h = new Hospital();
-    h.setNo(Integer.parseInt(request.getParameter("num")));
+    h.setNo(Integer.parseInt(request.getParameter("no")));
     r.setHospital(h);
 
     reviewService.add(r);

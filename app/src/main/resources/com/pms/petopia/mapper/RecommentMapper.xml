@@ -39,7 +39,7 @@
   
   <delete id="delete" parameterType="int">
   delete from pet_recommt
-  where tno=#{value}
+  where trno=#{value}
   </delete>
   
   <select id="countReco" resultType="String" parameterType="int">

@@ -56,22 +56,19 @@ public class SharingMarketBoardController {
   @PostMapping("add")
   public String add(HttpServletRequest request, HttpSession session) throws Exception {
 
-    String uploadDir = request.getServletContext().getRealPath("/upload");
-
+    String uploadDir = sc.getRealPath("/upload");
     SharingMarketBoard smb = new SharingMarketBoard();
-    List<SharingMarketBoardPhoto> phots = new ArrayList<>();
-
-
     int cat = Integer.parseInt(request.getParameter("category"));
     smb.setCategory(sharingMarketBoardCategoryService.get(cat));
     smb.setTitle(request.getParameter("title"));
     smb.setContent(request.getParameter("content"));
 
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    List<SharingMarketBoardPhoto> phots = new ArrayList<>();
+
+    Member loginUser = (Member)session.getAttribute("loginUser");
     smb.setWriter(loginUser);
 
-    sharingMarketBoardService.add(smb);
-
+    sharingMarketBoardService.add(smb); 
     Collection<Part> photoParts = request.getParts();
     for (Part p : photoParts) {
       if(!p.getName().equals("photo")) {
@@ -105,13 +102,13 @@ public class SharingMarketBoardController {
         });
 
         Thumbnails.of(uploadDir + "/" + filename)
-        .size(80, 80)
+        .size(700, 700)
         .outputFormat("jpg")
         .crop(Positions.CENTER)
         .toFiles(new Rename() {
           @Override
           public String apply(String name, ThumbnailParameter param) {
-            return name + "_80x80";
+            return name + "_700x700";
           }
         });
       }
@@ -124,13 +121,16 @@ public class SharingMarketBoardController {
 
     model.addAttribute("smb", sharingMarketBoardService.get(no));
     model.addAttribute("catList", sharingMarketBoardCategoryService.list());
-    return "/jsp/sharingmarketboard/update.jsp";
+    return "/sharingmarketboard/update";
   }
 
   @PostMapping("update")
-  public String update(SharingMarketBoard board,HttpSession session,SharingMarketBoard smbBoard) throws Exception {
+  public String update(HttpServletRequest request, HttpSession session) throws Exception {
 
-    SharingMarketBoard oldBoard = sharingMarketBoardService.get(board.getNo());
+    String uploadDir = sc.getRealPath("/upload");
+    int no = Integer.parseInt(request.getParameter("no"));
+    SharingMarketBoard oldBoard = sharingMarketBoardService.get(no);
+
     if (oldBoard == null) {
       throw new Exception("해당 번호의 게시글이 없습니다.");
     } 
@@ -139,16 +139,61 @@ public class SharingMarketBoardController {
     if (oldBoard.getWriter().getNo() != loginUser.getNo()) {
       throw new Exception("변경 권한이 없습니다!");
     }
-    //    SharingMarketBoard smbBoard = new SharingMarketBoard();
-    //    smbBoard.setNo(oldBoard.getNo());
-    //
-    //    int categoryNo = Integer.parseInt(request.getParameter("category"));
-    //    smbBoard.setCategory(sharingMarketBoardCategoryService.get(categoryNo));
-    //
-    //    smbBoard.setTitle(request.getParameter("title"));
-    //    smbBoard.setContent(request.getParameter("content"));
+    SharingMarketBoard smbBoard = new SharingMarketBoard();
+    smbBoard.setNo(oldBoard.getNo());
+    int categoryNo = Integer.parseInt(request.getParameter("category"));
+    smbBoard.setCategory(sharingMarketBoardCategoryService.get(categoryNo));
+    smbBoard.setTitle(request.getParameter("title"));
+    smbBoard.setContent(request.getParameter("content"));
 
     sharingMarketBoardService.update(smbBoard);
+    sharingMarketBoardPhotoService.delete(no);
+
+    List<SharingMarketBoardPhoto> phots = new ArrayList<>();
+    Collection<Part> photoParts = request.getParts();
+    for (Part p : photoParts) {
+      if(!p.getName().equals("photo")) {
+        continue;
+      }
+
+      if (p.getSize() > 0) {  
+        // 파일을 선택해서 업로드 했다면,
+        String filename = UUID.randomUUID().toString();
+        p.write(uploadDir + "/" + filename);
+        SharingMarketBoardPhoto phot = new SharingMarketBoardPhoto();
+        phot.setPhoto(filename);
+        System.out.println(phot.getPhoto());
+        phots.add(phot);
+
+        if(phots != null) {
+          phot.setSharingmarketboard(smbBoard);
+          sharingMarketBoardPhotoService.add(phot);
+        }
+
+        // 썸네일 이미지 생성
+        Thumbnails.of(uploadDir + "/" + filename)
+        .size(30, 30)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_30x30";
+          }
+        });
+
+        Thumbnails.of(uploadDir + "/" + filename)
+        .size(700, 700)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_700x700";
+          }
+        });
+      }
+    }
 
     String webAdress= String.format("../sharingmarketboard/detail?no=%d",oldBoard.getNo());
     return "redirect:" + webAdress;
@@ -183,25 +228,18 @@ public class SharingMarketBoardController {
   }
 
   @GetMapping("detail")
-  public String detail(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  public void detail(int no, Model model) throws Exception {
 
-    int no = Integer.parseInt(request.getParameter("no"));
-    //    List<SharingMarketBoardComment>comments = sharingMarketBoardCommentService.get(no);
-    //    List<SharingMarketBoardPhoto> photo = sharingMarketBoardPhotoService.list(no);
-    //    System.out.println(comments);
-    //    System.out.println(no);
-    //    System.out.println(photo);
+    model.addAttribute("smb", sharingMarketBoardService.get(no));
+    model.addAttribute("catList", sharingMarketBoardCategoryService.list());
+    model.addAttribute("comtList", sharingMarketBoardCommentService.get(no));
+    model.addAttribute("photList", sharingMarketBoardPhotoService.list(no));
 
-    request.setAttribute("smb", sharingMarketBoardService.get(no));
-    request.setAttribute("catList", sharingMarketBoardCategoryService.list());
-    request.setAttribute("comtList", sharingMarketBoardCommentService.get(no));
-    request.setAttribute("photList", sharingMarketBoardPhotoService.list(no));
-
-    return"/sharingmarketboard/detail";
+    //    return"/sharingmarketboard/detail";
   }
 
   @GetMapping("list")
-  public String list(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  public String list(HttpServletRequest request, Model model) throws Exception {
 
     //    String item = request.getParameter("item");
     //    String keyword = request.getParameter("keyword");
@@ -227,10 +265,10 @@ public class SharingMarketBoardController {
     }
 
 
-    request.setAttribute("photList", photoList);
-    request.setAttribute("categoryNo", categoryNo);
-    request.setAttribute("catList", sharingMarketBoardCategoryService.list());
-    request.setAttribute("smBoards", smBoards);
+    model.addAttribute("photList", photoList);
+    model.addAttribute("category", category);
+    model.addAttribute("catList", sharingMarketBoardCategoryService.list());
+    model.addAttribute("smBoards", smBoards);
 
     return "/sharingmarketboard/list";
 
