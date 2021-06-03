@@ -16,6 +16,7 @@
 <script type="text/javascript" src="../../smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link href="../../css/board.css" rel="stylesheet"/>
 <meta charset='UTF-8'>
 <title>게시글 변경</title>
 </head>
@@ -33,49 +34,59 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   </div>
 </div>
 
-<div class="container">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-<img src="../../images/IMG_7390.PNG" width=10%; style=margin-right:70%;>
-<a class="navbar-brand" style=margin-right:50%>${oldBoard.bigAddress.name}&nbsp;${oldBoard.smallAddress.name}</a>
-</nav>
-<h2>게시글 변경</h2>
-<form action='update' method='post' id='frm'>
-<table border='1'>
-<tbody>
-<tr><th>광역시/도</th> 
-<td><select name ='stateNo'>
-<c:forEach items="${smallAddresses}" var="s">
-<option value='${s.bigAddress.no}' ${s.bigAddress.no == bigAddress.no ? "selected" : ""}>${s.bigAddress.name}</option>
-</c:forEach>
-</select></td>
-<tr><th>시/군/구</th> 
-<td><select name='cityNo'>
-<c:forEach items="${smallAddresses}" var="s">
-<option value='${s.no}' ${s.no == smallAddress.no ? "selected" : ""}>${s.name}</option>
-</c:forEach>
-</select></td></tr>
- 
-<tr><th>번호</th> <td><input type='text' name='no' value='${oldBoard.no}'readonly></td></tr>
-<tr><th>제목</th> <td><input name='title' type='text' value='${oldBoard.title}'></td></tr>
-<tr><th>내용</th> <td><textarea id='content' name='content' rows='10'>${oldBoard.content}</textarea></td></tr>
-<tr><th>작성자</th> <td>${oldBoard.writer.nick}</td></tr>
-<tr><th>등록일</th> <td>${oldBoard.createdDate}</td></tr>
-<tr><th>조회수</th> <td>${oldBoard.viewCount}</td></tr>
 
-<c:if test="${not empty loginUser and oldBoard.writer.no == loginUser.no}">
-<tr>
-  <td colspan='2'>
-    <input type='button' id='updatebutton' value='변경'>
-    <!--<a href='delete?no=${myTownBoard.no}'>삭제</a>-->
-  </td>
-</tr>
-</c:if>
-</tbody>
-</table>
-</form>
-<a href='list?stateNo=${bigAddress.no}&cityNo=${smallAddress.no}'>목록</a>
-<br>
+<div class="board">
+<div class="writingHeadr">
+<h2 class="title">게시글 변경</h2>
+<c:if test="${not empty loginUser and loginUser.no == oldBoard.writer.no}">
+  <div class="save-area">
+  <input type='button' class="button" id="updatebutton" value='변경'>
+  <span class="button"><a href='delete?no=${oldBoard.no}'>삭제</a></span>
+  </div>
+  </c:if>
 </div>
+<form id="frm" action='update' method='post'>
+<div class="writingContent">
+  <div class="writtingArea">
+    <div class="boardWritingEditor">
+    <div class="row">
+      <div class="categorySelectButton">
+        <select name ='stateNo' style="margin-bottom:10px; color: #5c5c5c;" class="form-select form-select-sm" style="font-size: 12px; font-family: 'Noto Sans KR', sans-serif;">
+        <c:forEach items="${smallAddresses}" var="s">
+        <option value='${s.bigAddress.no}' ${s.bigAddress.no == oldBoard.bigAddress.no ?  "selected" : ""}>${s.bigAddress.name}</option>
+        </c:forEach>
+        </select>
+        <select name='cityNo' style="margin-bottom:10px; color: #5c5c5c;" class="form-select form-select-sm" style="font-size: 12px; font-family: 'Noto Sans KR', sans-serif;">
+        <c:forEach items="${smallAddresses}" var="s">
+        <option value='${s.no}' ${s.no == smallAddress.no ?  "selected" : ""}>${s.name}</option>
+        </c:forEach>
+        </select>
+        <div class="input-group">
+        <input type='text' name='title' style="width: 888px; margin-bottom:10px;" class="form-control"  value='${oldBoard.title}'>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+   <div>
+  <textarea id="content" name='content' cols="108" rows="15">${oldBoard.content}</textarea>
+  </div>
+      <div class="input-group">
+      <input type="file" multiple="multiple" style="font-size: 14px;
+      color: #5c5c5c; font-family: 'Noto Sans KR', sans-serif; width: 888px; margin-top:10px;" name=photo class="form-control" style="width: 888px; margin-top:10px;">
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+ <input type='hidden' name='no' value='${oldBoard.no}' readonly>
+</form>
+
+ 
+<div class="button2">
+<span><a href='detail?no=${oldBoard.no}'>뒤로가기</a></span>
+</div>
+</div>
+
 
 
 <script type="text/javascript">

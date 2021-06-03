@@ -11,6 +11,7 @@
 <script type="text/javascript" src="../../smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link href="../../css/board.css" rel="stylesheet"/>
 <meta charset='UTF-8'>
 <title>우리동네 새 게시글</title>
 </head>
@@ -26,37 +27,65 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     같이 산책할 내 반려동물의 친구 사귀어 보세요.</p>
   </div>
 </div>
+<div class="board">
+<div class="writingHeadr">
+<h2 class="title">우리동네 게시글 쓰기</h2>
+  <div class="save-area">
+  <input class="button" type='button' id='savebutton' value='등록'>
+  </div>
+</div>
 
-
-<div class="container">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-<a class="navbar-brand">우리동네 새 게시글</a>
-</nav>
-
-
-
-<h1>${small.bigAddress.name} ${small.name}</h1>
 <form id='frm' action='add' method='post'>
-광역시/도 : 
-<select name ='stateNo'>
-<c:forEach items="${smallAddresses}" var="s">
-<option value='${s.bigAddress.no}' ${s.bigAddress.no == smallAddress.bigAddress.no ?  "selected" : ""}>${s.bigAddress.name}</option>
-</c:forEach>
-</select>
-시/군/구 : 
-<select name='cityNo'>
-<c:forEach items="${smallAddresses}" var="s">
-<option value='${s.no}' ${s.no == smallAddress.no ?  "selected" : ""}>${s.name}</option>
-</c:forEach>
-</select><br>
-
-제목: <input type='text' name='title'><br>
-내용: <textarea id='content' name='content' rows='10' cols='60'></textarea><br>
-<input type='button' id='savebutton' value='등록'>
+<div class="writingContent">
+  <div class="writtingArea">
+    <div class="boardWritingEditor">
+    <div class="row">
+      <div class="categorySelectButton">
+        <select name ='stateNo' style="margin-bottom:10px; color: #5c5c5c;" class="form-select form-select-sm" style="font-size: 12px; font-family: 'Noto Sans KR', sans-serif;">
+        <c:forEach items="${smallAddresses}" var="s">
+        <option value='${s.bigAddress.no}' ${s.bigAddress.no == smallAddress.bigAddress.no ?  "selected" : ""}>${s.bigAddress.name}</option>
+        </c:forEach>
+        </select>
+        <select name='cityNo' style="margin-bottom:10px; color: #5c5c5c;" class="form-select form-select-sm" style="font-size: 12px; font-family: 'Noto Sans KR', sans-serif;">
+        <c:forEach items="${smallAddresses}" var="s">
+        <option value='${s.no}' ${s.no == smallAddress.no ?  "selected" : ""}>${s.name}</option>
+        </c:forEach>
+        </select>
+      <div class="input-group">
+      <input type="text" name="title" style="width: 888px; margin-bottom:10px;" class="form-control" placeholder="제목을 입력해주세요.">
+      </div>
+      </div>
+    </div>
+    <div class="row">
+   <div>
+  <textarea id="content" name="content" cols="108" rows="15"></textarea>
+  </div>
+    </div>
+    </div>
+  </div>
+</div>
 </form>
 
-<a href='list?stateNo=${smallAddress.bigAddress.no} &cityNo=${smallAddress.no}'>목록</a>
+<div class="foot">
+ <span><a href='list?stateNo=${smallAddress.bigAddress.no} &cityNo=${smallAddress.no}' class="btn btn-outline-secondary" 
+ style="  border: 0px;
+  margin-top: 40px;
+  margin-left: 50px;
+  margin-bottom: 80px;
+  display: inline-block;
+  height: 36px;
+  border-radius: 6px;
+  padding: 0 10px 0 11px;
+  line-height: 36px;
+  font-weight: 700;
+  font-size: 13px;
+  color: #323232;
+  text-align: center;
+  background: #ededed;" role="button" >목록</a></span>
 </div>
+</div>
+
+
 <script type="text/javascript">
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
