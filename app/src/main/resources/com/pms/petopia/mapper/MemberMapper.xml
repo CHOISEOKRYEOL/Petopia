@@ -75,6 +75,13 @@
     where nick = #{nick};
   </select>
 
+<select id="findByTel" resultMap="memberMap" parameterType="String">
+    select
+    mno, phone
+    from pet_user
+    where phone = #{tel};
+  </select>
+
   <select id="findIdEmailKey" resultMap="memberMap" parameterType="map">
     select
     mno, id, email, name

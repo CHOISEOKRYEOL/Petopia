@@ -20,6 +20,8 @@ public interface MemberDao {
 
   Member findByNick(String nick) throws Exception;
 
+  Member findByTel(String tel) throws Exception;
+
   Member findIdEmailKey(Map<String,Object> params) throws Exception;
 
   Member findIdTel(Map<String,Object> params) throws Exception;

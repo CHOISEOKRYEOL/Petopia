@@ -130,7 +130,7 @@ $('#firstAuthentication').click(function() {
      
      $.ajax({
     	 type : 'POST',
-       url : "checktel",
+       url : "checkidtel",
        data : {
     	   id : id,
          tel : tel

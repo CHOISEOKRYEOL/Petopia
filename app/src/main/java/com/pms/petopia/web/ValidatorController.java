@@ -2,9 +2,9 @@ package com.pms.petopia.web;
 
 import java.io.PrintWriter;
 import java.util.Random;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.service.MemberService;
@@ -20,11 +20,9 @@ public class ValidatorController {
     this.memberService = memberService;
   }
 
-  @RequestMapping("checkid")
-  public void checkId(HttpServletRequest request, HttpServletResponse response)
+  @GetMapping("checkid")
+  public void checkId(String id, HttpServletResponse response)
       throws Exception {
-
-    String id = request.getParameter("id");
 
     Member m = memberService.getId(id);
 
@@ -39,11 +37,9 @@ public class ValidatorController {
     }
   }
 
-  @RequestMapping("checkemail")
-  public void checkMail(HttpServletRequest request, HttpServletResponse response)
+  @GetMapping("checkemail")
+  public void checkMail(String email, HttpServletResponse response)
       throws Exception {
-
-    String email = request.getParameter("email");
 
     Member m = memberService.getEmail(email);
 
@@ -58,11 +54,9 @@ public class ValidatorController {
     }
   }
 
-  @RequestMapping("checknick")
-  public void checkNick(HttpServletRequest request, HttpServletResponse response)
+  @GetMapping("checknick")
+  public void checkNick(String nick, HttpServletResponse response)
       throws Exception {
-
-    String nick = request.getParameter("nick");
 
     Member m = memberService.getNick(nick);
 
@@ -77,11 +71,26 @@ public class ValidatorController {
     }
   }
 
-  @RequestMapping("checktel")
-  public void checkTel(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  @GetMapping("checktel")
+  public void checkTel(String tel, HttpServletResponse response) throws Exception {
 
-    String id = request.getParameter("id");
-    String tel = request.getParameter("tel");
+    Member m = memberService.getTel(tel);
+
+    System.out.println(m);
+
+    response.setContentType("text/plain;charset=UTF-8");
+    PrintWriter out = response.getWriter();
+
+    if(m != null) {
+      out.write("1");
+    }
+    else {
+      out.write("0");
+    }
+  }
+
+  @GetMapping("checkidtel")
+  public void checkIdTel(String id, String tel, HttpServletResponse response) throws Exception {
 
     Member m = memberService.getIdTel(id, tel);
 
@@ -96,8 +105,8 @@ public class ValidatorController {
     }
   }
 
-  @RequestMapping("checknumber")
-  public void checkNumber(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  @GetMapping("checknumber")
+  public void checkNumber(String tel, HttpServletResponse response) throws Exception {
 
     Random r  = new Random();
     String authenticationNumber = "";
@@ -106,9 +115,7 @@ public class ValidatorController {
       authenticationNumber += randomNumber;
     }
 
-    String phoneNumber = request.getParameter("tel");
-
-    memberService.certifyNumberForRegister(phoneNumber, authenticationNumber);
+    memberService.certifyNumberForRegister(tel, authenticationNumber);
 
     response.setContentType("text/plain;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -116,8 +123,8 @@ public class ValidatorController {
     out.write(authenticationNumber);
   }
 
-  @RequestMapping("checknumber2")
-  public void checkNumber2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  @GetMapping("checknumber2")
+  public void checkNumber2(String tel, HttpServletResponse response) throws Exception {
 
     Random r  = new Random();
     String authenticationNumber = "";
@@ -126,9 +133,7 @@ public class ValidatorController {
       authenticationNumber += randomNumber;
     }
 
-    String phoneNumber = request.getParameter("tel");
-
-    memberService.certifyNumberForPassword(phoneNumber, authenticationNumber);
+    memberService.certifyNumberForPassword(tel, authenticationNumber);
 
     response.setContentType("text/plain;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -136,8 +141,8 @@ public class ValidatorController {
     out.write(authenticationNumber);
   }
 
-  @RequestMapping("checkpassword")
-  public void checkPassword(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  @GetMapping("checkpassword")
+  public void checkPassword(String id, String tel) throws Exception {
 
     int min = 97;
     int max = 122;
@@ -148,10 +153,7 @@ public class ValidatorController {
         .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
         .toString();
 
-    String phoneNumber = request.getParameter("tel");
-    String id = request.getParameter("id");
-
-    memberService.setNewPassword(id, phoneNumber, newPassword);
+    memberService.setNewPassword(id, tel, newPassword);
 
   }
 
