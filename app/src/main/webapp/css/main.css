@@ -295,7 +295,7 @@ a { text-decoration:none }
     margin-left: 52px;
 }
 
-/* 장터 
+/* 장터 */
 .market {
     display: flex;   
 }
@@ -303,11 +303,10 @@ a { text-decoration:none }
 .market_column {
     flex: 1;
     margin: 20px 20px 20px;
-    width: 200px;
     display: flex;
     flex-direction: column;   
 }
-*/
+
 .market_contents {
 		flex: 1;
 		margin-top: 10px;
