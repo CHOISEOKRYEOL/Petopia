@@ -42,6 +42,7 @@ public class MyTownBoardController {
   public void form(int stateNo, int cityNo, Model model) throws Exception {
 
     SmallAddress smallAddress = smallAddressService.get(cityNo);
+    System.out.println(smallAddress);
     List<SmallAddress> smallAddresses = smallAddressService.list();
 
     model.addAttribute("smallAddress", smallAddress);

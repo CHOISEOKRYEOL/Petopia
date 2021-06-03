@@ -143,6 +143,11 @@ public class DefaultMemberService implements MemberService {
   }
 
   @Override
+  public Member getTel(String tel) throws Exception {
+    return memberDao.findByTel(tel);
+  }
+
+  @Override
   public Member getIdEmail(String name, String nick) throws Exception {
     Map<String, Object> params = new HashMap<>();
     params.put("name", name);

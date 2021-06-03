@@ -36,9 +36,9 @@
   </update>
   
   <select id="findByUser" resultMap="scrapMap" parameterType="int">
-	  select
-	    s.sno,
-	    s.is_scrap,
+    select
+      s.sno,
+      s.is_scrap,
       n.nno as story_no,
       n.title as story_title,
       n.url as story_url,

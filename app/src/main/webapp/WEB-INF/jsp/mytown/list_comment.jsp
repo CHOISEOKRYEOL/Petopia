@@ -101,9 +101,8 @@ $('.modify-btn').click(function(e) {
   commentModifyDiv.css('display', '');
 });
 
-var commentRemoveDiv = $('#comment-remove');
-
 //--------------삭제버튼을 눌렀을 시
+var commentRemoveDiv = $('#comment-remove');
 commentRemoveDiv.css('display', 'none');
 
 $('.remove-btn').click(function(e) {
@@ -155,14 +154,19 @@ $('#comment-modify-btn').click(function(e) {
   
 //--------------삭제 확인버튼을 눌렀을 시  
 $('#comment-remove-btn').click(function(e) {
-    var commentNum = $('.remove-btn').attr('data-no');
+	var commentReNo = $('.remove-btn').attr('data-no');
+    console.log(commentReNo);
+    var comtTable = $('.comment-table[data-no=' + commentReNo + ']');
 
    var xhr = new XMLHttpRequest();
-      xhr.open("GET","deleteComment?no="+commentNum,true);
+      xhr.open("GET","deleteComment?no="+commentReNo,true);
         xhr.onreadystatechange = () => {
             if (xhr.readyState == 4) {
               if (xhr.status == 200) {
                   alert("댓글을 삭제했습니다.");
+                  comtTable.css('display', 'none');
+                  commentRemoveDiv.css('display', 'none');
+                  resetBtn();
               } else {
                 alert("요청오류 : " + xhr.status);
                 }

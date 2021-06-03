@@ -25,6 +25,8 @@ public interface MemberService {
 
   Member getNick(String nick) throws Exception;
 
+  Member getTel(String tel) throws Exception;
+
   Member getIdEmail(String name, String nick) throws Exception;
 
   Member getIdTel(String id, String tel) throws Exception;

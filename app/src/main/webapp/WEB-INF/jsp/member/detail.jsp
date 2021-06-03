@@ -27,11 +27,7 @@
 				</tr>
 				<tr>
 					<th>비밀번호</th>
-					<td><input name='password' type='password'></td>
-				</tr>
-				<tr>
-					<th>비밀번호 확인</th>
-					<td><input name='checkPassword' type='password'></td>
+					<td><input name='password' type='password' minlength="8"></td>
 				</tr>
 				<tr>
 					<th>휴대전화</th>

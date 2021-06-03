@@ -60,7 +60,7 @@
 						<input type="text" class="form-control form-control-sm" id="id"
 							name="id" placeholder="아이디" required oninput="checkId()" maxlength='20'>
 						<div id="idLength" style="display: none">영문/숫자 6자 이상 입력하세요.</div>
-						<div id="idCheck" style="display: none">이미 존재하는 ID 입니다.</div>
+						<div id="idCheck" style="display: none">이미 사용 중인 ID 입니다.</div>
 					</div>
 				</div>
 				<div class="mb-3 row">
@@ -69,7 +69,7 @@
 						<input type="email" required class="form-control form-control-sm"
 							id="email" name="email" placeholder="이메일" oninput="checkEmail()" maxlength='40'>
 						<div id="emailPattern" style="display: none">이메일 형식이 아닙니다.</div>
-						<div id="emailCheck" style="display: none">이미 존재하는 E-mail
+						<div id="emailCheck" style="display: none">이미 사용 중인 E-mail
 							입니다.</div>
 					</div>
 				</div>
@@ -79,7 +79,7 @@
 						<input type="text" required class="form-control form-control-sm"
 							id="nick" name="nick" placeholder="닉네임" oninput="checkNick()" maxlength='10'>
 						<div id="nickLength" style="display: none">2자 이상 입력하세요.</div>
-						<div id="nickCheck" style="display: none">이미 존재하는 닉네임 입니다.</div>
+						<div id="nickCheck" style="display: none">이미 사용 중인 닉네임 입니다.</div>
 						<div id="nickPattern" style="display: none">한글 자음/모음 입력은
 							허용되지 않습니다.</div>
 					</div>
@@ -107,11 +107,10 @@
 				<div class="mb-3 row">
 					<label for="tel" class="col-sm-2 col-form-label">휴대전화</label>
 					<div class="col-sm-6">
-						<input type="tel" required class="form-control form-control-sm"
-							id="tel" name="tel" placeholder="휴대전화 입력" oninput="checkTel()" maxlength='11'>
-						<div id="telCheck" style="display: none">숫자만 입력 가능합니다.</div>
-						<br> <input type="button" id="sendNumber" name="auth"
-							value="인증번호 요청">
+						<input type="number" required class="form-control form-control-sm" id="tel" name="tel" placeholder="휴대전화 입력" oninput="checkTel()" maxlength='11'>
+						<div id="telCheck" style="display: none">(-)없이 11자리 입력하세요.</div>
+						<div id="sameTel" style="display: none">이미 사용 중인 번호입니다.</div>
+						<br> <input type="button" id="sendNumber" name="auth" value="인증번호 요청">
 					</div>
 				</div>
 
@@ -147,6 +146,7 @@
 		var emailCheck = 0;
 		var nickCheck = 0;
 		var telCheck = 0;
+		var sameTel = 0;
 		var authenticationCheck = 0;
 		var tempNumber = 0;
 		var confirmNumber = 0;
@@ -250,7 +250,6 @@
 			var userNick = $('#nick').val();
 			$.ajax({
 				url : "checknick",
-				contentType: 'application/x-www-form-urlencoded; charset=euc-kr',
 				data : {
 					nick : userNick
 				},
@@ -307,12 +306,23 @@
 
 		function checkTel() {
 			var userTel = $('#tel').val();
-			if (userTel.match(telValidator) == null) {
+			 $.ajax({
+			        url : "checktel",
+			        data : {
+			          tel : userTel
+			        },
+			        success : function(data) {
+			if (data == "0" && userTel.length < 9) {
+				$("#tel").css("background-color", "#FFCECE");
 				$("#telCheck").show();
+				$("#sameTel").hide();
 				telCheck = 0;
-			} else if (userTel.match(telValidator) != null) {
+				}
+			 else if (data == "0" && userTel.length > 10) {
 				$("#telCheck").hide();
+				$("#sameTel").hide();
 				telCheck = 1;
+		        	$("#tel").css("background-color", "#B0F6AC");
 		        if (idCheck == 1 && pwdCheck == 1 && repeatedPwdCheck == 1 && emailCheck == 1
 		                && nickCheck == 1 && telCheck == 1 && authenticationCheck == 1) {
 					$(".btn").prop("disabled", false);
@@ -320,6 +330,14 @@
 					nameCheck();
 				}
 			}
+			else if(data == "1") {
+				telCheck = 0;
+				$("#tel").css("background-color", "#FFCECE");
+				$("#sameTel").show();
+				$("#telCheck").hide();
+			}
+			        }
+			});
 		}
 
 		function checkOriginalPwd() {
