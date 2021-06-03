@@ -75,8 +75,9 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <c:if test="${not empty loginUser and myTownBoard.writer.no == loginUser.no}">
   <div class = "buttons">
     <span class = "button"><a href='update?no=${myTownBoard.no}'>변경</a></span>
-    <span class = "button"><a href='delete?no=${myTownBoard.no}'>삭제</a></span>
+    <input class =" button" type="button" value = '삭제' onclick="removeCheck()">
   </div>
+    <form action="delete?no=${myTownBoard.no}" name="removefrm" method="get"></form>
   </c:if>
   
   
@@ -122,6 +123,17 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
    	}
    });
   });
+  
+  function removeCheck() {
+	  if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+	      //document.removefrm.submit();
+	      document.location.href="/web/app/mytown/delete?no="+boardNo;
+
+	  }else{   //취소
+	      return false;
+	  }
+	 }
+  
 </script>
 
 
