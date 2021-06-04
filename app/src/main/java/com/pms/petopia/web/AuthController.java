@@ -57,7 +57,14 @@ public class AuthController {
     }
     else {
       session.setAttribute("loginUser", member);
-      return "main";
+      Member loginUser = (Member) session.getAttribute("loginUser");
+      if(loginUser.getRole() == 1) {
+        return "main";
+      }
+      else {
+        return "admin/main";
+      }
+
     }
   }
 

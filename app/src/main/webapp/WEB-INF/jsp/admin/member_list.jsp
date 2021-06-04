@@ -101,8 +101,8 @@ text-decoration:none
     <button class="button">검색</button>
     <div class="button" style="color: #323232; background: #ededed;">
       <span >
-        <a href="../main" style="color: #323232;">뒤로가기</a>
-      </span>
+         <a href="/web/app/admin/main" style="color: gray; text-decoration:none;">뒤로가기</a>
+      </span>s
     </div>
   </form>
   </div>
@@ -151,7 +151,7 @@ text-decoration:none
 	 <footer></footer>
 <script>
 $(document).ready(function() {
-	    $("header").load("../../html/header.jsp");
+	    $("header").load("../../html/header2.jsp");
 	    $("footer").load("../../html/footer.html");
 	  });
 </script>

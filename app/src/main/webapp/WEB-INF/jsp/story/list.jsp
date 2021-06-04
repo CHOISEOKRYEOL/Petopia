@@ -64,7 +64,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   ${s.no}
   </c:if>
   </td> 
-  <td><a href='${s.url}'>${s.title}</a></td> 
+  <td><a href='${s.url}' target="_blank">${s.title}</a></td> 
   <td>${s.site}</td> 
   <td>${s.registeredDate}</td> 
 </tr>

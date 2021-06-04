@@ -8,6 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
 <title>병원 리뷰 목록</title>
 <style type="text/css">
 
@@ -28,14 +29,14 @@ td{
   padding: 0 10px 0 11px;
 }
 
-.table{
+/* .table{
 width: 700px;
 margin: 0 auto;
 border: 1px solid #cccccc;
  font-weight: 500;
   font-size: 16px;
   text-align: center;
-}
+} */
 
 .search{
 display: block;
@@ -78,6 +79,7 @@ width: 100%;
 <body>
 <header></header>
 
+<div class="container">
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="display: block;"> 
 <a class="navbar-brand">관리자 병원 리뷰 목록</a>
   <div class="container-fluid" style="display: block; min-width: 1000px;">
@@ -93,7 +95,7 @@ width: 100%;
     <button class="button">검색</button>
         <div class="button">
       <span >
-        <a href="../main">뒤로가기</a>
+        <a href="/web/app/admin/main" style="color: gray; text-decoration:none;">뒤로가기</a>
       </span>
     </div>
   </form>
@@ -129,10 +131,11 @@ width: 100%;
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
 	<footer></footer>
 	<script>
 $(document).ready(function() {
-      $("header").load("../../html/header.jsp");
+      $("header").load("../../html/header2.jsp");
       $("footer").load("../../html/footer.html");
     });
 </script>
