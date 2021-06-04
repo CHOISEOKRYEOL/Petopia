@@ -39,7 +39,7 @@
               <a class="nav-link active" aria-current="page" href="/web/app/logout">로그아웃</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/web/app/mypage/main">마이페이지</a>
+              <a class="nav-link active" aria-current="page" href="/web/app/pet/list">마이페이지</a>
             </li>
           </ul>
         </div>
