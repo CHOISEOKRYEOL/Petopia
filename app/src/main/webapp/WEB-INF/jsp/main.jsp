@@ -52,7 +52,6 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     </div>
     
     <div class="box2">
-      <div class="container_navleft01">
       <nav class="navbar navbar-expand-lg navbar-light">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -61,17 +60,6 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
         </li>
       </ul>
       </nav>
-      </div>
-      <div class="container_navright01">
-      <nav class="navbar navbar-expand-lg navbar-light">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/web/app/record/list">
-          <img src="/web/images/pawprintfull.png"> 진찰기록</a>
-        </li>
-      </ul>
-      </nav>
-      </div>
     </div>
     
     <c:if test="${not empty loginUser}">

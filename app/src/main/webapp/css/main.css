@@ -29,22 +29,11 @@ a { text-decoration:none }
 /* 마이펫이름 */
 .box2 {
     box-sizing: context-box;
+    align-items: center;
     display: flex;
     height: 50px;
     width: 100%;
     border-bottom: 2px solid gray;
-}
-
-.container_navleft01 {
-	  align-items: center;
-    display: flex;
-    width: 30%;
-}
-
-.container_navright01 {
-	  align-items: center;
-    display: flex;
-    flex: 1;
 }
 
 /* 마이펫내용 */
@@ -64,7 +53,7 @@ a { text-decoration:none }
     width: 30%;
 }
 
-/* 진찰기록 */
+/* 진찰기록
 .container_right01 {
     display: flex;
     justify-content: left;
@@ -75,7 +64,8 @@ a { text-decoration:none }
     padding-left: 20px;
     flex: 1;
 }
-
+ */
+ 
 /* 나눔장터이름 */
 .box4 {
 	  box-sizing: context-box;
@@ -245,7 +235,7 @@ a { text-decoration:none }
     height: 100%;
  }
  
- /* 진찰기록탐라 */
+ /* 진찰기록탐라
  .timeline {
     position: relative;
 }
@@ -294,7 +284,8 @@ a { text-decoration:none }
 .timeline_desc {
     margin-left: 52px;
 }
-
+*/
+ 
 /* 장터 */
 .market {
     display: flex;   
