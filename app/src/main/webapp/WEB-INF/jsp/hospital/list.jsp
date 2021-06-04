@@ -43,7 +43,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 
 <jsp:include page="map.jsp"/>
 
-<table class="table table-hover">
+<table class="table table-hover" style="text-align: center;">
 <thead>
 <tr>
 <th>번호</th> <th>이름</th> <th>전화 번호</th> <th>기본주소</th> <th>상세주소</th> <th>진료시간</th> <th>평점</th>

@@ -45,7 +45,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   </form>
 </nav>
 
-<table class="table table-hover">
+<table class="table table-hover" style="text-align: center;">
 <thead>
 <tr>
 <th>번호</th> <th>제목</th> <th>사이트</th> <th>등록일</th>
@@ -64,7 +64,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   ${s.no}
   </c:if>
   </td> 
-  <td><a href='${s.url}'>${s.title}</a></td> 
+  <td><a href='${s.url}' target="_blank">${s.title}</a></td> 
   <td>${s.site}</td> 
   <td>${s.registeredDate}</td> 
 </tr>
