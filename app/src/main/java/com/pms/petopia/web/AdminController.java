@@ -188,4 +188,14 @@ public class AdminController {
       return "admin/review_list";
     }
   }
+
+  @RequestMapping("main")
+  public String reviewList(HttpSession session)throws Exception {
+
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if(loginUser.getRole() == 1) {
+      return "admin/access_fail";
+    }
+    return "admin/main";
+  }
 }

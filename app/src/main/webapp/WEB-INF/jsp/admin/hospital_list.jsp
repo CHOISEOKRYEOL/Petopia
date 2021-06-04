@@ -78,13 +78,13 @@ width: 100%;
 </head>
 <body>
 <header></header>
-
+<div class="container">
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="display: block;"> 
 <a class="navbar-brand">병원 리스트</a>
   <div class="container-fluid" style="display: block; min-width: 1000px;">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
   <li class="nav-item">
-    <a href='../main' class="botton">메인</a>
+     <a href="/web/app/admin/main" style="color: gray; text-decoration:none;">뒤로가기</a>
     <a href='add' class="botton" >등록</a>
     </li>
     </ul>
@@ -132,10 +132,11 @@ width: 100%;
       </c:forEach>
     </tbody>
   </table>
+  </div>
   <footer></footer>
 <script>
 $(document).ready(function() {
-      $("header").load("../../html/header.jsp");
+      $("header").load("../../html/header2.jsp");
       $("footer").load("../../html/footer.html");
     });
 </script>

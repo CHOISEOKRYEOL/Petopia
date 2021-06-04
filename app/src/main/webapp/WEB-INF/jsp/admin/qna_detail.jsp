@@ -140,10 +140,9 @@ ${qna.answer}</c:if></textarea></td>
 	
 	</div>
 	</div>
-	</div>
 	<script>
 $(document).ready(function() {
-      $("header").load("../../html/header.jsp");
+      $("header").load("../../html/header2.jsp");
       $("footer").load("../../html/footer.html");
     });
 </script>

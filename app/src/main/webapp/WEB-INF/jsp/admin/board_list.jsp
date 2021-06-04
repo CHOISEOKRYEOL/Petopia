@@ -84,14 +84,14 @@ text-decoration:none
 </head>
 <body>
 
-
+<div class="container">
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="display: block;"> 
 <a class="navbar-brand">게시글 관리</a>
   <div class="container-fluid" style="display: block; min-width: 1000px;">
     <div class="button">
       <span >
-        <a href="../main">뒤로가기</a>
+         <a href="/web/app/admin/main" style="color: gray; text-decoration:none;">뒤로가기</a>
       </span>
     </div>
   </div>
@@ -159,11 +159,11 @@ text-decoration:none
   <a href="../main">뒤로가기</a>
 </span>
 </div>
-	
+
 	 <footer></footer>
 <script>
 $(document).ready(function() {
-      $("header").load("../../html/header.jsp");
+      $("header").load("../../html/header2.jsp");
       $("footer").load("../../html/footer.html");
     });
 </script>
