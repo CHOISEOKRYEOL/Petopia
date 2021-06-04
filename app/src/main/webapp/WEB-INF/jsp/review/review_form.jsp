@@ -86,12 +86,36 @@
   crossorigin="anonymous"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script type="text/javascript" src="../../js/stars.js"></script>
+  <link rel="stylesheet" type="text/css" href="../../css/layout.css">
+  <style>
+  a {
+    text-decoration:none
+  }
+  footer{
+    position: relative;
+    bottom: 0;
+    width: 100%;
+  }
+  </style>
 </head>
 <body>
-	<h1>리뷰 등록</h1>
+<header id="header"></header>
+
+<div class="wrap">
+<img src="../../images/20180515_203804.jpg" class="img-fluid width:100%;"
+style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
+  <div class="text-group">
+    <p style="font-size: 50px;">병원찾기</p>
+    <p style="font-size: 30px;">리뷰 등록</p>
+    <p>동네 커뮤니티로 정보를 나누고 수다 떨며<br>
+    병원에 대한 리뷰를 등록해 보세요.</p>
+  </div>
+</div>
+<div class="container">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<a class="navbar-brand">리뷰 등록</a>
+</nav>
 	<form action="add" method="post" enctype="multipart/form-data">
-	
-	
 	
 	<span class="star-input">
   <div>서비스</div>
@@ -260,5 +284,12 @@
 		        };
 		        thirdStarRating();
 	</script>
+	<footer></footer>
+<script>
+$(document).ready(function() {
+    $("header").load("../../html/header.jsp");
+    $("footer").load("../../html/footer.html");
+  });
+</script>
 </body>
 </html>

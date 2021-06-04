@@ -13,6 +13,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/board.css">
 </head>
 <body>
 <header id="header"></header>
@@ -31,20 +32,21 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 <img src="../../images/IMG_7390.PNG" width=10%; style=margin-right:70%;>
 <a class="navbar-brand" style=margin-right:50%>${smallAddress.bigAddress.name}&nbsp;${smallAddress.name}</a>
 </nav>
-	<a href = "main" type="button"> 우리동네찾으러가기</a>
+	
 	
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
   <li class="nav-item">
-		<a href='form?stateNo=${smallAddress.bigAddress.no}&cityNo=${smallAddress.no}' class="btn" style="background-color: #FFADAD;">새 글</a>
+    <a href = "main" class="button"> 우리동네찾으러가기</a>
+		<a href='form?stateNo=${smallAddress.bigAddress.no}&cityNo=${smallAddress.no}' class="button">새 글</a>
   </li>
   </ul>
 		<form class="d-flex" action='list'>
 		  <input type='hidden' name='stateNo' value='${smallAddress.bigAddress.no}'>
       <input type='hidden' name='cityNo' value='${smallAddress.no}'>
       <input type='hidden' name='r' value='r'> 
-      <button class="btn" style="background-color: #FFFFFF;" type="submit">추천수</button>
+      <button class="button" style="color: #323232; background: #ededed; border: 0px;" role="button">추천수</button>
     </form>
     <form action='list' method='get' class="d-flex">
 	    <input type='hidden' name='stateNo' value='${smallAddress.bigAddress.no}'>
