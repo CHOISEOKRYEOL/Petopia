@@ -128,24 +128,20 @@ a { text-decoration:none }
 
 /* 스토리 */
 .container_left02 {
-    align-items: center;
     display: flex;
-    justify-content: center;
     flex: 1;
     margin: 20px;
     background-color: #FAF0E6;
-    border-radius: 30px;
+    border-radius: 20px;
 }
 
 /* 동네 */
 .container_right02 {
-    align-items: center;
     display: flex;
-    justify-content: center;
     flex: 1;
     margin: 20px;
     background-color: #FAF0E6;
-    border-radius: 30px;
+    border-radius: 20px;
 }
 
 /* 병원검색상자 */

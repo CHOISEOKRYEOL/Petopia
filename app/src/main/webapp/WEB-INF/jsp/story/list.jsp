@@ -45,7 +45,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   </form>
 </nav>
 
-<table class="table table-hover">
+<table class="table table-hover" style="text-align: center;">
 <thead>
 <tr>
 <th>번호</th> <th>제목</th> <th>사이트</th> <th>등록일</th>
