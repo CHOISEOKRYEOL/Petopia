@@ -10,8 +10,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" href="../../css/common.css">
-<link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="/web/css/common.css">
+<link rel="stylesheet" type="text/css" href="/web/css/layout.css">
 </head>
 <body>
 <header></header>
@@ -39,8 +39,6 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     </form>
   </c:if>
   
-  
-
   <c:if test="${not empty loginUser and not empty bookmark}">
     <form action="../bookmark/delete">
       <input type="hidden" name="no" value="${bookmark.no}"> <input
@@ -74,8 +72,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     
     <div class="form-row mb-3">
       <label for="photo" class="col-sm-2 col-form-label">병원사진</label>
-      <img src='${photo300x300Url}'></a>
-      
+      <img src='${photo300x300Url}'>
     </div>
     
     <div class="mb-3 row">
@@ -113,7 +110,6 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 	    <label for="parking" class="col-sm-2 col-form-label">주차여부</label>
 	    <div class="form-check form-check-inline">
 	      <input type='radio' name='parking' value='1' ${hospital.parking == 1 ? "checked" : ""}>Yes
-	      ${hospital.parking}
 	    </div>
 	    <div class="form-check form-check-inline">
 	       <input type='radio' name='parking' value='0' ${hospital.parking == 0 ? "checked" : ""}>No

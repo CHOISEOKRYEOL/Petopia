@@ -10,15 +10,15 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script type="text/javascript" src="../../smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="../../css/layout.css">
-<link href="../../css/board.css" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="/web/css/layout.css">
+<link rel="stylesheet" type="text/css" href="/web/css/board.css">
 <meta charset='UTF-8'>
 <title>우리동네 새 게시글</title>
 </head>
 <body>
 <header></header>
 <div class="wrap">
-<img src="../../images/20180515_203804.jpg" class="img-fluid width:100%;"
+<img src="/web/images/mytown.jpg" class="img-fluid width:100%;"
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="text-group">
     <p style="font-size: 50px;">우리동네</p>

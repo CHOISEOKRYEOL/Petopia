@@ -52,7 +52,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="mt-3 mb-3 row">
     <label for="birthDay" class="col-sm-1 col-form-label">생일</label>
     <div class="col-sm-6">
-      <input type="text" class="form-control" id="birthDay" name="birthDay">
+      <input type="date" class="form-control" id="birthDay" name="birthDay">
     </div>
   </div>
   <div class="form-row mb-3">

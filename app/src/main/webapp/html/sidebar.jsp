@@ -24,7 +24,8 @@
         <div class="collapse show" id="orders-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
             <li><a href="/web/app/bookmark/list" class="link-dark rounded">병원 즐겨찾기</a></li>
-            <li><a href="/web/app/mypage/mytownlist" class="link-dark rounded">내 게시글</a></li>
+            <li><a href="/web/app/mypage/mytownlist" class="link-dark rounded">나눔장터 게시글</a></li>
+            <li><a href="/web/app/mypage/mytownlist" class="link-dark rounded">우리동네 게시글</a></li>
           </ul>
         </div>
       </li>
