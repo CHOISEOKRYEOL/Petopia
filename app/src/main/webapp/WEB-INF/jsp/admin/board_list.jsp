@@ -4,11 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../css/layout.css">
-<title>관리자 Q&A 목록</title>
+<title>관리자 게시판 관리</title>
 <style type="text/css">
 
 boady{
@@ -18,6 +19,14 @@ font-family: 'Noto Sans KR', sans-serif;
 font-size: medium;
 vertical-align: middel;
 display: center;
+}
+
+td{
+  margin-top: 10px;
+  height: 36px;
+  margin-right: 4px;
+  line-height: 36px;
+  padding: 0 10px 0 11px;
 }
 
 .table{
@@ -54,13 +63,13 @@ margin: 0 auto;
 
 .content{
 display: block;
-min-width: 1000px;
+/* min-width: 1000px;
   height: 680;
-  padding: 30px 30px 30px 30px;
+  padding: 30px 30px 30px 30px; */
 }
 
 footer{
-position: relative;
+position: absolute;
 bottom: 0;
 width: 100%;
 }
@@ -69,69 +78,88 @@ a{
 text-decoration:none
 }
 
-td{
-  margin-top: 10px;
-  height: 36px;
-  margin-right: 4px;
-  line-height: 36px;
-  padding: 0 10px 0 11px;
-}
 
 </style>
 </head>
 <body>
 
-<header></header>
+
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="display: block;"> 
-<a class="navbar-brand">관리자 Q&A 목록</a>
+<a class="navbar-brand">게시글 관리</a>
+  <div class="container-fluid" style="display: block; min-width: 1000px;">
+    <div class="button">
+      <span >
+        <a href="../main">뒤로가기</a>
+      </span>
+    </div>
+  </div>
 </nav>
 
-	<div class="content">
+<div class="content">
 	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>분류</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+				<th>처리</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="sList" var="s">
+				<tr>
+					<td>${s.no}</td>
+					<td>${s.category.name}</td>
+					<td>${s.title}</td>
+					<td>${s.writer.name}</td>
+					<td>${s.createdDate}</td>
+					<td>
+					<div class="button">
+              <span><a href="../sharingmarketboard/delete?no${s.no}">삭제</a></span></div>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+	<table class="table" border='1'>
 		<thead>
 			<tr>
 				<th>번호</th>
 				<th>제목</th>
 				<th>작성자</th>
-				<th>등록일</th>
-				<th>상태</th>
-				<th>처리1</th>
-				<th>처리2</th>
+				<th>작성일</th>
+				<th>조회수</th>
+				<th>추천수</th>
+				<th>처리</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${list}" var="q">
+			<c:forEach items="mList" var="m">
 				<tr>
-					<td>${q.no}</td>
-					<td><a href='../qna/detail?no=${q.no}'>${q.title}</a></td>
-					<td>${q.writer.nick}</td>
-					<td>${q.createdDate}</td>
-					<c:if test="${q.state == 1}">
-						<td>완료</td>
-					</c:if>
-					<c:if test="${q.state == 0}">
-						<td>대기</td>
-					</c:if>
-					<td>
-					<div class="button" style="color: rgb(252, 116, 116); background: rgba(255, 173, 173, 0.30);">
+					<td>${m.no}</td>
+					<td>${m.title}</td>
+					<td>${m.writer.nick}</td>
+					<td>${m.createdDate}</td>
+					<td>${m.viewCount}</td>
+					<td>${m.recommentCount}</td>
+					<td><div class="button">
               <span>
-              <a href='qna_detail?no=${q.no}'>답변</a>
+              <a href="../mytown/delete?no=${m.no}">삭제</a>
               </span>
-              </div>
-           </td>
-					<td>
-					    <div class="button" style="color: rgb(252, 116, 116); background: rgba(255, 173, 173, 0.30);">
-              <span>
-              <a href='../qna/delete?no=${q.no}'>삭제</a>
-               </span>
-              </div>
+              </div>        
               </td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	<br>
+<div class="button">
+<span>
+  <a href="../main">뒤로가기</a>
+</span>
+</div>
+
 	</div>
 	
 	 <footer></footer>

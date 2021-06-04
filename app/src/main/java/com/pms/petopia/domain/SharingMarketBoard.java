@@ -1,6 +1,7 @@
 package com.pms.petopia.domain;
 
 import java.sql.Date;
+import java.util.List;
 
 public class SharingMarketBoard {
 
@@ -11,14 +12,15 @@ public class SharingMarketBoard {
   private Member writer;
   private int viewCount;
   private SharingMarketBoardCategory category;
+  private List<SharingMarketBoardPhoto> photos;
+  private SharingMarketBoardPhoto photo;
 
   @Override
   public String toString() {
     return "SharingMarketBoard [no=" + no + ", title=" + title + ", content=" + content
         + ", createdDate=" + createdDate + ", writer=" + writer + ", viewCount=" + viewCount
-        + ", category=" + category  + "]";
+        + ", category=" + category + ", photos=" + photos + ", photo=" + photo + "]";
   }
-
   public int getNo() {
     return no;
   }
@@ -60,6 +62,22 @@ public class SharingMarketBoard {
   }
   public void setCategory(SharingMarketBoardCategory category) {
     this.category = category;
+  }
+
+  public List<SharingMarketBoardPhoto> getPhotos() {
+    return photos;
+  }
+
+  public void setPhotos(List<SharingMarketBoardPhoto> photos) {
+    this.photos = photos;
+  }
+
+  public SharingMarketBoardPhoto getPhoto() {
+    return photo;
+  }
+
+  public void setPhoto(SharingMarketBoardPhoto photo) {
+    this.photo = photo;
   }
 
 }
