@@ -20,14 +20,6 @@ vertical-align: middel;
 display: center;
 }
 
-td{
-  margin-top: 10px;
-  height: 36px;
-  margin-right: 4px;
-  line-height: 36px;
-  padding: 0 10px 0 11px;
-}
-
 .table{
 width: 700px;
 margin: 0 auto;
@@ -68,9 +60,21 @@ min-width: 1000px;
 }
 
 footer{
-position: absolute;
+position: relative;
 bottom: 0;
 width: 100%;
+}
+
+a{
+text-decoration:none
+}
+
+td{
+  margin-top: 10px;
+  height: 36px;
+  margin-right: 4px;
+  line-height: 36px;
+  padding: 0 10px 0 11px;
 }
 
 </style>
@@ -81,13 +85,6 @@ width: 100%;
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="display: block;"> 
 <a class="navbar-brand">관리자 Q&A 목록</a>
-  <div class="container-fluid" style="display: block; min-width: 1000px;">
-    <div class="button">
-      <span >
-        <a href="../main">뒤로가기</a>
-      </span>
-    </div>
-  </div>
 </nav>
 
 	<div class="content">
@@ -117,14 +114,14 @@ width: 100%;
 						<td>대기</td>
 					</c:if>
 					<td>
-					<div  class="btn btn-outline-secondary" style="  display: inline-block; padding: 0 10px 0 11px; line-height: 36px; font-weight: 700; font-size: 13px; height: 36px; margin-right: 4px;">
+					<div class="button" style="color: rgb(252, 116, 116); background: rgba(255, 173, 173, 0.30);">
               <span>
-              <a href='qnadetail?no=${q.no}'>답변</a>
+              <a href='qna_detail?no=${q.no}'>답변</a>
               </span>
               </div>
            </td>
 					<td>
-					    <div  class="btn btn-outline-secondary" style="  display: inline-block; padding: 0 10px 0 11px; line-height: 36px; font-weight: 700; font-size: 13px; height: 36px; margin-right: 4px;">
+					    <div class="button" style="color: rgb(252, 116, 116); background: rgba(255, 173, 173, 0.30);">
               <span>
               <a href='../qna/delete?no=${q.no}'>삭제</a>
                </span>

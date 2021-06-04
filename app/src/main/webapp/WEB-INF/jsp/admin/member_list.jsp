@@ -9,6 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
 <title>회원 목록</title>
 <style type="text/css">
 
@@ -63,15 +64,20 @@ margin: 0 auto;
 
 .content{
 display: block;
-min-width: 1000px;
-  height: 680;
-  padding: 30px 30px 30px 30px;
+text-align: center;
+/* min-width: 1000px; */
+/*   height: 300;*/
+  padding: 30px 30px 30px 30px; 
 }
 
 footer{
-position: absolute;
+position: relative;
 bottom: 0;
 width: 100%;
+}
+
+a{
+text-decoration:none
 }
 
 </style>
@@ -79,9 +85,10 @@ width: 100%;
 <body>
 <header></header>
 
+<div class="container">
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="display: block;"> 
 <a class="navbar-brand">회원 관리</a>
-  <div class="container-fluid" style="display: block; min-width: 1000px;">
+  <div class="container-fluid" style="display: block;">
  <div class="search" class="form-select form-select-sm" style="margin-bottom:10px; margin-right: 4px; display: block;
  font-size: 12px; font-family: 'Noto Sans KR', sans-serif;">
   <form method='get'>
@@ -93,9 +100,9 @@ width: 100%;
       <option value='4' ${param.item == "4" ? "selected" : ""}>전화번호</option>
     </select> <input type='search' name='keyword' value='${param.keyword}'>
     <button class="button">검색</button>
-    <div class="button">
+    <div class="button" style="color: #323232; background: #ededed;">
       <span >
-        <a href="../main">뒤로가기</a>
+        <a href="../main" style="color: #323232;">뒤로가기</a>
       </span>
     </div>
   </form>
@@ -142,9 +149,10 @@ width: 100%;
 			</c:forEach>
 		</tbody>
 	</table>
-	</div>
-	
-	<footer></footer>
+	 </div>
+	   </div>
+	   
+	 <footer></footer>
 <script>
 $(document).ready(function() {
 	    $("header").load("../../html/header.jsp");

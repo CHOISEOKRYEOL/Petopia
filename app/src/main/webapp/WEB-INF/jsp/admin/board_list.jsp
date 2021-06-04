@@ -63,9 +63,9 @@ margin: 0 auto;
 
 .content{
 display: block;
-min-width: 1000px;
+/* min-width: 1000px;
   height: 680;
-  padding: 30px 30px 30px 30px;
+  padding: 30px 30px 30px 30px; */
 }
 
 footer{
@@ -73,6 +73,11 @@ position: absolute;
 bottom: 0;
 width: 100%;
 }
+
+a{
+text-decoration:none
+}
+
 
 </style>
 </head>
