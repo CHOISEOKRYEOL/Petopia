@@ -59,10 +59,10 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     <select name='category'>
       <option value='0' >전체</option>
       <c:forEach items="${catList}" var="cat">
-	      <c:if test="${smb.category.no == cat.no}">
+	      <c:if test="${category == cat.no}">
 	        <c:set var="selected" value="selected"/>
 	      </c:if>
-        <option value='${cat.no}' ${selected}>${cat.name}</option>
+        <option value='${cat.no}' ${category == cat.no ? "selected" :""}>${cat.name}</option>
       </c:forEach>
     </select>
 

@@ -226,7 +226,28 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     
     <div class="box7">
       <div class="container_left02">
-      스토리
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th> 번호 </th>
+            <th> 제목 </th>
+            <th> 사이트명 </th>
+            <th> 등록일 </th>
+          </tr>
+        </thead>
+        <tbody>
+          <c:forEach items="${storyList}" var="s">
+            <tr>
+              <td>${s.no} </td>
+              <td><a href='${s.url}'>${s.title}</a></td>
+              <td>${s.site}</td>
+              <td>${s.registeredDate}</td>
+            </tr>
+          </c:forEach>
+        </tbody>
+       </table>
+      
+      
       </div>
       
       <div class="container_right02">

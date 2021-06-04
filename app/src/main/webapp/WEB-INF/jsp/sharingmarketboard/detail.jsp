@@ -8,51 +8,19 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/detailboard.css">
 <title>나눔장터 게시글 상세</title>
 <style>
-.detail-table{
-width: 800px;
-margin: 0 auto;
-border: 1px solid #cccccc;
+a{
+text-decoration:none
 }
-
-.detail-add-table{
-width: 700px;
-margin: 0 auto;
-border: 1px solid #cccccc;
-}
-
-th,tr{
-left-padding: 20px;
-right-padding: 10px;
-top-padding: 10px;
-bottom-padding: 10px;
-}
-
-photo {
-    align-items: center;
-    display: flex;
-    justify-content: left;
-}
-
-img {
-    align-items: center;
-    display: flex;
-    justify-content: left;
-}
-
-footer{
-position: relative;
-bottom: 0;
-width: 100%;
-}
-
-</style>
+</style> 
 </head>
 <body>
-<header></header>
+<header id="header"></header>
+
 <div class="wrap">
-<img src="../../images/20180115_1208492.jpg" class="img-fluid width:100%;"
+<img src="/web/images/smarket.jpg" class="img-fluid width:100%;"
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="text-group">
     <p style="font-size: 50px;">나눔장터</p>
@@ -73,28 +41,34 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   </div>
 </nav>
 
-
-
+<div style="margin-top:30px;">
 <c:if test="${not empty smb}">
-<table class="detail-table">
+<table border='1' id="detailTable" class="detail-table" style="margin-bottom: 15px">
 <tbody>
-<tr><th>번호</th> <td>${smb.no}</td>
-<th>분류</th> <td colspan="3">${smb.category.name}</td></tr>
-<tr><th>작성자</th> 
-<c:if test="${smb.writer.state == 0}">
-<td>${smb.writer.nick}</td>
-</c:if>
-<c:if test="${smb.writer.state == 1}">
-<td>탈퇴 회원</td>
-</c:if>
-
-<th>작성일</th> <td>${smb.createdDate}</td>
-<th>조회수</th> <td>${smb.viewCount}</td></tr>
-<tr><th>제목</th> <td colspan="5">${smb.title}</td></tr>
-<tr><th>내용</th> <td colspan="5">${smb.content}</td></tr>
-
+   <tr class = "board-title">
+       <td colspan = "8"><h1>${smb.title}</h1></td>
+   </tr>  
+       <tr><th>분류</th>
+          <td>${smb.category.name}</td>
+          <th>작성자</th>
+          <c:if test="${smb.writer.state == 1}">
+            <td>탈퇴 회원</td>
+          </c:if>
+          <c:if test="${smb.writer.state == 0}">
+            <td>${smb.writer.nick}</td>
+          </c:if>
+          <td colspan = "2"></td>
+        </tr>
+         <tr id="recomentCount">
+          <th>조회수</th>
+          <td>${smb.viewCount}</td>
+          <th>등록일</th>
+          <td>${smb.createdDate}</td>
+        </tr>
+          <tr>
+          <td colspan="8"><span class="content">${smb.content}</span></td>
+        </tr>
 <tr>
-<th></th> 
 <c:if test="${not empty photList}">
 <td colspan="5"><c:forEach items="${photList}" var="p">
 <div>
@@ -113,7 +87,8 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
  <c:if test="${not empty loginUser and loginUser.no == smb.writer.no}">
   <tr>
     <td colspan='2'>
-      <a href='update?no=${smb.no}'>변경</a><a href='delete?no=${smb.no}'>삭제</a>
+      <a href='update?no=${smb.no}' class="button" style="item-align: center; color: #323232; background: #ededed; border: 0px;">변경</a>
+      <a href='delete?no=${smb.no}' class="button"  style="item-align: center; color: #323232; background: #ededed; border: 0px;">삭제</a>
     </td>
   </tr>
   </c:if>
@@ -133,14 +108,14 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 <input id="detail-add-no" type='hidden' name='no' value='${smb.no}'>
 <table class="detail-add-table">
 <tr>
-<td><textarea id="detail-add-comment" name='content' rows='5' cols='40'></textarea></td>
+<td><textarea id="detail-add-comment" name='content' rows='2' cols='80'></textarea></td>
 <td><input id="detail-add-comment-btn" type="button" value='등록'></td></tr>
   </table>
   </form>
   </c:if>
   
   <a href='list' class="btn" style="background-color: #FFADAD;">목록</a>
-
+</div>
 </div>
 <script>
 "use strict"

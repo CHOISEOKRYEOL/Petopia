@@ -8,6 +8,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
 <style type="text/css">
 
 boady{
@@ -27,14 +29,14 @@ td{
   padding: 0 10px 0 11px;
 }
 
-.table{
+/* .table{
 width: 700px;
 margin: 0 auto;
 border: 1px solid #cccccc;
  font-weight: 500;
   font-size: 16px;
   text-align: center;
-}
+} */
 
 .search{
 display: block;
@@ -105,7 +107,6 @@ width: 100%;
   </div>
 </nav>
 
-<div class="content">
 <table class="table table-hover">
 <thead>
 <tr>
@@ -131,7 +132,6 @@ width: 100%;
       </c:forEach>
     </tbody>
   </table>
-</div>
   <footer></footer>
 <script>
 $(document).ready(function() {
