@@ -54,12 +54,10 @@ public class HospitalController {
     String uploadDir = sc.getRealPath("/upload");
 
     if(photoFile.getSize() > 0) {
-      // 파일을 선택해서 업로드 했다면,
       String filename = UUID.randomUUID().toString();
       photoFile.write(uploadDir + "/" + filename);
       hospital.setPhoto(filename);
 
-      // 썸네일 이미지 생성
       Thumbnails.of(uploadDir + "/" + filename)
       .size(300, 300)
       .outputFormat("jpg")
@@ -123,42 +121,15 @@ public class HospitalController {
 
   }
 
-  /*@RequestMapping("/hospital/detail")
-  public String execute(HttpServletRequest request, HttpServletResponse response)
-      throws Exception {
-
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-
-    String address = request.getParameter("a");
-    String hname = request.getParameter("h");
-
-    Hospital hospital = hospitalService.get(hname);
-    //Bookmark bookmark = bookmarkService.get(loginUser.getNo(), hospital.getNo());
-
-    //request.setAttribute("bookmark", bookmark);
-    request.setAttribute("hospital", hospital);
-
-    System.out.println("gggg");
-    if(address != null) {
-      request.setAttribute("hname", hname);
-    }
-    request.setAttribute("address", address);
-
-    return "/jsp/hospital/detail.jsp";
-
-  }
-   */
   @RequestMapping("update")
   public String update(int cityNo, Hospital hospital, Part photoFile) throws Exception {
     String uploadDir = sc.getRealPath("/upload");
 
     if(photoFile.getSize() > 0) {
-      // 파일을 선택해서 업로드 했다면,
       String filename = UUID.randomUUID().toString();
       photoFile.write(uploadDir + "/" + filename);
       hospital.setPhoto(filename);
 
-      // 썸네일 이미지 생성
       Thumbnails.of(uploadDir + "/" + filename)
       .size(300, 300)
       .outputFormat("jpg")

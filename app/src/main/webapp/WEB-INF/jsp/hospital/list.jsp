@@ -31,9 +31,11 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 <a class="navbar-brand">병원 찾기</a>
   <div class="container-fluid">
   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  <c:if test="${loginUser.role == 0}">
     <li class="nav-item">
       <a href='form' class="btn" style="background-color: #FFADAD;">새 글</a>
     </li>
+    </c:if>
   </ul>
   <jsp:include page="../../../html/state4.jsp"/>
   </div>
@@ -61,10 +63,10 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 					<td>${h.startTime}시~${h.endTime}시</td>
 					<td>
 					<c:if test="${h.rating == 0}">
-					0
+					0점
 					</c:if>
 					<c:if test="${h.rating > 0 }">
-					<fmt:formatNumber value="${h.rating}" pattern=".00" />
+					<fmt:formatNumber value="${h.rating}점" pattern=".0" />
 					</c:if>
 					</td>
 
