@@ -117,7 +117,7 @@ width: 100%;
       <c:forEach items="${list}" var="h">
         <tr>
           <td>${h.no}</td>
-          <td><a href='detail?no=${h.no}'>${h.name}</a></td>
+          <td><a href='../hospital/detail?no=${h.no}'>${h.name}</a></td>
           <td>${h.tel}</td>
           <td>${h.bigAddress.name}&nbsp;${h.smallAddress.name}</td>
           <td>${h.address}</td>
