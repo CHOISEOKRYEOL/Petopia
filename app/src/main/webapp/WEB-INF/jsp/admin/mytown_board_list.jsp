@@ -105,7 +105,7 @@ width: 100%;
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="mList" var="m">
+			<c:forEach items="${mList}" var="m">
 				<tr>
 					<td>${m.no}</td>
 					<td>${m.title}</td>
@@ -115,7 +115,7 @@ width: 100%;
 					<td>${m.recommentCount}</td>
 					<td><div class="button">
               <span>
-              <a href="../mytown/delete?no=${m.no}">삭제</a>
+              <a href="../mytown/deleteByAdmin?no=${m.no}">삭제</a>
               </span>
               </div>        
               </td>

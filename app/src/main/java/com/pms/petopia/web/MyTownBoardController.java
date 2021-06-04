@@ -80,6 +80,14 @@ public class MyTownBoardController {
     model.addAttribute("commentCount", commentCount);
   }
 
+  @GetMapping("deleteByAdmin")
+  public String deleteByAdmin(int no) throws Exception {
+
+    myTownBoardService.delete(no);
+
+    return "redirect:../admin/mytown_board_list";
+  }
+
   @GetMapping("delete")
   public String delete(int no, HttpSession session)
       throws Exception {

@@ -200,6 +200,16 @@ public class SharingMarketBoardController {
 
   }
 
+  @RequestMapping("deleteByAdmin")
+  public String deleteByAdmin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    int no = Integer.parseInt(request.getParameter("no"));
+
+    sharingMarketBoardService.delete(no);
+
+    return "redirect:../admin/sharing_board_list";
+  }
+
   @RequestMapping("delete")
   public String delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -223,7 +233,12 @@ public class SharingMarketBoardController {
       sharingMarketBoardPhotoService.delete(no);
     }
 
-    return "redirect:list";
+    if(loginUser.getRole() == 1) {
+      return "redirect:list";
+    }
+    else {
+      return "redirect:../admin/sharing_board_list";
+    }
 
   }
 

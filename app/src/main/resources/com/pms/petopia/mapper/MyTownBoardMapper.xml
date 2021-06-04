@@ -54,10 +54,11 @@
   
   
   <select id="findAll" resultMap="myTownBoardMap">
-    <include refid="find"/>
+  <include refid="find"></include>
     from pet_state s
       inner join pet_city c on s.gno=c.gno
       inner join pet_mytown t on c.cno=t.cno
+      inner join pet_user m on m.mno=t.writer
     order by t.tno desc
   </select>
   
