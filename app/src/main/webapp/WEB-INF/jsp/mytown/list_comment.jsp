@@ -49,7 +49,7 @@ padding: 5px;
 <c:if test="${myTownBoard.no == c.myTownBoard.no}">
 
 <form action='../mytown/updateComment' method='post'>
-<table class ="comment-table">
+<table class ="comment-table" data-no='${c.no}'>
 <tr><td bgcolor="pink">작성자</td><td bgcolor="pink">작성일</td></tr>
 <tr>
 <td>${c.writer.nick}</td>

@@ -135,6 +135,21 @@ function placesSearchCB (data, status, pagination) {
 
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
         map.setBounds(bounds);
+        // 인서트문 만들기
+        var sql = "";
+        for (var i=0; i<data.length; i++) {
+            displayMarker(data[i]);    
+            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+            
+            var sql = sql + "insert into pet_hp(cno, name, tel, addr, stime, etime, vet, park) values"
+            	+ "( 1, '"+ data[i].place_name + "'" + "," 
+            			+ "'" + data[i].phone + "' ," 
+            			+ "'" + data[i].address_name + "',"
+            			+ "10, 22, 2, 0);\n";
+        } 
+        
+        console.log(sql);
+        //
     } 
 }
 

@@ -15,6 +15,16 @@
 <link rel="stylesheet" type="text/css" href="../../css/layout.css">
 <link rel="stylesheet" type="text/css" href="../../css/detailboard.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <style>
+  a {
+    text-decoration:none
+  }
+  footer{
+    position: relative;
+    bottom: 0;
+    width: 100%;
+  }
+  </style>
 </head>
 <body>
 <header id="header"></header>
@@ -33,7 +43,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 <img src="../../images/IMG_7390.PNG" width=10%; style=margin-right:70%;>
 <a class="navbar-brand" style=margin-right:50%>${smallAddress.bigAddress.name}&nbsp;${smallAddress.name}</a>
 </nav>
-<span class="button"><a href='list?stateNo=${smallAddress.bigAddress.no}&cityNo=${smallAddress.no}'>목록</a></span>
+<span class="button" style="color: #323232; background: #ededed;"><a href='list?stateNo=${smallAddress.bigAddress.no}&cityNo=${smallAddress.no}' style="color: #323232; background: #ededed; border: 0px;" role="button">목록</a></span>
 <c:if test="${not empty loginUser}">
     <input id="board-no" type="hidden" name="no" value="${myTownBoard.no}">
     <input id="reco-count" type="hidden" name="rcount" value="${myTownBoard.recommentCount}">
@@ -41,7 +51,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
         <!--  <a href='recommentadd?no=${myTownBoard.no}' class ='btn'>추천</a> -->
 </c:if>
   <form action='update' method='post'>
-    <table border='1' id="detailTable" class="detail-table">
+    <table border='1' id="detailTable" class="detail-table" style=margin-bottom:20%>
       <tbody>
         <tr class = "board-title">
           <td colspan = "8"><h1>${myTownBoard.title}</h1></td>
@@ -74,8 +84,8 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   
   <c:if test="${not empty loginUser and myTownBoard.writer.no == loginUser.no}">
   <div class = "buttons">
-    <span class = "button"><a href='update?no=${myTownBoard.no}'>변경</a></span>
-    <input class =" button" type="button" value = '삭제' onclick="removeCheck()">
+    <span class = "button" style="color: #323232; background: #ededed;"><a href='update?no=${myTownBoard.no}' style="color: #323232; background: #ededed; border: 0px;">변경</a></span>
+    <input class =" button" type="button" value = '삭제' onclick="removeCheck()" style="color: #323232; background: #ededed; border: 0px;">
   </div>
     <form action="delete?no=${myTownBoard.no}" name="removefrm" method="get"></form>
   </c:if>
@@ -95,7 +105,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 	<table class="detail-add-table">
 	<tr>
 	<td><textarea id="detail-add-comment" name='content' rows='2' cols='80'></textarea></td>
-	<td><input id="detail-add-comment-btn" type="button" class="button" value='등록'></td></tr>
+	<td><input id="detail-add-comment-btn" type="button" class="button" value='등록' style="color: #323232; background: #ededed; border: 0px;"></td></tr>
 	</table>                          
 </form>
 </c:if>
