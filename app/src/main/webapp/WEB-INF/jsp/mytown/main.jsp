@@ -8,8 +8,9 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/web/css/mytown.css">
-<link rel="stylesheet" type="text/css" href="/web/css/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/mytown.css">
+<link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/board.css">
 </head>
 <body>
 <header></header>
@@ -35,14 +36,11 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="mytown-main-group">
     <p style="font-size: 25px; font-weight: bold;">우리동네 더 행복하게 즐기기</p>
     <p style="font-size: 20px;">동네 검색을 통해 알아보세요!</p>
+    <jsp:include page="../../../html/state.html"/>
   </div>
 </div>
 
-<div class="hangjung">
-  <jsp:include page="../../../html/state.html"/>
 </div>
-</div>
-
 <%-- <form action='list' method='get'>
     광역시/도 : <select name='stateNo'>
       <c:forEach items="${smallAddresses}" var="s">

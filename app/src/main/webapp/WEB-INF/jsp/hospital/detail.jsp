@@ -70,21 +70,21 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     
     <div class="form-row mb-3">
       <label for="photo" class="col-sm-2 col-form-label">병원사진</label>
-      <a href='${photoUrl}'> <img src='${photo300x300Url}'></a>
-      <input name='photo' type='file'>
+      <img src='${photo300x300Url}'></a>
+      
     </div>
     
     <div class="mb-3 row">
 	    <label for="title" class="col-sm-2 col-form-label">병원이름</label>
 	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="name" name="name" value='${hospital.name}'>
+	    <p>${hospital.name}
 	    </div>
     </div>
     
     <div class="mb-3 row">
 	    <label for="url" class="col-sm-2 col-form-label">전화번호</label>
 	    <div class="col-sm-10">
-	      <input type="tel" class="form-control" id="tel" name="tel" value='${hospital.tel}'>
+	    <p>${hospital.tel}</p>
 	    </div>
     </div>
 
@@ -96,20 +96,20 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 	  <div class="mb-3 row">
 	    <label for="address" class="col-sm-2 col-form-label">상세주소</label>
 	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="address" name="address" value='${hospital.address}'>
+	    <p>${hospital.address}</p>
 	    </div>
 	  </div>
 	  
 	  <div class="form-row mb-3">
 	    <label for="startTime" class="col-sm-2 col-form-label">진료시간</label>
-	    <input type="number" name="startTime" value='${hospital.startTime}'>시 ~ 
-	    <input type="number" name="endTime" value='${hospital.endTime}'>시
+	    ${hospital.startTime}시 ~ ${hospital.endTime}시
 	  </div>
 	  
 	  <div class="form-row mb-3">
 	    <label for="parking" class="col-sm-2 col-form-label">주차여부</label>
 	    <div class="form-check form-check-inline">
 	      <input type='radio' name='parking' value='1' ${hospital.parking == 1 ? "checked" : ""}>Yes
+	      ${hospital.parking}
 	    </div>
 	    <div class="form-check form-check-inline">
 	       <input type='radio' name='parking' value='0' ${hospital.parking == 0 ? "checked" : ""}>No
@@ -123,9 +123,9 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 	  
 	  <div class="form-row mb-3">
       <label for="photo" class="col-sm-2 col-form-label">평점</label> 
-      <c:if test="${hospital.rating == 0}">0.0</c:if>
+      <c:if test="${hospital.rating == 0}">0점</c:if>
       <c:if test="${hospital.rating > 0}">
-        <fmt:formatNumber value="${hospital.rating}" pattern=".00" />
+        <h1><fmt:formatNumber value="${hospital.rating}" pattern=".0" />점</h1>
       </c:if>
     </div>
 		</form>
@@ -134,9 +134,10 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="modal-footer justify-content-between">
     <div>
       <a href='list' class="btn btn-secondary">목록</a>
+      <c:if test="${loginUser.role == 0}">
       <a href='delete?no=${hospital.no}' class="btn btn-danger">삭제</a>
+      </c:if>
     </div>
-      <input class="btn" style="background-color: #FFADAD;" type='submit' value='변경'>
   </div>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">

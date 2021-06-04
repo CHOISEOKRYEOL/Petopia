@@ -33,43 +33,39 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 
 <div class="main">
 <div class="main-mypet" style="margin-left: 10px;">
-  <table class="table table-hover">
+  <table class="table table-hover" style="border-bottom: 1px solid gray;">
 		<thead>
-		<tr>
-		<th>번호</th>
-		<th>사진</th>
-		<th>품종</th>
-		<th>이름</th>
-		<th>나이</th>
-		<th>생일</th>
-		<th>성별</th>
-		</tr>
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>등록일</th>
+				<th>답변</th>
+			</tr>
 		</thead>
 		<tbody>
-		<c:forEach items="${list}" var= "pets">
-		  <c:if test="${not empty pets.photo}">
-		    <c:set var="photoUrl">../../upload/${pets.photo}_30x30.jpg</c:set>
-		  </c:if>
-		  <c:if test="${empty pets.photo}">
-		    <c:set var="photoUrl">../../images/person_30x30.jpg</c:set>
-		  </c:if>
-		 <tr>
-		
-		  <td>${pets.no}</td>
-		  <td><img src='${photoUrl}'></td>
-		  <td>${pets.type.type}</td>
-		  <td><a href='detail?no=${pets.no}'>${pets.name}</a></td> 
-		  <td>${pets.age}</td>
-		  <td>${pets.birthDay}</td>
-		  <c:if test="${pets.gender == 0}">
-		  <td> 남 </td> </c:if>
-		  <c:if test="${pets.gender == 1}">
-		  <td> 여 </td> </c:if>
-		</tr>
-		</c:forEach>
+			<c:forEach items="${list}" var="q">
+				<c:if test="${q.writer.no == loginUser.no}">
+					<tr>
+						<td>${q.no}</td>
+						<td><a href='detail?no=${q.no}'>${q.title}</a></td>
+						<td>${q.writer.nick}</td>
+						<td>${q.createdDate}</td>
+						<c:if test="${q.state == 0}">
+							<td>대기</td>
+						</c:if>
+						<c:if test="${q.state == 1}">
+							<td>완료</td>
+						</c:if>
+					</tr>
+				</c:if>
+			</c:forEach>
 		</tbody>
-		</table>
-	</div>
+	</table>
+	<div class="modal-footer justify-content-end">
+    <a href='qna_form' class="btn" style="background-color: #FFADAD;">새 Q&A 작성</a>
+  </div>
+</div>
 </div>
 </div>
 

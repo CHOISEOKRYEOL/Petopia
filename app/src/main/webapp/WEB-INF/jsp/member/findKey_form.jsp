@@ -117,7 +117,7 @@ $('#secondAuthentication').click(function() {
 				swal("인증 성공", "문자로 임시 비밀번호가 전송됩니다.", "success", { button: "확인"});
 			},
 			error : function(response) {
-				swal("asdf", "문자로 임시 비밀번호가 전송됩니다.", "success", { button: "확인"});
+				swal("인증 성공", "문자로 임시 비밀번호가 전송됩니다.", "success", { button: "확인"});
 			}
 			 
 		})

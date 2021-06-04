@@ -88,6 +88,7 @@ public class ReviewController {
     int count = Integer.parseInt(temp);
 
     float average = (r.getServiceRating() + r.getCleanlinessRating() + r.getCostRating()) / 3.0F;
+
     h.setAccumulatedRating(average);
     hospitalService.setAccumulatedRating(h);
 
@@ -100,6 +101,7 @@ public class ReviewController {
     else {
       finalRating = average * 1.0F;
     }
+
     rating.setRating(finalRating);
 
     hospitalService.rate(rating);
