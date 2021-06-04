@@ -9,6 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
 <title>관리자 게시판 관리</title>
 <style type="text/css">
 
@@ -29,14 +30,14 @@ td{
   padding: 0 10px 0 11px;
 }
 
-.table{
+/* .table{
 width: 700px;
 margin: 0 auto;
 border: 1px solid #cccccc;
  font-weight: 500;
   font-size: 16px;
   text-align: center;
-}
+} */
 
 .search{
 display: block;
@@ -91,7 +92,6 @@ width: 100%;
   </div>
 </nav>
 
-<div class="content">
 	<table class="table table-hover">
 		<thead>
 			<tr>
@@ -154,8 +154,6 @@ width: 100%;
   <a href="../main">뒤로가기</a>
 </span>
 </div>
-
-	</div>
 	
 	 <footer></footer>
 <script>

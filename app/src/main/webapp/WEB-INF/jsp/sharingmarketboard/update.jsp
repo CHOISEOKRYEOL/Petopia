@@ -20,7 +20,7 @@ text-decoration:none
 <body>
 <header></header>
 <div class="wrap">
-<img src="../../images/20180115_1208492.jpg" class="img-fluid width:100%;"
+<img src="/web/images/smarket" class="img-fluid width:100%;"
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="text-group">
     <p style="font-size: 50px;">나눔장터</p>

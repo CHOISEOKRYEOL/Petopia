@@ -13,37 +13,28 @@
 <link rel="stylesheet" type="text/css" href="../../css/board.css">
 <title>Q&A 답변</title>
 <style>
-boady{
-width: 1000px;
-margin: 0 auto;
+body{
 font-family: 'Noto Sans KR', sans-serif;
 font-size: medium;
-vertical-align: middel;
-display: center;
+}
+
+form{
+  margin: 0 auto;
+  display: center;
+text-align: center;
 }
 
 td{
-  margin-top: 10px;
-  height: 36px;
-  margin-right: 4px;
-  line-height: 36px;
-  padding: 0 10px 0 11px;
+  padding: 10px;
 }
 
-.table{
-width: 700px;
-margin: 0 auto;
-border: 1px solid #cccccc;
+table{
+border: 0px;
  font-weight: 500;
   font-size: 16px;
-  text-align: center;
-}
-
-.search{
-display: block;
-min-width: 1000px;
-margin: 0 auto;
-  text-align: center;
+  margin: 0 auto;
+  display: center;
+text-align: center;
 }
 
  .button{
@@ -67,10 +58,7 @@ color: rgb(252, 116, 116); background: rgba(255, 173, 173, 0.30);
 } 
 
 .content{
-display: block;
-/* min-width: 1000px; */
-/*   height: 300; */
-  padding: 30px 30px 30px 30px;
+  padding: 10px 10px 10px 10px;
 }
 
 .footer{
@@ -85,47 +73,45 @@ text-decoration:none
 
 .button-area{
   margin-right: 60px;
-  margin-top: 10px;
+  margin-top: 0px;
   margin-bottom: 30px;
 }
 
 .btnHeadr{
   margin: 10px;
   position: relative;
-  margin-top: 60px;
-  margin-bottom: 16px;
-  border-top: 1px solid #323232;
+  margin-top: 3px;
+  margin-bottom: 10px;
   font-size: 12px;
 }
+
 
 </style>
 </head>
 <body>
 <header></header>
 	
+<div class="container">
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="display: block;"> 
 <a class="navbar-brand">관리자 Q&A 관리</a>
   <div class="container-fluid" style="display: block; min-width: 1000px;">
+   <div class="button"><span><a href='qnalist' style="color: gray;">목록</a></span></div>
   </div>
 </nav>
 
-<div class="board">
-<div class="writingHeadr">
-<h2 class="title">Q&A 답변</h2>
-  <div class="save-area">
-   <span><a href='list' class="button" 
-    style="color: #323232; background: #ededed; border: 0px;" role="button" >목록</a></span>
-  </div>
-</div>
-
 
 <div class="content">
-  <form action='answer' method='post'>
+  <form class="frm"
+    action='answer' method='post'>
     <table>
       <tbody>
         <tr>
-          <th>질문</th>
-          <td><textarea rows='10' cols='60' readonly>${qna.content}
+          <th></th>
+          <td>
+          <div class="writingHeadr">
+		      <h4 class="title">Q. ${qna.title}</h4>
+		      </div>
+      <textarea rows='10' cols='60' readonly>${qna.content}
 <c:if test="${qna.state == 1}">
 
 
@@ -136,18 +122,23 @@ ${qna.answer}</c:if></textarea></td>
         </tr>
         <br>
         <tr>
-          <th>답변</th>
-          <td><textarea = name='answer' rows='10' cols='60'></textarea></td>
+          <th></th>
+          <td>
+            <div class="writingHeadr">
+            <h4 class="title">A. 관리자 답변</h4>
+            </div>
+            <textarea name='answer' rows='10' cols='60'></textarea></td>
         </tr>
       </tbody>
     </table>
     <input type='hidden' name='no' value='${qna.no}'>
     <div class="btnHeadr">
     <input class="button" style="color: rgb(252, 116, 116); background: rgba(255, 173, 173, 0.30);" type='submit' value='답변'>
-      <div class="button"><span><a href='qnalist'>목록</a></span></div>
+      <div class="button"><span><a href='qnalist' style="color: gray;">목록</a></span></div>
   </div>
   </form>
 	
+	</div>
 	</div>
 	</div>
 	<script>
