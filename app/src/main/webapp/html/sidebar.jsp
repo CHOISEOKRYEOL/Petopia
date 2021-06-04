@@ -12,9 +12,8 @@
         </button>
         <div class="collapse show" id="home-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#mypet" class="link-dark rounded">마이펫</a></li>
-            <li><a href="#mypetadd" class="link-dark rounded">마이펫 등록</a></li>
-            <li><a href="#record" class="link-dark rounded">진찰기록</a></li>
+            <li><a href="/web/app/pet/list" class="link-dark rounded">마이펫</a></li>
+            <li><a href="/web/app/pet/form" class="link-dark rounded">마이펫 등록</a></li>
           </ul>
         </div>
       </li>
