@@ -50,7 +50,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <tbody>
     <c:forEach items="${myTownList}" var="t">
       <tr>
-        <td>${t.bigAddress.name} ${t.smallAddress.name} </td>
+        <td>${t.bigAddress.name} &nbsp; ${t.smallAddress.name} </td>
         <td><a href='../mytown/detail?stateNo=${t.bigAddress.no}&cityNo=${t.smallAddress.no}&no=${t.no}'>${t.title}</a></td>
         <td>${t.createdDate}</td>
         <td>${t.viewCount}</td>

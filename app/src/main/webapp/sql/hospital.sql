@@ -1,0 +1,15 @@
+insert into pet_hp(cno, name, tel, addr, stime, etime, vet, park) values( 22, '브이케어동물병원','02-6949-3038' ,'서울 서초구 반포동 739-34',10, 22, 2, 0);
+insert into pet_hp(cno, name, tel, addr, stime, etime, vet, park) values( 22, '라파엘종합동물병원','02-3444-7507' ,'서울 서초구 반포동 722-29',10, 22, 2, 0);
+insert into pet_hp(cno, name, tel, addr, stime, etime, vet, park) values( 23, '24시 닥터멍동물병원','02-554-7505' ,'서울 강남구 역삼동 641-10',10, 22, 2, 0);
+insert into pet_hp(cno, name, tel, addr, stime, etime, vet, park) values( 23, '논현동물병원','02-3442-3785' ,'서울 강남구 논현동 181-8',10, 22, 2, 0);
+insert into pet_hp(cno, name, tel, addr, stime, etime, vet, park) values( 23, '커비동물병원','02-545-8952' ,'서울 강남구 논현동 159-23',10, 22, 2, 0);
+insert into pet_hp(cno, name, tel, addr, stime, etime, vet, park) values( 23, '충현동물종합병원','02-549-7582' ,'서울 강남구 논현동 191-12',10, 22, 2, 0);
+insert into pet_hp(cno, name, tel, addr, stime, etime, vet, park) values( 23, '그레이스 동물병원','02-3442-5554' ,'서울 강남구 논현1동 122-20',10, 22, 2, 0);
+insert into pet_hp(cno, name, tel, addr, stime, etime, vet, park) values( 23, '와이즈24시동물병원','02-3446-8253' ,'서울 강남구 논현동 123-5',10, 22, 2, 0);
+insert into pet_hp(cno, name, tel, addr, stime, etime, vet, park) values( 23, '강남동물병원','02-514-7582' ,'서울 강남구 논현동 234-26',10, 22, 2, 0);
+insert into pet_hp(cno, name, tel, addr, stime, etime, vet, park) values( 22, '교대동물병원','02-596-1175' ,'서울 서초구 서초동 1690-2',10, 22, 2, 0);
+insert into pet_hp(cno, name, tel, addr, stime, etime, vet, park) values( 23, '고양이병원 백산동물병원','1644-5653' ,'서울 강남구 역삼동 725-15',10, 22, 2, 0);
+insert into pet_hp(cno, name, tel, addr, stime, etime, vet, park) values( 23, '다정동물병원','02-544-7975' ,'서울 강남구 논현동 149-6',10, 22, 2, 0);
+insert into pet_hp(cno, name, tel, addr, stime, etime, vet, park) values( 23, '서울동물심장병원','02-6203-7588' ,'서울 강남구 역삼동 689-2',10, 22, 2, 0);
+insert into pet_hp(cno, name, tel, addr, stime, etime, vet, park) values( 22, '꿈꾸는동물병원','02-592-0202' ,'서울 서초구 반포동 30-25',10, 22, 2, 0);
+insert into pet_hp(cno, name, tel, addr, stime, etime, vet, park) values( 23, '츄츄동물병원','02-512-0075' ,'서울 강남구 역삼동 834-66',10, 22, 2, 0);

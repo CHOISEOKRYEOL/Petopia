@@ -46,7 +46,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 <table class="table table-hover">
 <thead>
 <tr>
-<th>번호</th> <th>제목</th> <th>사이트</th> <th>등록일</th> <th>스크랩</th>
+<th>번호</th> <th>제목</th> <th>사이트</th> <th>등록일</th>
 </tr>
 </thead>
 
@@ -65,11 +65,6 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <td><a href='${s.url}'>${s.title}</a></td> 
   <td>${s.site}</td> 
   <td>${s.registeredDate}</td> 
-  <td>
-    <input type="hidden" id="news-no" value="${s.no}">
-    <button type="button" class="scrap" data-no="${s.no}">스크랩</button>
-    <button class="scrap-cancel" type="button" data-no="${s.no}">스크랩 취소</button>
-  </td>
 </tr>
 
 </c:forEach>
@@ -77,86 +72,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 </table>
 
 </div>
-  <script>
-   var scrapList = document.querySelectorAll(".scrap");
-   var scrapcancelList = document.querySelectorAll(".scrapcancel");
-  /*  $.ajax({"scrapcheck",
-     dataType : "String",
-     success(scrap){
-       scrap.forEach(if 
-        )
-     }
-   }); */
-   (function() {
-     for (var scrap of scrapList) {
-       console.log(scrap);
-       var xhr = new XMLHttpRequest();
-       console.log(xhr.responseText);
-       
-       
-       xhr.onreadystatechange = () => {
-         if (xhr.readyState == 4) {
-           if (xhr.status == 200) {
-             console.log(xhr.responseText);
-            /*  console.log("------------");
-             if (xhr.responseText == "0") {
-               console.log("0");
-               $(".scrap").hide();
-             } else if (xhr.responseText == "1") {
-               console.log("1");
-               $(".scrap-cancel").hide();
-             }  */
-            
-           } else {
-
-           }
-         }
-       };
-       xhr.open("GET", "scrapcheck?no=" + scrap.getAttribute("data-no"), true);
-       xhr.send();
-       console.log(xhr.responseText);
-       console.log("send() 리턴함.");
-     };
-   })(); 
-   
-   for(var scrap of scrapList) {
-    scrap.onclick = function() {
-      var newsNo = this.getAttribute("data-no");
-      console.log(newsNo);
-      var xhr = new XMLHttpRequest();
-      
-      xhr.onreadystatechange = () => {
-        if (xhr.readyState == 4) {
-          if (xhr.status == 200) {
-            
-            if (xhr.responseText == "fail") {
-                  
-              console.log("여기 fail");
-              swal("이미 스크랩한 게시물입니다!", "감사합니다", "warning");
-              //alert("이미 추천한 게시물입니다.");
-      /*         <div id="scrap-cancel" style="display:none;"/>
-       */        
-            } else {
-              
-              console.log("여기 success");
-              swal("뉴스를 스크랩하였습니다!", "감사합니다.", "success");
-              //alert("게시물을 추천하였습니다.") 
-              
-            }
-            
-          } else {
-            alert("실행 오류 입니다!");
-          }
-        }
-        
-      };
-      console.log(newsNo);
-      xhr.open("GET", "scrapadd?newsNo=" + newsNo, true);
-      xhr.send();
-      console.log("send() 리턴함.");
-    };
-   
-};
+<script type="text/javascript">
 $(document).ready(function() {
     $("header").load("/web/html/header.jsp");
     $("footer").load("/web/html/footer.html");
