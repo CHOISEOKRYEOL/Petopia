@@ -61,6 +61,23 @@
     background: rgba(255, 173, 173, 0.30);
   }
   
+   .button2{
+  border: 0px;
+  margin-top: 40px;
+  margin-left: 50px;
+  margin-bottom: 80px;
+  display: inline-block;
+  height: 36px;
+  border-radius: 6px;
+  padding: 0 10px 0 11px;
+  line-height: 36px;
+  font-weight: 700;
+  font-size: 13px;
+  color: #323232;
+  text-align: center;
+  background: #ededed;
+} 
+
   .detail-table > th {
     font-family: 'Noto Sans KR', sans-serif;
   }

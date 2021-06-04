@@ -10,6 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../css/mytown.css">
 <link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/board.css">
 </head>
 <body>
 <header></header>
@@ -35,14 +36,11 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="mytown-main-group">
     <p style="font-size: 25px; font-weight: bold;">우리동네 더 행복하게 즐기기</p>
     <p style="font-size: 20px;">동네 검색을 통해 알아보세요!</p>
+    <jsp:include page="../../../html/state.html"/>
   </div>
 </div>
 
-<div class="hangjung">
-  <jsp:include page="../../../html/state.html"/>
 </div>
-</div>
-
 <%-- <form action='list' method='get'>
     광역시/도 : <select name='stateNo'>
       <c:forEach items="${smallAddresses}" var="s">
