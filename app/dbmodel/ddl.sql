@@ -552,6 +552,34 @@ CREATE UNIQUE INDEX UIX_pet_recomt
 ALTER TABLE pet_recomt
   MODIFY COLUMN rno INTEGER NOT NULL AUTO_INCREMENT COMMENT '추천번호';
 
+-- 나눔장터사진
+ALTER TABLE pet_mark_phot
+  ADD CONSTRAINT FK_pet_mark_TO_pet_mark_phot -- 나눔장터 -> 나눔장터사진
+    FOREIGN KEY (
+      sno -- 나눔장터번호
+    )
+    REFERENCES pet_mark ( -- 나눔장터
+      sno -- 나눔장터번호
+    )
+    ON DELETE CASCADE,
+  ADD INDEX FK_pet_mark_TO_pet_mark_phot (
+    sno ASC -- 나눔장터번호
+  );
+
+-- 나눔장터 댓글
+ALTER TABLE pet_mark_comt
+  ADD CONSTRAINT FK_pet_mark_TO_pet_mark_comt -- 나눔장터 -> 나눔장터 댓글
+    FOREIGN KEY (
+      sno -- 나눔장터번호
+    )
+    REFERENCES pet_mark ( -- 나눔장터
+      sno -- 나눔장터번호
+    )
+    ON DELETE CASCADE,
+  ADD INDEX FK_pet_mark_TO_pet_mark_comt (
+    sno ASC -- 나눔장터번호
+  );
+
 -- 우리동네 댓글
 ALTER TABLE pet_mytown_comt
   ADD CONSTRAINT FK_pet_mytown_TO_pet_mytown_comt -- 우리동네 -> 우리동네 댓글
@@ -560,7 +588,8 @@ ALTER TABLE pet_mytown_comt
     )
     REFERENCES pet_mytown ( -- 우리동네
       tno -- 우리동네번호
-    ),
+    )
+    ON DELETE CASCADE,
   ADD INDEX FK_pet_mytown_TO_pet_mytown_comt (
     tno ASC -- 우리동네번호
   );
@@ -635,16 +664,6 @@ ALTER TABLE pet_mytown
       cno -- 시군구번호
     );
 
--- 나눔장터사진
-ALTER TABLE pet_mark_phot
-  ADD CONSTRAINT FK_pet_mark_TO_pet_mark_phot -- 나눔장터 -> 나눔장터사진
-    FOREIGN KEY (
-      sno -- 나눔장터번호
-    )
-    REFERENCES pet_mark ( -- 나눔장터
-      sno -- 나눔장터번호
-    );
-
 -- 리뷰
 ALTER TABLE pet_hp_review
   ADD CONSTRAINT FK_pet_hp_TO_pet_hp_review -- 병원 -> 리뷰
@@ -693,16 +712,6 @@ ALTER TABLE pet_qna
     )
     REFERENCES pet_user ( -- 회원
       mno -- 회원번호
-    );
-
--- 나눔장터 댓글
-ALTER TABLE pet_mark_comt
-  ADD CONSTRAINT FK_pet_mark_TO_pet_mark_comt -- 나눔장터 -> 나눔장터 댓글
-    FOREIGN KEY (
-      sno -- 나눔장터번호
-    )
-    REFERENCES pet_mark ( -- 나눔장터
-      sno -- 나눔장터번호
     );
 
 -- 나눔장터 댓글
@@ -803,4 +812,5 @@ ALTER TABLE pet_recomt
     )
     REFERENCES pet_mytown ( -- 우리동네
       tno -- 우리동네번호
-    );
+    )
+    ON DELETE CASCADE;

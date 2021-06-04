@@ -35,21 +35,13 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
       <a href='form' class="btn" style="background-color: #FFADAD;">새 글</a>
     </li>
   </ul>
-    <form class="d-flex" action='list' method='get'>
-			<select name='gno'>
-			  <c:forEach items="${area}" var="a">
-			    <option value='${a.bigAddress.no}'>${a.bigAddress.name}</option>
-			  </c:forEach>
-			</select>
-			<select name='cno'>
-			  <c:forEach items="${area}" var="a">
-			    <option value='${a.no}'>${a.name}</option>
-			  </c:forEach>
-			</select>
-      <button class="btn btn-outline-success col-sm-3" type="submit">검색</button>
-    </form>
+		<div class="hangjung">
+		  <jsp:include page="../../../html/state.html"/>
+		</div>
   </div>
 </nav>
+
+<jsp:include page="map.jsp"/>
 
 <table class="table table-hover">
 <thead>

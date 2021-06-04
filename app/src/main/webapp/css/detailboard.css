@@ -1,0 +1,81 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+  .container {
+    /* border: 1px solid lightgray; */
+    width: 900px;
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0px auto;
+    padding-top: 10px;
+    min-height: 100vh;
+  }
+
+  .detail-table { 
+    width: 800px;
+    text-align: center;
+    margin: 0 auto;
+    border: none;
+    margin-top: -20px;
+  }
+  
+  .board-title {
+    text-align: center;
+    border-bottom: 1px solid #323232;
+  }
+  
+  .button{
+    margin-top: 10px;
+    display: inline-block;
+    height: 36px;
+    margin-right: 4px;
+    border: 0px;
+    border-radius: 6px;
+    padding: 0 10px 0 11px;
+    line-height: 36px;
+    font-weight: 700;
+    font-size: 13px;
+    color: rgb(252, 116, 116);
+    text-align: center;
+    background: rgba(255, 173, 173, 0.30);
+  }
+  
+  
+  .buttons {
+    margin-left: 774px;
+  }
+  
+  .reco {
+    margin-top: 10px;
+    display: inline-block;
+    height: 36px;
+    margin-right: 4px;
+    margin-left: 774px;
+    border: 0px;
+    border-radius: 6px;
+    padding: 0 10px 0 11px;
+    line-height: 36px;
+    font-weight: 700;
+    font-size: 13px;
+    color: rgb(252, 116, 116);
+    text-align: center;
+    background: rgba(255, 173, 173, 0.30);
+  }
+  
+  .detail-table > th {
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  
+  .comment-count {
+    margin-left: 80px;
+  }
+  
+  .detail-table > tbody > tr:nth-child(4) > td {
+    padding-top: 30px;
+  }
+  
+  .detail-add-table {
+    margin: 0 auto;
+  }
+  
+  
+  
