@@ -100,6 +100,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 </table>
 </form>
 <a href="form" role="button" class="button">새 펫</a>
+<p><a href='../main' class="button">뒤로가기</a></p>
 </div>
 </div>
 </div>
