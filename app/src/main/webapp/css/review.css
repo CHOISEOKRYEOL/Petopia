@@ -29,4 +29,11 @@
       font-family: 'Noto Sans KR', sans-serif;
    }
    
+     
+  .button-area{
+  margin: 30px;
+  display: absolute;
+  text-align: center;
+  }
+   
   

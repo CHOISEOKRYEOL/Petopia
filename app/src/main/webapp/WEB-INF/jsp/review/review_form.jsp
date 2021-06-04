@@ -173,10 +173,10 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 		<div class = "bill">
 		<br> 영수증 : <input type="file" name="photoFile" accept="image/*" required><br>
 		</div>
-		<input type="hidden" name="no" value="${num}"> <input type="submit" class = "button" value="등록하기" style=margin-left:80%;>
+		<input type="hidden" name="no" value="${num}"> <input type="submit" class = "button" value="등록하기" style="margin-left:80%; position: relative;">
 	</form>
 	<form action="../main">
-		<input type="submit" class="button2" value="뒤로가기" style=margin-left:80%;>
+		<input type="submit" class="button2" value="뒤로가기" style="margin-left:80%; position: relative;">
 	</form>
 	 </div>
 	<script>
