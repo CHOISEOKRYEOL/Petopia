@@ -50,7 +50,7 @@ public class HospitalController {
   }
 
   @PostMapping("add")
-  public String add(int cityNo, Hospital hospital, Part photoFile) throws Exception {
+  public String add(int cno, Hospital hospital, Part photoFile) throws Exception {
     String uploadDir = sc.getRealPath("/upload");
 
     if(photoFile.getSize() > 0) {
@@ -72,7 +72,7 @@ public class HospitalController {
       });
     }
 
-    SmallAddress smallAddress = smallAddressService.get(cityNo);
+    SmallAddress smallAddress = smallAddressService.get(cno);
     hospital.setSmallAddress(smallAddress);
 
     hospitalService.add(hospital);

@@ -102,7 +102,7 @@
 			<a href='qna/list'>Q&A 목록</a>
 		</p>
 		<p>
-		  <a href='member/bookmarklist'>병원 즐겨찾기</a>
+		  <a href='bookmark/list'>병원 즐겨찾기</a>
 		</p>
 		<p>
 		  <a href='mypage/main'>My Page</a>

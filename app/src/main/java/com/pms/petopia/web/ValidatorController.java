@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.service.MemberService;
 
-
 @Controller
 @RequestMapping("/member")
 public class ValidatorController {
@@ -142,7 +141,7 @@ public class ValidatorController {
     out.write(authenticationNumber);
   }
 
-  @RequestMapping("checkpassword")
+  @GetMapping("checkpassword")
   public void checkPassword(String id, String tel) throws Exception {
 
     int min = 97;
@@ -155,7 +154,7 @@ public class ValidatorController {
         .toString();
 
     memberService.setNewPassword(id, tel, newPassword);
-
+    // AJax
   }
 
 }

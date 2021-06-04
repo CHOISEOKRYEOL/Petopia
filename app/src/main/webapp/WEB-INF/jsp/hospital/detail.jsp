@@ -146,6 +146,8 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
       <input class="btn" style="background-color: #FFADAD;" type='submit' value='변경'>
   </div>
 
+
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <a class="navbar-brand">병원 리뷰</a>
 	<form action="../review/review_form">
