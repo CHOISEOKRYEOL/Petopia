@@ -123,9 +123,9 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 	  
 	  <div class="form-row mb-3">
       <label for="photo" class="col-sm-2 col-form-label">평점</label> 
-      <c:if test="${hospital.rating == 0}">0.0</c:if>
+      <c:if test="${hospital.rating == 0}">0점</c:if>
       <c:if test="${hospital.rating > 0}">
-        <fmt:formatNumber value="${hospital.rating}" pattern=".00" />
+        <fmt:formatNumber value="${hospital.rating}" pattern=".00" />점
       </c:if>
     </div>
 		</form>

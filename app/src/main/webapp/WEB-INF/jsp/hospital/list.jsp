@@ -66,7 +66,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 					0점
 					</c:if>
 					<c:if test="${h.rating > 0 }">
-					<fmt:formatNumber value="${h.rating}점" pattern=".0" />
+					<fmt:formatNumber value="${h.rating}" pattern=".0" />점
 					</c:if>
 					</td>
 
