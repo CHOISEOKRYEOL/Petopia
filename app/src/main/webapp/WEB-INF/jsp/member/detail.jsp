@@ -72,14 +72,15 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   </div>
 	
 <div class="modal-footer justify-content-end">
-  <input class="btn" style="background-color: #FFADAD;" type='submit' value='등록'>
+  <input class="btn" style="background-color: #FFADAD;" type='submit' value='수정'>
 </div>
-	</form>
+</form>
+<div class="signout d-flex justify-content-end">
 	<form action='delete' method='post'>
 		<input type='hidden' name='no' value='${member.no}'> <input
-			type='submit' name='delete' value='회원탈퇴'>
-	</form>
-  </div>
+			type='submit' name='delete'  class="btn" style="background-color: #FFADAD;" value='회원탈퇴'></form>
+</div>
+</div>
 </div>
 </div>
 

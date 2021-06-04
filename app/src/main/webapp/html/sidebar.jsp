@@ -23,7 +23,7 @@
         </button>
         <div class="collapse show" id="orders-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#hospital" class="link-dark rounded">병원 즐겨찾기</a></li>
+            <li><a href="/web/app/bookmark/list" class="link-dark rounded">병원 즐겨찾기</a></li>
             <li><a href="/web/app/mypage/main" class="link-dark rounded">내 게시글</a></li>
           </ul>
         </div>
@@ -37,7 +37,6 @@
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
             <li><a href="/web/app/member/detail" class="link-dark rounded">Profile</a></li>
             <li><a href="/web/app/qna/list" class="link-dark rounded">Q&A</a></li>
-            <li><a href="#signout" class="link-dark rounded">Sign out</a></li>
           </ul>
         </div>
       </li>
