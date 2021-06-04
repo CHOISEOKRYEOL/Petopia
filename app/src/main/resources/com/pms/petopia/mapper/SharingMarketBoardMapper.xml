@@ -18,11 +18,15 @@
 	    <result column="writer_state" property="state"/>
     </association>
     
-        <association property="category" javaType="sharingmarketboardcategory">
+    <association property="category" javaType="sharingmarketboardcategory">
 	    <id column="category_no" property="no"/>
 	    <result column="category_name" property="name"/>
     </association>
     
+    <collection property="photos"  ofType="SharingMarketBoardPhoto">
+      <id column="photo_no" property="no"/>
+      <result column="photo_file" property="photo"/>
+    </collection>
   </resultMap>
   
   <sql id='select'>
@@ -36,10 +40,13 @@
       mem.name as writer_nick,
       mem.state as writer_state,
       cat.cno as category_no,
-      cat.cat_name as category_name
+      cat.cat_name as category_name,
+      phot.spno photo_no,
+      phot.photo photo_file
     from pet_mark mark
       inner join pet_user mem on mem.mno = mark.writer
       inner join pet_mark_cat cat on cat.cno = mark.cno
+      left outer join pet_mark_phot phot on mark.sno = phot.sno
   </sql>
   
   

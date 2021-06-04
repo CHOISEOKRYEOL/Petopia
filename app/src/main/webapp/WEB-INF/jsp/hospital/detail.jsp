@@ -38,6 +38,8 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
         type="submit" value="☆">
     </form>
   </c:if>
+  
+  
 
   <c:if test="${not empty loginUser and not empty bookmark}">
     <form action="../bookmark/delete">
@@ -48,6 +50,8 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   </c:if>
   </div>
 </nav>
+
+<jsp:include page="map_detail.jsp"/>
 
 	<c:if test="${not empty hospital}">
 		<c:if test="${not empty hospital.photo}">

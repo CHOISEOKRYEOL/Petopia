@@ -68,7 +68,7 @@ padding: 30px 30px 30px 30px;
 }
 
 footer{
-position: absolute;
+position: relative;
 bottom: 0;
 width: 100%;
 }

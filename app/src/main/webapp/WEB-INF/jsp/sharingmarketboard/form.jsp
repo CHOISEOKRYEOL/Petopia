@@ -12,6 +12,18 @@
 <script type="text/javascript" src="../../smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>나눔장터 게시판</title>
+<style>
+footer{
+position: relative;
+bottom: 0;
+width: 100%;
+}
+
+a {
+text-decoration:none
+} 
+
+</style>
 </head>
 <body>
 <header></header>
@@ -30,6 +42,8 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6; min-width:900px;
 <div class="writingHeadr">
 <h2 class="title">게시글 쓰기</h2>
 	<div class="save-area">
+	 <span><a href='list' class="button" 
+    style="color: #323232; background: #ededed; border: 0px;" role="button" >목록</a></span>
 	<input class="button" type='button' id='savebutton' value='등록'>
 	</div>
 </div>

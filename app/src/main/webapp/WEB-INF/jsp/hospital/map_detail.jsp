@@ -4,17 +4,15 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>${hname}</title>
+    <title>${hospital.name}</title>
 </head>
 <body>
-<input type="hidden" id="a" value="${address}"> 
-<input type="hidden" id="h" value="${hname}">
+<input type="hidden" id="h" value="${hospital.name}">
 <div id="map" style="width:100%;height:350px;"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2793f88bea0d7a6546285f048e073074&libraries=services"></script>
 <script>
 
-var address = document.getElementById('a').value;
 var hname = document.getElementById('h').value;
 
 // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
@@ -33,7 +31,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var ps = new kakao.maps.services.Places(); 
 
 // 키워드로 장소를 검색합니다
-ps.keywordSearch(address + hname, placesSearchCB); 
+ps.keywordSearch(hname, placesSearchCB); 
 
 // 키워드 검색 완료 시 호출되는 콜백함수 입니다
 function placesSearchCB (data, status, pagination) {

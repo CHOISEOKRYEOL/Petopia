@@ -249,7 +249,6 @@ public class SharingMarketBoardController {
     if (category != null) {
       categoryNo = Integer.parseInt(category);
     }
-    List<SharingMarketBoardPhoto> photoList = new ArrayList<>();
     List<SharingMarketBoard> smBoards = null;
     if (categoryNo == 0) {
       smBoards = sharingMarketBoardService.list();
@@ -258,14 +257,7 @@ public class SharingMarketBoardController {
       smBoards = sharingMarketBoardService.getCategory(categoryNo);
     }
 
-    for(SharingMarketBoard smb : smBoards) {
-      SharingMarketBoardPhoto phot = new SharingMarketBoardPhoto();
-      phot= sharingMarketBoardPhotoService.listMin(smb.getNo());
-      photoList.add(phot);
-    }
 
-
-    model.addAttribute("photList", photoList);
     model.addAttribute("category", category);
     model.addAttribute("catList", sharingMarketBoardCategoryService.list());
     model.addAttribute("smBoards", smBoards);
