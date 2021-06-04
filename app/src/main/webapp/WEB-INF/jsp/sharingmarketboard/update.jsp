@@ -8,7 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script type="text/javascript" src="../../smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link href="../../css/board.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="../../css/layout.css">
 <title>나눔장터 게시글 상세</title>
 </head>
@@ -25,39 +25,55 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   </div>
 </div>
 
-<h1>나눔장터 게시글 변경</h1>
-<c:if test="${not empty smb}">
-<form id="updatefrm" action='update' method='post' enctype='multipart/form-data'>
-<table border='1'>
-<tbody>
-<tr><th>번호</th> <td><input type='text' name='no' value='${smb.no}' readonly></td></tr>
-<select name='category'>
-<c:forEach items="${catList}" var="cat">
- <option value='${cat.no}' ${smb.category.no  == cat.no ? "selected" : ""}>${cat.name}</option>
-</c:forEach>
-</select>
-<tr><th>제목</th> <td><input type='text' name='title'  value='${smb.title}'></td></tr><br>
-<tr><th>내용</th> <td><textarea id="content" name='content' rows='10' cols='60'>${smb.content}</textarea></td></tr>
-<tr><th>작성자</th> <td>${smb.writer.name}</td></tr>
-<tr><th>작성일</th> <td>${smb.createdDate}</td></tr>
-<tr><th>조회수</th> <td>${smb.viewCount}</td></tr>
-<tr><th>사진</th> <td><input type="file" multiple="multiple" name=photo></td></tr>
-</tbody>
-
+<div class="board">
+<div class="writingHeadr">
+<h2 class="title">게시글 변경</h2>
 <c:if test="${not empty loginUser and loginUser.no == smb.writer.no}">
-	<tfoot>
-	<tr>
-	  <td colspan='2'>
-	    <input type='button' id="updatebutton" value='변경'><a href='delete?no=${smb.no}'>삭제</a>
-	  </td>
-	</tr>
-	</tfoot>    
+  <div class="save-area">
+  <input type='button' class="button" id="updatebutton" value='변경'>
+  <span class="button"><a href='delete?no=${smb.no}'>삭제</a></span>
+  </div>
   </c:if>
-  
-</table>
-</form>
+</div>
+<form id="updatefrm" action='update' method='post' enctype='multipart/form-data'>
+<c:if test="${not empty smb}">
+<div class="writingContent">
+  <div class="writtingArea">
+    <div class="boardWritingEditor">
+    <div class="row">
+      <div class="categorySelectButton">
+          <select name='category' style="margin-bottom:10px;" class="form-select form-select-sm" style="font-size: 12px; font-family: 'Noto Sans KR', sans-serif;" aria-label=".form-select-lg example">
+						<c:forEach items="${catList}" var="cat">
+						 <option value='${cat.no}' ${smb.category.no  == cat.no ? "selected" : ""}>${cat.name}</option>
+						</c:forEach>
+						</select>
+           <div class="input-group">
+            <input type='text' name='title' style="width: 888px; margin-bottom:10px;" class="form-control"  value='${smb.title}'>
+          </div>
+      </div>
+    </div>
+    <div class="row">
+   <div>
+  <textarea id="content" name='content' cols="108" rows="15">${smb.content}</textarea>
+  </div>
+      <div class="input-group">
+      <input type="file" multiple="multiple" style="font-size: 14px;
+      color: #5c5c5c; font-family: 'Noto Sans KR', sans-serif; width: 888px; margin-top:10px;" name=photo class="form-control" style="width: 888px; margin-top:10px;">
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
 </c:if>
-<p><a href='detail?no=${smb.no}'>뒤로가기</a></p>
+ <input type='hidden' name='no' value='${smb.no}' readonly>
+</form>
+
+
+ 
+<div class="button2">
+<span><a href='detail?no=${smb.no}'>뒤로가기</a></span>
+</div>
+</div>
 
 <script type="text/javascript">
 var oEditors = [];

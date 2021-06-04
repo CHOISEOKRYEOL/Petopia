@@ -5,10 +5,10 @@ import java.util.Random;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Member;
 import com.pms.petopia.service.MemberService;
-
 
 @Controller
 @RequestMapping("/member")
@@ -89,7 +89,7 @@ public class ValidatorController {
     }
   }
 
-  @GetMapping("checkidtel")
+  @PostMapping("checkidtel")
   public void checkIdTel(String id, String tel, HttpServletResponse response) throws Exception {
 
     Member m = memberService.getIdTel(id, tel);
@@ -154,7 +154,7 @@ public class ValidatorController {
         .toString();
 
     memberService.setNewPassword(id, tel, newPassword);
-
+    // AJax
   }
 
 }

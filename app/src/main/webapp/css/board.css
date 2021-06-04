@@ -1,0 +1,104 @@
+  .container {
+    width: 900px;
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0px auto;
+    padding-top: 10px;
+    min-height: 100vh;
+  }
+  
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: medium;
+    vertical-align: middel;
+    display: center;
+  }
+
+.board{
+	width: 1000px;
+	margin: 0 auto;
+}
+
+.writingHeadr{
+	margin: 10px;
+	position: relative;
+	margin-top: 25px;
+	margin-bottom: 16px;
+	border-bottom: 1px solid #323232;
+	font-size: 12px;
+}
+
+.save-area{
+	position: absolute;
+	bottom: 8px;
+	right: 0px;
+	box-sizing: border-box;
+}
+
+ .button{
+	margin-top: 10px;
+	display: inline-block;
+	height: 36px;
+	margin-right: 4px;
+	border: 0px;
+	border-radius: 6px;
+	padding: 0 10px 0 11px;
+	line-height: 36px;
+	font-weight: 700;
+	font-size: 13px;
+	color: rgb(252, 116, 116);
+	text-align: center;
+	background: rgba(255, 173, 173, 0.30);
+} 
+
+/* .foot{
+  position: relative;
+  border-top: 1px solid #323232;
+} */
+
+ .button2{
+  border: 0px;
+  margin-top: 40px;
+  margin-left: 50px;
+  margin-bottom: 80px;
+  display: inline-block;
+  height: 36px;
+  border-radius: 6px;
+  padding: 0 10px 0 11px;
+  line-height: 36px;
+  font-weight: 700;
+  font-size: 13px;
+  text-align: center;
+  color: #323232;
+  background: #ededed;
+} 
+
+.writingContent{
+	margin-top: 0px;
+	margin-left: 50px;
+	position: relative;
+	padding-top: 10px;
+	padding-bottom: 20px;
+	 width: 100%;
+}
+
+.row{
+	margin-top: 0;
+	margin-bottom: 10;
+	padding-bottom: 10;
+	  width: 100%;
+}
+
+.form-select {
+	width: 250px;
+}
+
+.input-group{
+	display: block;
+	color: #5c5c5c;
+}
+
+.boardWritingEditor {
+    float: left;
+    width: 100%;
+}
+

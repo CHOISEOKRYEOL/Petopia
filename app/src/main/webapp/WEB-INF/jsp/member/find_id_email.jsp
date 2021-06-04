@@ -22,7 +22,8 @@
 <br>
 <br>
 <c:if test="${not empty member}">
-<h1>아이디 : ${member.id} 이메일 : ${member.email}</h1>
+<h1>${member.name} 님의</h1>
+<h2>아이디 : ${member.id} 이메일 : ${member.email}</h2>
 </c:if>
 <c:if test="${empty member}">
 <h1>존재하지 않는 아이디 혹은 닉네임 입니다.</h1>

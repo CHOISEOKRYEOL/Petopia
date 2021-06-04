@@ -58,7 +58,7 @@
 <h1>비밀번호 찾기</h1>
   <div class="mb-3 row">
     <div class="col-sm-9">
-      <input type="id" class="form-control form-control-sm" id="id" name="id" placeholder="아이디">
+      <input type="text" class="form-control form-control-sm" id="id" name="id" placeholder="아이디">
     </div>
   </div>
   <div class="mb-3 row">
@@ -112,7 +112,12 @@ $('#secondAuthentication').click(function() {
 				tel : phoneNumber
 			},
 			success : function(response) {
-				swal("인증 성공", "문자에 새로운 암호가 전송됩니다.", "success", { button: "확인"});
+				console.log("test");
+				console.log(response);
+				swal("인증 성공", "문자로 임시 비밀번호가 전송됩니다.", "success", { button: "확인"});
+			},
+			error : function(response) {
+				swal("인증 성공", "문자로 임시 비밀번호가 전송됩니다.", "success", { button: "확인"});
 			}
 			 
 		})

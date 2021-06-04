@@ -23,13 +23,13 @@
 	integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
 	crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<link rel="stylesheet" type="text/css" href="../../css/common.css">
-<link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="/web/css/common.css">
+<link rel="stylesheet" type="text/css" href="/web/css/layout.css">
 </head>
 <body>
 	<header></header>
 	<div class="wrap">
-		<img src="../../images/20180115_115933.jpg"
+		<img src="/web/images/mypage.jpg"
 			class="img-fluid width:100%;"
 			style="filter: alpha(opacity = 60); opacity: 0.6; -moz-opacity: 0.6;">
 		<div class="text-group">
@@ -107,7 +107,7 @@
 				<div class="mb-3 row">
 					<label for="tel" class="col-sm-2 col-form-label">휴대전화</label>
 					<div class="col-sm-6">
-						<input type="number" required class="form-control form-control-sm" id="tel" name="tel" placeholder="휴대전화 입력" oninput="checkTel()" maxlength='11'>
+						<input type="tel" required class="form-control form-control-sm" id="tel" name="tel" placeholder="휴대전화 입력" oninput="checkTel()" maxlength='11'>
 						<div id="telCheck" style="display: none">(-)없이 11자리 입력하세요.</div>
 						<div id="sameTel" style="display: none">이미 사용 중인 번호입니다.</div>
 						<br> <input type="button" id="sendNumber" name="auth" value="인증번호 요청">
@@ -472,8 +472,8 @@
 		});
 		
 		$(document).ready(function() {
-		    $("header").load("../../html/header.jsp");
-		    $("footer").load("../../html/footer.html");
+		    $("header").load("/web/html/header.jsp");
+		    $("footer").load("/web/html/footer.html");
 		  });
 	</script>
 

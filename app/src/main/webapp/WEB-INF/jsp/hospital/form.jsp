@@ -13,13 +13,13 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" href="../../css/common.css">
-<link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="/web/css/common.css">
+<link rel="stylesheet" type="text/css" href="/web/css/layout.css">
 </head>
 <body>
 <header></header>
 <div class="wrap">
-<img src="../../images/Screenshot_2017-01-05-23-08-49.png" class="img-fluid width:100%;"
+<img src="/web/images/bigstock.jpg" class="img-fluid width:100%;"
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="text-group">
     <p style="font-size: 50px;">펫토피아</p>
@@ -51,14 +51,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   
   <div class="form-row mb-3">
   <label for="gno" class="col-sm-2 col-form-label">기본주소</label>
-      <select id="gno" class="col-md-4" name='gno'>
-          <option value=''>시/도</option>
-          <option value='1'>서울특별시</option>
-         </select>
-       <select id="cno" class="col-md-4" name='cno'>
-          <option value=''>시/군/구</option>
-          <option value='1'>강남구</option>
-         </select>
+  <jsp:include page="../../../html/state2.html"/>
   </div>
   
   <div class="mb-3 row">
@@ -93,9 +86,10 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     <label for="photo" class="col-sm-2 col-form-label">병원사진</label>
     <input type="file" name="photo" id="imageFileOpenInput" accept="image/*">
   </div>
+  
 <div class="modal-footer justify-content-between">
-<a href='list' class="btn btn-secondary">목록</a>
-<input class="btn" style="background-color: #FFADAD;" type='submit' value='등록'>
+	<a href='list' class="btn btn-secondary">목록</a>
+	<input class="btn" style="background-color: #FFADAD;" type='submit' value='등록'>
 </div>
 </form>
 </div>
@@ -104,8 +98,8 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 <footer></footer>
 <script>
 $(document).ready(function() {
-    $("header").load("../../html/header.jsp");
-    $("footer").load("../../html/footer.html");
+    $("header").load("/web/html/header.jsp");
+    $("footer").load("/web/html/footer.html");
   });
 </script>
 </body>

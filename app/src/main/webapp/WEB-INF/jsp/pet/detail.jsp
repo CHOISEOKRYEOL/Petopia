@@ -21,7 +21,6 @@
   #form {
     width: 500px;
     margin-left: 550px;
-    
   }
   
   .button {
@@ -32,7 +31,7 @@
 
   color: white;
 
-  padding: 8px 8px;
+  padding: 6px 6px;
 
   text-align: center;
 
@@ -53,7 +52,7 @@
 <body>
 <header></header>
 <div class="wrap">
-<img src="../../images/20180115_120703.jpg" class="img-fluid width:100%;"
+<img src="../../images/mypet.jpg" class="img-fluid width:100%;"
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="text-group">
     <p style="font-size: 50px;">내 펫 상세정보</p>
@@ -91,7 +90,6 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
         <tfoot>
         <tr><td colspan='2'>
         <input type='submit' value='변경' class="button"> <a href='delete?no=${pet.no}' class="button">삭제</a>
-        
         </td></tr>
         </tfoot>
       </table>
