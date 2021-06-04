@@ -139,9 +139,7 @@ a { text-decoration:none }
 
 /* 동네 */
 .container_right02 {
-    align-items: center;
     display: flex;
-    justify-content: center;
     flex: 1;
     margin: 20px;
     background-color: #FAF0E6;

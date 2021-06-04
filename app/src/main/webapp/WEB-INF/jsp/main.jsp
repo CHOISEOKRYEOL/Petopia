@@ -55,7 +55,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     --%>
     </div>
     </div>
-    
+        <%--  
     <div class="box2">
       <nav class="navbar navbar-expand-lg navbar-light">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -76,9 +76,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
       <div class="container_right01">
         <p>name: eeee<br>age: eeee<br>eeeeeddddd</p>
       </div>
-      </div>
       
-      <%-- 
       <div class="timeline">
         <div class="timeline_line"></div>
         <ul class="timeline_items">
@@ -118,9 +116,9 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
           </ul>
         </div>
       </div>
-    --%>
     </div>
     </c:if>
+    --%>
     
     <c:if test="${empty loginUser}">
     <div class="box3" style="align-items: center; display: flex; justify-content: center;">
@@ -145,10 +143,10 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     <div class="box5">
       <div class="row justify-content-evenly">
         <div class="col-3">
-          <a href="https://www.naver.com/">
+          <a href="http://localhost:8080/web/app/mytown/detail?stateNo=1&cityNo=16&no=2">
           <img src="/web/images/20180111_205149.jpg" style="width: 200px; height: 250px;"></a>
           <p class="market_contents">
-          <a href="https://www.naver.com/" class="link-dark" style="text-decoration:none;">
+          <a href="http://localhost:8080/web/app/mytown/detail?stateNo=1&cityNo=16&no=2" class="link-dark" style="text-decoration:none;">
           dkdkdksssssssssssssssssssssssssssssssssss</a></p>
         </div>
         <div class="col-3">
@@ -233,25 +231,25 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
       
       <div class="container_right02">
        <table class="table table-hover">
-  <thead>
-    <tr>
-      <th> 동네 </th>
-      <th> 제목 </th>
-      <th> 등록일 </th>
-      <th> 추천수 </th>
-    </tr>
-  </thead>
-  <tbody>
-    <c:forEach items="${myTownList}" var="t">
-      <tr>
-        <td>${t.bigAddress.name} &nbsp; ${t.smallAddress.name} </td>
-        <td><a href='../mytown/detail?stateNo=${t.bigAddress.no}&cityNo=${t.smallAddress.no}&no=${t.no}'>${t.title}</a></td>
-        <td>${t.createdDate}</td>
-        <td>&nbsp;&nbsp;&nbsp;${t.recommentCount}</td>
-      </tr>
-    </c:forEach>
-  </tbody>
- </table>
+			  <thead>
+			    <tr>
+			      <th> 동네 </th>
+			      <th> 제목 </th>
+			      <th> 등록일 </th>
+			      <th> 추천수 </th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <c:forEach items="${myTownList}" var="t">
+			      <tr>
+			        <td>${t.bigAddress.name} &nbsp; ${t.smallAddress.name} </td>
+			        <td><a href='../mytown/detail?stateNo=${t.bigAddress.no}&cityNo=${t.smallAddress.no}&no=${t.no}'>${t.title}</a></td>
+			        <td>${t.createdDate}</td>
+			        <td>&nbsp;&nbsp;&nbsp;${t.recommentCount}</td>
+			      </tr>
+			    </c:forEach>
+			  </tbody>
+			 </table>
       </div>
     </div>
 </div>
