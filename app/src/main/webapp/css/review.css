@@ -9,21 +9,24 @@
     padding-top: 10px;
     min-height: 100vh;
   }
-
-  .mytownmain { 
-    position: relative; 
-  }
-  
-  .mytown-main-group { 
-    position: absolute; 
-    top: 40%; 
-    left: 10%;
+  .review_content { 
+    text-align: center;
+    margin: 0 auto;
     font-family: 'Noto Sans KR', sans-serif;
     font-style: normal;
     font-weight: normal;
+    margin-left: 2%;
+   }
+   
+   .stars {
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 5%;
    }
    
    .bill {
+      margin-left: 22%;
+      font-family: 'Noto Sans KR', sans-serif;
    }
    
   
