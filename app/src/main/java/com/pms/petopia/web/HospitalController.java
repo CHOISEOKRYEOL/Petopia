@@ -83,7 +83,7 @@ public class HospitalController {
     bookmarkService.deleteByAdmin(no);
     hospitalService.delete(no);
 
-    return "../admin/hospital_list";
+    return "admin/hospital_list";
   }
 
   @GetMapping("detail")
