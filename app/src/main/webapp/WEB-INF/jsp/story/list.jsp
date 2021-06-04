@@ -33,9 +33,11 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <a class="navbar-brand">스토리</a>
   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  <c:if test="${loginUser.role == 0}">
     <li class="nav-item">
       <a href='form' class="btn" style="background-color: #FFADAD;">새 글</a>
     </li>
+  </c:if>
   </ul>
   <form class="d-flex">
     <input class="form-control me-2" type="search" name="keyword" value='${param.keyword}' placeholder="검색" aria-label="검색">

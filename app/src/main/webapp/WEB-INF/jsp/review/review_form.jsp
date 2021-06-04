@@ -86,9 +86,9 @@
   crossorigin="anonymous"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script type="text/javascript" src="../../js/stars.js"></script>
-  <link rel="stylesheet" type="text/css" href="../../css/layout.css">
-  <link rel="stylesheet" type="text/css" href="../../css/review.css">
-  <link rel="stylesheet" type="text/css" href="../../css/board.css">
+  <link rel="stylesheet" type="text/css" href="/web/css/layout.css">
+  <link rel="stylesheet" type="text/css" href="/web/css/review.css">
+  <link rel="stylesheet" type="text/css" href="/web/css/board.css">
   <style>
   a {
     text-decoration:none
@@ -104,7 +104,7 @@
 <header id="header"></header>
 
 <div class="wrap">
-<img src="../../images/20180515_203804.jpg" class="img-fluid width:100%;"
+<img src="/web/images/bigstock.jpg" class="img-fluid width:100%;"
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="text-group">
     <p style="font-size: 50px;">병원찾기</p>

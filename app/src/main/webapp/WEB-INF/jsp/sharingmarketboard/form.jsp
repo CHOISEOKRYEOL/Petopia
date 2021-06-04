@@ -7,10 +7,10 @@
 <meta charset='UTF-8'>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-<link href="../../css/board.css" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="../../css/layout.css">
 <script type="text/javascript" src="../../smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/web/css/board.css">
+<link rel="stylesheet" type="text/css" href="/web/css/layout.css">
 <title>나눔장터 게시판</title>
 <style>
 footer{
@@ -28,7 +28,7 @@ text-decoration:none
 <body>
 <header></header>
 <div class="wrap">
-<img src="../../images/20180115_1208492.jpg" class="img-fluid"
+<img src="/web/images/smarket.jpg" class="img-fluid"
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6; min-width:900px;">
   <div class="text-group">
     <p style="font-size: 50px;">나눔장터</p>
