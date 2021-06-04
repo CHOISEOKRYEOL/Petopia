@@ -46,20 +46,51 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   </c:if>
   
 <form action='update' method='post' enctype="multipart/form-data">
-<table class="table table-hover">
- <tbody>
- <tr><th>번호</th> <td><input name='no' type='text' value='${pet.no}' readonly></td></tr> 
- <tr><th>이름</th> <td><input name='name' type='text' value='${pet.name}'></td></tr>
- <tr><th>나이</th> <td><input name='age' type='text' value='${pet.age}'readonly></td></tr>
- <tr><th>생일</th> <td><input name='birthDay' type='day' value='${pet.birthDay}' readonly></td></tr>
- <tr><th>성별</th> <td><input name='gender' type='text' value='${pet.gender}' readonly></td></tr>
- <tr><th>사진</th> 
-  <td><a href='${photoUrl}'>
-  <img src='${photo80x80Url}'></a><br>
-  <input name='photoFile' type='file'></td></tr>
- <tr><th>품종</th> <td><input type='text' value='${pet.type.type}' readonly></td></tr>
- </tbody>
-</table>
+<div class="mt-3 mb-3 row">
+<label for="no" class="col-sm-1 col-form-label">번호</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control-plaintext" id="no" name="no" value='${pet.no}'>
+    </div>
+  </div>
+<div class="mb-3 row">
+<label for="name" class="col-sm-1 col-form-label">이름</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control-plaintext" id="name" name="name" value='${pet.name}'>
+    </div>
+  </div>
+  <div class="mb-3 row">
+<label for="age" class="col-sm-1 col-form-label">나이</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control-plaintext" id="age" name="age" value='${pet.age}'>
+    </div>
+  </div>
+   <div class="mb-3 row">
+<label for="birthDay" class="col-sm-1 col-form-label">생일</label>
+    <div class="col-sm-6">
+      <input type="date" class="form-control-plaintext" id="birthDay" name="birthDay" value='${pet.birthDay}'>
+    </div>
+  </div>
+     <div class="form-row mb-3">
+<label for="gender" class="col-sm-1 col-form-label">성별</label>
+    <div class="form-check form-check-inline">
+        <input type='radio' name='gender' value='0' ${pet.gender == 1 ? "checked" : ""}>남
+      </div>
+      <div class="form-check form-check-inline">
+         <input type='radio' name='gender' value='1' ${pet.gender == 0 ? "checked" : ""}>여
+      </div>
+  </div>
+ <div class="mb-3 row">
+<label for="type" class="col-sm-1 col-form-label">품종</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control-plaintext" id="type" name="type" value='${pet.type.type}'>
+    </div>
+  </div>
+    <div class="form-row mb-3">
+      <label for="photo" class="col-sm-2 col-form-label">사진</label>
+      <img src='${photo80x80Url}'><br>
+      <input name='photoFile' type='file'>
+    </div>
+
   <div class="modal-footer justify-content-between">
     <div>
    <a href='list' class="btn btn-secondary" type='submit'>목록</a>
