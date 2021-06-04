@@ -168,8 +168,7 @@
           </c:if>
 					</td>
 					
-					
-					<td><a href='${photoUrl}'><img src='${thumbnail}'></a></td> 
+					<td><a href='${photoUrl}' target="_blank"><img src='${thumbnail}'></a></td> 
 					
 					</tr>
 					
