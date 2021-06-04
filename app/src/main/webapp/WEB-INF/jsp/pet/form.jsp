@@ -34,23 +34,44 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 
 <div class="main">
 <div class="main-mypet" style="margin-left: 10px;">
-<div id="form-add">
-<table class="table table-hover">
+<div id="addform">
 <form action="add" method="post" enctype="multipart/form-data">
-<h1></h1>
-이름: <input type="text" name="name"><br>
-나이: <input type="int" name="age"><br>
-생일: <input type="date" name="birthDay"><br>
-성별: <input type="radio" name="gender" value="0">남
-      <input type="radio" name="gender" value="1">여<br>
-      
-품종: <select id="species" name="species.no">
-      <option value="1">강아지</option>
-      <option value="2">고양이</option>
-      <option value="3">기타</option>
-    </select>
-    
-    <select id="type" name="type.no">
+
+  <div class="mt-3 mb-3 row">
+    <label for="name" class="col-sm-1 col-form-label">이름</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="name" name="name">
+    </div>
+  </div>
+  <div class="mt-3 mb-3 row">
+    <label for="age" class="col-sm-1 col-form-label">나이</label>
+    <div class="col-sm-6">
+      <input type="number" class="form-control" id="age" name="age" min="1" max="30" value="1">
+    </div>
+  </div>
+  <div class="mt-3 mb-3 row">
+    <label for="birthDay" class="col-sm-1 col-form-label">생일</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="birthDay" name="birthDay">
+    </div>
+  </div>
+  <div class="form-row mb-3">
+    <label for="gender" class="col-sm-1 col-form-label">성별</label>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="gender" id="gender" value="0">남
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="gender" id="gender" value="1">여
+    </div>
+  </div>
+  <div class="form-row mb-3">
+  <label for="species" class="col-sm-1 col-form-label">품종</label>
+      <select id="species" class="col-md-3" name='species.no'>
+	      <option value="1">강아지</option>
+	      <option value="2">고양이</option>
+	      <option value="3">기타</option>
+      </select>
+      <select id="type" class="col-md-3" name="type.no">
       <option value = "1">진돗개</option>
       <option value = "2">시바</option>
       <option value = "3">저먼 셰퍼드</option>
@@ -61,18 +82,24 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
       <option value = "8">푸들</option>
       <option value = "9">로트바일러</option>
       <option value = "10">치와와</option>
-    </select><br>
+    </select>
+  </div>
+  
+  <div class="form-row mb-3">
+    <label for="photo" class="col-sm-1 col-form-label">사진</label>
+    <input type="file" name="photoFile" id="imageFileOpenInput" accept="image/*">
+  </div>
    
-사진: <input type="file" name="photoFile"><br>
-<input type="submit" value="등록"  class="button">
+<div class="modal-footer justify-content-end">
+  <input class="btn" style="background-color: #FFADAD;" type='submit' value='등록'>
+</div>
 </form>
-</table>
+</div>
 </div>
 </div>
 </div>
 
 <script>
-   
    var t1 = document.querySelector("#species");
    var t2 = document.querySelector("#type");
    t1.onchange = function() {
@@ -82,17 +109,14 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
      
      t2.innerHTML = xhr.responseText;
    }
-   </script>
-</div>
-</div>
+   
+   $(document).ready(function() {
+	    $("header").load("/web/html/header.jsp");
+	    $("sidebar").load("/web/html/sidebar.jsp");
+	    $("footer").load("/web/html/footer.html");
+	  });
+</script>
 
 <footer></footer>
-<script>
-$(document).ready(function() {
-    $("header").load("/web/html/header.jsp");
-    $("sidebar").load("/web/html/sidebar.jsp");
-    $("footer").load("/web/html/footer.html");
-  });
-</script>
 </body>
 </html>
