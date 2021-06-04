@@ -226,7 +226,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     
     <div class="box7">
       <div class="container_left02">
-      <table class="table table-hover">
+      <table class="table table-hover" style="text-align: center;">
         <thead>
           <tr>
             <th> 번호 </th>
@@ -246,12 +246,10 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
           </c:forEach>
         </tbody>
        </table>
-      
-      
       </div>
       
       <div class="container_right02">
-       <table class="table table-hover">
+       <table class="table table-hover" style="text-align: center;">
 			  <thead>
 			    <tr>
 			      <th> 동네 </th>
@@ -264,7 +262,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 			    <c:forEach items="${myTownList}" var="t">
 			      <tr>
 			        <td>${t.bigAddress.name} &nbsp; ${t.smallAddress.name} </td>
-			        <td><a href='../mytown/detail?stateNo=${t.bigAddress.no}&cityNo=${t.smallAddress.no}&no=${t.no}'>${t.title}</a></td>
+			        <td><a href='../app/mytown/detail?stateNo=${t.bigAddress.no}&cityNo=${t.smallAddress.no}&no=${t.no}'>${t.title}</a></td>
 			        <td>${t.createdDate}</td>
 			        <td>&nbsp;&nbsp;&nbsp;${t.recommentCount}</td>
 			      </tr>
