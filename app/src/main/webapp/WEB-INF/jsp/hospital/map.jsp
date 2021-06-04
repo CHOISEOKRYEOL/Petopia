@@ -12,7 +12,7 @@
 <input type="hidden" id="stateName" value="${stateName}"> 
 <input type="hidden" id="cityName" value="${cityName}">
 <div id="map" style="width:100%;height:350px;"></div>
-<table id="hospital-table" class="table table-hover">
+<!-- <table id="hospital-table" class="table table-hover">
   <thead>
 	  <tr>
 	    <th> 번호 </th>
@@ -25,7 +25,7 @@
   </thead>
   <tbody>
   </tbody>
-</table>
+</table> -->
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2793f88bea0d7a6546285f048e073074&libraries=services"></script>
 <script>
@@ -122,7 +122,7 @@ function placesSearchCB (data, status, pagination) {
         for (var i=0; i<data.length; i++) {
             displayMarker(data[i]);    
             bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-            var tr = "<tr>" 
+            /* var tr = "<tr>" 
             + "<td>"+ i +"</td>"
             + "<td><a href=detail?a=" + address + "&h="+ data[i].place_name + ">" + data[i].place_name + "</a>" + "</td>"
             + "<td>"+ data[i].phone +"</td>"
@@ -130,7 +130,7 @@ function placesSearchCB (data, status, pagination) {
             + "<td> &nbsp;&nbsp;"+ i +"</td>"
             + "<td> &nbsp;&nbsp;"+ i +"</td>"
           +"</tr>";
-            hospitalTableTbody.innerHTML = hospitalTableTbody.innerHTML + tr;
+            hospitalTableTbody.innerHTML = hospitalTableTbody.innerHTML + tr; */
         }       
 
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
