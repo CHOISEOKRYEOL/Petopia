@@ -56,7 +56,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   </form>
 	</div>
   </nav>
-	<table border='1' class="table table-hover" style=margin-bottom:20% >
+	<table class="table table-hover" style="margin-bottom:20%;" >
 		<thead>
 			<tr>
 				<th>번호</th>

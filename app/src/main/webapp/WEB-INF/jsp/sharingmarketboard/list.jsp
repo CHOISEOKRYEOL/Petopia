@@ -77,7 +77,6 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   </div>
 </nav>
 
-<div class="content">
 <table class="table table-hover">
 <thead>
 <tr>
@@ -111,7 +110,6 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 </c:forEach>
 </tbody>
 </table>
-</div>
 </div>
 
 <footer class="footer"></footer>
