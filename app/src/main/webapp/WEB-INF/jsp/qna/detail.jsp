@@ -54,10 +54,10 @@ ${qna.answer}</c:if>
 	
 	<c:if test="${loginUser.id ne 'admin'}">
 		<c:if test="${qna.state == 0}">
-			<a href='modifying_form?no=${qna.no}'>수정</a>
+			<a href='modifying_form?no=${qna.no}' class="btn" style="background-color: #FFADAD;" type='submit'>수정</a>
 		</c:if>
-		<a href='delete?no=${qna.no}'>삭제</a>
-		<a href='list'>목록</a>
+		<a href='delete?no=${qna.no}' class="btn btn-danger" type='submit'>삭제</a>
+		<a href='list' class="btn btn-secondary" type='submit'>목록</a>
 	</c:if>
 	<c:if test="${loginUser.id eq 'admin'}">
 		<a href='../admin/qnalist'>돌아가기</a>

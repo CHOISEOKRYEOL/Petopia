@@ -78,7 +78,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 <div class="signout d-flex justify-content-end">
 	<form action='delete' method='post'>
 		<input type='hidden' name='no' value='${member.no}'> <input
-			type='submit' name='delete'  class="btn" style="background-color: #FFADAD;" value='회원탈퇴'></form>
+			type='submit' name='delete'  class="btn btn-dark" value='회원탈퇴'></form>
 </div>
 </div>
 </div>

@@ -44,13 +44,14 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
       <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 입력하세요." required>
     </div>
   </div>
+<div class="modal-footer justify-content-between">
   <div class="mb-3 form-check">
     <input type="checkbox" class="form-check-input" id="saveIdOrEmail" name="saveIdOrEmail">
     <label class="form-check-label" for="saveEmail">ID/Email 저장</label>
     <a href="member/findKey_form">아이디/비밀번호 찾기</a>
   </div>
-  
 <button id="login" class="btn" style="background-color: #FFADAD;">로그인</button>
+</div>
 </form>
 </div>
 </div>
