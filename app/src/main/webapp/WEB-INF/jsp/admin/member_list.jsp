@@ -13,13 +13,11 @@
 <title>회원 목록</title>
 <style type="text/css">
 
-boady{
-width: 1000px;
+body{
+width: 100%;
 margin: 0 auto;
 font-family: 'Noto Sans KR', sans-serif;
 font-size: medium;
-vertical-align: middel;
-display: center;
 }
 
 td{
@@ -30,14 +28,14 @@ td{
   padding: 0 10px 0 11px;
 }
 
-.table{
+/* .table{
 width: 700px;
 margin: 0 auto;
 border: 1px solid #cccccc;
  font-weight: 500;
   font-size: 16px;
   text-align: center;
-}
+} */
 
 .search{
 display: block;
@@ -63,6 +61,7 @@ margin: 0 auto;
 } 
 
 .content{
+vertical-align: middle;
 display: block;
 text-align: center;
 /* min-width: 1000px; */
@@ -111,8 +110,6 @@ text-decoration:none
 </nav>
 
 
-
-<div class="content">
 	<table class="table table-hover">
 		<thead>
 			<tr>
@@ -150,7 +147,6 @@ text-decoration:none
 		</tbody>
 	</table>
 	 </div>
-	   </div>
 	   
 	 <footer></footer>
 <script>

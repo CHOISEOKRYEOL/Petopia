@@ -254,11 +254,8 @@ public class SharingMarketBoardController {
   }
 
   @GetMapping("list")
-  public String list(HttpServletRequest request, Model model) throws Exception {
+  public String list(String item,String keyword,String category, Model model) throws Exception {
 
-    //    String item = request.getParameter("item");
-    //    String keyword = request.getParameter("keyword");
-    String category = request.getParameter("category");
 
     int categoryNo = 0;
     if (category != null) {
@@ -270,10 +267,15 @@ public class SharingMarketBoardController {
 
     } else {
       smBoards = sharingMarketBoardService.getCategory(categoryNo);
+
+      if(item != null && keyword != null && keyword.length() > 0) {
+        smBoards = sharingMarketBoardService.searchByDetail(item, keyword);
+
+      }
     }
 
 
-    model.addAttribute("category", category);
+    model.addAttribute("category", categoryNo);
     model.addAttribute("catList", sharingMarketBoardCategoryService.list());
     model.addAttribute("smBoards", smBoards);
 

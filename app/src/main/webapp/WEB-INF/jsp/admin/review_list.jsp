@@ -101,7 +101,6 @@ width: 100%;
   </div>
 </nav>
 
-<div class="content">
 	<table class="table table-hover" >
 		<thead>
 			<tr>
@@ -130,7 +129,6 @@ width: 100%;
 			</c:forEach>
 		</tbody>
 	</table>
-	</div>
 	<footer></footer>
 	<script>
 $(document).ready(function() {
