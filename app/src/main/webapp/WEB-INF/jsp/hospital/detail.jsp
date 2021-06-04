@@ -16,7 +16,7 @@
 <body>
 <header></header>
 <div class="wrap">
-<img src="../../images/242photo.jpg" class="img-fluid width:100%;"
+<img src="/web/images/bigstock.jpg" class="img-fluid width:100%;"
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="text-group">
     <p style="font-size: 50px;">펫토피아</p>
@@ -90,14 +90,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 
 	  <div class="form-row mb-3">
 	  <label for="gno" class="col-sm-2 col-form-label">기본주소</label>
-	    <select id="gno" class="col-md-4" name='gno'>
-	      <option value=''>시/도</option>
-	      <option value='1' ${hospital.bigAddress.no == 1 ? "selected" : ""}>서울특별시</option>
-	    </select>
-	    <select id="cno" class="col-md-4" name='cno'>
-	      <option value=''>시/군/구</option>
-	      <option value='1' ${hospital.smallAddress.no == 1 ? "selected" : ""}>강남구</option>
-	    </select>
+	    <jsp:include page="../../../html/state3.jsp"/>
 	  </div>
 	  
 	  <div class="mb-3 row">
@@ -148,19 +141,19 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <a class="navbar-brand">병원 리뷰</a>
-	<form action="../review/review_form">
+	<form action="/web/app/review/review_form">
     <input type='hidden' name='num' value='${hospital.no}'>
     <input type="submit" value="리뷰 작성">
   </form>
 </nav>
-<div class="reviewlist"></div>
+<jsp:include page="/app/review/list"/>
 </div>
 
 <footer></footer>
 <script>
 $(document).ready(function() {
-    $("header").load("../../html/header.jsp");
-    $("footer").load("../../html/footer.html");
+    $("header").load("/web/html/header.jsp");
+    $("footer").load("/web/html/footer.html");
   });
 </script>
 </body>
