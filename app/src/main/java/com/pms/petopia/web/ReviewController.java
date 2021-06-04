@@ -87,11 +87,7 @@ public class ReviewController {
     String temp = reviewService.countReview(h.getNo());
     int count = Integer.parseInt(temp);
 
-    System.out.printf("리뷰 추가 후, 개수 : %d\n", count);
-
     float average = (r.getServiceRating() + r.getCleanlinessRating() + r.getCostRating()) / 3.0F;
-
-    System.out.printf("리뷰 추가 후, 평균 : %.2f\n", average);
 
     h.setAccumulatedRating(average);
     hospitalService.setAccumulatedRating(h);
@@ -100,14 +96,12 @@ public class ReviewController {
     float finalRating = 0;
     if(count > 1) {
       float original = rating.getAccumulatedRating();
-      System.out.printf("리뷰 추가 후, 누적 평점 : %.2f\n", original);
       finalRating = original / (count * 1.0F);
     }
     else {
       finalRating = average * 1.0F;
     }
 
-    System.out.printf("리뷰 추가 후, 최종 평점 : %.2f\n", finalRating);
     rating.setRating(finalRating);
 
     hospitalService.rate(rating);

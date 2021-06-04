@@ -14,6 +14,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="../css/mypage.css">
 <link rel="stylesheet" type="text/css" href="../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../css/common.css">
 </head>
 <body>
 <header id="header"></header>
@@ -29,51 +30,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 </div>
 
 <div class="container">
-  <div class="flex-shrink-0 p-3 bg-white" style="width: 280px;">
-    <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-      <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
-      <span class="fs-5 fw-semibold">My Page</span>
-    </a>
-    <ul class="list-unstyled ps-0">
-      <li class="mb-1">
-        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-          My Pet
-        </button>
-        <div class="collapse show" id="home-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#mypet" class="link-dark rounded">마이펫</a></li>
-            <li><a href="#mypetadd" class="link-dark rounded">마이펫 등록</a></li>
-            <li><a href="#record" class="link-dark rounded">진찰기록</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="mb-1">
-        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="orders-collapse" aria-expanded="false">
-          즐겨찾기
-        </button>
-        <div class="collapse show" id="orders-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#hospital" class="link-dark rounded">병원 즐겨찾기</a></li>
-            <li><a href="#story" class="link-dark rounded">스토리 스크랩</a></li>
-            <li><a href="#board" class="link-dark rounded">내 게시글</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="border-top my-3"></li>
-      <li class="mb-1">
-        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-          Account
-        </button>
-        <div class="collapse" id="account-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#account" class="link-dark rounded">Profile</a></li>
-            <li><a href="#qna" class="link-dark rounded">Q&A</a></li>
-            <li><a href="#signout" class="link-dark rounded">Sign out</a></li>
-          </ul>
-        </div>
-      </li>
-    </ul>
-  </div>
+<div id="sidebar"></div>
 
 <div class="main">
   <main class="sidebar_main">
@@ -86,6 +43,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 <script>
 $(document).ready(function() {
     $("header").load("../html/header.jsp");
+    $("sidebar").load("../html/sidebar.jsp");
     $("footer").load("../html/footer.html");
   });
 </script>

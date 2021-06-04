@@ -72,7 +72,6 @@ public class SharingMarketBoardCommentController{
     }
 
     SharingMarketBoardComment oldSmbComt = sharingMarketBoardCommentService.getNo(smbComt.getNo());
-
     smbComt.setNo(oldSmbComt.getNo());
     smbComt.setSharingmarketboard(oldBoard);
     smbComt.setContent(content);

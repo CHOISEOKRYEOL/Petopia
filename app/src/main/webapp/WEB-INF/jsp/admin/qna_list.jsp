@@ -4,11 +4,94 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../css/layout.css">
 <title>관리자 Q&A 목록</title>
+<style type="text/css">
+
+boady{
+width: 1000px;
+margin: 0 auto;
+font-family: 'Noto Sans KR', sans-serif;
+font-size: medium;
+vertical-align: middel;
+display: center;
+}
+
+td{
+  margin-top: 10px;
+  height: 36px;
+  margin-right: 4px;
+  line-height: 36px;
+  padding: 0 10px 0 11px;
+}
+
+.table{
+width: 700px;
+margin: 0 auto;
+border: 1px solid #cccccc;
+ font-weight: 500;
+  font-size: 16px;
+  text-align: center;
+}
+
+.search{
+display: block;
+min-width: 1000px;
+margin: 0 auto;
+  text-align: center;
+}
+
+ .button{
+  margin-top: 10px;
+  display: inline-block;
+  height: 36px;
+  margin-right: 4px;
+  border: 0px;
+  border-radius: 6px;
+  padding: 0 10px 0 11px;
+  line-height: 36px;
+  font-weight: 700;
+  font-size: 13px;
+  text-align: center;
+  color: #323232;
+  background: #ededed;
+} 
+
+.content{
+display: block;
+min-width: 1000px;
+  height: 680;
+  padding: 30px 30px 30px 30px;
+}
+
+footer{
+position: absolute;
+bottom: 0;
+width: 100%;
+}
+
+</style>
 </head>
 <body>
-	<h1>관리자 Q&A 목록</h1>
-	<table border='1'>
+
+<header></header>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="display: block;"> 
+<a class="navbar-brand">관리자 Q&A 목록</a>
+  <div class="container-fluid" style="display: block; min-width: 1000px;">
+    <div class="button">
+      <span >
+        <a href="../main">뒤로가기</a>
+      </span>
+    </div>
+  </div>
+</nav>
+
+	<div class="content">
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>번호</th>
@@ -33,13 +116,33 @@
 					<c:if test="${q.state == 0}">
 						<td>대기</td>
 					</c:if>
-					<td><a href='qnadetail?no=${q.no}'>답변</a></td>
-					<td><a href='../qna/delete?no=${q.no}'>삭제</a></td>
+					<td>
+					<div  class="btn btn-outline-secondary" style="  display: inline-block; padding: 0 10px 0 11px; line-height: 36px; font-weight: 700; font-size: 13px; height: 36px; margin-right: 4px;">
+              <span>
+              <a href='qnadetail?no=${q.no}'>답변</a>
+              </span>
+              </div>
+           </td>
+					<td>
+					    <div  class="btn btn-outline-secondary" style="  display: inline-block; padding: 0 10px 0 11px; line-height: 36px; font-weight: 700; font-size: 13px; height: 36px; margin-right: 4px;">
+              <span>
+              <a href='../qna/delete?no=${q.no}'>삭제</a>
+               </span>
+              </div>
+              </td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 	<br>
-	<a href='../main'>뒤로가기</a>
+	</div>
+	
+	 <footer></footer>
+<script>
+$(document).ready(function() {
+      $("header").load("../../html/header.jsp");
+      $("footer").load("../../html/footer.html");
+    });
+</script>
 </body>
 </html>

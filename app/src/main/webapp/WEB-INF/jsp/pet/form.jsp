@@ -10,16 +10,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../css/common.css">
 <link rel="stylesheet" type="text/css" href="../../css/layout.css">
-
-<style>
-  #form-add {
-    width: 500px;
-    margin-left: 650px;
-  }
-</style>
 
 <style>
 
@@ -46,27 +38,22 @@
   cursor: pointer;
 
 }
-
 </style>
-
-<style>
-
-</style>
-
 </head>
 
 <body>
 <header></header>
 <div class="wrap">
-<img src="../../images/20180115_120703.jpg" class="img-fluid width:100%;"
+<img src="/web/images/mypage.jpg"  class="img-fluid width:100%;"
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="text-group">
-    <p style="font-size: 50px;">나의 펫 등록</p>
-    <p style="font-size: 30px;">소중한 나의 펫 등록</p>
+    <p style="font-size: 50px;">마이펫</p>
+    <p style="font-size: 30px;">나의 펫 등록</p>
     <p>나의 소중한 펫을 등록을 할수 있습니다<br>
-    여러 </p> 
   </div>
 </div>
+
+<div class="container">
 <div id="form-add">
 <table class="table table-hover">
 <form action="add" method="post" enctype="multipart/form-data">
@@ -99,8 +86,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 사진: <input type="file" name="photoFile"><br>
 <input type="submit" value="등록"  class="button">
 </table>
-</form>
-</form>
+</div>
 </div>
 
 <script>
@@ -115,13 +101,12 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
      t2.innerHTML = xhr.responseText;
    }
    </script>
-   
-   <script>
-   $(document).ready(function() {
-	    $("header").load("../../html/header.jsp");
-	    $("footer").load("../../html/footer.html");
-	  });
-   </script>
 <footer></footer>
+<script>
+$(document).ready(function() {
+    $("header").load("/web/html/header.jsp");
+    $("footer").load("/web/html/footer.html");
+  });
+</script>
 </body>
 </html>
