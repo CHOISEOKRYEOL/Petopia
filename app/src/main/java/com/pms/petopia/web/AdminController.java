@@ -50,8 +50,8 @@ public class AdminController {
     this.reviewService = reviewService;
   }
 
-  @GetMapping("boardlist")
-  public String boardList(HttpSession session, Model model)
+  @GetMapping("sharing_board_list")
+  public String sharingBoardList(HttpSession session, Model model)
       throws Exception {
 
     Member loginUser = (Member) session.getAttribute("loginUser");
@@ -61,12 +61,29 @@ public class AdminController {
     }
     else {
       List<SharingMarketBoard> sList = sharingMarketBoardService.list();
-      List<MyTownBoard> mList = myTownBoardService.listAll();
 
       model.addAttribute("sList", sList);
+
+      return "admin/sharing_board_list";
+
+    }
+  }
+
+  @GetMapping("mytown_board_list")
+  public String myTownBoardList(HttpSession session, Model model)
+      throws Exception {
+
+    Member loginUser = (Member) session.getAttribute("loginUser");
+
+    if(loginUser.getRole() == 1) {
+      return "access_fail";
+    }
+    else {
+      List<MyTownBoard> mList = myTownBoardService.listAll();
+
       model.addAttribute("mList", mList);
 
-      return "board_list";
+      return "admin/mytown_board_list";
 
     }
   }
@@ -84,7 +101,7 @@ public class AdminController {
 
   }
 
-  @GetMapping("memberlist")
+  @GetMapping("member_list")
   public String memberList(String item, String keyword, HttpSession session, Model model)
       throws Exception {
 
@@ -147,10 +164,9 @@ public class AdminController {
     }
   }
 
-  @GetMapping("reviewlist")
+  @GetMapping("review_list")
   public String reviewList(String item, String keyword, HttpSession session, Model model)
       throws Exception {
-
 
     Member loginUser = (Member) session.getAttribute("loginUser");
     if(loginUser.getRole() == 1) {

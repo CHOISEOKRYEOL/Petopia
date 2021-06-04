@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>우리동네 내 게시글</title>
+<title>Q&A 작성</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -33,33 +33,23 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 
 <div class="main">
 <div class="main-mypet" style="margin-left: 10px;">
-<c:if test="${emptyList eq 'true'}">
-<p>등록된 게시글이 없습니다!</p>
-</c:if>
-<c:if test="${emptyList ne 'true'}">
-  <table class="table table-hover">
-  <thead>
-    <tr>
-      <th> 동네 </th>
-      <th> 제목 </th>
-      <th> 등록일 </th>
-      <th> 조회수 </th>
-      <th> 추천수 </th>
-    </tr>
-  </thead>
-  <tbody>
-    <c:forEach items="${myTownList}" var="t">
-      <tr>
-        <td>${t.bigAddress.name} &nbsp; ${t.smallAddress.name} </td>
-        <td><a href='../mytown/detail?stateNo=${t.bigAddress.no}&cityNo=${t.smallAddress.no}&no=${t.no}'>${t.title}</a></td>
-        <td>${t.createdDate}</td>
-        <td>${t.viewCount}</td>
-        <td>${t.recommentCount}</td>
-      </tr>
-    </c:forEach>
-  </tbody>
- </table>
-</c:if>
+	<form action="add" method='post'>
+		<table class="table table-hover">
+			<tbody>
+				<tr>
+					<th>제목</th>
+					<td><input type='text' name='title' minlength="3"></td>
+				</tr>
+				<tr>
+					<th>내용</th>
+					<td><textarea name='content' rows='10' cols='60' minlength="10"></textarea></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="d-flex justify-content-end">
+		<input class="btn" style="background-color: #FFADAD;" type='submit' value='작성'>
+		</div>
+	</form>
 </div>
 </div>
 </div>

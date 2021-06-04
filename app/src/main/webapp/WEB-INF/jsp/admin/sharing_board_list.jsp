@@ -91,7 +91,6 @@ width: 100%;
     </div>
   </div>
 </nav>
-
 	<table class="table table-hover">
 		<thead>
 			<tr>
@@ -104,7 +103,8 @@ width: 100%;
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="sList" var="s">
+
+			<c:forEach items="${sList}" var="s">
 				<tr>
 					<td>${s.no}</td>
 					<td>${s.category.name}</td>
@@ -113,40 +113,10 @@ width: 100%;
 					<td>${s.createdDate}</td>
 					<td>
 					<div class="button">
-              <span><a href="../sharingmarketboard/delete?no${s.no}">삭제</a></span></div>
+              <span><a href="../sharingmarketboard/deleteByAdmin?no=${s.no}">삭제</a></span></div>
 				</tr>
 			</c:forEach>
-		</tbody>
-	</table>
-	<table class="table" border='1'>
-		<thead>
-			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>조회수</th>
-				<th>추천수</th>
-				<th>처리</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="mList" var="m">
-				<tr>
-					<td>${m.no}</td>
-					<td>${m.title}</td>
-					<td>${m.writer.nick}</td>
-					<td>${m.createdDate}</td>
-					<td>${m.viewCount}</td>
-					<td>${m.recommentCount}</td>
-					<td><div class="button">
-              <span>
-              <a href="../mytown/delete?no=${m.no}">삭제</a>
-              </span>
-              </div>        
-              </td>
-				</tr>
-			</c:forEach>
+
 		</tbody>
 	</table>
 <div class="button">

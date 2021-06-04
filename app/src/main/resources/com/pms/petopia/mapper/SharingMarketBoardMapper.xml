@@ -56,8 +56,8 @@
     values(#{category.no}, #{title}, #{content}, #{writer.no})
   </insert>
   
-  <select id="findAll" resultMap="sharingmarketboardMap" parameterType="sharingmarketboard">
-  <include refid='select'/>
+  <select id="findAll" resultMap="sharingmarketboardMap">
+  <include refid="select"></include>
       order by mark.sno desc
   </select>
   

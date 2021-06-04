@@ -86,7 +86,9 @@
   crossorigin="anonymous"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script type="text/javascript" src="../../js/stars.js"></script>
-  <link rel="stylesheet" type="text/css" href="../../css/layout.css">
+  <link rel="stylesheet" type="text/css" href="/web/css/layout.css">
+  <link rel="stylesheet" type="text/css" href="/web/css/review.css">
+  <link rel="stylesheet" type="text/css" href="/web/css/board.css">
   <style>
   a {
     text-decoration:none
@@ -102,7 +104,7 @@
 <header id="header"></header>
 
 <div class="wrap">
-<img src="../../images/20180515_203804.jpg" class="img-fluid width:100%;"
+<img src="/web/images/bigstock.jpg" class="img-fluid width:100%;"
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="text-group">
     <p style="font-size: 50px;">병원찾기</p>
@@ -116,7 +118,8 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 <a class="navbar-brand">리뷰 등록</a>
 </nav>
 	<form action="add" method="post" enctype="multipart/form-data">
-	
+
+<div class="stars">	
 	<span class="star-input">
   <div>서비스</div>
   <span class="input">
@@ -164,17 +167,18 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
       <label for="p15">5</label>
     </span>
 </span>
+</div>
 	
-	
-		<br> <br> 내용 : <br>
-		<textarea name="comment" rows='10' cols='60' minlength="5"></textarea>
+		<div class = "review_content"><textarea name="comment" rows='10' cols='60' minlength="5"></textarea></div>
+		<div class = "bill">
 		<br> 영수증 : <input type="file" name="photoFile" accept="image/*" required><br>
-		<input type="hidden" name="no" value="${num}"> <input type="submit" value="등록하기">
+		</div>
+		<input type="hidden" name="no" value="${num}"> <input type="submit" class = "button" value="등록하기" style="margin-left:80%; position: relative;">
 	</form>
 	<form action="../main">
-		<input type="submit" value="뒤로가기">
+		<input type="submit" class="button2" value="뒤로가기" style="margin-left:80%; position: relative;">
 	</form>
-	 
+	 </div>
 	<script>
 	var starRating = function(){
 		var $star = $(".star-input"),

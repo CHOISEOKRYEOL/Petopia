@@ -37,7 +37,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     </li>
     </c:if>
   </ul>
-  <jsp:include page="../../../html/state4.jsp"/>
+  <%-- <jsp:include page="../../../html/state4.jsp"/> --%>
   </div>
 </nav>
 
