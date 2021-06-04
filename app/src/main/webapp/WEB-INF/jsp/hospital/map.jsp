@@ -135,7 +135,7 @@ function placesSearchCB (data, status, pagination) {
 
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
         map.setBounds(bounds);
-        // 인서트문 만들기
+        /* // 인서트문 만들기
         var sql = "";
         for (var i=0; i<data.length; i++) {
             displayMarker(data[i]);    
@@ -148,7 +148,7 @@ function placesSearchCB (data, status, pagination) {
             			+ "10, 22, 2, 0);\n";
         } 
         
-        console.log(sql);
+        console.log(sql); */
         //
     } 
 }
