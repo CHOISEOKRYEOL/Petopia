@@ -28,6 +28,9 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 
 <div class="container">
     <div class="box1">
+    <div class="boxtext1">
+    <p><img src="/web/images/pawprint.png"> 펫토피아에 오신 것을 환영합니다 <img src="/web/images/pawprint.png"></p>
+  <%-- 
     <div class="pagination">
         <div class="pagination_item01">
            시/도
@@ -49,6 +52,8 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
            <input type="button" class="img-search-btn">
         </div>
     </div>
+    --%>
+    </div>
     </div>
     
     <div class="box2">
@@ -68,12 +73,12 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
         <div class="img-mypet">
           <img class="mypetpic" src="/web/images/20180111_205149.jpg">
         </div>
-        <p>name: eeee<br>age: eeee<br>eeeeeddddd
-        </p>
+      <div class="container_right01">
+        <p>name: eeee<br>age: eeee<br>eeeeeddddd</p>
+      </div>
       </div>
       
       <%-- 
-      <div class="container_right01">
       <div class="timeline">
         <div class="timeline_line"></div>
         <ul class="timeline_items">
