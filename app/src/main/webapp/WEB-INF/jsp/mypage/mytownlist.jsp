@@ -5,12 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>스크랩</title>
+<title>우리동네 내 게시글</title>
 </head>
 <body>
-<h1>${loginUser.nick}님의 우리동네 게시물</h1>
 <c:if test="${emptyList eq 'true'}">
-  <p>등록된 게시글이 없습니다!</p>
+<p>등록된 게시글이 없습니다!</p>
 </c:if>
 <c:if test="${emptyList ne 'true'}">
 <table border='1'>
