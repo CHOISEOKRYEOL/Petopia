@@ -238,9 +238,9 @@ a { text-decoration:none }
  /* 진찰기록탐라
  .timeline {
     position: relative;
-}
+}*/
 
-/* 라인 */
+/* 라인
 .timeline_line {
     border-right: 2px solid #FFADAD;
 
@@ -264,9 +264,9 @@ a { text-decoration:none }
 .timeline_top {
     align-items: center;
     display: flex;
-}
+} */
 
-/* 동그라미 */
+/* 동그라미
 .timeline_circle {
     background-color: #FFADAD;
     border-radius: 9999px;
@@ -283,9 +283,8 @@ a { text-decoration:none }
 
 .timeline_desc {
     margin-left: 52px;
-}
-*/
- 
+} */
+
 /* 장터 */
 .market {
     display: flex;   

@@ -72,6 +72,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
         </p>
       </div>
       
+      <%-- 
       <div class="container_right01">
       <div class="timeline">
         <div class="timeline_line"></div>
@@ -112,6 +113,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
           </ul>
         </div>
       </div>
+    --%>
     </div>
     </c:if>
     
