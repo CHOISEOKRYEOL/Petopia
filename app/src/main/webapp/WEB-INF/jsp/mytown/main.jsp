@@ -15,10 +15,10 @@
 <body>
 <header></header>
 <div class="wrap">
-<img src="../../images/20180515_203804.jpg" class="img-fluid width:100%;"
+<img src="/web/images/mytown.jpg" class="img-fluid width:100%;"
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="text-group">
-    <p style="font-size: 50px;">우리동네</p>
+    <p style="font-size: 50px;">펫토피아</p>
     <p style="font-size: 30px;">우리동네 친구찾기</p>
     <p>동네 커뮤니티로 정보를 나누고 수다 떨며<br>
     같이 산책할 내 반려동물의 친구 사귀어 보세요.</p>
@@ -32,7 +32,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 </nav>
 
 <div class="mytownmain">
-<img src="../../images/IMG_7390.PNG" width=50%; style=margin-left:45%;>
+<img src="/web/images/IMG_7390.PNG" width=50%; style=margin-left:45%;>
   <div class="mytown-main-group">
     <p style="font-size: 25px; font-weight: bold;">우리동네 더 행복하게 즐기기</p>
     <p style="font-size: 20px;">동네 검색을 통해 알아보세요!</p>
@@ -56,8 +56,8 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 <footer></footer>
 <script>
 $(document).ready(function() {
-    $("header").load("../../html/header.jsp");
-    $("footer").load("../../html/footer.html");
+    $("header").load("/web/html/header.jsp");
+    $("footer").load("/web/html/footer.html");
   });
 </script>
 </body>

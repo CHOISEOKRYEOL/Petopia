@@ -10,13 +10,13 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" href="../../css/common.css">
-<link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="/web/css/common.css">
+<link rel="stylesheet" type="text/css" href="/web/css/layout.css">
 </head>
 <body>
 <header></header>
 <div class="wrap">
-<img src="../../images/242photo.jpg" class="img-fluid width:100%;"
+<img src="/web/images/bigstock.jpg" class="img-fluid width:100%;"
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="text-group">
     <p style="font-size: 50px;">펫토피아</p>
@@ -31,13 +31,13 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 <a class="navbar-brand">병원 찾기</a>
   <div class="container-fluid">
   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  <c:if test="${loginUser.role == 0}">
     <li class="nav-item">
       <a href='form' class="btn" style="background-color: #FFADAD;">새 글</a>
     </li>
+    </c:if>
   </ul>
-		<div class="hangjung">
-		  <jsp:include page="../../../html/state.html"/>
-		</div>
+  <jsp:include page="../../../html/state4.jsp"/>
   </div>
 </nav>
 
@@ -63,10 +63,10 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 					<td>${h.startTime}시~${h.endTime}시</td>
 					<td>
 					<c:if test="${h.rating == 0}">
-					0
+					0점
 					</c:if>
 					<c:if test="${h.rating > 0 }">
-					<fmt:formatNumber value="${h.rating}" pattern=".00" />
+					<fmt:formatNumber value="${h.rating}" pattern=".0" />점
 					</c:if>
 					</td>
 
@@ -108,8 +108,8 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 
 <script>
 $(document).ready(function() {
-    $("header").load("../../html/header.jsp");
-    $("footer").load("../../html/footer.html");
+    $("header").load("/web/html/header.jsp");
+    $("footer").load("/web/html/footer.html");
   });
 </script>
 </body>

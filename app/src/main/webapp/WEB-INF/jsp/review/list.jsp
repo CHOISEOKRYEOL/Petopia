@@ -32,19 +32,18 @@
 .fifth-star-input>.input5{display:inline-block;width:150px;background-size:150px;height:28px;white-space:nowrap;overflow:hidden;position: relative;}
 
 
-
 </style>
 
 </head>
 
-
 <body>
-
+<div class="reviewmain" style=" margin-top: 10px;">
 <c:forEach items="${list}" var="r">
+<div class="reviewlist" style="border: 2px solid #FFADAD;">
 	<c:set var="photoUrl">../../upload/${r.photo}</c:set>
 	<c:set var="thumbnail">../../upload/${r.photo}_100x100.jpg</c:set>
 	<c:if test="${r.hospital.no == hospital.no}">
-		<table border='1'>
+		<table class="table table-hover" style="text-align: center;">
 			<thead>
 				<tr>
 					<th>서비스</th>
@@ -205,7 +204,9 @@
 		</table>
 	</c:if>
 	<br>
+</div>
 </c:forEach>
+</div>
 
 </body>
 </html>
