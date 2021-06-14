@@ -9,40 +9,32 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/board.css">
 <title>Q&A 답변</title>
-<style type="text/css">
-
-boady{
-width: 1000px;
-margin: 0 auto;
+<style>
+body{
 font-family: 'Noto Sans KR', sans-serif;
 font-size: medium;
-vertical-align: middel;
-display: center;
+}
+
+form{
+  margin: 0 auto;
+  display: center;
+text-align: center;
 }
 
 td{
-  margin-top: 10px;
-  height: 36px;
-  margin-right: 4px;
-  line-height: 36px;
-  padding: 0 10px 0 11px;
+  padding: 10px;
 }
 
-.table{
-width: 700px;
-margin: 0 auto;
-border: 1px solid #cccccc;
+table{
+border: 0px;
  font-weight: 500;
   font-size: 16px;
-  text-align: center;
-}
-
-.search{
-display: block;
-min-width: 1000px;
-margin: 0 auto;
-  text-align: center;
+  margin: 0 auto;
+  display: center;
+text-align: center;
 }
 
  .button{
@@ -61,41 +53,65 @@ margin: 0 auto;
   background: #ededed;
 } 
 
+.button3{
+color: rgb(252, 116, 116); background: rgba(255, 173, 173, 0.30);
+} 
+
 .content{
-display: block;
-min-width: 1000px;
-  height: 680;
-  padding: 30px 30px 30px 30px;
+  padding: 10px 10px 10px 10px;
 }
 
-footer{
-position: absolute;
+.footer{
+position: relative;
 bottom: 0;
 width: 100%;
 }
+
+a{
+text-decoration:none
+}
+
+.button-area{
+  margin-right: 60px;
+  margin-top: 0px;
+  margin-bottom: 30px;
+}
+
+.btnHeadr{
+  margin: 10px;
+  position: relative;
+  margin-top: 3px;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+
 </style>
 </head>
 <body>
 <header></header>
-
+	
+<div class="container">
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="display: block;"> 
-<a class="navbar-brand">관리자 Q&A 목록</a>
+<a class="navbar-brand">관리자 Q&A 관리</a>
   <div class="container-fluid" style="display: block; min-width: 1000px;">
-    <div class="button">
-      <span >
-        <a href="../main">뒤로가기</a>
-      </span>
-    </div>
+   <div class="button"><span><a href='qnalist' style="color: gray;">목록</a></span></div>
   </div>
 </nav>
 
+
 <div class="content">
-	<form action='answer' method='post'>
-		<table class="table table-hover">
-			<tbody>
-				<tr>
-					<th>질문</th>
-					<td><textarea rows='10' cols='60' readonly>${qna.content}
+  <form class="frm"
+    action='answer' method='post'>
+    <table>
+      <tbody>
+        <tr>
+          <th></th>
+          <td>
+          <div class="writingHeadr">
+		      <h4 class="title">Q. ${qna.title}</h4>
+		      </div>
+      <textarea rows='10' cols='60' readonly>${qna.content}
 <c:if test="${qna.state == 1}">
 
 
@@ -103,26 +119,30 @@ width: 100%;
 ■ 관리자 답변 ■
 
 ${qna.answer}</c:if></textarea></td>
-				</tr>
-				<br>
-				<tr>
-					<th>답변</th>
-					<td><textarea = name='answer' rows='10' cols='60'></textarea></td>
-				</tr>
-			</tbody>
-		</table>
-		<input class="button" type='hidden' name='no' value='${qna.no}'> <input
-			type='submit' value='수정'>
-	</form>
-
-	<div class="button"><span><a href='qnalist'>목록</a></span></div>
-	
+        </tr>
+        <br>
+        <tr>
+          <th></th>
+          <td>
+            <div class="writingHeadr">
+            <h4 class="title">A. 관리자 답변</h4>
+            </div>
+            <textarea name='answer' rows='10' cols='60'></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+    <input type='hidden' name='no' value='${qna.no}'>
+    <div class="btnHeadr">
+    <input class="button" style="color: rgb(252, 116, 116); background: rgba(255, 173, 173, 0.30);" type='submit' value='답변'>
+      <div class="button"><span><a href='qnalist' style="color: gray;">목록</a></span></div>
+  </div>
+  </form>
 	
 	</div>
-	<footer></footer>
+	</div>
 	<script>
 $(document).ready(function() {
-      $("header").load("../../html/header.jsp");
+      $("header").load("../../html/header2.jsp");
       $("footer").load("../../html/footer.html");
     });
 </script>

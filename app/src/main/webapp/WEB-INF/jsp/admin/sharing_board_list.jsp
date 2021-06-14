@@ -30,14 +30,14 @@ td{
   padding: 0 10px 0 11px;
 }
 
-.table{
+/* .table{
 width: 700px;
 margin: 0 auto;
 border: 1px solid #cccccc;
  font-weight: 500;
   font-size: 16px;
   text-align: center;
-}
+} */
 
 .search{
 display: block;
@@ -64,9 +64,9 @@ margin: 0 auto;
 
 .content{
 display: block;
-/* min-width: 1000px;
+min-width: 1000px;
   height: 680;
-  padding: 30px 30px 30px 30px; */
+  padding: 30px 30px 30px 30px;
 }
 
 footer{
@@ -75,17 +75,12 @@ bottom: 0;
 width: 100%;
 }
 
-a{
-text-decoration:none
-}
-
-
 </style>
 </head>
 <body>
+<header></header>
 
 <div class="container">
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="display: block;"> 
 <a class="navbar-brand">게시글 관리</a>
   <div class="container-fluid" style="display: block; min-width: 1000px;">
@@ -96,7 +91,6 @@ text-decoration:none
     </div>
   </div>
 </nav>
-
 	<table class="table table-hover">
 		<thead>
 			<tr>
@@ -109,7 +103,8 @@ text-decoration:none
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="sList" var="s">
+
+			<c:forEach items="${sList}" var="s">
 				<tr>
 					<td>${s.no}</td>
 					<td>${s.category.name}</td>
@@ -118,40 +113,10 @@ text-decoration:none
 					<td>${s.createdDate}</td>
 					<td>
 					<div class="button">
-              <span><a href="../sharingmarketboard/delete?no${s.no}">삭제</a></span></div>
+              <span><a href="../sharingmarketboard/deleteByAdmin?no=${s.no}">삭제</a></span></div>
 				</tr>
 			</c:forEach>
-		</tbody>
-	</table>
-	<table class="table" border='1'>
-		<thead>
-			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>조회수</th>
-				<th>추천수</th>
-				<th>처리</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="mList" var="m">
-				<tr>
-					<td>${m.no}</td>
-					<td>${m.title}</td>
-					<td>${m.writer.nick}</td>
-					<td>${m.createdDate}</td>
-					<td>${m.viewCount}</td>
-					<td>${m.recommentCount}</td>
-					<td><div class="button">
-              <span>
-              <a href="../mytown/delete?no=${m.no}">삭제</a>
-              </span>
-              </div>        
-              </td>
-				</tr>
-			</c:forEach>
+
 		</tbody>
 	</table>
 <div class="button">
@@ -159,7 +124,7 @@ text-decoration:none
   <a href="../main">뒤로가기</a>
 </span>
 </div>
-
+	</div>
 	 <footer></footer>
 <script>
 $(document).ready(function() {

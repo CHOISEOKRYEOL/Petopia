@@ -11,11 +11,16 @@
 <link href="../../css/board.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="../../css/layout.css">
 <title>나눔장터 게시글 상세</title>
+<style>
+a {
+text-decoration:none
+} 
+</style>
 </head>
 <body>
 <header></header>
 <div class="wrap">
-<img src="../../images/20180115_1208492.jpg" class="img-fluid width:100%;"
+<img src="/web/images/smarket.jpg" class="img-fluid width:100%;"
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="text-group">
     <p style="font-size: 50px;">나눔장터</p>
@@ -31,7 +36,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 <c:if test="${not empty loginUser and loginUser.no == smb.writer.no}">
   <div class="save-area">
   <input type='button' class="button" id="updatebutton" value='변경'>
-  <span class="button"><a href='delete?no=${smb.no}'>삭제</a></span>
+  <span class="button"  style="color: #323232; background: #ededed;"><a href='delete?no=${smb.no}' style=" color: #323232;border: 0px;" >삭제</a></span>
   </div>
   </c:if>
 </div>
@@ -71,7 +76,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 
  
 <div class="button2">
-<span><a href='detail?no=${smb.no}'>뒤로가기</a></span>
+<span style="color: #323232; background: #ededed;" ><a href='detail?no=${smb.no}' style=" color: #323232;">뒤로가기</a></span>
 </div>
 </div>
 

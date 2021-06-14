@@ -1,5 +1,6 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 
 a { text-decoration:none }
 
@@ -26,25 +27,23 @@ a { text-decoration:none }
     top: 0;*/
 }
 
+.boxtext1 {
+    text-align: center;
+    align-items: center;
+    padding-top: 40px;
+    font-family: 'Jua','Noto Sans KR', sans-serif;
+    font-size: 40px;
+    font-weight: normal;
+}
+
 /* 마이펫이름 */
 .box2 {
     box-sizing: context-box;
+    align-items: center;
     display: flex;
     height: 50px;
     width: 100%;
     border-bottom: 2px solid gray;
-}
-
-.container_navleft01 {
-	  align-items: center;
-    display: flex;
-    width: 30%;
-}
-
-.container_navright01 {
-	  align-items: center;
-    display: flex;
-    flex: 1;
 }
 
 /* 마이펫내용 */
@@ -60,11 +59,11 @@ a { text-decoration:none }
 .container_left01 {
     align-items: center;
     display: flex;
-    justify-content: left;
+    justify-content: center;
     width: 30%;
 }
 
-/* 진찰기록 */
+/* 진찰기록 -> 펫정보 */
 .container_right01 {
     display: flex;
     justify-content: left;
@@ -76,6 +75,7 @@ a { text-decoration:none }
     flex: 1;
 }
 
+ 
 /* 나눔장터이름 */
 .box4 {
 	  box-sizing: context-box;
@@ -128,24 +128,20 @@ a { text-decoration:none }
 
 /* 스토리 */
 .container_left02 {
-    align-items: center;
     display: flex;
-    justify-content: center;
     flex: 1;
     margin: 20px;
     background-color: #FAF0E6;
-    border-radius: 30px;
+    border-radius: 20px;
 }
 
 /* 동네 */
 .container_right02 {
-    align-items: center;
     display: flex;
-    justify-content: center;
     flex: 1;
     margin: 20px;
     background-color: #FAF0E6;
-    border-radius: 30px;
+    border-radius: 20px;
 }
 
 /* 병원검색상자 */
@@ -245,12 +241,12 @@ a { text-decoration:none }
     height: 100%;
  }
  
- /* 진찰기록탐라 */
+ /* 진찰기록탐라
  .timeline {
     position: relative;
-}
+}*/
 
-/* 라인 */
+/* 라인
 .timeline_line {
     border-right: 2px solid #FFADAD;
 
@@ -274,9 +270,9 @@ a { text-decoration:none }
 .timeline_top {
     align-items: center;
     display: flex;
-}
+} */
 
-/* 동그라미 */
+/* 동그라미
 .timeline_circle {
     background-color: #FFADAD;
     border-radius: 9999px;
@@ -293,7 +289,7 @@ a { text-decoration:none }
 
 .timeline_desc {
     margin-left: 52px;
-}
+} */
 
 /* 장터 */
 .market {

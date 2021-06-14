@@ -12,8 +12,9 @@
 <style>
 .comment-table{
 width: 700px;
-margin: 0 auto;
+margin: 15px auto;
 border: 1px solid #cccccc;
+padding: 10px;
 }
 #comment-remove, #comment-modify {
 /*display: none;*/
@@ -23,8 +24,27 @@ button {
 text-align: center;
 border: 1px solid #cccccc;
 }
-th,tr{
+th,tr,td{
 padding: 5px;
+margin: 15px;
+}
+
+
+.modify-btn, .remove-btn{
+  margin-top: 10px;
+  display: inline-block;
+  height: 36px;
+  margin-right: 4px;
+  border: 0px;
+  border-radius: 6px;
+  padding: 0 10px 0 11px;
+  line-height: 36px;
+  font-weight: 700;
+  font-size: 13px;
+  text-align: center;
+  color: #323232;
+  background: #ededed;
+
 }
 </style>
 </head>
@@ -53,8 +73,10 @@ padding: 5px;
 <tr>
   <tr><td colspan="2"><c:if test="${not empty loginUser and loginUser.no == smb.writer.no}">
     <div id="d2">
-        <button type='button' class='modify-btn' data-no='${comt.no}' >수정</button>
-        <button type='button' class='remove-btn' data-no='${comt.no}'>삭제</button>
+        <button type='button' class='modify-btn' data-no='${comt.no}' 
+         style="item-align: center; color: #323232; background: #ededed; border: 0px;">수정</button>
+        <button type='button' class='remove-btn' data-no='${comt.no}'
+         style="item-align: center; color: #323232; background: #ededed; border: 0px;">삭제</button>
     </div>
   </c:if></td></tr>
   

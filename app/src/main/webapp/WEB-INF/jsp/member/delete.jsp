@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Refresh" content="1;url=../main">
 <title>회원 탈퇴</title>
 </head>
 <body>

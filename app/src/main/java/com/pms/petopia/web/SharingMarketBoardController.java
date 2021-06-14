@@ -200,6 +200,16 @@ public class SharingMarketBoardController {
 
   }
 
+  @RequestMapping("deleteByAdmin")
+  public String deleteByAdmin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    int no = Integer.parseInt(request.getParameter("no"));
+
+    sharingMarketBoardService.delete(no);
+
+    return "redirect:../admin/sharing_board_list";
+  }
+
   @RequestMapping("delete")
   public String delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -223,7 +233,12 @@ public class SharingMarketBoardController {
       sharingMarketBoardPhotoService.delete(no);
     }
 
-    return "redirect:list";
+    if(loginUser.getRole() == 1) {
+      return "redirect:list";
+    }
+    else {
+      return "redirect:../admin/sharing_board_list";
+    }
 
   }
 
@@ -239,34 +254,28 @@ public class SharingMarketBoardController {
   }
 
   @GetMapping("list")
-  public String list(HttpServletRequest request, Model model) throws Exception {
+  public String list(String item,String keyword,String category, Model model) throws Exception {
 
-    //    String item = request.getParameter("item");
-    //    String keyword = request.getParameter("keyword");
-    String category = request.getParameter("category");
 
     int categoryNo = 0;
     if (category != null) {
       categoryNo = Integer.parseInt(category);
     }
-    List<SharingMarketBoardPhoto> photoList = new ArrayList<>();
     List<SharingMarketBoard> smBoards = null;
     if (categoryNo == 0) {
       smBoards = sharingMarketBoardService.list();
 
     } else {
       smBoards = sharingMarketBoardService.getCategory(categoryNo);
+
+      if(item != null && keyword != null && keyword.length() > 0) {
+        smBoards = sharingMarketBoardService.searchByDetail(item, keyword);
+
+      }
     }
 
-    for(SharingMarketBoard smb : smBoards) {
-      SharingMarketBoardPhoto phot = new SharingMarketBoardPhoto();
-      phot= sharingMarketBoardPhotoService.listMin(smb.getNo());
-      photoList.add(phot);
-    }
 
-
-    model.addAttribute("photList", photoList);
-    model.addAttribute("category", category);
+    model.addAttribute("category", categoryNo);
     model.addAttribute("catList", sharingMarketBoardCategoryService.list());
     model.addAttribute("smBoards", smBoards);
 

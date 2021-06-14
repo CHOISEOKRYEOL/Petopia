@@ -84,7 +84,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   
   <div class="form-row mb-3">
     <label for="photo" class="col-sm-2 col-form-label">병원사진</label>
-    <input type="file" name="photo" id="imageFileOpenInput" accept="image/*">
+    <input type="file" name="photoFile" id="imageFileOpenInput" accept="image/*">
   </div>
   
 <div class="modal-footer justify-content-between">

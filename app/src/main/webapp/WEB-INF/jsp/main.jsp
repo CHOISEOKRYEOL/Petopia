@@ -28,6 +28,9 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 
 <div class="container">
     <div class="box1">
+    <div class="boxtext1">
+    <p><img src="/web/images/pawprint.png"> 펫토피아에 오신 것을 환영합니다 <img src="/web/images/pawprint.png"></p>
+  <%-- 
     <div class="pagination">
         <div class="pagination_item01">
            시/도
@@ -49,10 +52,11 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
            <input type="button" class="img-search-btn">
         </div>
     </div>
+    --%>
     </div>
-    
+    </div>
+        <%--  
     <div class="box2">
-      <div class="container_navleft01">
       <nav class="navbar navbar-expand-lg navbar-light">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -61,17 +65,6 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
         </li>
       </ul>
       </nav>
-      </div>
-      <div class="container_navright01">
-      <nav class="navbar navbar-expand-lg navbar-light">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/web/app/record/list">
-          <img src="/web/images/pawprintfull.png"> 진찰기록</a>
-        </li>
-      </ul>
-      </nav>
-      </div>
     </div>
     
     <c:if test="${not empty loginUser}">
@@ -80,11 +73,10 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
         <div class="img-mypet">
           <img class="mypetpic" src="/web/images/20180111_205149.jpg">
         </div>
-        <p>name: eeee<br>age: eeee<br>eeeeeddddd
-        </p>
+      <div class="container_right01">
+        <p>name: eeee<br>age: eeee<br>eeeeeddddd</p>
       </div>
       
-      <div class="container_right01">
       <div class="timeline">
         <div class="timeline_line"></div>
         <ul class="timeline_items">
@@ -126,6 +118,7 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
       </div>
     </div>
     </c:if>
+    --%>
     
     <c:if test="${empty loginUser}">
     <div class="box3" style="align-items: center; display: flex; justify-content: center;">
@@ -150,10 +143,10 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     <div class="box5">
       <div class="row justify-content-evenly">
         <div class="col-3">
-          <a href="https://www.naver.com/">
+          <a href="http://localhost:8080/web/app/mytown/detail?stateNo=1&cityNo=16&no=2">
           <img src="/web/images/20180111_205149.jpg" style="width: 200px; height: 250px;"></a>
           <p class="market_contents">
-          <a href="https://www.naver.com/" class="link-dark" style="text-decoration:none;">
+          <a href="http://localhost:8080/web/app/mytown/detail?stateNo=1&cityNo=16&no=2" class="link-dark" style="text-decoration:none;">
           dkdkdksssssssssssssssssssssssssssssssssss</a></p>
         </div>
         <div class="col-3">
@@ -233,11 +226,49 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     
     <div class="box7">
       <div class="container_left02">
-      스토리
+      <table class="table table-hover" style="text-align: center;">
+        <thead>
+          <tr>
+            <th> 번호 </th>
+            <th> 제목 </th>
+            <th> 사이트명 </th>
+            <th> 등록일 </th>
+          </tr>
+        </thead>
+        <tbody>
+          <c:forEach items="${storyList}" var="s">
+            <tr>
+              <td>${s.no} </td>
+              <td><a href='${s.url}'>${s.title}</a></td>
+              <td>${s.site}</td>
+              <td>${s.registeredDate}</td>
+            </tr>
+          </c:forEach>
+        </tbody>
+       </table>
       </div>
       
       <div class="container_right02">
-      커뮤
+       <table class="table table-hover" style="text-align: center;">
+			  <thead>
+			    <tr>
+			      <th> 동네 </th>
+			      <th> 제목 </th>
+			      <th> 등록일 </th>
+			      <th> 추천수 </th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <c:forEach items="${myTownList}" var="t">
+			      <tr>
+			        <td>${t.bigAddress.name} &nbsp; ${t.smallAddress.name} </td>
+			        <td><a href='../app/mytown/detail?stateNo=${t.bigAddress.no}&cityNo=${t.smallAddress.no}&no=${t.no}'>${t.title}</a></td>
+			        <td>${t.createdDate}</td>
+			        <td>&nbsp;&nbsp;&nbsp;${t.recommentCount}</td>
+			      </tr>
+			    </c:forEach>
+			  </tbody>
+			 </table>
       </div>
     </div>
 </div>

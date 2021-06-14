@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.pms.petopia.domain.Hospital;
 import com.pms.petopia.domain.Member;
@@ -49,8 +50,8 @@ public class AdminController {
     this.reviewService = reviewService;
   }
 
-  @GetMapping("boardlist")
-  public String boardList(HttpSession session, Model model)
+  @GetMapping("sharing_board_list")
+  public String sharingBoardList(HttpSession session, Model model)
       throws Exception {
 
     Member loginUser = (Member) session.getAttribute("loginUser");
@@ -60,12 +61,29 @@ public class AdminController {
     }
     else {
       List<SharingMarketBoard> sList = sharingMarketBoardService.list();
-      List<MyTownBoard> mList = myTownBoardService.listAll();
 
       model.addAttribute("sList", sList);
+
+      return "admin/sharing_board_list";
+
+    }
+  }
+
+  @GetMapping("mytown_board_list")
+  public String myTownBoardList(HttpSession session, Model model)
+      throws Exception {
+
+    Member loginUser = (Member) session.getAttribute("loginUser");
+
+    if(loginUser.getRole() == 1) {
+      return "access_fail";
+    }
+    else {
+      List<MyTownBoard> mList = myTownBoardService.listAll();
+
       model.addAttribute("mList", mList);
 
-      return "board_list";
+      return "admin/mytown_board_list";
 
     }
   }
@@ -83,7 +101,7 @@ public class AdminController {
 
   }
 
-  @GetMapping("memberlist")
+  @GetMapping("member_list")
   public String memberList(String item, String keyword, HttpSession session, Model model)
       throws Exception {
 
@@ -110,7 +128,7 @@ public class AdminController {
     }
   }
 
-  @GetMapping("answer")
+  @PostMapping("answer")
   public String answerQna(Qna qna) throws Exception {
 
     qna.setState(1);
@@ -146,10 +164,9 @@ public class AdminController {
     }
   }
 
-  @GetMapping("reviewlist")
+  @GetMapping("review_list")
   public String reviewList(String item, String keyword, HttpSession session, Model model)
       throws Exception {
-
 
     Member loginUser = (Member) session.getAttribute("loginUser");
     if(loginUser.getRole() == 1) {
@@ -170,5 +187,15 @@ public class AdminController {
 
       return "admin/review_list";
     }
+  }
+
+  @RequestMapping("main")
+  public String reviewList(HttpSession session)throws Exception {
+
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if(loginUser.getRole() == 1) {
+      return "admin/access_fail";
+    }
+    return "admin/main";
   }
 }

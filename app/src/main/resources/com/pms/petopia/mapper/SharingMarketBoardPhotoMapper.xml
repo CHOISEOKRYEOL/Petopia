@@ -44,7 +44,7 @@
        where phot.spno = #{no}
   </select>
   
-      <select id="findByMin" resultMap="sharingmarketboardPhotoMap" parameterType="int">
+<!--       <select id="findByMin" resultMap="sharingmarketboardPhotoMap" parameterType="int">
        select 
        min(spno),
         phot.photo,
@@ -52,7 +52,7 @@
       from pet_mark_phot phot
       right join pet_mark mark on mark.sno = phot.sno
        where phot.sno = #{no}
-  </select>
+  </select> -->
   
   
 <!--   <update id="update" parameterType="sharingmarketboardphoto">
