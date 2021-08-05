@@ -20,6 +20,10 @@
  - JavaScript
 
 
+# ER Diagram
+![Petopia](https://user-images.githubusercontent.com/76925405/122040289-96394180-ce12-11eb-8523-44e633c5f957.png)
+
+
 # 주요 기능
  - 게시글 및 댓글 관리
  - 회원 관리
