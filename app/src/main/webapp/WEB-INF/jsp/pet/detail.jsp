@@ -12,7 +12,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-<<<<<<< HEAD
 <link rel="stylesheet" type="text/css" href="../css/main.css">
 <script type="text/javascript" src="../js/page.js"></script>
 <link rel="stylesheet" type="text/css" href="../../css/common.css">
@@ -49,20 +48,15 @@
 }
 </style>
 
-=======
 <link rel="stylesheet" type="text/css" href="/web/css/mypage.css">
 <link rel="stylesheet" type="text/css" href="/web/css/layout.css">
 <link rel="stylesheet" type="text/css" href="/web/css/common.css">
->>>>>>> 09d926483857a5f36fd634cda874a431139bd422
 </head>
 <body>
 <header></header>
 <div class="wrap">
-<<<<<<< HEAD
 <img src="../../images/mypet.jpg" class="img-fluid width:100%;"
-=======
 <img src="/web/images/mypage.jpg" class="img-fluid width:100%;"
->>>>>>> 09d926483857a5f36fd634cda874a431139bd422
 style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
   <div class="text-group">
     <p style="font-size: 50px;">펫토피아</p>
@@ -88,7 +82,6 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
     <c:set var="photoUrl"></c:set>
   </c:if>
   
-<<<<<<< HEAD
  <form action='update' method='post' enctype="multipart/form-data">
  <div id="form">
 <table class="table table-hover">
@@ -113,7 +106,6 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
      </form>
      </c:if>
      <p><a href='list' class="button">목록</a></p>
-=======
 <form action='update' method='post' enctype="multipart/form-data">
 <div class="mt-3 mb-3 row">
 <label for="no" class="col-sm-1 col-form-label">번호</label>
@@ -169,7 +161,6 @@ style="filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6;">
 </div>
  </form>
  </c:if>
->>>>>>> 09d926483857a5f36fd634cda874a431139bd422
 </div>
       
 </div>
